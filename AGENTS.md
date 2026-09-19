@@ -193,10 +193,10 @@ python run_tests.py      →  24 passed, 0 failed      （当时的备用运行�
 **必须整段算，不能只查端点。** 两个端点都在障碍外、中间穿过球心，是最典型的漏检，
 也是这类系统最常见的实现 bug。`tests/` 里有专门的单元测试锁死它，不许绕过。
 
-### schema 将在批次 01 冻结
+### schema 已在批次 01 冻结
 
-`schemas/` 下三份（`event` / `scenario` / `verdict`）要按
-`docs/spec-open-questions.md` 在批次 01 统一复核和冻结。冻结后不得由单个模块自行加字段。
+`schemas/` 下三份（`event` / `scenario` / `verdict`）已按
+`docs/spec-open-questions.md` 在批次 01 统一复核和冻结。后续不得由单个模块自行加字段。
 事件类型固定 13 种，首版就全部定义，**不要后加**：
 
 `PROPOSAL` `TRANSFORM` `CERTIFICATE` `PREPARE` `COMMIT` `DISPATCH` `CONTROLLER_ACK`
