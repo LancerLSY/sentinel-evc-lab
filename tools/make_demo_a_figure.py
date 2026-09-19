@@ -355,7 +355,9 @@ def main(argv=None) -> int:
     svg = build_svg(geo, args.cases)
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(svg, encoding="utf-8")
+    # 显式写 LF：这个文件要进版本库，行尾必须与平台无关，
+    # 否则在 Windows 上生成一次就产生一次无意义的 diff。
+    out.write_text(svg, encoding="utf-8", newline="\n")
 
     print(f"第一幕 {geo['cases']} 个案例：路径 a 错误放行 "
           f"{geo['path_a_wrong_release']} / {geo['path_a_total_violating']}，"

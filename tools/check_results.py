@@ -106,6 +106,18 @@ def main(argv=None) -> int:
     if run_id and run_id not in md:
         problems.append(f"RESULTS.md 里没有出现 run_id「{run_id}」")
 
+    # 行尾守卫：证据包被 checkout 转换过，独立校验就一定失败。
+    # Linux 上的 CI 不会转换，所以必须在这里显式挡住（见仓库根的 .gitattributes）。
+    events_path = Path(args.sample_run) / "bundle" / "events.jsonl"
+    if events_path.exists():
+        raw = events_path.read_bytes()
+        cr = raw.count(b"\r")
+        print(f"{'events.jsonl 行尾':<24}{'CR 字节 ' + str(cr):>28}")
+        if cr:
+            problems.append(
+                f"events.jsonl 里有 {cr} 个 CR 字节：工作区被做过 LF→CRLF 转换，"
+                "随包证据包已不可独立校验（检查 .gitattributes / core.autocrlf）")
+
     print("-" * 68)
     if problems:
         print(f"不一致 {len(problems)} 处：", file=sys.stderr)
