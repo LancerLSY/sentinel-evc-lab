@@ -55,7 +55,7 @@ obstacle-avoiding trajectories, each of which passes a full geometric check on i
 are blended with weights, and the resulting trajectory goes straight through the obstacle.
 The parent trajectory's verdict does not hold for the blend.
 
-![Demo A: two parent trajectories that each pass verification; the blended final action passes through the obstacle](docs/demo_a.svg)
+![Demo A: two parent trajectories that each pass verification; the blended final action passes through the obstacle](docs/demo_a.en.svg)
 
 1. In this case (#0): parent trajectories P1 and P2 each pass a full check
    (minimum margins +67.7 mm / +75.0 mm); blended 0.5 / 0.5, the final action has a
@@ -66,7 +66,8 @@ The parent trajectory's verdict does not hold for the blend.
    "Δ-Cert + full check when needed" also releases 0 and falsely rejects 0, using 500
    (**calls during the verification stage — not a whole-system speedup**).
 
-The figure is produced by `python tools/make_demo_a_figure.py --out docs/demo_a.svg`:
+The figure is produced by `python tools/make_demo_a_figure.py --lang en`
+(`--lang zh` writes the Chinese figure used by [README.zh-CN.md](README.zh-CN.md)):
 the script runs Act One itself and asserts the baseline from `RESULTS.md` before drawing,
 so nothing in it is hand-entered.
 

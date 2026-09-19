@@ -57,8 +57,9 @@
 3. 「最终动作每次全检」能拦住全部 500 条，代价是 1000 次完整检查；「Δ-Cert + 必要全检」
    同样 0 条放行、0 条误拒，用掉 500 次（**验证阶段的调用次数，不是整机提速**）。
 
-图由 `python tools/make_demo_a_figure.py --out docs/demo_a.svg` 生成：脚本自己跑一遍
-第一幕，先跟 `RESULTS.md` 的基线断言，不一致就拒绝出图 —— 所以图里没有手填的数字。
+图由 `python tools/make_demo_a_figure.py --lang zh` 生成（`--lang en` 出英文版，
+给 [README.md](README.md) 用）：脚本自己跑一遍第一幕，先跟 `RESULTS.md` 的基线断言，
+不一致就拒绝出图 —— 所以图里没有手填的数字。
 
 跑一次 `demo` 就能看到三条判定路径在同一批数据上的差异。
 

@@ -36,12 +36,15 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install -e ".[test]"
-      - name: 第一幕 1000 案例 + 生成对照图（含基线断言）
+      - name: 第一幕 1000 案例 + 生成中英对照图（含基线断言）
         run: |
           python -m sentinel_evc demo --cases 1000 --out runs/demo_a --run-id demo-a
           python -m sentinel_evc verify --bundle runs/demo_a/bundle \
             --public-key runs/demo_a/anchors/demo.public --run-id demo-a
-          python tools/make_demo_a_figure.py --out runs/demo_a/demo_a.svg --cases 1000
+          python tools/make_demo_a_figure.py --lang zh --cases 1000 \
+            --out runs/demo_a/demo_a.svg
+          python tools/make_demo_a_figure.py --lang en --cases 1000 \
+            --out runs/demo_a/demo_a.en.svg
       - name: 随包 sample_run 未漂移
         run: |
           python -m sentinel_evc verify --bundle sample_run/bundle \
@@ -53,6 +56,7 @@ jobs:
           name: demo-a
           path: |
             runs/demo_a/demo_a.svg
+            runs/demo_a/demo_a.en.svg
             runs/demo_a/summary.json
             runs/demo_a/report.html
             runs/demo_a/bundle
