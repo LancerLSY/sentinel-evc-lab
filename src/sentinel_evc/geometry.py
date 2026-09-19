@@ -89,7 +89,7 @@ def full_check(plan: Plan, scene: Scene):
     return (first_violation is None), tuple(margins), first_violation
 
 
-def full_check_sampled(plan: Plan, scene: Scene, samples_per_segment: int = 200):
+def full_check_sampled(plan: Plan, scene: Scene, samples_per_segment: int = 1000):
     """完整几何检查（独立对照实现）。
 
     用密集采样代替解析最近点。采样必然比解析实现保守性略差（可能高估余量），
@@ -114,7 +114,7 @@ def full_check_sampled(plan: Plan, scene: Scene, samples_per_segment: int = 200)
                 seg_margin = min(seg_margin, p[axis] - scene.ws_lo[axis] - slack)
                 seg_margin = min(seg_margin, scene.ws_hi[axis] - p[axis] - slack)
             for obs in scene.obstacles:
-                dist = _norm(_sub(p, obs.center))
+                dist = math.dist(p, obs.center)
                 seg_margin = min(seg_margin, dist - obs.radius - slack)
 
         margins.append(seg_margin)

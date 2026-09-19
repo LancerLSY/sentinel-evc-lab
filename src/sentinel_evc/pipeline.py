@@ -72,38 +72,41 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True,
         "root_full_checks": 0,
     }
     samples = []
+    sample_counts = {"mix": 0, "near": 0}
 
     scene = make_scene(seed)
     mix_cases = cases // 2
     for i in range(cases):
         case_seed = seed + i
         p1, p2 = make_parent_pair(case_seed)
-        log.append("PROPOSAL", plan_hash=p1.hash, role="parent")
-
-        # 建立父证书：一次完整几何检查
-        root = establish_root(p1, scene)
-        stats["root_full_checks"] += root.full_checks_used
-        if root.verdict != "FULL":
-            continue  # 父轨迹本身不合格的案例跳过
-        parent_cert = root.certificate
-        log.append(
-            "CERTIFICATE",
-            cert_id=parent_cert.cert_id,
-            plan_hash=p1.hash,
-            verdict=root.verdict,
-            path=root.path,
-            margins=list(root.margins),
-            first_violation_segment=root.first_violation_segment,
-            full_checks_used=root.full_checks_used,
-            inherit_depth=root.inherit_depth,
-            parent_cert_id=root.parent_cert_id,
-        )
+        roots = []
+        for parent in (p1, p2):
+            log.append("PROPOSAL", plan_hash=parent.hash, role="parent")
+            root = establish_root(parent, scene)
+            stats["root_full_checks"] += root.full_checks_used
+            log.append(
+                "CERTIFICATE",
+                cert_id=root.certificate.cert_id if root.certificate else None,
+                plan_hash=parent.hash,
+                verdict=root.verdict,
+                path=root.path,
+                margins=list(root.margins),
+                first_violation_segment=root.first_violation_segment,
+                full_checks_used=root.full_checks_used,
+                inherit_depth=root.inherit_depth,
+                parent_cert_id=root.parent_cert_id,
+            )
+            roots.append(root)
+        if any(root.verdict != "FULL" for root in roots):
+            continue
+        parent_cert = roots[0].certificate
 
         # 一半案例用异侧混合（实际违规），一半用同侧扰动（实际安全）
         if i < mix_cases:
             child, record = mix(p1, p2, plan_id=f"MIX-{i:06d}")
         else:
             child, record = perturb(p1, seed=case_seed, plan_id=f"NEAR-{i:06d}")
+        sample_kind = "mix" if record.kind == "mix" else "near"
 
         log.append("PROPOSAL", plan_hash=child.hash, role="child")
 
@@ -111,7 +114,7 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True,
         log.append(
             "TRANSFORM",
             plan_hash=child.hash,
-            method="mix" if record.kind == "mix" else "near",
+            method=sample_kind,
             parent_plan_hashes=parents,
         )
 
@@ -136,6 +139,18 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True,
 
         # ---- 路径 c：Δ-Cert + 必要全检
         v = validate_or_inherit(child, scene, p1, parent_cert, record)
+        log.append(
+            "CERTIFICATE",
+            cert_id=v.certificate.cert_id if v.certificate else None,
+            plan_hash=child.hash,
+            verdict=v.verdict,
+            path=v.path,
+            margins=list(v.margins),
+            first_violation_segment=v.first_violation_segment,
+            full_checks_used=v.full_checks_used,
+            inherit_depth=v.inherit_depth,
+            parent_cert_id=v.parent_cert_id,
+        )
         stats["path_c_full_checks"] += v.full_checks_used
         if v.verdict == "INHERITED":
             stats["path_c_inherited"] += 1
@@ -151,10 +166,10 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True,
         if truly_ok and v.verdict in ("INHERITED", "FULL"):
             stats["safe_children_passed"] += 1
 
-        if len(samples) < 8:
+        if sample_counts[sample_kind] < 2:
             samples.append({
                 "case": i,
-                "kind": record.kind,
+                "kind": sample_kind,
                 "truly_ok": truly_ok,
                 "verdict": v.verdict,
                 "min_margin": round(min(true_margins), 6),
@@ -163,6 +178,7 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True,
                 "child_knots": [list(k) for k in child.points],
                 "obstacle": scene.obstacles[0].summary(),
             })
+            sample_counts[sample_kind] += 1
 
     if stats["path_b_full_checks"]:
         stats["full_check_reduction_pct"] = round(

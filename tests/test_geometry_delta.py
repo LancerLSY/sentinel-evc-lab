@@ -62,6 +62,26 @@ def test_two_independent_implementations_agree():
         assert cross_validate(child, scene), f"seed={seed} 子轨迹判定分歧"
 
 
+def test_sampled_oracle_default_detects_a_narrow_obstacle_between_coarse_samples():
+    plan = Plan(
+        points=((0.0, 0.0, 0.0), (1.0, 0.0, 0.0)),
+        dt=0.05,
+        gripper_events=(),
+        controller_profile="test",
+        task_phase="test",
+    )
+    scene = Scene(
+        scene_id="narrow",
+        obstacles=(Sphere(center=(0.401, 0.0, 0.0), radius=0.0001),),
+        ws_lo=(-1.0, -1.0, -1.0),
+        ws_hi=(2.0, 1.0, 1.0),
+        tool_radius=0.0,
+        tracking_reserve=0.0,
+    )
+    assert not full_check_sampled(plan, scene)[0]
+    assert cross_validate(plan, scene)
+
+
 def test_mix_of_two_valid_trajectories_violates():
     """项目的核心主张：两条分别通过的轨迹，混合之后穿过障碍。"""
     scene = make_scene(0)

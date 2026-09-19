@@ -105,6 +105,39 @@ def test_demo_evidence_includes_geometry_execution_and_outcome_in_one_stream(dem
     assert [event["seq"] for event in events] == list(range(len(events)))
 
 
+def test_demo_records_both_parent_checks_and_every_child_verdict(demo_output):
+    summary = json.loads((demo_output / "summary.json").read_bytes())
+    events = [json.loads(line) for line in
+              (demo_output / "bundle" / "events.jsonl").read_bytes().splitlines()]
+    parent_hashes = {event["plan_hash"] for event in events
+                     if event["type"] == "PROPOSAL" and event["payload"]["role"] == "parent"}
+    child_hashes = {event["plan_hash"] for event in events
+                    if event["type"] == "PROPOSAL" and event["payload"]["role"] == "child"}
+    parent_results = [event for event in events
+                      if event["type"] == "CERTIFICATE" and event["plan_hash"] in parent_hashes]
+    child_results = [event for event in events
+                     if event["type"] == "CERTIFICATE" and event["plan_hash"] in child_hashes]
+
+    assert len(parent_results) == 16
+    assert all(event["payload"]["verdict"] == "FULL" for event in parent_results)
+    assert all(event["payload"]["inherit_depth"] == 0 and event["cert_id"]
+               for event in parent_results)
+    assert summary["geometry"]["root_full_checks"] == 16
+    assert len(child_results) == 8
+    rejected = [event for event in child_results if event["payload"]["verdict"] == "REJECTED"]
+    inherited = [event for event in child_results if event["payload"]["verdict"] == "INHERITED"]
+    assert len(rejected) == 4 and all(event["payload"]["path"] == "full" for event in rejected)
+    assert len(inherited) == 4 and all(event["payload"]["path"] == "delta" for event in inherited)
+    assert sum(event["payload"]["full_checks_used"] for event in child_results) == 4
+    assert summary["geometry"]["path_c_full_checks"] == 4
+
+
+def test_demo_report_shows_mix_and_near_examples(demo_output):
+    report = (demo_output / "report.html").read_text(encoding="utf-8")
+    assert report.count("变换类型 <code>mix</code>") == 2
+    assert report.count("变换类型 <code>near</code>") == 2
+
+
 def test_verify_accepts_the_original_demo_bundle(demo_output):
     result = verify(demo_output)
     assert result.returncode == 0, result.stdout + result.stderr
