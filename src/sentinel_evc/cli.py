@@ -47,6 +47,15 @@ def _events(bundle_dir: str) -> list[dict]:
     return [json.loads(line) for line in raw.splitlines()]
 
 
+def _bundle_summary(bundle: dict) -> dict:
+    return {
+        "bundle_dir": "bundle",
+        "public_key": "anchors/demo.public",
+        "event_count": bundle["event_count"],
+        "tip_hash": bundle["tip_hash"],
+    }
+
+
 def _geometry_ok(stats: dict) -> bool:
     return (
         stats["path_b_wrong_release"] == 0
@@ -86,7 +95,7 @@ def cmd_demo(args) -> int:
         "run_id": run_id,
         "geometry": {key: value for key, value in geometry.items() if key != "samples"},
         "faults": faults,
-        "bundle": bundle,
+        "bundle": _bundle_summary(bundle),
     })
     write_report(
         str(output / "report.html"), run_id=run_id, geo=geometry, faults=faults,
@@ -131,7 +140,7 @@ def cmd_fault(args) -> int:
         bundle = act_three_evidence(log, str(output))
     ok, message = verify_bundle(bundle["bundle_dir"], bundle["public_key"], output.name)
     _write_json(output / "summary.json", {
-        "run_id": output.name, "faults": faults, "bundle": bundle,
+        "run_id": output.name, "faults": faults, "bundle": _bundle_summary(bundle),
     })
     success = ok and _faults_ok(faults)
     print(("PASS" if success else "FAIL") + f" — {message}")

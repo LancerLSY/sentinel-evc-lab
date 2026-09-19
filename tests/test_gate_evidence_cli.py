@@ -81,6 +81,8 @@ def test_demo_uses_directory_name_for_every_run_identity(demo_output):
               (demo_output / "bundle" / "events.jsonl").read_bytes().splitlines()]
     assert {summary["run_id"], manifest["run_id"],
             *(event["run_id"] for event in events)} == {demo_output.name}
+    assert summary["bundle"]["bundle_dir"] == "bundle"
+    assert summary["bundle"]["public_key"] == "anchors/demo.public"
 
 
 def test_demo_manifest_describes_the_complete_raw_event_file(demo_output):
