@@ -13,6 +13,12 @@ python -m sentinel_evc demo --cases 1000 --out runs/repro --run-id repro
 
 输出目录必须为空。随包的 `sample_run/` 请勿覆盖。
 
+本页是手写的，`sample_run/` 是机器生成的。两者是否还对得上，由脚本核对，CI 里也会跑：
+
+```bash
+python tools/check_results.py
+```
+
 ## 第一幕 · 几何判定
 
 | 指标 | 值 | 来源 |

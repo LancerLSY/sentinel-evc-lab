@@ -46,6 +46,8 @@ jobs:
         run: |
           python -m sentinel_evc verify --bundle sample_run/bundle \
             --public-key sample_run/anchors/demo.public --run-id sample-001
+      - name: RESULTS.md 与随包 sample_run 对得上
+        run: python tools/check_results.py
       - uses: actions/upload-artifact@v7
         with:
           name: demo-a

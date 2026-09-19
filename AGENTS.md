@@ -233,8 +233,9 @@ src/sentinel_evc/
 └── cli.py             # demo / verify / tamper
 
 tools/
-└── make_demo_a_figure.py  # 第一幕对照图：跑一遍第一幕 → 与基线断言 → 内联 SVG，
-                           # 写出 docs/demo_a.svg（README「三分钟看懂」用的那张）
+├── make_demo_a_figure.py  # 第一幕对照图：跑一遍第一幕 → 与基线断言 → 内联 SVG，
+│                          # 写出 docs/demo_a.svg（README「三分钟看懂」用的那张）
+└── check_results.py       # 核对 RESULTS.md 的数字与随包 sample_run/summary.json
 ```
 
 **校验器是独立实现** —— 只读文件、自己重算，**不 import 写入方的任何模块**。

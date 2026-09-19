@@ -1,59 +1,80 @@
 # Sentinel EVC Lab
 
-> 给机器人策略的动作块加一道最终提交前的门禁：验证的是真正要被执行的那个动作，
-> 许可有期限、只能用一次、可以撤销，整个过程留下第三方能独立校验的记录。
+**English** | [中文](README.zh-CN.md)
 
-数值参考实现。在普通笔记本上五分钟跑完，不需要 GPU、机械臂或任何模型权重。
+> A gate at the last commit point of a robot policy's action block: it verifies the action
+> that will *actually* be executed. Permits are time-boxed, single-use and revocable, and
+> every step leaves a record a third party can verify independently.
+
+A numeric reference implementation. It runs in five minutes on an ordinary laptop —
+no GPU, no robot arm, no model weights.
+
+> **Status**: v0.1 (candidate) · `pytest` **24 passed** · three-act demo reproducible · license **not yet in effect** (see License)
+> CI: [workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
+> (workflow badge images do not load for a private repository, so this is a link rather than
+> a badge; the badge goes on after the repository becomes public.)
 
 ---
 
-## 这是什么，不是什么
+## What this is, and what it is not
 
-| 能力 | 当前状态 | 明确不承诺 |
+| Capability | Status | Explicitly *not* claimed |
 | --- | --- | --- |
-| 动作合同与规范化哈希 | 已实现，数值域 | 不覆盖真实机械臂逆运动学 |
-| 几何完整检查 | 已实现：静态球障碍 + 盒工作空间 + 球形工具 | 不覆盖连杆、夹爪、载荷、动态障碍 |
-| Δ-Cert 增量继承 | 已实现，L=1 约束族 | 不覆盖速度、加速度、夹持、接触 |
-| 一次性执行许可 | 已实现，本地 HMAC | 不是 PKI，不是功能安全 |
-| 撤销屏障 | 已实现，模拟控制器 | 不是电机制动证明 |
-| 证据哈希链与签名 | 已实现，Ed25519 | 只证明记录完整性，不证明传感器诚实 |
-| 真实 VLA 接入 | **未开始** | 下一步目标是只读影子模式，不是闭环干预 |
-| 学习式后果预测（WorldGuard） | **仅保留接口，无实现** | 无训练、无实验、无结论 |
-| 真机 | **未开始**，不在本轮范围 | —— |
+| Action contract + canonical hashing | Implemented, numeric domain | Does not cover real-arm inverse kinematics |
+| Full geometric check | Implemented: static sphere obstacles + box workspace + spherical tool | Does not cover links, grippers, payloads, dynamic obstacles |
+| Δ-Cert incremental re-verification | Implemented, L=1 constraint family | Does not cover velocity, acceleration, grasping, contact |
+| Single-use execution permit | Implemented, local HMAC | Not PKI, not functional safety |
+| Revocation barrier | Implemented against a simulated controller | Not a motor-braking proof |
+| Evidence hash chain + signature | Implemented, Ed25519 | Proves record integrity only, not sensor honesty |
+| Real VLA integration | **Not started** | Next goal is read-only shadow mode, not closed-loop intervention |
+| Learned consequence prediction (WorldGuard) | **Interface only, no implementation** | No training, no experiments, no conclusions |
+| Physical robot | **Not started**, out of scope for this round | — |
 
-本项目里的「许可」「证书」「验证」都有具体适用范围。它们**不是**功能安全认证、
-**不是**物理停止证明、**不是**事故责任判断。
+### Three things we always say
 
----
-
-## 三分钟看懂
-
-现在的部署链里普遍存在一个缺口：策略模型给出的动作，和最终真正提交给驱动的动作，
-中间隔着若干次变换 —— 归一化、聚合、插值、重定时、前缀截取。
-
-**问题是：验证通常发生在变换之前。**
-
-本仓库用一个可复现的构造样例说明这件事的后果：两条分别通过了完整几何验证的绕障
-轨迹，把它们加权混合之后，得到的轨迹穿过障碍。父轨迹的验证结论对混合结果不成立。
-
-![第一幕对照图：两条各自验证通过的父轨迹，混合之后的最终动作穿过障碍](docs/demo_a.svg)
-
-1. 图中这一组（案例 #0）：两条父轨迹 P1、P2 各自完整检查都通过（最小余量
-   +67.7 mm / +75.0 mm）；按 0.5 / 0.5 混合后，最终动作的最小余量是 **−68.1 mm**，
-   第 6 段起穿过障碍。
-2. 「只验父轨迹就放行」这条路径，把 500 条真正违规的子轨迹**全部放行** ——
-   这就是本项目要解决的问题。
-3. 「最终动作每次全检」能拦住全部 500 条，代价是 1000 次完整检查；「Δ-Cert + 必要全检」
-   同样 0 条放行、0 条误拒，用掉 500 次（**验证阶段的调用次数，不是整机提速**）。
-
-图由 `python tools/make_demo_a_figure.py --out docs/demo_a.svg` 生成：脚本自己跑一遍
-第一幕，先跟 `RESULTS.md` 的基线断言，不一致就拒绝出图 —— 所以图里没有手填的数字。
-
-跑一次 `demo` 就能看到三条判定路径在同一批数据上的差异。
+1. "Permit", "certificate" and "verification" each have a specific scope here — this is
+   **not a functional-safety certification, not a physical-stop proof, and not an
+   accident-liability judgement**.
+2. `dt=50 ms`, `K≤4`, the tracking reserve and similar numbers are **configurations of
+   this numeric profile** — not a safe speed or a human-protection distance for any robot.
+3. "Zero observed failures" only means this set of tests did not find that class of
+   problem — **it does not mean zero accidents in arbitrary scenarios**.
 
 ---
 
-## 快速开始（CPU，5 分钟）
+## Three minutes
+
+Deployment chains share a gap: the action a policy model emits and the action that is
+finally handed to the driver are separated by several transforms — normalisation,
+aggregation, interpolation, retiming, prefix truncation.
+
+**The problem: verification usually happens *before* those transforms.**
+
+This repository makes the consequence reproducible with a constructed example: two
+obstacle-avoiding trajectories, each of which passes a full geometric check on its own,
+are blended with weights, and the resulting trajectory goes straight through the obstacle.
+The parent trajectory's verdict does not hold for the blend.
+
+![Demo A: two parent trajectories that each pass verification; the blended final action passes through the obstacle](docs/demo_a.svg)
+
+1. In this case (#0): parent trajectories P1 and P2 each pass a full check
+   (minimum margins +67.7 mm / +75.0 mm); blended 0.5 / 0.5, the final action has a
+   minimum margin of **−68.1 mm** and enters the obstacle from segment 6 onward.
+2. The "verify the parent and release" path **releases all 500** genuinely violating child
+   trajectories — that is the problem this project addresses.
+3. "Full check the final action every time" blocks all 500 at a cost of 1000 full checks;
+   "Δ-Cert + full check when needed" also releases 0 and falsely rejects 0, using 500
+   (**calls during the verification stage — not a whole-system speedup**).
+
+The figure is produced by `python tools/make_demo_a_figure.py --out docs/demo_a.svg`:
+the script runs Act One itself and asserts the baseline from `RESULTS.md` before drawing,
+so nothing in it is hand-entered.
+
+Run `demo` once and you will see the three verdict paths side by side on the same data.
+
+---
+
+## Quick start (CPU, 5 minutes)
 
 ```bash
 python -m venv .venv
@@ -63,7 +84,7 @@ python -m pip install -e ".[test]"
 python -m sentinel_evc demo --cases 1000 --out runs/my_first_run
 ```
 
-然后独立校验这次运行的证据包：
+Then verify that run's evidence bundle independently:
 
 ```bash
 python -m sentinel_evc verify \
@@ -72,139 +93,169 @@ python -m sentinel_evc verify \
   --run-id my_first_run
 ```
 
-再看看篡改之后会发生什么：
+And see what tampering does:
 
 ```bash
 python -m sentinel_evc tamper --out runs/my_first_run
 ```
 
-打开 `runs/my_first_run/report.html` 查看离线回放页（双击即可，无需服务器）。
+Open `runs/my_first_run/report.html` for the offline replay page (double-click; no server).
 
-新实验请用空目录。不要覆盖随包的 `sample_run/`。
+Use an empty output directory for new runs. Do not overwrite the bundled `sample_run/`.
 
 ---
 
-## 三个 Demo 各证明了什么
+## What the three demos each prove
 
-### 第一幕 · 变换让旧结论失效
+### Act One · A transform invalidates the earlier verdict
 
-三条判定路径跑在**完全相同**的场景、父轨迹和子轨迹上：
+All three verdict paths run on **exactly the same** scene, parent and child trajectories:
 
-| 判定路径 | 错误放行的违规轨迹 | 完整检查调用次数 |
+| Verdict path | Violating trajectories wrongly released | Full-check calls |
 | --- | --- | --- |
-| a 只验父轨迹就放行 | 500 / 500 | 0 |
-| b 最终全检（基线） | 0 / 500 | 1000 |
-| c Δ-Cert + 必要全检 | 0 / 500 | 500 |
+| a · release on the parent's verdict | 500 / 500 | 0 |
+| b · full check of the final action (baseline) | 0 / 500 | 1000 |
+| c · Δ-Cert + full check when needed | 0 / 500 | 500 |
 
-同时，500 条同侧微调的安全子轨迹全部通过，误拒 0 条 —— 这条负对照是必要的，
-它说明这套机制不是「一变就拒」。
+At the same time, 500 safe, same-side perturbations all pass, with 0 false rejections.
+That negative control matters: it shows the mechanism is not "reject anything that changed".
 
-> **关于那个 50%：** 它指的是**验证阶段的完整检查调用次数**，不是整机提速。
-> 父证书的建立成本、继承失败的回退成本都必须一并计入才能谈端到端收益。
-> 本仓库目前没有端到端耗时数据，所以不作任何提速主张。
+> **About that 50%:** it refers to **full-check call counts in the verification stage**,
+> not a whole-system speedup. The cost of establishing parent certificates and the cost of
+> falling back after a failed inheritance must both be added back before anyone talks about
+> end-to-end gains. This repository has no end-to-end timing data, so it makes no speedup
+> claim of any kind.
 
-### 第二幕 · 撤销不让已发生的动作消失
+### Act Two · Revocation does not make actions that already happened disappear
 
-七类故障注入：迟到动作、票据过期、许可重放、场景变更、队列版本变更、撤销竞态、
-取消未确认。全部阻断了新的失效提交。
+Seven fault injections: late action, expired permit, permit replay, scene change,
+queue-revision change, revocation race, unconfirmed cancel. All of them blocked further
+invalid submissions.
 
-关键结果有两条，第二条同样重要：
+Two results matter, and the second matters just as much:
 
-- 撤销之后，旧代次**新增**本地提交 = **0**
-- 但撤销**之前**已经提交的那一步，仍然出现在 `observed` 里
+- After revocation, **new** local submissions from the old generation = **0**
+- But the step committed **before** revocation still shows up in `observed`
 
-软件队列清空、控制器确认取消、实际运动停止是三件不同的事。本仓库的 `observed`
-是模拟结果，不是电机制动的证明。真机演示必须按具体控制器实测。
+Emptying a software queue, the controller confirming a cancel, and the motion physically
+stopping are three different things. The `observed` cursor here is simulation output — not
+a motor-braking proof. A real demonstration must be measured against the actual controller.
 
-### 第三幕 · 证据能被第三方独立校验
+### Act Three · The evidence can be verified independently
 
-事件加序号与前项摘要构成哈希链，清单记录事件数、末尾摘要和文件摘要，
-用 Ed25519 签名。校验器是独立实现，只读文件、自己重算，不 import 写入方的代码。
+Events carry a sequence number and the previous event's digest, forming a hash chain; the
+manifest records the event count, the tip hash and per-file digests, and is signed with
+Ed25519. The verifier is a separate implementation: it only reads files and recomputes,
+and imports none of the writer's modules.
 
-`tamper` 命令演示四种篡改，各自留下不同的失败特征：
+The `tamper` command demonstrates four kinds of tampering, each leaving a different
+failure signature:
 
-| 篡改方式 | 失败的校验层 |
+| Tampering | Failing verification layer |
 | --- | --- |
-| 改事件里 1 个字节 | file_digest · hash_chain · tip_hash |
-| 删掉最后 3 行 | file_digest · event_count · tip_hash |
-| 换一把公钥 | signature |
-| 改 run_id | run_id |
+| Flip one byte in an event | file_digest · hash_chain · tip_hash |
+| Delete the last 3 lines | file_digest · event_count · tip_hash |
+| Swap in a different public key | signature |
+| Change the run_id | run_id |
 
-签名只证明**相对于指定公钥的记录完整性**。它不证明传感器诚实，不证明动作在
-物理上发生过，不判断责任。包内公钥仅供演示，不是客户 PKI。
-
----
-
-## 结果与限制
-
-`sample_run/` 是一次真实运行的完整输出，随包提供，可用 `verify` 独立校验。
-每个数字的复现命令见 [RESULTS.md](RESULTS.md)。
-
-本仓库**没有**运行过：真实 VLA、MuJoCo、ROS 2、物理机器人、视觉模型、mTLS。
-
-「零次观测到失效」只说明这组构造测试没有发现该类问题，不等于任意场景零事故。
-任务成功率、预测覆盖率、误报率和真实事故率是不同的指标，不能合并成一个「安全率」。
+A signature only proves **record integrity relative to a specified public key**. It does
+not prove that sensors were honest, that an action physically happened, or who is at
+fault. The bundled key is for demonstration; it is not a customer PKI.
 
 ---
 
-## 架构
+## Results and limitations
+
+`sample_run/` is the complete output of one real run, shipped with the repository and
+independently verifiable with `verify`. Reproduction commands for every number are in
+[RESULTS.md](RESULTS.md).
+
+This repository has **not** run: a real VLA, MuJoCo, ROS 2, a physical robot, a vision
+model, or mTLS.
+
+"Zero observed failures" only means this set of constructed tests did not find that class
+of problem; it is not zero accidents in arbitrary scenarios. Task success rate, prediction
+coverage, false-positive rate and real accident rate are different metrics and must not be
+merged into a single "safety rate".
+
+---
+
+## Architecture
 
 ```
-Snapshot ──> 候选编译 ──> 完整检查 / Δ-Cert 继承 ──> Authority.prepare
-                                                          │
-                                                   Lease（一次性、有期限）
-                                                          │
-                                                          v
-                            Executor.commit ── 复核最新状态、上下文、期限
-                                     │
-                                逐步 dispatch ──> SimController
-                                     │                  │
-                                  revoke            三个游标
-                                     │           submitted / accepted / observed
-                                     v
-                    EventLog ──> 哈希链 ──> 签名 ──> 独立校验 + 静态回放页
+Snapshot ──> candidate compile ──> full check / Δ-Cert inherit ──> Authority.prepare
+                                                                        │
+                                                              Lease (single-use, TTL)
+                                                                        │
+                                                                        v
+                                          Executor.commit ── re-check state, context, deadline
+                                                   │
+                                            stepwise dispatch ──> SimController
+                                                   │                    │
+                                                revoke            three cursors
+                                                   │        submitted / accepted / observed
+                                                   v
+                              EventLog ──> hash chain ──> signature ──> independent verify + static replay page
 ```
 
-五项发布不变量，每条对应 `tests/` 里的一个测试：
+Five release invariants, each locked by a test in `tests/`:
 
-1. 未授权通道不能写驱动 —— 只有 `Executor` 调 `controller.submit`
-2. 同一许可不能重复消费
-3. 已提交的不可撤销前缀不能被改写
-4. 撤销后不新增旧代次本地提交
-5. 取消未确认不得恢复旧计划
+1. No unauthorised channel may write to the driver — only `Executor` calls `controller.submit`
+2. A permit cannot be consumed twice
+3. A committed irrevocable prefix cannot be rewritten
+4. No new old-generation local submissions after revocation
+5. An unconfirmed cancel must not restore the old plan
 
 ---
 
-## 运行测试
+## Real VLA integration status
+
+**Not started.** The next goal is **read-only shadow mode**: record the "raw action block"
+and the "finally submitted action" inside a real upstream chain, change no values, and
+answer offline: "had the gate been enabled at the time, how many submissions would it have
+rejected, and why". Closed-loop intervention is out of scope for this round. The plan is in
+[docs/下一步_影子模式接入.md](docs/下一步_影子模式接入.md) (Chinese).
+
+---
+
+## Running the tests
 
 ```bash
-python -m pytest -q          # 正式方式
-python run_tests.py          # 装不上 pytest 时的备用运行器
+python -m pytest -q          # preferred
+python run_tests.py          # fallback runner when pytest cannot be installed
 ```
 
 ---
 
-## 依赖纪律
+## Dependency discipline
 
-运行时依赖只有 `cryptography` 一个。不引入 torch、不引入 scipy、不引入 web 框架。
-`report.html` 由 Python 字符串模板 + 内联 SVG 生成，没有构建步骤、没有 CDN，
-断网也能打开。
+The only runtime dependency is `cryptography`. No torch, no scipy, no web framework.
+`report.html` is generated from a Python string template plus inline SVG — no build step,
+no CDN, and it opens offline.
 
-陌生人 `pip install` 一次成功的概率，直接决定这个仓库有没有人用。
-
----
-
-## 如何贡献
-
-欢迎的贡献：新的构造反例、独立的检查器实现、故障注入场景、跨平台复现记录。
-
-提 PR 请附：测试、输入输出样例、已知限制。
-
-特别欢迎**指出本仓库某个结论不成立的证据**。负结果会被保留在仓库里，不会删掉。
+How often a stranger's `pip install` succeeds on the first try decides whether anyone uses
+this repository at all.
 
 ---
 
-## 许可
+## Contributing
 
-见 `LICENSE.proposed`。**在团队确认代码权属、先行技术披露顺序和依赖许可之前，
-本仓库尚未正式授权开源。** 公开仓库没有合适的许可证，不等于开源。
+Welcome contributions: new constructed counterexamples, independent checker
+implementations, fault-injection scenarios, cross-platform reproduction records.
+
+PRs must include: tests, input/output samples, known limitations.
+
+Evidence that **one of this repository's conclusions does not hold** is especially
+welcome. Negative results are kept in the repository, not deleted.
+
+---
+
+## License
+
+See [LICENSE.proposed](LICENSE.proposed). **Until the team has confirmed code ownership,
+the prior-disclosure order and dependency licences, this repository is not yet licensed
+for open source.** The file is named `LICENSE.proposed` rather than `LICENSE` for exactly
+that reason: a public repository without an effective licence is not open source.
+
+The licence type itself is **also not settled** (Apache-2.0 and MIT differ materially on
+patent terms; the team has to decide).
