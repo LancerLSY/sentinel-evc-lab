@@ -104,6 +104,29 @@ def test_event_fixture_matches_production_canonical_bytes():
         assert line == canonical_json(json.loads(line))
 
 
+def test_production_event_log_uses_the_frozen_event_schema():
+    from sentinel_evc.contracts import canonical_json
+    from sentinel_evc.events import EventLog
+
+    log = EventLog(
+        "schema-integration",
+        monotonic_ns=lambda: 42,
+        utc_now=lambda: "2026-09-19T00:00:00Z",
+    )
+    rule = schema("event")
+    for fixture in load_events():
+        event = log.append(
+            fixture["type"],
+            plan_hash=fixture["plan_hash"],
+            lease_id=fixture["lease_id"],
+            cert_id=fixture["cert_id"],
+            **fixture["payload"],
+        )
+        assert_schema(event, rule)
+    for line, event in zip(log.to_jsonl().splitlines(), log.events()):
+        assert line == canonical_json(event)
+
+
 def test_event_fixture_chain_and_gap():
     raw = (FIXTURES / "sample_events.jsonl").read_bytes()
     assert raw.endswith(b"\n") and b"\r" not in raw
@@ -201,3 +224,12 @@ def test_verdict_fixture_is_formal_path_only():
         del bad[key]
         with pytest.raises(AssertionError):
             assert_schema(bad, rule)
+
+
+def test_production_verdict_uses_the_frozen_verdict_schema():
+    from sentinel_evc.delta_cert import establish_root
+    from sentinel_evc.scenarios import make_parent_pair, make_scene
+
+    plan, _ = make_parent_pair(0)
+    verdict = establish_root(plan, make_scene(0)).summary()
+    assert_schema(verdict, schema("verdict"))

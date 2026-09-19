@@ -74,7 +74,7 @@ def full_check(plan: Plan, scene: Scene):
     first_violation: Optional[int] = None
 
     for k in range(plan.horizon):
-        p0, p1 = plan.knots[k], plan.knots[k + 1]
+        p0, p1 = plan.points[k], plan.points[k + 1]
         seg_margin = _segment_box_margin(p0, p1, scene)
 
         for obs in scene.obstacles:
@@ -100,7 +100,7 @@ def full_check_sampled(plan: Plan, scene: Scene, samples_per_segment: int = 200)
     slack = scene.tool_radius + scene.tracking_reserve
 
     for k in range(plan.horizon):
-        p0, p1 = plan.knots[k], plan.knots[k + 1]
+        p0, p1 = plan.points[k], plan.points[k + 1]
         seg_margin = float("inf")
 
         for i in range(samples_per_segment + 1):

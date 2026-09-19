@@ -11,9 +11,9 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
+import math
 from pathlib import Path
-from typing import Tuple
+from typing import TYPE_CHECKING, Tuple
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import (
@@ -22,8 +22,8 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
 )
 from cryptography.exceptions import InvalidSignature
 
-from .contracts import canonical_json
-from .events import EventLog
+if TYPE_CHECKING:
+    from .events import EventLog
 
 
 def _sha256_file(path: Path) -> str:
@@ -36,6 +36,8 @@ def _sha256_file(path: Path) -> str:
 
 def build_bundle(log: EventLog, out_dir: str) -> dict:
     """把一次运行的事件导出成可独立校验的包。"""
+    from .contracts import canonical_json
+
     out = Path(out_dir)
     bundle = out / "bundle"
     anchors = out / "anchors"
@@ -43,7 +45,7 @@ def build_bundle(log: EventLog, out_dir: str) -> dict:
     anchors.mkdir(parents=True, exist_ok=True)
 
     events_path = bundle / "events.jsonl"
-    events_path.write_text(log.to_jsonl(), encoding="utf-8")
+    events_path.write_bytes(log.to_jsonl())
 
     manifest = {
         "run_id": log.run_id,
@@ -149,9 +151,17 @@ def verify_layers(bundle_dir: str, public_key_path: str, run_id: str) -> dict:
             r["hash_chain"] = f"CHAIN_BROKEN: 哈希链在第 {i} 条断裂"
             chain_ok = False
             break
-        prev = "sha256:" + hashlib.sha256(
-            json.dumps(_canon_for_hash(ev), sort_keys=True, separators=(",", ":"),
-                       ensure_ascii=False).encode("utf-8")).hexdigest()
+        try:
+            canonical = _canonical_json(ev)
+        except (TypeError, ValueError) as exc:
+            r["hash_chain"] = f"EVENT_UNREADABLE: 第 {i} 条不符合规范字节规则: {exc}"
+            chain_ok = False
+            break
+        if canonical != line.encode("utf-8"):
+            r["hash_chain"] = f"EVENT_NONCANONICAL: 第 {i} 条不是规范 JSON"
+            chain_ok = False
+            break
+        prev = "sha256:" + hashlib.sha256(canonical).hexdigest()
     if chain_ok:
         r["hash_chain"] = True
 
@@ -180,12 +190,32 @@ def failed_layers(bundle_dir: str, public_key_path: str, run_id: str) -> tuple:
     return tuple(k for k in LAYERS if r[k] is not None and r[k] is not True)
 
 
-def _canon_for_hash(obj):
-    """与 contracts._canon 相同的规则，这里独立重写一遍以保持校验器自足。"""
+def _encode(obj) -> str:
+    """独立实现规范 JSON，verify 不复用生产侧协议代码。"""
+    if obj is None:
+        return "null"
+    if isinstance(obj, bool):
+        return "true" if obj else "false"
+    if isinstance(obj, int):
+        return str(obj)
     if isinstance(obj, float):
-        return float("%.12g" % obj)
-    if isinstance(obj, (list, tuple)):
-        return [_canon_for_hash(x) for x in obj]
+        if not math.isfinite(obj):
+            raise ValueError("浮点必须有限")
+        return format(0.0 if obj == 0.0 else obj, ".16e")
+    if isinstance(obj, str):
+        if any(0xD800 <= ord(char) <= 0xDFFF for char in obj):
+            raise ValueError("字符串包含孤立 surrogate")
+        return json.dumps(obj, ensure_ascii=False)
+    if isinstance(obj, list):
+        return "[" + ",".join(_encode(value) for value in obj) + "]"
     if isinstance(obj, dict):
-        return {str(k): _canon_for_hash(v) for k, v in obj.items()}
-    return obj
+        if any(not isinstance(key, str) for key in obj):
+            raise TypeError("对象键必须是字符串")
+        return "{" + ",".join(
+            _encode(key) + ":" + _encode(obj[key]) for key in sorted(obj)
+        ) + "}"
+    raise TypeError(f"不支持的 JSON 类型: {type(obj).__name__}")
+
+
+def _canonical_json(obj) -> bytes:
+    return _encode(obj).encode("utf-8")

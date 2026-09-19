@@ -14,7 +14,7 @@ import threading
 from typing import Optional
 
 from .authority import Authority
-from .contracts import Context, ErrorCode, Lease, Plan, Rejection, Snapshot
+from .contracts import ErrorCode, Lease, LeaseContext, Plan, Rejection, Snapshot
 from .events import EventLog
 
 
@@ -58,7 +58,7 @@ class Executor:
         lease: Lease,
         plan: Plan,
         snapshot: Snapshot,
-        live_context: Context,
+        live_context: LeaseContext,
         now_ns: int,
     ) -> None:
         """提交阶段：复核最新状态，消费一次性许可，才开放待发前缀。
@@ -71,29 +71,16 @@ class Executor:
                 raise Rejection(ErrorCode.CANCEL_UNCONFIRMED, "故障状态下不接纳新许可")
 
             if not self._authority.verify_mac(lease):
-                raise Rejection(ErrorCode.LEASE_UNKNOWN, "许可签名不匹配")
+                raise Rejection(ErrorCode.AUTH_FAILED, "许可签名不匹配")
 
-            if lease.plan_hash != plan.hash:
-                raise Rejection(ErrorCode.CERTIFICATE_MISS, "许可未绑定这个最终动作")
+            if lease.final_hash != plan.hash:
+                raise Rejection(ErrorCode.AUTH_FAILED, "许可未绑定这个最终动作")
 
-            if now_ns > lease.deadline_mono_ns:
+            if now_ns > lease.deadline_mono:
                 raise Rejection(ErrorCode.LEASE_EXPIRED, "许可已过期")
 
-            # 上下文逐项复核
-            lc, pc = live_context, lease.context
-            if lc.boot != pc.boot:
-                raise Rejection(ErrorCode.CONTEXT_CHANGED, "boot 变化")
-            if lc.epoch != pc.epoch:
-                raise Rejection(ErrorCode.STALE_GENERATION, "代次已推进")
-            if lc.scene_id != pc.scene_id:
-                raise Rejection(ErrorCode.CONTEXT_CHANGED, "场景变化")
-            if lc.queue_rev != pc.queue_rev:
-                raise Rejection(ErrorCode.CONTEXT_CHANGED, "队列版本变化")
-            if lc.controller != pc.controller:
-                raise Rejection(ErrorCode.CONTEXT_CHANGED, "控制器 profile 变化")
-
-            if not snapshot.valid:
-                raise Rejection(ErrorCode.STATE_STALE, "提交时快照无效")
+            if live_context != lease.context:
+                raise Rejection(ErrorCode.CONTEXT_CHANGED, "执行上下文变化")
 
             # 新快照可以替换旧快照，但必须仍在允许管内。
             # 注意：obs_id 相同但状态已出管，一样要拒绝。
@@ -101,7 +88,7 @@ class Executor:
 
             from .authority import START_TUBE
 
-            if math.dist(snapshot.position, plan.knots[0]) > START_TUBE:
+            if math.dist(snapshot.position, plan.points[0]) > START_TUBE:
                 raise Rejection(ErrorCode.TRACKING_TUBE, "提交时起点已出管")
 
             # 一次性消费。放在所有检查之后 —— 检查失败不应烧掉许可。
@@ -118,9 +105,8 @@ class Executor:
                 plan_hash=plan.hash,
                 lease_id=lease.lease_id,
                 cert_id=lease.cert_id,
-                prefix_len=lease.prefix_len,
-                obs_id=snapshot.obs_id,
-                generation=self._generation,
+                accepted=True,
+                reason_code=None,
             )
 
     # ------------------------------------------------------------ Dispatch
@@ -139,10 +125,7 @@ class Executor:
             lease = self._lease
             assert lease is not None and self._plan is not None
 
-            if now_ns > lease.deadline_mono_ns:
-                self._events.append(
-                    "BACKUP", reason=ErrorCode.LEASE_EXPIRED, lease_id=lease.lease_id
-                )
+            if now_ns > lease.deadline_mono:
                 self._pending.clear()
                 self._state = ExecutorState.IDLE
                 self._controller.tick()
@@ -154,7 +137,7 @@ class Executor:
                 return False
 
             step = self._pending.pop(0)
-            action = self._plan.knots[step + 1]
+            action = self._plan.points[step + 1]
             ok = self._controller.submit(action, self._generation)
             if ok:
                 self._dispatched += 1
@@ -162,8 +145,9 @@ class Executor:
                     "DISPATCH",
                     plan_hash=self._plan.hash,
                     lease_id=lease.lease_id,
-                    step=step,
-                    generation=self._generation,
+                    cert_id=lease.cert_id,
+                    step_index=step,
+                    submitted=True,
                 )
             else:
                 self._pending.insert(0, step)
@@ -180,13 +164,19 @@ class Executor:
         cancel 发在锁外。
         """
         with self._lock:
+            old_epoch = self._generation
             self._generation += 1  # 旧代次立刻失效
             self._pending.clear()  # 清本地待发
             self._state = ExecutorState.FAULT
             lease_id = self._lease.lease_id if self._lease else None
             self._lease = None
-            self._events.append("REVOKE", reason=reason, lease_id=lease_id,
-                                new_generation=self._generation)
+            self._events.append(
+                "REVOKE",
+                lease_id=lease_id,
+                reason=reason,
+                old_epoch=old_epoch,
+                new_epoch=self._generation,
+            )
 
         self._controller.cancel()  # 锁外发，等 ACK 不占锁
 
@@ -194,7 +184,7 @@ class Executor:
         """查询取消是否已确认。"""
         acked = self._controller.cancel_acked
         if acked is not None:
-            self._events.append("CANCEL_ACK", acked=bool(acked))
+            self._events.append("CANCEL_ACK", confirmed=bool(acked))
         return acked
 
     def try_recover(self, operator_approved: bool) -> None:
@@ -207,5 +197,3 @@ class Executor:
             if not operator_approved:
                 raise Rejection(ErrorCode.CANCEL_UNCONFIRMED, "缺少人工批准")
             self._state = ExecutorState.IDLE
-            self._events.append("OUTCOME", outcome="recovered",
-                                generation=self._generation)

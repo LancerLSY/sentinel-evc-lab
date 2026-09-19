@@ -19,6 +19,8 @@ DT = 0.05
 
 START = (0.10, 0.0, 0.30)
 GOAL = (0.70, 0.0, 0.30)
+CONTROLLER_PROFILE = "sim-controller-v1"
+TASK_PHASE = "transfer"
 
 
 def make_scene(seed: int = 0) -> Scene:
@@ -49,7 +51,13 @@ def _arc(amplitude: float, plan_id: str, noise: float = 0.0, seed: int = 0) -> P
             y += rng.uniform(-noise, noise)
             z += rng.uniform(-noise, noise)
         knots.append((x, y, z))
-    return Plan(plan_id=plan_id, knots=tuple(knots), dt=DT)
+    return Plan(
+        points=tuple(knots),
+        dt=DT,
+        gripper_events=(),
+        controller_profile=CONTROLLER_PROFILE,
+        task_phase=TASK_PHASE,
+    )
 
 
 def make_parent_pair(seed: int = 0):
@@ -66,9 +74,15 @@ def mix(p1: Plan, p2: Plan, weight: float = 0.5, plan_id: str = "MIX"):
     """
     knots = tuple(
         tuple(weight * a[j] + (1 - weight) * b[j] for j in range(3))
-        for a, b in zip(p1.knots, p2.knots)
+        for a, b in zip(p1.points, p2.points)
     )
-    child = Plan(plan_id=plan_id, knots=knots, dt=p1.dt)
+    child = Plan(
+        points=knots,
+        dt=p1.dt,
+        gripper_events=p1.gripper_events,
+        controller_profile=p1.controller_profile,
+        task_phase=p1.task_phase,
+    )
     record = TransformRecord(
         transform_id=f"tf-{plan_id}",
         kind="mix",  # 不在 INHERITABLE 里 —— 混合必须当作新的最终候选
@@ -85,11 +99,17 @@ def perturb(p1: Plan, magnitude: float = 0.008, seed: int = 0, plan_id: str = "N
     这条是必要的负对照：没有它，别人会认为这套机制只是「一变就拒」。
     """
     rng = random.Random(seed)
-    knots = [p1.knots[0]]
-    for k in p1.knots[1:-1]:
+    knots = [p1.points[0]]
+    for k in p1.points[1:-1]:
         knots.append(tuple(k[j] + rng.uniform(-magnitude, magnitude) for j in range(3)))
-    knots.append(p1.knots[-1])
-    child = Plan(plan_id=plan_id, knots=tuple(knots), dt=p1.dt)
+    knots.append(p1.points[-1])
+    child = Plan(
+        points=tuple(knots),
+        dt=p1.dt,
+        gripper_events=p1.gripper_events,
+        controller_profile=p1.controller_profile,
+        task_phase=p1.task_phase,
+    )
     record = TransformRecord(
         transform_id=f"tf-{plan_id}",
         kind="perturb",  # 已登记、可计算上界 —— 允许尝试继承

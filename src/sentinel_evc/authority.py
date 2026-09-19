@@ -13,17 +13,17 @@ from __future__ import annotations
 import hmac
 import itertools
 import os
+from dataclasses import replace
 from hashlib import sha256
 from typing import Optional
 
 from .contracts import (
     Certificate,
-    Context,
     ErrorCode,
     Lease,
+    LeaseContext,
     Rejection,
     Snapshot,
-    canonical_json,
 )
 from .delta_cert import CertificateStore
 
@@ -50,10 +50,10 @@ class Authority:
     # ------------------------------------------------------------ 签名
 
     def _mac(self, lease: Lease) -> str:
-        return hmac.new(self._key, canonical_json(lease.payload()), sha256).hexdigest()
+        return hmac.new(self._key, lease.signing_bytes(), sha256).hexdigest()
 
     def verify_mac(self, lease: Lease) -> bool:
-        return hmac.compare_digest(self._mac(lease), lease.mac)
+        return hmac.compare_digest(self._mac(lease), lease.hmac)
 
     # ------------------------------------------------------------ Prepare
 
@@ -61,7 +61,7 @@ class Authority:
         self,
         plan,
         cert: Certificate,
-        context: Context,
+        context: LeaseContext,
         snapshot: Snapshot,
         now_ns: int,
         prefix_len: int = 4,
@@ -69,42 +69,40 @@ class Authority:
     ) -> Lease:
         """准备阶段：核对内容与范围，签发许可。**不向驱动发任何命令。**"""
         if prefix_len < 1 or prefix_len > MAX_PREFIX_LEN:
-            raise Rejection(ErrorCode.INPUT_SCHEMA, f"prefix_len={prefix_len}")
+            raise Rejection(ErrorCode.AUTH_FAILED, f"prefix_len={prefix_len}")
         if prefix_len > plan.horizon:
-            raise Rejection(ErrorCode.INPUT_SCHEMA, "前缀长于计划本身")
+            raise Rejection(ErrorCode.AUTH_FAILED, "前缀长于计划本身")
         if ttl_ns > MAX_TTL_NS:
-            raise Rejection(ErrorCode.INPUT_SCHEMA, "ttl 超过资源保护上限")
+            raise Rejection(ErrorCode.AUTH_FAILED, "ttl 超过资源保护上限")
 
         # 证书必须来自本地登记表，且确实覆盖这个最终动作
         if not self._store.covers(cert.cert_id, plan.hash):
-            raise Rejection(ErrorCode.CERTIFICATE_MISS, "证书未覆盖该最终动作")
+            raise Rejection(ErrorCode.AUTH_FAILED, "证书未覆盖该最终动作")
 
-        if not snapshot.valid:
-            raise Rejection(ErrorCode.STATE_STALE, "快照无效")
-        age = now_ns - snapshot.capture_mono_ns
+        age = now_ns - snapshot.observed_mono
         if age > MAX_OBS_AGE_NS:
             raise Rejection(ErrorCode.STATE_STALE, f"观测年龄 {age}ns")
 
         # 起点必须落在允许管内
         import math
 
-        if math.dist(snapshot.position, plan.knots[0]) > START_TUBE:
+        if math.dist(snapshot.position, plan.points[0]) > START_TUBE:
             raise Rejection(ErrorCode.TRACKING_TUBE, "起点偏离允许管")
 
         # 期限要覆盖整个前缀的预计执行时间
         prefix_ns = int(prefix_len * plan.dt * 1e9)
         if ttl_ns < prefix_ns:
-            raise Rejection(ErrorCode.INPUT_SCHEMA, "期限不足以跑完前缀")
+            raise Rejection(ErrorCode.AUTH_FAILED, "期限不足以跑完前缀")
 
         lease = Lease(
             lease_id=f"lease-{next(_lease_counter):06d}",
-            plan_hash=plan.hash,
+            final_hash=plan.hash,
             context=context,
             cert_id=cert.cert_id,
             prefix_len=prefix_len,
-            deadline_mono_ns=now_ns + ttl_ns,
+            deadline_mono=now_ns + ttl_ns,
         )
-        lease = Lease(**{**lease.__dict__, "mac": self._mac(lease)})
+        lease = replace(lease, hmac=self._mac(lease))
         self._issued[lease.lease_id] = lease
         return lease
 
@@ -113,9 +111,9 @@ class Authority:
     def consume(self, lease: Lease) -> None:
         """一次性消费。同一许可第二次使用必须失败。"""
         if lease.lease_id not in self._issued:
-            raise Rejection(ErrorCode.LEASE_UNKNOWN, lease.lease_id)
+            raise Rejection(ErrorCode.AUTH_FAILED, lease.lease_id)
         if not self.verify_mac(lease):
-            raise Rejection(ErrorCode.LEASE_UNKNOWN, "签名不匹配，疑似伪造或篡改")
+            raise Rejection(ErrorCode.AUTH_FAILED, "签名不匹配，疑似伪造或篡改")
         if lease.lease_id in self._consumed:
             raise Rejection(ErrorCode.LEASE_REPLAY, lease.lease_id)
         self._consumed.add(lease.lease_id)

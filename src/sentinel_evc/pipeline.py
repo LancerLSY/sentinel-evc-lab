@@ -6,12 +6,13 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import Optional
 
 from .authority import Authority
-from .contracts import Context, ErrorCode, Rejection, Snapshot
+from .contracts import ErrorCode, LeaseContext, Rejection, Snapshot
 from .delta_cert import CertificateStore, establish_root, validate_or_inherit
-from .events import EventLog
+from .events import ZERO_HASH, EventLog
 from .executor import Executor, ExecutorState
 from .geometry import cross_validate, full_check
 from .scenarios import make_parent_pair, make_scene, mix, perturb
@@ -27,6 +28,20 @@ class Clock:
     def advance(self, ns: int) -> int:
         self.now_ns += ns
         return self.now_ns
+
+
+def _snapshot(obs_id: str, context: LeaseContext, position, observed_mono: int):
+    return Snapshot(
+        obs_id=obs_id,
+        robot=context.robot,
+        boot=context.boot,
+        epoch=context.epoch,
+        scene_id=context.scene_id,
+        queue_rev=context.queue_rev,
+        committed_prefix_hash=context.committed_prefix_hash,
+        position=position,
+        observed_mono=observed_mono,
+    )
 
 
 # ==================================================================== 第一幕
@@ -68,8 +83,18 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
         if root.verdict != "FULL":
             continue  # 父轨迹本身不合格的案例跳过
         parent_cert = root.certificate
-        log.append("CERTIFICATE", cert_id=parent_cert.cert_id,
-                   plan_hash=p1.hash, method="FULL", case=i)
+        log.append(
+            "CERTIFICATE",
+            cert_id=parent_cert.cert_id,
+            plan_hash=p1.hash,
+            verdict=root.verdict,
+            path=root.path,
+            margins=list(root.margins),
+            first_violation_segment=root.first_violation_segment,
+            full_checks_used=root.full_checks_used,
+            inherit_depth=root.inherit_depth,
+            parent_cert_id=root.parent_cert_id,
+        )
 
         # 一半案例用异侧混合（实际违规），一半用同侧扰动（实际安全）
         if i % 2 == 0:
@@ -77,7 +102,13 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
         else:
             child, record = perturb(p1, seed=seed, plan_id=f"NEAR-{i:06d}")
 
-        log.append("TRANSFORM", **record.summary(), case=i)
+        parents = [p1.hash, p2.hash] if record.kind == "mix" else [p1.hash]
+        log.append(
+            "TRANSFORM",
+            plan_hash=child.hash,
+            method="mix" if record.kind == "mix" else "near",
+            parent_plan_hashes=parents,
+        )
 
         # 地面真值：独立判断这条子轨迹到底违不违规
         truly_ok, true_margins, first_viol = full_check(child, scene)
@@ -123,8 +154,8 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
                 "verdict": v.verdict,
                 "min_margin": round(min(true_margins), 6),
                 "first_violation_segment": first_viol,
-                "parent_knots": [list(k) for k in p1.knots],
-                "child_knots": [list(k) for k in child.knots],
+                "parent_knots": [list(k) for k in p1.points],
+                "child_knots": [list(k) for k in child.points],
                 "obstacle": scene.obstacles[0].summary(),
             })
 
@@ -177,8 +208,15 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
     root = establish_root(p1, scene)
     store.register(root.certificate)
 
-    ctx = Context(scene_id=scene.scene_id)
-    snap = Snapshot("obs-0", p1.knots[0], clock.now_ns)
+    ctx = LeaseContext(
+        robot="numeric-robot-0",
+        boot=1,
+        epoch=0,
+        scene_id=scene.scene_id,
+        queue_rev=0,
+        committed_prefix_hash=ZERO_HASH,
+    )
+    snap = _snapshot("obs-0", ctx, p1.points[0], clock.now_ns)
 
     controller = SimController(
         capacity=2,
@@ -191,11 +229,18 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
     detail = {"fault": fault, "blocked": False, "code": None,
               "stale_submissions_after_revoke": 0, "cursors": {}}
 
+    lease = None
     try:
         lease = authority.prepare(p1, root.certificate, ctx, snap, clock.now_ns,
                                   prefix_len=4, ttl_ns=500_000_000)
-        log.append("PREPARE", lease_id=lease.lease_id, plan_hash=p1.hash,
-                   cert_id=root.certificate.cert_id, fault=fault)
+        log.append(
+            "PREPARE",
+            lease_id=lease.lease_id,
+            plan_hash=p1.hash,
+            cert_id=root.certificate.cert_id,
+            prefix_len=lease.prefix_len,
+            deadline_mono=lease.deadline_mono,
+        )
 
         live_ctx = ctx
         commit_snap = snap
@@ -204,11 +249,11 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
         if fault == "lease_expired":
             now = clock.advance(2_000_000_000)  # 超过 ttl
         elif fault == "scene_changed":
-            live_ctx = Context(scene_id="scene-9999")
+            live_ctx = replace(ctx, scene_id="scene-9999")
         elif fault == "queue_rev_changed":
-            live_ctx = Context(scene_id=scene.scene_id, queue_rev=7)
+            live_ctx = replace(ctx, queue_rev=7)
         elif fault == "late_action":
-            commit_snap = Snapshot("obs-late", (0.9, 0.9, 0.9), clock.now_ns)
+            commit_snap = _snapshot("obs-late", ctx, (0.9, 0.9, 0.9), clock.now_ns)
 
         ex.commit(lease, p1, commit_snap, live_ctx, now)
 
@@ -252,12 +297,27 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
     except Rejection as exc:
         detail["blocked"] = True
         detail["code"] = exc.code
-        log.append("BACKUP", reason=exc.code, fault=fault)
+        log.append(
+            "COMMIT",
+            plan_hash=p1.hash,
+            lease_id=lease.lease_id if lease else None,
+            cert_id=root.certificate.cert_id,
+            accepted=False,
+            reason_code=exc.code,
+        )
 
     for _ in range(4):
         controller.tick()
-    for item in controller.observed:
-        log.append("OBSERVED", action=list(item["action"]), generation=item["gen"])
+    for step_index, item in enumerate(controller.observed):
+        log.append(
+            "OBSERVED",
+            plan_hash=p1.hash,
+            lease_id=lease.lease_id if lease else None,
+            cert_id=root.certificate.cert_id,
+            step_index=step_index,
+            position=list(item["action"]),
+            observed=True,
+        )
     detail["cursors"] = controller.cursors()
     return detail
 
@@ -268,5 +328,11 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
 def act_three_evidence(log: EventLog, out_dir: str) -> dict:
     from .evidence import build_bundle
 
-    log.append("OUTCOME", outcome="run_complete", event_count=log.count)
+    log.append(
+        "OUTCOME",
+        status="completed",
+        submitted=len(log.by_type("DISPATCH")),
+        accepted=len(log.by_type("CONTROLLER_ACK")),
+        observed=len(log.by_type("OBSERVED")),
+    )
     return build_bundle(log, out_dir)

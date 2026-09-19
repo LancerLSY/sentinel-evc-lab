@@ -27,7 +27,13 @@ def test_midpoint_penetration():
 
     这是最典型的漏检。只查端点的实现会放行这条轨迹。
     """
-    plan = Plan("p", ((0.0, 0.0, 0.0), (1.0, 0.0, 0.0)), dt=0.05)
+    plan = Plan(
+        points=((0.0, 0.0, 0.0), (1.0, 0.0, 0.0)),
+        dt=0.05,
+        gripper_events=(),
+        controller_profile="test",
+        task_phase="test",
+    )
     ok, margins, first = full_check(plan, _scene())
     assert not ok, "线段穿过球心却被放行 —— 说明检查只看了端点"
     assert first == 0
@@ -104,7 +110,7 @@ def test_margin_deducts_from_remaining_not_original():
         expected = root.certificate.margins[k] - LIPSCHITZ * e1[k] - LIPSCHITZ * e2[k]
         assert abs(v2.certificate.margins[k] - expected) < 1e-12, (
             f"第 {k} 段余量没有从剩余量累计扣减")
-    assert v2.certificate.depth == 2
+    assert v2.certificate.inherit_depth == 2
 
 
 def test_inherited_margin_is_conservative_lower_bound():
@@ -128,7 +134,7 @@ def test_unregistered_transform_forces_full_check():
     bad = TransformRecord("x", "unknown", p1.hash, child.hash)
     v = validate_or_inherit(child, scene, p1, root.certificate, bad)
     assert v.full_checks_used == 1
-    assert v.reason_code == "transform_not_registered"
+    assert v.path == "full"
 
 
 def test_scene_change_invalidates_certificate():
@@ -139,4 +145,4 @@ def test_scene_change_invalidates_certificate():
     other = make_scene(7)
     v = validate_or_inherit(child, other, p1, root.certificate, record)
     assert v.full_checks_used == 1
-    assert v.reason_code in ("scene_changed", "GEOMETRY_VIOLATION")
+    assert v.path == "full"

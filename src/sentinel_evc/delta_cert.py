@@ -31,14 +31,12 @@ import math
 from dataclasses import dataclass
 from typing import Optional
 
-from .contracts import Certificate, Plan, Scene, TransformRecord
+from .contracts import MAX_INHERIT_DEPTH, Certificate, Plan, Scene, TransformRecord
 from .geometry import full_check
 
 # 本项目约束族的 Lipschitz 常数。整臂推广时这个值不再是 1，
 # 拿不到有效界时必须退回 FULL_ONLY，不能沿用。
 LIPSCHITZ = 1.0
-
-MAX_INHERIT_DEPTH = 8
 
 _cert_counter = itertools.count(1)
 
@@ -67,7 +65,6 @@ class Verdict:
             "plan_hash": self.plan_hash,
             "verdict": self.verdict,
             "path": self.path,
-            "cert_id": self.certificate.cert_id if self.certificate else None,
             "parent_cert_id": self.parent_cert_id,
             "margins": [round(m, 9) for m in self.margins],
             "first_violation_segment": self.first_violation_segment,
@@ -83,8 +80,8 @@ def deviation_bounds(parent: Plan, child: Plan) -> tuple:
         raise ValueError("时间网格不同，不能按段比较偏差")
     e = []
     for k in range(parent.horizon):
-        d0 = math.dist(parent.knots[k], child.knots[k])
-        d1 = math.dist(parent.knots[k + 1], child.knots[k + 1])
+        d0 = math.dist(parent.points[k], child.points[k])
+        d1 = math.dist(parent.points[k + 1], child.points[k + 1])
         e.append(max(d0, d1))
     return tuple(e)
 
@@ -102,13 +99,19 @@ def dependency_ok(
     """
     if not transform.inheritable:
         return "transform_not_registered"
-    if parent_cert.scene_hash != scene.hash:
+    if parent_cert.scene_id != scene.scene_id:
         return "scene_changed"
-    if parent_cert.dt != child.dt:
+    if parent_cert.plan.dt != child.dt:
         return "dt_changed"
-    if parent_cert.horizon != child.horizon:
+    if parent_cert.plan.horizon != child.horizon:
         return "horizon_changed"
-    if parent_cert.depth + 1 > MAX_INHERIT_DEPTH:
+    if parent_cert.plan.gripper_events != child.gripper_events:
+        return "gripper_events_changed"
+    if parent_cert.plan.controller_profile != child.controller_profile:
+        return "controller_profile_changed"
+    if parent_cert.plan.task_phase != child.task_phase:
+        return "task_phase_changed"
+    if parent_cert.inherit_depth >= MAX_INHERIT_DEPTH:
         return "max_depth_exceeded"
     return None
 
@@ -140,7 +143,7 @@ def validate_or_inherit(
                 certificate=parent_cert,
                 margins=parent_cert.margins,
                 full_checks_used=0,
-                inherit_depth=parent_cert.depth,
+                inherit_depth=parent_cert.inherit_depth,
                 parent_cert_id=parent_cert.cert_id,
             )
         return _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
@@ -148,9 +151,7 @@ def validate_or_inherit(
     # --- 情形三：尝试 Δ 继承
     reason = dependency_ok(parent_cert, child, scene, transform)
     if reason is not None:
-        v = _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
-        v.reason_code = reason
-        return v
+        return _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
 
     e = deviation_bounds(parent_plan, child)
     # 关键：从父证书的剩余余量扣，不是从最初值扣
@@ -161,15 +162,11 @@ def validate_or_inherit(
     if min(child_margins) >= 0.0:
         cert = Certificate(
             cert_id=_next_cert_id(),
-            plan_hash=child.hash,
-            scene_hash=scene.hash,
-            dt=child.dt,
-            horizon=child.horizon,
+            plan=child,
+            scene_id=scene.scene_id,
             margins=child_margins,
-            method="INHERITED",
-            parent_id=parent_cert.cert_id,
-            root_id=parent_cert.root_id or parent_cert.cert_id,
-            depth=parent_cert.depth + 1,
+            inherit_depth=parent_cert.inherit_depth + 1,
+            parent_cert_id=parent_cert.cert_id,
         )
         return Verdict(
             plan_hash=child.hash,
@@ -178,15 +175,12 @@ def validate_or_inherit(
             certificate=cert,
             margins=child_margins,
             full_checks_used=0,
-            inherit_depth=cert.depth,
+            inherit_depth=cert.inherit_depth,
             parent_cert_id=parent_cert.cert_id,
         )
 
     # 界不够 —— 这只说明「无法证明」，还要真的做完整检查才能下结论
-    v = _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
-    if v.reason_code is None:
-        v.reason_code = "bound_insufficient"
-    return v
+    return _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
 
 
 def _full_path(
@@ -202,18 +196,14 @@ def _full_path(
             first_violation_segment=first_violation,
             full_checks_used=1,
             parent_cert_id=parent_cert_id,
-            reason_code="GEOMETRY_VIOLATION",
         )
     cert = Certificate(
         cert_id=_next_cert_id(),
-        plan_hash=child.hash,
-        scene_hash=scene.hash,
-        dt=child.dt,
-        horizon=child.horizon,
+        plan=child,
+        scene_id=scene.scene_id,
         margins=margins,
-        method="FULL",
-        root_id=None,
-        depth=0,
+        inherit_depth=0,
+        parent_cert_id=None,
     )
     return Verdict(
         plan_hash=child.hash,

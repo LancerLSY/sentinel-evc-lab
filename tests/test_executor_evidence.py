@@ -1,11 +1,13 @@
 """执行器五项发布不变量 + 证据链测试。"""
 
+from dataclasses import replace
+
 import pytest
 
 from sentinel_evc.authority import Authority
-from sentinel_evc.contracts import Context, ErrorCode, Rejection, Snapshot
+from sentinel_evc.contracts import Certificate, ErrorCode, LeaseContext, Rejection, Snapshot
 from sentinel_evc.delta_cert import CertificateStore, establish_root
-from sentinel_evc.events import EventLog
+from sentinel_evc.events import EventLog, ZERO_HASH
 from sentinel_evc.evidence import build_bundle, failed_layers, verify_bundle
 from sentinel_evc.executor import Executor, ExecutorState
 from sentinel_evc.pipeline import Clock
@@ -24,8 +26,11 @@ def _rig(drop_cancel_ack=False, capacity=2):
     log = EventLog("test")
     ctrl = SimController(capacity=capacity, drop_cancel_ack=drop_cancel_ack)
     ex = Executor(auth, ctrl, log)
-    ctx = Context(scene_id=scene.scene_id)
-    snap = Snapshot("obs-0", p1.knots[0], clock.now_ns)
+    ctx = LeaseContext("robot-test", 0, 0, scene.scene_id, 0, ZERO_HASH)
+    snap = Snapshot(
+        obs_id="obs-0", **ctx.summary(), position=p1.points[0],
+        observed_mono=clock.now_ns,
+    )
     return dict(scene=scene, plan=p1, store=store, cert=root.certificate,
                 auth=auth, clock=clock, log=log, ctrl=ctrl, ex=ex,
                 ctx=ctx, snap=snap)
@@ -49,14 +54,14 @@ def test_lease_cannot_be_consumed_twice():
 def test_forged_certificate_id_is_rejected():
     """上游自选的证书 ID 不构成证据。"""
     r = _rig()
-    from sentinel_evc.contracts import Certificate
-
-    fake = Certificate("cert-999999", r["plan"].hash, r["scene"].hash,
-                       r["plan"].dt, r["plan"].horizon, (9.9,) * r["plan"].horizon,
-                       "FULL")
+    fake = Certificate(
+        cert_id="cert-999999", plan=r["plan"], scene_id=r["scene"].scene_id,
+        margins=(9.9,) * r["plan"].horizon, inherit_depth=0,
+        parent_cert_id=None,
+    )
     with pytest.raises(Rejection) as exc:
         r["auth"].prepare(r["plan"], fake, r["ctx"], r["snap"], r["clock"].now_ns)
-    assert exc.value.code == ErrorCode.CERTIFICATE_MISS
+    assert exc.value.code == ErrorCode.AUTH_FAILED
 
 
 def test_expired_lease_is_rejected_at_commit():
@@ -73,13 +78,13 @@ def test_context_change_is_rejected():
     for field, value, code in [
         ("scene_id", "other", ErrorCode.CONTEXT_CHANGED),
         ("queue_rev", 42, ErrorCode.CONTEXT_CHANGED),
-        ("epoch", 5, ErrorCode.STALE_GENERATION),
+        ("epoch", 5, ErrorCode.CONTEXT_CHANGED),
         ("boot", 9, ErrorCode.CONTEXT_CHANGED),
     ]:
         r = _rig()
         lease = r["auth"].prepare(r["plan"], r["cert"], r["ctx"], r["snap"],
                                   r["clock"].now_ns)
-        live = Context(**{**r["ctx"].__dict__, field: value})
+        live = replace(r["ctx"], **{field: value})
         with pytest.raises(Rejection) as exc:
             r["ex"].commit(lease, r["plan"], r["snap"], live, r["clock"].now_ns)
         assert exc.value.code == code, f"{field} 变化应给 {code}"
@@ -90,7 +95,7 @@ def test_state_outside_tube_rejected_even_with_same_obs_id():
     r = _rig()
     lease = r["auth"].prepare(r["plan"], r["cert"], r["ctx"], r["snap"],
                               r["clock"].now_ns)
-    drifted = Snapshot("obs-0", (0.9, 0.9, 0.9), r["clock"].now_ns)
+    drifted = replace(r["snap"], position=(0.9, 0.9, 0.9))
     with pytest.raises(Rejection) as exc:
         r["ex"].commit(lease, r["plan"], drifted, r["ctx"], r["clock"].now_ns)
     assert exc.value.code == ErrorCode.TRACKING_TUBE
@@ -192,7 +197,7 @@ def test_controller_capacity_forces_batched_submission():
 def test_evidence_roundtrip_and_tampering(tmp_path):
     log = EventLog("ev-test")
     for i in range(20):
-        log.append("DISPATCH", step=i)
+        log.append("DISPATCH", step_index=i, submitted=True)
     b = build_bundle(log, str(tmp_path))
 
     ok, msg = verify_bundle(b["bundle_dir"], b["public_key"], "ev-test")
@@ -219,7 +224,7 @@ def test_four_tampering_modes_give_four_distinct_profiles(tmp_path):
 
     log = EventLog("p-test")
     for i in range(30):
-        log.append("DISPATCH", step=i)
+        log.append("DISPATCH", step_index=i, submitted=True)
     b = build_bundle(log, str(tmp_path))
     bundle, pub = b["bundle_dir"], b["public_key"]
     profiles = set()
@@ -261,8 +266,12 @@ def test_event_log_rejects_unknown_type():
 
 def test_hash_chain_is_deterministic():
     """同样的事件序列必须给出同样的末尾摘要 —— 跨机器复现的前提。"""
-    a, b = EventLog("same"), EventLog("same")
+    a, b = (
+        EventLog("same", monotonic_ns=lambda: 123,
+                 utc_now=lambda: "2026-09-19T00:00:00Z")
+        for _ in range(2)
+    )
     for log in (a, b):
         for i in range(10):
-            log.append("DISPATCH", step=i, position=[0.1 * i, 0.0, 0.3])
+            log.append("DISPATCH", step_index=i, submitted=True)
     assert a.tip_hash == b.tip_hash
