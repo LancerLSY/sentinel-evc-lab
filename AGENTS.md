@@ -231,6 +231,10 @@ src/sentinel_evc/
 ├── report.py          # 生成静态 report.html（内联 SVG）
 ├── scenarios.py       # 场景与轨迹构造、批量实验
 └── cli.py             # demo / verify / tamper
+
+tools/
+└── make_demo_a_figure.py  # 第一幕对照图：跑一遍第一幕 → 与基线断言 → 内联 SVG，
+                           # 写出 docs/demo_a.svg（README「三分钟看懂」用的那张）
 ```
 
 **校验器是独立实现** —— 只读文件、自己重算，**不 import 写入方的任何模块**。
