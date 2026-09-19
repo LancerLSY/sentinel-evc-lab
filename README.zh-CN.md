@@ -7,7 +7,7 @@
 
 数值参考实现。在普通笔记本上五分钟跑完，不需要 GPU、机械臂或任何模型权重。
 
-> **状态**：v0.1（候选）· `pytest` **24 项通过** · 三幕 demo 可复现 · 许可证**尚未生效**（见文末）
+> **状态**：v0.1（候选）· `pytest` **24 项通过** · 三幕 demo 可复现 · 许可：**MIT**
 > CI：[workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 > （私有仓库里 workflow 徽章图片拉不出来，所以这里放链接而不是 badge；转为公开后再挂徽章。）
 
@@ -225,8 +225,14 @@ python run_tests.py          # 装不上 pytest 时的备用运行器
 
 ## 许可
 
-见 [LICENSE.proposed](LICENSE.proposed)。**在团队确认代码权属、先行技术披露顺序和
-依赖许可之前，本仓库尚未正式授权开源。** 文件叫 `LICENSE.proposed` 而不是 `LICENSE`，
-就是这个意思：公开仓库里没有生效的许可证，不等于已经开源。
+本项目采用 **MIT 许可证**，全文见 [LICENSE](LICENSE)；
+版权行是 `Copyright (c) 2026 Sentinel EVC Lab contributors`。
 
-许可类型本身也**尚未定稿**（Apache-2.0 与 MIT 在专利条款上有实质差别，待团队确认）。
+两点需要写清楚：
+
+- **MIT 不含专利授权条款。** 本项目核心机制另有专利申请（申请号 202611458350.1），
+  本许可证**不构成任何专利许可或默示许可**。
+- 运行时依赖 `cryptography`（Apache-2.0）与测试依赖 `pytest`（MIT）各自保留其许可，
+  不受本项目许可影响。
+
+仓库当前仍为 **private**。是否转为公开是另一件事，与许可证无关。

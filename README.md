@@ -9,7 +9,7 @@
 A numeric reference implementation. It runs in five minutes on an ordinary laptop —
 no GPU, no robot arm, no model weights.
 
-> **Status**: v0.1 (candidate) · `pytest` **24 passed** · three-act demo reproducible · license **not yet in effect** (see License)
+> **Status**: v0.1 (candidate) · `pytest` **24 passed** · three-act demo reproducible · license: **MIT**
 > CI: [workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 > (workflow badge images do not load for a private repository, so this is a link rather than
 > a badge; the badge goes on after the repository becomes public.)
@@ -252,10 +252,16 @@ welcome. Negative results are kept in the repository, not deleted.
 
 ## License
 
-See [LICENSE.proposed](LICENSE.proposed). **Until the team has confirmed code ownership,
-the prior-disclosure order and dependency licences, this repository is not yet licensed
-for open source.** The file is named `LICENSE.proposed` rather than `LICENSE` for exactly
-that reason: a public repository without an effective licence is not open source.
+This project is released under the **MIT License** — full text in [LICENSE](LICENSE);
+the copyright line reads `Copyright (c) 2026 Sentinel EVC Lab contributors`.
 
-The licence type itself is **also not settled** (Apache-2.0 and MIT differ materially on
-patent terms; the team has to decide).
+Two things stated plainly:
+
+- **MIT carries no patent grant.** The core mechanism is the subject of a separate
+  patent application (application no. 202611458350.1). This licence grants no patent
+  rights, express or implied.
+- The runtime dependency `cryptography` (Apache-2.0) and the test dependency `pytest`
+  (MIT) keep their own licences, unaffected by this one.
+
+The repository is currently **private**. Whether it becomes public is a separate
+decision, independent of this licence.
