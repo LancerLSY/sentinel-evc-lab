@@ -1,5 +1,6 @@
 from dataclasses import replace
-from threading import Barrier, Thread
+from threading import Barrier, Event, Thread, current_thread
+from time import monotonic_ns
 
 import pytest
 
@@ -12,7 +13,7 @@ from sentinel_evc.scenarios import make_parent_pair, make_scene
 from sentinel_evc.sim_controller import SimController
 
 
-def rig(controller=None):
+def rig(controller=None, event_clock=monotonic_ns):
     scene = make_scene(0)
     plan, _ = make_parent_pair(0)
     cert = establish_root(plan, scene).certificate
@@ -22,7 +23,7 @@ def rig(controller=None):
     context = LeaseContext('robot', 1, 0, scene.scene_id, 0, ZERO_HASH)
     now = [1_000_000_000]
     snap = Snapshot('obs', **context.summary(), position=plan.points[0], observed_mono=now[0])
-    log = EventLog('executor')
+    log = EventLog('executor', monotonic_ns=event_clock)
     ctrl = controller or SimController()
     ex = Executor(auth, ctrl, log, monotonic_ns=lambda: now[0])
     lease = auth.prepare(plan, cert, context, snap, now[0])
@@ -271,3 +272,59 @@ def test_repeated_cancel_poll_records_confirmation_once():
     assert ex.poll_cancel() is True
     assert ex.poll_cancel() is True
     assert len(log.by_type('CANCEL_ACK')) == 1
+
+
+def test_concurrent_revoke_and_observed_keep_unique_sequence_and_chain():
+    from sentinel_evc.contracts import sha256_hex
+
+    revoke_entered, release_revoke, observation_finished = Event(), Event(), Event()
+    errors = []
+
+    def event_clock():
+        if current_thread().name == 'revoke-writer':
+            revoke_entered.set()
+            assert release_revoke.wait(timeout=5)
+        return 1
+
+    ex, _, ctrl, log, plan, lease, ctx, snap, now = rig(event_clock=event_clock)
+    ex.commit(lease, plan, snap, ctx, now[0])
+    ex.tick(now[0], ctx)
+
+    def revoke():
+        try:
+            ex.revoke('concurrent')
+        except Exception as error:
+            errors.append(error)
+
+    def observe():
+        try:
+            ex.tick(now[0] + 50_000_000, ctx)
+        except Exception as error:
+            errors.append(error)
+        finally:
+            observation_finished.set()
+
+    revoker = Thread(target=revoke, name='revoke-writer')
+    observer = Thread(target=observe)
+    revoker.start()
+    assert revoke_entered.wait(timeout=5)
+    observer.start()
+    try:
+        # 无锁版本在此完成 OBSERVED，从而与暂停的 REVOKE 使用同一 seq。
+        # 有锁版本等待 REVOKE 完成；定时等待只释放测试屏障，不推进模拟时钟。
+        observation_finished.wait(timeout=0.2)
+    finally:
+        release_revoke.set()
+        revoker.join(timeout=5)
+        observer.join(timeout=5)
+    assert not revoker.is_alive() and not observer.is_alive()
+    assert errors == []
+    assert ctrl.cursors() == {'submitted': 1, 'accepted': 1, 'observed': 1}
+    records = log.events()
+    assert {'REVOKE', 'OBSERVED'} <= {event['type'] for event in records}
+    assert [event['seq'] for event in records] == list(range(len(records)))
+    previous = ZERO_HASH
+    for event in records:
+        assert event['prev_hash'] == previous
+        previous = sha256_hex(event)
+    assert log.tip_hash == previous

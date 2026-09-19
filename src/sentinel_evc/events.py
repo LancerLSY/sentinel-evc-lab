@@ -7,6 +7,7 @@ import re
 from collections import deque
 from copy import deepcopy
 from datetime import datetime, timezone
+from threading import Lock
 from time import monotonic_ns
 
 from .contracts import canonical_json, sha256_hex
@@ -106,6 +107,8 @@ class EventLog:
         if type(maxlen) is not int or maxlen <= 0:
             raise ValueError("事件队列容量必须为正整数")
         self.run_id = run_id
+        # 序号、链摘要、队列和丢弃范围属于同一次记录事务。
+        self._lock = Lock()
         self._events: deque = deque()
         self._maxlen = maxlen
         self._monotonic_ns = monotonic_ns
@@ -125,17 +128,18 @@ class EventLog:
         for value in (lease_id, cert_id):
             if value is not None and (not isinstance(value, str) or not value):
                 raise ValueError("事件 ID 必须为非空字符串或 null")
-        if self._gap_count and len(self._events) < self._maxlen:
-            self._record_gap()
-        if len(self._events) >= self._maxlen:
-            # 丢当前尝试，保留已排队事件；缺失序号由后续 LOG_GAP 解释。
-            if not self._gap_count:
-                self._first_dropped_seq = self._seq
-            self._last_dropped_seq = self._seq
-            self._gap_count += 1
-            self._seq += 1
-            return None
-        return self._record(etype, payload, plan_hash, lease_id, cert_id)
+        with self._lock:
+            if self._gap_count and len(self._events) < self._maxlen:
+                self._record_gap()
+            if len(self._events) >= self._maxlen:
+                # 丢当前尝试，保留已排队事件；缺失序号由后续 LOG_GAP 解释。
+                if not self._gap_count:
+                    self._first_dropped_seq = self._seq
+                self._last_dropped_seq = self._seq
+                self._gap_count += 1
+                self._seq += 1
+                return None
+            return self._record(etype, payload, plan_hash, lease_id, cert_id)
 
     def _record(self, etype, payload, plan_hash=None, lease_id=None, cert_id=None):
         event = {
@@ -168,29 +172,35 @@ class EventLog:
 
     @property
     def tip_hash(self) -> str:
-        return self._prev_hash
+        with self._lock:
+            return self._prev_hash
 
     @property
     def count(self) -> int:
         """累计成功记录数；不包含丢弃尝试，包含 LOG_GAP。"""
-        return self._count
+        with self._lock:
+            return self._count
 
     def events(self) -> list[dict]:
-        return deepcopy(list(self._events))
+        with self._lock:
+            return deepcopy(list(self._events))
 
     def drain(self) -> list[dict]:
         """将当前缓冲事件交给消费者并释放容量；流的序号和链不重置。"""
-        events = list(self._events)
-        self._events.clear()
-        if self._gap_count:
-            events.append(self._record_gap())
+        with self._lock:
+            events = list(self._events)
             self._events.clear()
-        return events
+            if self._gap_count:
+                events.append(self._record_gap())
+                self._events.clear()
+            return events
 
     def to_jsonl(self) -> bytes:
-        if self._gap_count:
-            raise RuntimeError("存在尚未记录的 LOG_GAP；先 drain 消费完整批次")
-        return b"".join(canonical_json(event) + b"\n" for event in self._events)
+        with self._lock:
+            if self._gap_count:
+                raise RuntimeError("存在尚未记录的 LOG_GAP；先 drain 消费完整批次")
+            return b"".join(canonical_json(event) + b"\n" for event in self._events)
 
     def by_type(self, etype: str) -> list[dict]:
-        return deepcopy([event for event in self._events if event["type"] == etype])
+        with self._lock:
+            return deepcopy([event for event in self._events if event["type"] == etype])

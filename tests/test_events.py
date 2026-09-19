@@ -221,3 +221,47 @@ def test_unknown_event_and_invalid_ids_leave_log_empty():
         with pytest.raises(ValueError):
             log.append("PROPOSAL", role="parent", **ids)
     assert log.count == 0 and log.tip_hash == ZERO_HASH
+
+
+def test_drain_waits_for_an_in_progress_append():
+    from threading import Event, Thread
+
+    clock_entered, release_clock, drain_finished = Event(), Event(), Event()
+    result = []
+    errors = []
+
+    def clock():
+        clock_entered.set()
+        assert release_clock.wait(timeout=5)
+        return 1
+
+    log = EventLog('concurrent-drain', monotonic_ns=clock)
+
+    def write():
+        try:
+            log.append('PROPOSAL', role='parent')
+        except Exception as error:
+            errors.append(error)
+
+    def drain():
+        result.extend(log.drain())
+        drain_finished.set()
+
+    writer = Thread(target=write)
+    reader = Thread(target=drain)
+    writer.start()
+    assert clock_entered.wait(timeout=5)
+    reader.start()
+    try:
+        assert not drain_finished.wait(timeout=0.1)
+    finally:
+        release_clock.set()
+        writer.join(timeout=5)
+        reader.join(timeout=5)
+    assert not writer.is_alive() and not reader.is_alive()
+    assert errors == []
+    assert len(result) == 1
+    assert result[0]['seq'] == 0
+    assert log.events() == []
+    assert log.count == 1
+    assert log.tip_hash == 'sha256:' + hashlib.sha256(canonical_json(result[0])).hexdigest()
