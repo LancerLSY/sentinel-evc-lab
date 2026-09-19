@@ -2,6 +2,7 @@
 
 import ast
 from hashlib import sha256
+from io import BytesIO
 import json
 from pathlib import Path
 import shutil
@@ -61,6 +62,20 @@ def test_builder_rejects_empty_and_already_drained_stream(tmp_path):
     log.append("PROPOSAL", role="child")
     with pytest.raises(ValueError):
         evidence.build_bundle(log, str(tmp_path / "partial"))
+
+
+def test_builder_exports_a_complete_spooled_bounded_stream(tmp_path):
+    spool = BytesIO()
+    log = EventLog("spooled", maxlen=3, spool=spool)
+    for index in range(10):
+        log.append("DISPATCH", step_index=index, submitted=True)
+
+    assert len(log.events()) <= 3
+    result = evidence.build_bundle(log, str(tmp_path))
+    raw = Path(result["bundle_dir"], "events.jsonl").read_bytes()
+    assert raw.count(b"\n") == result["event_count"] == 10
+    assert b'"type":"LOG_GAP"' not in raw
+    assert evidence.verify_bundle(result["bundle_dir"], result["public_key"], "spooled")[0]
 
 
 def test_independent_fixed_fixture_roundtrip(tmp_path):

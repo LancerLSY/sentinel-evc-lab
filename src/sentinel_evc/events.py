@@ -7,6 +7,7 @@ import re
 from collections import deque
 from copy import deepcopy
 from datetime import datetime, timezone
+from io import BytesIO
 from threading import Lock
 from time import monotonic_ns
 
@@ -100,7 +101,7 @@ def _utc_now() -> str:
 class EventLog:
     """只持有尚未消费的事件；count/tip_hash 覆盖整个流，包括已 drain 的事件。"""
 
-    def __init__(self, run_id: str, maxlen: int = 1024, *,
+    def __init__(self, run_id: str, maxlen: int = 1024, *, spool=None,
                  monotonic_ns=monotonic_ns, utc_now=_utc_now):
         if not isinstance(run_id, str) or not run_id:
             raise ValueError("run_id 必须为非空字符串")
@@ -111,6 +112,9 @@ class EventLog:
         self._lock = Lock()
         self._events: deque = deque()
         self._maxlen = maxlen
+        self._spool = spool
+        self._spooled_count = 0
+        self._type_counts = {event_type: 0 for event_type in EVENT_TYPES}
         self._monotonic_ns = monotonic_ns
         self._utc_now = utc_now
         self._seq = 0
@@ -129,6 +133,8 @@ class EventLog:
             if value is not None and (not isinstance(value, str) or not value):
                 raise ValueError("事件 ID 必须为非空字符串或 null")
         with self._lock:
+            if self._spool is not None and len(self._events) >= self._maxlen:
+                self._flush_to_spool()
             if self._gap_count and len(self._events) < self._maxlen:
                 self._record_gap()
             if len(self._events) >= self._maxlen:
@@ -157,8 +163,16 @@ class EventLog:
         self._prev_hash = sha256_hex(event)
         self._seq += 1
         self._count += 1
+        self._type_counts[etype] += 1
         self._events.append(event)
         return deepcopy(event)
+
+    def _flush_to_spool(self) -> None:
+        for event in self._events:
+            self._spool.write(canonical_json(event) + b"\n")
+        self._spool.flush()
+        self._spooled_count += len(self._events)
+        self._events.clear()
 
     def _record_gap(self) -> dict:
         event = self._record("LOG_GAP", {
@@ -185,6 +199,10 @@ class EventLog:
         with self._lock:
             return deepcopy(list(self._events))
 
+    def type_count(self, event_type: str) -> int:
+        with self._lock:
+            return self._type_counts.get(event_type, 0)
+
     def drain(self) -> list[dict]:
         """将当前缓冲事件交给消费者并释放容量；流的序号和链不重置。"""
         with self._lock:
@@ -199,7 +217,28 @@ class EventLog:
         with self._lock:
             if self._gap_count:
                 raise RuntimeError("存在尚未记录的 LOG_GAP；先 drain 消费完整批次")
-            return b"".join(canonical_json(event) + b"\n" for event in self._events)
+            output = BytesIO()
+            self._write_jsonl(output)
+            return output.getvalue()
+
+    def write_jsonl(self, path) -> int:
+        """把已消费和仍在队列中的完整事件流写入目标文件。"""
+        with self._lock:
+            if self._gap_count:
+                raise RuntimeError("存在尚未记录的 LOG_GAP；先 drain 消费完整批次")
+            with open(path, "wb") as output:
+                self._write_jsonl(output)
+            return self._spooled_count + len(self._events)
+
+    def _write_jsonl(self, output) -> None:
+        if self._spool is not None:
+            position = self._spool.tell()
+            self._spool.seek(0)
+            while chunk := self._spool.read(65536):
+                output.write(chunk)
+            self._spool.seek(position)
+        for event in self._events:
+            output.write(canonical_json(event) + b"\n")
 
     def by_type(self, etype: str) -> list[dict]:
         with self._lock:

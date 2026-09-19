@@ -35,10 +35,6 @@ def build_bundle(log, out_dir: str) -> dict:
     """把一次运行的事件导出成可独立校验的包。"""
     from .contracts import canonical_json
 
-    data = log.to_jsonl()
-    if not data or data.count(b"\n") != log.count:
-        raise ValueError("证据包必须包含非空完整事件流，不能只打包 drain 后的残余队列")
-
     out = Path(out_dir)
     bundle = out / "bundle"
     anchors = out / "anchors"
@@ -46,7 +42,9 @@ def build_bundle(log, out_dir: str) -> dict:
     anchors.mkdir(parents=True)
 
     events_path = bundle / "events.jsonl"
-    events_path.write_bytes(data)
+    written = log.write_jsonl(events_path)
+    if written == 0 or written != log.count:
+        raise ValueError("证据包必须包含非空完整事件流，不能只打包 drain 后的残余队列")
 
     manifest = {
         "run_id": log.run_id,
