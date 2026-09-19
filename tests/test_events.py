@@ -122,17 +122,20 @@ def test_overflow_preserves_queued_events_and_reports_dropped_sequence_range():
     assert log.count == 2
     assert log.events() == [first, second]
     old_tip = log.tip_hash
-    assert log.drain() == [first, second]
-    assert log.events() == []
-    assert log.count == 2 and log.tip_hash == old_tip
-    normal = log.append("PROPOSAL", role="child")
-    gap, recorded = log.events()
-    assert gap["seq"] == 4 and normal["seq"] == 5
+    drained = log.drain()
+    assert drained[:2] == [first, second]
+    gap = drained[2]
+    assert gap["seq"] == 4
     assert gap["type"] == "LOG_GAP"
     assert gap["payload"] == {
         "dropped_count": 2, "first_dropped_seq": 2, "last_dropped_seq": 3,
     }
     assert gap["prev_hash"] == old_tip
+    assert log.events() == []
+    assert log.count == 3
+    normal = log.append("PROPOSAL", role="child")
+    assert normal["seq"] == 5
+    recorded, = log.events()
     assert recorded == normal
     assert normal["prev_hash"] == "sha256:" + hashlib.sha256(canonical_json(gap)).hexdigest()
     assert log.count == 4
@@ -140,18 +143,23 @@ def test_overflow_preserves_queued_events_and_reports_dropped_sequence_range():
 
 def test_capacity_one_prioritizes_gap_and_tracks_new_drop():
     log = fixed_log(maxlen=1)
-    log.append("PROPOSAL", role="parent")
+    first = log.append("PROPOSAL", role="parent")
     assert log.append("PROPOSAL", role="child") is None
-    log.drain()
-    assert log.append("PROPOSAL", role="child") is None
-    first_gap = log.drain()[0]
+    drained = log.drain()
+    assert drained[0] == first
+    first_gap = drained[1]
     assert first_gap["seq"] == 2
     assert first_gap["payload"]["first_dropped_seq"] == 1
+    assert log.drain() == []
+    normal = log.append("PROPOSAL", role="child")
+    assert normal["seq"] == 3
     assert log.append("PROPOSAL", role="child") is None
-    next_gap = log.drain()[0]
-    assert next_gap["seq"] == 4
+    drained = log.drain()
+    assert drained[0] == normal
+    next_gap = drained[1]
+    assert next_gap["seq"] == 5
     assert next_gap["payload"] == {
-        "dropped_count": 1, "first_dropped_seq": 3, "last_dropped_seq": 3,
+        "dropped_count": 1, "first_dropped_seq": 4, "last_dropped_seq": 4,
     }
 
 
@@ -161,6 +169,8 @@ def test_default_capacity_is_1024():
         assert log.append("PROPOSAL", role="parent") is not None
     assert log.append("PROPOSAL", role="child") is None
     assert log.count == len(log.events()) == 1024
+    with pytest.raises(RuntimeError):
+        log.to_jsonl()
 
 
 def test_empty_buffer_and_drain_do_not_reset_chain():

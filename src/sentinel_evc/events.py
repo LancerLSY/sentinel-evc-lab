@@ -126,13 +126,7 @@ class EventLog:
             if value is not None and (not isinstance(value, str) or not value):
                 raise ValueError("事件 ID 必须为非空字符串或 null")
         if self._gap_count and len(self._events) < self._maxlen:
-            self._record("LOG_GAP", {
-                "dropped_count": self._gap_count,
-                "first_dropped_seq": self._first_dropped_seq,
-                "last_dropped_seq": self._last_dropped_seq,
-            })
-            self._gap_count = 0
-            self._first_dropped_seq = self._last_dropped_seq = None
+            self._record_gap()
         if len(self._events) >= self._maxlen:
             # 丢当前尝试，保留已排队事件；缺失序号由后续 LOG_GAP 解释。
             if not self._gap_count:
@@ -162,6 +156,16 @@ class EventLog:
         self._events.append(event)
         return deepcopy(event)
 
+    def _record_gap(self) -> dict:
+        event = self._record("LOG_GAP", {
+            "dropped_count": self._gap_count,
+            "first_dropped_seq": self._first_dropped_seq,
+            "last_dropped_seq": self._last_dropped_seq,
+        })
+        self._gap_count = 0
+        self._first_dropped_seq = self._last_dropped_seq = None
+        return event
+
     @property
     def tip_hash(self) -> str:
         return self._prev_hash
@@ -178,9 +182,14 @@ class EventLog:
         """将当前缓冲事件交给消费者并释放容量；流的序号和链不重置。"""
         events = list(self._events)
         self._events.clear()
+        if self._gap_count:
+            events.append(self._record_gap())
+            self._events.clear()
         return events
 
     def to_jsonl(self) -> bytes:
+        if self._gap_count:
+            raise RuntimeError("存在尚未记录的 LOG_GAP；先 drain 消费完整批次")
         return b"".join(canonical_json(event) + b"\n" for event in self._events)
 
     def by_type(self, etype: str) -> list[dict]:
