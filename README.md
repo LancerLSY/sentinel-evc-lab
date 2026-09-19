@@ -237,6 +237,9 @@ no CDN, and it opens offline.
 How often a stranger's `pip install` succeeds on the first try decides whether anyone uses
 this repository at all.
 
+A per-package licence registry (measured from the installed distributions, not copied from
+upstream docs) is in [docs/依赖许可.md](docs/依赖许可.md) (Chinese).
+
 ---
 
 ## Contributing
