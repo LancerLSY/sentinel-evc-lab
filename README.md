@@ -170,7 +170,7 @@ Snapshot ──> 候选编译 ──> 完整检查 / Δ-Cert 继承 ──> Auth
 
 ```bash
 python -m pytest -q          # 正式方式
-python run_tests.py          # 装不上 pytest 时的备用运行器
+python run_tests.py          # 等价的便捷入口
 ```
 
 ---

@@ -105,7 +105,7 @@ python -m pytest -q
 
 ```
 python -m pytest -q      →  24 passed
-python run_tests.py      →  24 passed, 0 failed      （备用运行器）
+python run_tests.py      →  24 passed, 0 failed      （当时的备用运行器）
 ```
 
 ### `demo --cases 1000` 第一幕 · 几何判定
