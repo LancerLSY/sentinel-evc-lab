@@ -31,3 +31,9 @@ htmlcov/
 *.token
 .env
 runs/
+
+# Local agent context (private, never commit)
+AGENTS.local.md
+CLAUDE.local.md
+.dsh/
+.agents/
