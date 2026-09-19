@@ -120,6 +120,8 @@ def render(run_id: str, geo: dict, faults: dict, bundle: dict, verify_msg: str,
         ("path_c_false_reject", "路径 c 误拒数"), ("path_c_inherited", "直接继承次数"),
         ("cross_check_disagreements", "独立对照分歧数"),
         ("root_full_checks", "父证书建立完整检查次数"),
+        ("path_c_full_checks", "继承失败回退完整检查次数"),
+        ("end_to_end_wall_seconds", "端到端墙钟时间（秒）"),
     )
     stats = "".join(f"<tr><td>{label}</td><td class='num'>{_text(geo.get(key))}</td></tr>"
                     for key, label in metrics)
@@ -162,7 +164,7 @@ def render(run_id: str, geo: dict, faults: dict, bundle: dict, verify_msg: str,
 <table><tr><th>统计项</th><th>记录值</th></tr>{stats}</table></div>
 <div class="note">完整检查调用次数不是整机提速。评估收益还需父证书建立成本、
 失败回退成本和端到端墙钟时间；本页不从调用次数推断性能收益。
-失败回退耗时未记录；端到端墙钟时间未记录。</div>
+继承失败回退成本以上方完整检查次数记录；墙钟时间未提供时显示“未记录”。</div>
 {svgs}
 <h2>第二幕 · 撤销与三个游标</h2>
 <div class="wrap"><table><tr><th>注入的故障</th><th>结果</th><th>错误码</th>

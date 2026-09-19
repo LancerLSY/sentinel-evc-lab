@@ -7,6 +7,7 @@ import json
 import sys
 import tempfile
 from pathlib import Path
+from time import perf_counter
 
 from .contracts import canonical_json
 from .events import EventLog
@@ -71,6 +72,7 @@ def cmd_demo(args) -> int:
         return 1
 
     run_id = output.name
+    started = perf_counter()
     with tempfile.TemporaryFile() as spool:
         log = EventLog(run_id, spool=spool)
         geometry = act_one_geometry(args.cases, log, seed=args.seed)
@@ -79,6 +81,7 @@ def cmd_demo(args) -> int:
 
     ok, message = verify_bundle(bundle["bundle_dir"], bundle["public_key"], run_id)
     _write_json(output / "scenario.json", _scenario(args.seed))
+    geometry["end_to_end_wall_seconds"] = round(perf_counter() - started, 6)
     _write_json(output / "summary.json", {
         "run_id": run_id,
         "geometry": {key: value for key, value in geometry.items() if key != "samples"},
@@ -101,10 +104,12 @@ def cmd_geometry(args) -> int:
         print(f"FAIL — {exc}", file=sys.stderr)
         return 1
 
+    started = perf_counter()
     with tempfile.TemporaryFile() as spool:
         stats = act_one_geometry(
             args.cases, EventLog(output.name, spool=spool), seed=args.seed,
         )
+    stats["end_to_end_wall_seconds"] = round(perf_counter() - started, 6)
     _write_json(output / "scenario.json", _scenario(args.seed))
     _write_json(output / "summary.json", {"run_id": output.name, "geometry": stats})
     success = _geometry_ok(stats)

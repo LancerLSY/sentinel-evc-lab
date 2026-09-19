@@ -50,8 +50,8 @@ def test_missing_metrics_are_not_zero_or_performance_claims():
     assert '50%' not in result
     assert '0 / 0 / 0' not in result
     assert '未阻断' in result
-    assert '端到端墙钟时间未记录' in result
-    assert '失败回退耗时未记录' in result
+    assert '端到端墙钟时间（秒）</td><td class=\'num\'>未记录' in result
+    assert '继承失败回退完整检查次数</td><td class=\'num\'>未记录' in result
 
 
 def test_all_input_text_is_escaped_and_page_is_offline(tmp_path):
