@@ -24,6 +24,12 @@ import re
 import sys
 from pathlib import Path
 
+# Windows 上输出被管道或重定向接走时，Python 用本地编码（简体中文机器上是 GBK），
+# 碰到 GBK 里没有的字符会直接崩。CI 跑在 UTF-8 环境，抓不到这一类问题。
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 # (RESULTS.md 里的指标名, summary.json 里的取值函数, 期望渲染出来的样子)
 ROWS = [
     ("构造案例总数", lambda s: s["geometry"]["cases"], "1000"),
@@ -75,7 +81,7 @@ def main(argv=None) -> int:
     md = results_path.read_text(encoding="utf-8")
 
     print(f"run_id      {summary.get('run_id')}")
-    print(f"对照文件    {summary_path}  ↔  {results_path}")
+    print(f"对照文件    {summary_path}  vs  {results_path}")
     print(f"{'指标':<24}{'summary.json':>14}{'RESULTS.md':>14}  期望")
     print("-" * 68)
 

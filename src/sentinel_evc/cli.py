@@ -25,6 +25,19 @@ def _fmt_row(cells, widths):
     return "  ".join(str(c).ljust(w) for c, w in zip(cells, widths)).rstrip()
 
 
+def _use_utf8_output() -> None:
+    """把标准输出/错误固定成 UTF-8。
+
+    Windows 上输出被管道或重定向接走时，Python 会用本地编码（简体中文机器上是 GBK），
+    而第二幕要打印 ✓ / ✗ —— GBK 里没有这两个字符，`print` 会直接抛
+    UnicodeEncodeError，把 demo 打断在第二幕，退出码 1。
+    CI 跑在 UTF-8 环境，永远抓不到这一类问题（同类的坑见仓库根 .gitattributes 的注释）。
+    """
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
 def cmd_demo(args) -> int:
     out = Path(args.out)
     if out.exists() and any(out.iterdir()):
@@ -169,6 +182,7 @@ def cmd_tamper(args) -> int:
 
 
 def main(argv=None) -> int:
+    _use_utf8_output()
     ap = argparse.ArgumentParser(
         prog="sentinel_evc", description="Sentinel EVC Lab · 数值参考实现")
     sub = ap.add_subparsers(dest="cmd", required=True)
