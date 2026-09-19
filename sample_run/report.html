@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sentinel EVC Lab · sample-001</title>
+<style>
+:root{--bg:#fbfbfa;--fg:#1a1a18;--mut:#6b6b66;--line:#e0dfdb;
+      --ok:#2d7a4f;--bad:#b3452f;--warn:#9a6b1f;--acc:#3a5f8a}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#1a1a18;--fg:#eceae4;--mut:#9a9890;--line:#33322e;
+  --ok:#6cc08a;--bad:#e08a70;--warn:#d4a95a;--acc:#8ab0d8}}
+*{box-sizing:border-box}
+body{margin:0;padding:2rem 1.25rem;background:var(--bg);color:var(--fg);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;
+  max-width:60rem;margin-inline:auto}
+h1{font-size:1.5rem;margin:0 0 .25rem}
+h2{font-size:1.1rem;margin:2.5rem 0 .75rem;padding-bottom:.35rem;
+   border-bottom:1px solid var(--line)}
+.sub{color:var(--mut);font-size:.85rem;margin-bottom:2rem}
+table{border-collapse:collapse;width:100%;font-size:.88rem;margin:.5rem 0}
+th,td{text-align:left;padding:.45rem .6rem;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600;font-size:.8rem;text-transform:uppercase;
+   letter-spacing:.03em}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.ok{color:var(--ok);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+.warn{color:var(--warn);font-weight:600}
+.wrap{overflow-x:auto}
+.note{background:color-mix(in srgb,var(--warn) 8%,transparent);
+  border-left:3px solid var(--warn);padding:.7rem .9rem;margin:1rem 0;
+  font-size:.86rem;border-radius:0 3px 3px 0}
+svg{max-width:100%;height:auto;display:block;margin:1rem 0}
+code{font:.85em ui-monospace,SFMono-Regular,Menlo,monospace;
+  background:color-mix(in srgb,var(--fg) 7%,transparent);padding:.1em .35em;
+  border-radius:3px}
+.cursors{display:flex;gap:1.5rem;flex-wrap:wrap;margin:1rem 0}
+.cursor{flex:1;min-width:8rem;border:1px solid var(--line);border-radius:4px;
+  padding:.7rem .9rem}
+.cursor .n{font-size:1.6rem;font-weight:600;font-variant-numeric:tabular-nums}
+.cursor .l{color:var(--mut);font-size:.78rem}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);
+  color:var(--mut);font-size:.8rem}
+</style></head><body>
+
+<h1>Sentinel EVC Lab 运行报告</h1>
+<p class="sub">run_id <code>sample-001</code> · 数值参考域 ·
+本页由一次实际运行生成，不含任何预录内容</p>
+
+<div class="note"><strong>结论边界：</strong>本页全部结果来自构造的数值几何场景。
+没有真实 VLA、没有机械臂、没有视觉输入。「许可」「证书」「验证」在此都有具体
+适用范围，不是功能安全认证、不是物理停止证明、不是事故责任判断。</div>
+
+<h2>第一幕 · 变换让旧结论失效</h2>
+<p>共 1000 个案例，其中实际违规的子轨迹 500 条。
+三条判定路径使用完全相同的场景、父轨迹和子轨迹。</p>
+<div class="wrap"><table>
+<tr><th>判定路径</th><th>错误放行的违规轨迹</th><th>完整检查调用次数</th></tr>
+<tr><td>a · 只验父轨迹就放行</td><td class='num bad'>500</td><td class='num'>0</td></tr><tr><td>b · 最终全检（基线）</td><td class='num ok'>0</td><td class='num'>1000</td></tr><tr><td>c · Δ-Cert + 必要全检</td><td class='num ok'>0</td><td class='num'>500</td></tr></table></div>
+<p style="font-size:.88rem;color:var(--mut)">
+安全子轨迹通过 500 / 500 条（误拒
+0 条）· 直接继承 500 次 ·
+相对基线的完整检查调用减少 <strong>50.0%</strong>
+· 独立实现交叉验证分歧 0 处</p>
+<div class="note">「减少 50.0% 完整检查调用」
+指的是<strong>验证阶段的函数调用次数</strong>，不是整机提速。父证书建立成本
+（本次 1000 次完整检查）和失败回退成本都必须一并计入才能
+谈端到端收益。</div>
+<p style='color:var(--mut);font-size:.85rem;margin-top:1.5rem'>案例 0 · 变换类型 <code>mix</code> · 实际违规 · 判定 <strong class="bad">REJECTED</strong> · 最小余量 -0.0681 m</p><svg viewBox="0 0 640 260" role="img"
+  aria-label="案例 0 的父轨迹与子轨迹">
+  <circle cx="320.0" cy="181.7" r="48.3" fill="var(--bad)"
+    opacity=".18"/>
+  <circle cx="320.0" cy="181.7" r="48.3" fill="none"
+    stroke="var(--bad)" stroke-width="1.5" opacity=".6"/>
+  <path d="M30.0,188.3 L66.2,160.0 L102.5,132.8 L138.8,107.8 L175.0,85.8 L211.2,67.8 L247.5,54.4 L283.8,46.1 L320.0,43.3 L356.3,46.1 L392.5,54.4 L428.8,67.8 L465.0,85.8 L501.3,107.8 L537.5,132.8 L573.8,160.0 L610.0,188.3" fill="none" stroke="var(--acc)"
+    stroke-width="2" stroke-dasharray="5 3" opacity=".75"/>
+  <path d="M30.0,188.3 L66.2,188.3 L102.5,188.3 L138.8,188.3 L175.0,188.3 L211.2,188.3 L247.5,188.3 L283.8,188.3 L320.0,188.3 L356.3,188.3 L392.5,188.3 L428.8,188.3 L465.0,188.3 L501.3,188.3 L537.5,188.3 L573.8,188.3 L610.0,188.3" fill="none" stroke="var(--bad)"
+    stroke-width="2.5"/>
+  <text x="30" y="18" fill="var(--mut)" font-size="11">
+    虚线 = 父轨迹（已验证通过）　实线 = 变换后的最终动作　圆 = 障碍</text>
+</svg><p style='color:var(--mut);font-size:.85rem;margin-top:1.5rem'>案例 1 · 变换类型 <code>perturb</code> · 实际安全 · 判定 <strong class="ok">INHERITED</strong> · 最小余量 0.0750 m</p><svg viewBox="0 0 640 260" role="img"
+  aria-label="案例 1 的父轨迹与子轨迹">
+  <circle cx="309.9" cy="183.3" r="46.7" fill="var(--bad)"
+    opacity=".18"/>
+  <circle cx="309.9" cy="183.3" r="46.7" fill="none"
+    stroke="var(--bad)" stroke-width="1.5" opacity=".6"/>
+  <path d="M30.0,176.5 L65.0,149.2 L100.0,123.0 L135.0,98.8 L170.0,77.6 L205.0,60.1 L239.9,47.2 L274.9,39.2 L309.9,36.6 L344.9,39.2 L379.9,47.2 L414.9,60.1 L449.9,77.6 L484.9,98.8 L519.9,123.0 L554.9,149.2 L589.9,176.5" fill="none" stroke="var(--acc)"
+    stroke-width="2" stroke-dasharray="5 3" opacity=".75"/>
+  <path d="M30.0,176.5 L59.5,144.0 L96.3,123.0 L137.2,94.5 L162.9,72.5 L208.9,67.6 L243.3,51.3 L280.9,46.3 L310.5,30.0 L340.7,40.4 L375.8,48.1 L410.9,64.2 L449.3,80.7 L489.9,97.9 L515.2,115.6 L549.2,151.7 L589.9,176.5" fill="none" stroke="var(--ok)"
+    stroke-width="2.5"/>
+  <text x="30" y="18" fill="var(--mut)" font-size="11">
+    虚线 = 父轨迹（已验证通过）　实线 = 变换后的最终动作　圆 = 障碍</text>
+</svg><p style='color:var(--mut);font-size:.85rem;margin-top:1.5rem'>案例 2 · 变换类型 <code>mix</code> · 实际违规 · 判定 <strong class="bad">REJECTED</strong> · 最小余量 -0.0659 m</p><svg viewBox="0 0 640 260" role="img"
+  aria-label="案例 2 的父轨迹与子轨迹">
+  <circle cx="320.0" cy="181.7" r="48.3" fill="var(--bad)"
+    opacity=".18"/>
+  <circle cx="320.0" cy="181.7" r="48.3" fill="none"
+    stroke="var(--bad)" stroke-width="1.5" opacity=".6"/>
+  <path d="M30.0,190.5 L66.2,162.2 L102.5,135.0 L138.8,109.9 L175.0,88.0 L211.2,69.9 L247.5,56.5 L283.8,48.3 L320.0,45.5 L356.3,48.3 L392.5,56.5 L428.8,69.9 L465.0,88.0 L501.3,109.9 L537.5,135.0 L573.8,162.2 L610.0,190.5" fill="none" stroke="var(--acc)"
+    stroke-width="2" stroke-dasharray="5 3" opacity=".75"/>
+  <path d="M30.0,190.5 L66.2,190.5 L102.5,190.5 L138.8,190.5 L175.0,190.5 L211.2,190.5 L247.5,190.5 L283.8,190.5 L320.0,190.5 L356.3,190.5 L392.5,190.5 L428.8,190.5 L465.0,190.5 L501.3,190.5 L537.5,190.5 L573.8,190.5 L610.0,190.5" fill="none" stroke="var(--bad)"
+    stroke-width="2.5"/>
+  <text x="30" y="18" fill="var(--mut)" font-size="11">
+    虚线 = 父轨迹（已验证通过）　实线 = 变换后的最终动作　圆 = 障碍</text>
+</svg><p style='color:var(--mut);font-size:.85rem;margin-top:1.5rem'>案例 3 · 变换类型 <code>perturb</code> · 实际安全 · 判定 <strong class="ok">INHERITED</strong> · 最小余量 0.0740 m</p><svg viewBox="0 0 640 260" role="img"
+  aria-label="案例 3 的父轨迹与子轨迹">
+  <circle cx="316.6" cy="182.2" r="47.8" fill="var(--bad)"
+    opacity=".18"/>
+  <circle cx="316.6" cy="182.2" r="47.8" fill="none"
+    stroke="var(--bad)" stroke-width="1.5" opacity=".6"/>
+  <path d="M30.0,177.2 L65.8,149.3 L101.6,122.4 L137.5,97.6 L173.3,75.9 L209.1,58.1 L244.9,44.9 L280.7,36.7 L316.6,33.9 L352.4,36.7 L388.2,44.9 L424.0,58.1 L459.9,75.9 L495.7,97.6 L531.5,122.4 L567.3,149.3 L603.1,177.2" fill="none" stroke="var(--acc)"
+    stroke-width="2" stroke-dasharray="5 3" opacity=".75"/>
+  <path d="M30.0,177.2 L61.8,148.6 L103.2,120.5 L130.0,92.5 L169.2,68.3 L214.2,58.5 L239.6,42.8 L281.1,33.0 L309.9,30.0 L349.4,43.9 L387.8,41.5 L427.3,51.7 L464.5,76.8 L501.5,103.8 L527.2,115.3 L569.3,152.3 L603.1,177.2" fill="none" stroke="var(--ok)"
+    stroke-width="2.5"/>
+  <text x="30" y="18" fill="var(--mut)" font-size="11">
+    虚线 = 父轨迹（已验证通过）　实线 = 变换后的最终动作　圆 = 障碍</text>
+</svg>
+
+<h2>第二幕 · 撤销不让已发生的动作消失</h2>
+<div class="wrap"><table>
+<tr><th>注入的故障</th><th>结果</th><th>错误码</th>
+<th>撤销后新增旧代次提交</th><th>submitted / accepted / observed</th></tr>
+<tr><td><code>late_action</code></td><td class='ok'>已阻断</td><td><code>TRACKING_TUBE</code></td><td class='num'>0</td><td class='num'>0 / 0 / 0</td></tr><tr><td><code>lease_expired</code></td><td class='ok'>已阻断</td><td><code>LEASE_EXPIRED</code></td><td class='num'>0</td><td class='num'>0 / 0 / 0</td></tr><tr><td><code>lease_replay</code></td><td class='ok'>已阻断</td><td><code>LEASE_REPLAY</code></td><td class='num'>0</td><td class='num'>0 / 0 / 0</td></tr><tr><td><code>scene_changed</code></td><td class='ok'>已阻断</td><td><code>CONTEXT_CHANGED</code></td><td class='num'>0</td><td class='num'>0 / 0 / 0</td></tr><tr><td><code>queue_rev_changed</code></td><td class='ok'>已阻断</td><td><code>CONTEXT_CHANGED</code></td><td class='num'>0</td><td class='num'>0 / 0 / 0</td></tr><tr><td><code>revoke_race</code></td><td class='ok'>已阻断</td><td><code>—</code></td><td class='num'>0</td><td class='num'>3 / 3 / 3</td></tr><tr><td><code>cancel_unconfirmed</code></td><td class='ok'>已阻断</td><td><code>CANCEL_UNCONFIRMED</code></td><td class='num'>0</td><td class='num'>3 / 3 / 3</td></tr></table></div>
+<p style="font-size:.88rem;color:var(--mut)">
+7 / 7 类故障被阻断 ·
+撤销后旧代次新增提交合计
+<strong class="ok">
+0</strong></p>
+<div class="note">三个游标必须分开读。撤销之后本地不再新增旧代次提交，
+但<strong>撤销之前已经提交的命令仍然会出现在 observed 里</strong>。
+软件队列清空、控制器确认取消、实际运动停止是三件不同的事 ——
+本页的 observed 是模拟结果，不是电机制动的证明。</div>
+
+<h2>第三幕 · 证据可被第三方独立校验</h2>
+<div class="cursors">
+<div class="cursor"><div class="n">2031</div>
+<div class="l">事件条数</div></div>
+<div class="cursor"><div class="n ok">PASS</div>
+<div class="l">独立校验结果</div></div>
+</div>
+<p style="font-size:.88rem">末尾摘要 <code>sha256:872d9a5779ae246e6ca9aba5a…</code></p>
+<p style="font-size:.88rem;color:var(--mut)">OK: 2031 条事件，7 层校验全部通过</p>
+<div class="note">签名只证明<strong>相对于指定公钥的记录完整性</strong>。
+它不证明传感器诚实，不证明动作在物理上发生过，不判断责任。
+包内公钥仅供演示，不是客户 PKI。</div>
+
+<footer>Sentinel EVC Lab · 本页由 <code>python -m sentinel_evc demo</code>
+生成 · 所有数字可通过重跑同一命令复现</footer>
+</body></html>

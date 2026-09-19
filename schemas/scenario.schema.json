@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "数值场景",
+  "type": "object",
+  "required": ["scene_id", "obstacles", "workspace", "tool_radius",
+               "tracking_reserve", "dt", "horizon"],
+  "properties": {
+    "scene_id": {"type": "string"},
+    "obstacles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "center", "radius"],
+        "properties": {
+          "type": {"const": "sphere"},
+          "center": {"type": "array", "items": {"type": "number"},
+                     "minItems": 3, "maxItems": 3},
+          "radius": {"type": "number", "exclusiveMinimum": 0}
+        }
+      }
+    },
+    "workspace": {
+      "type": "object",
+      "required": ["lo", "hi"],
+      "properties": {
+        "lo": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+        "hi": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3}
+      }
+    },
+    "tool_radius": {"type": "number", "minimum": 0},
+    "tracking_reserve": {"type": "number", "minimum": 0},
+    "dt": {"type": "number", "exclusiveMinimum": 0},
+    "horizon": {"type": "integer", "minimum": 1},
+    "seed": {"type": "integer"}
+  }
+}

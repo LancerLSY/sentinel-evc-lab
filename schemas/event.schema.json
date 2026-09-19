@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sentinel EVC 事件",
+  "description": "A 和 B 的解耦点。第 1 周末冻结，之后改动要两位主力同意。",
+  "type": "object",
+  "required": ["seq", "run_id", "type", "payload", "prev_hash"],
+  "additionalProperties": false,
+  "properties": {
+    "seq": {"type": "integer", "minimum": 0},
+    "run_id": {"type": "string"},
+    "type": {
+      "enum": ["PROPOSAL", "TRANSFORM", "CERTIFICATE", "PREPARE", "COMMIT",
+               "DISPATCH", "CONTROLLER_ACK", "OBSERVED", "REVOKE",
+               "CANCEL_ACK", "BACKUP", "OUTCOME", "LOG_GAP"]
+    },
+    "payload": {"type": "object"},
+    "prev_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "判定结果",
+  "type": "object",
+  "required": ["plan_hash", "verdict", "path", "full_checks_used"],
+  "properties": {
+    "plan_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "verdict": {"enum": ["FULL", "INHERITED", "REJECTED"]},
+    "path": {"enum": ["parent_only", "full", "delta"]},
+    "cert_id": {"type": ["string", "null"]},
+    "parent_cert_id": {"type": ["string", "null"]},
+    "margins": {"type": "array", "items": {"type": "number"},
+                "description": "每段剩余最小余量，单位米"},
+    "first_violation_segment": {"type": ["integer", "null"]},
+    "full_checks_used": {"type": "integer", "minimum": 0},
+    "inherit_depth": {"type": "integer", "minimum": 0},
+    "reason_code": {"type": ["string", "null"]}
+  }
+}
