@@ -45,13 +45,13 @@ def _next_cert_id() -> str:
     return f"cert-{next(_cert_counter):06d}"
 
 
-@dataclass
+@dataclass(frozen=True)
 class Verdict:
     """一次判定的完整结果，对应 schemas/verdict.schema.json。"""
 
     plan_hash: str
     verdict: str  # FULL | INHERITED | REJECTED
-    path: str  # parent_only | full | delta
+    path: str  # full | delta
     certificate: Optional[Certificate] = None
     margins: tuple = ()
     first_violation_segment: Optional[int] = None
@@ -60,13 +60,16 @@ class Verdict:
     parent_cert_id: Optional[str] = None
     reason_code: Optional[str] = None
 
+    def __post_init__(self):
+        object.__setattr__(self, "margins", tuple(self.margins))
+
     def summary(self) -> dict:
         return {
             "plan_hash": self.plan_hash,
             "verdict": self.verdict,
             "path": self.path,
             "parent_cert_id": self.parent_cert_id,
-            "margins": [round(m, 9) for m in self.margins],
+            "margins": list(self.margins),
             "first_violation_segment": self.first_violation_segment,
             "full_checks_used": self.full_checks_used,
             "inherit_depth": self.inherit_depth,
@@ -76,7 +79,7 @@ class Verdict:
 
 def deviation_bounds(parent: Plan, child: Plan) -> tuple:
     """逐段偏差界 e(k)，要求同时间网格、同节点数。"""
-    if parent.horizon != child.horizon:
+    if parent.horizon != child.horizon or parent.dt != child.dt:
         raise ValueError("时间网格不同，不能按段比较偏差")
     e = []
     for k in range(parent.horizon):
@@ -132,23 +135,13 @@ def validate_or_inherit(
     if parent_cert is None or parent_plan is None or transform is None:
         return _full_path(child, scene)
 
-    # --- 情形二：内容完全相同，查过依赖后直接复用
-    if parent_cert.plan_hash == child.hash:
-        reason = dependency_ok(parent_cert, child, scene, transform)
-        if reason is None:
-            return Verdict(
-                plan_hash=child.hash,
-                verdict="INHERITED",
-                path="delta",
-                certificate=parent_cert,
-                margins=parent_cert.margins,
-                full_checks_used=0,
-                inherit_depth=parent_cert.inherit_depth,
-                parent_cert_id=parent_cert.cert_id,
-            )
+    # 余量只能绑定证书内的父计划，不能配上另一个父计划低估偏差。
+    if (parent_plan != parent_cert.plan
+            or transform.parent_hash != parent_cert.plan_hash
+            or transform.child_hash != child.hash):
         return _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
 
-    # --- 情形三：尝试 Δ 继承
+    # identity 也走同一条路径，保证继承深度和依赖检查不被绕过。
     reason = dependency_ok(parent_cert, child, scene, transform)
     if reason is not None:
         return _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
@@ -159,7 +152,7 @@ def validate_or_inherit(
         parent_cert.margins[k] - LIPSCHITZ * e[k] for k in range(child.horizon)
     )
 
-    if min(child_margins) >= 0.0:
+    if min(child_margins) > 0.0:
         cert = Certificate(
             cert_id=_next_cert_id(),
             plan=child,
