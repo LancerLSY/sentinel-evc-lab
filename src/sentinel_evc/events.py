@@ -1,77 +1,166 @@
-"""事件记录。
-
-13 种事件类型首版就全部定义，不要后加 —— 事件 schema 是 A 和 B 的
-解耦点，冻结之后改动要两人同意。
-
-原始动作、批准动作、发送动作和反馈不能共用一列。没有反馈时输出 unknown，
-不得把「发送成功」写成「实际完成」。
-"""
+"""有界事件队列与规范 JSONL；排队失败保留序号并显式报告缺口。"""
 
 from __future__ import annotations
 
-import json
+import math
+import re
 from collections import deque
-from typing import Optional
+from copy import deepcopy
+from datetime import datetime, timezone
+from time import monotonic_ns
 
 from .contracts import canonical_json, sha256_hex
 
-EVENT_TYPES = (
-    "PROPOSAL",
-    "TRANSFORM",
-    "CERTIFICATE",
-    "PREPARE",
-    "COMMIT",
-    "DISPATCH",
-    "CONTROLLER_ACK",
-    "OBSERVED",
-    "REVOKE",
-    "CANCEL_ACK",
-    "BACKUP",
-    "OUTCOME",
-    "LOG_GAP",
-)
 
+PAYLOAD_FIELDS = {
+    "PROPOSAL": {"role"},
+    "TRANSFORM": {"method", "parent_plan_hashes"},
+    "CERTIFICATE": {
+        "verdict", "path", "margins", "first_violation_segment",
+        "full_checks_used", "inherit_depth", "parent_cert_id",
+    },
+    "PREPARE": {"prefix_len", "deadline_mono"},
+    "COMMIT": {"accepted", "reason_code"},
+    "DISPATCH": {"step_index", "submitted"},
+    "CONTROLLER_ACK": {"step_index", "accepted"},
+    "OBSERVED": {"step_index", "position", "observed"},
+    "REVOKE": {"reason", "old_epoch", "new_epoch"},
+    "CANCEL_ACK": {"confirmed"},
+    "BACKUP": {"reason", "backup_plan_hash"},
+    "OUTCOME": {"status", "submitted", "accepted", "observed"},
+    "LOG_GAP": {"dropped_count", "first_dropped_seq", "last_dropped_seq"},
+}
+EVENT_TYPES = tuple(PAYLOAD_FIELDS)
 ZERO_HASH = "sha256:" + "0" * 64
+PAYLOAD_ENUMS = {
+    "role": {"parent", "child"},
+    "method": {"mix", "near"},
+    "verdict": {"FULL", "INHERITED", "REJECTED"},
+    "path": {"full", "delta"},
+    "status": {"completed", "rejected", "fault"},
+    "reason_code": {
+        None, "STATE_STALE", "CONTEXT_CHANGED", "LEASE_REPLAY", "TRACKING_TUBE",
+        "CANCEL_UNCONFIRMED", "LEASE_EXPIRED", "AUTH_FAILED", "QUEUE_FULL",
+    },
+}
+
+
+def _digest(value) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"sha256:[0-9a-f]{64}", value) is not None
+
+
+def _number(value) -> bool:
+    return type(value) is int or (type(value) is float and math.isfinite(value))
+
+
+def _validate_payload(etype: str, payload: dict) -> None:
+    if etype not in PAYLOAD_FIELDS:
+        raise ValueError(f"未定义的事件类型: {etype}")
+    if payload.keys() != PAYLOAD_FIELDS[etype]:
+        raise ValueError(f"{etype} payload 字段不符合合同")
+    for field, value in payload.items():
+        if field in PAYLOAD_ENUMS:
+            valid = value in tuple(PAYLOAD_ENUMS[field])
+        elif (etype, field) in {
+            ("COMMIT", "accepted"),
+            ("DISPATCH", "submitted"),
+            ("CONTROLLER_ACK", "accepted"),
+            ("OBSERVED", "observed"),
+            ("CANCEL_ACK", "confirmed"),
+        }:
+            valid = type(value) is bool
+        elif field in {"margins", "position"}:
+            valid = isinstance(value, (list, tuple)) and all(_number(v) for v in value)
+            if field == "position":
+                valid = valid and len(value) == 3
+        elif field == "parent_plan_hashes":
+            valid = isinstance(value, (list, tuple)) and all(_digest(v) for v in value)
+        elif field == "backup_plan_hash":
+            valid = _digest(value)
+        elif field == "parent_cert_id":
+            valid = value is None or (isinstance(value, str) and bool(value))
+        elif field == "reason":
+            valid = isinstance(value, str)
+        elif field == "deadline_mono":
+            valid = _number(value)
+        elif field == "first_violation_segment" and value is None:
+            valid = True
+        else:
+            valid = type(value) is int and value >= (1 if field in {"prefix_len", "dropped_count"} else 0)
+        if not valid:
+            raise ValueError(f"{etype}.{field} 不符合合同")
+    canonical_json(payload)
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 class EventLog:
-    """有界事件队列。
+    """只持有尚未消费的事件；count/tip_hash 覆盖整个流，包括已 drain 的事件。"""
 
-    队列有上限，满了就显式丢弃并记一条 LOG_GAP —— 不无限堆内存，
-    但缺口必须可见。需要完整证据的运行模式下，出现缺口应停止批准新任务。
-    """
-
-    def __init__(self, run_id: str, maxlen: int = 100_000):
+    def __init__(self, run_id: str, maxlen: int = 1024, *,
+                 monotonic_ns=monotonic_ns, utc_now=_utc_now):
+        if not isinstance(run_id, str) or not run_id:
+            raise ValueError("run_id 必须为非空字符串")
+        if type(maxlen) is not int or maxlen <= 0:
+            raise ValueError("事件队列容量必须为正整数")
         self.run_id = run_id
         self._events: deque = deque()
         self._maxlen = maxlen
+        self._monotonic_ns = monotonic_ns
+        self._utc_now = utc_now
         self._seq = 0
+        self._count = 0
         self._prev_hash = ZERO_HASH
         self._gap_count = 0
+        self._first_dropped_seq = None
+        self._last_dropped_seq = None
 
-    def append(self, etype: str, **payload) -> dict:
-        if etype not in EVENT_TYPES:
-            raise ValueError(f"未定义的事件类型: {etype}")
-
+    def append(self, etype: str, *, plan_hash=None, lease_id=None,
+               cert_id=None, **payload) -> dict | None:
+        _validate_payload(etype, payload)
+        if plan_hash is not None and not _digest(plan_hash):
+            raise ValueError("plan_hash 不符合摘要格式")
+        for value in (lease_id, cert_id):
+            if value is not None and (not isinstance(value, str) or not value):
+                raise ValueError("事件 ID 必须为非空字符串或 null")
+        if self._gap_count and len(self._events) < self._maxlen:
+            self._record("LOG_GAP", {
+                "dropped_count": self._gap_count,
+                "first_dropped_seq": self._first_dropped_seq,
+                "last_dropped_seq": self._last_dropped_seq,
+            })
+            self._gap_count = 0
+            self._first_dropped_seq = self._last_dropped_seq = None
         if len(self._events) >= self._maxlen:
-            # 丢最旧的，并把缺口记下来
-            self._events.popleft()
+            # 丢当前尝试，保留已排队事件；缺失序号由后续 LOG_GAP 解释。
+            if not self._gap_count:
+                self._first_dropped_seq = self._seq
+            self._last_dropped_seq = self._seq
             self._gap_count += 1
+            self._seq += 1
+            return None
+        return self._record(etype, payload, plan_hash, lease_id, cert_id)
 
-        ev = {
+    def _record(self, etype, payload, plan_hash=None, lease_id=None, cert_id=None):
+        event = {
             "seq": self._seq,
+            "ts_mono_ns": self._monotonic_ns(),
+            "ts_utc": self._utc_now(),
             "run_id": self.run_id,
             "type": etype,
-            "payload": payload,
+            "plan_hash": plan_hash,
+            "lease_id": lease_id,
+            "cert_id": cert_id,
+            "payload": deepcopy(payload),
             "prev_hash": self._prev_hash,
         }
+        self._prev_hash = sha256_hex(event)
         self._seq += 1
-        self._prev_hash = sha256_hex(ev)
-        self._events.append(ev)
-        return ev
-
-    def note_gap(self, detail: str) -> None:
-        self.append("LOG_GAP", detail=detail, dropped=self._gap_count)
+        self._count += 1
+        self._events.append(event)
+        return deepcopy(event)
 
     @property
     def tip_hash(self) -> str:
@@ -79,16 +168,20 @@ class EventLog:
 
     @property
     def count(self) -> int:
-        return self._seq
+        """累计成功记录数；不包含丢弃尝试，包含 LOG_GAP。"""
+        return self._count
 
-    def events(self) -> list:
-        return list(self._events)
+    def events(self) -> list[dict]:
+        return deepcopy(list(self._events))
 
-    def to_jsonl(self) -> str:
-        return "\n".join(
-            json.dumps(ev, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-            for ev in self._events
-        ) + "\n"
+    def drain(self) -> list[dict]:
+        """将当前缓冲事件交给消费者并释放容量；流的序号和链不重置。"""
+        events = list(self._events)
+        self._events.clear()
+        return events
 
-    def by_type(self, etype: str) -> list:
-        return [e for e in self._events if e["type"] == etype]
+    def to_jsonl(self) -> bytes:
+        return b"".join(canonical_json(event) + b"\n" for event in self._events)
+
+    def by_type(self, etype: str) -> list[dict]:
+        return deepcopy([event for event in self._events if event["type"] == etype])
