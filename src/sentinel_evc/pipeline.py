@@ -47,7 +47,8 @@ def _snapshot(obs_id: str, context: LeaseContext, position, observed_mono: int):
 # ==================================================================== 第一幕
 
 
-def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dict:
+def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True,
+                     seed: int = 0) -> dict:
     """变换让旧结论失效。
 
     对每个案例跑三条判定路径：
@@ -72,10 +73,12 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
     }
     samples = []
 
+    scene = make_scene(seed)
+    mix_cases = cases // 2
     for i in range(cases):
-        seed = i
-        scene = make_scene(seed % 50)
-        p1, p2 = make_parent_pair(seed)
+        case_seed = seed + i
+        p1, p2 = make_parent_pair(case_seed)
+        log.append("PROPOSAL", plan_hash=p1.hash, role="parent")
 
         # 建立父证书：一次完整几何检查
         root = establish_root(p1, scene)
@@ -97,10 +100,12 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
         )
 
         # 一半案例用异侧混合（实际违规），一半用同侧扰动（实际安全）
-        if i % 2 == 0:
+        if i < mix_cases:
             child, record = mix(p1, p2, plan_id=f"MIX-{i:06d}")
         else:
-            child, record = perturb(p1, seed=seed, plan_id=f"NEAR-{i:06d}")
+            child, record = perturb(p1, seed=case_seed, plan_id=f"NEAR-{i:06d}")
+
+        log.append("PROPOSAL", plan_hash=child.hash, role="child")
 
         parents = [p1.hash, p2.hash] if record.kind == "mix" else [p1.hash]
         log.append(
@@ -113,7 +118,7 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
         # 地面真值：独立判断这条子轨迹到底违不违规
         truly_ok, true_margins, first_viol = full_check(child, scene)
 
-        if cross_check and i < 50:
+        if cross_check:
             if not cross_validate(child, scene):
                 stats["cross_check_disagreements"] += 1
 
@@ -180,12 +185,12 @@ FAULTS = [
 ]
 
 
-def act_two_faults(log: EventLog) -> dict:
+def act_two_faults(log: EventLog, fault: str = "all", seed: int = 0) -> dict:
     """许可与撤销。七类故障各跑一遍。"""
-    results = []
-
-    for fault in FAULTS:
-        results.append(_run_one_fault(fault, log))
+    if fault != "all" and fault not in FAULTS:
+        raise ValueError(f"未定义的故障: {fault}")
+    selected = FAULTS if fault == "all" else [fault]
+    results = [_run_one_fault(name, log, seed) for name in selected]
 
     summary = {
         "faults_run": len(results),
@@ -198,9 +203,9 @@ def act_two_faults(log: EventLog) -> dict:
     return summary
 
 
-def _run_one_fault(fault: str, log: EventLog) -> dict:
-    scene = make_scene(0)
-    p1, _ = make_parent_pair(0)
+def _run_one_fault(fault: str, log: EventLog, seed: int = 0) -> dict:
+    scene = make_scene(seed)
+    p1, _ = make_parent_pair(seed)
     store = CertificateStore()
     authority = Authority(store)
     clock = Clock(1_000_000_000)
@@ -327,8 +332,8 @@ def act_three_evidence(log: EventLog, out_dir: str) -> dict:
     log.append(
         "OUTCOME",
         status="completed",
-        submitted=len(log.by_type("DISPATCH")),
-        accepted=len(log.by_type("CONTROLLER_ACK")),
-        observed=len(log.by_type("OBSERVED")),
+        submitted=log.type_count("DISPATCH"),
+        accepted=log.type_count("CONTROLLER_ACK"),
+        observed=log.type_count("OBSERVED"),
     )
     return build_bundle(log, out_dir)

@@ -38,6 +38,12 @@ def test_seven_faults_share_stream_without_duplicate_observations():
                                  for item in observed})
 
 
+@pytest.mark.parametrize("fault", FAULTS)
+def test_fault_selection_runs_only_the_requested_case(fault):
+    result = act_two_faults(EventLog("selected"), fault=fault, seed=1234)
+    assert [item["fault"] for item in result["details"]] == [fault]
+
+
 def test_accepted_step_can_be_observed_after_revoke():
     log = EventLog("revoke-order")
     result = _run_one_fault("revoke-race", log)
