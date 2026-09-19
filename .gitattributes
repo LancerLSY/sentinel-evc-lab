@@ -1,1 +1,6 @@
 tests/fixtures/*.jsonl text eol=lf
+sample_run/bundle/* binary
+sample_run/anchors/demo.public binary
+sample_run/scenario.json text eol=lf
+sample_run/summary.json text eol=lf
+sample_run/report.html text eol=lf
