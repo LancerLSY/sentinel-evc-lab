@@ -25,7 +25,7 @@ def _rig(drop_cancel_ack=False, capacity=2):
     clock = Clock(1_000_000_000)
     log = EventLog("test")
     ctrl = SimController(capacity=capacity, drop_cancel_ack=drop_cancel_ack)
-    ex = Executor(auth, ctrl, log)
+    ex = Executor(auth, ctrl, log, monotonic_ns=lambda: clock.now_ns)
     ctx = LeaseContext("robot-test", 0, 0, scene.scene_id, 0, ZERO_HASH)
     snap = Snapshot(
         obs_id="obs-0", **ctx.summary(), position=p1.points[0],
@@ -113,7 +113,7 @@ def test_no_stale_generation_submissions_after_revoke():
 
     for _ in range(2):
         r["clock"].advance(50_000_000)
-        r["ex"].tick(r["clock"].now_ns)
+        r["ex"].tick(r["clock"].now_ns, replace(r["ctx"], epoch=r["ex"].generation))
 
     gen_before = r["ex"].generation
     n_before = len(r["ctrl"].submitted)
@@ -121,7 +121,7 @@ def test_no_stale_generation_submissions_after_revoke():
 
     for _ in range(8):
         r["clock"].advance(50_000_000)
-        r["ex"].tick(r["clock"].now_ns)
+        r["ex"].tick(r["clock"].now_ns, replace(r["ctx"], epoch=r["ex"].generation))
 
     new = r["ctrl"].submitted[n_before:]
     stale = [s for s in new if s["gen"] <= gen_before]
@@ -138,12 +138,13 @@ def test_already_submitted_step_may_still_execute():
                               r["clock"].now_ns)
     r["ex"].commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
     r["clock"].advance(50_000_000)
-    r["ex"].tick(r["clock"].now_ns)
+    r["ex"].tick(r["clock"].now_ns, replace(r["ctx"], epoch=r["ex"].generation))
 
     assert len(r["ctrl"].submitted) >= 1
     r["ex"].revoke("test")
     for _ in range(5):
-        r["ctrl"].tick()
+        r["clock"].advance(50_000_000)
+        r["ex"].tick(r["clock"].now_ns, replace(r["ctx"], epoch=r["ex"].generation))
     assert len(r["ctrl"].observed) >= 1, (
         "撤销前已提交的步骤应当仍被观测到 —— 如果这里是 0，"
         "说明模拟把撤销画成了瞬间制动")
@@ -159,9 +160,11 @@ def test_cannot_recover_without_cancel_ack():
     r["ex"].commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
     r["ex"].revoke("test")
     for _ in range(10):
-        r["ctrl"].tick()
+        r["clock"].advance(50_000_000)
+        r["ex"].tick(r["clock"].now_ns, replace(r["ctx"], epoch=r["ex"].generation))
     with pytest.raises(Rejection) as exc:
-        r["ex"].try_recover(operator_approved=True)
+        r["ex"].recover(replace(r["snap"], epoch=r["ex"].generation,
+                                observed_mono=r["clock"].now_ns), human_approved=True)
     assert exc.value.code == ErrorCode.CANCEL_UNCONFIRMED
 
 
@@ -172,9 +175,11 @@ def test_cannot_recover_without_operator_approval():
     r["ex"].commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
     r["ex"].revoke("test")
     for _ in range(10):
-        r["ctrl"].tick()
+        r["clock"].advance(50_000_000)
+        r["ex"].tick(r["clock"].now_ns, replace(r["ctx"], epoch=r["ex"].generation))
     with pytest.raises(Rejection):
-        r["ex"].try_recover(operator_approved=False)
+        r["ex"].recover(replace(r["snap"], epoch=r["ex"].generation,
+                                observed_mono=r["clock"].now_ns), human_approved=False)
     assert r["ex"].state == ExecutorState.FAULT
 
 
@@ -185,9 +190,9 @@ def test_controller_capacity_forces_batched_submission():
                               r["clock"].now_ns, prefix_len=4)
     r["ex"].commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
     r["clock"].advance(50_000_000)
-    r["ex"].tick(r["clock"].now_ns)
+    r["ex"].tick(r["clock"].now_ns, replace(r["ctx"], epoch=r["ex"].generation))
     r["clock"].advance(50_000_000)
-    r["ex"].tick(r["clock"].now_ns)
+    r["ex"].tick(r["clock"].now_ns, replace(r["ctx"], epoch=r["ex"].generation))
     assert r["ctrl"].free_slots() <= 2
 
 
