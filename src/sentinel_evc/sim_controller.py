@@ -30,11 +30,18 @@ class SimController:
         ack_delay_ticks: int = 1,
         exec_delay_ticks: int = 1,
         drop_cancel_ack: bool = False,
+        drop_ack: bool = False,
     ):
+        if type(capacity) is not int or capacity < 1:
+            raise ValueError("capacity 必须为正整数")
+        if any(type(delay) is not int or delay < 0
+               for delay in (ack_delay_ticks, exec_delay_ticks)):
+            raise ValueError("控制器延迟必须为非负整数周期")
         self.capacity = capacity
         self.ack_delay_ticks = ack_delay_ticks
         self.exec_delay_ticks = exec_delay_ticks
         self.drop_cancel_ack = drop_cancel_ack
+        self.drop_ack = drop_ack
 
         self._inflight = deque()  # [{action, gen, age, state}]
         self.submitted = []  # 已发出
@@ -69,7 +76,7 @@ class SimController:
 
     # ------------------------------------------------------------ 推进
 
-    def tick(self) -> None:
+    def advance(self) -> None:
         """推进一个控制周期。"""
         # 取消确认：丢弃尚未被确认的命令，但**已经确认的会继续执行完**
         if self._cancel_pending:
@@ -91,7 +98,9 @@ class SimController:
             if item["state"] == "submitted" and item["age"] >= self.ack_delay_ticks:
                 item["state"] = "accepted"
                 item["age"] = 0
-                self.accepted.append({"action": item["action"], "gen": item["gen"]})
+                # ACK 丢失只影响主机可见确认，不把控制器已接受的动作当作未执行。
+                if not self.drop_ack:
+                    self.accepted.append({"action": item["action"], "gen": item["gen"]})
             elif item["state"] == "accepted" and item["age"] >= self.exec_delay_ticks:
                 item["state"] = "observed"
                 self.observed.append({"action": item["action"], "gen": item["gen"]})
@@ -99,6 +108,10 @@ class SimController:
 
         for item in done:
             self._inflight.remove(item)
+
+    def tick(self) -> None:
+        """保留旧执行器入口；确定性推进由 advance 实现。"""
+        self.advance()
 
     # ------------------------------------------------------------ 查询
 

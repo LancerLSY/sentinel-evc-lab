@@ -17,6 +17,7 @@ dist/
 venv/
 env/
 .pytest_cache/
+.pytest_tmp/
 .ruff_cache/
 .coverage
 htmlcov/
@@ -29,11 +30,14 @@ htmlcov/
 
 # Local secrets / run artifacts
 *.token
+*.pem
+*.key
 .env
 runs/
 
 # Local agent context (private, never commit)
 AGENTS.local.md
+SESSION_HANDOFF.md
 CLAUDE.local.md
 .dsh/
 .agents/

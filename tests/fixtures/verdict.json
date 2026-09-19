@@ -1,0 +1,15 @@
+{
+  "plan_hash": "sha256:103bb40200517e66c9e9f2a256e872429bc1ebceef7068cd34ff5b96d86916d9",
+  "verdict": "INHERITED",
+  "path": "delta",
+  "margins": [
+    0.017,
+    0.021,
+    0.009
+  ],
+  "first_violation_segment": null,
+  "full_checks_used": 0,
+  "inherit_depth": 2,
+  "parent_cert_id": "fixture-parent-cert",
+  "reason_code": null
+}

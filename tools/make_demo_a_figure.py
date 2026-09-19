@@ -84,7 +84,7 @@ ZH = {
     "box3": "父轨迹的结论对混合结果不成立 —— 这就是本项目要解决的问题。",
     "box4": "Δ-Cert 界不够（父余量扣不掉逐段偏差），回退完整检查 → 判定 {verdict}。",
     "box5": "「界不够」是「无法证明」，不是「一定会碰撞」—— 所以必须真的再查一遍。",
-    "repro": "复现：python -m sentinel_evc demo --cases {cases} --out runs/demo_a",
+    "repro": "复现：python -m sentinel_evc demo --cases {cases} --seed {seed} --out runs/demo_a",
     "generated": "本图由同一次运行的输出生成；脚本先跟基线断言，不一致就拒绝出图。",
     "legend_x": (0, 250, 500),
     "start": "起点",
@@ -127,7 +127,7 @@ EN = {
     "box4": "Δ-Cert bound insufficient: parent margin cannot absorb the per-segment",
     "box5": "deviation, so it falls back to a full check → {verdict}, "
             "not \"will collide\".",
-    "repro": "Reproduce: python -m sentinel_evc demo --cases {cases} --out runs/demo_a",
+    "repro": "Reproduce: python -m sentinel_evc demo --cases {cases} --seed {seed} --out runs/demo_a",
     "generated": "Generated from that same run; the script asserts the baseline first.",
     "legend_x": (0, 290, 580),
     "start": "start",
@@ -159,10 +159,10 @@ def mm(x: float) -> str:
     return f"{x * 1000:+.1f}"
 
 
-def run_act_one(cases: int) -> dict:
+def run_act_one(cases: int, seed: int) -> dict:
     """真跑一遍第一幕。返回流水线统计（含前 8 个案例的轨迹样本）。"""
     log = EventLog(run_id="demo-a-figure")
-    geo = act_one_geometry(cases, log)
+    geo = act_one_geometry(cases, log, seed=seed)
     bad = {
         k: (geo.get(k), v)
         for k, v in BASELINE.items()
@@ -198,7 +198,7 @@ def _polyline(pts, tx, **attrs) -> str:
 
 
 def _segments(plan):
-    return [(plan.knots[k], plan.knots[k + 1]) for k in range(plan.horizon)]
+    return [(plan.points[k], plan.points[k + 1]) for k in range(plan.horizon)]
 
 
 def _closest_point_on_segment(p0, p1, c):
@@ -212,10 +212,10 @@ def _closest_point_on_segment(p0, p1, c):
     return tuple(p0[i] + t * d[i] for i in range(3))
 
 
-def build_svg(geo: dict, cases: int, lang: str = "zh") -> str:
+def build_svg(geo: dict, cases: int, seed: int, lang: str = "zh") -> str:
     T = STRINGS[lang]
-    scene = make_scene(0)
-    p1, p2 = make_parent_pair(0)
+    scene = make_scene(seed)
+    p1, p2 = make_parent_pair(seed)
     sample = geo["samples"][0]          # 案例 #0 —— 异侧混合，实际违规
     child = sample["child_knots"]
     child = [tuple(p) for p in child]
@@ -225,8 +225,13 @@ def build_svg(geo: dict, cases: int, lang: str = "zh") -> str:
     clearance = obs.radius + scene.tool_radius + scene.tracking_reserve
     ok_p1, m_p1, _ = full_check(p1, scene)
     ok_p2, m_p2, _ = full_check(p2, scene)
-    child_plan = Plan(plan_id=f"MIX-{sample['case']:06d}", knots=tuple(child),
-                      dt=p1.dt)
+    child_plan = Plan(
+        points=tuple(child),
+        dt=p1.dt,
+        gripper_events=p1.gripper_events,
+        controller_profile=p1.controller_profile,
+        task_phase=p1.task_phase,
+    )
     ok_c, m_c, first_bad = full_check(child_plan, scene)
     child_segments = _segments(child_plan)
 
@@ -254,7 +259,7 @@ def build_svg(geo: dict, cases: int, lang: str = "zh") -> str:
     # 两条父轨迹
     parts.append(_polyline(p1_pts, tx, stroke=C_ACC, stroke_width="2.2",
                            opacity=".85"))
-    parts.append(_polyline(p2.knots, tx, stroke=C_OK, stroke_width="2.2",
+    parts.append(_polyline(p2.points, tx, stroke=C_OK, stroke_width="2.2",
                            opacity=".85"))
 
     # 混合后的最终动作：违规段加粗
@@ -328,7 +333,7 @@ def build_svg(geo: dict, cases: int, lang: str = "zh") -> str:
         f'</text>')
     parts.append(
         f'<text x="{PX:.1f}" y="{ly + 44:.1f}" font-size="11.5" fill="{C_MUT}">'
-        f'{T["projection"].format(z=p1.knots[0][2])}</text>')
+        f'{T["projection"].format(z=p1.points[0][2])}</text>')
 
     # ---------------------------------------------------------------- 右侧面板
     g = geo
@@ -382,7 +387,7 @@ def build_svg(geo: dict, cases: int, lang: str = "zh") -> str:
               d=g["cross_check_disagreements"],
               pct=g.get("full_check_reduction_pct", 0),
               m1=mm(min(m_p1)), m2=mm(min(m_p2)), mc=mm(min(m_c)),
-              seg=first_bad, verdict=sample["verdict"], cases=cases,
+              seg=first_bad, verdict=sample["verdict"], cases=cases, seed=seed,
               verdict_upper=sample["verdict"])
     for i, key in enumerate(T["notes"]):
         color = C_BAD if i == 0 else C_MUT
@@ -414,7 +419,7 @@ def build_svg(geo: dict, cases: int, lang: str = "zh") -> str:
     y = box_top + box_h + 24.0
     panel.append(
         f'<text x="{col_path}" y="{y}" font-size="11.5" fill="{C_MUT}">'
-        f'{T["repro"].format(cases=cases)}</text>')
+        f'{T["repro"].format(cases=cases, seed=seed)}</text>')
     panel.append(
         f'<text x="{col_path}" y="{y + 18:.1f}" font-size="11.5" fill="{C_MUT}">'
         f'{T["generated"]}</text>')
@@ -435,9 +440,13 @@ def build_svg(geo: dict, cases: int, lang: str = "zh") -> str:
 
 
 def main(argv=None) -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="生成第一幕（Demo A）对照图")
     ap.add_argument("--out", default=None)
     ap.add_argument("--cases", type=int, default=1000)
+    ap.add_argument("--seed", type=int, default=1234)
     ap.add_argument("--lang", choices=sorted(STRINGS), default="zh",
                     help="zh → docs/demo_a.svg；en → docs/demo_a.en.svg")
     args = ap.parse_args(argv)
@@ -445,8 +454,8 @@ def main(argv=None) -> int:
     out_path = args.out or (
         "docs/demo_a.svg" if args.lang == "zh" else f"docs/demo_a.{args.lang}.svg")
 
-    geo = run_act_one(args.cases)
-    svg = build_svg(geo, args.cases, lang=args.lang)
+    geo = run_act_one(args.cases, args.seed)
+    svg = build_svg(geo, args.cases, args.seed, lang=args.lang)
     out = Path(out_path)
     out.parent.mkdir(parents=True, exist_ok=True)
     # 显式写 LF：这个文件要进版本库，行尾必须与平台无关，

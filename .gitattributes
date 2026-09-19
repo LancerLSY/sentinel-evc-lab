@@ -1,24 +1,15 @@
-# 行尾策略 —— 这份文件是「随包 sample_run/ 能不能被独立校验」的前提
-# ---------------------------------------------------------------------------
-# 证据包与锚点必须**逐字节**一致：
-#   · manifest.json 里记的是 events.jsonl 的 sha256（原始字节）
-#   · manifest.sig 是对 manifest.json 原始字节的 Ed25519 签名
-#   · anchors/demo.public 与 manifest.sig 是裸二进制
-# 只要 checkout 时做过一次 LF → CRLF 转换，这三样就全废。
-#
-# 实测（2026-09-19，Windows 全新 clone）：系统级 core.autocrlf=true 会把
-# sample_run/bundle/events.jsonl 从 727605 字节变成 729636 字节，
-# `verify` 立刻报 FILE_DIGEST_MISMATCH。Linux 上 CI 默认不做转换，
-# **永远抓不到这一类问题** —— 只有换一台机器 clone 才会暴露。
-#
-# 规则顺序很重要：.gitattributes 里后面的规则覆盖前面的，
-# 所以通用规则在前、例外在后。
-
-# 通用：文本文件一律以 LF 入库、以 LF 检出
+# 文本统一以 LF 保存；签名证据按原始字节检出。
 * text=auto eol=lf
 
-# 例外：证据包与锚点按二进制处理，任何平台都不转换
-*.jsonl  -text
-*.sig    -text
-*.public -text
-sample_run/bundle/manifest.json -text
+*.jsonl text eol=lf
+*.sig binary
+*.public binary
+
+# manifest 摘要和签名都依赖 bundle 的原始字节，禁止换行转换。
+sample_run/bundle/* binary
+
+# 这些产物是普通文本，固定 LF 便于跨平台复现。
+tests/fixtures/*.jsonl text eol=lf
+sample_run/scenario.json text eol=lf
+sample_run/summary.json text eol=lf
+sample_run/report.html text eol=lf

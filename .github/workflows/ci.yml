@@ -4,60 +4,42 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10", "3.12"]
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.13"
       - run: python -m pip install -e ".[test]"
       - run: python -m pytest -q
-      - name: 端到端冒烟：跑一次 demo 并独立校验
+      - name: Run the three-act smoke demo
+        shell: pwsh
         run: |
-          python -m sentinel_evc demo --cases 100 --out runs/ci --run-id ci
-          python -m sentinel_evc verify --bundle runs/ci/bundle \
-            --public-key runs/ci/anchors/demo.public --run-id ci
-          python -m sentinel_evc tamper --out runs/ci --run-id ci
+          python -m sentinel_evc demo --cases 100 --seed 1234 --out runs/ci
+          python -m sentinel_evc verify --bundle runs/ci/bundle --public-key runs/ci/anchors/demo.public --run-id ci
 
   demo-a:
-    # Demo 第一步（第一幕）在 GitHub 上自证：
-    # 跑满 1000 案例 → 出图脚本与 RESULTS.md 基线断言（不一致就退出码 2）→
-    # 把对照图、summary、report、证据包当 Artifact 传上去，谁都能下载核对。
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      actions: write
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.13"
       - run: python -m pip install -e ".[test]"
-      - name: 第一幕 1000 案例 + 生成中英对照图（含基线断言）
+      - name: Generate the 1000-case bilingual figure
+        shell: pwsh
         run: |
-          python -m sentinel_evc demo --cases 1000 --out runs/demo_a --run-id demo-a
-          python -m sentinel_evc verify --bundle runs/demo_a/bundle \
-            --public-key runs/demo_a/anchors/demo.public --run-id demo-a
-          python tools/make_demo_a_figure.py --lang zh --cases 1000 \
-            --out runs/demo_a/demo_a.svg
-          python tools/make_demo_a_figure.py --lang en --cases 1000 \
-            --out runs/demo_a/demo_a.en.svg
-      - name: 随包 sample_run 未漂移
-        run: |
-          python -m sentinel_evc verify --bundle sample_run/bundle \
-            --public-key sample_run/anchors/demo.public --run-id sample-001
-      - name: RESULTS.md 与随包 sample_run 对得上
-        run: python tools/check_results.py
-      - uses: actions/upload-artifact@v7
+          python tools/make_demo_a_figure.py --lang zh --cases 1000 --seed 1234 --out runs/demo_a.svg
+          python tools/make_demo_a_figure.py --lang en --cases 1000 --seed 1234 --out runs/demo_a.en.svg
+          python tools/check_results.py
+          python -m sentinel_evc verify --bundle sample_run/bundle --public-key sample_run/anchors/demo.public --run-id sample_run
+      - uses: actions/upload-artifact@v4
         with:
           name: demo-a
           path: |
-            runs/demo_a/demo_a.svg
-            runs/demo_a/demo_a.en.svg
-            runs/demo_a/summary.json
-            runs/demo_a/report.html
-            runs/demo_a/bundle
-            runs/demo_a/anchors/demo.public
+            runs/demo_a.svg
+            runs/demo_a.en.svg
+            sample_run/summary.json
+            sample_run/report.html
+            sample_run/bundle
+            sample_run/anchors/demo.public

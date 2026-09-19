@@ -4,21 +4,22 @@
   <rect width="1040" height="560" fill="#ffffff"/>
   <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC','Microsoft YaHei',sans-serif">
         <rect x="486.0" y="332.0" width="522.0" height="152.0" rx="4" fill="#f7f6f3" stroke="#d8d7d2" stroke-width="1"/>
-    <circle cx="254.0" cy="260.7" r="23.8" fill="#b3452f" opacity=".16"/>
-    <circle cx="254.0" cy="260.7" r="23.8" fill="none" stroke="#b3452f" stroke-width="1.5" opacity=".65"/>
-    <circle cx="254.0" cy="260.7" r="35.6" fill="none" stroke="#b3452f" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>
+    <circle cx="254.0" cy="264.0" r="23.8" fill="#b3452f" opacity=".16"/>
+    <circle cx="254.0" cy="264.0" r="23.8" fill="none" stroke="#b3452f" stroke-width="1.5" opacity=".65"/>
+    <circle cx="254.0" cy="264.0" r="35.6" fill="none" stroke="#b3452f" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>
     <rect x="64.0" y="74.0" width="380.0" height="380.0" fill="none" stroke="#d8d7d2" stroke-width="1"/>
-    <path d="M111.5,264.0 L129.3,250.1 L147.1,236.7 L164.9,224.4 L182.8,213.6 L200.6,204.8 L218.4,198.2 L236.2,194.1 L254.0,192.8 L271.8,194.1 L289.6,198.2 L307.4,204.8 L325.2,213.6 L343.1,224.4 L360.9,236.7 L378.7,250.1 L396.5,264.0" fill="none" stroke="#3a5f8a" stroke-width="2.2" opacity=".85"/>
-    <path d="M111.5,264.0 L129.3,277.9 L147.1,291.3 L164.9,303.6 L182.8,314.4 L200.6,323.2 L218.4,329.8 L236.2,333.9 L254.0,335.2 L271.8,333.9 L289.6,329.8 L307.4,323.2 L325.2,314.4 L343.1,303.6 L360.9,291.3 L378.7,277.9 L396.5,264.0" fill="none" stroke="#2d7a4f" stroke-width="2.2" opacity=".85"/>
+    <path d="M111.5,264.0 L129.3,251.2 L147.1,238.8 L164.9,227.4 L182.8,217.4 L200.6,209.2 L218.4,203.2 L236.2,199.4 L254.0,198.1 L271.8,199.4 L289.6,203.2 L307.4,209.2 L325.2,217.4 L343.1,227.4 L360.9,238.8 L378.7,251.2 L396.5,264.0" fill="none" stroke="#3a5f8a" stroke-width="2.2" opacity=".85"/>
+    <path d="M111.5,264.0 L129.3,276.8 L147.1,289.2 L164.9,300.6 L182.8,310.6 L200.6,318.8 L218.4,324.8 L236.2,328.6 L254.0,329.9 L271.8,328.6 L289.6,324.8 L307.4,318.8 L325.2,310.6 L343.1,300.6 L360.9,289.2 L378.7,276.8 L396.5,264.0" fill="none" stroke="#2d7a4f" stroke-width="2.2" opacity=".85"/>
     <path d="M111.5,264.0 L129.3,264.0 L147.1,264.0 L164.9,264.0 L182.8,264.0 L200.6,264.0 L218.4,264.0 L236.2,264.0 L254.0,264.0 L271.8,264.0 L289.6,264.0 L307.4,264.0 L325.2,264.0 L343.1,264.0 L360.9,264.0 L378.7,264.0 L396.5,264.0" fill="none" stroke="#b3452f" stroke-width="2.6" opacity=".55"/>
     <path d="M218.4,264.0 L236.2,264.0" fill="none" stroke="#b3452f" stroke-width="5" stroke-linecap="round"/>
     <path d="M236.2,264.0 L254.0,264.0" fill="none" stroke="#b3452f" stroke-width="5" stroke-linecap="round"/>
     <path d="M254.0,264.0 L271.8,264.0" fill="none" stroke="#b3452f" stroke-width="5" stroke-linecap="round"/>
     <path d="M271.8,264.0 L289.6,264.0" fill="none" stroke="#b3452f" stroke-width="5" stroke-linecap="round"/>
+    <path d="M289.6,264.0 L307.4,264.0" fill="none" stroke="#b3452f" stroke-width="5" stroke-linecap="round"/>
     <circle cx="254.0" cy="264.0" r="4.5" fill="#fff" stroke="#b3452f" stroke-width="2"/>
     <line x1="254.0" y1="264.0" x2="320.0" y2="212.0" stroke="#b3452f" stroke-width="1" opacity=".7"/>
     <text x="324.0" y="208.0" font-size="12" fill="#b3452f" font-weight="600">第 6 段起穿障</text>
-    <text x="324.0" y="223.0" font-size="12" fill="#b3452f">最小余量 -68.1 mm</text>
+    <text x="324.0" y="223.0" font-size="12" fill="#b3452f">最小余量 -75.0 mm</text>
     <circle cx="111.5" cy="264.0" r="3.5" fill="#1a1a18"/>
     <text x="119.5" y="255.0" font-size="11.5" fill="#6b6b66" text-anchor="start">起点</text>
     <circle cx="396.5" cy="264.0" r="3.5" fill="#1a1a18"/>
@@ -66,12 +67,12 @@
     <text x="500.0" y="294.0" font-size="12" fill="#6b6b66">直接继承 500 次；独立实现交叉验证分歧 0 处。</text>
     <text x="500.0" y="315.0" font-size="12" fill="#6b6b66">完整检查调用减少 50.0% —— 指验证阶段的调用次数，不是整机提速。</text>
     <text x="500.0" y="352.0" font-size="12.5" font-weight="700" fill="#1a1a18">图中这一组（案例 #0）为什么成立</text>
-    <text x="500.0" y="376.0" font-size="12" fill="#1a1a18">P1 最小余量 +67.7 mm，P2 +75.0 mm —— 两条父轨迹各自完整检查都通过。</text>
-    <text x="500.0" y="399.0" font-size="12" fill="#1a1a18">按 0.5 / 0.5 混合后：最小余量 -68.1 mm，第 6 段起穿过禁区。</text>
+    <text x="500.0" y="376.0" font-size="12" fill="#1a1a18">P1 最小余量 +63.3 mm，P2 +63.3 mm —— 两条父轨迹各自完整检查都通过。</text>
+    <text x="500.0" y="399.0" font-size="12" fill="#1a1a18">按 0.5 / 0.5 混合后：最小余量 -75.0 mm，第 6 段起穿过禁区。</text>
     <text x="500.0" y="422.0" font-size="12" fill="#1a1a18">父轨迹的结论对混合结果不成立 —— 这就是本项目要解决的问题。</text>
     <text x="500.0" y="445.0" font-size="12" fill="#1a1a18">Δ-Cert 界不够（父余量扣不掉逐段偏差），回退完整检查 → 判定 REJECTED。</text>
     <text x="500.0" y="468.0" font-size="12" fill="#1a1a18">「界不够」是「无法证明」，不是「一定会碰撞」—— 所以必须真的再查一遍。</text>
-    <text x="500.0" y="508.0" font-size="11.5" fill="#6b6b66">复现：python -m sentinel_evc demo --cases 1000 --out runs/demo_a</text>
+    <text x="500.0" y="508.0" font-size="11.5" fill="#6b6b66">复现：python -m sentinel_evc demo --cases 1000 --seed 1234 --out runs/demo_a</text>
     <text x="500.0" y="526.0" font-size="11.5" fill="#6b6b66">本图由同一次运行的输出生成；脚本先跟基线断言，不一致就拒绝出图。</text>
   </g>
 </svg>

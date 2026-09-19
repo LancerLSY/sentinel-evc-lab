@@ -6,12 +6,13 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import Optional
 
 from .authority import Authority
-from .contracts import Context, ErrorCode, Rejection, Snapshot
+from .contracts import ErrorCode, LeaseContext, Rejection, Snapshot
 from .delta_cert import CertificateStore, establish_root, validate_or_inherit
-from .events import EventLog
+from .events import ZERO_HASH, EventLog
 from .executor import Executor, ExecutorState
 from .geometry import cross_validate, full_check
 from .scenarios import make_parent_pair, make_scene, mix, perturb
@@ -29,10 +30,25 @@ class Clock:
         return self.now_ns
 
 
+def _snapshot(obs_id: str, context: LeaseContext, position, observed_mono: int):
+    return Snapshot(
+        obs_id=obs_id,
+        robot=context.robot,
+        boot=context.boot,
+        epoch=context.epoch,
+        scene_id=context.scene_id,
+        queue_rev=context.queue_rev,
+        committed_prefix_hash=context.committed_prefix_hash,
+        position=position,
+        observed_mono=observed_mono,
+    )
+
+
 # ==================================================================== 第一幕
 
 
-def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dict:
+def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True,
+                     seed: int = 0) -> dict:
     """变换让旧结论失效。
 
     对每个案例跑三条判定路径：
@@ -56,33 +72,56 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
         "root_full_checks": 0,
     }
     samples = []
+    sample_counts = {"mix": 0, "near": 0}
 
+    scene = make_scene(seed)
+    mix_cases = cases // 2
     for i in range(cases):
-        seed = i
-        scene = make_scene(seed % 50)
-        p1, p2 = make_parent_pair(seed)
-
-        # 建立父证书：一次完整几何检查
-        root = establish_root(p1, scene)
-        stats["root_full_checks"] += root.full_checks_used
-        if root.verdict != "FULL":
-            continue  # 父轨迹本身不合格的案例跳过
-        parent_cert = root.certificate
-        log.append("CERTIFICATE", cert_id=parent_cert.cert_id,
-                   plan_hash=p1.hash, method="FULL", case=i)
+        case_seed = seed + i
+        p1, p2 = make_parent_pair(case_seed)
+        roots = []
+        for parent in (p1, p2):
+            log.append("PROPOSAL", plan_hash=parent.hash, role="parent")
+            root = establish_root(parent, scene)
+            stats["root_full_checks"] += root.full_checks_used
+            log.append(
+                "CERTIFICATE",
+                cert_id=root.certificate.cert_id if root.certificate else None,
+                plan_hash=parent.hash,
+                verdict=root.verdict,
+                path=root.path,
+                margins=list(root.margins),
+                first_violation_segment=root.first_violation_segment,
+                full_checks_used=root.full_checks_used,
+                inherit_depth=root.inherit_depth,
+                parent_cert_id=root.parent_cert_id,
+            )
+            roots.append(root)
+        if any(root.verdict != "FULL" for root in roots):
+            continue
+        parent_cert = roots[0].certificate
 
         # 一半案例用异侧混合（实际违规），一半用同侧扰动（实际安全）
-        if i % 2 == 0:
+        if i < mix_cases:
             child, record = mix(p1, p2, plan_id=f"MIX-{i:06d}")
         else:
-            child, record = perturb(p1, seed=seed, plan_id=f"NEAR-{i:06d}")
+            child, record = perturb(p1, seed=case_seed, plan_id=f"NEAR-{i:06d}")
+        sample_kind = "mix" if record.kind == "mix" else "near"
 
-        log.append("TRANSFORM", **record.summary(), case=i)
+        log.append("PROPOSAL", plan_hash=child.hash, role="child")
+
+        parents = [p1.hash, p2.hash] if record.kind == "mix" else [p1.hash]
+        log.append(
+            "TRANSFORM",
+            plan_hash=child.hash,
+            method=sample_kind,
+            parent_plan_hashes=parents,
+        )
 
         # 地面真值：独立判断这条子轨迹到底违不违规
         truly_ok, true_margins, first_viol = full_check(child, scene)
 
-        if cross_check and i < 50:
+        if cross_check:
             if not cross_validate(child, scene):
                 stats["cross_check_disagreements"] += 1
 
@@ -100,6 +139,18 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
 
         # ---- 路径 c：Δ-Cert + 必要全检
         v = validate_or_inherit(child, scene, p1, parent_cert, record)
+        log.append(
+            "CERTIFICATE",
+            cert_id=v.certificate.cert_id if v.certificate else None,
+            plan_hash=child.hash,
+            verdict=v.verdict,
+            path=v.path,
+            margins=list(v.margins),
+            first_violation_segment=v.first_violation_segment,
+            full_checks_used=v.full_checks_used,
+            inherit_depth=v.inherit_depth,
+            parent_cert_id=v.parent_cert_id,
+        )
         stats["path_c_full_checks"] += v.full_checks_used
         if v.verdict == "INHERITED":
             stats["path_c_inherited"] += 1
@@ -115,18 +166,19 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
         if truly_ok and v.verdict in ("INHERITED", "FULL"):
             stats["safe_children_passed"] += 1
 
-        if len(samples) < 8:
+        if sample_counts[sample_kind] < 2:
             samples.append({
                 "case": i,
-                "kind": record.kind,
+                "kind": sample_kind,
                 "truly_ok": truly_ok,
                 "verdict": v.verdict,
                 "min_margin": round(min(true_margins), 6),
                 "first_violation_segment": first_viol,
-                "parent_knots": [list(k) for k in p1.knots],
-                "child_knots": [list(k) for k in child.knots],
+                "parent_knots": [list(k) for k in p1.points],
+                "child_knots": [list(k) for k in child.points],
                 "obstacle": scene.obstacles[0].summary(),
             })
+            sample_counts[sample_kind] += 1
 
     if stats["path_b_full_checks"]:
         stats["full_check_reduction_pct"] = round(
@@ -139,22 +191,22 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
 # ==================================================================== 第二幕
 
 FAULTS = [
-    "late_action",
-    "lease_expired",
-    "lease_replay",
-    "scene_changed",
-    "queue_rev_changed",
-    "revoke_race",
-    "cancel_unconfirmed",
+    "late",
+    "expired",
+    "replay",
+    "scene-change",
+    "queue-rev-change",
+    "revoke-race",
+    "cancel-unconfirmed",
 ]
 
 
-def act_two_faults(log: EventLog) -> dict:
+def act_two_faults(log: EventLog, fault: str = "all", seed: int = 0) -> dict:
     """许可与撤销。七类故障各跑一遍。"""
-    results = []
-
-    for fault in FAULTS:
-        results.append(_run_one_fault(fault, log))
+    if fault != "all" and fault not in FAULTS:
+        raise ValueError(f"未定义的故障: {fault}")
+    selected = FAULTS if fault == "all" else [fault]
+    results = [_run_one_fault(name, log, seed) for name in selected]
 
     summary = {
         "faults_run": len(results),
@@ -167,9 +219,9 @@ def act_two_faults(log: EventLog) -> dict:
     return summary
 
 
-def _run_one_fault(fault: str, log: EventLog) -> dict:
-    scene = make_scene(0)
-    p1, _ = make_parent_pair(0)
+def _run_one_fault(fault: str, log: EventLog, seed: int = 0) -> dict:
+    scene = make_scene(seed)
+    p1, _ = make_parent_pair(seed)
     store = CertificateStore()
     authority = Authority(store)
     clock = Clock(1_000_000_000)
@@ -177,59 +229,74 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
     root = establish_root(p1, scene)
     store.register(root.certificate)
 
-    ctx = Context(scene_id=scene.scene_id)
-    snap = Snapshot("obs-0", p1.knots[0], clock.now_ns)
+    ctx = LeaseContext(
+        robot="numeric-robot-0",
+        boot=1,
+        epoch=0,
+        scene_id=scene.scene_id,
+        queue_rev=0,
+        committed_prefix_hash=ZERO_HASH,
+    )
+    snap = _snapshot("obs-0", ctx, p1.points[0], clock.now_ns)
 
     controller = SimController(
         capacity=2,
         ack_delay_ticks=1,
         exec_delay_ticks=1,
-        drop_cancel_ack=(fault == "cancel_unconfirmed"),
+        drop_cancel_ack=(fault == "cancel-unconfirmed"),
     )
-    ex = Executor(authority, controller, log)
+    ex = Executor(authority, controller, log, monotonic_ns=lambda: clock.now_ns)
 
     detail = {"fault": fault, "blocked": False, "code": None,
               "stale_submissions_after_revoke": 0, "cursors": {}}
 
+    lease = None
     try:
         lease = authority.prepare(p1, root.certificate, ctx, snap, clock.now_ns,
                                   prefix_len=4, ttl_ns=500_000_000)
-        log.append("PREPARE", lease_id=lease.lease_id, plan_hash=p1.hash,
-                   cert_id=root.certificate.cert_id, fault=fault)
+        log.append(
+            "PREPARE",
+            lease_id=lease.lease_id,
+            plan_hash=p1.hash,
+            cert_id=root.certificate.cert_id,
+            prefix_len=lease.prefix_len,
+            deadline_mono=lease.deadline_mono,
+        )
 
         live_ctx = ctx
         commit_snap = snap
         now = clock.now_ns
 
-        if fault == "lease_expired":
+        if fault == "expired":
             now = clock.advance(2_000_000_000)  # 超过 ttl
-        elif fault == "scene_changed":
-            live_ctx = Context(scene_id="scene-9999")
-        elif fault == "queue_rev_changed":
-            live_ctx = Context(scene_id=scene.scene_id, queue_rev=7)
-        elif fault == "late_action":
-            commit_snap = Snapshot("obs-late", (0.9, 0.9, 0.9), clock.now_ns)
+        elif fault == "scene-change":
+            live_ctx = replace(ctx, scene_id="scene-9999")
+        elif fault == "queue-rev-change":
+            live_ctx = replace(ctx, queue_rev=7)
+        elif fault == "late":
+            commit_snap = _snapshot("obs-late", ctx, (0.9, 0.9, 0.9), clock.now_ns)
 
         ex.commit(lease, p1, commit_snap, live_ctx, now)
 
-        if fault == "lease_replay":
+        if fault == "replay":
             # 同一许可第二次提交必须失败
             ex2 = Executor(authority, SimController(), log)
             ex2.commit(lease, p1, snap, ctx, clock.now_ns)
 
-        # 正常推进两步
+        # 撤销时保留最后一个已接受但尚未观测的步骤
         for _ in range(3):
             clock.advance(50_000_000)
-            ex.tick(clock.now_ns)
+            ex.tick(clock.now_ns, live_ctx)
 
-        if fault in ("revoke_race", "cancel_unconfirmed"):
+        if fault in ("revoke-race", "cancel-unconfirmed"):
             before = len(controller.submitted)
             gen_before = ex.generation
             ex.revoke(reason=fault)
+            live_ctx = replace(ctx, epoch=ex.generation)
             # 撤销之后继续推进，观察有没有新增旧代次提交
             for _ in range(5):
                 clock.advance(50_000_000)
-                ex.tick(clock.now_ns)
+                ex.tick(clock.now_ns, live_ctx)
             after_stale = sum(
                 1 for s in controller.submitted[before:] if s["gen"] < gen_before + 1
             )
@@ -238,13 +305,17 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
             detail["observed_after_revoke"] = len(controller.observed)
             ex.poll_cancel()
             detail["blocked"] = after_stale == 0
-            if fault == "cancel_unconfirmed":
+            if fault == "cancel-unconfirmed":
                 try:
-                    ex.try_recover(operator_approved=True)
+                    fresh = _snapshot("obs-recover", live_ctx,
+                                      controller.observed[-1]["action"], clock.now_ns)
+                    ex.recover(fresh, human_approved=True)
                     detail["blocked"] = False
-                    detail["code"] = "RECOVERED_WITHOUT_ACK"  # 不该发生
                 except Rejection as exc:
-                    detail["blocked"] = True
+                    detail["blocked"] = (
+                        after_stale == 0 and ex.state == ExecutorState.FAULT
+                        and exc.code == ErrorCode.CANCEL_UNCONFIRMED
+                    )
                     detail["code"] = exc.code
         else:
             detail["blocked"] = False  # 该拒的没拒住
@@ -252,12 +323,18 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
     except Rejection as exc:
         detail["blocked"] = True
         detail["code"] = exc.code
-        log.append("BACKUP", reason=exc.code, fault=fault)
+        log.append(
+            "COMMIT",
+            plan_hash=p1.hash,
+            lease_id=lease.lease_id if lease else None,
+            cert_id=root.certificate.cert_id,
+            accepted=False,
+            reason_code=exc.code,
+        )
 
-    for _ in range(4):
-        controller.tick()
-    for item in controller.observed:
-        log.append("OBSERVED", action=list(item["action"]), generation=item["gen"])
+    for _ in range(6):
+        clock.advance(50_000_000)
+        ex.tick(clock.now_ns, live_ctx)
     detail["cursors"] = controller.cursors()
     return detail
 
@@ -268,5 +345,11 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
 def act_three_evidence(log: EventLog, out_dir: str) -> dict:
     from .evidence import build_bundle
 
-    log.append("OUTCOME", outcome="run_complete", event_count=log.count)
+    log.append(
+        "OUTCOME",
+        status="completed",
+        submitted=log.type_count("DISPATCH"),
+        accepted=log.type_count("CONTROLLER_ACK"),
+        observed=log.type_count("OBSERVED"),
+    )
     return build_bundle(log, out_dir)

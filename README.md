@@ -9,7 +9,8 @@
 A numeric reference implementation. It runs in five minutes on an ordinary laptop —
 no GPU, no robot arm, no model weights.
 
-> **Status**: v0.1 (candidate) · `pytest` **24 passed** · three-act demo reproducible · license: **MIT**
+> **Status**: v0.1 (candidate) · local gate **397 passed** · G0–G4 verified · license: **MIT**
+> G5 still requires a non-project member to reproduce this integrated branch and explain its limits.
 > CI: [workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 > (workflow badge images do not load for a private repository, so this is a link rather than
 > a badge; the badge goes on after the repository becomes public.)
@@ -27,7 +28,7 @@ no GPU, no robot arm, no model weights.
 | Revocation barrier | Implemented against a simulated controller | Not a motor-braking proof |
 | Evidence hash chain + signature | Implemented, Ed25519 | Proves record integrity only, not sensor honesty |
 | Real VLA integration | **Not started** | Next goal is read-only shadow mode, not closed-loop intervention |
-| Learned consequence prediction (WorldGuard) | **Interface only, no implementation** | No training, no experiments, no conclusions |
+| Learned consequence prediction (WorldGuard) | **Explanation only; public interface undefined** | No training, no experiments, no conclusions |
 | Physical robot | **Not started**, out of scope for this round | — |
 
 ### Three things we always say
@@ -58,15 +59,15 @@ The parent trajectory's verdict does not hold for the blend.
 ![Demo A: two parent trajectories that each pass verification; the blended final action passes through the obstacle](docs/demo_a.en.svg)
 
 1. In this case (#0): parent trajectories P1 and P2 each pass a full check
-   (minimum margins +67.7 mm / +75.0 mm); blended 0.5 / 0.5, the final action has a
-   minimum margin of **−68.1 mm** and enters the obstacle from segment 6 onward.
+   (minimum margins +63.3 mm / +63.3 mm); blended 0.5 / 0.5, the final action has a
+   minimum margin of **−75.0 mm** and enters the obstacle from segment 6 onward.
 2. The "verify the parent and release" path **releases all 500** genuinely violating child
    trajectories — that is the problem this project addresses.
 3. "Full check the final action every time" blocks all 500 at a cost of 1000 full checks;
    "Δ-Cert + full check when needed" also releases 0 and falsely rejects 0, using 500
    (**calls during the verification stage — not a whole-system speedup**).
 
-The figure is produced by `python tools/make_demo_a_figure.py --lang en`
+The figure is produced by `python tools/make_demo_a_figure.py --lang en --seed 1234`
 (`--lang zh` writes the Chinese figure used by [README.zh-CN.md](README.zh-CN.md)):
 the script runs Act One itself and asserts the baseline from `RESULTS.md` before drawing,
 so nothing in it is hand-entered.
@@ -82,7 +83,7 @@ python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\Activate.ps1
 python -m pip install -e ".[test]"
 
-python -m sentinel_evc demo --cases 1000 --out runs/my_first_run
+python -m sentinel_evc demo --cases 1000 --seed 1234 --out runs/my_first_run
 ```
 
 Then verify that run's evidence bundle independently:
@@ -94,11 +95,15 @@ python -m sentinel_evc verify \
   --run-id my_first_run
 ```
 
-And see what tampering does:
+Run all seven deterministic execution faults separately:
 
 ```bash
-python -m sentinel_evc tamper --out runs/my_first_run
+python -m sentinel_evc fault --fault all --seed 1234 --out runs/fault
 ```
+
+The four evidence-tampering profiles are independent black-box gate tests rather than a
+public CLI command; their exact command and first failing layers are recorded in
+[RESULTS.md](RESULTS.md).
 
 Open `runs/my_first_run/report.html` for the offline replay page (double-click; no server).
 
@@ -121,11 +126,11 @@ All three verdict paths run on **exactly the same** scene, parent and child traj
 At the same time, 500 safe, same-side perturbations all pass, with 0 false rejections.
 That negative control matters: it shows the mechanism is not "reject anything that changed".
 
-> **About that 50%:** it refers to **full-check call counts in the verification stage**,
-> not a whole-system speedup. The cost of establishing parent certificates and the cost of
-> falling back after a failed inheritance must both be added back before anyone talks about
-> end-to-end gains. This repository has no end-to-end timing data, so it makes no speedup
-> claim of any kind.
+> **About that 50%:** it refers to **child-trajectory full-check calls in the verification
+> stage**, not a whole-system speedup. This run also paid for 2,000 parent-certificate full
+> checks and 500 failed-inheritance fallbacks. The recorded core pipeline time was
+> 11.909279 seconds and the one-off external command time was 12.171510 seconds on the
+> stated Windows machine. A single local measurement is not a performance claim.
 
 ### Act Two · Revocation does not make actions that already happened disappear
 
@@ -149,13 +154,13 @@ manifest records the event count, the tip hash and per-file digests, and is sign
 Ed25519. The verifier is a separate implementation: it only reads files and recomputes,
 and imports none of the writer's modules.
 
-The `tamper` command demonstrates four kinds of tampering, each leaving a different
-failure signature:
+The independent gate tests reconstruct four tampered copies, each stopping first at a
+different verification layer:
 
 | Tampering | Failing verification layer |
 | --- | --- |
-| Flip one byte in an event | file_digest · hash_chain · tip_hash |
-| Delete the last 3 lines | file_digest · event_count · tip_hash |
+| Flip one byte in an event | hash_chain |
+| Delete the last 3 lines | event_count |
 | Swap in a different public key | signature |
 | Change the run_id | run_id |
 
@@ -167,8 +172,8 @@ fault. The bundled key is for demonstration; it is not a customer PKI.
 
 ## Results and limitations
 
-`sample_run/` is the complete output of one real run, shipped with the repository and
-independently verifiable with `verify`. Reproduction commands for every number are in
+`sample_run/` is the complete output of the current 7,049-event run, shipped with the
+repository and independently verifiable with `verify`. Reproduction commands for every number are in
 [RESULTS.md](RESULTS.md).
 
 This repository has **not** run: a real VLA, MuJoCo, ROS 2, a physical robot, a vision
@@ -230,7 +235,7 @@ python run_tests.py          # fallback runner when pytest cannot be installed
 
 ## Dependency discipline
 
-The only runtime dependency is `cryptography`. No torch, no scipy, no web framework.
+The only runtime dependencies are `numpy` and `cryptography`. No torch, no scipy, no web framework.
 `report.html` is generated from a Python string template plus inline SVG — no build step,
 no CDN, and it opens offline.
 
@@ -261,8 +266,8 @@ Two things stated plainly:
 - **MIT carries no patent grant.** The core mechanism is the subject of a separate
   patent application (application no. 202611458350.1). This licence grants no patent
   rights, express or implied.
-- The runtime dependency `cryptography` (Apache-2.0) and the test dependency `pytest`
-  (MIT) keep their own licences, unaffected by this one.
+- The runtime dependencies `numpy` (BSD-3-Clause) and `cryptography` (Apache-2.0), and
+  the test dependency `pytest` (MIT), keep their own licences, unaffected by this one.
 
 The repository is currently **private**. Whether it becomes public is a separate
 decision, independent of this licence.

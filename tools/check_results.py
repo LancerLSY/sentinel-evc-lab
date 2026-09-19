@@ -5,7 +5,7 @@
 
 它在查三件事：
 
-1. `sample_run/summary.json` 里的值 = 本文件登记的基线（与 AGENTS.md 第 2 节一致）；
+1. `sample_run/summary.json` 里的值 = 当前批次 04 的冻结基线；
 2. `RESULTS.md` 的表格里，每一行都真的写了那个值；
 3. 两边的 `run_id` 对得上。
 
@@ -26,22 +26,22 @@ from pathlib import Path
 
 # (RESULTS.md 里的指标名, summary.json 里的取值函数, 期望渲染出来的样子)
 ROWS = [
-    ("构造案例总数", lambda s: s["geometry"]["cases"], "1000"),
-    ("实际违规的子轨迹", lambda s: s["geometry"]["path_a_total_violating"], "500"),
-    ("路径 a 错误放行", lambda s: s["geometry"]["path_a_wrong_release"], "500"),
-    ("路径 b 错误放行", lambda s: s["geometry"]["path_b_wrong_release"], "0"),
-    ("路径 c 错误放行", lambda s: s["geometry"]["path_c_wrong_release"], "0"),
-    ("路径 b 完整检查调用", lambda s: s["geometry"]["path_b_full_checks"], "1000"),
-    ("路径 c 完整检查调用", lambda s: s["geometry"]["path_c_full_checks"], "500"),
-    ("直接继承次数", lambda s: s["geometry"]["path_c_inherited"], "500"),
-    ("安全子轨迹通过", lambda s: s["geometry"]["safe_children_passed"], "500 / 500"),
+    ("构造案例", lambda s: s["geometry"]["cases"], "1000"),
+    ("实际违规子轨迹", lambda s: s["geometry"]["path_a_total_violating"], "500"),
+    ("路径 a / b / c 错误放行", lambda s: " / ".join(str(s["geometry"][key]) for key in (
+        "path_a_wrong_release", "path_b_wrong_release", "path_c_wrong_release")), "500 / 0 / 0"),
+    ("安全子轨迹通过", lambda s: f'{s["geometry"]["safe_children_passed"]} / {s["geometry"]["safe_children_total"]}', "500 / 500"),
     ("误拒", lambda s: s["geometry"]["path_c_false_reject"], "0"),
-    ("独立实现交叉验证分歧", lambda s: s["geometry"]["cross_check_disagreements"], "0"),
-    ("父证书建立的完整检查", lambda s: s["geometry"]["root_full_checks"], "1000"),
-    ("注入故障类型数", lambda s: s["faults"]["faults_run"], "7"),
-    ("阻断的故障数", lambda s: s["faults"]["blocked"], "7"),
+    ("独立对照分歧", lambda s: s["geometry"]["cross_check_disagreements"], "0"),
+    ("两条父轨迹建立证书", lambda s: s["geometry"]["root_full_checks"], "2000"),
+    ("路径 b 最终全检", lambda s: s["geometry"]["path_b_full_checks"], "1000"),
+    ("路径 c 继承失败回退", lambda s: s["geometry"]["path_c_full_checks"], "500"),
+    ("路径 c 直接继承", lambda s: s["geometry"]["path_c_inherited"], "500"),
+    ("子轨迹完整检查调用减少", lambda s: f'{s["geometry"]["full_check_reduction_pct"]:.1f}%', "50.0%"),
+    ("注入故障类型", lambda s: s["faults"]["faults_run"], "7"),
+    ("正确阻断", lambda s: s["faults"]["blocked"], "7"),
     ("撤销后旧代次新增提交", lambda s: s["faults"]["stale_gen_submissions_after_revoke"], "0"),
-    ("事件条数", lambda s: s["bundle"]["event_count"], "2031"),
+    ("事件条数", lambda s: s["bundle"]["event_count"], "7049"),
 ]
 
 
@@ -55,6 +55,9 @@ def _row_value(md: str, label: str):
 
 
 def main(argv=None) -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description="核对 RESULTS.md 与 sample_run/")
     ap.add_argument("--sample-run", default="sample_run")
     ap.add_argument("--results", default="RESULTS.md")
@@ -85,7 +88,7 @@ def main(argv=None) -> int:
         except (KeyError, TypeError) as exc:
             problems.append(f"{label}: summary.json 里取不到值（{exc}）")
             continue
-        rendered = f"{actual} / {actual}" if expected == "500 / 500" else str(actual)
+        rendered = str(actual)
         cell = _row_value(md, label)
         mark = "OK"
         if rendered != expected:

@@ -7,7 +7,8 @@
 
 数值参考实现。在普通笔记本上五分钟跑完，不需要 GPU、机械臂或任何模型权重。
 
-> **状态**：v0.1（候选）· `pytest` **24 项通过** · 三幕 demo 可复现 · 许可：**MIT**
+> **状态**：v0.1（候选）· 本地门禁 **397 项通过** · G0–G4 已验证 · 许可：**MIT**
+> G5 仍需非项目成员对当前集成分支完成复现并能说明边界。
 > CI：[workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 > （私有仓库里 workflow 徽章图片拉不出来，所以这里放链接而不是 badge；转为公开后再挂徽章。）
 
@@ -24,7 +25,7 @@
 | 撤销屏障 | 已实现，模拟控制器 | 不是电机制动证明 |
 | 证据哈希链与签名 | 已实现，Ed25519 | 只证明记录完整性，不证明传感器诚实 |
 | 真实 VLA 接入 | **未开始** | 下一步目标是只读影子模式，不是闭环干预 |
-| 学习式后果预测（WorldGuard） | **仅保留接口，无实现** | 无训练、无实验、无结论 |
+| 学习式后果预测（WorldGuard） | **仅保留说明，公开接口未定义** | 无训练、无实验、无结论 |
 | 真机 | **未开始**，不在本轮范围 | —— |
 
 ### 三句必须常说的话
@@ -50,14 +51,14 @@
 ![第一幕对照图：两条各自验证通过的父轨迹，混合之后的最终动作穿过障碍](docs/demo_a.svg)
 
 1. 图中这一组（案例 #0）：两条父轨迹 P1、P2 各自完整检查都通过（最小余量
-   +67.7 mm / +75.0 mm）；按 0.5 / 0.5 混合后，最终动作的最小余量是 **−68.1 mm**，
+   +63.3 mm / +63.3 mm）；按 0.5 / 0.5 混合后，最终动作的最小余量是 **−75.0 mm**，
    第 6 段起穿过障碍。
 2. 「只验父轨迹就放行」这条路径，把 500 条真正违规的子轨迹**全部放行** ——
    这就是本项目要解决的问题。
 3. 「最终动作每次全检」能拦住全部 500 条，代价是 1000 次完整检查；「Δ-Cert + 必要全检」
    同样 0 条放行、0 条误拒，用掉 500 次（**验证阶段的调用次数，不是整机提速**）。
 
-图由 `python tools/make_demo_a_figure.py --lang zh` 生成（`--lang en` 出英文版，
+图由 `python tools/make_demo_a_figure.py --lang zh --seed 1234` 生成（`--lang en` 出英文版，
 给 [README.md](README.md) 用）：脚本自己跑一遍第一幕，先跟 `RESULTS.md` 的基线断言，
 不一致就拒绝出图 —— 所以图里没有手填的数字。
 
@@ -72,7 +73,7 @@ python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\Activate.ps1
 python -m pip install -e ".[test]"
 
-python -m sentinel_evc demo --cases 1000 --out runs/my_first_run
+python -m sentinel_evc demo --cases 1000 --seed 1234 --out runs/my_first_run
 ```
 
 然后独立校验这次运行的证据包：
@@ -84,11 +85,14 @@ python -m sentinel_evc verify \
   --run-id my_first_run
 ```
 
-再看看篡改之后会发生什么：
+单独运行全部七类确定性执行故障：
 
 ```bash
-python -m sentinel_evc tamper --out runs/my_first_run
+python -m sentinel_evc fault --fault all --seed 1234 --out runs/fault
 ```
+
+四种证据篡改由独立黑盒门禁测试执行，不再作为公开 CLI 命令；具体命令和首个失败层
+记录在 [RESULTS.md](RESULTS.md)。
 
 打开 `runs/my_first_run/report.html` 查看离线回放页（双击即可，无需服务器）。
 
@@ -111,9 +115,10 @@ python -m sentinel_evc tamper --out runs/my_first_run
 同时，500 条同侧微调的安全子轨迹全部通过，误拒 0 条 —— 这条负对照是必要的，
 它说明这套机制不是「一变就拒」。
 
-> **关于那个 50%：** 它指的是**验证阶段的完整检查调用次数**，不是整机提速。
-> 父证书的建立成本、继承失败的回退成本都必须一并计入才能谈端到端收益。
-> 本仓库目前没有端到端耗时数据，所以不作任何提速主张。
+> **关于那个 50%：** 它只比较验证阶段的**子轨迹完整检查调用次数**，不是整机提速。
+> 本轮还支付了 2000 次父证书完整检查和 500 次继承失败回退。记录的核心流水线时间为
+> 11.909279 秒，单次外部命令计时为 12.171510 秒，均只属于所列 Windows 环境，
+> 不构成性能主张。
 
 ### 第二幕 · 撤销不让已发生的动作消失
 
@@ -133,12 +138,12 @@ python -m sentinel_evc tamper --out runs/my_first_run
 事件加序号与前项摘要构成哈希链，清单记录事件数、末尾摘要和文件摘要，
 用 Ed25519 签名。校验器是独立实现，只读文件、自己重算，不 import 写入方的代码。
 
-`tamper` 命令演示四种篡改，各自留下不同的失败特征：
+独立门禁测试重建四份篡改副本，各自在不同的校验层首次失败：
 
 | 篡改方式 | 失败的校验层 |
 | --- | --- |
-| 改事件里 1 个字节 | file_digest · hash_chain · tip_hash |
-| 删掉最后 3 行 | file_digest · event_count · tip_hash |
+| 改事件里 1 个字节 | hash_chain |
+| 删掉最后 3 行 | event_count |
 | 换一把公钥 | signature |
 | 改 run_id | run_id |
 
@@ -149,7 +154,7 @@ python -m sentinel_evc tamper --out runs/my_first_run
 
 ## 结果与限制
 
-`sample_run/` 是一次真实运行的完整输出，随包提供，可用 `verify` 独立校验。
+`sample_run/` 是当前 7049 条事件运行的完整输出，随包提供，可用 `verify` 独立校验。
 每个数字的复现命令见 [RESULTS.md](RESULTS.md)。
 
 本仓库**没有**运行过：真实 VLA、MuJoCo、ROS 2、物理机器人、视觉模型、mTLS。
@@ -206,7 +211,7 @@ python run_tests.py          # 装不上 pytest 时的备用运行器
 
 ## 依赖纪律
 
-运行时依赖只有 `cryptography` 一个。不引入 torch、不引入 scipy、不引入 web 框架。
+运行时依赖只有 `numpy` 和 `cryptography`。不引入 torch、不引入 scipy、不引入 web 框架。
 `report.html` 由 Python 字符串模板 + 内联 SVG 生成，没有构建步骤、没有 CDN，
 断网也能打开。
 
@@ -233,7 +238,7 @@ python run_tests.py          # 装不上 pytest 时的备用运行器
 
 - **MIT 不含专利授权条款。** 本项目核心机制另有专利申请（申请号 202611458350.1），
   本许可证**不构成任何专利许可或默示许可**。
-- 运行时依赖 `cryptography`（Apache-2.0）与测试依赖 `pytest`（MIT）各自保留其许可，
-  不受本项目许可影响。
+- 运行时依赖 `numpy`（BSD-3-Clause）、`cryptography`（Apache-2.0）与测试依赖
+  `pytest`（MIT）各自保留其许可，不受本项目许可影响。
 
 仓库当前仍为 **private**。是否转为公开是另一件事，与许可证无关。

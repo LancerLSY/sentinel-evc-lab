@@ -1,110 +1,120 @@
 # 结果与复现
 
-每个数字后面直接跟产生它的命令和输出文件路径。任何人质疑任何一个数字，
-回应是「你自己跑一遍」，而不是一段解释。
-
-本页全部数据来自 `sample_run/`，run_id 为 `sample-001`。
+本页只记录可定位到实际运行、代码提交和输出文件的结果。当前样例由提交
+`d6cf66e992b34b395158f2aabd32b993aef07b6b` 生成，run_id 为 `sample_run`。
 
 ## 复现命令
 
 ```bash
-python -m sentinel_evc demo --cases 1000 --out runs/repro --run-id repro
-```
-
-输出目录必须为空。随包的 `sample_run/` 请勿覆盖。
-
-本页是手写的，`sample_run/` 是机器生成的。两者是否还对得上，由脚本核对，CI 里也会跑：
-
-```bash
-python tools/check_results.py
-```
-
-## 第一幕 · 几何判定
-
-| 指标 | 值 | 来源 |
-| --- | --- | --- |
-| 构造案例总数 | 1000 | `sample_run/summary.json` → `geometry.cases` |
-| 实际违规的子轨迹 | 500 | `geometry.path_a_total_violating` |
-| 路径 a 错误放行 | 500 | `geometry.path_a_wrong_release` |
-| 路径 b 错误放行 | 0 | `geometry.path_b_wrong_release` |
-| 路径 c 错误放行 | 0 | `geometry.path_c_wrong_release` |
-| 路径 b 完整检查调用 | 1000 | `geometry.path_b_full_checks` |
-| 路径 c 完整检查调用 | 500 | `geometry.path_c_full_checks` |
-| 直接继承次数 | 500 | `geometry.path_c_inherited` |
-| 安全子轨迹通过 | 500 / 500 | `geometry.safe_children_passed` |
-| 误拒 | 0 | `geometry.path_c_false_reject` |
-| 独立实现交叉验证分歧 | 0 | `geometry.cross_check_disagreements` |
-| 父证书建立的完整检查 | 1000 | `geometry.root_full_checks` |
-
-**完整检查调用减少 50.0%**，即 500 次
-对 1000 次。
-
-图中那一组（案例 #0）的数字，同样来自真实运行：
-
-| 指标 | 值 | 来源 |
-| --- | --- | --- |
-| P1 最小余量 | +67.7 mm | `docs/demo_a.svg` · `python tools/make_demo_a_figure.py --out docs/demo_a.svg` |
-| P2 最小余量 | +75.0 mm | 同上 |
-| 0.5·P1 + 0.5·P2 最小余量 | −68.1 mm（第 6 段起穿障） | 同上 |
-
-该脚本自己跑一遍第一幕，先与本节基线断言，不一致就报错退出 —— 配图里没有手填数字。
-
-这个数字的适用范围：
-- 它是**验证阶段的函数调用次数**，不是整机提速，不是端到端时延改善。
-- 父证书建立成本（1000 次完整检查）不在分子里，谈端到端收益时必须加回去。
-- 命中率取决于变换幅度分布。本次构造集是一半可继承、一半不可继承，属于人为设定的比例。
-- 本仓库**没有**端到端耗时测量，因此不作任何提速主张。
-
-## 第二幕 · 故障注入
-
-| 指标 | 值 |
-| --- | --- |
-| 注入故障类型数 | 7 |
-| 阻断的故障数 | 7 |
-| **撤销后旧代次新增提交** | **0** |
-
-逐类结果见 `sample_run/summary.json` → `faults.details`，或 `report.html`。
-
-撤销/取消 ACK 均为数值模拟，**不是实机制动证明**。
-
-## 第三幕 · 证据
-
-| 指标 | 值 |
-| --- | --- |
-| 事件条数 | 2031 |
-| 末尾摘要 | `sha256:872d9a5779ae246e6ca9aba5a2bf83c06…` |
-| 独立校验 | PASS（7 层全过） |
-
-```bash
+python -m sentinel_evc demo --cases 1000 --seed 1234 --out runs/sample_run
 python -m sentinel_evc verify \
-  --bundle sample_run/bundle \
-  --public-key sample_run/anchors/demo.public \
-  --run-id sample-001
-
-python -m sentinel_evc tamper --out sample_run --run-id sample-001
+  --bundle runs/sample_run/bundle \
+  --public-key runs/sample_run/anchors/demo.public \
+  --run-id sample_run
 ```
 
-## 自动化测试
+输出目录必须尚不存在。仓库中的 `sample_run/` 是上述运行通过后保存的同一份产物，
+包含 `scenario.json`、`summary.json`、`report.html`、bundle 三文件和 bundle 外演示公钥。
+
+## G0 · 来源
+
+| 项 | 记录 |
+| --- | --- |
+| 生成代码 | `d6cf66e992b34b395158f2aabd32b993aef07b6b` |
+| 输入 profile | `sample_run/scenario.json` |
+| 汇总 | `sample_run/summary.json` |
+| 事件清单 | `sample_run/bundle/manifest.json` |
+| 平台 | Windows 11 `10.0.26200`，Python 3.13.5 |
+| 依赖 | numpy 2.3.3，cryptography 48.0.0；测试 pytest 8.4.2 |
+| 核心流水线墙钟时间 | 11.909279 秒，见 `geometry.end_to_end_wall_seconds`；不含最终 summary/report 写入 |
+| 完整命令外部墙钟时间 | 12.171510 秒，PowerShell `Measure-Command` 单次本机记录 |
+
+墙钟时间只有本机单次测量，不是性能基准。外部计时未进入签名 bundle；这里保留命令、
+代码提交和读数，避免把核心流水线字段误写成整条命令耗时。
+
+## G1 · 几何
+
+| 指标 | 值 | 来源 |
+| --- | --- | --- |
+| 构造案例 | 1000 | `geometry.cases` |
+| 实际违规子轨迹 | 500 | `geometry.path_a_total_violating` |
+| 路径 a / b / c 错误放行 | 500 / 0 / 0 | 对应 `path_*_wrong_release` |
+| 安全子轨迹通过 | 500 / 500 | `safe_children_passed` / `safe_children_total` |
+| 误拒 | 0 | `path_c_false_reject` |
+| 独立对照分歧 | 0 | `cross_check_disagreements` |
+
+独立对照对每段取 1001 个采样点，不复用生产侧解析几何公式。固定 1000 案例的
+独立门禁命令为：
 
 ```bash
-python -m pytest -q      # 或 python run_tests.py
+python -m pytest -q tests/test_gate_geometry.py
 ```
 
-本轮：**24 项通过**。
+README 的双语第一幕配图使用同一默认种子生成：
 
-这个数字只属于本仓库。技术文档和历史参考包里的 57 / 50 / 12 / 65 / 51 项来自
-不同代码库、不同时间，**任何形式的相加或并列都不成立**。
+```bash
+python tools/make_demo_a_figure.py --lang zh --cases 1000 --seed 1234
+python tools/make_demo_a_figure.py --lang en --cases 1000 --seed 1234
+```
 
-## 运行环境
+案例 #0 中，P1/P2 最小余量均为 +63.3 mm，0.5/0.5 混合轨迹最小余量为
+−75.0 mm，并从第 6 段进入禁区。数字由脚本实际计算后写入 SVG。
 
-| 项 | 值 |
-| --- | --- |
-| Python | 3.12.3 |
-| 平台 | Linux x86_64 |
+## G2 · Δ-Cert 与成本
 
-其它平台未测试。依赖范围不是兼容性证明。
+| 指标 | 值 | 来源 |
+| --- | --- | --- |
+| 两条父轨迹建立证书 | 2000 次完整检查 | `geometry.root_full_checks` |
+| 路径 b 最终全检 | 1000 次 | `geometry.path_b_full_checks` |
+| 路径 c 继承失败回退 | 500 次完整检查 | `geometry.path_c_full_checks` |
+| 路径 c 直接继承 | 500 次 | `geometry.path_c_inherited` |
+| 子轨迹完整检查调用减少 | 50.0% | `geometry.full_check_reduction_pct` |
 
-## 本仓库没有做过的事
+50.0% 只比较路径 c 与路径 b 的**子轨迹完整检查调用次数**。它不包含 2000 次父证书
+建立成本，也不等于整机提速。累计余量 `30−8−5=17mm`、六类依赖变化回退、深度 4
+回退和继承失败后安全轨迹仍可由完整检查通过，均由 `tests/test_geometry_delta.py` 锁定。
 
-真实 VLA 推理、MuJoCo、ROS 2、物理机器人、视觉模型训练、mTLS、多用户权限、
-工业级持久化、跨进程隔离、真机停止与后备验证。
+## G3 · 执行与故障
+
+| 指标 | 值 | 来源 |
+| --- | --- | --- |
+| 注入故障类型 | 7 | `faults.faults_run` |
+| 正确阻断 | 7 | `faults.blocked` |
+| 撤销后旧代次新增提交 | 0 | `faults.stale_gen_submissions_after_revoke` |
+| 撤销竞态中撤销前已提交、随后 observed | 3 | `faults.details[fault=revoke-race]` |
+| cancel 未确认 | 阻断，`CANCEL_UNCONFIRMED` | `faults.details[fault=cancel-unconfirmed]` |
+
+这些游标来自确定性数值控制器。它们不是物理停止或实机制动证明。
+
+## G4 · 证据
+
+| 指标 | 值 | 来源 |
+| --- | --- | --- |
+| 事件条数 | 7049 | `sample_run/bundle/manifest.json` |
+| 末尾摘要 | `sha256:40e6c3fba173750057f82c077c63e4fa9c3e684e61645ae7b238149ff3e23f19` | 同上 |
+| `events.jsonl` 摘要 | `sha256:2f8d0b5a9a393bc0d8bec5631ef9fe20618c0a50ce0d5a2af955a522eaac0e14` | 同上 |
+| 独立 verify | PASS，7049 条事件、7 层全过 | 上方 verify 命令 |
+
+四类篡改门禁由下列测试实际重建副本并修改，不依赖生产写入方的协议实现：
+
+```bash
+python -m pytest -q tests/test_gate_evidence_cli.py \
+  -k "verify_reports_distinct_first_failure or verify_accepts"
+```
+
+首个失败层分别为：中间事件 `hash_chain`、删尾三行 `event_count`、错误公钥
+`signature`、错误 run_id `run_id`。
+
+## 回归与发布边界
+
+```bash
+python -m pytest -q
+python -m compileall -q src tests run_tests.py
+```
+
+本轮全量结果为 **397 passed**。G0–G4 已在本地通过；G5 尚未完成。子 agent、CI、
+同一作者换环境或离线安装 smoke 都不能代替真实非项目成员按 README 复现并说明边界，
+因此版本保持 candidate。
+
+本仓库没有运行真实 VLA、MuJoCo、ROS 2、物理机器人、视觉模型训练、mTLS、
+多用户权限、工业级持久化或跨进程隔离。

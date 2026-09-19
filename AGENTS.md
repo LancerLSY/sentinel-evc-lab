@@ -3,8 +3,35 @@
 本文件是给 AI 编码助手（dsh / Claude Code / Codex / Cursor 等）的**工作指令**。
 它位于 `.git` 所在层级（仓库根），会被自动加载。**动手改任何代码前，先把本文件读完。**
 
-> 私密上下文（本机绝对路径、凭据、内部约束、材料位置）在 `AGENTS.local.md`。
-> 该文件不进版本库；如果它不存在，说明当前是干净检出，请向项目维护者索取。
+> 本机路径、当前分支和动态进度在 `SESSION_HANDOFF.md`。该文件不进版本库；
+> 它不存在时，从实际仓库识别进度并重新建立记录。
+
+## 本轮分批实施规则
+
+以下规则由维护者在 2026-09-19 确认；与本文后面的历史环境或实现状态冲突时，
+以本节和 `docs/spec-open-questions.md` 为准。
+
+- 原方案决定业务语义；分批实施计划决定分支、阶段和验收；
+  `karpathy-guidelines` 只指导工程风格，不覆盖项目合同。
+- 当前工作按 `chore/00-repo-skeleton`、`feat/01-contracts-schemas`、
+  `feat/02-core-evidence`、`feat/03-executor-presentation`、
+  `test/04-integration-gates`、`release/05-v0.1-candidate` 顺序进行。
+  每批测试、审查和提交完成后停止，未经维护者确认不合并、不推送、不进入下一批。
+- 每个有独立意义的改动都要先运行相关测试、检查 diff，再单独提交。提交信息使用
+  中文意图行，并用 `Constraint`、`Tested`、`Not-tested`、`Confidence`、
+  `Scope-risk` 等 trailer 记录依据和验证范围。
+- 只提交本次相关内容；不夹带已有工作区修改、私钥、本机路径或动态进度；不改写历史。
+- 本机路径和动态进度只写 `SESSION_HANDOFF.md`。该文件仅本地保存，并同时由
+  `.gitignore` 与 `.git/info/exclude` 排除。
+- Python 基线为 3.13；运行依赖只允许 `numpy`、`cryptography`，测试依赖只允许
+  `pytest`。不增加其他运行或测试依赖。
+- 领域对象使用 frozen dataclass；保留规范 JSON、HMAC 与 Ed25519 密钥分离、
+  Executor 单写者、单调时钟、有界事件队列和 LOG_GAP、独立 verify、revoke 锁内
+  三操作等约束。精确合同和维护者补充见 `docs/spec-open-questions.md`。
+- Q 项不得自行补全。未决规则不阻塞无关工作，但不得据此新增公开字段、错误码、
+  阈值、事件或协议行为。
+- 实现遵循最小改动：不提前抽象、不预留钩子、不做无关重构，不用 skip、xfail
+  或 mock 核心逻辑冒充通过。
 
 ---
 
@@ -27,15 +54,15 @@
 
 | 项 | 值 |
 | --- | --- |
-| Python | **3.14.6**，虚拟环境已建在 `.venv/` |
-| 运行时依赖 | **只有 `cryptography`** |
+| Python | **3.13** |
+| 运行时依赖 | **只有 `numpy`、`cryptography`** |
 | 测试依赖 | `pytest` |
-| git | PortableGit 2.55，已装、已配 PATH、**凭据已存好，`git push` 直接可用** |
-| 远端 | `origin` → 私有仓库（地址见 `AGENTS.local.md`） |
+| git | 使用当前环境可用的 Git |
+| 远端 | 以 `git remote -v` 的实际结果为准 |
 
 ### 依赖纪律（硬约束）
 
-**运行时依赖只允许 `cryptography` 一个。** 不引入 `torch`、不引入 `scipy`、
+**运行时依赖只允许 `numpy` 和 `cryptography`。** 不引入 `torch`、不引入 `scipy`、
 不引入任何 web 框架。
 
 理由很实际：**陌生人 `pip install` 一次成功的概率，直接决定这个仓库有没有人用。**
@@ -49,19 +76,15 @@
 .\.venv\Scripts\Activate.ps1
 python -m pip install -e ".[test]"
 python -m pytest -q
-python -m sentinel_evc demo   --cases 1000 --out runs/my_run
-python -m sentinel_evc verify --bundle runs/my_run/bundle --public-key runs/my_run/anchors/demo.public --run-id my_run
-python -m sentinel_evc tamper --out runs/my_run --run-id my_run
 ```
 
 ### 命令（Git Bash —— README 原文可原样照抄）
 
-`README.md` 里写的是 `source .venv/bin/activate` 这类 bash 写法。
-本机装了 Git Bash，**这些命令一字不改就能跑**：
+在 Git Bash 中使用对应虚拟环境入口：
 
 ```bash
 source .venv/Scripts/activate
-python -m sentinel_evc demo --cases 1000 --out runs/my_run
+python -m pytest -q
 ```
 
 ### 运行产物
@@ -71,15 +94,18 @@ python -m sentinel_evc demo --cases 1000 --out runs/my_run
 
 ---
 
-## 2. 回归基线 —— 改代码后必须复现这些数字
+## 2. 远端参考实现的历史基线
 
-任何偏离都是**回归**，先查清楚原因再提交，不要把数字改小或改大来「对齐」。
+下列数字来自同步前已有提交及随包样例，不是批次 00 的新验收结论。后续只有按本轮
+冻结合同重新运行相应门禁后，才能把结果写成“本次实测”。
+
+这些数字只能作为回归调查线索，不能覆盖本轮冻结合同或直接写进新验收结论。
 
 ### 单元测试
 
 ```
 python -m pytest -q      →  24 passed
-python run_tests.py      →  24 passed, 0 failed      （备用运行器）
+python run_tests.py      →  24 passed, 0 failed      （当时的备用运行器）
 ```
 
 ### `demo --cases 1000` 第一幕 · 几何判定
@@ -167,10 +193,11 @@ python run_tests.py      →  24 passed, 0 failed      （备用运行器）
 **必须整段算，不能只查端点。** 两个端点都在障碍外、中间穿过球心，是最典型的漏检，
 也是这类系统最常见的实现 bug。`tests/` 里有专门的单元测试锁死它，不许绕过。
 
-### schema 已冻结
+### schema 已在批次 01 冻结
 
-`schemas/` 下三份（`event` / `scenario` / `verdict`）**已冻结**。
-**改 schema 需要两人同意。** 事件类型固定 13 种，首版就全部定义，**不要后加**：
+`schemas/` 下三份（`event` / `scenario` / `verdict`）已按
+`docs/spec-open-questions.md` 在批次 01 统一复核和冻结。后续不得由单个模块自行加字段。
+事件类型固定 13 种，首版就全部定义，**不要后加**：
 
 `PROPOSAL` `TRANSFORM` `CERTIFICATE` `PREPARE` `COMMIT` `DISPATCH` `CONTROLLER_ACK`
 `OBSERVED` `REVOKE` `CANCEL_ACK` `BACKUP` `OUTCOME` `LOG_GAP`
@@ -230,7 +257,7 @@ src/sentinel_evc/
 ├── pipeline.py        # 端到端编排
 ├── report.py          # 生成静态 report.html（内联 SVG）
 ├── scenarios.py       # 场景与轨迹构造、批量实验
-└── cli.py             # demo / verify / tamper
+└── cli.py             # demo / geometry / fault / verify
 
 tools/
 ├── make_demo_a_figure.py  # 第一幕对照图：跑一遍第一幕 → 与基线断言 → 内联 SVG，
@@ -261,7 +288,8 @@ tools/
 **不做**：训练任何模型、接 openpi / LIBERO、装 MuJoCo、碰 ROS2、做 WorldGuard、
 做前后端分离管理台、接真机、做闭环干预。
 
-`worldguard/` 目录**只放接口定义和 `README_WHY_EMPTY.md`**。
+`worldguard/` 目录当前**只放 `README_WHY_EMPTY.md`**。原方案没有公开接口签名，
+不要编造接口。
 空目录配诚实说明，比塞一个没验证过的模型强。
 
 `README.md` 顶部那张**能力状态表是项目最重要的诚信装置**。
