@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - run: python -m pip install -e ".[test]"
+      - run: python -m pip install "setuptools>=68" -e ".[test]"
       - run: python -m pytest -q
       - name: Run the three-act smoke demo
         shell: pwsh
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - run: python -m pip install -e ".[test]"
+      - run: python -m pip install "setuptools>=68" -e ".[test]"
       - name: Generate the 1000-case bilingual figure
         shell: pwsh
         run: |
