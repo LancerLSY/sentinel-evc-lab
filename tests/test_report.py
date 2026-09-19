@@ -50,7 +50,8 @@ def test_missing_metrics_are_not_zero_or_performance_claims():
     assert '50%' not in result
     assert '0 / 0 / 0' not in result
     assert '未阻断' in result
-    assert '端到端墙钟时间（秒）</td><td class=\'num\'>未记录' in result
+    assert '核心流水线墙钟时间（秒）</td><td class=\'num\'>未记录' in result
+    assert '不含最终 summary/report 写入' in result
     assert '继承失败回退完整检查次数</td><td class=\'num\'>未记录' in result
 
 
