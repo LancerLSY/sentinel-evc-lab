@@ -6,11 +6,11 @@ build-backend = "setuptools.build_meta"
 name = "sentinel-evc-lab"
 version = "0.1.0.dev0"
 description = "可核验的动作执行门禁、增量重验与证据链 —— 数值参考实现"
-requires-python = ">=3.10"
-dependencies = ["cryptography>=42"]
+requires-python = ">=3.13"
+dependencies = ["numpy", "cryptography"]
 
 [project.optional-dependencies]
-test = ["pytest>=8"]
+test = ["pytest"]
 
 [project.scripts]
 sentinel-evc = "sentinel_evc.cli:main"
