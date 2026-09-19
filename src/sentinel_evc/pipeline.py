@@ -170,13 +170,13 @@ def act_one_geometry(cases: int, log: EventLog, cross_check: bool = True) -> dic
 # ==================================================================== 第二幕
 
 FAULTS = [
-    "late_action",
-    "lease_expired",
-    "lease_replay",
-    "scene_changed",
-    "queue_rev_changed",
-    "revoke_race",
-    "cancel_unconfirmed",
+    "late",
+    "expired",
+    "replay",
+    "scene-change",
+    "queue-rev-change",
+    "revoke-race",
+    "cancel-unconfirmed",
 ]
 
 
@@ -222,9 +222,9 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
         capacity=2,
         ack_delay_ticks=1,
         exec_delay_ticks=1,
-        drop_cancel_ack=(fault == "cancel_unconfirmed"),
+        drop_cancel_ack=(fault == "cancel-unconfirmed"),
     )
-    ex = Executor(authority, controller, log)
+    ex = Executor(authority, controller, log, monotonic_ns=lambda: clock.now_ns)
 
     detail = {"fault": fault, "blocked": False, "code": None,
               "stale_submissions_after_revoke": 0, "cursors": {}}
@@ -246,35 +246,36 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
         commit_snap = snap
         now = clock.now_ns
 
-        if fault == "lease_expired":
+        if fault == "expired":
             now = clock.advance(2_000_000_000)  # 超过 ttl
-        elif fault == "scene_changed":
+        elif fault == "scene-change":
             live_ctx = replace(ctx, scene_id="scene-9999")
-        elif fault == "queue_rev_changed":
+        elif fault == "queue-rev-change":
             live_ctx = replace(ctx, queue_rev=7)
-        elif fault == "late_action":
+        elif fault == "late":
             commit_snap = _snapshot("obs-late", ctx, (0.9, 0.9, 0.9), clock.now_ns)
 
         ex.commit(lease, p1, commit_snap, live_ctx, now)
 
-        if fault == "lease_replay":
+        if fault == "replay":
             # 同一许可第二次提交必须失败
             ex2 = Executor(authority, SimController(), log)
             ex2.commit(lease, p1, snap, ctx, clock.now_ns)
 
-        # 正常推进两步
+        # 撤销时保留最后一个已接受但尚未观测的步骤
         for _ in range(3):
             clock.advance(50_000_000)
-            ex.tick(clock.now_ns)
+            ex.tick(clock.now_ns, live_ctx)
 
-        if fault in ("revoke_race", "cancel_unconfirmed"):
+        if fault in ("revoke-race", "cancel-unconfirmed"):
             before = len(controller.submitted)
             gen_before = ex.generation
             ex.revoke(reason=fault)
+            live_ctx = replace(ctx, epoch=ex.generation)
             # 撤销之后继续推进，观察有没有新增旧代次提交
             for _ in range(5):
                 clock.advance(50_000_000)
-                ex.tick(clock.now_ns)
+                ex.tick(clock.now_ns, live_ctx)
             after_stale = sum(
                 1 for s in controller.submitted[before:] if s["gen"] < gen_before + 1
             )
@@ -283,13 +284,17 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
             detail["observed_after_revoke"] = len(controller.observed)
             ex.poll_cancel()
             detail["blocked"] = after_stale == 0
-            if fault == "cancel_unconfirmed":
+            if fault == "cancel-unconfirmed":
                 try:
-                    ex.try_recover(operator_approved=True)
+                    fresh = _snapshot("obs-recover", live_ctx,
+                                      controller.observed[-1]["action"], clock.now_ns)
+                    ex.recover(fresh, human_approved=True)
                     detail["blocked"] = False
-                    detail["code"] = "RECOVERED_WITHOUT_ACK"  # 不该发生
                 except Rejection as exc:
-                    detail["blocked"] = True
+                    detail["blocked"] = (
+                        after_stale == 0 and ex.state == ExecutorState.FAULT
+                        and exc.code == ErrorCode.CANCEL_UNCONFIRMED
+                    )
                     detail["code"] = exc.code
         else:
             detail["blocked"] = False  # 该拒的没拒住
@@ -306,18 +311,9 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
             reason_code=exc.code,
         )
 
-    for _ in range(4):
-        controller.tick()
-    for step_index, item in enumerate(controller.observed):
-        log.append(
-            "OBSERVED",
-            plan_hash=p1.hash,
-            lease_id=lease.lease_id if lease else None,
-            cert_id=root.certificate.cert_id,
-            step_index=step_index,
-            position=list(item["action"]),
-            observed=True,
-        )
+    for _ in range(6):
+        clock.advance(50_000_000)
+        ex.tick(clock.now_ns, live_ctx)
     detail["cursors"] = controller.cursors()
     return detail
 
