@@ -252,6 +252,9 @@ PRs must include: tests, input/output samples, known limitations.
 Evidence that **one of this repository's conclusions does not hold** is especially
 welcome. Negative results are kept in the repository, not deleted.
 
+Current tasks and progress (including the five v0.2 shadow-mode steps) are in
+[docs/任务板.md](docs/任务板.md) (Chinese).
+
 ---
 
 ## License
