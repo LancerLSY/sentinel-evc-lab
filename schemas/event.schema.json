@@ -1,19 +1,475 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Sentinel EVC 事件",
-  "description": "A 和 B 的解耦点。第 1 周末冻结，之后改动要两位主力同意。",
+  "description": "批次 01 冻结合同；payload 按事件类型限定。",
   "type": "object",
-  "required": ["seq", "run_id", "type", "payload", "prev_hash"],
+  "required": [
+    "seq",
+    "ts_mono_ns",
+    "ts_utc",
+    "run_id",
+    "type",
+    "plan_hash",
+    "lease_id",
+    "cert_id",
+    "payload",
+    "prev_hash"
+  ],
   "additionalProperties": false,
   "properties": {
-    "seq": {"type": "integer", "minimum": 0},
-    "run_id": {"type": "string"},
-    "type": {
-      "enum": ["PROPOSAL", "TRANSFORM", "CERTIFICATE", "PREPARE", "COMMIT",
-               "DISPATCH", "CONTROLLER_ACK", "OBSERVED", "REVOKE",
-               "CANCEL_ACK", "BACKUP", "OUTCOME", "LOG_GAP"]
+    "seq": {
+      "type": "integer",
+      "minimum": 0
     },
-    "payload": {"type": "object"},
-    "prev_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
-  }
+    "ts_mono_ns": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ts_utc": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "enum": [
+        "PROPOSAL",
+        "TRANSFORM",
+        "CERTIFICATE",
+        "PREPARE",
+        "COMMIT",
+        "DISPATCH",
+        "CONTROLLER_ACK",
+        "OBSERVED",
+        "REVOKE",
+        "CANCEL_ACK",
+        "BACKUP",
+        "OUTCOME",
+        "LOG_GAP"
+      ]
+    },
+    "plan_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "lease_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "cert_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "payload": {},
+    "prev_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "type": {
+          "const": "PROPOSAL"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "role"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "role": {
+              "enum": [
+                "parent",
+                "child"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "TRANSFORM"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "method",
+            "parent_plan_hashes"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "method": {
+              "enum": [
+                "mix",
+                "near"
+              ]
+            },
+            "parent_plan_hashes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^sha256:[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "CERTIFICATE"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "verdict",
+            "path",
+            "margins",
+            "first_violation_segment",
+            "full_checks_used",
+            "inherit_depth",
+            "parent_cert_id"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "verdict": {
+              "enum": [
+                "FULL",
+                "INHERITED",
+                "REJECTED"
+              ]
+            },
+            "path": {
+              "enum": [
+                "full",
+                "delta"
+              ]
+            },
+            "margins": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "first_violation_segment": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "full_checks_used": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "inherit_depth": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "parent_cert_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "PREPARE"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "prefix_len",
+            "deadline_mono"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "prefix_len": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "deadline_mono": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "COMMIT"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "accepted",
+            "reason_code"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "accepted": {
+              "type": "boolean"
+            },
+            "reason_code": {
+              "enum": [
+                "STATE_STALE",
+                "CONTEXT_CHANGED",
+                "LEASE_REPLAY",
+                "TRACKING_TUBE",
+                "CANCEL_UNCONFIRMED",
+                "LEASE_EXPIRED",
+                "AUTH_FAILED",
+                "QUEUE_FULL",
+                null
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "DISPATCH"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "step_index",
+            "submitted"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "step_index": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "submitted": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "CONTROLLER_ACK"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "step_index",
+            "accepted"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "step_index": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "accepted": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "OBSERVED"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "step_index",
+            "position",
+            "observed"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "step_index": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "position": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "observed": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "REVOKE"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "reason",
+            "old_epoch",
+            "new_epoch"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "type": "string"
+            },
+            "old_epoch": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "new_epoch": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "CANCEL_ACK"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "confirmed"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "confirmed": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "BACKUP"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "reason",
+            "backup_plan_hash"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "type": "string"
+            },
+            "backup_plan_hash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "OUTCOME"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "status",
+            "submitted",
+            "accepted",
+            "observed"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "status": {
+              "enum": [
+                "completed",
+                "rejected",
+                "fault"
+              ]
+            },
+            "submitted": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "accepted": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "observed": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "type": {
+          "const": "LOG_GAP"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "dropped_count",
+            "first_dropped_seq",
+            "last_dropped_seq"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "dropped_count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "first_dropped_seq": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "last_dropped_seq": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    }
+  ]
 }
