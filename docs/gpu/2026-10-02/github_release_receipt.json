@@ -1,0 +1,30 @@
+{
+  "schema": "sentinel-github-release-receipt-v1",
+  "tag": "gpu-experiments-20261002",
+  "target_commit": "968f39344152325dfac156e2685cebcea5177529",
+  "release_id": 401282414,
+  "release_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002",
+  "assets": [
+    {
+      "name": "sentinel-worldguard-gpu-20261002.tar.gz",
+      "bytes": 166843882,
+      "sha256": "2cbc367dfbfeebce7c7b8b10572781ab4eda33f55550ba037f95a94f5694992e",
+      "asset_id": 603972722,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/gpu-experiments-20261002/sentinel-worldguard-gpu-20261002.tar.gz"
+    },
+    {
+      "name": "sentinel-smolvla-so100-overlay-20261002.tar.gz",
+      "bytes": 176466914,
+      "sha256": "e9776e0b7256f8f2cd855ea8b3853c5332e45af260392ccee2f22e3d52867aa0",
+      "asset_id": 603973146,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/gpu-experiments-20261002/sentinel-smolvla-so100-overlay-20261002.tar.gz"
+    },
+    {
+      "name": "artifact_index.json",
+      "bytes": 1039,
+      "sha256": "d1a5ef3ad9506ea16159da8232e7d1464cfdac87f89f2ee7ded5326aa74c8871",
+      "asset_id": 603973806,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/gpu-experiments-20261002/artifact_index.json"
+    }
+  ]
+}

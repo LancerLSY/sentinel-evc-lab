@@ -1,0 +1,15 @@
+{
+  "schema": "sentinel-release-archive-verification-v1",
+  "assets": [
+    {
+      "asset": "sentinel-worldguard-gpu-20261002.tar.gz",
+      "verified_files": 184,
+      "source_commit": "968f39344152325dfac156e2685cebcea5177529"
+    },
+    {
+      "asset": "sentinel-smolvla-so100-overlay-20261002.tar.gz",
+      "verified_files": 25,
+      "source_commit": "968f39344152325dfac156e2685cebcea5177529"
+    }
+  ]
+}

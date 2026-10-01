@@ -140,7 +140,7 @@ video are not duplicated in repository history.
 
 ## Download trained artifacts
 
-The experimental release [gpu-experiments-20261002](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) carries the WorldGuard artifact bundle and SmolVLA trainable overlay. `artifact_index.json` lists asset sizes and SHA256 digests. The WorldGuard bundle retains all 36 trained members, normalization/PCA, calibration, predictions, logs and the exact earlier real-cache producer. Original real video and upstream frozen encoder/base weights remain at their official sources.
+The experimental release [gpu-experiments-20261002](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) carries the WorldGuard artifact bundle and SmolVLA trainable overlay. `artifact_index.json` lists asset sizes and SHA256 digests; the repository retains [the artifact index](gpu/2026-10-02/release_artifact_index.json), [GitHub upload verification](gpu/2026-10-02/github_release_receipt.json) and [per-file archive verification](gpu/2026-10-02/release_archive_verification.json). The WorldGuard bundle retains all 36 trained members, normalization/PCA, calibration, predictions, logs and the exact earlier real-cache producer. Original real video and upstream frozen encoder/base weights remain at their official sources.
 
 ## Loading and retention
 
