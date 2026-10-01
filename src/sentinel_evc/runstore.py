@@ -120,13 +120,13 @@ class RunStore:
             return record
         # Interrupted/unfinalized failures have no signed completion to claim.
         # Completed/rejected records always verify, even if a cache field was removed.
-        if record['status']=='failed' and not (directory/'bundle/manifest.json').exists():
+        if record['status']=='failed':
             verification=record.get('verification')
             finalization_failed=(isinstance(verification,dict) and verification.get('ok') is False
                 and verification.get('message')=='EVIDENCE_FINALIZATION_FAILED'
                 and isinstance(record.get('error'),dict)
                 and record['error'].get('code')=='EVIDENCE_FINALIZATION_FAILED')
-            if not verification or finalization_failed:
+            if finalization_failed or (not verification and not (directory/'bundle/manifest.json').exists()):
                 message='EVIDENCE_FINALIZATION_FAILED' if finalization_failed else 'UNFINALIZED_RECORD'
                 record['verification']={'ok':False,'message':message,'trust':'self-contained demo key; external trust required'}
                 return record

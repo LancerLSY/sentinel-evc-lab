@@ -133,10 +133,15 @@ def test_export_replaces_cache_and_ignores_legacy_temp_symlink(tmp_path):
     finally:manager.close();store.close()
 
 
-def test_unsigned_finalization_failure_survives_restart(tmp_path,monkeypatch):
+@pytest.mark.parametrize('partial_manifest',[False,True])
+def test_unsigned_finalization_failure_survives_restart(tmp_path,monkeypatch,partial_manifest):
     import sentinel_evc.product_pipeline as pipeline
     original=pipeline.build_bundle
-    def fail(*args,**kwargs):raise OSError('injected disk failure')
+    def fail(*args,**kwargs):
+        if partial_manifest:
+            bundle=Path(args[1])/'bundle';bundle.mkdir()
+            (bundle/'manifest.json').write_text('{}')
+        raise OSError('injected disk failure')
     monkeypatch.setattr(pipeline,'build_bundle',fail)
     store=RunStore(tmp_path);manager=pipeline.ProductManager(store,realtime=False)
     try:
