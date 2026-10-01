@@ -47,6 +47,12 @@ telemetry.
 
 [Product design](DESIGN.md) · [App installation](docs/install_app.md) · [Model and robot integration ports](docs/integration_ports.md)
 
+![MuJoCo workbench with recorded 3D trajectory, evidence status and scientific acceptance gates](docs/screenshots/physics-workbench.jpg)
+
+The CLI, App and integration ports are available on `main`. The workbench keeps
+execution completion, evidence integrity and scientific acceptance visible separately;
+a completed experiment can retain a failed scientific gate.
+
 
 ## Local numeric workbench
 
@@ -69,6 +75,19 @@ python -m pytest -q
 [Mechanism matrix](docs/implementation_matrix.md) · [Validation](docs/product_validation.md) · [Pending experiments](docs/experiment_plan.md) · [Contracts](docs/product_contracts.md)
 
 A genuine local numerical product increment. Real VLA, GRU, vision and device-motion experiments remain pending with explicit prerequisites; prototype measurements do not establish those capabilities.
+
+## Reproduce local performance
+
+```bash
+python -m pip install -e ".[physics,test]"
+python tools/benchmark_performance.py --out runs/performance-01 --physics-warmup 1
+```
+
+The benchmark records 20 paired 1,000-case geometry repetitions, 10 realtime numeric
+runs and three complete 25-trial MuJoCo experiments. It includes parent proofs, failed
+fallbacks, signing and independent verification; numeric totals also include ZIP
+export. Warmups are retained and excluded from quantiles. See the
+[measurement protocol](docs/performance_protocol.md). Use a new output directory.
 
 
 ---

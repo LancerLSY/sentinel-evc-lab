@@ -42,6 +42,11 @@ open "$HOME/Applications/Sentinel-EVC/Sentinel EVC.app"
 
 [产品设计](DESIGN.md) · [App 安装说明](docs/install_app.md) · [模型与机械臂接入端口](docs/integration_ports.md)
 
+![MuJoCo 工作台：实际三维轨迹、证据核验和科学验收结果](docs/screenshots/physics-workbench.jpg)
+
+CLI、App 和各接入端口已合并到 `main`。界面分别展示执行是否完成、证据是否完整、
+科学验收是否通过；实验完成后仍会保留失败的科学门。
+
 
 ## 本地数值工作台
 
@@ -64,6 +69,18 @@ python -m pytest -q
 [逐项实现表](docs/implementation_matrix.md) · [验证结果](docs/product_validation.md) · [待做实验](docs/experiment_plan.md) · [接口契约](docs/product_contracts.md)
 
 这是可操作的本地数值基础产品。真实 VLA、GRU、视觉和设备运动实验仍有明确前提；当前原型指标不能代表这些能力。
+
+## 复现本机性能测试
+
+```bash
+python -m pip install -e ".[physics,test]"
+python tools/benchmark_performance.py --out runs/performance-01 --physics-warmup 1
+```
+
+基准运行 20 轮配对的 1,000 案例几何验证、10 次实时数值运行及三次完整的
+25 试验 MuJoCo 实验。计时包含父证书、失败回退、签名与独立校验；数值运行总时
+也包含 ZIP 导出。预热样本保留，但不计入分位数。详见[计量协议](docs/performance_protocol.md)。
+每次使用新的输出目录。
 
 
 ---
