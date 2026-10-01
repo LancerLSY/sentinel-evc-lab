@@ -2,11 +2,15 @@
 
 import ast
 import hashlib
+import importlib.machinery
 import io
 import json
+import os
 from pathlib import Path
 import shutil
+import subprocess
 import tarfile
+import sys
 
 import pytest
 
@@ -122,6 +126,7 @@ def test_public_source_archive_has_a_fixed_nonsecret_surface():
     assert "src/sentinel_evc/native/SentinelApp.swift" in names
     assert "tests/test_ssh_experiment.py" in names
     assert "tools/benchmark_performance.py" in names
+    assert "tools/validate_scenarios.py" in names
     assert not any(".git" in Path(name).parts for name in names)
     assert not any(name.endswith((".token", ".pem", ".key")) for name in names)
     assert "AGENTS.local.md" not in names
@@ -140,6 +145,85 @@ def test_public_source_archive_refuses_symlinked_benchmark(tmp_path, link_target
 
     with pytest.raises(remote.RemoteExperimentError, match="unsafe"):
         remote._source_files(tmp_path)
+
+
+@pytest.mark.parametrize("location", ["src", "src/sentinel_evc/nested.py"])
+def test_public_source_archive_refuses_root_or_nested_symlink(tmp_path, location):
+    (tmp_path / "src/sentinel_evc").mkdir(parents=True)
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "src/sentinel_evc/module.py").write_text("", encoding="utf-8")
+    (tmp_path / "tests/test_module.py").write_text("", encoding="utf-8")
+    for name in ("pyproject.toml", "README.md", "LICENSE"):
+        (tmp_path / name).write_text(name, encoding="utf-8")
+    path = tmp_path / location
+    if path.is_dir():
+        shutil.rmtree(path)
+        path.symlink_to(tmp_path / "tests", target_is_directory=True)
+    else:
+        path.symlink_to(tmp_path / "README.md")
+    with pytest.raises(remote.RemoteExperimentError, match="unsafe"):
+        remote._source_files(tmp_path)
+
+
+def test_public_source_archive_refuses_symlinked_checkout_root(tmp_path):
+    checkout = tmp_path / "checkout"
+    (checkout / "src").mkdir(parents=True)
+    alias = tmp_path / "checkout-alias"
+    alias.symlink_to(checkout, target_is_directory=True)
+    with pytest.raises(remote.RemoteExperimentError, match="root is unsafe"):
+        remote._source_files(alias)
+
+
+def test_public_manifest_digest_includes_scenario_harness(tmp_path):
+    root = Path(remote.__file__).resolve().parents[2]
+    before = remote._public_source_manifest_sha256(root)
+    checkout = tmp_path / "checkout"
+    checkout.mkdir()
+    for source in remote._source_files(root):
+        target = checkout / source.relative_to(root)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+    harness = checkout / "tools/validate_scenarios.py"
+    harness.write_bytes(harness.read_bytes() + b"\n# digest-change\n")
+    after = remote._public_source_manifest_sha256(checkout)
+    assert after != before
+
+
+def test_extracted_public_source_archive_runs_full_validation(tmp_path):
+    if importlib.machinery.PathFinder.find_spec('pytest') is None:
+        pytest.skip('public archive full validation requires optional pytest')
+    root = Path(remote.__file__).resolve().parents[2]
+    package, _ = remote._source_archive(root)
+    checkout = tmp_path / 'extracted-public-source'
+    checkout.mkdir()
+    with tarfile.open(fileobj=io.BytesIO(package), mode='r:gz') as archive:
+        for member in archive.getmembers():
+            target = checkout / member.name
+            if member.isdir():
+                target.mkdir(parents=True, exist_ok=True)
+                continue
+            assert member.isfile()
+            target.parent.mkdir(parents=True, exist_ok=True)
+            incoming = archive.extractfile(member)
+            assert incoming is not None
+            target.write_bytes(incoming.read())
+    environment = os.environ.copy()
+    current_src = (root / 'src').resolve()
+    dependencies = [
+        str(Path(item).resolve()) for item in sys.path if item and Path(item).resolve() != current_src
+    ]
+    environment['PYTHONPATH'] = os.pathsep.join([str(checkout / 'src'), *dependencies])
+    result = subprocess.run(
+        # Exclude only this rehearsal to avoid recursively unpacking and
+        # launching another complete suite from inside itself.
+        [sys.executable, '-m', 'pytest', '-q', '-k',
+         'not extracted_public_source_archive_runs_full_validation'],
+        cwd=checkout, env=environment,
+        text=True, capture_output=True, timeout=180,
+    )
+    (tmp_path / 'archive-validation.log').write_text(result.stdout + result.stderr, 'utf-8')
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert '1 deselected' in result.stdout, result.stdout
 
 
 def test_remote_bootstrap_runs_package_verification_with_the_dependency_venv():

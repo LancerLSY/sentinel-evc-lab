@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 import threading
+import time
 import uuid
 import zipfile
 
@@ -25,6 +26,11 @@ from .ssh_experiment import _expected_source_manifest_sha256, _verify_result_tre
 
 JOB_ID = re.compile(r"^physics-job-[0-9a-f]{32}$")
 ACTIVE = {"queued", "running"}
+STATUSES = ACTIVE | {"interrupted", "completed", "failed"}
+
+
+def _public_error(code, exc, message):
+    return f"{code} ({type(exc).__name__}): {message}"
 
 
 def physics_engine_status():
@@ -59,21 +65,26 @@ class PhysicsJobs:
         self.root = Path(root).expanduser().resolve()
         self.root.mkdir(parents=True, exist_ok=True)
         self._ownership = _WorkspaceLock(self.root / "jobs.lock")
-        self._lock = threading.RLock()
-        self._workers = {}
-        self._processes = {}
-        self._closed = False
-        self._engine = physics_engine_status()
-        for path in self.root.glob("physics-job-*/job.json"):
-            if not JOB_ID.fullmatch(path.parent.name) or path.is_symlink() or path.parent.is_symlink():
-                continue
-            try:
-                record = strict_json(path.read_bytes())
-                if record["status"] in ACTIVE:
-                    record.update(status="interrupted", error="进程重启，物理试验已中断；请创建新作业。")
-                    self._save(record)
-            except (ValueError, KeyError, OSError):
-                continue
+        try:
+            self._lock = threading.RLock()
+            self._workers = {}
+            self._processes = {}
+            self._closed = False
+            self._engine = physics_engine_status()
+            for path in self.root.glob("physics-job-*/job.json"):
+                if not JOB_ID.fullmatch(path.parent.name) or path.is_symlink() or path.parent.is_symlink():
+                    continue
+                try:
+                    record = self._decode_record(path.read_bytes(), path.parent.name)
+                    if record["status"] in ACTIVE:
+                        record.update(status="interrupted", error="进程重启，物理试验已中断；请创建新作业。")
+                        self._save(record)
+                except (ValueError, KeyError, OSError, TypeError):
+                    continue
+        except BaseException:
+            self._ownership.close()
+            self._ownership = None
+            raise
 
     def engine_status(self):
         return dict(self._engine)
@@ -90,16 +101,47 @@ class PhysicsJobs:
         record["updated_at"] = utc_now()
         _atomic(self.directory(record["id"]) / "job.json", record)
 
+    @staticmethod
+    def _decode_record(raw, expected_id):
+        record = strict_json(raw)
+        required = {
+            "id", "name", "status", "seed", "friction", "render", "created_at",
+            "error", "summary", "source_manifest_sha256", "scientific_gates_pass", "scope",
+        }
+        if not isinstance(record, dict) or not required.issubset(record):
+            raise ValueError("invalid job metadata")
+        if record["id"] != expected_id or not JOB_ID.fullmatch(record["id"]):
+            raise ValueError("job identity mismatch")
+        if record["status"] not in STATUSES:
+            raise ValueError("invalid job status")
+        if not isinstance(record["name"], str) or not record["name"]:
+            raise ValueError("invalid job name")
+        if type(record["seed"]) is not int:
+            raise ValueError("invalid job seed")
+        friction = record["friction"]
+        if isinstance(friction, bool) or not isinstance(friction, (int, float)) or not math.isfinite(friction):
+            raise ValueError("invalid job friction")
+        if type(record["render"]) is not bool or not isinstance(record["created_at"], str):
+            raise ValueError("invalid job metadata types")
+        if record["error"] is not None and not isinstance(record["error"], str):
+            raise ValueError("invalid job error")
+        if record["summary"] is not None and not isinstance(record["summary"], dict):
+            raise ValueError("invalid job summary")
+        if not isinstance(record["source_manifest_sha256"], str) or not record["source_manifest_sha256"]:
+            raise ValueError("invalid source binding")
+        if record["scientific_gates_pass"] is not None and type(record["scientific_gates_pass"]) is not bool:
+            raise ValueError("invalid scientific gate result")
+        if not isinstance(record["scope"], str) or not record["scope"]:
+            raise ValueError("invalid job scope")
+        return record
+
     def _raw(self, job_id):
         path = self.directory(job_id) / "job.json"
         if path.is_symlink():
             raise KeyError("physics job not found")
         try:
-            record = strict_json(path.read_bytes())
-            if record["id"] != job_id:
-                raise ValueError("job identity mismatch")
-            return record
-        except (OSError, ValueError, KeyError) as exc:
+            return self._decode_record(path.read_bytes(), job_id)
+        except (OSError, ValueError, KeyError, TypeError) as exc:
             raise KeyError("physics job not found") from exc
 
     def start(self, value):
@@ -180,7 +222,11 @@ class PhysicsJobs:
                 process.wait()
             with self._lock:
                 record = self._raw(job_id)
-                record.update(status="failed", error=str(exc)[:1000], scientific_gates_pass=None)
+                record.update(
+                    status="failed",
+                    error=_public_error("PHYSICS_JOB_FAILED", exc, "物理试验未完整完成；详细运行输出仅保存在本地 worker.log。"),
+                    scientific_gates_pass=None,
+                )
                 self._save(record)
         finally:
             with self._lock:
@@ -203,7 +249,8 @@ class PhysicsJobs:
                                               "trust": "self-contained demo integrity keys"}
                 except (ValueError, OSError, KeyError, RuntimeError) as exc:
                     record.update(status="failed", summary=None, scientific_gates_pass=None,
-                                  error="EVIDENCE_INVALID: " + str(exc)[:300], verification={"ok": False})
+                                  error=_public_error("EVIDENCE_INVALID", exc, "物理试验证据未通过重新校验。"),
+                                  verification={"ok": False})
                     self._save(record)
             return record
 
@@ -212,7 +259,7 @@ class PhysicsJobs:
             rows = []
             for path in self.root.glob("physics-job-*/job.json"):
                 try:
-                    row = self._raw(path.parent.name)
+                    row = self.get(path.parent.name)
                     rows.append({key: row.get(key) for key in ("id", "name", "status", "seed", "friction", "created_at", "error", "scientific_gates_pass")})
                 except KeyError:
                     continue
@@ -263,6 +310,8 @@ class PhysicsJobs:
 
     def close(self):
         with self._lock:
+            if self._ownership is None:
+                return
             self._closed = True
             for process in self._processes.values():
                 if process.poll() is None:
@@ -271,10 +320,24 @@ class PhysicsJobs:
         for worker in workers:
             worker.join(timeout=2)
         with self._lock:
-            for process in self._processes.values():
+            processes = list(self._processes.values())
+            for process in processes:
                 if process.poll() is None:
                     process.kill()
+        deadline = time.monotonic() + 2
+        for process in processes:
+            if process.poll() is None:
+                try:
+                    process.wait(timeout=max(0, deadline - time.monotonic()))
+                except subprocess.TimeoutExpired:
+                    pass
         for worker in workers:
             if worker.is_alive():
-                worker.join(timeout=2)
-        self._ownership.close()
+                worker.join(timeout=max(0, deadline - time.monotonic()))
+        with self._lock:
+            worker_alive = any(worker.is_alive() for worker in workers)
+            process_alive = any(process.poll() is None for process in self._processes.values())
+            if worker_alive or process_alive:
+                raise RuntimeError("物理作业清理超时；目录所有权仍保留。")
+            self._ownership.close()
+            self._ownership = None

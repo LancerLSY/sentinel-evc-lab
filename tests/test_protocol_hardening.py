@@ -239,6 +239,19 @@ def test_prediction_registry_binding_and_expiry():
     assert exc.value.code == ErrorCode.MODEL_UNKNOWN
 
 
+@pytest.mark.parametrize('field,value', [('hash','changed'),('plan_hash','changed'),('deadline_mono_ns',NOW+2_000_000_000),('allowed',False),('allowed',1)])
+def test_mutated_registered_prediction_denies_prepare_and_dispatch(field,value):
+    _,plan,cert,authority,_,_,_,context,snapshot=_rig()
+    prediction=SimpleNamespace(plan_hash=plan.hash,hash='sha256:'+'a'*64,deadline_mono_ns=NOW+1_000_000_000,allowed=True)
+    authority.register_prediction(prediction)
+    lease=authority.prepare(plan,cert,context,snapshot,NOW,prediction=prediction,require_prediction=True)
+    setattr(prediction,field,value)
+    with pytest.raises(Rejection) as exc:authority.validate_runtime(lease,plan.hash,NOW)
+    assert exc.value.code==ErrorCode.MODEL_UNKNOWN
+    with pytest.raises(Rejection) as exc:authority.prepare(plan,cert,context,snapshot,NOW,prediction=prediction,require_prediction=True)
+    assert exc.value.code==ErrorCode.MODEL_UNKNOWN
+
+
 def test_log_overflow_emits_sticky_gap_and_blocks_motion():
     _, plan, cert, authority, _, _, events, context, snapshot = _rig(maxlen=3)
     for i in range(5):

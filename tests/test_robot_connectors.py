@@ -113,3 +113,32 @@ def test_dashboard_line_and_timeout_are_bounded(tmp_path, monkeypatch):
     assert result["ok"] is False
     with pytest.raises(ValueError):
         registry.diagnose(profile["id"], timeout=float("inf"))
+
+
+@pytest.mark.parametrize("metadata", [[], 7, {"driver": "mock"}, {"id": "wrong", "driver": "mock"}])
+def test_corrupt_robot_metadata_isolated_while_valid_profile_remains_visible(tmp_path, metadata):
+    registry = robots.RobotRegistry(tmp_path)
+    valid = registry.create("valid", "mock")
+    corrupt_id = "robot-" + "a" * 32
+    corrupt = tmp_path / corrupt_id
+    corrupt.mkdir()
+    import json
+    (corrupt / "robot.json").write_text(json.dumps(metadata), "utf-8")
+    with pytest.raises(KeyError):
+        registry.get(corrupt_id)
+    assert [record["id"] for record in registry.list()] == [valid["id"]]
+
+
+def test_nested_robot_endpoint_and_capabilities_cannot_enable_motion_or_break_list(tmp_path):
+    import json
+    registry = robots.RobotRegistry(tmp_path)
+    valid = registry.create("valid", "mock")
+    corrupt = registry.create("cell", "ur_dashboard_readonly", "robot.local")
+    path = tmp_path / corrupt["id"] / "robot.json"
+    record = json.loads(path.read_text("utf-8"))
+    record["endpoint"] = []
+    record["hardware_motion"] = True
+    path.write_text(json.dumps(record), "utf-8")
+    with pytest.raises(KeyError):
+        registry.get(corrupt["id"])
+    assert [record["id"] for record in registry.list()] == [valid["id"]]

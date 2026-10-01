@@ -91,15 +91,24 @@ class Authority:
         if type(allowed) is not bool:
             raise TypeError("prediction.allowed 必须是 bool")
         existing = self._predictions.get(prediction_hash)
-        if existing is not None and existing is not prediction and (
-            existing.plan_hash != plan_hash
-            or existing.deadline_mono_ns != deadline
-            or existing.allowed != allowed
-        ):
+        if existing is not None and existing[1:] != (prediction_hash,plan_hash,deadline,allowed):
             raise ValueError("prediction hash collision")
         if existing is None and len(self._predictions) >= self._max_predictions:
             raise ValueError("prediction registry capacity exceeded")
-        self._predictions[prediction_hash] = prediction
+        self._predictions[prediction_hash] = (prediction,prediction_hash,plan_hash,deadline,allowed)
+
+    def _registered_prediction(self, prediction_hash):
+        binding=self._predictions.get(prediction_hash)
+        if binding is None:
+            raise Rejection(ErrorCode.MODEL_UNKNOWN, 'prediction 未在本地登记')
+        prediction, original_hash, plan_hash, deadline, allowed = binding
+        if (getattr(prediction,'hash',None) != original_hash
+                or getattr(prediction,'plan_hash',None) != plan_hash
+                or type(getattr(prediction,'deadline_mono_ns',None)) is not int
+                or prediction.deadline_mono_ns != deadline
+                or getattr(prediction,'allowed',None) is not allowed):
+            raise Rejection(ErrorCode.MODEL_UNKNOWN, 'prediction 登记字段已改变')
+        return prediction
 
     def advance_generation(self) -> int:
         """Invalidate every lease issued under the previous generation."""
@@ -116,8 +125,8 @@ class Authority:
         if now_ns > lease.deadline_mono_ns:
             raise Rejection(ErrorCode.LEASE_EXPIRED, "许可已过期")
         if lease.prediction_hash is not None:
-            prediction = self._predictions.get(lease.prediction_hash)
-            if prediction is None or prediction.plan_hash != plan_hash:
+            prediction = self._registered_prediction(lease.prediction_hash)
+            if prediction.plan_hash != plan_hash:
                 raise Rejection(ErrorCode.MODEL_UNKNOWN, "prediction 登记或动作绑定失效")
             if prediction.allowed is not True or now_ns > prediction.deadline_mono_ns:
                 raise Rejection(ErrorCode.MODEL_UNKNOWN, "prediction 已拒绝或过期")
@@ -202,8 +211,8 @@ class Authority:
             raise Rejection(ErrorCode.MODEL_UNKNOWN, "缺少必需 prediction")
         if prediction is not None:
             prediction_hash = getattr(prediction, "hash", None)
-            registered = self._predictions.get(prediction_hash)
-            if registered is None or registered is not prediction:
+            registered = self._registered_prediction(prediction_hash)
+            if registered is not prediction:
                 raise Rejection(ErrorCode.MODEL_UNKNOWN, "prediction 未在本地登记")
             if prediction.plan_hash != plan.hash:
                 raise Rejection(ErrorCode.MODEL_UNKNOWN, "prediction 未绑定最终动作")

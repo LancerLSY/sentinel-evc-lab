@@ -1,6 +1,8 @@
 """Loopback-only single-user HTTP transport. Controller lifecycle stays in the worker."""
 from __future__ import annotations
 import json
+import os
+import re
 import secrets
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
@@ -11,7 +13,9 @@ from .runstore import RunStore
 MAX_BODY = 12 * 1024 * 1024
 
 class LocalServer(ThreadingHTTPServer):
-    daemon_threads = True
+    daemon_threads = False
+    block_on_close = True
+    request_timeout = 5.0
     def __init__(self, address, store, manager):
         if address[0] != '127.0.0.1':
             raise ValueError('only 127.0.0.1 is supported')
@@ -35,11 +39,24 @@ class LocalServer(ThreadingHTTPServer):
             super().server_close()
             raise
 
+    def get_request(self):
+        request, client_address = super().get_request()
+        try:
+            request.settimeout(self.request_timeout)
+        except BaseException:
+            request.close()
+            raise
+        return request, client_address
+
     def server_close(self):
-        if self.physics_jobs is not None:
-            self.physics_jobs.close()
-            self.physics_jobs = None
-        super().server_close()
+        try:
+            if self.physics_jobs is not None:
+                self.physics_jobs.close()
+                self.physics_jobs = None
+        finally:
+            # ThreadingHTTPServer blocks here until every non-daemon request
+            # handler has returned, so callers may then close manager/store.
+            super().server_close()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -104,11 +121,7 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3]=='trace':
                     return self.reply(200, self.server.physics_jobs.trace(parts[2]))
                 if parts[3]=='download':
-                    path=self.server.physics_jobs.directory(parts[2])/'evidence.zip'
-                    if path.is_symlink() or not path.is_file():
-                        raise KeyError('no verified export')
-                    if not self.server.physics_jobs.get(parts[2]).get('verification',{}).get('ok'):
-                        raise ValueError('evidence failed verification')
+                    path=self.server.physics_jobs.export(parts[2])
                     return self.reply(200,path.read_bytes(),'application/zip')
             if parts == ['api','runs']:
                 return self.reply(200,{'runs':self.server.store.list()})
@@ -126,8 +139,7 @@ class Handler(BaseHTTPRequestHandler):
                 if len(parts)==3:return self.reply(200,{'run':self.server.manager.read(run_id)})
                 if parts[3]=='events':return self.reply(200,{'events':self.server.manager.events(run_id)})
                 if parts[3]=='download':
-                    path=self.server.store.directory(run_id)/'evidence.zip'
-                    if path.is_symlink() or not path.is_file():raise KeyError('no export')
+                    path=self.server.store.export(run_id)
                     return self.reply(200,path.read_bytes(),'application/zip')
             assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js'}
             name='/'.join(parts)
@@ -207,6 +219,9 @@ def serve(root='runs/workbench',port=8765, *, open_browser=False):
         manager=ProductManager(store)
         server=LocalServer(('127.0.0.1',port),store,manager)
         print('Sentinel 本地操作台：http://127.0.0.1:'+str(server.server_address[1]),flush=True)
+        launch_nonce=os.environ.get('SENTINEL_LAUNCH_NONCE','')
+        if re.fullmatch(r'[0-9a-f]{32}',launch_nonce):
+            print('SENTINEL_READY '+json.dumps({'nonce':launch_nonce,'url':'http://127.0.0.1:'+str(server.server_address[1])}),flush=True)
         print('数值工作台 / 三维物理 / 模型资产 / 机械臂诊断；Ctrl+C 停止服务。',flush=True)
         if threading.current_thread() is threading.main_thread():
             previous_term = signal.getsignal(signal.SIGTERM)
@@ -220,6 +235,7 @@ def serve(root='runs/workbench',port=8765, *, open_browser=False):
     except KeyboardInterrupt:
         pass
     finally:
+        manager_closed=manager is None
         try:
             if server is not None:
                 server.server_close()
@@ -227,9 +243,12 @@ def serve(root='runs/workbench',port=8765, *, open_browser=False):
             try:
                 if manager is not None:
                     manager.close()
+                    manager_closed=True
             finally:
                 try:
-                    if store is not None:
+                    # A timed-out worker still owns this workspace. Its thread
+                    # keeps the manager/store alive until process exit or retry.
+                    if store is not None and manager_closed:
                         store.close()
                 finally:
                     if previous_term is not None:

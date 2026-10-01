@@ -11,6 +11,11 @@ private struct AppConfig: Decodable {
     let bind: String
 }
 
+private struct BackendReady: Decodable {
+    let nonce: String
+    let url: String
+}
+
 @main
 final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKDownloadDelegate {
     private var window: NSWindow!
@@ -19,6 +24,7 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var outputBuffer = Data()
     private var terminating = false
     private var backendPort: Int?
+    private let launchNonce = UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
 
     static func main() {
         let app = NSApplication.shared
@@ -163,6 +169,7 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         task.executableURL = URL(fileURLWithPath: config.python)
         task.arguments = ["-m", "sentinel_evc", "serve", "--port", "0", "--data-dir", config.data_dir]
         var environment = ProcessInfo.processInfo.environment
+        environment["SENTINEL_LAUNCH_NONCE"] = launchNonce
         if !config.source_dir.isEmpty {
             let source = URL(fileURLWithPath: config.source_dir).appendingPathComponent("src").path
             environment["PYTHONPATH"] = source + (environment["PYTHONPATH"].map { ":" + $0 } ?? "")
@@ -195,10 +202,15 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         while let newline = outputBuffer.firstIndex(of: 10) {
             let lineData = outputBuffer.prefix(upTo: newline)
             outputBuffer.removeSubrange(...newline)
-            guard let line = String(data: lineData, encoding: .utf8),
-                  let range = line.range(of: "http://127.0.0.1:") else { continue }
-            let raw = line[range.lowerBound...].trimmingCharacters(in: .whitespacesAndNewlines)
-            if let url = URL(string: raw), url.host == "127.0.0.1" {
+            guard backendPort == nil,
+                  let line = String(data: lineData, encoding: .utf8),
+                  line.hasPrefix("SENTINEL_READY "),
+                  let payload = line.dropFirst("SENTINEL_READY ".count).data(using: .utf8),
+                  let ready = try? JSONDecoder().decode(BackendReady.self, from: payload),
+                  ready.nonce == launchNonce else { continue }
+            if let url = URL(string: ready.url), url.scheme == "http", url.host == "127.0.0.1",
+               let port = url.port, (1...65535).contains(port), url.user == nil, url.password == nil,
+               url.path.isEmpty || url.path == "/", url.query == nil, url.fragment == nil {
                 backendPort = url.port
                 webView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15))
             }
@@ -210,7 +222,7 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         task.terminate()
         // The server closes active workers and finalizes evidence on SIGTERM.
         // Keep the application alive long enough for that cleanup to finish.
-        let deadline = Date().addingTimeInterval(8.0)
+        let deadline = Date().addingTimeInterval(15.0)
         while task.isRunning && Date() < deadline {
             RunLoop.current.run(until: Date().addingTimeInterval(0.05))
         }

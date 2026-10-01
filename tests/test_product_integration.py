@@ -1,5 +1,9 @@
 import base64
 import json
+import os
+import selectors
+import subprocess
+import sys
 import threading
 import time
 from http.server import ThreadingHTTPServer
@@ -11,6 +15,7 @@ from sentinel_evc.runstore import RunStore
 from sentinel_evc.product_pipeline import ProductManager, ProductSession
 from sentinel_evc.server import LocalServer
 from sentinel_evc.evidence import verify_bundle
+from sentinel_evc.physics_jobs import PhysicsJobs
 
 def wait_status(manager,run_id,states,timeout=10):
     deadline=time.monotonic()+timeout
@@ -19,6 +24,57 @@ def wait_status(manager,run_id,states,timeout=10):
         if record['status'] in states:return record
         time.sleep(.01)
     raise AssertionError('run did not reach expected state')
+
+
+def test_real_serve_subprocess_nonce_sigterm_and_workspace_reopen(tmp_path):
+    workspace = tmp_path / 'real-serve-workspace'
+    nonce = '0123456789abcdef0123456789abcdef'
+    environment = os.environ.copy()
+    environment['SENTINEL_LAUNCH_NONCE'] = nonce
+    process = subprocess.Popen(
+        [sys.executable, '-m', 'sentinel_evc', 'serve', '--port', '0', '--data-dir', str(workspace)],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=environment,
+    )
+    output = bytearray()
+    selector = selectors.DefaultSelector()
+    assert process.stdout is not None
+    selector.register(process.stdout, selectors.EVENT_READ)
+    marker = None
+    try:
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline and marker is None:
+            assert process.poll() is None, output.decode('utf-8', 'replace')
+            if not selector.select(timeout=.2):
+                continue
+            chunk = os.read(process.stdout.fileno(), 4096)
+            if not chunk:
+                continue
+            output.extend(chunk)
+            for line in output.splitlines():
+                if line.startswith(b'SENTINEL_READY '):
+                    marker = json.loads(line.removeprefix(b'SENTINEL_READY '))
+                    break
+        assert marker is not None, output.decode('utf-8', 'replace')
+        assert marker['nonce'] == nonce
+        assert marker['url'].startswith('http://127.0.0.1:')
+        with urlopen(marker['url'] + '/api/session', timeout=5) as response:
+            assert response.status == 200
+            assert json.load(response)['profile'] == 'numeric-simulator-product-v1'
+        process.terminate()
+        assert process.wait(timeout=15) == 0
+    finally:
+        selector.close()
+        if process.poll() is None:
+            process.kill()
+            process.wait(timeout=5)
+        if process.stdout is not None:
+            output.extend(process.stdout.read())
+            process.stdout.close()
+
+    store = RunStore(workspace)
+    store.close()
+    physics = PhysicsJobs(workspace / 'physics-jobs')
+    physics.close()
 
 def test_product_actual_observed_persisted_signed_and_replayed(tmp_path):
     store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
@@ -112,6 +168,14 @@ def test_http_token_host_origin_and_input_boundaries(tmp_path):
         assert request('/api/runs/'+record['id'])[1]['run']['result']['cursors']['observed']==40
         code,export=request('/api/runs/'+record['id']+'/export',{},headers)
         assert code==200 and export['download_url'].endswith('/download')
+        import io,zipfile
+        directory=store.directory(record['id'])
+        (directory/'evidence.zip').write_bytes(b'corrupt cached zip')
+        with urlopen(base+export['download_url'],timeout=5) as response:
+            assert zipfile.is_zipfile(io.BytesIO(response.read()))
+        (directory/'bundle/result.json').write_bytes(b'{}')
+        code,error=request(export['download_url'])
+        assert code==500 and error['error']['code']=='READ_FAILED'
     finally:
         server.shutdown();server.server_close();thread.join();manager.close();store.close()
 
@@ -183,6 +247,93 @@ def test_local_server_does_not_create_physics_owner_before_bind(monkeypatch,tmp_
             LocalServer(('127.0.0.1',0),store,manager)
         assert constructed==[]
     finally:manager.close();store.close()
+
+
+def test_preparation_stop_never_dispatches_or_regresses_status(tmp_path,monkeypatch):
+    import sentinel_evc.product_pipeline as pipeline
+    entered=threading.Event();release=threading.Event()
+    original=pipeline.build_default_numeric_artifacts
+    def blocked(**kwargs):
+        entered.set();assert release.wait(5)
+        return original(**kwargs)
+    monkeypatch.setattr(pipeline,'build_default_numeric_artifacts',blocked)
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    try:
+        run=manager.start(Scenario());assert entered.wait(5)
+        assert manager.stop(run['id'])['status']=='stopping'
+        assert manager.read(run['id'])['status']=='stopping'
+        release.set();manager._sessions[run['id']].thread.join(10)
+        record=manager.read(run['id'])
+        assert record['status']=='failed' and record['error']['code']=='PROCESS_STOPPED'
+        assert record['verification']['ok'] is True
+        assert record['result']['cursors']=={'submitted':0,'accepted':0,'observed':0}
+        assert not any(e['type']=='DISPATCH' for e in manager.events(run['id']))
+        fresh=manager.start(Scenario());manager._sessions[fresh['id']].thread.join(10)
+        assert manager.read(fresh['id'])['status']=='completed'
+    finally:release.set();manager.close();store.close()
+
+
+def test_shutdown_timeout_retains_storage_until_worker_exits(tmp_path,monkeypatch):
+    entered=threading.Event();release=threading.Event()
+    original=ProductSession.finalize
+    def blocked(self,status):
+        entered.set();assert release.wait(5)
+        return original(self,status)
+    monkeypatch.setattr(ProductSession,'finalize',blocked)
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    try:
+        run=manager.start(Scenario());assert entered.wait(5)
+        with pytest.raises(RuntimeError,match='ownership retained'):manager.close(timeout=.01)
+        with pytest.raises(RuntimeError,match='already owned'):RunStore(tmp_path)
+        with pytest.raises(RuntimeError):manager.start(Scenario())
+        release.set();manager._sessions[run['id']].thread.join(10)
+        manager.close()
+        assert store.read(run['id'])['verification']['ok'] is True
+    finally:release.set();manager.close();store.close()
+    reopened=RunStore(tmp_path);reopened.close()
+
+
+def test_stop_during_candidate_publication_is_preserved(tmp_path,monkeypatch):
+    from types import SimpleNamespace
+    import sentinel_evc.product_pipeline as pipeline
+    entered=threading.Event();release=threading.Event()
+    original=pipeline.evaluate_candidates
+    class BlockedCandidates:
+        def __init__(self,rows):self.rows=rows
+        def __iter__(self):
+            entered.set();assert release.wait(5)
+            return iter(self.rows)
+    def wrapped(*args,**kwargs):
+        result=original(*args,**kwargs)
+        return SimpleNamespace(candidates=BlockedCandidates(result.candidates),selected=result.selected)
+    monkeypatch.setattr(pipeline,'evaluate_candidates',wrapped)
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    try:
+        run=manager.start(Scenario(risk_limit=.001));assert entered.wait(5)
+        assert manager.stop(run['id'])['status']=='stopping'
+        release.set();manager._sessions[run['id']].thread.join(10)
+        record=manager.read(run['id'])
+        assert record['status']=='failed' and record['error']['code']=='PROCESS_STOPPED'
+        assert record['result']['cursors']['submitted']==0
+        assert record['verification']['ok'] is True
+    finally:release.set();manager.close();store.close()
+
+
+def test_stop_cannot_be_acknowledged_during_signed_finalization(tmp_path,monkeypatch):
+    import sentinel_evc.product_pipeline as pipeline
+    entered=threading.Event();release=threading.Event()
+    original=pipeline.build_bundle
+    def blocked(*args,**kwargs):
+        entered.set();assert release.wait(5)
+        return original(*args,**kwargs)
+    monkeypatch.setattr(pipeline,'build_bundle',blocked)
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    try:
+        run=manager.start(Scenario());assert entered.wait(5)
+        with pytest.raises(ValueError,match='cannot stop'):manager.stop(run['id'])
+        release.set();manager._sessions[run['id']].thread.join(10)
+        assert manager.read(run['id'])['status']=='completed'
+    finally:release.set();manager.close();store.close()
 
 
 def test_serve_closes_manager_and_store_when_server_construction_fails(monkeypatch,tmp_path):
@@ -313,3 +464,59 @@ def test_new_stop_during_resume_is_not_lost(tmp_path):
         assert len([e for e in manager.events(run['id']) if e['type']=='DISPATCH'])==before
     finally:
         release.set();Executor.try_recover=original;manager.close();store.close()
+
+
+def test_server_close_waits_for_inflight_handler_before_workspace_release(tmp_path):
+    entered, release = threading.Event(), threading.Event()
+    store = RunStore(tmp_path); manager = ProductManager(store, realtime=False)
+    server = LocalServer(('127.0.0.1', 0), store, manager)
+    server_thread = threading.Thread(target=server.serve_forever)
+    server_thread.start()
+    response = {}
+
+    def blocked_import(name, format, content_base64):
+        entered.set()
+        assert release.wait(5)
+        return {'id': 'asset-' + 'a' * 32, 'name': name, 'format': format,
+                'physics_authorized': False}
+
+    server.assets.import_asset = blocked_import
+    base = 'http://127.0.0.1:' + str(server.server_address[1])
+
+    def request():
+        body = json.dumps({'name': 'barrier', 'format': 'obj', 'content_base64': 'eA=='}).encode()
+        headers = {'Content-Type': 'application/json', 'X-Sentinel-Token': server.token}
+        try:
+            with urlopen(Request(base + '/api/assets', data=body, headers=headers), timeout=5) as result:
+                response['status'] = result.status
+                response['body'] = json.load(result)
+        except BaseException as exc:
+            response['error'] = exc
+
+    request_thread = threading.Thread(target=request)
+    request_thread.start()
+    closer = None
+    try:
+        assert entered.wait(5)
+        server.shutdown()
+        closer = threading.Thread(target=server.server_close)
+        closer.start()
+        time.sleep(.05)
+        assert closer.is_alive(), 'server_close released while a handler still used server resources'
+        release.set()
+        request_thread.join(5); closer.join(5); server_thread.join(5)
+        assert not request_thread.is_alive() and not closer.is_alive() and not server_thread.is_alive()
+        assert response.get('status') == 201, response
+        assert response['body']['asset']['physics_authorized'] is False
+        manager.close(); store.close()
+        reopened = RunStore(tmp_path)
+        reopened.close()
+    finally:
+        release.set()
+        if closer is None:
+            server.shutdown(); server.server_close()
+        request_thread.join(5); server_thread.join(5)
+        try: manager.close()
+        except Exception: pass
+        try: store.close()
+        except Exception: pass

@@ -158,3 +158,28 @@ def test_model_check_rejects_source_changed_after_import(tmp_path, monkeypatch):
     monkeypatch.setattr("sentinel_evc.assets.importlib.util.find_spec", lambda name: object())
     with pytest.raises(ValueError, match="import digest"):
         store.check(asset["id"])
+
+
+@pytest.mark.parametrize("metadata", [[], 7, {"format": "obj"}, {"id": "wrong", "format": "obj"}])
+def test_corrupt_asset_metadata_isolated_while_valid_asset_remains_visible(tmp_path, metadata):
+    store = AssetStore(tmp_path)
+    valid = store.import_asset("valid", "obj", content=OBJ)
+    corrupt_id = "asset-" + "a" * 32
+    corrupt = tmp_path / corrupt_id
+    corrupt.mkdir()
+    (corrupt / "asset.json").write_text(json.dumps(metadata), "utf-8")
+    with pytest.raises(KeyError):
+        store.get(corrupt_id)
+    assert [record["id"] for record in store.list()] == [valid["id"]]
+
+
+def test_nested_asset_metadata_cannot_enable_physics_or_drop_list_response(tmp_path):
+    store = AssetStore(tmp_path)
+    valid = store.import_asset("valid", "obj", content=OBJ)
+    path = tmp_path / valid["id"] / "asset.json"
+    record = json.loads(path.read_text("utf-8"))
+    record["capabilities"] = []
+    path.write_text(json.dumps(record), "utf-8")
+    with pytest.raises(KeyError):
+        store.get(valid["id"])
+    assert store.list() == []

@@ -1,21 +1,21 @@
 # Mechanism implementation matrix — product foundation
 
-This is the first usable local numerical product increment. Design mechanisms are tracked individually; the historical v4 GRU/dataset/robot claims are not substituted with prototype results.
+This is the first usable local numerical product increment. Repository mechanism IDs M01–M12 are distinct from the original v4 requirement IDs. See [design_alignment.md](design_alignment.md) for the accurate F01–F12 trace and remaining integrations; historical v4 GRU/dataset/robot claims are not substituted with prototype results.
 
 | Mechanism | Implemented behavior | Remaining experiment |
 |---|---|---|
-| F01 final action binding | immutable descriptor/Plan digest; finite 3D position profile | upstream VLA action adapters and normalization versions |
-| F02 full physical validation | exact segment/sphere and box geometry; model cannot override rejection | link geometry, controller feasibility and recoverable robot terminal sets |
-| F03 incremental certificate | parent/child/scene/time/event bindings; cumulative margins; full fallback; paired local total-cost measurement | realistic transform distribution and complex geometry; current simple-profile delta path is slower |
-| F04 lease | bounded prefix, HMAC, one-use, full Context, expiry and prediction registry | process/key isolation and device trust |
-| F05 single writer | only Executor writes controller commands | real driver capability enforcement |
-| F06 commit/runtime state | fresh actual feedback before dispatch; start/tracking tube; context checks | sensors, synchronization and measured feedback delays |
-| F07 revoke/recover | invalidates unused permits; cancel confirmed + drain + fresh feedback + current epoch + approval | device cancel and physical braking characterization |
-| F08 final-candidate prediction | all four final Plans evaluated; deterministic earliest allowed; strict exact suffix | v4 GRU weights/training, visual/action-conditional model |
-| F09 calibrated consequence | root-max rank, independent root groups, model/rule digest; unsupported action family unknown | large calibration/test sets and distribution shift studies |
-| F10 local correction | bounded fixed-end geometric repair, original full recheck; disabled by default | v4 SciPy SQP and complete post-repair prediction pipeline |
-| F11 gripper release | numerical open requires support assertion + allowed phase; actual simulated gripper feedback | hardware support sensing, clamp/force/slip trials |
-| F12 evidence/replay | sticky gap gate; every run asset signed; independent verifier; persisted data replay | external anchors/customer PKI/forensic custody |
+| M01 final action binding | immutable descriptor/Plan digest; finite 3D position profile | upstream VLA action adapters and normalization versions |
+| M02 full physical validation | exact segment/sphere and box geometry; model cannot override rejection | link geometry, controller feasibility and recoverable robot terminal sets |
+| M03 incremental certificate | parent/child/scene/time/event bindings; cumulative margins; full fallback; paired local total-cost measurement | realistic transform distribution and complex geometry; current simple-profile delta path is slower |
+| M04 lease | bounded prefix, HMAC, one-use, full Context, expiry and prediction registry | process/key isolation and device trust |
+| M05 single writer | only Executor writes controller commands | real driver capability enforcement |
+| M06 commit/runtime state | fresh actual feedback before dispatch; start/tracking tube; context checks | sensors, synchronization and measured feedback delays |
+| M07 revoke/recover | invalidates unused permits; cancel confirmed + drain + fresh feedback + current epoch + approval | device cancel and physical braking characterization |
+| M08 final-candidate prediction | all four final Plans evaluated; deterministic earliest allowed; strict exact suffix | v4 GRU weights/training, visual/action-conditional model |
+| M09 calibrated consequence | root-max rank, independent root groups, model/rule digest; unsupported action family unknown | large calibration/test sets and distribution shift studies |
+| M10 local correction | bounded fixed-end geometric repair, original full recheck; disabled by default | v4 SciPy SQP and complete post-repair prediction pipeline |
+| M11 gripper release | numerical open requires support assertion + allowed phase; actual simulated gripper feedback | hardware support sensing, clamp/force/slip trials |
+| M12 evidence/replay | sticky gap gate; every run asset signed; independent verifier; persisted data replay | external anchors/customer PKI/forensic custody |
 | Workbench | create/import scenario, four-candidate outcomes, actual load chart, event filters, step replay, stop/resume, ZIP | multi-user auth, remote deployment, device/VLA management |
 
 The numerical plant uses `v_next=v+dt*(-a-k*r-d*v-beta*r³)` and `r_next=r+dt*v_next`. Observable history contains eight `(r,v,a)` samples. Hidden simulator parameters are confined to label/evaluator channels. Absolute position Plans convert to acceleration using successive discrete velocities and initial zero future tool velocity. Four movement durations share 40 observation intervals at dt=0.05.

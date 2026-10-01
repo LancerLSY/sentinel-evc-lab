@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import shutil
 import stat
 import subprocess
 
@@ -23,6 +24,9 @@ def _source(root: Path) -> Path:
     (source / "tests/test_sample.py").write_text("def test_ok(): pass\n", encoding="utf-8")
     (source / "tools/benchmark_performance.py").write_text(
         "print('benchmark')\n", encoding="utf-8"
+    )
+    (source / "tools/validate_scenarios.py").write_text(
+        "print('scenarios')\n", encoding="utf-8"
     )
     (source / "src/sentinel_evc/__pycache__").mkdir()
     (source / "src/sentinel_evc/__pycache__/bad.pyc").write_bytes(b"private cache")
@@ -68,6 +72,7 @@ def test_install_system_publishes_complete_core_install(tmp_path):
     assert "PYTHONDONTWRITEBYTECODE=1" in result.command.read_text(encoding="utf-8")
     assert (target / "source/tests/test_sample.py").is_file()
     assert (target / "source/tools/benchmark_performance.py").is_file()
+    assert (target / "source/tools/validate_scenarios.py").is_file()
     assert (target / "source/src/sentinel_evc/native/SentinelApp.swift").is_file()
     assert not (target / "source/src/sentinel_evc/__pycache__").exists()
     manifest = json.loads((target / "installation.json").read_text())
@@ -88,6 +93,31 @@ def test_public_source_refuses_symlinked_benchmark(tmp_path, link_target):
 
     with pytest.raises(ValueError, match="regular file"):
         installation._copy_public_source(source, tmp_path / "public")
+
+
+@pytest.mark.parametrize("location", ["src", "src/sentinel_evc/nested.py"])
+def test_public_source_refuses_root_or_nested_symlink_before_copy(tmp_path, location):
+    source = _source(tmp_path)
+    path = source / location
+    if path.is_dir():
+        shutil.rmtree(path)
+        path.symlink_to(source / "tests", target_is_directory=True)
+    else:
+        path.symlink_to(source / "README.md")
+    destination = tmp_path / "public"
+    with pytest.raises(ValueError, match="symlink"):
+        installation._copy_public_source(source, destination)
+    assert not destination.exists()
+
+
+def test_public_source_refuses_symlinked_checkout_root_before_copy(tmp_path):
+    source = _source(tmp_path)
+    alias = tmp_path / "checkout-alias"
+    alias.symlink_to(source, target_is_directory=True)
+    destination = tmp_path / "public"
+    with pytest.raises(ValueError, match="root cannot be a symlink"):
+        installation._copy_public_source(alias, destination)
+    assert not destination.exists()
 
 
 def test_source_digest_ignores_runtime_bytecode_cache(tmp_path):
@@ -240,9 +270,19 @@ def test_build_macos_app_requires_macos(tmp_path, monkeypatch):
 
 def test_native_app_waits_for_cleanup_then_reaps_backend():
     source = (Path(installation.__file__).parent / "native/SentinelApp.swift").read_text()
-    assert "addingTimeInterval(8.0)" in source
+    assert "addingTimeInterval(15.0)" in source
     assert "kill(task.processIdentifier, SIGKILL)" in source
     assert "task.waitUntilExit()" in source
+
+
+def test_native_backend_discovery_requires_nonce_and_exact_marker():
+    source=(Path(installation.__file__).parent/'native/SentinelApp.swift').read_text()
+    assert 'line.hasPrefix("SENTINEL_READY ")' in source
+    assert 'ready.nonce == launchNonce' in source
+    assert 'environment["SENTINEL_LAUNCH_NONCE"] = launchNonce' in source
+    assert 'guard backendPort == nil' in source
+    assert 'url.user == nil, url.password == nil' in source
+    assert 'line.range(of: "http://127.0.0.1:")' not in source
 
 
 def test_native_app_routes_only_backend_downloads_to_save_panel():

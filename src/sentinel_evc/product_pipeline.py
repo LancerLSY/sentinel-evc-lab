@@ -57,7 +57,7 @@ class ProductManager:
             session=self._sessions.get(run_id)
             if not session:raise ValueError('run is not live')
             with session.condition:
-                if session.record['status'] not in {'queued','preparing','running'}:raise ValueError('cannot stop')
+                if session.finalizing or session.record['status'] not in {'queued','preparing','running'}:raise ValueError('cannot stop')
                 session.stop_requested=True
                 session.record['status']='stopping'
                 session.condition.notify_all()
@@ -74,7 +74,7 @@ class ProductManager:
                 session.condition.notify_all()
             return session.snapshot()
 
-    def close(self):
+    def close(self, timeout=5):
         with self._lock:
             self._closed=True
             sessions=list(self._sessions.values())
@@ -83,8 +83,11 @@ class ProductManager:
                 session.shutdown_requested=True
                 session.stop_requested=True
                 session.condition.notify_all()
+        deadline=time.monotonic()+timeout
         for session in sessions:
-            session.thread.join(timeout=5)
+            session.thread.join(timeout=max(0,deadline-time.monotonic()))
+        if any(session.thread.is_alive() for session in sessions):
+            raise RuntimeError('numeric workers have not stopped; workspace ownership retained')
 
 class ProductSession:
     def __init__(self,manager,scenario,record):
@@ -94,6 +97,7 @@ class ProductSession:
         self.stop_requested=False
         self.resume_requested=False
         self.shutdown_requested=False
+        self.finalizing=False
         self.thread=threading.Thread(target=self.run,name='sentinel-'+record['id'][-8:],daemon=True)
         self.start_wall=time.monotonic()
         self.clock=time.monotonic_ns()
@@ -166,16 +170,24 @@ class ProductSession:
         events=tuple((i-offset,event) for i,event in plan.gripper_events if i>=offset)
         return Plan(plan.plan_id+'-suffix-'+str(offset),plan.knots[offset:],plan.dt,events,plan.descriptor)
 
+    def check_preparation(self):
+        with self.condition:
+            if self.stop_requested or self.shutdown_requested:
+                raise Rejection('PROCESS_STOPPED','准备阶段已停止；请创建新运行。')
+
     def run(self):
         controller=executor=case=None
         final_status="failed"
         self.root_prediction=None
         try:
-            with self.condition:self.record['status']='preparing'
+            with self.condition:
+                self.check_preparation()
+                self.record['status']='preparing'
             self.persist()
             case=make_numeric_case(self.scenario.seed)
             self.r,self.v=case.current_r,case.current_v
             model,calibration=build_default_numeric_artifacts(mode=self.scenario.prediction_mode)
+            self.check_preparation()
             self.model,self.calibration=model,calibration
             self.result['model']={**model.summary(),'id':model.hash}
             self.result['calibration']={**calibration.summary(),'id':calibration.hash}
@@ -184,6 +196,7 @@ class ProductSession:
                 ok,margins,_=full_check(candidate,self.scenario.scene)
                 return ok,min(margins)
             evaluation=evaluate_candidates(case.history,plans,model,calibration,self.now(),risk_limit=self.scenario.risk_limit,physical_check=geometry_check,ttl_ns=60_000_000_000)
+            self.check_preparation()
             for row in evaluation.candidates:
                 candidate=row.summary()
                 candidate['duration']=float(candidate['duration'])
@@ -192,6 +205,7 @@ class ProductSession:
             for row in evaluation.candidates:
                 self.log.append('PROPOSAL',candidate_id=row.plan.plan_id,plan_hash=row.plan.hash)
                 self.log.append('PREDICTION',candidate_id=row.plan.plan_id,status=row.status,prediction_hash=row.prediction.hash if row.prediction else None,reason=row.reason)
+            self.check_preparation()
             selected=evaluation.selected
             if selected is None:
                 final_status='rejected'
@@ -205,7 +219,9 @@ class ProductSession:
             authority=Authority(certificate_store,events=self.log)
             executor=Executor(authority,controller,self.log)
             context=Context(scene_id=self.scenario.scene.scene_id)
-            self.record['status']='running'
+            with self.condition:
+                self.check_preparation()
+                self.record['status']='running'
             self.persist()
             while self.observed_index < plan.horizon:
                 if self.stop_requested:
@@ -278,6 +294,11 @@ class ProductSession:
             # Keep sanitized public diagnostics, with exception type only.
             self.log.append('BACKUP',reason=type(exc).__name__)
         finally:
+            with self.condition:
+                self.finalizing=True
+                if self.stop_requested and final_status in {'completed','rejected'}:
+                    final_status='failed'
+                    self.record['error']={'code':'PROCESS_STOPPED','message':'运行终结前已收到停止请求；没有自动批准后续动作。'}
             try:
                 self.finalize(final_status)
             except Exception:

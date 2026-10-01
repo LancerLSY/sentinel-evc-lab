@@ -146,15 +146,21 @@ def _host_pin(host: str) -> dict:
 
 
 def _source_files(root: Path):
+    if root.is_symlink():
+        raise RemoteExperimentError("public source root is unsafe")
     allowed = []
     for base, suffixes in ((root / "src", {".py", ".html", ".css", ".js", ".md", ".swift"}),
                            (root / "tests", {".py"})):
-        if not base.is_dir() or base.is_symlink():
+        if base.is_symlink():
+            raise RemoteExperimentError(f"public source directory is unsafe: {base.name}")
+        if not base.is_dir():
             raise RemoteExperimentError(f"missing public source directory: {base.name}")
         for path in sorted(base.rglob("*")):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise RemoteExperimentError(f"public source tree contains an unsafe entry: {base.name}")
             if path.is_dir():
                 continue
-            if path.is_symlink() or not path.is_file() or path.suffix not in suffixes:
+            if path.suffix not in suffixes:
                 continue
             allowed.append(path)
     for name in ("pyproject.toml", "README.md", "LICENSE"):
@@ -162,12 +168,21 @@ def _source_files(root: Path):
         if not path.is_file() or path.is_symlink():
             raise RemoteExperimentError(f"missing public source file: {name}")
         allowed.append(path)
-    benchmark = root / "tools" / "benchmark_performance.py"
-    if benchmark.exists() or benchmark.is_symlink() or benchmark.parent.is_symlink():
-        if benchmark.is_symlink() or benchmark.parent.is_symlink() or not benchmark.is_file():
-            raise RemoteExperimentError("public performance benchmark is unsafe")
-        allowed.append(benchmark)
+    for name in ("benchmark_performance.py", "validate_scenarios.py"):
+        tool = root / "tools" / name
+        if tool.exists() or tool.is_symlink() or tool.parent.is_symlink():
+            if tool.is_symlink() or tool.parent.is_symlink() or not tool.is_file():
+                raise RemoteExperimentError(f"public tool is unsafe: {name}")
+            allowed.append(tool)
     return tuple(sorted(set(allowed)))
+
+
+def _public_source_manifest_sha256(root: Path) -> str:
+    manifest = {
+        path.relative_to(root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in _source_files(root)
+    }
+    return hashlib.sha256(canonical_json(manifest)).hexdigest()
 
 
 def _source_archive(root: Path) -> tuple[bytes, str]:

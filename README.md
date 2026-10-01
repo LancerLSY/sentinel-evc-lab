@@ -76,6 +76,21 @@ python -m pytest -q
 
 A genuine local numerical product increment. Real VLA, GRU, vision and device-motion experiments remain pending with explicit prerequisites; prototype measurements do not establish those capabilities.
 
+## Alignment and reliability
+
+The [v4 F01–F12 review](docs/design_alignment.md) maps the original requirements to
+current code and pending integrations. The [reliability report](docs/reliability_results.md)
+describes evidence rereads, shutdown ownership, cancellation races and the additional
+numeric/physics scenario protocol. Reproduce the numeric matrix with:
+
+```bash
+python tools/validate_scenarios.py --out runs/reliability-scenarios
+```
+
+The matrix checks supported runs, conservative refusals, unsupported actions and
+restart/tamper recovery. Physics acceptance failures remain visible; successful
+software regression does not establish full v4 completion or hardware reliability.
+
 ## Reproduce local performance
 
 ```bash
@@ -89,7 +104,7 @@ fallbacks, signing and independent verification; numeric totals also include ZIP
 export. Warmups are retained and excluded from quantiles. See the
 [measurement protocol](docs/performance_protocol.md). Use a new output directory.
 
-Actual `main` measurements on Apple M4, 10 cores / 16 GiB:
+Historical `main` snapshot `7a16586` measurements on Apple M4, 10 cores / 16 GiB:
 
 | Workload | Repetitions | P50 | P95 |
 |---|---:|---:|---:|

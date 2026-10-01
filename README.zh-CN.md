@@ -70,6 +70,19 @@ python -m pytest -q
 
 这是可操作的本地数值基础产品。真实 VLA、GRU、视觉和设备运动实验仍有明确前提；当前原型指标不能代表这些能力。
 
+## 设计对齐与可靠性
+
+[v4 F01–F12 对齐复盘](docs/design_alignment.md)按原设计编号对应实现和剩余接入工作。
+[可靠性报告](docs/reliability_results.md)记录证据重验、关闭时目录所有权、停止竞态修复和
+扩展数值/物理场景验证方法。运行新增数值场景矩阵：
+
+```bash
+python tools/validate_scenarios.py --out runs/reliability-scenarios
+```
+
+矩阵覆盖正常运行、保守拒绝、未知动作、重启和篡改后恢复。物理验收失败会保留；
+软件回归通过不能代表完整 v4 或真机可靠性已经完成。
+
 ## 复现本机性能测试
 
 ```bash
@@ -82,7 +95,7 @@ python tools/benchmark_performance.py --out runs/performance-01 --physics-warmup
 也包含 ZIP 导出。预热样本保留，但不计入分位数。详见[计量协议](docs/performance_protocol.md)。
 每次使用新的输出目录。
 
-`main` 在 Apple M4、10 核 / 16 GiB 上的实际结果：
+历史 `main` 快照 `7a16586` 在 Apple M4、10 核 / 16 GiB 上的实际结果：
 
 | 工作负载 | 重复次数 | P50 | P95 |
 |---|---:|---:|---:|

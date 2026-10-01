@@ -1,7 +1,6 @@
 """Persistent robot connection profiles and bounded read-only diagnostics."""
 from __future__ import annotations
 
-import json
 import ipaddress
 import math
 import os
@@ -14,6 +13,7 @@ import uuid
 from datetime import datetime, timezone
 
 from .contracts import canonical_json
+from .scenario import strict_json
 
 
 ROBOT_ID = re.compile(r"^robot-[0-9a-f]{32}$")
@@ -120,6 +120,59 @@ class RobotRegistry:
             raise KeyError("robot profile not found")
         return path
 
+    @staticmethod
+    def _validate_record(record, robot_id: str) -> dict:
+        required = {
+            "id", "name", "driver", "created_at", "endpoint", "mode",
+            "hardware_motion", "credentials_stored", "capabilities", "last_diagnostic",
+        }
+        if not isinstance(record, dict) or set(record) != required:
+            raise ValueError("invalid robot profile")
+        if record["id"] != robot_id or not ROBOT_ID.fullmatch(record["id"]):
+            raise ValueError("robot identity mismatch")
+        if not isinstance(record["name"], str) or not _NAME.fullmatch(record["name"]):
+            raise ValueError("invalid robot name")
+        driver = record["driver"]
+        if not isinstance(driver, str) or driver not in DRIVERS:
+            raise ValueError("invalid robot driver")
+        if not isinstance(record["created_at"], str):
+            raise ValueError("invalid robot creation time")
+        if record["hardware_motion"] is not False or record["credentials_stored"] is not False:
+            raise ValueError("robot profile cannot authorize motion or persist credentials")
+        expected_mode = "demo" if driver == "mock" else "read_only_diagnostic"
+        if record["mode"] != expected_mode:
+            raise ValueError("invalid robot mode")
+        endpoint = record["endpoint"]
+        if driver == "mock":
+            if endpoint is not None:
+                raise ValueError("mock profile cannot contain an endpoint")
+        else:
+            if not isinstance(endpoint, dict) or set(endpoint) != {"host", "port"}:
+                raise ValueError("invalid robot endpoint")
+            if not _valid_host(endpoint["host"]):
+                raise ValueError("invalid robot host")
+            if isinstance(endpoint["port"], bool) or not isinstance(endpoint["port"], int) or not 1 <= endpoint["port"] <= 65535:
+                raise ValueError("invalid robot port")
+        capabilities = record["capabilities"]
+        expected_capabilities = {
+            "diagnose": True, "write": False, "feedback": False, "queue": False,
+            "cancel": False, "executor_ready": False,
+        }
+        if capabilities != expected_capabilities:
+            raise ValueError("invalid robot capabilities")
+        diagnostic = record["last_diagnostic"]
+        if diagnostic is not None:
+            if not isinstance(diagnostic, dict) or diagnostic.get("robot_id") != robot_id:
+                raise ValueError("invalid robot diagnostic metadata")
+            if diagnostic.get("driver") != driver or type(diagnostic.get("hardware_connected")) is not bool:
+                raise ValueError("invalid robot diagnostic identity")
+            commands = diagnostic.get("commands_sent")
+            if not isinstance(commands, list) or any(command not in _READ_ONLY_COMMANDS for command in commands):
+                raise ValueError("robot diagnostic contains a non-read-only command")
+            if driver == "mock" and (diagnostic["hardware_connected"] or commands):
+                raise ValueError("mock diagnostic cannot claim hardware access")
+        return record
+
     def create(self, name, driver, host=None, port=None) -> dict:
         if not isinstance(name, str) or not _NAME.fullmatch(name):
             raise ValueError("name must be 1..128 printable characters")
@@ -172,13 +225,10 @@ class RobotRegistry:
     def get(self, robot_id) -> dict:
         with self._lock:
             try:
-                record = json.loads((self._directory(robot_id) / "robot.json").read_text("utf-8"))
-            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                record = strict_json((self._directory(robot_id) / "robot.json").read_bytes())
+                return self._validate_record(record, robot_id)
+            except (OSError, ValueError, KeyError, TypeError) as exc:
                 raise KeyError("robot profile not found") from exc
-            driver = record.get("driver")
-            if record.get("id") != robot_id or not isinstance(driver, str) or driver not in DRIVERS:
-                raise KeyError("robot profile not found")
-            return record
 
     def list(self) -> list[dict]:
         with self._lock:

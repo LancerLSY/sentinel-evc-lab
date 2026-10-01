@@ -103,7 +103,12 @@ def test_restart_marks_interrupted_and_rejects_path_identifiers(tmp_path):
     job_id = 'physics-job-' + 'a' * 32
     directory = tmp_path / job_id
     directory.mkdir()
-    (directory / 'job.json').write_text(json.dumps({'id': job_id, 'status': 'running', 'created_at': '2026-10-01'}))
+    (directory / 'job.json').write_text(json.dumps({
+        'id': job_id, 'name': 'test', 'status': 'running', 'seed': 7,
+        'friction': .35, 'render': False, 'created_at': '2026-10-01',
+        'error': None, 'summary': None, 'source_manifest_sha256': 'source',
+        'scientific_gates_pass': None, 'scope': 'mujoco-tray-geometry-v1',
+    }))
     manager = jobs.PhysicsJobs(tmp_path)
     try:
         assert manager.get(job_id)['status'] == 'interrupted'
@@ -167,3 +172,97 @@ def test_invalid_completed_evidence_is_persisted_for_list_and_restart(tmp_path, 
         assert reopened.list()[0]['status'] == 'failed'
     finally:
         reopened.close()
+
+
+@pytest.mark.parametrize('metadata', [
+    [],
+    7,
+    {'status': 'running'},
+    {'id': 'physics-job-' + 'b' * 32, 'status': 'not-a-status'},
+])
+def test_malformed_persisted_metadata_is_skipped_without_wedging_constructor(tmp_path, metadata):
+    job_id = 'physics-job-' + 'a' * 32
+    directory = tmp_path / job_id
+    directory.mkdir()
+    (directory / 'job.json').write_text(json.dumps(metadata))
+    manager = jobs.PhysicsJobs(tmp_path)
+    try:
+        assert manager.list() == []
+        with pytest.raises(KeyError):
+            manager.get(job_id)
+    finally:
+        manager.close()
+
+
+def test_close_retains_workspace_ownership_while_worker_is_still_alive(tmp_path):
+    class BlockedWorker:
+        alive = True
+        def join(self, timeout=None):
+            pass
+        def is_alive(self):
+            return self.alive
+
+    manager = jobs.PhysicsJobs(tmp_path)
+    blocked = BlockedWorker()
+    manager._workers['blocked'] = blocked
+    with pytest.raises(RuntimeError, match='所有权仍保留'):
+        manager.close()
+    with pytest.raises(RuntimeError, match='already owned'):
+        jobs.PhysicsJobs(tmp_path)
+    blocked.alive = False
+    manager.close()
+    reopened = jobs.PhysicsJobs(tmp_path)
+    reopened.close()
+
+
+def test_constructor_failure_releases_workspace_ownership(tmp_path, monkeypatch):
+    def broken_engine_probe():
+        raise RuntimeError('injected probe failure')
+
+    original = jobs.physics_engine_status
+    monkeypatch.setattr(jobs, 'physics_engine_status', broken_engine_probe)
+    with pytest.raises(RuntimeError, match='probe failure'):
+        jobs.PhysicsJobs(tmp_path)
+    monkeypatch.setattr(jobs, 'physics_engine_status', original)
+    reopened = jobs.PhysicsJobs(tmp_path)
+    reopened.close()
+
+
+def test_worker_failure_does_not_publish_exception_paths(tmp_path, monkeypatch):
+    _fake_process(monkeypatch)
+    secret = '/Users/private/secret-project/result.json'
+
+    def leaked_verifier(path):
+        raise OSError(secret)
+
+    monkeypatch.setattr(jobs, '_verify_result_tree', leaked_verifier)
+    manager = jobs.PhysicsJobs(tmp_path)
+    try:
+        created = manager.start({'seed': 7})
+        manager._workers[created['id']].join(5)
+        record = manager.get(created['id'])
+        listed = manager.list()[0]
+        assert record['status'] == listed['status'] == 'failed'
+        assert record['error'].startswith('PHYSICS_JOB_FAILED (OSError):')
+        assert secret not in record['error']
+        assert secret not in json.dumps(listed)
+    finally:
+        manager.close()
+
+
+def test_list_reverifies_completed_evidence_and_persists_sanitized_failure(tmp_path, monkeypatch):
+    _fake_process(monkeypatch)
+    manager = jobs.PhysicsJobs(tmp_path)
+    try:
+        created = manager.start({'seed': 7})
+        manager._workers[created['id']].join(5)
+        experiment = manager.directory(created['id']) / 'experiment'
+        (experiment / 'summary.json').write_text('{"forged":true}')
+        listed = manager.list()[0]
+        assert listed['status'] == 'failed'
+        assert listed['scientific_gates_pass'] is None
+        assert listed['error'].startswith('EVIDENCE_INVALID (')
+        assert str(tmp_path) not in listed['error']
+        assert manager.get(created['id'])['status'] == 'failed'
+    finally:
+        manager.close()

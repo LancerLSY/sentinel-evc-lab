@@ -11,7 +11,7 @@ This increment is a local single-user numeric workbench. Core DTOs live only in 
 - `Executor.try_recover(operator_approved, snapshot=None, live_context=None, now_ns=None)` requires confirmed cancel, drained driver prefix, a valid observation sampled after revoke, current local epoch, and explicit approval.
 - SimController exposes read-only `read_feedback(now_ns)` with actual position, submitted/accepted/observed cursors and gripper state. Only its observed command list changes the numeric plant; no next target or merely submitted command changes observed state.
 - A numerical `open` event requires `Snapshot.supported is True` and a supported task phase, and is dispatched by Executor only. It never establishes physical support sensing.
-- Authority accepts registered prediction objects via `register_prediction(prediction)`; `prepare(..., prediction=None, require_prediction=False)` binds any required prediction to the final plan and its validity. Lease carries `prediction_hash` when supplied. Core reads `Prediction.plan_hash`, `hash`, `deadline_mono_ns`, and `allowed`; numeric code alone defines the immutable object. Missing/unregistered/denied/expired required predictions deny preparation and dispatch.
+- Authority accepts registered prediction objects via `register_prediction(prediction)`; `prepare(..., prediction=None, require_prediction=False)` binds any required prediction to the final plan and its validity. Lease carries `prediction_hash` when supplied. Core snapshots `Prediction.plan_hash`, `hash`, `deadline_mono_ns`, and `allowed`, and denies preparation/dispatch if a registered object's fields change; numeric code defines its immutable object. Missing/unregistered/denied/expired required predictions deny preparation and dispatch. The registry remains a trusted local-process boundary.
 - `EventLog(run_id, maxlen=100000, schema_version="v0.1")` preserves legacy event types; `product-v1` adds `PREDICTION`, `LEASE`, `CANCEL_REQUEST`, `CANCEL_ACCEPTED`. `CANCEL_ACK` carries confirmed semantics. Overflow emits a visible sticky LOG_GAP and denies further motion approvals in that run.
 
 ## Numeric interfaces
@@ -37,12 +37,20 @@ The first trainable model is explicitly a standard-library low-dimensional resid
 Pending/blocked experiments have prerequisites, runnable entrypoints or explicit integration requirements, acceptance criteria and output expectations, but no metrics. Completed experiments require command, source/environment, data/model/calibration identifiers, acceptance output and artifact digests. Real VLA/vision/robot/GRU experiments are distinct from this numerical product.
 
 
-Terminal status is published only after controller cleanup and signed asset finalization.
+Successful completion and signed rejection are published only after controller cleanup
+and signed asset finalization. A restart or finalization failure can publish an
+operational `failed` record without a complete bundle; it has verification false
+(`UNFINALIZED_RECORD` or `EVIDENCE_FINALIZATION_FAILED`), cannot export and never
+establishes successful execution or a confirmed physical stop.
 Resume responds `preparing` so clients continue polling; a newer stop request is never
 cleared by recovery. Finalization failure becomes `EVIDENCE_FINALIZATION_FAILED`,
 invalidates completion confirmation and permits a later independent run. Terminal
-reads reverify signed assets and compare all displayed status/result/error/scope data;
-exports verify again and allow flat member names only. The supplied public key remains
+reads and lists reverify finalized signed assets and compare all displayed
+status/result/error/scope data; removing a verification cache field does not bypass
+verification. Downloads regenerate exports from verified source assets, and exports
+allow flat member names only. A shutdown timeout retains workspace ownership while
+workers remain alive. A stop during preparation ends with no approved dispatch and
+requires a new run. The supplied public key remains
 a demo trust source. Product scenario/event schemas are envelopes; core constructors
 and regressions enforce semantic cross-field conditions. Dedicated run/prediction/
 experiment schemas are a subsequent contract-documentation increment.

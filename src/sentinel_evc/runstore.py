@@ -10,6 +10,7 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 from .evidence import verify_bundle, _safe_name
+from .scenario import strict_json
 
 RUN_ID = re.compile(r'^run-[0-9a-f]{32}$')
 ACTIVE = {'queued','preparing','running','stopping','stopped'}
@@ -44,9 +45,15 @@ class RunStore:
         self.root.mkdir(parents=True,exist_ok=True)
         self._lock = threading.RLock()
         self._process_lock = _WorkspaceLock(self.root / 'workspace.lock')
-        self._db = sqlite3.connect(self.root / 'index.sqlite3',check_same_thread=False)
-        self._db.execute('CREATE TABLE IF NOT EXISTS runs (id TEXT PRIMARY KEY, updated TEXT, summary TEXT)')
-        self.rebuild()
+        self._db = None
+        try:
+            self._db = sqlite3.connect(self.root / 'index.sqlite3',check_same_thread=False)
+            self._db.execute('CREATE TABLE IF NOT EXISTS runs (id TEXT PRIMARY KEY, updated TEXT, summary TEXT)')
+            self.rebuild()
+        except BaseException:
+            if self._db is not None:self._db.close()
+            self._process_lock.close()
+            raise
 
     def directory(self, run_id):
         if not isinstance(run_id,str) or not RUN_ID.fullmatch(run_id):
@@ -94,15 +101,35 @@ class RunStore:
     def read(self, run_id):
         with self._lock:
             try:
-                record=json.loads((self.directory(run_id) / 'run.json').read_text('utf-8'))
+                path=self.directory(run_id) / 'run.json'
+                if path.is_symlink():raise ValueError('symlink metadata refused')
+                record=strict_json(path.read_bytes())
+                if (not isinstance(record,dict) or record.get('id') != run_id
+                        or not isinstance(record.get('status'),str)
+                        or record['status'] not in ACTIVE | TERMINAL
+                        or not isinstance(record.get('name'),str)
+                        or not isinstance(record.get('scenario'),dict)):
+                    raise ValueError('invalid run metadata')
                 return self._verified_record(record)
             except (OSError,ValueError) as exc:
                 raise KeyError('run not found') from exc
 
     def _verified_record(self,record):
-        if record.get('status') not in TERMINAL or not record.get('verification'):
-            return record
         directory=self.directory(record['id'])
+        if record.get('status') not in TERMINAL and not (directory/'bundle/manifest.json').exists():
+            return record
+        # Interrupted/unfinalized failures have no signed completion to claim.
+        # Completed/rejected records always verify, even if a cache field was removed.
+        if record['status']=='failed' and not (directory/'bundle/manifest.json').exists():
+            verification=record.get('verification')
+            finalization_failed=(isinstance(verification,dict) and verification.get('ok') is False
+                and verification.get('message')=='EVIDENCE_FINALIZATION_FAILED'
+                and isinstance(record.get('error'),dict)
+                and record['error'].get('code')=='EVIDENCE_FINALIZATION_FAILED')
+            if not verification or finalization_failed:
+                message='EVIDENCE_FINALIZATION_FAILED' if finalization_failed else 'UNFINALIZED_RECORD'
+                record['verification']={'ok':False,'message':message,'trust':'self-contained demo key; external trust required'}
+                return record
         try:
             ok,message=verify_bundle(str(directory/'bundle'),str(directory/'anchors/demo.public'),record['id'])
             if not ok:raise ValueError('invalid bundle')
@@ -130,7 +157,15 @@ class RunStore:
 
     def list(self):
         with self._lock:
-            return [json.loads(row[0]) for row in self._db.execute('SELECT summary FROM runs ORDER BY updated DESC LIMIT 200')]
+            identifiers=[row[0] for row in self._db.execute('SELECT id FROM runs ORDER BY updated DESC LIMIT 200')]
+            rows=[]
+            for run_id in identifiers:
+                try:
+                    record=self.read(run_id)
+                    rows.append({k:record.get(k) for k in ('id','name','status','created_at','updated_at','error','selected','scope','verification')})
+                except KeyError:
+                    continue
+            return rows
 
     def events(self, run_id):
         path = self.directory(run_id) / 'events.jsonl'
@@ -170,14 +205,17 @@ class RunStore:
                 raise ValueError('unsafe manifest member')
             files += ['bundle/'+name for name in manifest['files']]
             archive = directory / 'evidence.zip'
-            temp = directory / 'evidence.tmp'
-            with zipfile.ZipFile(temp,'w',zipfile.ZIP_DEFLATED) as z:
-                for name in files:
-                    path = directory/name
-                    if path.is_symlink() or not path.is_file() or path.resolve().is_relative_to(directory.resolve()) is False:
-                        raise ValueError('unsafe export path')
-                    z.write(path,name)
-            os.replace(temp,archive)
+            temp = directory / ('evidence-'+uuid.uuid4().hex+'.tmp')
+            try:
+                with temp.open('xb') as stream, zipfile.ZipFile(stream,'w',zipfile.ZIP_DEFLATED) as z:
+                    for name in files:
+                        path = directory/name
+                        if path.is_symlink() or not path.is_file() or path.resolve().is_relative_to(directory.resolve()) is False:
+                            raise ValueError('unsafe export path')
+                        z.write(path,name)
+                os.replace(temp,archive)
+            finally:
+                temp.unlink(missing_ok=True)
             return archive
 
     def close(self):

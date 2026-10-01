@@ -17,6 +17,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
 from .contracts import canonical_json
+from .scenario import strict_json
 
 
 MAX_ASSET_BYTES = 8 * 1024 * 1024
@@ -382,6 +383,54 @@ class AssetStore:
             raise KeyError("asset not found")
         return path
 
+    @staticmethod
+    def _validate_record(record, asset_id: str) -> dict:
+        required = {
+            "id", "name", "format", "created_at", "source_sha256", "size_bytes",
+            "geometry_kind", "geometry_count", "preview_available", "physics_check",
+            "physics_authorized", "capabilities",
+        }
+        if not isinstance(record, dict) or not required.issubset(record) or set(record) - required - {"last_check"}:
+            raise ValueError("invalid asset metadata")
+        if record["id"] != asset_id or not ASSET_ID.fullmatch(record["id"]):
+            raise ValueError("asset identity mismatch")
+        if not isinstance(record["name"], str) or not _NAME.fullmatch(record["name"]):
+            raise ValueError("invalid asset name")
+        if record["format"] not in FORMATS or not isinstance(record["created_at"], str):
+            raise ValueError("invalid asset format")
+        if not isinstance(record["source_sha256"], str) or not re.fullmatch(r"sha256:[0-9a-f]{64}", record["source_sha256"]):
+            raise ValueError("invalid asset digest")
+        if type(record["size_bytes"]) is not int or not 1 <= record["size_bytes"] <= MAX_ASSET_BYTES:
+            raise ValueError("invalid asset size")
+        if record["geometry_kind"] not in {"mesh", "primitives"}:
+            raise ValueError("invalid asset geometry kind")
+        if type(record["geometry_count"]) is not int or record["geometry_count"] < 0:
+            raise ValueError("invalid asset geometry count")
+        if type(record["preview_available"]) is not bool or type(record["physics_authorized"]) is not bool:
+            raise ValueError("invalid asset flags")
+        if record["physics_authorized"] is not False:
+            raise ValueError("asset metadata cannot authorize physics")
+        if record["physics_check"] not in {"not_run", "not_applicable", "unavailable", "passed", "failed"}:
+            raise ValueError("invalid physics check status")
+        capabilities = record["capabilities"]
+        if not isinstance(capabilities, dict) or capabilities.get("preview") is not True:
+            raise ValueError("invalid asset capabilities")
+        if capabilities.get("fixture_authorization") is not False or capabilities.get("training") is not False:
+            raise ValueError("asset capabilities cannot authorize execution")
+        if type(capabilities.get("mujoco_check")) is not bool:
+            raise ValueError("invalid asset check capability")
+        if capabilities["mujoco_check"] is not (record["format"] in {"mjcf", "urdf"}):
+            raise ValueError("asset check capability disagrees with format")
+        if record["preview_available"] is not (record["geometry_count"] > 0):
+            raise ValueError("asset preview flag disagrees with geometry")
+        if "last_check" in record:
+            last_check = record["last_check"]
+            if not isinstance(last_check, dict) or last_check.get("asset_id") != asset_id:
+                raise ValueError("invalid asset check metadata")
+            if last_check.get("physics_authorized") is not False:
+                raise ValueError("asset check cannot authorize physics")
+        return record
+
     def import_asset(self, name, format, *, content=None, content_base64=None) -> dict:
         if not isinstance(name, str) or not _NAME.fullmatch(name):
             raise ValueError("name must be 1..128 printable characters")
@@ -450,12 +499,10 @@ class AssetStore:
     def get(self, asset_id) -> dict:
         with self._lock:
             try:
-                record = json.loads((self._directory(asset_id) / "asset.json").read_text("utf-8"))
-            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                record = strict_json((self._directory(asset_id) / "asset.json").read_bytes())
+                return self._validate_record(record, asset_id)
+            except (OSError, ValueError, KeyError, TypeError) as exc:
                 raise KeyError("asset not found") from exc
-            if record.get("id") != asset_id or record.get("format") not in FORMATS:
-                raise KeyError("asset not found")
-            return record
 
     def list(self) -> list[dict]:
         with self._lock:

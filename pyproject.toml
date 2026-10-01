@@ -22,3 +22,6 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 sentinel_evc = ["web/*.html", "web/*.css", "web/*.js", "web/*.md", "native/*.swift"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

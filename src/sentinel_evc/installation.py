@@ -216,7 +216,10 @@ def _resolve_source_checkout(source: str | os.PathLike[str] | None) -> Path:
         origin = packaged_checkout if (packaged_checkout / "pyproject.toml").is_file() else Path.cwd()
     else:
         origin = Path(source)
-    origin = origin.expanduser().resolve()
+    origin = origin.expanduser()
+    if origin.is_symlink():
+        raise ValueError("installation source root cannot be a symlink")
+    origin = origin.resolve()
     if not origin.is_dir() or not (origin / "pyproject.toml").is_file():
         raise ValueError("installation source must be a source checkout with pyproject.toml")
     return origin
@@ -233,19 +236,32 @@ def _reject_recursive_target(destination: Path, source: Path) -> None:
 
 def _copy_public_source(source: str | os.PathLike[str] | None, destination: Path) -> Path:
     origin = _resolve_source_checkout(source)
-    benchmark = origin / "tools" / "benchmark_performance.py"
-    if (benchmark.exists() or benchmark.is_symlink() or benchmark.parent.is_symlink()) and (
-        benchmark.is_symlink()
-        or benchmark.parent.is_symlink()
-        or not benchmark.is_file()
-    ):
-        raise ValueError("public performance benchmark must be a regular file")
-    destination.mkdir()
     required = ("src", "tests", "pyproject.toml", "README.md", "LICENSE")
     for name in required:
         item = origin / name
+        if item.is_symlink():
+            raise ValueError(f"required public source asset is a symlink: {name}")
         if not item.exists():
             raise FileNotFoundError(f"required public source asset is missing: {name}")
+        if name in {"src", "tests"}:
+            if not item.is_dir():
+                raise ValueError(f"required public source directory is unsafe: {name}")
+            for nested in item.rglob("*"):
+                if nested.is_symlink() or not (nested.is_dir() or nested.is_file()):
+                    raise ValueError(f"public source tree contains a symlink or special file: {name}")
+        elif not item.is_file():
+            raise ValueError(f"required public source file is unsafe: {name}")
+    tools = tuple(origin / "tools" / name for name in (
+        "benchmark_performance.py", "validate_scenarios.py",
+    ))
+    for tool in tools:
+        if tool.exists() or tool.is_symlink() or tool.parent.is_symlink():
+            if tool.is_symlink() or tool.parent.is_symlink() or not tool.is_file():
+                raise ValueError(f"public tool must be a regular file: {tool.name}")
+
+    destination.mkdir()
+    for name in required:
+        item = origin / name
         target = destination / name
         if item.is_dir():
             shutil.copytree(
@@ -254,13 +270,15 @@ def _copy_public_source(source: str | os.PathLike[str] | None, destination: Path
             )
         else:
             shutil.copy2(item, target)
-    # Older source checkouts predate the public benchmark, so absence remains
-    # compatible.  When present, copy only this audited tool rather than the
+    # Older source checkouts predate these public validators, so absence remains
+    # compatible.  When present, copy only the audited tools rather than the
     # whole tools directory, which may contain local operator material.
-    if benchmark.is_file():
-        target = destination / "tools" / benchmark.name
-        target.parent.mkdir()
-        shutil.copy2(benchmark, target)
+    for tool in tools:
+        if not tool.is_file():
+            continue
+        target = destination / "tools" / tool.name
+        target.parent.mkdir(exist_ok=True)
+        shutil.copy2(tool, target)
     return destination
 
 

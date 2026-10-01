@@ -74,3 +74,83 @@ def test_only_one_service_owns_storage(tmp_path):
         with pytest.raises(RuntimeError):RunStore(tmp_path)
     finally:first.close()
     second=RunStore(tmp_path);second.close()
+
+
+def test_terminal_reads_and_lists_reverify_without_cached_verification(tmp_path):
+    from sentinel_evc.product_pipeline import ProductManager
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    try:
+        run=manager.start(Scenario());manager._sessions[run['id']].thread.join()
+        path=store.directory(run['id'])/'run.json'
+        record=json.loads(path.read_text());record.pop('verification')
+        path.write_text(json.dumps(record))
+        assert store.read(run['id'])['verification']['ok'] is True
+        record['scope']='forged hardware success'
+        path.write_text(json.dumps(record))
+        visible=store.read(run['id'])
+        assert visible['status']=='failed' and visible['verification']['ok'] is False
+        assert visible['scope']=='numeric-simulator-product-v1'
+        assert store.list()[0]['status']=='failed'
+        with pytest.raises(ValueError):store.export(run['id'])
+        record['status']='queued'
+        path.write_text(json.dumps(record))
+        assert store.read(run['id'])['status']=='failed'
+    finally:manager.close();store.close()
+
+
+@pytest.mark.parametrize('payload', ['[]','null','42','{"id":"wrong","status":"completed"}'])
+def test_malformed_run_metadata_is_isolated_on_restart(tmp_path,payload):
+    store=RunStore(tmp_path);run=store.create(Scenario());path=store.directory(run['id'])/'run.json'
+    store.close();path.write_text(payload)
+    store=RunStore(tmp_path)
+    try:
+        assert store.list()==[]
+        with pytest.raises(KeyError):store.read(run['id'])
+        assert store.create(Scenario())['status']=='queued'
+    finally:store.close()
+
+
+def test_failed_store_constructor_releases_workspace_lock(tmp_path):
+    import sqlite3
+    (tmp_path/'index.sqlite3').write_bytes(b'corrupt sqlite')
+    with pytest.raises(sqlite3.DatabaseError):RunStore(tmp_path)
+    (tmp_path/'index.sqlite3').unlink()
+    store=RunStore(tmp_path);store.close()
+
+
+def test_export_replaces_cache_and_ignores_legacy_temp_symlink(tmp_path):
+    import zipfile
+    from sentinel_evc.product_pipeline import ProductManager
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    try:
+        run=manager.start(Scenario());manager._sessions[run['id']].thread.join()
+        directory=store.directory(run['id'])
+        victim=tmp_path/'outside.txt';victim.write_text('preserved')
+        (directory/'evidence.tmp').symlink_to(victim)
+        archive=store.export(run['id']);archive.write_bytes(b'corrupt cache')
+        assert zipfile.is_zipfile(store.export(run['id']))
+        assert victim.read_text()=='preserved'
+    finally:manager.close();store.close()
+
+
+def test_unsigned_finalization_failure_survives_restart(tmp_path,monkeypatch):
+    import sentinel_evc.product_pipeline as pipeline
+    original=pipeline.build_bundle
+    def fail(*args,**kwargs):raise OSError('injected disk failure')
+    monkeypatch.setattr(pipeline,'build_bundle',fail)
+    store=RunStore(tmp_path);manager=pipeline.ProductManager(store,realtime=False)
+    try:
+        run=manager.start(Scenario());manager._sessions[run['id']].thread.join(10)
+        assert manager.read(run['id'])['error']['code']=='EVIDENCE_FINALIZATION_FAILED'
+    finally:manager.close();store.close()
+    store=RunStore(tmp_path);manager=pipeline.ProductManager(store,realtime=False)
+    try:
+        record=store.read(run['id'])
+        assert record['status']=='failed'
+        assert record['error']['code']=='EVIDENCE_FINALIZATION_FAILED'
+        assert record['verification']['ok'] is False
+        with pytest.raises(ValueError):store.export(run['id'])
+        monkeypatch.setattr(pipeline,'build_bundle',original)
+        fresh=manager.start(Scenario());manager._sessions[fresh['id']].thread.join(10)
+        assert manager.read(fresh['id'])['status']=='completed'
+    finally:manager.close();store.close()
