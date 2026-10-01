@@ -251,10 +251,92 @@ def cmd_verify_physics(args):
     return 0
 
 
+def cmd_install(args):
+    from dataclasses import asdict
+    from .installation import install_system
+    source = args.source or str(Path(__file__).resolve().parents[2])
+    if args.interactive or args.target is None:
+        from .install_wizard import run_wizard
+        if not sys.stdin.isatty():
+            raise ValueError("交互安装需要终端；无人值守安装请指定 --target。")
+        return run_wizard(source=source, target=args.target, profile=args.profile,
+                          python_executable=args.python, no_app=args.no_app)
+    result = install_system(args.target, profile=args.profile, source=source,
+                            python_executable=args.python, build_app=(not args.no_app and sys.platform == "darwin"))
+    print(json.dumps(asdict(result), ensure_ascii=False, indent=2, default=str))
+    return 0
+
+
+def cmd_build_app(args):
+    from .installation import build_macos_app
+    root = Path(__file__).resolve().parents[2]
+    path = build_macos_app(args.out, args.python, args.data_dir, source_dir=root if (root / "pyproject.toml").is_file() else None)
+    print(path)
+    return 0
+
+
+def cmd_app(args):
+    from .server import serve
+    if args.browser or sys.platform != "darwin":
+        serve(args.data_dir, args.port, open_browser=True)
+        return 0
+    import subprocess
+    from .installation import build_macos_app
+    import hashlib
+    data_dir = Path(args.data_dir).expanduser().resolve()
+    root = Path(__file__).resolve().parents[2]
+    source_dir = root if (root / "pyproject.toml").is_file() else None
+    config = {"schema_version": "native-app-v1",
+              "python": str(Path(sys.executable).expanduser().absolute()),
+              "data_dir": str(data_dir),
+              "source_dir": str(source_dir) if source_dir else "",
+              "bind": "127.0.0.1"}
+    native = Path(__file__).resolve().parent / "native/SentinelApp.swift"
+    identity = hashlib.sha256(json.dumps(config, sort_keys=True).encode() + native.read_bytes()).hexdigest()[:20]
+    app = data_dir.parent / ".sentinel-apps" / ("Sentinel EVC-" + identity + ".app")
+    if not app.exists():
+        build_macos_app(app, sys.executable, data_dir, source_dir=source_dir)
+    saved = json.loads((app / "Contents/Resources/app-config.json").read_text(encoding="utf-8"))
+    if saved != config:
+        raise ValueError("桌面App配置与当前工作区不一致，请使用新的构建目录。")
+    subprocess.run(["open", "-n", str(app)], check=True)
+    print("已打开 Sentinel EVC 桌面App。")
+    return 0
+
+
+def cmd_models(args):
+    from .assets import AssetStore
+    store = AssetStore(Path(args.data_dir)/"models")
+    if args.model_action == "import":
+        path = Path(args.file)
+        value = store.import_asset(args.name or path.stem, args.format or path.suffix.lstrip("."), content=path.read_bytes())
+    elif args.model_action == "list":
+        value = {"assets": store.list()}
+    elif args.model_action == "check":
+        value = store.check(args.id)
+    else:
+        value = store.geometry(args.id)
+    print(json.dumps(value, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_robot(args):
+    from .robot_connectors import RobotRegistry
+    registry = RobotRegistry(Path(args.data_dir)/"robots")
+    if args.robot_action == "add":
+        value = registry.create(args.name, args.driver, args.host, args.port)
+    elif args.robot_action == "list":
+        value = {"profiles": registry.list()}
+    else:
+        value = registry.diagnose(args.id)
+    print(json.dumps(value, ensure_ascii=False, indent=2))
+    return 0
+
+
 def main(argv=None) -> int:
     _use_utf8_output()
     ap = argparse.ArgumentParser(
-        prog="sentinel_evc", description="Sentinel EVC Lab · 数值参考实现")
+        prog="sentinel_evc", description="Sentinel EVC · CLI、桌面App与机器人实验入口")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     d = sub.add_parser("demo", help="跑完整三幕")
@@ -320,6 +402,53 @@ def main(argv=None) -> int:
     check_physics = sub.add_parser("verify-physics", help="校验 SSH 回传收据、签名索引与全部物理试验")
     check_physics.add_argument("--out", required=True)
     check_physics.set_defaults(func=cmd_verify_physics)
+
+    install = sub.add_parser("install", help="一键安装独立CLI环境与桌面App")
+    install.add_argument("--target", default=None)
+    install.add_argument("--interactive", action="store_true", help="打开终端安装向导；不传target时自动打开")
+    install.add_argument("--profile", choices=("core","all"), default="all")
+    install.add_argument("--source", default=None)
+    install.add_argument("--python", default=sys.executable)
+    install.add_argument("--no-app", action="store_true")
+    install.set_defaults(func=cmd_install)
+
+    build_app = sub.add_parser("build-app", help="构建原生macOS桌面入口（使用已有Python环境）")
+    build_app.add_argument("--out", required=True)
+    build_app.add_argument("--python", default=sys.executable)
+    build_app.add_argument("--data-dir", default="runs/app")
+    build_app.set_defaults(func=cmd_build_app)
+
+    app = sub.add_parser("app", help="打开桌面App或浏览器操作台")
+    app.add_argument("--data-dir", default="runs/app")
+    app.add_argument("--browser", action="store_true")
+    app.add_argument("--port", type=int, default=0)
+    app.set_defaults(func=cmd_app)
+
+    models = sub.add_parser("models", help="导入、预览与检查3D模型")
+    models.add_argument("--data-dir", default="runs/app")
+    model_actions = models.add_subparsers(dest="model_action", required=True)
+    model_import = model_actions.add_parser("import")
+    model_import.add_argument("--file", required=True)
+    model_import.add_argument("--format", choices=("obj","stl","mjcf","urdf"))
+    model_import.add_argument("--name", default=None)
+    model_actions.add_parser("list")
+    for action in ("check","geometry"):
+        parser = model_actions.add_parser(action)
+        parser.add_argument("--id", required=True)
+    models.set_defaults(func=cmd_models)
+
+    robot = sub.add_parser("robot", help="配置机械臂驱动入口与只读诊断")
+    robot.add_argument("--data-dir", default="runs/app")
+    robot_actions = robot.add_subparsers(dest="robot_action", required=True)
+    robot_add = robot_actions.add_parser("add")
+    robot_add.add_argument("--name", required=True)
+    robot_add.add_argument("--driver", choices=("mock","ur_dashboard_readonly"), required=True)
+    robot_add.add_argument("--host", default=None)
+    robot_add.add_argument("--port", type=int, default=None)
+    robot_actions.add_parser("list")
+    robot_diagnose = robot_actions.add_parser("diagnose")
+    robot_diagnose.add_argument("--id", required=True)
+    robot.set_defaults(func=cmd_robot)
 
     args = ap.parse_args(argv)
     try:

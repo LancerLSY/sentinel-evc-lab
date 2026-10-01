@@ -21,6 +21,21 @@ jobs:
           python -m sentinel_evc train-baseline --mode residual --out runs/baseline-ci
           python -m sentinel_evc experiments
           python -m pip wheel --no-deps . --wheel-dir runs/dist
+      - name: Managed core installation and packaged UI resources
+        run: |
+          python -m sentinel_evc install --target runs/installed-core --profile core --no-app
+          runs/installed-core/bin/sentinel-evc experiments
+          runs/installed-core/bin/sentinel-evc models --data-dir runs/installed-core/data import --file examples/models/tool.obj
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          wheel = next(Path('runs/dist').glob('*.whl'))
+          with ZipFile(wheel) as archive:
+              names = set(archive.namelist())
+              assert 'sentinel_evc/web/viewer.js' in names
+              assert 'sentinel_evc/native/SentinelApp.swift' in names
+              assert 'sentinel_evc/install_wizard.py' in names
+          PY
       - name: 端到端冒烟：跑一次 demo 并独立校验
         run: |
           python -m sentinel_evc demo --cases 100 --out runs/ci --run-id ci

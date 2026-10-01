@@ -45,21 +45,42 @@ def _skip(reason):
     raise _Skipped(reason)
 
 
+_MISSING = object()
+
+
 class _MonkeyPatch:
     def __init__(self):
         self._changes = []
 
-    def setattr(self, target, name, value):
+    def setattr(self, target, name, value=_MISSING):
+        if isinstance(target, str):
+            import importlib
+            parts = target.split(".")
+            current = importlib.import_module(parts[0])
+            for part in parts[1:-1]:
+                current = getattr(current, part)
+            target, name, value = current, parts[-1], name
+        if value is _MISSING:
+            raise TypeError("setattr requires a replacement value")
         previous = getattr(target, name)
-        self._changes.append((target, name, previous))
+        self._changes.append(("attribute", target, name, previous))
         setattr(target, name, value)
+
+    def setitem(self, target, key, value):
+        self._changes.append(("item", target, key, target.get(key, _MISSING)))
+        target[key] = value
 
     def __enter__(self):
         return self
 
     def __exit__(self, *exc):
-        for target, name, previous in reversed(self._changes):
-            setattr(target, name, previous)
+        for kind, target, name, previous in reversed(self._changes):
+            if kind == "attribute":
+                setattr(target, name, previous)
+            elif previous is _MISSING:
+                target.pop(name, None)
+            else:
+                target[name] = previous
 
 
 def _parametrize(names, values):
@@ -108,7 +129,7 @@ def main() -> int:
                 with tempfile.TemporaryDirectory() as tmp, _MonkeyPatch() as patch:
                     kwargs = dict(case)
                     if "tmp_path" in inspect.signature(fn).parameters:
-                        kwargs["tmp_path"] = Path(tmp)
+                        kwargs["tmp_path"] = Path(tmp).resolve()
                     if "monkeypatch" in inspect.signature(fn).parameters:
                         kwargs["monkeypatch"] = patch
                     try:

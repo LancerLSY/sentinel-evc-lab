@@ -6,11 +6,46 @@
 > that will *actually* be executed. Permits are time-boxed, single-use and revocable, and
 > every step leaves a record a third party can verify independently.
 
-A numeric reference implementation. It runs in five minutes on an ordinary laptop —
-no GPU, no robot arm, no pretrained checkpoint required.
+A local product workbench with a CLI, native macOS App and browser fallback. The same
+Python engine serves numeric reference runs, a fixed MuJoCo contact profile, bounded 3D
+asset inspection and read-only robot diagnostics.
 
-> **Status**: v0.2 product foundation · `pytest` **68 passed** · three-act demo reproducible · license: **MIT**
+> **Status**: v0.3 CLI + App workbench · three-act demo reproducible · license: **MIT**
 > CI: [workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
+
+
+## Product quick start
+
+Clone the repository and start the interactive terminal installer. Python 3.10+ is
+required; building the optional macOS App also requires Apple Command Line Tools.
+
+```bash
+git clone https://github.com/LancerLSY/sentinel-evc-lab.git
+cd sentinel-evc-lab
+./tools/install.sh
+```
+
+Choose the full or lightweight profile, a new installation directory, and whether to
+build the macOS App. The wizard shows actual stage progress, keeps detailed failure
+logs, and offers to open the workbench or display SSH setup commands when finished.
+If `python3` points to an older interpreter, set `PYTHON=/path/to/python3.12` when
+running the script. Windows users can run `.\tools\install.ps1` from PowerShell.
+
+For unattended installation, pass the target explicitly (`all` also installs MuJoCo):
+
+```bash
+./tools/install.sh "$HOME/Applications/Sentinel-EVC"
+open "$HOME/Applications/Sentinel-EVC/Sentinel EVC.app"
+```
+
+The installed CLI is at `Sentinel-EVC/bin/sentinel-evc`. If the native App cannot be
+used, launch `sentinel-evc serve` and open its loopback URL in a browser. All entrypoints
+share four integration surfaces: numeric/physics experiments, model assets, read-only
+robot diagnostics and the staged experiment plan. The offline Canvas viewer renders
+parsed model geometry and signed, recorded MuJoCo trajectories; it does not invent live
+telemetry.
+
+[Product design](DESIGN.md) · [App installation](docs/install_app.md) · [Model and robot integration ports](docs/integration_ports.md)
 
 
 ## Local numeric workbench
@@ -33,7 +68,7 @@ python -m pytest -q
 
 [Mechanism matrix](docs/implementation_matrix.md) · [Validation](docs/product_validation.md) · [Pending experiments](docs/experiment_plan.md) · [Contracts](docs/product_contracts.md)
 
-A genuine local numerical product increment. Real VLA, GRU, vision and device experiments remain pending with explicit prerequisites; prototype measurements do not establish those capabilities.
+A genuine local numerical product increment. Real VLA, GRU, vision and device-motion experiments remain pending with explicit prerequisites; prototype measurements do not establish those capabilities.
 
 
 ---
@@ -48,9 +83,11 @@ A genuine local numerical product increment. Real VLA, GRU, vision and device ex
 | Single-use execution permit | Implemented, local HMAC | Not PKI, not functional safety |
 | Revocation barrier | Implemented against a simulated controller | Not a motor-braking proof |
 | Evidence hash chain + signature | Implemented, Ed25519 | Proves record integrity only, not sensor honesty |
-| Real VLA integration | **Not started** | Next goal is read-only shadow mode, not closed-loop intervention |
+| Real VLA integration | **Pending** | Next goal is read-only shadow mode, not closed-loop intervention |
 | Numeric consequence prediction | **Implemented: physical ID + trainable ridge residual + root calibration** | Not the v4 GRU, visual WorldGuard or a robot result |
-| Physical robot | **Not started**, out of scope for this round | — |
+| Robot connection | **Implemented: mock + Universal Robots read-only diagnostics** | Motion adapter and hardware actuation remain pending |
+| 3D model entrypoint | **Implemented: bounded OBJ/STL/MJCF/URDF import and Canvas preview** | Import or compile success does not authorize motion |
+| MuJoCo fixed fixture | **Implemented: signed open-tray contact experiment** | Separate profile; fastest candidate currently fails one of nine gates |
 
 ### Three things we always say
 
@@ -193,8 +230,9 @@ fault. The bundled key is for demonstration; it is not a customer PKI.
 independently verifiable with `verify`. Reproduction commands for every number are in
 [RESULTS.md](RESULTS.md).
 
-This repository has **not** run: a real VLA, MuJoCo, ROS 2, a physical robot, a vision
-model, or mTLS.
+This repository has run its separate fixed MuJoCo open-tray profile. It has **not** run a
+real VLA, ROS 2 motion stack, physical robot motion, vision model or mTLS. Imported models
+are inspected separately and are never promoted into the trusted motion fixture.
 
 "Zero observed failures" only means this set of constructed tests did not find that class
 of problem; it is not zero accidents in arbitrary scenarios. Task success rate, prediction
@@ -252,7 +290,8 @@ python run_tests.py          # fallback runner when pytest cannot be installed
 
 ## Dependency discipline
 
-The only runtime dependency is `cryptography`. No torch, no scipy, no web framework.
+The core runtime dependency is `cryptography`; the `physics` install profile adds MuJoCo
+and Pillow. No torch, no scipy, no web framework.
 `report.html` is generated from a Python string template plus inline SVG — no build step,
 no CDN, and it opens offline.
 
@@ -274,7 +313,7 @@ PRs must include: tests, input/output samples, known limitations.
 Evidence that **one of this repository's conclusions does not hold** is especially
 welcome. Negative results are kept in the repository, not deleted.
 
-Current tasks and progress (including the five v0.2 shadow-mode steps) are in
+Current tasks and progress (including the staged shadow-mode steps) are in
 [docs/任务板.md](docs/任务板.md) (Chinese).
 
 ---

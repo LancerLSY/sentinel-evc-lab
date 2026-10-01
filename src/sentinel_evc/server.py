@@ -8,18 +8,39 @@ from urllib.parse import urlsplit
 from .scenario import Scenario, InputError, strict_json, TEMPLATES
 from .runstore import RunStore
 
-MAX_BODY = 65536
+MAX_BODY = 12 * 1024 * 1024
 
 class LocalServer(ThreadingHTTPServer):
     daemon_threads = True
     def __init__(self, address, store, manager):
         if address[0] != '127.0.0.1':
             raise ValueError('only 127.0.0.1 is supported')
+        from .assets import AssetStore
+        from .robot_connectors import RobotRegistry
+        from .physics_jobs import PhysicsJobs
         self.store, self.manager, self.token = store, manager, secrets.token_urlsafe(32)
+        self.physics_jobs = None
         super().__init__(address, Handler)
-        port = self.server_address[1]
-        self.hosts = {'127.0.0.1:'+str(port),'localhost:'+str(port)}
-        self.origins = {'http://'+host for host in self.hosts}
+        try:
+            self.assets = AssetStore(store.root / "models")
+            self.robots = RobotRegistry(store.root / "robots")
+            self.physics_jobs = PhysicsJobs(store.root / "physics-jobs")
+            port = self.server_address[1]
+            self.hosts = {'127.0.0.1:'+str(port),'localhost:'+str(port)}
+            self.origins = {'http://'+host for host in self.hosts}
+        except Exception:
+            if self.physics_jobs is not None:
+                self.physics_jobs.close()
+                self.physics_jobs = None
+            super().server_close()
+            raise
+
+    def server_close(self):
+        if self.physics_jobs is not None:
+            self.physics_jobs.close()
+            self.physics_jobs = None
+        super().server_close()
+
 
 class Handler(BaseHTTPRequestHandler):
     server_version = 'SentinelLocal/0.2'
@@ -64,7 +85,31 @@ class Handler(BaseHTTPRequestHandler):
         try:
             parts=self.parts()
             if parts == ['api','session']:
-                return self.reply(200,{'token':self.server.token,'profile':'numeric-simulator-product-v1','templates':TEMPLATES,'capabilities':{'stop':True,'resume':True,'export':True,'real_robot':False}})
+                physics_engine=self.server.physics_jobs.engine_status()
+                return self.reply(200,{'token':self.server.token,'profile':'numeric-simulator-product-v1','templates':TEMPLATES,'physics_engine':physics_engine,'capabilities':{'stop':True,'resume':True,'export':True,'real_robot':False,'model_import':True,'robot_diagnostics':True,'physics_jobs':physics_engine['available']}})
+            if parts == ['api','assets']:
+                return self.reply(200, {'assets': self.server.assets.list()})
+            if len(parts) in (3,4) and parts[:2] == ['api','assets']:
+                if len(parts)==3:
+                    return self.reply(200, {'asset': self.server.assets.get(parts[2])})
+                if parts[3]=='geometry':
+                    return self.reply(200, {'geometry': self.server.assets.geometry(parts[2])})
+            if parts == ['api','robots']:
+                return self.reply(200, {'profiles': self.server.robots.list()})
+            if parts == ['api','physics-jobs']:
+                return self.reply(200, {'jobs': self.server.physics_jobs.list()})
+            if len(parts) in (3,4) and parts[:2] == ['api','physics-jobs']:
+                if len(parts)==3:
+                    return self.reply(200, {'job': self.server.physics_jobs.get(parts[2])})
+                if parts[3]=='trace':
+                    return self.reply(200, self.server.physics_jobs.trace(parts[2]))
+                if parts[3]=='download':
+                    path=self.server.physics_jobs.directory(parts[2])/'evidence.zip'
+                    if path.is_symlink() or not path.is_file():
+                        raise KeyError('no verified export')
+                    if not self.server.physics_jobs.get(parts[2]).get('verification',{}).get('ok'):
+                        raise ValueError('evidence failed verification')
+                    return self.reply(200,path.read_bytes(),'application/zip')
             if parts == ['api','runs']:
                 return self.reply(200,{'runs':self.server.store.list()})
             if parts == ['api','experiments']:
@@ -84,16 +129,16 @@ class Handler(BaseHTTPRequestHandler):
                     path=self.server.store.directory(run_id)/'evidence.zip'
                     if path.is_symlink() or not path.is_file():raise KeyError('no export')
                     return self.reply(200,path.read_bytes(),'application/zip')
-            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css'}
+            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js'}
             name='/'.join(parts)
             if name in assets:
                 resource=files('sentinel_evc').joinpath('web',assets[name])
-                ctype={'index.html':'text/html; charset=utf-8','styles.css':'text/css; charset=utf-8','app.js':'text/javascript; charset=utf-8'}[assets[name]]
+                ctype={'index.html':'text/html; charset=utf-8','styles.css':'text/css; charset=utf-8','app.js':'text/javascript; charset=utf-8','viewer.js':'text/javascript; charset=utf-8'}[assets[name]]
                 return self.reply(200,resource.read_bytes(),ctype)
             raise KeyError('route not found')
         except KeyError:
             self.error(404,'NOT_FOUND','运行或页面不存在。')
-        except (OSError,ValueError):
+        except (OSError,ValueError,RuntimeError):
             self.error(500,'READ_FAILED','读取失败，请查看本地运行状态。')
 
     def do_POST(self):
@@ -107,6 +152,23 @@ class Handler(BaseHTTPRequestHandler):
                 return self.error(415,'CONTENT_TYPE','需要 application/json。')
             self.connection.settimeout(5)
             body=strict_json(self.rfile.read(int(length)))
+            if parts == ['api','assets']:
+                if not isinstance(body,dict) or set(body) != {'name','format','content_base64'}:
+                    raise InputError('需要 name、format、content_base64 模型参数。')
+                return self.reply(201, {'asset': self.server.assets.import_asset(body['name'],body['format'],content_base64=body['content_base64'])})
+            if len(parts)==4 and parts[:2]==['api','assets'] and parts[3]=='check' and body=={}:
+                return self.reply(200, {'check': self.server.assets.check(parts[2])})
+            if parts == ['api','robots']:
+                if not isinstance(body,dict) or set(body)-{'name','driver','host','port'} or not {'name','driver'}.issubset(body):
+                    raise InputError('需要 name、driver 及可选的 host、port。')
+                return self.reply(201, {'profile': self.server.robots.create(**body)})
+            if len(parts)==4 and parts[:2]==['api','robots'] and parts[3]=='diagnose' and body=={}:
+                return self.reply(200, {'diagnostic': self.server.robots.diagnose(parts[2])})
+            if parts == ['api','physics-jobs']:
+                return self.reply(201, {'job': self.server.physics_jobs.start(body)})
+            if len(parts)==4 and parts[:2]==['api','physics-jobs'] and parts[3]=='export' and body=={}:
+                self.server.physics_jobs.export(parts[2])
+                return self.reply(200, {'download_url':'/api/physics-jobs/'+parts[2]+'/download'})
             if parts == ['api','runs']:
                 record=self.server.manager.start(Scenario.parse(body))
                 return self.reply(201,{'run':record})
@@ -126,8 +188,8 @@ class Handler(BaseHTTPRequestHandler):
             self.error(404,'NOT_FOUND','运行不存在。')
         except RuntimeError as exc:
             self.error(409,'RUN_CONFLICT',str(exc))
-        except ValueError:
-            self.error(409,'INVALID_STATE','当前状态不支持此操作。')
+        except ValueError as exc:
+            self.error(400,'INVALID_INPUT',str(exc))
         except (OSError,TimeoutError):
             self.error(500,'WRITE_FAILED','保存失败，未批准新的动作。')
 
@@ -135,18 +197,40 @@ class Handler(BaseHTTPRequestHandler):
         self.error(405,'METHOD_NOT_ALLOWED','不支持跨来源访问。')
 
 
-def serve(root='runs/workbench',port=8765):
+def serve(root='runs/workbench',port=8765, *, open_browser=False):
     from .product_pipeline import ProductManager
-    store=RunStore(root)
-    manager=ProductManager(store)
-    server=LocalServer(('127.0.0.1',port),store,manager)
-    print('Sentinel 本地操作台：http://127.0.0.1:'+str(server.server_address[1]),flush=True)
-    print('数值模拟；Ctrl+C 停止服务。',flush=True)
+    import signal, threading
+    store = manager = server = None
+    previous_term = None
     try:
+        store=RunStore(root)
+        manager=ProductManager(store)
+        server=LocalServer(('127.0.0.1',port),store,manager)
+        print('Sentinel 本地操作台：http://127.0.0.1:'+str(server.server_address[1]),flush=True)
+        print('数值工作台 / 三维物理 / 模型资产 / 机械臂诊断；Ctrl+C 停止服务。',flush=True)
+        if threading.current_thread() is threading.main_thread():
+            previous_term = signal.getsignal(signal.SIGTERM)
+            def stop_service(signum, frame):
+                raise KeyboardInterrupt
+            signal.signal(signal.SIGTERM, stop_service)
+        if open_browser:
+            import webbrowser
+            webbrowser.open('http://127.0.0.1:' + str(server.server_address[1]))
         server.serve_forever(poll_interval=.2)
     except KeyboardInterrupt:
         pass
     finally:
-        manager.close()
-        server.server_close()
-        store.close()
+        try:
+            if server is not None:
+                server.server_close()
+        finally:
+            try:
+                if manager is not None:
+                    manager.close()
+            finally:
+                try:
+                    if store is not None:
+                        store.close()
+                finally:
+                    if previous_term is not None:
+                        signal.signal(signal.SIGTERM, previous_term)

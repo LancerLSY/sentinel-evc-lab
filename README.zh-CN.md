@@ -5,10 +5,42 @@
 > 给机器人策略的动作块加一道最终提交前的门禁：验证的是真正要被执行的那个动作，
 > 许可有期限、只能用一次、可以撤销，整个过程留下第三方能独立校验的记录。
 
-数值参考实现。在普通笔记本上五分钟跑完，不需要 GPU、机械臂或任何模型权重。
+这是一个同时提供 CLI、原生 macOS App 和浏览器备用入口的本地产品工作台。同一套
+Python 引擎承载数值参考实验、固定 MuJoCo 接触实验、受限三维资产检查和机械臂只读诊断。
 
-> **状态**：v0.2 基础工作台 · `pytest` **68 项通过** · 三幕 demo 可复现 · 许可：**MIT**
+> **状态**：v0.3 CLI + App 工作台 · 三幕 demo 可复现 · 许可：**MIT**
 > CI：[workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
+
+
+## 产品快速开始
+
+下载仓库后直接打开终端安装向导。需要 Python 3.10+；创建可选的 macOS App
+还需要 Apple Command Line Tools：
+
+```bash
+git clone https://github.com/LancerLSY/sentinel-evc-lab.git
+cd sentinel-evc-lab
+./tools/install.sh
+```
+
+向导可选择完整版/轻量版、安装目录和是否创建 macOS App，显示实际阶段进度，
+保留失败日志，完成后可打开工作台或查看 SSH 接入命令。若 `python3` 是旧版本，
+运行脚本时指定 `PYTHON=/path/to/python3.12`。Windows 用户可在 PowerShell 中运行
+`.\tools\install.ps1`。
+
+无人值守安装显式传入目录；默认 `all` profile 同时安装 MuJoCo：
+
+```bash
+./tools/install.sh "$HOME/Applications/Sentinel-EVC"
+open "$HOME/Applications/Sentinel-EVC/Sentinel EVC.app"
+```
+
+安装后的 CLI 位于 `Sentinel-EVC/bin/sentinel-evc`。无法使用原生 App 时，可运行
+`sentinel-evc serve`，再用浏览器打开本机回环地址。CLI、App 和浏览器共用四类接口：
+数值/三维实验、模型资产、机械臂只读诊断和分阶段实验计划。离线 Canvas 视窗绘制
+实际解析出的模型几何与签名 MuJoCo 记录轨迹，不生成虚构遥测。
+
+[产品设计](DESIGN.md) · [App 安装说明](docs/install_app.md) · [模型与机械臂接入端口](docs/integration_ports.md)
 
 
 ## 本地数值工作台
@@ -31,7 +63,7 @@ python -m pytest -q
 
 [逐项实现表](docs/implementation_matrix.md) · [验证结果](docs/product_validation.md) · [待做实验](docs/experiment_plan.md) · [接口契约](docs/product_contracts.md)
 
-这是可操作的本地数值基础产品。真实 VLA、GRU、视觉和设备实验仍有明确前提；当前原型指标不能代表这些能力。
+这是可操作的本地数值基础产品。真实 VLA、GRU、视觉和设备运动实验仍有明确前提；当前原型指标不能代表这些能力。
 
 
 ---
@@ -46,9 +78,11 @@ python -m pytest -q
 | 一次性执行许可 | 已实现，本地 HMAC | 不是 PKI，不是功能安全 |
 | 撤销屏障 | 已实现，模拟控制器 | 不是电机制动证明 |
 | 证据哈希链与签名 | 已实现，Ed25519 | 只证明记录完整性，不证明传感器诚实 |
-| 真实 VLA 接入 | **未开始** | 下一步目标是只读影子模式，不是闭环干预 |
+| 真实 VLA 接入 | **待实现** | 下一步目标是只读影子模式，不是闭环干预 |
 | 数值后果预测 | **已实现：历史辨识、可训练 ridge 残差、根分组校准** | 尚未复现 v4 GRU、视觉 WorldGuard 或真实机器人 |
-| 真机 | **未开始**，不在本轮范围 | —— |
+| 机械臂连接 | **已实现：Mock 与 Universal Robots 只读诊断** | 运动适配器和真机执行仍待实现 |
+| 三维模型入口 | **已实现：受限 OBJ/STL/MJCF/URDF 导入与 Canvas 预览** | 导入或编译成功不会批准运动 |
+| MuJoCo 固定装置 | **已实现：签名开放托盘接触实验** | 独立 profile；最快候选目前九项门中一项失败 |
 
 ### 三句必须常说的话
 
@@ -175,10 +209,26 @@ python -m sentinel_evc tamper --out runs/my_first_run
 `sample_run/` 是一次真实运行的完整输出，随包提供，可用 `verify` 独立校验。
 每个数字的复现命令见 [RESULTS.md](RESULTS.md)。
 
-本仓库**没有**运行过：真实 VLA、MuJoCo、ROS 2、物理机器人、视觉模型、mTLS。
+本仓库已经运行独立的固定 MuJoCo 开放托盘 profile；仍**没有**运行真实 VLA、ROS 2
+运动链、物理机器人运动、视觉模型或 mTLS。导入模型只进入检查入口，不会自动成为
+可信运动 fixture。
 
 「零次观测到失效」只说明这组构造测试没有发现该类问题，不等于任意场景零事故。
 任务成功率、预测覆盖率、误报率和真实事故率是不同的指标，不能合并成一个「安全率」。
+
+### MuJoCo 三维接触实验
+
+可选 `physics` profile 在固定的 XYZ 驱动开放托盘、自由三维载荷和地面接触场景中，
+记录实际伺服/接触状态、完整状态分支、五档物理步长、撤销后动力学和签名证据：
+
+```bash
+python -m pip install -e ".[physics,test]"
+python -m sentinel_evc physics --out runs/physics01 --seed 7 --render
+```
+
+该固定 profile 当前九项门通过八项：几何规则选出的最快候选发生滑移，完整终态姿态
+收敛门失败；负结果保留。它与任意上传模型的几何预览和五步编译检查相互独立，后者
+不会获得 Executor 运动许可。当前结果也不代表机械臂、VLA、v4 GRU 或视觉 WorldGuard。
 
 ---
 
@@ -229,7 +279,8 @@ python run_tests.py          # 装不上 pytest 时的备用运行器
 
 ## 依赖纪律
 
-运行时依赖只有 `cryptography` 一个。不引入 torch、不引入 scipy、不引入 web 框架。
+核心运行依赖只有 `cryptography`；`physics` 安装 profile 额外加入 MuJoCo 与 Pillow。
+不引入 torch、不引入 scipy、不引入 web 框架。
 `report.html` 由 Python 字符串模板 + 内联 SVG 生成，没有构建步骤、没有 CDN，
 断网也能打开。
 

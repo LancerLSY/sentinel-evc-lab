@@ -1,6 +1,8 @@
+import base64
 import json
 import threading
 import time
+from http.server import ThreadingHTTPServer
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 import pytest
@@ -102,6 +104,130 @@ def test_http_token_host_origin_and_input_boundaries(tmp_path):
         assert request('/api/runs/'+record['id'])[1]['run']['result']['cursors']['observed']==40
         code,export=request('/api/runs/'+record['id']+'/export',{},headers)
         assert code==200 and export['download_url'].endswith('/download')
+    finally:
+        server.shutdown();server.server_close();thread.join();manager.close();store.close()
+
+
+def test_http_model_robot_and_viewer_entrypoints(tmp_path):
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    server=LocalServer(('127.0.0.1',0),store,manager)
+    thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+    base='http://127.0.0.1:'+str(server.server_address[1])
+    def request(path,body=None,token=None):
+        raw=None if body is None else json.dumps(body).encode()
+        headers={'Content-Type':'application/json'}
+        if token is not None:headers['X-Sentinel-Token']=token
+        req=Request(base+path,data=raw,headers=headers)
+        try:
+            with urlopen(req,timeout=5) as response:
+                payload=response.read()
+                if response.headers.get_content_type()=='application/json':
+                    payload=json.loads(payload)
+                return response.status,payload,response.headers.get_content_type()
+        except HTTPError as exc:
+            return exc.code,json.loads(exc.read()),exc.headers.get_content_type()
+    try:
+        code,session,_=request('/api/session');assert code==200
+        token=session['token']
+        code,viewer,content_type=request('/viewer.js')
+        assert code==200 and content_type=='text/javascript' and b'SentinelViewer' in viewer
+
+        obj=b'v 0 0 0\nv 1 0 0\nv 0 1 0\nf 1 2 3\n'
+        body={'name':'HTTP triangle','format':'obj','content_base64':base64.b64encode(obj).decode()}
+        assert request('/api/assets',body)[0]==403
+        assert request('/api/assets',{'name':'bad'},token)[0]==400
+        code,created,_=request('/api/assets',body,token);assert code==201
+        asset=created['asset'];asset_id=asset['id']
+        assert request('/api/assets')[1]['assets'][0]['id']==asset_id
+        assert request('/api/assets/'+asset_id)[1]['asset']['source_sha256']==asset['source_sha256']
+        geometry=request('/api/assets/'+asset_id+'/geometry')[1]['geometry']
+        assert geometry['vertices'][2]==[0.0,1.0,0.0] and geometry['triangles']==[[0,1,2]]
+        check=request('/api/assets/'+asset_id+'/check',{},token)[1]['check']
+        assert check['status']=='not_applicable' and check['physics_authorized'] is False
+        assert request('/api/assets/asset-'+'0'*32+'/geometry')[0]==404
+
+        robot_body={'name':'Protocol demo','driver':'mock'}
+        assert request('/api/robots',robot_body)[0]==403
+        code,created,_=request('/api/robots',robot_body,token);assert code==201
+        profile=created['profile'];robot_id=profile['id']
+        assert profile['hardware_motion'] is False and profile['credentials_stored'] is False
+        diagnostic=request('/api/robots/'+robot_id+'/diagnose',{},token)[1]['diagnostic']
+        assert diagnostic['status']=='demo_ready' and diagnostic['hardware_connected'] is False
+        assert request('/api/robots')[1]['profiles'][0]['last_diagnostic']['status']=='demo_ready'
+        assert request('/api/robots',{'name':'bad','driver':'mock','password':'secret'},token)[0]==400
+        assert request('/api/robots/robot-'+'0'*32+'/diagnose',{},token)[0]==404
+    finally:
+        server.shutdown();server.server_close();thread.join();manager.close();store.close()
+
+
+def test_local_server_does_not_create_physics_owner_before_bind(monkeypatch,tmp_path):
+    import sentinel_evc.physics_jobs as jobs
+    constructed=[]
+    class ForbiddenPhysicsJobs:
+        def __init__(self,root):constructed.append(root)
+    def fail_bind(self,address,handler):
+        raise OSError('injected bind failure')
+    monkeypatch.setattr(jobs,'PhysicsJobs',ForbiddenPhysicsJobs)
+    monkeypatch.setattr(ThreadingHTTPServer,'__init__',fail_bind)
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    try:
+        with pytest.raises(OSError,match='bind failure'):
+            LocalServer(('127.0.0.1',0),store,manager)
+        assert constructed==[]
+    finally:manager.close();store.close()
+
+
+def test_serve_closes_manager_and_store_when_server_construction_fails(monkeypatch,tmp_path):
+    import sentinel_evc.server as server_module
+    import sentinel_evc.product_pipeline as pipeline
+    closed=[]
+    class FakeStore:
+        def __init__(self,root):self.root=tmp_path
+        def close(self):closed.append('store')
+    class FakeManager:
+        def __init__(self,store):pass
+        def close(self):closed.append('manager')
+    def fail_server(*args,**kwargs):raise OSError('injected construction failure')
+    monkeypatch.setattr(server_module,'RunStore',FakeStore)
+    monkeypatch.setattr(pipeline,'ProductManager',FakeManager)
+    monkeypatch.setattr(server_module,'LocalServer',fail_server)
+    with pytest.raises(OSError,match='construction failure'):
+        server_module.serve(tmp_path,0)
+    assert closed==['manager','store']
+
+
+def test_http_reports_missing_physics_engine_and_rejects_malformed_dynamic_types(tmp_path,monkeypatch):
+    import sentinel_evc.physics_jobs as jobs
+    monkeypatch.setattr(jobs,'physics_engine_status',lambda:{
+        'available':False,'version':None,'reason':'MuJoCo is not installed; install sentinel-evc-lab[physics].',
+    })
+    store=RunStore(tmp_path);manager=ProductManager(store,realtime=False)
+    server=LocalServer(('127.0.0.1',0),store,manager)
+    thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+    base='http://127.0.0.1:'+str(server.server_address[1])
+    def request(path,body=None,token=None):
+        raw=None if body is None else json.dumps(body).encode()
+        headers={'Content-Type':'application/json'}
+        if token is not None:headers['X-Sentinel-Token']=token
+        try:
+            with urlopen(Request(base+path,data=raw,headers=headers),timeout=5) as response:
+                return response.status,json.load(response)
+        except HTTPError as exc:
+            return exc.code,json.load(exc)
+    try:
+        code,session=request('/api/session');assert code==200
+        assert session['physics_engine']=={
+            'available':False,'version':None,'reason':'MuJoCo is not installed; install sentinel-evc-lab[physics].',
+        }
+        assert session['capabilities']['physics_jobs'] is False
+        token=session['token']
+        for friction in ('0.35',[0.35]):
+            code,value=request('/api/physics-jobs',{'friction':friction},token)
+            assert code==400 and value['error']['code']=='INPUT_SCHEMA'
+        code,value=request('/api/physics-jobs',{},token)
+        assert code==400 and 'not installed' in value['error']['message']
+        code,value=request('/api/robots',{'name':'bad','driver':['mock']},token)
+        assert code==400 and value['error']['code']=='INVALID_INPUT'
     finally:
         server.shutdown();server.server_close();thread.join();manager.close();store.close()
 

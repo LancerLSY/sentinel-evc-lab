@@ -1,8 +1,26 @@
 # Product foundation validation
 
-Validated on macOS with Python 3.12.14. This is the local numerical product increment; the v4 GRU, real VLA, visual world model and robot trials remain in [experiment_plan.md](experiment_plan.md).
+Validation history and the current CLI/desktop increment, exercised on macOS with Python 3.12.14. The v4 GRU, real VLA, visual world model and robot trials remain in [experiment_plan.md](experiment_plan.md).
 
-## Automated checks
+## CLI, desktop, model and visual workbench validation (2026-10-01)
+
+The v0.3 increment adds managed installation, an AppKit/WebKit macOS App, bounded OBJ/STL/MJCF/URDF assets, read-only robot profiles and persisted local physics jobs. Both entrypoints use the same engine and signed evidence verifier. The App is locally built and ad-hoc signed; distribution signing/notarization and a bundled standalone Python runtime remain pending.
+
+The browser exercise imported the repository's two-link MJCF model, displayed its actual geometry, compiled it with MuJoCo 3.14.0, and completed five settle steps without warnings. The check persisted and remained visible after re-selection. Model inspection leaves `physics_authorized: false`. OBJ import and mock robot diagnostics were also exercised through the installed CLI; browser mock diagnostics explicitly returned `hardware_connected: false` and no commands. No real robot was contacted.
+
+A UI-created physics job completed all 25 signed trials. Its recorded 1,260-frame integrated trace played in the three-dimensional viewport, and the browser downloaded a 262-entry ZIP with no corrupt entries. Independent verification validated all 25 trials. The UI simultaneously displayed completed execution, evidence PASS, scientific acceptance incomplete, and the actual `slip` outcome. It did not turn the failed .6s convergence gate into a success.
+
+The actual native App created a numerical run with 40 submitted/accepted/observed commands, selected the 1.6s branch and displayed evidence PASS. Closing its window removed both the App and its owned Python server process. Native download/save and standard menu verification are recorded in the final release checks below.
+
+Desktop and 390px layouts were visually inspected; the narrow model stage remained usable with no page-width overflow. Navigation, empty states, engine-unavailable states, actual geometry, execution charts, recorded playback and export are backed by local data. Completed physics jobs stop polling; re-selection/manual refresh re-verifies evidence. Invalid completed evidence becomes a persisted failure, and no-engine installs disable physics creation with a reason.
+
+![Actual signed physics workbench](screenshots/physics-workbench.jpg)
+
+Final v0.3 checks: **163 passed** with actual MuJoCo available, and the fallback runner **163 passed, 0 failed, 0 skipped**. The earlier 68- and 97-test counts below describe the preceding increments. Tests include core/no-engine states, hostile model expansion/resource requests, malformed API types, failed construction cleanup, App workspace/runtime cache isolation, persisted evidence invalidation, interactive installation and native menu/download lifecycle contracts. CI additionally installs a fresh core environment and checks packaged viewer/Swift/wizard resources.
+
+The interactive installer was exercised in a real terminal through `./tools/install.sh`: select the core profile, choose a new destination, decline App creation, complete all five real installation stages, and display the SSH command without connecting. The generated managed CLI starts successfully. Automated checks also cover the full profile, App choice, existing-directory refusal, invalid input, cancellation/EOF, dependency failure cleanup with retained logs, post-install launch failure, and noninteractive automation compatibility. PowerShell wiring is provided but has not been exercised on a Windows host in this local validation.
+
+## Historical automated checks
 
 `python -m pytest -q`: **68 passed**. Tests cover final-plan/certificate bindings, finite immutable contracts, independent root calibration, unknown action families, exact forecast suffixes, lease replay/generation/context/feedback checks, cancel-confirm/drain/recovery, gripper release, sticky log gaps, persistence and signed replay, malformed evidence, export traversal, local HTTP boundaries, workspace ownership, recovery races and evidence-finalization failures.
 
