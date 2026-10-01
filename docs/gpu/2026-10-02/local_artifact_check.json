@@ -20,6 +20,21 @@
       "manifest_sha256": "f03fccb54b0e7ee2b616eae0cd7693430b05abad48ab4e68b0b0224af33278d8",
       "artifact_count": 16,
       "mismatches": []
+    },
+    "w1-real-visual-v1": {
+      "manifest_sha256": "179dcf2be5853dfea953f4d7441335a7aed7456a3f12d4026eaefb862495be0b",
+      "artifact_count": 16,
+      "mismatches": []
+    },
+    "w2-mujoco-visual-v1": {
+      "manifest_sha256": "895caf662c018f2cdceef4325e1dac0d5d618a2771a63fe707b071f5910a2b23",
+      "artifact_count": 31,
+      "mismatches": []
+    },
+    "w2-visual-camera-recal-v1": {
+      "manifest_sha256": "617431a0a6afacdf7367b6fb412aadcd0035fe2d5e8f8a72e5f5624f6136d200",
+      "artifact_count": 2,
+      "mismatches": []
     }
   }
 }

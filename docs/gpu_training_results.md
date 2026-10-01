@@ -219,6 +219,47 @@ shifted test order is `overview_shift, front_shift`. Sorted camera dictionaries
 alone do not reconstruct this order, so preserve the exact source and this
 ordered contract. [Audit evidence](gpu/2026-10-02/w2_visual_independent_audit.json).
 
+## Camera-profile recalibration recovery control
+
+The same sealed 500-root shifted-camera stress set was used for a separate engineering control. The original visual weights, train-only PCA, normalizers and test features stayed frozen. Only the 200 dev and 299 cal historical sequences were re-rendered in the shifted camera profile; dev residual scales and rank-285 alpha=.05 quantiles were recalculated. No test value chose a parameter, scale or threshold. This is a recovery comparison on an existing stress set, rather than a new independent generalization test.
+
+| Calibration applied to shifted cameras | Full-15D / XY coverage | Unsafe selected roots | Selected duration |
+|---|---|---|---|
+| Original camera profile | 94.4% / 55.8% | 47/500 | All 1.2 s |
+| Profile-matched dev/cal | 93.8% / 94.0% | 0/500 | All 1.6 s |
+
+Recalibration took 30.63 seconds and changed the envelope and decision, while the full test prediction array remained bitwise identical (mixed 15D MAE 0.05688). It recovered the XY gate on this group by choosing slower actions; it did not improve perception or establish 95% coverage. Full-state coverage decreased. The minimal supported response to a camera change is to bind the new camera/preprocessing/PCA profile, recalibrate with independent development/calibration data, and evaluate the resulting decisions.
+
+[Measured results](gpu/2026-10-02/w2_camera_recal_metrics.json), [protocol and frozen identities](gpu/2026-10-02/w2_camera_recal_manifest.json), and [independent artifact/prediction check](gpu/2026-10-02/w2_camera_recal_independent_check.json).
+
+## SmolVLA real-data fine-tune and measured inference
+
+![Actual VLA fine-tune and camera-profile recovery](gpu/2026-10-02/smolvla-camera-comparisons.svg)
+
+The registered run completed 5,000 optimizer updates, batch 8 and bfloat16 autocast. Its 99,880,992 trainable parameters cover the action expert, state/action and time projections; the VLM stayed frozen. The dev-selected overlay is from step 3750, loss 0.161077; the final-step checkpoint and optimizer/RNG state are also archived. The original base and selected policy were rebuilt from the same pinned inputs before one paired held-out pass with identical sampling noise.
+
+The five held-out episodes contain 1,926 overlapping windows. Each emits a 50×6 action chunk; padded targets are excluded. These remain five independent episode units, rather than 1,926 independent trials. Both models use the same train-only normalization and task/camera inputs.
+
+| Policy | Native MAE / RMSE | MAE / train action std | RMSE / train action std |
+|---|---|---|---|
+| Pinned base | 13.32110 / 19.63200 | 0.673166 | 0.922082 |
+| Dev-selected fine-tune | 4.47285 / 7.31455 | 0.245984 | 0.387015 |
+
+Normalized action MAE decreased 63.46% on this fixed recorded-data group. Native units remain undeclared by the dataset. Per-joint values are retained in [the raw result](gpu/2026-10-02/smolvla_result.json); this comparison measures action reconstruction, rather than robot task success. Ten shadow windows retain original uint8 images, state, target/base/fine chunks and fixed noise. An independent saved-artifact check verified all 155 trainable tensors, the full parameter count, finiteness, immutable bindings and every shadow tensor digest without rerunning held-out inference.
+
+The stdout-to-result wall span was 93.06 minutes. That includes setup, decoding, dev evaluation, checkpoint I/O, the stop/resume pause and held-out evaluation. At step 2,000 the run resumed from a verified checkpoint with eight decoding workers: a 128-training-frame loader comparison measured 15.58 versus 48.37 steady samples/s with two/eight workers. Its warm/shared-cache scope is retained; the deterministic sampler resumes at the update boundary, while restarting a loader draws a new worker seed. This is not a claim of bitwise equality with an uninterrupted run.
+
+A separate fixed dev-only sample measured five warmups and twenty synchronized inference calls. The host has a 16-core CPU quota; the default 64-thread configuration was compared once with the formal run's four-thread configuration, preserving all weights, inputs and source.
+
+| Inference scope, batch 1 / 10 denoising steps | 64-thread P50 / P95 | 4-thread P50 / P95 |
+|---|---|---|
+| Prepared tensors to native 50×6 chunk | 309.68 / 318.05 ms | 226.22 / 234.58 ms |
+| Images in memory through preprocessing/inference/unnormalization | 312.13 / 320.70 ms | 229.26 / 236.90 ms |
+
+Setting `OMP_NUM_THREADS=4 MKL_NUM_THREADS=4` reduced observed P50 by about 27%, with no model changes. These calls exclude video reading, transport and robot execution; their twenty-sample percentiles are descriptive. Peak allocated/reserved memory is recorded in [the four-thread benchmark](gpu/2026-10-02/smolvla_inference_benchmark.json), with [the original 64-thread comparison](gpu/2026-10-02/smolvla_inference_benchmark_threads64.json) retained. The source and inference overlay travel with the experimental release.
+
+[Checkpoint](gpu/2026-10-02/smolvla_best_checkpoint.json), [saved-artifact verification](gpu/2026-10-02/smolvla_artifact_verification.json), [operational resume](gpu/2026-10-02/smolvla_operational_resume.json), and [loader measurement](gpu/2026-10-02/smolvla_loader_benchmark.json).
+
 ## Design decisions supported by these results
 
 Use the physical-identification model as the numerical default while the learned

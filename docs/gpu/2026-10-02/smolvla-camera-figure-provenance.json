@@ -1,0 +1,11 @@
+{
+  "schema": "sentinel-figure-provenance-v1",
+  "figure": "smolvla-camera-comparisons.svg",
+  "figure_sha256": "87153d4dc2eef3fa01926339bb436708e73efdc64e68d856cef2d4e2ab112002",
+  "source_sha256": "f764e3f982385aaed16bb281cc5183c5dafe4498b5b9b4a557c230f428bb3be0",
+  "input_sha256": {
+    "smolvla_result.json": "96be9493270d6b5295aecbdcaf31a6a15acc0936205275d2d922b2d9b6f02c84",
+    "w2_camera_recal_metrics.json": "cc9b8fdb90bd9b16e1c7682dcc3dddffacae573f2128ffc30bd675059072dda7"
+  },
+  "description": "Offline action errors on five episodes; profile recovery on the same existing stress set, with slower actions. No new independent camera generalization or robot-success claim."
+}

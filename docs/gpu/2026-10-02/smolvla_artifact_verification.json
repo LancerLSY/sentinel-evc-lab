@@ -1,0 +1,32 @@
+{
+  "schema": "sentinel-smolvla-artifact-verification-v1",
+  "verified_unix": 1790881662.6945765,
+  "run_identity": "sha256:fb49d382c7cfb184b7d5be90dc7f3da28aad4e4b1391b968b9feb071c5cedeea",
+  "script_sha256": "bd6533682e152dab24b55fcec1730e49b04f7ea764f7b2af0826ee6c3d18cb70",
+  "trainable_tensor_count": 155,
+  "trainable_parameter_count": 99880992,
+  "all_trainable_tensors_finite": true,
+  "all_shadow_tensor_digests_verified": true,
+  "shadow_windows": 10,
+  "shadow_test_positions": [
+    0,
+    214,
+    428,
+    642,
+    856,
+    1069,
+    1283,
+    1497,
+    1711,
+    1925
+  ],
+  "test_windows_inferred_from_last_retained_position": 1926,
+  "dev_selected_step": 3750,
+  "dev_selected_loss": 0.16107744215345332,
+  "final_optimizer_step": 5000,
+  "initial_stdout_birth_unix": 1790875909,
+  "resumed_stdout_birth_unix": 1790878692,
+  "result_file_mtime_unix": 1790881492.566125,
+  "stdout_to_result_wall_span_seconds": 5583.566124916077,
+  "wall_span_scope": "Includes setup, video decoding, development evaluation, checkpoint writes, stop/resume pause and held-out evaluation; not pure GPU training time."
+}

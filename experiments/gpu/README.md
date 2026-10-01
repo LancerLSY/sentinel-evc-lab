@@ -73,6 +73,9 @@ python experiments/gpu/train_mujoco_world.py --out runs/w2 --device cuda \
 MUJOCO_GL=egl python experiments/gpu/train_mujoco_visual.py --dataset-run runs/w2 \
   --weights "$WEIGHTS/resnet18-f37072fd.pth" --out runs/w2-visual \
   --device cuda --source-commit "$(git rev-parse HEAD)"
+MUJOCO_GL=egl python experiments/gpu/recalibrate_mujoco_camera.py --dataset-run runs/w2 \
+  --source-run runs/w2-visual --weights "$WEIGHTS/resnet18-f37072fd.pth" \
+  --out runs/w2-camera-recal --device cuda
 python experiments/gpu/cache_visual_features.py --data-dir "$DATA" \
   --out runs/visual-cache --weights "$WEIGHTS/resnet18-f37072fd.pth" --device cuda
 python experiments/gpu/train_real_world.py --data-dir "$DATA" \

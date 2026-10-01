@@ -1,0 +1,191 @@
+{
+  "bindings": {
+    "dataset_revision": "728583b5eaf9e739a7f119e2def466fa1d552402",
+    "downloads": {
+      "base_model": {
+        "files": [
+          {
+            "bytes": 1573,
+            "path": ".gitattributes",
+            "sha256": "32949ddb126c25a78e757b890078c46d0c8f8e899e56510a1efef817233149f9"
+          },
+          {
+            "bytes": 4625,
+            "path": "README.md",
+            "sha256": "a484071b8d7d0591452f795813fb54af9199fc1c48ef1ee995358d5ba07ee070"
+          },
+          {
+            "bytes": 2299,
+            "path": "config.json",
+            "sha256": "650584b56c104720f7a3c91d1ec6bec9e8de8ac11e60c92ba2fa82d93eda147d"
+          },
+          {
+            "bytes": 906712520,
+            "path": "model.safetensors",
+            "sha256": "7cd549ac2351fb069c0ddb3c34ad2d09cfc92b56a15dccdfc2e41467aaca01eb"
+          },
+          {
+            "bytes": 660,
+            "path": "policy_postprocessor.json",
+            "sha256": "2b78bb742065288df2ec63b0ee35f97a1f6950171cf2272f7e34b1fe3873b17b"
+          },
+          {
+            "bytes": 640,
+            "path": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+            "sha256": "490ab239d96e263687c0b2e386a0afbc235a2eceb9857c36ed32f2f162a3e7c8"
+          },
+          {
+            "bytes": 1872,
+            "path": "policy_preprocessor.json",
+            "sha256": "7683d648280a72f0d51e869fb8dd1596beed90b7f84849330cf1bc26634a4bd6"
+          },
+          {
+            "bytes": 640,
+            "path": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+            "sha256": "490ab239d96e263687c0b2e386a0afbc235a2eceb9857c36ed32f2f162a3e7c8"
+          }
+        ],
+        "manifest_sha256": "41bd6fb5b9a74f542e561d81073fcda05f868d4b9ce0af87ce5628a2f3da3517",
+        "repo_id": "lerobot/smolvla_base",
+        "revision": "d9f33c94a60fb382c90dea2164c96845bd955e28"
+      },
+      "dataset": {
+        "files": [
+          {
+            "bytes": 2461,
+            "path": ".gitattributes",
+            "sha256": "e7a120ab07b1bc5b486be249e9fc6c83d59448d0093e1dfebe95d1566d9cafc0"
+          },
+          {
+            "bytes": 3730,
+            "path": "README.md",
+            "sha256": "923e4c260c7dce15f1d3ccccd06e1eb30dcb3675258790550fb4c0978e0c50cb"
+          },
+          {
+            "bytes": 476455,
+            "path": "data/chunk-000/file-000.parquet",
+            "sha256": "e74b2786f24bc5bb8d9e6b82f5f16cc4ae921fcaf42cabdcb9bf939ca78767e1"
+          },
+          {
+            "bytes": 76059,
+            "path": "meta/episodes/chunk-000/file-000.parquet",
+            "sha256": "c5714dd5018ec013fac6610bd6bc7e97fc9ec79623b898ab8c4adddc3da61260"
+          },
+          {
+            "bytes": 2623,
+            "path": "meta/info.json",
+            "sha256": "aec8d0c7bd3d2dc693c160bd58f9fb6aabcbb24d4b28e2f09950a3aa6b246eef"
+          },
+          {
+            "bytes": 5830,
+            "path": "meta/stats.json",
+            "sha256": "5f53e159022a2ecf14bb01dd0623fcc498bffa719a776f1ef1858c6098169b89"
+          },
+          {
+            "bytes": 2251,
+            "path": "meta/tasks.parquet",
+            "sha256": "8703df66cb1d03b2e808ee069cbf816447a91ef59acad8f49e2834a2f4587f89"
+          },
+          {
+            "bytes": 320383994,
+            "path": "videos/observation.images.top/chunk-000/file-000.mp4",
+            "sha256": "7c7f2674c7af4ac9fde4c0301ad25325ef8c655f0bd455b4b3b8a9ece1965d73"
+          },
+          {
+            "bytes": 149163691,
+            "path": "videos/observation.images.wrist/chunk-000/file-000.mp4",
+            "sha256": "f605a80ca6d299231aebec49c945768a18a1207f30bd9dce4add0ab535478e7c"
+          }
+        ],
+        "manifest_sha256": "5dcc6c6580bc402db4d24933702b96a098e510b7b3e241dd7f245042cab47400",
+        "repo_id": "lerobot/svla_so100_pickplace",
+        "revision": "728583b5eaf9e739a7f119e2def466fa1d552402"
+      },
+      "vlm_backbone": {
+        "files": [
+          {
+            "bytes": 1519,
+            "path": ".gitattributes",
+            "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+          },
+          {
+            "bytes": 10865,
+            "path": "README.md",
+            "sha256": "afc4bf5f519438b221a84292979a9eac3de4b9726e5baaa82033c55f59f9f7a5"
+          },
+          {
+            "bytes": 4739,
+            "path": "added_tokens.json",
+            "sha256": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a"
+          },
+          {
+            "bytes": 430,
+            "path": "chat_template.json",
+            "sha256": "b585e3598909a5687f9f9d738d35223724dedef256b9b274e1cbfb32b13c74bf"
+          },
+          {
+            "bytes": 3767,
+            "path": "config.json",
+            "sha256": "ea6bc1237e96247f6258de3e202e2e62b93d6f386dc47e7b36b5588bf3a15e17"
+          },
+          {
+            "bytes": 136,
+            "path": "generation_config.json",
+            "sha256": "34835060c9f0f74d1acb456cc72ca32746d3843d9eb5f578f9cbffac1d2eb840"
+          },
+          {
+            "bytes": 466391,
+            "path": "merges.txt",
+            "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+          },
+          {
+            "bytes": 2029990624,
+            "path": "model.safetensors",
+            "sha256": "b9bfd456c9472c0acd5719d6e514c4b859891af205ee1a736552fd3497b8b0c3"
+          },
+          {
+            "bytes": 599,
+            "path": "preprocessor_config.json",
+            "sha256": "149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374"
+          },
+          {
+            "bytes": 67,
+            "path": "processor_config.json",
+            "sha256": "f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c"
+          },
+          {
+            "bytes": 868,
+            "path": "special_tokens_map.json",
+            "sha256": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60"
+          },
+          {
+            "bytes": 3548256,
+            "path": "tokenizer.json",
+            "sha256": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a"
+          },
+          {
+            "bytes": 28626,
+            "path": "tokenizer_config.json",
+            "sha256": "dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913"
+          },
+          {
+            "bytes": 800662,
+            "path": "vocab.json",
+            "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+          }
+        ],
+        "manifest_sha256": "67ab0b2de17fc074c67bcabfebff03a9d4d590ca9f62d2b060489d34a663846b",
+        "repo_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+        "revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+      }
+    },
+    "episode_splits_sha256": "ff9737025388421923958d5882cebbe831d9e8945eca8c4cd9cf09405a68dd0f",
+    "model_revision": "d9f33c94a60fb382c90dea2164c96845bd955e28",
+    "schema": "smolvla-run-identity-v1",
+    "script_sha256": "bd6533682e152dab24b55fcec1730e49b04f7ea764f7b2af0826ee6c3d18cb70",
+    "train_only_stats_sha256": "c66c456d920996bec5d503c99b4e355539e25b4a1ee18054b125aef7b86b437f",
+    "vlm_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467"
+  },
+  "run_identity": "sha256:fb49d382c7cfb184b7d5be90dc7f3da28aad4e4b1391b968b9feb071c5cedeea",
+  "schema": "smolvla-run-identity-v1"
+}

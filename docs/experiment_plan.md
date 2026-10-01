@@ -1,8 +1,8 @@
 # Experiments left for subsequent increments
 
 The [2026-10-02 GPU report](gpu_training_results.md) now records completed numeric
-GRU, MuJoCo object, visual object and real-data joint training, plus ongoing actual
-SmolVLA fine-tuning. [The separate experiment scripts](../experiments/gpu/README.md)
+GRU, MuJoCo object, visual object and real-data joint training, plus completed actual
+SmolVLA fine-tuning and paired held-out evaluation. [The separate experiment scripts](../experiments/gpu/README.md)
 provide those reproducible model runs. The built-in registry below still describes
 product integration prerequisites; its pending state does not erase completed
 GPU training.

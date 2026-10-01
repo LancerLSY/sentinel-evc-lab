@@ -9,8 +9,8 @@ are comparison criteria, not evidence that an experiment has been completed.
 
 **GPU update, 2026-10-02:** actual numerical GRU, observed-object MuJoCo,
 image-to-object WorldGuard and real SO100 joint predictors have now been trained
-and independently evaluated. Actual SmolVLA weights are loaded and fine-tuning
-is in progress. [Training results](gpu_training_results.md) and
+and independently evaluated. Actual SmolVLA has completed 5000 fine-tuning updates, paired held-out evaluation
+and saved-weight/10-window verification. [Training results](gpu_training_results.md) and
 [model cards](gpu_model_cards.md) supersede the missing-training statements below;
 the remainder of this review describes the previously shipped product profile.
 Its live VLA transform/permit bindings, device execution and external trust

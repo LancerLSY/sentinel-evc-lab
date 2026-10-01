@@ -1,0 +1,79 @@
+{
+  "autocast_dtype": "torch.bfloat16",
+  "batch_size": 1,
+  "benchmark_source_sha256": "38a935d754c7188af8d1be2092c38641a5b2012e8ecf32c12a7214c85531baf1",
+  "best_trainable_state_sha256": "786fb0b1bdd89824960d57fb88564c0b7bfbd36c011da8e7cf721a7905dca30b",
+  "chunk_shape": [
+    1,
+    50,
+    6
+  ],
+  "gpu": "NVIDIA GeForce RTX 4090 D",
+  "measurement_count": 20,
+  "model_parameter_dtypes": [
+    "torch.bfloat16",
+    "torch.float32"
+  ],
+  "peak_allocated_bytes": 970590720,
+  "peak_reserved_bytes": 1004535808,
+  "prepared_tensors_to_dataset_native_50x6_chunk": {
+    "p50_ms": 309.6754206344485,
+    "p95_ms": 318.0517591536045,
+    "samples_ms": [
+      221.09946515411139,
+      221.7716658487916,
+      223.52407220751047,
+      228.4991256892681,
+      238.83136827498674,
+      259.135072119534,
+      303.2327042892575,
+      305.08926324546337,
+      308.33208188414574,
+      309.6754206344485,
+      310.2036966010928,
+      310.50137151032686,
+      310.5174722149968,
+      310.5830568820238,
+      310.8630459755659,
+      311.7612227797508,
+      316.9921012595296,
+      317.5615556538105,
+      318.0517591536045,
+      319.85013745725155
+    ]
+  },
+  "raw_images_in_memory_to_preprocess_infer_unnormalize": {
+    "p50_ms": 312.12866213172674,
+    "p95_ms": 320.7015385851264,
+    "samples_ms": [
+      223.38770423084497,
+      224.54487346112728,
+      225.84531549364328,
+      230.89811950922012,
+      241.17506109178066,
+      261.402721516788,
+      305.6794572621584,
+      307.28542525321245,
+      310.85124239325523,
+      312.12866213172674,
+      312.83487007021904,
+      313.084308989346,
+      313.0902200937271,
+      313.28793708235025,
+      313.3428478613496,
+      314.2378255724907,
+      319.3682096898556,
+      320.68868540227413,
+      320.7015385851264,
+      322.1695879474282
+    ]
+  },
+  "run_identity": "sha256:fb49d382c7cfb184b7d5be90dc7f3da28aad4e4b1391b968b9feb071c5cedeea",
+  "schema": "smolvla-inference-benchmark-v1",
+  "scope": "one fixed dev-split sample in memory; no video-read/network/robot/test",
+  "source_sha256": "bd6533682e152dab24b55fcec1730e49b04f7ea764f7b2af0826ee6c3d18cb70",
+  "steps": 10,
+  "torch_num_threads": 64,
+  "train_only_stats_sha256": "c66c456d920996bec5d503c99b4e355539e25b4a1ee18054b125aef7b86b437f",
+  "warmup_count": 5
+}

@@ -1,0 +1,201 @@
+{
+  "best_trainable_state_sha256": "786fb0b1bdd89824960d57fb88564c0b7bfbd36c011da8e7cf721a7905dca30b",
+  "calibration": {
+    "episode_count": 10,
+    "split": "cal",
+    "status": "Reserved for W1; not fitted or reported in this W0 run."
+  },
+  "claim_boundary": "Offline action-chunk reconstruction on held-out recorded windows. No robot was commanded.",
+  "run_identity": "sha256:fb49d382c7cfb184b7d5be90dc7f3da28aad4e4b1391b968b9feb071c5cedeea",
+  "schema": "smolvla-offline-result-v1",
+  "selection": {
+    "best_dev_loss": 0.16107744215345332,
+    "checkpoint": "checkpoints/best",
+    "split": "dev"
+  },
+  "shadow": {
+    "manifest_sha256": "f9632a52f5a4e57b2c6c6e921188785909a70472903a1b0dd8561f0dd7e20548",
+    "window_count": 10
+  },
+  "test": {
+    "episode_count": 5,
+    "metrics": {
+      "base": {
+        "dataset_native_overall": {
+          "mae": 13.321098372631203,
+          "rmse": 19.632000256757664
+        },
+        "dataset_native_per_joint": [
+          {
+            "mae": 18.082593590535712,
+            "name": "main_shoulder_pan",
+            "rmse": 24.329918544867944
+          },
+          {
+            "mae": 24.85623242902002,
+            "name": "main_shoulder_lift",
+            "rmse": 32.5597741925846
+          },
+          {
+            "mae": 10.394360383586074,
+            "name": "main_elbow_flex",
+            "rmse": 13.861426466124339
+          },
+          {
+            "mae": 12.231246400414856,
+            "name": "main_wrist_flex",
+            "rmse": 16.131726474889973
+          },
+          {
+            "mae": 7.545432027970651,
+            "name": "main_wrist_roll",
+            "rmse": 10.391008781281906
+          },
+          {
+            "mae": 6.816725404259898,
+            "name": "main_gripper",
+            "rmse": 10.003197808044924
+          }
+        ],
+        "dataset_native_values_units": "undeclared_by_dataset_metadata",
+        "train_action_std": {
+          "fit_split": "train",
+          "units": "same dataset-native values; physical units undeclared",
+          "values": [
+            27.259197235107422,
+            33.79585647583008,
+            19.814014434814453,
+            16.901596069335938,
+            11.339887619018555,
+            9.38298225402832
+          ]
+        },
+        "train_action_std_normalized_overall": {
+          "mae": 0.6731661706839671,
+          "rmse": 0.9220824343767996
+        },
+        "train_action_std_normalized_per_joint": [
+          {
+            "mae": 0.6633575240945038,
+            "name": "main_shoulder_pan",
+            "rmse": 0.8925398031676983
+          },
+          {
+            "mae": 0.7354816541466657,
+            "name": "main_shoulder_lift",
+            "rmse": 0.9634250343742368
+          },
+          {
+            "mae": 0.5245963870943992,
+            "name": "main_elbow_flex",
+            "rmse": 0.6995768836648208
+          },
+          {
+            "mae": 0.723674045499461,
+            "name": "main_wrist_flex",
+            "rmse": 0.9544498882368063
+          },
+          {
+            "mae": 0.6653886070203706,
+            "name": "main_wrist_roll",
+            "rmse": 0.9163237879253308
+          },
+          {
+            "mae": 0.7264988062484026,
+            "name": "main_gripper",
+            "rmse": 1.066100045956558
+          }
+        ]
+      },
+      "finetuned": {
+        "dataset_native_overall": {
+          "mae": 4.4728497243297705,
+          "rmse": 7.314545786939165
+        },
+        "dataset_native_per_joint": [
+          {
+            "mae": 4.348891742421809,
+            "name": "main_shoulder_pan",
+            "rmse": 6.579304564544754
+          },
+          {
+            "mae": 6.965997902214742,
+            "name": "main_shoulder_lift",
+            "rmse": 11.343901058514755
+          },
+          {
+            "mae": 4.787901722226144,
+            "name": "main_elbow_flex",
+            "rmse": 7.893475071339173
+          },
+          {
+            "mae": 4.475733894197968,
+            "name": "main_wrist_flex",
+            "rmse": 6.515970431936478
+          },
+          {
+            "mae": 3.437509934541952,
+            "name": "main_wrist_roll",
+            "rmse": 4.799584210662114
+          },
+          {
+            "mae": 2.8210631503760073,
+            "name": "main_gripper",
+            "rmse": 4.609046828792793
+          }
+        ],
+        "dataset_native_values_units": "undeclared_by_dataset_metadata",
+        "train_action_std": {
+          "fit_split": "train",
+          "units": "same dataset-native values; physical units undeclared",
+          "values": [
+            27.259197235107422,
+            33.79585647583008,
+            19.814014434814453,
+            16.901596069335938,
+            11.339887619018555,
+            9.38298225402832
+          ]
+        },
+        "train_action_std_normalized_overall": {
+          "mae": 0.24598394901484866,
+          "rmse": 0.3870154880606742
+        },
+        "train_action_std_normalized_per_joint": [
+          {
+            "mae": 0.15953851112197506,
+            "name": "main_shoulder_pan",
+            "rmse": 0.24136090665880167
+          },
+          {
+            "mae": 0.20611988067534417,
+            "name": "main_shoulder_lift",
+            "rmse": 0.3356595229335049
+          },
+          {
+            "mae": 0.2416421840274979,
+            "name": "main_elbow_flex",
+            "rmse": 0.3983783850878955
+          },
+          {
+            "mae": 0.26481131579050904,
+            "name": "main_wrist_flex",
+            "rmse": 0.3855239708915575
+          },
+          {
+            "mae": 0.30313439160557826,
+            "name": "main_wrist_roll",
+            "rmse": 0.4232479518971317
+          },
+          {
+            "mae": 0.30065741086818737,
+            "name": "main_gripper",
+            "rmse": 0.49121342283328695
+          }
+        ]
+      }
+    },
+    "single_pass": true,
+    "split": "test"
+  }
+}

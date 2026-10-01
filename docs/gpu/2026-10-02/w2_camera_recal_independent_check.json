@@ -1,0 +1,10 @@
+{
+  "schema": "sentinel-camera-recalibration-artifact-check-v1",
+  "prediction_bitwise_unchanged": true,
+  "prediction_max_abs_difference": 0.0,
+  "predicted_roots": 500,
+  "artifact_hashes_verified": {
+    "metrics.json": "cc9b8fdb90bd9b16e1c7682dcc3dddffacae573f2128ffc30bd675059072dda7",
+    "sealed_test_recalibrated_predictions.npz": "44d1551733fcea333bf4a7e5f5793e375d5bd25148d70b27894a8171a39eb094"
+  }
+}

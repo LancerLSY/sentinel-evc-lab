@@ -1,0 +1,730 @@
+{
+  "best_trainable_state_sha256": "786fb0b1bdd89824960d57fb88564c0b7bfbd36c011da8e7cf721a7905dca30b",
+  "claim_boundary": "Offline dataset-native action chunks only; physical units are undeclared by metadata. No robot was commanded.",
+  "run_identity": "sha256:fb49d382c7cfb184b7d5be90dc7f3da28aad4e4b1391b968b9feb071c5cedeea",
+  "schema": "smolvla-shadow-manifest-v2",
+  "tensor_file": "shadow_windows.pt",
+  "tensor_file_sha256": "d32e295f5f97e59129c6294cf3b5c0b473e66585a5048f174307fd02570d5758",
+  "windows": [
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "eea83b677ffa81e603bd37508c5005529dfd595b999d8c68bc64069340fb355d",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "a76bc29d33b301de0481bc4e7ab983f21d7ce4bc7853b64cac197fd8e9e768e1",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "90a8c08409752cf8d5ff9b345561002a1994691bb9b2e1d2d88e8d5d009ab6df",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 9,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "801a750f5939cc84b4fb3fee6537132495dd2ebb1b1cdb0c3bccd0a33d401d13",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "e52289eb567d795a86180b304837d20b8df7940610a1c9dfc046747b9b0c17da",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 0,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "60aabf198d85575bdc660ae2738362005bbf825eaabde89c32396c04edbc754a",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "abcdd4ef67934949449d63a9e89c8f279e01ab8943358e4444593ff668ef32a4",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "ad84dc59f2ba4aacc057e7c4f6d668461cbee51695fe481daf25641ba7993bf0",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 0
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "eea83b677ffa81e603bd37508c5005529dfd595b999d8c68bc64069340fb355d",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "572a4654591ae7cbf9eae5e7533c88d05159556d3579815d02716580ec0de055",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "e2c32fac14935fda43e8d31995356f4243f58778f48e3c27c93306d9db53e2e6",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 9,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "887496a80b1acc4eea046676de04cf527cbdcbc8a7068dd7d584570ec920e716",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "275a0615cf70af4c123b61047057ce172535f86b89079aefce102ccbd80eed7b",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 214,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "ce8f21ffea181fb2b5a87300acfd6109efd4e7e326f0fc749446931162c55bdb",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "ead22a2b5a2f89e479c9f30d0b65b2924bdc4ed912c5d3a8da2af6ecc5319e3f",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "f6045c2a532bbb296d4cdfde609073f1033a3c46623a2b5bf0d23b82c81cefbd",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 214
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "eea83b677ffa81e603bd37508c5005529dfd595b999d8c68bc64069340fb355d",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "e5aa14d8e26b5e4f8398712c7f6d3bca83c93d708a0f2c93b12e64f19dc4fe02",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "8bcb80c4f1716c259c8fc66446dba4cdef621dbcd8d3dbc312d57d03dff33d9b",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 10,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "ecfbaf8b2afd94ec6ca087381907f1c8dd799b18a2a9f6af566651360c151730",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "95f80e82d88beba55bd5ced8477cca24585dd5426faa67d574d08d23f00d95f5",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 40,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "9b4fe413c685c4afa7cf119b2366b24edab68a4d6582373859c06f079db89100",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "d1fb4b08ee6495244076dc88fee81cb1b0986ac512dcef5f134997b415a326da",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "8cf214697627a0bc1f432f0ed18d9355a9c3c26fc18d5fd1fae736664ac9c449",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 428
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "eea83b677ffa81e603bd37508c5005529dfd595b999d8c68bc64069340fb355d",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "5c30cac1431b502008729162a4bf4addb8087546eccd00ac27a83538b4b3ad7e",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "b79290a4df7adcb1726836c9cbcbdb6c16d7bd9a603e884dc802cc3bd6a6cc9c",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 10,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "1dbbcd818dc19c3ec55e21c2a26083d6b024fd3d6e7fee8267852b6cdce829a3",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "751e40b5fb2535b30542fc9aaf86616d804b9fc0b541314b61678031085c5b0d",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 254,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "c788916a2660d59a54a24a27ed4d9d14f48736e73d3cb3d7a5ba1a38d8d78f6f",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "fa05291d647b85a33a84d953138546b9d4bd6666730c871069a60124d2beef3d",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "758167d742fead055978b41e9af2f735ca1ba593e9a1f8bc6ae7bb14819b15e1",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 642
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "eea83b677ffa81e603bd37508c5005529dfd595b999d8c68bc64069340fb355d",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "44ce9ccb46b1a559f84dc6499b5d112dd2cca5f31c96ce94883c296d09ef3c76",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "69166f912609ff5c6731de6feac61879102e7c228b8cb51d7041d3bd35737412",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 23,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "d979c6d192aac7b76d70e2f646b6e938a2abb8e8af2f348a04c89e0d3a719909",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "936e2a740c336bf4ece29e3c8a05dba833534429b4a76ae2030fd7f831ae9231",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 104,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "9d6baf2a2bc8d614b84bca6c5fd40e95391f7ae2b73710517d17642c4f0ec3bc",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "c2fff78943d2c5cfe73dc94d8cc49533ea34517c6c45350dc02b7a0d45faee62",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "d776d2690da9c0b06fc0dc43e152a644ca4dc4b949b02cf06c2f1ec911b317c3",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 856
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "eea83b677ffa81e603bd37508c5005529dfd595b999d8c68bc64069340fb355d",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "1cf30a298d860bea3da06766e4a1d103678c915396cb9513b2158f6d837af570",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "b24d37c296d976e67a92c057dfe53bc77a30a5912b7c69444acee1307723cb63",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 23,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "412bcccf5f5a85068fa1d78dad023b084b37998fd54832d06a23f81f6d506ce7",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "d429eb2ee8ef83a36fe1cd355cc9af4172b8d6f28831ad190c1b685e6c0c321b",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 317,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "ca2f9c6930d6ca96fec2d4bca313040697b2d04b9c3b13e287650b6f14142abf",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "b4c3a3e05dad1d0c9fcf4ab181a2517e697945e4ae72a2e9df56cbf5994e1ca3",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "36071d33e0bd8da64e39edc9a011059795c0d42bd5a9d2c8be7189dc227845e9",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 1069
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "eea83b677ffa81e603bd37508c5005529dfd595b999d8c68bc64069340fb355d",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "7c39d04a2f87dfc97ddad8e3551c4bb6efe946484a5e0c63a4c988b8af888323",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "460c4b4e72f6f4b089ae642348b44948e18a79284b597b0682193ca509ee60d4",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 34,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "b2f2d8ba322063d752a4e6ee14c53428d520748465b2ef1cebea300f2d8b32c8",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "e312569cead731cb5c105ea23d21b34b20fa8be2eb216e854392d9ac459e0608",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 156,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "1acc682a441bc8345893dd936db9a6ce2e5c006f8804da8353f31896e8d89de0",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "11a090120d27ff8952e68bb75492ebac7200f9b7e64131ff7d73a16724a571e3",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "6da3f8252bb783f665ae346836b72a924d092899ac9784f47da9b75721be3e87",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 1283
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "980b46fcdaa1b4465e7e99de6a74afa1cd70f92804d9ed762ced282fabc0aeb2",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "722e11be23b1adb926edee5d7cdfe0f6ff9f500e223fab08f39bae93c8c5141a",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "aad997c678fa5933063cb41e003b438444466ab0df8a99f8c7cd1dbdcb7b8280",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 34,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "e6b71d4867e255eb7da6f62ce03280e143d3cb2b6f03f9df2c4bfdaac7fa1158",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "f4aa96bea614d57fb82738fb8e66148d30c7c347101115f23e89acea88512b0b",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 370,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "97bba5f4f8e5e752704917915fc22e63a0ef6da235628a7f44905fcf94d564d6",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "42fb7d924bf5c7821a4da70143b5fab2744260e64256ab1c8b3a1ef63059f00c",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "be2fb8023d1bf74da1157e5f5af3c85b223b3e1f029f9b4ea5a36ab45214b7dd",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 1497
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "eea83b677ffa81e603bd37508c5005529dfd595b999d8c68bc64069340fb355d",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "48da7bfa51e5ac64fc8e4aaaf82fe73066ebc4dfc8d454a5e22bac40aea4d83b",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "726a632676c68a3df88d2689d8aa62ffaefa162669dc9925dd9672a9c2684f01",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 43,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "167177054cb358c93647ecc2d91a52b3534c515abdfbc99ea2a141e38f039852",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "e10ff3cfdefa44c991fc499e98ed10cd38059535dfa79fc436d6cccefd05927c",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 208,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "3605ceb70daa8c35aeba536427ba729c76b1306327b550db52f5c1fda4ff7abe",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "5786059d25a947219c779eb1dec2f0f0ef8842d390657ae06adc7dd23f1e5424",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "dcbf4cbc88841adabbe1338fbce761880fb2714ebf9e5f126a31848cdc804f8f",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 1711
+    },
+    {
+      "action_is_pad": {
+        "dtype": "torch.bool",
+        "sha256": "6e1ac6016044bfe9f24ae75a3cd112f324d4ef34a0c07581901639fa636cc940",
+        "shape": [
+          50
+        ]
+      },
+      "base_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "fc4e29041adec0784040856bd60e630e1be056cb1d63f993f16d50f6c6a7f40c",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "79b8b911b6a657d1d433880f340bac9bcccce9a0a82eca6f0e2bb0b909f1187a",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "episode_index": 43,
+      "finetuned_dataset_native_action_chunk": {
+        "dtype": "torch.float32",
+        "sha256": "f530b97e9a44be71658177f884afb4fc08d09b92df01b144196a8774e5d17a05",
+        "shape": [
+          50,
+          6
+        ]
+      },
+      "fixed_noise": {
+        "dtype": "torch.float32",
+        "sha256": "619b8bf9710e7ef6350e5d60096c2b2bb7fbbe0b7d4c5d186c035b7ce6a38115",
+        "shape": [
+          50,
+          32
+        ]
+      },
+      "frame_index": 422,
+      "raw_images_uint8": {
+        "observation.images.top": {
+          "dtype": "torch.uint8",
+          "sha256": "5788c59e4f14d87898f017e4d1b41c2743e8a4458c0568efc9d95f38069a2593",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        },
+        "observation.images.wrist": {
+          "dtype": "torch.uint8",
+          "sha256": "a2a66573504538bb7de9309756b40a110ec5ba0058ac03322ff3da6b8a64e2b3",
+          "shape": [
+            3,
+            480,
+            640
+          ]
+        }
+      },
+      "raw_state": {
+        "dtype": "torch.float32",
+        "sha256": "c35763fa1db0c1005a89ab07f18509d1c311ccb552c589ef4c6e4470439646e6",
+        "shape": [
+          6
+        ]
+      },
+      "task": "Pick up the cube and place it in the box.",
+      "test_dataset_position": 1925
+    }
+  ]
+}

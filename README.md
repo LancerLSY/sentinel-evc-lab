@@ -83,17 +83,21 @@ profile-specific; the GPU measurements are recorded separately below.
 The [GPU training report](docs/gpu_training_results.md) records actual RTX 4090 D
 runs, frozen data/model revisions, independent calibration and retained negative
 results. Numerical GRU, MuJoCo object prediction, image-to-object WorldGuard and
-SO100 real-data joint prediction have completed training. Actual SmolVLA weights
-are loaded and the 5000-step fine-tune is in progress in the same experiment.
+SO100 real-data joint prediction have completed training. The actual SmolVLA fine-tune completed 5000 updates; its dev-selected checkpoint
+reduced held-out normalized action MAE from 0.67317 to 0.24598 (63.46%).
+Four-thread in-memory image-to-action inference measured P50/P95 229.26/236.90 ms
+for a 50×6 chunk. These are recorded-data measurements.
 
 The visual object model reduced mean selected movement duration from 1.6 to
 1.2856 seconds, with 0/500 unsafe selections in the fixed-camera simulator group.
-Changing only the cameras produced 47/500 unsafe selections. On real SO100 joint
+Changing only the cameras produced 47/500 unsafe selections. Recalibrating on
+profile-matched dev/cal, with identical predictions, changed selections to 1.6 s
+and produced 0/500 on that existing stress set; XY coverage remained 94.0%. On real SO100 joint
 recordings, adding images increased normalized prediction error by 10%; the
 simpler state/action model is the better baseline. Full results include strong
 physical baselines, envelope widths, sample denominators and failed cases.
 
-[Reproduce training](experiments/gpu/README.md) · [Model cards and loading](docs/gpu_model_cards.md)
+[Reproduce training](experiments/gpu/README.md) · [Model cards and loading](docs/gpu_model_cards.md) · [Trained weights](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002)
 
 ## Alignment and reliability
 
@@ -154,7 +158,7 @@ parent/fallback costs, measurement boundaries and reproduction.
 | Single-use execution permit | Implemented, local HMAC | Not PKI, not functional safety |
 | Revocation barrier | Implemented against a simulated controller | Not a motor-braking proof |
 | Evidence hash chain + signature | Implemented, Ed25519 | Proves record integrity only, not sensor honesty |
-| Real VLA integration | **Experimental: actual SmolVLA loaded; GPU fine-tune in progress** | Recorded-data evaluation; live driver integration remains pending |
+| Real VLA integration | **Experimental: actual SmolVLA fine-tuned and held-out evaluated** | Recorded-data evaluation; live driver integration remains pending |
 | Numeric consequence prediction | **Product: physical ID/ridge; experiment: trained strict v4 GRU** | Trained GPU weights are separate from the default product profile |
 | Visual object WorldGuard | **GPU-trained fixed-camera MuJoCo experiment** | Shifted-camera and real-object deployment require separate evidence |
 | Robot connection | **Implemented: mock + Universal Robots read-only diagnostics** | Motion adapter and hardware actuation remain pending |

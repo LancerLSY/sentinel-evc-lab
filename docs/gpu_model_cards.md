@@ -77,6 +77,8 @@ are part of the supported input contract. Fixed spatial grid regions do not
 provide persistent multi-object identities. The earlier observed-object W2
 model has additional true state information and is listed as an oracle reference.
 
+The separate `w2-visual-camera-recal-v1` control freezes all visual-model predictions and refits only residual scales/quantiles on shifted-profile dev/cal. On the existing stress set, unsafe selections changed from 47/500 to 0/500 by selecting 1.6-second actions. XY coverage remained 94.0% and full-state coverage 93.8%. Its own manifest/calibration travels with the same weights; it is not an independent new deployment test.
+
 ## W1 real SO100 visual joint predictor
 
 `w1-real-visual-v1` trains three state/action members, three visual/state/action
@@ -112,7 +114,10 @@ The real-video cache was produced by source SHA256 `9afc79d73e9d4e4e2c8c32d8377b
 `smolvla-so100-v1` uses the actual pinned LeRobot SmolVLA base and SmolVLM2
 backbone. The frozen VLM stays outside the optimizer; 99,880,992 action-expert,
 state/action projection and action-time parameters are trainable. The registered
-run uses batch 8, bfloat16 and 5000 optimizer steps.
+run completed batch 8, bfloat16 and 5000 optimizer steps. Dev selected step 3750
+(loss 0.161077); held-out normalized action MAE was 0.245984 versus the base
+0.673166. The saved 155-tensor overlay has SHA256
+`786fb0b1bdd89824960d57fb88564c0b7bfbd36c011da8e7cf721a7905dca30b`.
 
 `checkpoints/best/trainable_state.pt` is an overlay for the pinned base, not a
 standalone full policy. `checkpoint.json` binds its hash, the immutable run
@@ -132,6 +137,10 @@ The model's original Apache-2.0 licensing and dataset attribution accompany the
 checkpoint overlay; Sentinel's code license remains MIT. Download the pinned
 original base/backbone from their owners. Large third-party weights and recorded
 video are not duplicated in repository history.
+
+## Download trained artifacts
+
+The experimental release [gpu-experiments-20261002](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) carries the WorldGuard artifact bundle and SmolVLA trainable overlay. `artifact_index.json` lists asset sizes and SHA256 digests. The WorldGuard bundle retains all 36 trained members, normalization/PCA, calibration, predictions, logs and the exact earlier real-cache producer. Original real video and upstream frozen encoder/base weights remain at their official sources.
 
 ## Loading and retention
 

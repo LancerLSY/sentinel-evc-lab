@@ -1,0 +1,11 @@
+{
+  "base_model": "lerobot/smolvla_base",
+  "base_model_revision": "recorded in run_manifest.json",
+  "best_dev_loss": 0.16107744215345332,
+  "format": "smolvla-frozen-vlm-trainable-state-v1",
+  "reload": "Rebuild the pinned base policy, then load trainable_state.pt before inference.",
+  "run_identity": "sha256:fb49d382c7cfb184b7d5be90dc7f3da28aad4e4b1391b968b9feb071c5cedeea",
+  "step": 3750,
+  "train_stats_sha256": "4caf996a5beb2601720e5548213089ab56297c9ed6fbe57d99a95bc57a9a6136",
+  "trainable_state_sha256": "786fb0b1bdd89824960d57fb88564c0b7bfbd36c011da8e7cf721a7905dca30b"
+}
