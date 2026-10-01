@@ -283,3 +283,7 @@ tools/
 - 商业计划书**一页都不进公开仓库**。
 - 私钥不进仓库；demo 公钥要标注「**演示用，非客户 PKI**」。
 - CI badge **必须在确认 CI 真的跑绿之后再挂**，不能预先挂。
+
+## 本轮用户授权的新增范围：MuJoCo / SSH 实验
+
+现有数值工作台继续保留。用户要求真实三维仿真验证，新增独立可选 `physics` 依赖和 CLI 物理/SSH 实验 profile；核心默认依赖仍只有 cryptography。先读 `docs/physics_ssh_design.md` 与 `docs/physics_review_zh.md`。不得将托盘接触 fixture 描述为真实 VLA/机械臂/真机，也不得把实验完成或 CI 通过写成全部科学门通过。完整负面实验允许退出码3；当前快分支严格终态收敛失败必须保留。SSH 密钥/agent认证和严格主机验证由 OpenSSH 负责，凭据与私有材料不能进入源码包。

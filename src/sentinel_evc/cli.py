@@ -220,9 +220,34 @@ def cmd_experiments(args):
         records=[e for e in records if e['id']==args.experiment_id]
         if not records:
             print("unknown experiment",file=sys.stderr);return 2
-        print(json.dumps({"status":"PREREQUISITES_REQUIRED","experiment":records[0]},ensure_ascii=False,indent=2))
+        print(json.dumps({"status":"PREREQUISITES_REQUIRED" if records[0]["status"] == "pending" else records[0]["status"],"experiment":records[0]},ensure_ascii=False,indent=2))
         return 3
     print(json.dumps({"experiments":records},ensure_ascii=False,indent=2))
+    return 0
+
+
+def cmd_physics(args):
+    from .physics_experiment import run_physics_experiment
+    result = run_physics_experiment(args.out, seed=args.seed, friction=args.friction, render=args.render)
+    print(json.dumps({"scope": result["scope"], "acceptance": result["acceptance"],
+                      "integrated_outcome": result["integrated"]["outcome"],
+                      "out": args.out}, ensure_ascii=False, indent=2))
+    return 0 if result["infrastructure_gates_pass"] else 3
+
+
+def cmd_remote_physics(args):
+    from .ssh_experiment import run_remote_physics
+    result = run_remote_physics(args.host, args.out, seed=args.seed,
+                                friction=args.friction, render=args.render,
+                                python=args.python, timeout=args.timeout)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["infrastructure_gates_pass"] else 3
+
+
+def cmd_verify_physics(args):
+    from .ssh_experiment import verify_physics_experiment_result
+    result = verify_physics_experiment_result(args.out)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
 
 
@@ -275,14 +300,34 @@ def main(argv=None) -> int:
     experiments.add_argument("--experiment-id",default=None)
     experiments.set_defaults(func=cmd_experiments)
 
+    physics = sub.add_parser("physics", help="真实 MuJoCo 三维托盘接触实验（可选依赖）")
+    physics.add_argument("--out", required=True)
+    physics.add_argument("--seed", type=int, default=7)
+    physics.add_argument("--friction", type=float, default=.35)
+    physics.add_argument("--render", action="store_true")
+    physics.set_defaults(func=cmd_physics)
+
+    remote = sub.add_parser("remote-physics", help="通过严格 OpenSSH 执行隔离的三维物理作业")
+    remote.add_argument("--host", required=True, help="现有 OpenSSH 主机别名")
+    remote.add_argument("--out", required=True)
+    remote.add_argument("--python", default="python3", help="远端 Python 3.10+ 可执行文件名")
+    remote.add_argument("--timeout", type=int, default=7200)
+    remote.add_argument("--seed", type=int, default=7)
+    remote.add_argument("--friction", type=float, default=.35)
+    remote.add_argument("--render", action="store_true", help="远端 EGL 渲染实际轨迹")
+    remote.set_defaults(func=cmd_remote_physics)
+
+    check_physics = sub.add_parser("verify-physics", help="校验 SSH 回传收据、签名索引与全部物理试验")
+    check_physics.add_argument("--out", required=True)
+    check_physics.set_defaults(func=cmd_verify_physics)
+
     args = ap.parse_args(argv)
     try:
         return args.func(args)
-    except (ValueError,OSError) as exc:
+    except (ValueError,OSError,RuntimeError) as exc:
         print(str(exc),file=sys.stderr)
         return 2
 
 
 if __name__ == "__main__":
     sys.exit(main())
-

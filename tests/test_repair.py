@@ -38,7 +38,7 @@ def test_undefined_gradient_fails_closed():
 
 
 def test_external_experiments_are_pending_without_fake_metrics():
-    records = experiment_registry()
+    records = tuple(record for record in experiment_registry() if record.status == "pending")
     assert {record.experiment_id for record in records} == {
         "real-vla-shadow",
         "gru-residual-world",

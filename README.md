@@ -293,3 +293,21 @@ Two things stated plainly:
   (MIT) keep their own licences, unaffected by this one.
 
 The repository is public. Code licensing and patent rights retain the separate scopes above.
+
+## MuJoCo 3D contact experiment and SSH reproduction
+
+An optional experimental profile now runs an actuated XYZ open tray with a free 3D payload in MuJoCo. It records actual servo/contact dynamics, paired complete-state branches, five physics resolutions, revoke with continuing dynamics, mutation refusal and signed trial/experiment evidence. The existing numeric workbench remains a separate profile.
+
+```bash
+python -m pip install -e ".[physics,test]"
+python -m sentinel_evc physics --out runs/physics01 --seed 7 --render
+# Existing OpenSSH alias, Python 3.10+, working key/agent and known_hosts required:
+python -m sentinel_evc remote-physics --host YOUR_ALIAS --out runs/remote01 --seed 7
+python -m sentinel_evc verify-physics --out runs/remote01
+```
+
+Omit `--render` for headless CPU physics. Remote rendering uses EGL and needs a working driver. Local rendering uses the platform's MuJoCo renderer. Outputs must be empty new directories. SSH transport reads no passwords and refuses changed host keys.
+
+A completed experiment can return **3** when an acceptance gate fails. Its signed `COMPLETE.json`/index and all 25 trial bundles remain available. The fixed fixture's geometry-only fastest choice slips, and its full terminal-pose convergence currently fails; this negative result is retained. Slower candidates pass the recorded local refinement. This experiment does not implement a robot arm, VLA checkpoint or learned 3D WorldGuard, and does not establish robot safety. [Full design review and optimized SSH/physics contract](docs/physics_ssh_design.md).
+
+[中文复盘与当前完成范围](docs/physics_review_zh.md)。

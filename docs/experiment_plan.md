@@ -11,3 +11,5 @@
 7. **External evidence trust**: long-lived signer outside runtime, known public key/run ID and independently retained chain anchor; rotation/restart and custody protocol.
 
 No metrics are assigned to these pending items. The baseline CLI writes actual modest experiment manifests with source/environment, root data/model/calibration IDs, acceptance fields and output digests. Its small sample count must accompany any reported metric.
+
+The first concrete MuJoCo experiment and SSH protocol are now implemented in [physics_ssh_design.md](physics_ssh_design.md). Run `physics --out <empty-directory>` with optional physics dependencies installed. The five-resolution, 25-trial experiment preserves a slipping selected branch and a currently failed fast terminal-pose convergence gate. Real robot/vision/VLA experiments above remain prerequisites, and a live SSH reproduction requires a configured authenticated target. Exit 3 with a signed COMPLETE/index means a completed negative experiment; exit 2 or an absent COMPLETE marker means incomplete execution.

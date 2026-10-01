@@ -1,4 +1,4 @@
-"""Truthful registry for experiments that still require external prerequisites."""
+"""Truthful experiment entrypoints; unavailable prerequisites are never fabricated."""
 
 from __future__ import annotations
 
@@ -40,6 +40,15 @@ class ExperimentRecord:
 
 def experiment_registry() -> tuple[ExperimentRecord, ...]:
     return (
+        ExperimentRecord(
+            "mujoco-tray-contact",
+            "MuJoCo XYZ open-tray/free-payload contact and SSH reproduction",
+            "available_validation_incomplete",
+            ("optional physics dependencies", "SSH key/agent and pinned host for remote runs"),
+            "python -m sentinel_evc physics --out <empty-directory> --seed 7",
+            ("five timestep refinements", "25 signed trials and aggregate index", "full terminal-pose convergence; preserve failures"),
+            ("summary.json", "COMPLETE.json", "experiment-index", "trial bundles", "REMOTE_RECEIPT.json for SSH"),
+        ),
         ExperimentRecord(
             "real-vla-shadow",
             "Real VLA record-only shadow integration",

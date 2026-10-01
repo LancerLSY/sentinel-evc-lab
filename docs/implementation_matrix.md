@@ -25,3 +25,9 @@ The bundled model/calibration covers the fixed 0.35m four-duration family. Other
 Host wall time and numerical command time are separate. Numeric time advances only for observed controller commands. Holding during operator pause freezes this numerical clock; it does not model continuous physical load motion during a real stop. The simulated accepted tail is drained and recorded before recovery. Real stop dynamics remain an experiment.
 
 Model scales in the basic ridge baseline are fitted on training roots, without test data. Dev roots are kept disjoint but this increment does not run hyperparameter selection or reproduce the v4 development-scale/GRU protocol. Independent root-max calibration remains explicit. Results are small deterministic evaluations, not safety guarantees.
+
+## Added physical and SSH profile
+
+See [physics_ssh_design.md](physics_ssh_design.md) for the full design review, scoped implementation and unresolved scientific gates. `physics` adds a real MuJoCo XYZ open-tray/free-payload contact fixture with complete-state pairing, fixed 2ms gateway cadence, full compiled-model binding, continuing stop dynamics, and a signed aggregate index. `remote-physics` launches the same trusted local runtime through strict OpenSSH and verifies the returned evidence against its submitted source and authenticated transfer receipt.
+
+This profile does not inherit the numeric predictor/calibration, incremental geometry certificates or workbench pause semantics. Geometry-only selection can slip; fastest-branch terminal-pose convergence currently fails. This increment is an experimental contact runner, not completion of v4 robot/VLA/GRU integration.

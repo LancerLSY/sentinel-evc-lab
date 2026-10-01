@@ -18,6 +18,7 @@ class ExecutorState:
 
 
 _OPEN_PHASES = frozenset({"place", "release", "handoff", "supported_release"})
+_MAX_MONOTONIC_NS = (1 << 63) - 1
 
 
 class Executor:
@@ -75,8 +76,45 @@ class Executor:
             raise Rejection(ErrorCode.STATE_STALE, f"观测年龄 {age}ns")
 
     def _matches_controller_feedback(self, snapshot: Snapshot, now_ns: int) -> bool:
-        feedback = self._controller.read_feedback(now_ns)
-        return math.dist(snapshot.position, feedback["position"]) <= 1e-12
+        """Bind the supplied snapshot to one fresh controller feedback sample.
+
+        ``now_ns`` is only the comparison clock.  It cannot make an old controller
+        sample fresh, so the controller-provided capture time must match the
+        snapshot and independently satisfy the observation-age bound.
+        """
+        try:
+            feedback = self._controller.read_feedback(now_ns)
+        except (KeyError, TypeError, ValueError, OverflowError):
+            return False
+        if not isinstance(feedback, dict):
+            return False
+
+        captured = feedback.get("capture_mono_ns")
+        if (
+            isinstance(captured, bool)
+            or not isinstance(captured, int)
+            or captured < 0
+            or captured > _MAX_MONOTONIC_NS
+            or captured != snapshot.capture_mono_ns
+        ):
+            return False
+        age = now_ns - captured
+        if age < 0 or age > MAX_OBS_AGE_NS:
+            return False
+
+        if "valid" in feedback and feedback["valid"] is not True:
+            return False
+        position = feedback.get("position")
+        if not isinstance(position, (tuple, list)) or len(position) != 3:
+            return False
+        if any(
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(float(value))
+            for value in position
+        ):
+            return False
+        return math.dist(snapshot.position, position) <= 1e-12
 
     def commit(
         self,
