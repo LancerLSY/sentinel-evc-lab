@@ -15,6 +15,27 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install -e ".[test]"
       - run: python -m pytest -q
+      - name: Numeric product and training artifact smoke
+        run: |
+          python -m sentinel_evc run --mode physical --fast --out runs/product-ci
+          python -m sentinel_evc train-baseline --mode residual --out runs/baseline-ci
+          python -m sentinel_evc experiments
+          python -m pip wheel --no-deps . --wheel-dir runs/dist
+      - name: Managed core installation and packaged UI resources
+        run: |
+          python -m sentinel_evc install --target runs/installed-core --profile core --no-app
+          runs/installed-core/bin/sentinel-evc experiments
+          runs/installed-core/bin/sentinel-evc models --data-dir runs/installed-core/data import --file examples/models/tool.obj
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          wheel = next(Path('runs/dist').glob('*.whl'))
+          with ZipFile(wheel) as archive:
+              names = set(archive.namelist())
+              assert 'sentinel_evc/web/viewer.js' in names
+              assert 'sentinel_evc/native/SentinelApp.swift' in names
+              assert 'sentinel_evc/install_wizard.py' in names
+          PY
       - name: 端到端冒烟：跑一次 demo 并独立校验
         run: |
           python -m sentinel_evc demo --cases 100 --out runs/ci --run-id ci
@@ -61,3 +82,25 @@ jobs:
             runs/demo_a/report.html
             runs/demo_a/bundle
             runs/demo_a/anchors/demo.public
+
+  physics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ".[test,physics]"
+      - name: Full suite with real headless MuJoCo
+        run: python -m pytest -q
+      - name: Completed physics experiment, including negative scientific gates
+        run: |
+          status=0
+          python -m sentinel_evc physics --out runs/physics-ci --seed 7 || status=$?
+          test "$status" -eq 0 -o "$status" -eq 3
+          test -f runs/physics-ci/COMPLETE.json
+          python -c 'from pathlib import Path; from sentinel_evc.ssh_experiment import _verify_result_tree; r = _verify_result_tree(Path("runs/physics-ci")); assert r["trial_count"] == 25'
+      - uses: actions/upload-artifact@v7
+        with:
+          name: physics-evidence
+          path: runs/physics-ci

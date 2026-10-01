@@ -2,12 +2,13 @@
 """备用测试运行器：在没有 pytest 的环境里跑测试。
 
 正式开发请用 `python -m pytest -q`。这个脚本只实现 pytest 的一个极小子集
-（`raises` 和 `tmp_path`），存在的意义是让「我这台机器装不上依赖」不成为
+（`raises`、`skip`、`parametrize` 、`monkeypatch.setattr` 和 `tmp_path`），存在的意义是让「我这台机器装不上依赖」不成为
 跑不了测试的借口。CI 里用真的 pytest。
 """
 
 from __future__ import annotations
 
+import re
 import inspect
 import sys
 import tempfile
@@ -17,8 +18,9 @@ from pathlib import Path
 
 
 class _Raises:
-    def __init__(self, exc_type):
+    def __init__(self, exc_type, match=None):
         self.exc_type = exc_type
+        self.match = match
         self.value = None
 
     def __enter__(self):
@@ -29,8 +31,71 @@ class _Raises:
             raise AssertionError(f"期望抛出 {self.exc_type.__name__}，但没有抛出")
         if not issubclass(et, self.exc_type):
             return False
+        if self.match is not None and not re.search(self.match,str(ev)):
+            raise AssertionError("异常信息与预期模式不符")
         self.value = ev
         return True
+
+
+class _Skipped(Exception):
+    pass
+
+
+def _skip(reason):
+    raise _Skipped(reason)
+
+
+_MISSING = object()
+
+
+class _MonkeyPatch:
+    def __init__(self):
+        self._changes = []
+
+    def setattr(self, target, name, value=_MISSING):
+        if isinstance(target, str):
+            import importlib
+            parts = target.split(".")
+            current = importlib.import_module(parts[0])
+            for part in parts[1:-1]:
+                current = getattr(current, part)
+            target, name, value = current, parts[-1], name
+        if value is _MISSING:
+            raise TypeError("setattr requires a replacement value")
+        previous = getattr(target, name)
+        self._changes.append(("attribute", target, name, previous))
+        setattr(target, name, value)
+
+    def setitem(self, target, key, value):
+        self._changes.append(("item", target, key, target.get(key, _MISSING)))
+        target[key] = value
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        for kind, target, name, previous in reversed(self._changes):
+            if kind == "attribute":
+                setattr(target, name, previous)
+            elif previous is _MISSING:
+                target.pop(name, None)
+            else:
+                target[name] = previous
+
+
+def _parametrize(names, values):
+    names = tuple(part.strip() for part in names.split(","))
+    def decorate(fn):
+        cases = []
+        for value in values:
+            row = (value,) if len(names) == 1 else tuple(value)
+            if len(row) != len(names):
+                raise ValueError("parameter count mismatch")
+            cases.append(dict(zip(names, row)))
+        previous = getattr(fn, "_parameter_cases", [{}])
+        fn._parameter_cases = [{**first, **second} for first in previous for second in cases]
+        return fn
+    return decorate
 
 
 def _install_pytest_shim() -> None:
@@ -38,6 +103,8 @@ def _install_pytest_shim() -> None:
         return
     shim = types.ModuleType("pytest")
     shim.raises = _Raises
+    shim.skip = _skip
+    shim.mark = types.SimpleNamespace(parametrize=_parametrize)
     sys.modules["pytest"] = shim
 
 
@@ -50,7 +117,7 @@ def main() -> int:
     import importlib
 
     modules = sorted(p.stem for p in (root / "tests").glob("test_*.py"))
-    passed = failed = 0
+    passed = failed = skipped = 0
     failures = []
 
     for mod_name in modules:
@@ -58,24 +125,30 @@ def main() -> int:
         for name, fn in sorted(vars(mod).items()):
             if not name.startswith("test_") or not callable(fn):
                 continue
-            kwargs = {}
-            if "tmp_path" in inspect.signature(fn).parameters:
-                tmp = tempfile.mkdtemp()
-                kwargs["tmp_path"] = Path(tmp)
-            try:
-                fn(**kwargs)
-                passed += 1
-                print(".", end="", flush=True)
-            except Exception:
-                failed += 1
-                print("F", end="", flush=True)
-                failures.append((f"{mod_name}::{name}", traceback.format_exc()))
+            for case_index, case in enumerate(getattr(fn, "_parameter_cases", [{}])):
+                with tempfile.TemporaryDirectory() as tmp, _MonkeyPatch() as patch:
+                    kwargs = dict(case)
+                    if "tmp_path" in inspect.signature(fn).parameters:
+                        kwargs["tmp_path"] = Path(tmp).resolve()
+                    if "monkeypatch" in inspect.signature(fn).parameters:
+                        kwargs["monkeypatch"] = patch
+                    try:
+                        fn(**kwargs)
+                        passed += 1
+                        print(".", end="", flush=True)
+                    except _Skipped:
+                        skipped += 1
+                        print("s", end="", flush=True)
+                    except Exception:
+                        failed += 1
+                        print("F", end="", flush=True)
+                        failures.append((f"{mod_name}::{name}[{case_index}]", traceback.format_exc()))
 
     print()
     for label, tb in failures:
         print(f"\n{'=' * 60}\nFAILED {label}\n{'-' * 60}\n{tb}")
 
-    print(f"\n{passed} passed, {failed} failed")
+    print(f"\n{passed} passed, {failed} failed, {skipped} skipped")
     return 0 if failed == 0 else 1
 
 

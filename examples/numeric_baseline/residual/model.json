@@ -1,0 +1,88 @@
+{
+  "candidate_sigmas": [
+    0.24130409076279896,
+    0.21338323625407707,
+    0.17558926552244414,
+    0.12189638039797775
+  ],
+  "coefficients": [
+    -0.20810637644454327,
+    0.16991830259244328,
+    0.17105325324213305,
+    0.1325830296809022,
+    0.0
+  ],
+  "family": "stdlib-ridge-residual",
+  "feature_mean": [
+    -0.00022968014248198038,
+    0.0051067970918994105,
+    -1.0408340855860843e-17,
+    0.00012268044645593628,
+    1.0
+  ],
+  "feature_names": [
+    "r",
+    "v",
+    "actual_action",
+    "r_cubed",
+    "bias"
+  ],
+  "feature_scale": [
+    0.06718784908338203,
+    0.3195816725552331,
+    1.0574602820689742,
+    0.0013212922519018548,
+    1e-12
+  ],
+  "limitations": [
+    "low-dimensional numeric residual baseline",
+    "not the v4 GRU ResidualWorld",
+    "not a robot or functional-safety model"
+  ],
+  "mode": "residual",
+  "model_hash": "sha256:e45aa37326c17a48bffff986959bfd6d9e763ee37316a97bda8c6f732ec8c016",
+  "nominal_parameters": [
+    20.0,
+    1.75,
+    80.0
+  ],
+  "target_mean": 0.0008370372025703204,
+  "target_scale": 0.03551875868650366,
+  "train_manifest_hash": "sha256:b6a1bf2ddce840f16505878ba4616ecea3dda57d242d22a7d6f5720db5ee4949",
+  "train_root_ids": [
+    "numeric-root-10000000",
+    "numeric-root-10000001",
+    "numeric-root-10000002",
+    "numeric-root-10000003",
+    "numeric-root-10000004",
+    "numeric-root-10000005",
+    "numeric-root-10000006",
+    "numeric-root-10000007",
+    "numeric-root-10000008",
+    "numeric-root-10000009",
+    "numeric-root-10000010",
+    "numeric-root-10000011",
+    "numeric-root-10000012",
+    "numeric-root-10000013",
+    "numeric-root-10000014",
+    "numeric-root-10000015",
+    "numeric-root-10000016",
+    "numeric-root-10000017",
+    "numeric-root-10000018",
+    "numeric-root-10000019",
+    "numeric-root-10000020",
+    "numeric-root-10000021",
+    "numeric-root-10000022",
+    "numeric-root-10000023",
+    "numeric-root-10000024",
+    "numeric-root-10000025",
+    "numeric-root-10000026",
+    "numeric-root-10000027",
+    "numeric-root-10000028",
+    "numeric-root-10000029",
+    "numeric-root-10000030",
+    "numeric-root-10000031"
+  ],
+  "training_scope": "train roots only; normalization fitted on the same train roots",
+  "version": "v1"
+}

@@ -1,0 +1,13 @@
+{
+  "alpha": 0.1,
+  "calibration_hash": "sha256:924241efc8f5759720b6b91819e4344fde096b40e36ec8e7b7da2d682ee0de02",
+  "candidate_rule_hash": "sha256:7d36029e00b833a092bd58d9af7cbacaf2500bfecc9c395798cd3a40467e50b8",
+  "finite": true,
+  "model_hash": "sha256:e45aa37326c17a48bffff986959bfd6d9e763ee37316a97bda8c6f732ec8c016",
+  "q": 0.9542947177560673,
+  "rank": 18,
+  "root_count": 19,
+  "root_manifest_hash": "sha256:9e319d144642ff3c794af79fdb8f09db5483b19219e225bd9d74812cdfef0b1f",
+  "scale_digest": "sha256:d018a746249102aa4f1d0b807d640a7a87b673389fbf4fb8b1aee60a40b609f8",
+  "score_definition": "root-max-over-candidate-time-absolute-r-error-over-sigma-v1"
+}

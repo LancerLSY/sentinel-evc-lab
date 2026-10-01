@@ -1,9 +1,8 @@
-"""Sentinel EVC Lab — 数值参考实现。
+"""Sentinel EVC — auditable execution and local robotics experiments.
 
-给机器人策略的动作块加一道最终提交前的门禁：验证的是真正要被执行的
-那个动作，许可有期限、只能用一次、可以撤销，全过程留下可独立校验的记录。
-
-范围：数值几何域。没有真实 VLA、没有机械臂、没有视觉。
+Shared CLI/App entrypoints preserve final-action authorization and evidence.
+Optional MuJoCo contact experiments, model inspection and read-only robot
+connectors have distinct scopes; real VLA/device motion remains pending.
 """
 
-__version__ = "0.1.0.dev0"
+__version__ = "0.3.0.dev0"

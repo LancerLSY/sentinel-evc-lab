@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sentinel product-v1 scenario",
+  "description": "Creation defaults are applied by Scenario.parse; duplicate JSON keys and non-finite numbers are rejected before schema parsing. Calibration covers only the bundled 0.35m action family. Semantic workspace lo<hi and name trim are checked by parser.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "product-v1"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^(?!.*[\\u0000-\\u001f]).*\\S.*$"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000
+    },
+    "displacement": {
+      "type": "number",
+      "minimum": 0.01,
+      "maximum": 0.6
+    },
+    "risk_limit": {
+      "type": "number",
+      "minimum": 0.001,
+      "maximum": 0.5
+    },
+    "prediction_mode": {
+      "enum": [
+        "physical",
+        "residual"
+      ]
+    },
+    "scene": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "obstacles",
+            "workspace",
+            "tool_radius",
+            "tracking_reserve"
+          ],
+          "properties": {
+            "obstacles": {
+              "type": "array",
+              "maxItems": 16,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "center",
+                  "radius"
+                ],
+                "properties": {
+                  "center": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "minimum": -2,
+                      "maximum": 2
+                    },
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "radius": {
+                    "type": "number",
+                    "minimum": 0.001,
+                    "maximum": 0.5
+                  }
+                }
+              }
+            },
+            "workspace": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "lo",
+                "hi"
+              ],
+              "properties": {
+                "lo": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "minimum": -2,
+                    "maximum": 2
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                "hi": {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "minimum": -2,
+                    "maximum": 2
+                  },
+                  "minItems": 3,
+                  "maxItems": 3
+                }
+              }
+            },
+            "tool_radius": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 0.1
+            },
+            "tracking_reserve": {
+              "type": "number",
+              "minimum": 0.005,
+              "maximum": 0.05
+            }
+          }
+        }
+      ]
+    }
+  }
+}

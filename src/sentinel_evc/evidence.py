@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 from pathlib import Path
 from typing import Tuple
 
@@ -26,6 +25,10 @@ from .contracts import canonical_json
 from .events import EventLog
 
 
+def _safe_name(name: str) -> bool:
+    return bool(name) and len(name) <= 100 and name not in {".", ".."} and all(c.isascii() and (c.isalnum() or c in "._-") for c in name)
+
+
 def _sha256_file(path: Path) -> str:
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -34,7 +37,7 @@ def _sha256_file(path: Path) -> str:
     return "sha256:" + h.hexdigest()
 
 
-def build_bundle(log: EventLog, out_dir: str) -> dict:
+def build_bundle(log: EventLog, out_dir: str, artifacts: dict | None = None) -> dict:
     """把一次运行的事件导出成可独立校验的包。"""
     out = Path(out_dir)
     bundle = out / "bundle"
@@ -45,13 +48,25 @@ def build_bundle(log: EventLog, out_dir: str) -> dict:
     events_path = bundle / "events.jsonl"
     events_path.write_text(log.to_jsonl(), encoding="utf-8")
 
+    files = {"events.jsonl": _sha256_file(events_path)}
+    for name, data in (artifacts or {}).items():
+        if not _safe_name(name) or name in {"events.jsonl", "manifest.json", "manifest.sig"}:
+            raise ValueError("unsafe artifact name")
+        path = bundle / name
+        if path.is_symlink():
+            raise ValueError("symlink artifact refused")
+        path.write_bytes(data)
+        files[name] = _sha256_file(path)
+
     manifest = {
         "run_id": log.run_id,
         "event_count": log.count,
         "tip_hash": log.tip_hash,
-        "files": {"events.jsonl": _sha256_file(events_path)},
+        "files": files,
         "signer": "sentinel-evc-lab demo key (NOT a customer PKI)",
     }
+    if log.schema_version != "v0.1":
+        manifest["event_schema"] = log.schema_version
     manifest_bytes = canonical_json(manifest)
     (bundle / "manifest.json").write_bytes(manifest_bytes)
 
@@ -83,7 +98,7 @@ LAYERS = ("files_present", "signature", "run_id", "file_digest",
           "event_count", "hash_chain", "tip_hash")
 
 
-def verify_layers(bundle_dir: str, public_key_path: str, run_id: str) -> dict:
+def verify_layers(bundle_dir: str, public_key_path: str, run_id: str, expected_tip: str | None = None) -> dict:
     """逐层校验，**不短路**。
 
     每一层独立判定并各自给出原因。不短路是刻意的：不同的篡改方式会留下
@@ -97,7 +112,7 @@ def verify_layers(bundle_dir: str, public_key_path: str, run_id: str) -> dict:
     r = {k: None for k in LAYERS}
 
     missing = [p.name for p in (events_path, manifest_path, sig_path)
-               if not p.exists()]
+               if not p.is_file() or p.is_symlink()]
     if missing:
         r["files_present"] = f"MISSING_FILE: {', '.join(missing)}"
         return r
@@ -115,7 +130,9 @@ def verify_layers(bundle_dir: str, public_key_path: str, run_id: str) -> dict:
         r["signature"] = f"BAD_PUBLIC_KEY: {exc}"
 
     try:
-        manifest = json.loads(manifest_bytes.decode("utf-8"))
+        manifest = _read_json(manifest_bytes.decode("utf-8"))
+        if not isinstance(manifest,dict):
+            raise ValueError("manifest must be an object")
     except Exception as exc:
         r["run_id"] = f"MANIFEST_UNREADABLE: {exc}"
         return r
@@ -124,15 +141,34 @@ def verify_layers(bundle_dir: str, public_key_path: str, run_id: str) -> dict:
     r["run_id"] = True if manifest.get("run_id") == run_id else (
         f"RUN_ID_MISMATCH: 清单里是 {manifest.get('run_id')}，要求的是 {run_id}")
 
-    # --- 文件摘要
-    declared = manifest.get("files", {}).get("events.jsonl")
-    r["file_digest"] = True if declared == _sha256_file(events_path) else (
-        "FILE_DIGEST_MISMATCH: events.jsonl 内容与清单摘要不符")
+    # Verify every signed asset. Only flat regular files are supported.
+    declared_files = manifest.get("files")
+    digest_error = None
+    if not isinstance(declared_files, dict) or "events.jsonl" not in declared_files:
+        digest_error = "FILE_DIGEST_MISMATCH: invalid manifest file map"
+    else:
+        for name, digest in declared_files.items():
+            path = bundle / name if isinstance(name, str) else bundle
+            if (not isinstance(name,str) or not _safe_name(name)
+                    or name in {"manifest.json","manifest.sig"}
+                    or path.is_symlink() or not path.is_file()):
+                digest_error = "FILE_DIGEST_MISMATCH: missing or unsafe artifact"
+                break
+            if digest != _sha256_file(path):
+                digest_error = "FILE_DIGEST_MISMATCH: signed artifact changed"
+                break
+    r["file_digest"] = digest_error or True
 
     # --- 条数
-    lines = [ln for ln in events_path.read_text(encoding="utf-8").splitlines() if ln]
+    try:
+        lines = [ln for ln in events_path.read_text(encoding="utf-8").splitlines() if ln]
+    except UnicodeError:
+        r["event_count"] = "EVENT_UNREADABLE: invalid UTF-8"
+        r["hash_chain"] = "EVENT_UNREADABLE: invalid UTF-8"
+        r["tip_hash"] = "TIP_HASH_MISMATCH: unreadable events"
+        return r
     declared_n = manifest.get("event_count")
-    r["event_count"] = True if len(lines) == declared_n else (
+    r["event_count"] = True if type(declared_n) is int and len(lines) == declared_n else (
         f"EVENT_COUNT_MISMATCH: 文件里 {len(lines)} 条，清单声明 {declared_n} 条")
 
     # --- 哈希链逐条重算
@@ -140,9 +176,19 @@ def verify_layers(bundle_dir: str, public_key_path: str, run_id: str) -> dict:
     chain_ok = True
     for i, line in enumerate(lines):
         try:
-            ev = json.loads(line)
+            ev = _read_json(line)
+            if not isinstance(ev,dict) or set(ev) != {"seq","run_id","type","payload","prev_hash"} or not isinstance(ev["payload"],dict):
+                raise ValueError("invalid event envelope")
         except Exception:
             r["hash_chain"] = f"EVENT_UNREADABLE: 第 {i} 条无法解析"
+            chain_ok = False
+            break
+        if type(ev.get("seq")) is not int or ev.get("seq") != i or ev.get("run_id") != run_id:
+            r["hash_chain"] = f"EVENT_IDENTITY_MISMATCH: event {i}"
+            chain_ok = False
+            break
+        if ev.get("type") == "LOG_GAP":
+            r["hash_chain"] = "EVIDENCE_GAP: log is incomplete"
             chain_ok = False
             break
         if ev.get("prev_hash") != prev:
@@ -155,17 +201,17 @@ def verify_layers(bundle_dir: str, public_key_path: str, run_id: str) -> dict:
     if chain_ok:
         r["hash_chain"] = True
 
-    r["tip_hash"] = True if prev == manifest.get("tip_hash") else (
+    r["tip_hash"] = True if prev == manifest.get("tip_hash") and (expected_tip is None or prev == expected_tip) else (
         "TIP_HASH_MISMATCH: 末尾摘要与清单不符")
     return r
 
 
-def verify_bundle(bundle_dir: str, public_key_path: str, run_id: str) -> Tuple[bool, str]:
+def verify_bundle(bundle_dir: str, public_key_path: str, run_id: str, expected_tip: str | None = None) -> Tuple[bool, str]:
     """独立校验。只接受三个参数，只读文件，自己重算一切。
 
     返回 (是否通过, 说明)。通过要求每一层都过。
     """
-    r = verify_layers(bundle_dir, public_key_path, run_id)
+    r = verify_layers(bundle_dir, public_key_path, run_id, expected_tip)
     failed = [v for v in r.values() if v is not None and v is not True]
     if not failed and all(v is True for v in r.values()):
         n = len(Path(bundle_dir, "events.jsonl")
@@ -180,6 +226,18 @@ def failed_layers(bundle_dir: str, public_key_path: str, run_id: str) -> tuple:
     return tuple(k for k in LAYERS if r[k] is not None and r[k] is not True)
 
 
+def _read_json(raw):
+    def unique(pairs):
+        output={}
+        for key,value in pairs:
+            if key in output:raise ValueError("duplicate JSON key")
+            output[key]=value
+        return output
+    def invalid(value):
+        raise ValueError("non-finite JSON constant")
+    return json.loads(raw,object_pairs_hook=unique,parse_constant=invalid)
+
+
 def _canon_for_hash(obj):
     """与 contracts._canon 相同的规则，这里独立重写一遍以保持校验器自足。"""
     if isinstance(obj, float):
@@ -189,3 +247,4 @@ def _canon_for_hash(obj):
     if isinstance(obj, dict):
         return {str(k): _canon_for_hash(v) for k, v in obj.items()}
     return obj
+

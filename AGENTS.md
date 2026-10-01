@@ -10,7 +10,8 @@
 
 ## 0. 先读这个
 
-这是一个**数值参考实现**。它不是产品，不是功能安全认证，不是真机系统。
+当前增量是**本地单用户数值工作台**：产品交互、持久化与执行闭环可用；范围仍为数值模拟。不是功能安全认证或真机系统。
+先读 `docs/product_contracts.md` 和 `docs/implementation_matrix.md`。旧 demo/sample_run 保留。
 动手前必读：`README.md`（能力状态表）、`docs/表述纪律.md`。
 
 **本仓库唯一要证明的主张：**
@@ -78,8 +79,8 @@ python -m sentinel_evc demo --cases 1000 --out runs/my_run
 ### 单元测试
 
 ```
-python -m pytest -q      →  24 passed
-python run_tests.py      →  24 passed, 0 failed      （备用运行器）
+python -m pytest -q      →  全套通过；当前数量见 docs/product_validation.md
+python run_tests.py      →  全套通过，0 failed      （备用运行器）
 ```
 
 ### `demo --cases 1000` 第一幕 · 几何判定
@@ -126,7 +127,7 @@ python run_tests.py      →  24 passed, 0 failed      （备用运行器）
 | 改事件里 1 个字节 | `file_digest` · `hash_chain` · `tip_hash` |
 | 删掉最后 3 行 | `file_digest` · `event_count` · `tip_hash` |
 | 换一把公钥 | `signature` |
-| 改 run_id | `run_id` |
+| 改 run_id | `run_id` · `hash_chain` · `tip_hash`（新校验器同时检查每条事件身份） |
 
 > 四种失败给四种不同报错，比「四次都失败」有说服力得多。**不要把这四种归并成一种错误。**
 
@@ -170,7 +171,7 @@ python run_tests.py      →  24 passed, 0 failed      （备用运行器）
 ### schema 已冻结
 
 `schemas/` 下三份（`event` / `scenario` / `verdict`）**已冻结**。
-**改 schema 需要两人同意。** 事件类型固定 13 种，首版就全部定义，**不要后加**：
+旧 schema 原样保留。新工作台使用独立 `product-event.schema.json` / `product-scenario.schema.json`，manifest 标明 event_schema。涉及契约变更需要实现者与独立 reviewer 复核。旧事件类型固定 13 种：
 
 `PROPOSAL` `TRANSFORM` `CERTIFICATE` `PREPARE` `COMMIT` `DISPATCH` `CONTROLLER_ACK`
 `OBSERVED` `REVOKE` `CANCEL_ACK` `BACKUP` `OUTCOME` `LOG_GAP`
@@ -258,8 +259,8 @@ tools/
 
 ## 8. 明确不要做的事（本轮范围外）
 
-**不做**：训练任何模型、接 openpi / LIBERO、装 MuJoCo、碰 ROS2、做 WorldGuard、
-做前后端分离管理台、接真机、做闭环干预。
+本轮已实现标准库低维残差基线、历史辨识物理基线及数值执行闭环。真实 VLA、视觉、GRU、MuJoCo、ROS2、真实机器人和分布式部署仍按实验登记中的前提开展。
+不把数值机制或本地操作台成绩写成这些外部能力。
 
 `worldguard/` 目录**只放接口定义和 `README_WHY_EMPTY.md`**。
 空目录配诚实说明，比塞一个没验证过的模型强。
@@ -282,3 +283,7 @@ tools/
 - 商业计划书**一页都不进公开仓库**。
 - 私钥不进仓库；demo 公钥要标注「**演示用，非客户 PKI**」。
 - CI badge **必须在确认 CI 真的跑绿之后再挂**，不能预先挂。
+
+## 本轮用户授权的新增范围：MuJoCo / SSH 实验
+
+现有数值工作台继续保留。用户要求真实三维仿真验证，新增独立可选 `physics` 依赖和 CLI 物理/SSH 实验 profile；核心默认依赖仍只有 cryptography。先读 `docs/physics_ssh_design.md` 与 `docs/physics_review_zh.md`。不得将托盘接触 fixture 描述为真实 VLA/机械臂/真机，也不得把实验完成或 CI 通过写成全部科学门通过。完整负面实验允许退出码3；当前快分支严格终态收敛失败必须保留。SSH 密钥/agent认证和严格主机验证由 OpenSSH 负责，凭据与私有材料不能进入源码包。

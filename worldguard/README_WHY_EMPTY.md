@@ -1,30 +1,19 @@
-# 这个目录为什么是空的
+# Numeric prediction and the future visual WorldGuard
 
-WorldGuard（动作条件后果预测）在首版**没有实现**。这不是遗漏，是决定。
+The v0.1 interface-only placeholder is superseded for the **numeric domain** by
+`src/sentinel_evc/prediction.py`, `calibration.py`, `numeric_world.py` and `data.py`.
+The local workbench compares a history-only physics identification baseline and a
+trainable standard-library ridge residual, using independent root calibration.
+This is not the historical v4 GRU or a visual world model.
 
-## 原因
+The visual/VLA branch remains pending. Activation requires a frozen checkpoint,
+observable inputs only, an equally informed physical baseline, action shuffle and
+no-action ablations, independent calibration/test roots, and measured closed-loop
+benefits including inference, wait, refusal and recovery costs.
 
-1. 它不在关键路径上。EVC 许可、Δ-Cert 和证据链能独立交付价值，
-   不需要先有一个学习模型。
-2. 在有经过验证的收益之前，放一个模型进来只会让「这套东西到底证明了什么」
-   变得模糊。
-3. 已有记录显示，在简单数值动力学里，知道方程族的物理辨识基线比学习模型更准
-   （技术文档记载：学习模型 MAE 14.10 mm，物理辨识基线 4.58 mm）。
-   这个负结果应当被保留，而不是靠加大模型掩盖。
+A task requiring a consequence prediction rejects missing, unknown, unregistered,
+expired or mismatched evidence. It does not silently bypass the prediction gate.
 
-## 启用的条件
-
-下面几条都成立之前，不启用：
-
-- 有**同信息强物理基线**做对照 —— 基线不能被剥夺输入，模型不能拿到隐藏真值
-- 动作置乱消融显示模型确实使用了未来动作信息，而不是学到了场景捷径
-- 冻结数据、冻结候选流程、独立校准之后，在**任务产出**上有增益，
-  而不只是预测 MAE 更低
-- 把实际推理时间、等待、拒绝和恢复都计入之后，有效任务产出仍然增加
-
-## 不启用时的行为
-
-某个任务如果声明必须依赖预测，那么模型不可用时该任务**只能拒绝正常动作或进入
-已验证的后备**，不能悄悄切回未经验证的基础执行。
-
-空目录配一份诚实说明，比塞一个没验证过的模型强。
+See `docs/implementation_matrix.md`, `docs/experiment_plan.md` and the actual small
+baseline artifacts in `examples/numeric_baseline/`. Historical document metrics are
+not current measurements and are not reproduced by these ridge models.

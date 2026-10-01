@@ -105,7 +105,7 @@ def cmd_demo(args) -> int:
 
 
 def cmd_verify(args) -> int:
-    ok, msg = verify_bundle(args.bundle, args.public_key, args.run_id)
+    ok, msg = verify_bundle(args.bundle, args.public_key, args.run_id,args.expected_tip)
     print(("PASS — " if ok else "FAIL — ") + msg)
     return 0 if ok else 1
 
@@ -181,10 +181,162 @@ def cmd_tamper(args) -> int:
     return 0 if all_failed and len(profiles) == 4 else 1
 
 
+def cmd_serve(args):
+    from .server import serve
+    if not 0 <= args.port <= 65535:
+        raise ValueError("port must be 0–65535")
+    serve(args.data_dir,args.port)
+    return 0
+
+
+def cmd_run(args):
+    from .scenario import Scenario, strict_json
+    from .runstore import RunStore
+    from .product_pipeline import ProductManager
+    scenario=Scenario.parse(strict_json(Path(args.scenario).read_bytes())) if args.scenario else Scenario.parse({"name":"CLI 数值运行","seed":args.seed,"prediction_mode":args.mode,"risk_limit":args.risk_limit})
+    store=RunStore(args.out)
+    manager=ProductManager(store,realtime=not args.fast)
+    try:
+        record=manager.start(scenario)
+        session=manager._sessions[record['id']]
+        session.thread.join()
+        result=manager.read(record['id'])
+        print(json.dumps({"id":result['id'],"status":result['status'],"selected":result['selected'],"cursors":result['result']['cursors'],"error":result['error'],"verification":result.get('verification')},ensure_ascii=False,indent=2))
+        return 0 if result['status']=="completed" else 3
+    finally:
+        manager.close();store.close()
+
+
+def cmd_baseline(args):
+    from .baseline import run_baseline
+    print(json.dumps(run_baseline(args.out,args.seed,args.mode,args.risk_limit),ensure_ascii=False,indent=2))
+    return 0
+
+
+def cmd_experiments(args):
+    from .experiments import experiment_registry
+    records=[e.summary() for e in experiment_registry()]
+    if args.experiment_id:
+        records=[e for e in records if e['id']==args.experiment_id]
+        if not records:
+            print("unknown experiment",file=sys.stderr);return 2
+        print(json.dumps({"status":"PREREQUISITES_REQUIRED" if records[0]["status"] == "pending" else records[0]["status"],"experiment":records[0]},ensure_ascii=False,indent=2))
+        return 3
+    print(json.dumps({"experiments":records},ensure_ascii=False,indent=2))
+    return 0
+
+
+def cmd_physics(args):
+    from .physics_experiment import run_physics_experiment
+    result = run_physics_experiment(args.out, seed=args.seed, friction=args.friction, render=args.render)
+    print(json.dumps({"scope": result["scope"], "acceptance": result["acceptance"],
+                      "integrated_outcome": result["integrated"]["outcome"],
+                      "out": args.out}, ensure_ascii=False, indent=2))
+    return 0 if result["infrastructure_gates_pass"] else 3
+
+
+def cmd_remote_physics(args):
+    from .ssh_experiment import run_remote_physics
+    result = run_remote_physics(args.host, args.out, seed=args.seed,
+                                friction=args.friction, render=args.render,
+                                python=args.python, timeout=args.timeout)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["infrastructure_gates_pass"] else 3
+
+
+def cmd_verify_physics(args):
+    from .ssh_experiment import verify_physics_experiment_result
+    result = verify_physics_experiment_result(args.out)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_install(args):
+    from dataclasses import asdict
+    from .installation import install_system
+    source = args.source or str(Path(__file__).resolve().parents[2])
+    if args.interactive or args.target is None:
+        from .install_wizard import run_wizard
+        if not sys.stdin.isatty():
+            raise ValueError("交互安装需要终端；无人值守安装请指定 --target。")
+        return run_wizard(source=source, target=args.target, profile=args.profile,
+                          python_executable=args.python, no_app=args.no_app)
+    result = install_system(args.target, profile=args.profile, source=source,
+                            python_executable=args.python, build_app=(not args.no_app and sys.platform == "darwin"))
+    print(json.dumps(asdict(result), ensure_ascii=False, indent=2, default=str))
+    return 0
+
+
+def cmd_build_app(args):
+    from .installation import build_macos_app
+    root = Path(__file__).resolve().parents[2]
+    path = build_macos_app(args.out, args.python, args.data_dir, source_dir=root if (root / "pyproject.toml").is_file() else None)
+    print(path)
+    return 0
+
+
+def cmd_app(args):
+    from .server import serve
+    if args.browser or sys.platform != "darwin":
+        serve(args.data_dir, args.port, open_browser=True)
+        return 0
+    import subprocess
+    from .installation import build_macos_app
+    import hashlib
+    data_dir = Path(args.data_dir).expanduser().resolve()
+    root = Path(__file__).resolve().parents[2]
+    source_dir = root if (root / "pyproject.toml").is_file() else None
+    config = {"schema_version": "native-app-v1",
+              "python": str(Path(sys.executable).expanduser().absolute()),
+              "data_dir": str(data_dir),
+              "source_dir": str(source_dir) if source_dir else "",
+              "bind": "127.0.0.1"}
+    native = Path(__file__).resolve().parent / "native/SentinelApp.swift"
+    identity = hashlib.sha256(json.dumps(config, sort_keys=True).encode() + native.read_bytes()).hexdigest()[:20]
+    app = data_dir.parent / ".sentinel-apps" / ("Sentinel EVC-" + identity + ".app")
+    if not app.exists():
+        build_macos_app(app, sys.executable, data_dir, source_dir=source_dir)
+    saved = json.loads((app / "Contents/Resources/app-config.json").read_text(encoding="utf-8"))
+    if saved != config:
+        raise ValueError("桌面App配置与当前工作区不一致，请使用新的构建目录。")
+    subprocess.run(["open", "-n", str(app)], check=True)
+    print("已打开 Sentinel EVC 桌面App。")
+    return 0
+
+
+def cmd_models(args):
+    from .assets import AssetStore
+    store = AssetStore(Path(args.data_dir)/"models")
+    if args.model_action == "import":
+        path = Path(args.file)
+        value = store.import_asset(args.name or path.stem, args.format or path.suffix.lstrip("."), content=path.read_bytes())
+    elif args.model_action == "list":
+        value = {"assets": store.list()}
+    elif args.model_action == "check":
+        value = store.check(args.id)
+    else:
+        value = store.geometry(args.id)
+    print(json.dumps(value, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_robot(args):
+    from .robot_connectors import RobotRegistry
+    registry = RobotRegistry(Path(args.data_dir)/"robots")
+    if args.robot_action == "add":
+        value = registry.create(args.name, args.driver, args.host, args.port)
+    elif args.robot_action == "list":
+        value = {"profiles": registry.list()}
+    else:
+        value = registry.diagnose(args.id)
+    print(json.dumps(value, ensure_ascii=False, indent=2))
+    return 0
+
+
 def main(argv=None) -> int:
     _use_utf8_output()
     ap = argparse.ArgumentParser(
-        prog="sentinel_evc", description="Sentinel EVC Lab · 数值参考实现")
+        prog="sentinel_evc", description="Sentinel EVC · CLI、桌面App与机器人实验入口")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     d = sub.add_parser("demo", help="跑完整三幕")
@@ -197,6 +349,7 @@ def main(argv=None) -> int:
     v.add_argument("--bundle", required=True)
     v.add_argument("--public-key", required=True)
     v.add_argument("--run-id", required=True)
+    v.add_argument("--expected-tip",default=None,help="独立保留的末尾锚点")
     v.set_defaults(func=cmd_verify)
 
     t = sub.add_parser("tamper", help="四种篡改测试")
@@ -204,8 +357,105 @@ def main(argv=None) -> int:
     t.add_argument("--run-id", default=None)
     t.set_defaults(func=cmd_tamper)
 
+    ui=sub.add_parser("serve",help="本地单用户数值操作台")
+    ui.add_argument("--port",type=int,default=8765)
+    ui.add_argument("--data-dir",default="runs/workbench")
+    ui.set_defaults(func=cmd_serve)
+
+    run=sub.add_parser("run",help="执行四候选数值闭环并保存签名证据")
+    run.add_argument("--out",default="runs/workbench")
+    run.add_argument("--scenario",default=None)
+    run.add_argument("--seed",type=int,default=7)
+    run.add_argument("--mode",choices=("physical","residual"),default="physical")
+    run.add_argument("--risk-limit",type=float,default=.12)
+    run.add_argument("--fast",action="store_true",help="仅用于数值验证的逻辑时钟模式")
+    run.set_defaults(func=cmd_run)
+
+    baseline=sub.add_parser("train-baseline",help="小规模根分组训练、校准和留出评价")
+    baseline.add_argument("--out",required=True)
+    baseline.add_argument("--seed",type=int,default=10_000_000)
+    baseline.add_argument("--mode",choices=("physical","residual"),default="residual")
+    baseline.add_argument("--risk-limit",type=float,default=.12)
+    baseline.set_defaults(func=cmd_baseline)
+
+    experiments=sub.add_parser("experiments",help="列出尚需模型、设备或数据的实验")
+    experiments.add_argument("--experiment-id",default=None)
+    experiments.set_defaults(func=cmd_experiments)
+
+    physics = sub.add_parser("physics", help="真实 MuJoCo 三维托盘接触实验（可选依赖）")
+    physics.add_argument("--out", required=True)
+    physics.add_argument("--seed", type=int, default=7)
+    physics.add_argument("--friction", type=float, default=.35)
+    physics.add_argument("--render", action="store_true")
+    physics.set_defaults(func=cmd_physics)
+
+    remote = sub.add_parser("remote-physics", help="通过严格 OpenSSH 执行隔离的三维物理作业")
+    remote.add_argument("--host", required=True, help="现有 OpenSSH 主机别名")
+    remote.add_argument("--out", required=True)
+    remote.add_argument("--python", default="python3", help="远端 Python 3.10+ 可执行文件名")
+    remote.add_argument("--timeout", type=int, default=7200)
+    remote.add_argument("--seed", type=int, default=7)
+    remote.add_argument("--friction", type=float, default=.35)
+    remote.add_argument("--render", action="store_true", help="远端 EGL 渲染实际轨迹")
+    remote.set_defaults(func=cmd_remote_physics)
+
+    check_physics = sub.add_parser("verify-physics", help="校验 SSH 回传收据、签名索引与全部物理试验")
+    check_physics.add_argument("--out", required=True)
+    check_physics.set_defaults(func=cmd_verify_physics)
+
+    install = sub.add_parser("install", help="一键安装独立CLI环境与桌面App")
+    install.add_argument("--target", default=None)
+    install.add_argument("--interactive", action="store_true", help="打开终端安装向导；不传target时自动打开")
+    install.add_argument("--profile", choices=("core","all"), default="all")
+    install.add_argument("--source", default=None)
+    install.add_argument("--python", default=sys.executable)
+    install.add_argument("--no-app", action="store_true")
+    install.set_defaults(func=cmd_install)
+
+    build_app = sub.add_parser("build-app", help="构建原生macOS桌面入口（使用已有Python环境）")
+    build_app.add_argument("--out", required=True)
+    build_app.add_argument("--python", default=sys.executable)
+    build_app.add_argument("--data-dir", default="runs/app")
+    build_app.set_defaults(func=cmd_build_app)
+
+    app = sub.add_parser("app", help="打开桌面App或浏览器操作台")
+    app.add_argument("--data-dir", default="runs/app")
+    app.add_argument("--browser", action="store_true")
+    app.add_argument("--port", type=int, default=0)
+    app.set_defaults(func=cmd_app)
+
+    models = sub.add_parser("models", help="导入、预览与检查3D模型")
+    models.add_argument("--data-dir", default="runs/app")
+    model_actions = models.add_subparsers(dest="model_action", required=True)
+    model_import = model_actions.add_parser("import")
+    model_import.add_argument("--file", required=True)
+    model_import.add_argument("--format", choices=("obj","stl","mjcf","urdf"))
+    model_import.add_argument("--name", default=None)
+    model_actions.add_parser("list")
+    for action in ("check","geometry"):
+        parser = model_actions.add_parser(action)
+        parser.add_argument("--id", required=True)
+    models.set_defaults(func=cmd_models)
+
+    robot = sub.add_parser("robot", help="配置机械臂驱动入口与只读诊断")
+    robot.add_argument("--data-dir", default="runs/app")
+    robot_actions = robot.add_subparsers(dest="robot_action", required=True)
+    robot_add = robot_actions.add_parser("add")
+    robot_add.add_argument("--name", required=True)
+    robot_add.add_argument("--driver", choices=("mock","ur_dashboard_readonly"), required=True)
+    robot_add.add_argument("--host", default=None)
+    robot_add.add_argument("--port", type=int, default=None)
+    robot_actions.add_parser("list")
+    robot_diagnose = robot_actions.add_parser("diagnose")
+    robot_diagnose.add_argument("--id", required=True)
+    robot.set_defaults(func=cmd_robot)
+
     args = ap.parse_args(argv)
-    return args.func(args)
+    try:
+        return args.func(args)
+    except (ValueError,OSError,RuntimeError) as exc:
+        print(str(exc),file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

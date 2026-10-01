@@ -19,16 +19,24 @@ def _rig(drop_cancel_ack=False, capacity=2):
     store = CertificateStore()
     root = establish_root(p1, scene)
     store.register(root.certificate)
-    auth = Authority(store)
     clock = Clock(1_000_000_000)
     log = EventLog("test")
-    ctrl = SimController(capacity=capacity, drop_cancel_ack=drop_cancel_ack)
+    auth = Authority(store, events=log)
+    ctrl = SimController(capacity=capacity, drop_cancel_ack=drop_cancel_ack,
+                         initial_position=p1.knots[0])
     ex = Executor(auth, ctrl, log)
     ctx = Context(scene_id=scene.scene_id)
     snap = Snapshot("obs-0", p1.knots[0], clock.now_ns)
     return dict(scene=scene, plan=p1, store=store, cert=root.certificate,
                 auth=auth, clock=clock, log=log, ctrl=ctrl, ex=ex,
                 ctx=ctx, snap=snap)
+
+
+def _tick(r, seq):
+    r["clock"].advance(50_000_000)
+    feedback = r["ctrl"].read_feedback(r["clock"].now_ns)
+    snap = Snapshot(f"obs-{seq}", feedback["position"], r["clock"].now_ns)
+    return r["ex"].tick(r["clock"].now_ns, snap, r["ctx"])
 
 
 # ------------------------------------------------ 不变量 2：许可不可重复消费
@@ -40,7 +48,7 @@ def test_lease_cannot_be_consumed_twice():
                               r["clock"].now_ns)
     r["ex"].commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
 
-    ex2 = Executor(r["auth"], SimController(), r["log"])
+    ex2 = Executor(r["auth"], SimController(initial_position=r["plan"].knots[0]), r["log"])
     with pytest.raises(Rejection) as exc:
         ex2.commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
     assert exc.value.code == ErrorCode.LEASE_REPLAY
@@ -106,9 +114,8 @@ def test_no_stale_generation_submissions_after_revoke():
                               r["clock"].now_ns)
     r["ex"].commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
 
-    for _ in range(2):
-        r["clock"].advance(50_000_000)
-        r["ex"].tick(r["clock"].now_ns)
+    for seq in range(1, 3):
+        _tick(r, seq)
 
     gen_before = r["ex"].generation
     n_before = len(r["ctrl"].submitted)
@@ -132,8 +139,7 @@ def test_already_submitted_step_may_still_execute():
     lease = r["auth"].prepare(r["plan"], r["cert"], r["ctx"], r["snap"],
                               r["clock"].now_ns)
     r["ex"].commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
-    r["clock"].advance(50_000_000)
-    r["ex"].tick(r["clock"].now_ns)
+    _tick(r, 1)
 
     assert len(r["ctrl"].submitted) >= 1
     r["ex"].revoke("test")
@@ -179,10 +185,8 @@ def test_controller_capacity_forces_batched_submission():
     lease = r["auth"].prepare(r["plan"], r["cert"], r["ctx"], r["snap"],
                               r["clock"].now_ns, prefix_len=4)
     r["ex"].commit(lease, r["plan"], r["snap"], r["ctx"], r["clock"].now_ns)
-    r["clock"].advance(50_000_000)
-    r["ex"].tick(r["clock"].now_ns)
-    r["clock"].advance(50_000_000)
-    r["ex"].tick(r["clock"].now_ns)
+    _tick(r, 1)
+    _tick(r, 2)
     assert r["ctrl"].free_slots() <= 2
 
 

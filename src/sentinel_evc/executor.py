@@ -1,19 +1,12 @@
-"""执行器：唯一的命令写入者。
-
-五项发布不变量，每条对应 tests/test_executor.py 里的一个测试：
-  1. 未授权通道不能写驱动（只有 Executor 调 controller.submit）
-  2. 同一许可不能重复消费
-  3. 已提交的不可撤销前缀不能被改写
-  4. 撤销后不新增旧代次本地提交
-  5. 取消未确认不得恢复旧计划
-"""
+"""Single-writer executor with observation-bound, revocable dispatch."""
 
 from __future__ import annotations
 
+import math
 import threading
 from typing import Optional
 
-from .authority import Authority
+from .authority import MAX_OBS_AGE_NS, START_TUBE, Authority
 from .contracts import Context, ErrorCode, Lease, Plan, Rejection, Snapshot
 from .events import EventLog
 
@@ -24,24 +17,31 @@ class ExecutorState:
     FAULT = "FAULT"
 
 
+_OPEN_PHASES = frozenset({"place", "release", "handoff", "supported_release"})
+_MAX_MONOTONIC_NS = (1 << 63) - 1
+
+
 class Executor:
-    """本地唯一命令写入者。"""
+    """The only object allowed to call the controller write interface."""
 
     def __init__(self, authority: Authority, controller, events: EventLog):
         self._authority = authority
         self._controller = controller
         self._events = events
-
         self._lock = threading.RLock()
         self._state = ExecutorState.IDLE
-        self._generation = 0
-
+        self._generation = authority.generation
         self._plan: Optional[Plan] = None
         self._lease: Optional[Lease] = None
-        self._pending: list = []  # 本地待发前缀
+        self._context: Optional[Context] = None
+        self._pending: list[int] = []
         self._dispatched = 0
-
-    # ------------------------------------------------------------ 属性
+        self._observed_at_commit = 0
+        self._last_snapshot_capture = -1
+        self._last_obs_id: Optional[str] = None
+        self._next_dispatch_ns = 0
+        self._revoked_after_capture = -1
+        self._pre_revoke_context: Optional[Context] = None
 
     @property
     def state(self) -> str:
@@ -51,7 +51,70 @@ class Executor:
     def generation(self) -> int:
         return self._generation
 
-    # ------------------------------------------------------------ Commit
+    @staticmethod
+    def _check_context(live: Context, permitted: Context, generation: int) -> None:
+        if live.epoch != permitted.epoch or live.epoch != generation:
+            raise Rejection(ErrorCode.STALE_GENERATION, "执行代次变化")
+        for field_name in (
+            "robot",
+            "boot",
+            "scene_id",
+            "controller",
+            "task_phase",
+            "queue_rev",
+            "committed_prefix_hash",
+        ):
+            if getattr(live, field_name) != getattr(permitted, field_name):
+                raise Rejection(ErrorCode.CONTEXT_CHANGED, f"{field_name} 变化")
+
+    @staticmethod
+    def _check_snapshot_age(snapshot: Snapshot, now_ns: int) -> None:
+        if not snapshot.valid:
+            raise Rejection(ErrorCode.STATE_STALE, "快照无效")
+        age = now_ns - snapshot.capture_mono_ns
+        if age < 0 or age > MAX_OBS_AGE_NS:
+            raise Rejection(ErrorCode.STATE_STALE, f"观测年龄 {age}ns")
+
+    def _matches_controller_feedback(self, snapshot: Snapshot, now_ns: int) -> bool:
+        """Bind the supplied snapshot to one fresh controller feedback sample.
+
+        ``now_ns`` is only the comparison clock.  It cannot make an old controller
+        sample fresh, so the controller-provided capture time must match the
+        snapshot and independently satisfy the observation-age bound.
+        """
+        try:
+            feedback = self._controller.read_feedback(now_ns)
+        except (KeyError, TypeError, ValueError, OverflowError):
+            return False
+        if not isinstance(feedback, dict):
+            return False
+
+        captured = feedback.get("capture_mono_ns")
+        if (
+            isinstance(captured, bool)
+            or not isinstance(captured, int)
+            or captured < 0
+            or captured > _MAX_MONOTONIC_NS
+            or captured != snapshot.capture_mono_ns
+        ):
+            return False
+        age = now_ns - captured
+        if age < 0 or age > MAX_OBS_AGE_NS:
+            return False
+
+        if "valid" in feedback and feedback["valid"] is not True:
+            return False
+        position = feedback.get("position")
+        if not isinstance(position, (tuple, list)) or len(position) != 3:
+            return False
+        if any(
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(float(value))
+            for value in position
+        ):
+            return False
+        return math.dist(snapshot.position, position) <= 1e-12
 
     def commit(
         self,
@@ -61,151 +124,237 @@ class Executor:
         live_context: Context,
         now_ns: int,
     ) -> None:
-        """提交阶段：复核最新状态，消费一次性许可，才开放待发前缀。
-
-        准备阶段的依据和提交时的新观测都要记录 —— 两者可以不同，
-        但新观测必须仍在允许管内。
-        """
+        """Consume a permit only after a complete, current commit-time recheck."""
         with self._lock:
             if self._state == ExecutorState.FAULT:
                 raise Rejection(ErrorCode.CANCEL_UNCONFIRMED, "故障状态下不接纳新许可")
-
+            if self._state == ExecutorState.RUNNING:
+                raise Rejection(ErrorCode.CONTROLLER_FULL, "已有前缀正在执行")
+            if self._events.has_gap:
+                raise Rejection(ErrorCode.EVIDENCE_GAP, "事件链已有 LOG_GAP")
+            if not self._events.can_append_without_gap():
+                self._events.note_gap("COMMIT event would overflow bounded buffer")
+                raise Rejection(ErrorCode.EVIDENCE_GAP, "提交事件无法完整记录")
             if not self._authority.verify_mac(lease):
                 raise Rejection(ErrorCode.LEASE_UNKNOWN, "许可签名不匹配")
-
             if lease.plan_hash != plan.hash:
                 raise Rejection(ErrorCode.CERTIFICATE_MISS, "许可未绑定这个最终动作")
-
-            if now_ns > lease.deadline_mono_ns:
-                raise Rejection(ErrorCode.LEASE_EXPIRED, "许可已过期")
-
-            # 上下文逐项复核
-            lc, pc = live_context, lease.context
-            if lc.boot != pc.boot:
-                raise Rejection(ErrorCode.CONTEXT_CHANGED, "boot 变化")
-            if lc.epoch != pc.epoch:
-                raise Rejection(ErrorCode.STALE_GENERATION, "代次已推进")
-            if lc.scene_id != pc.scene_id:
-                raise Rejection(ErrorCode.CONTEXT_CHANGED, "场景变化")
-            if lc.queue_rev != pc.queue_rev:
-                raise Rejection(ErrorCode.CONTEXT_CHANGED, "队列版本变化")
-            if lc.controller != pc.controller:
-                raise Rejection(ErrorCode.CONTEXT_CHANGED, "控制器 profile 变化")
-
-            if not snapshot.valid:
-                raise Rejection(ErrorCode.STATE_STALE, "提交时快照无效")
-
-            # 新快照可以替换旧快照，但必须仍在允许管内。
-            # 注意：obs_id 相同但状态已出管，一样要拒绝。
-            import math
-
-            from .authority import START_TUBE
-
+            self._authority.validate_available(lease)
+            self._authority.validate_runtime(lease, plan.hash, now_ns)
+            self._check_context(live_context, lease.context, self._generation)
+            self._check_snapshot_age(snapshot, now_ns)
             if math.dist(snapshot.position, plan.knots[0]) > START_TUBE:
                 raise Rejection(ErrorCode.TRACKING_TUBE, "提交时起点已出管")
+            if not self._matches_controller_feedback(snapshot, now_ns):
+                raise Rejection(ErrorCode.STATE_STALE, "快照不是控制器当前实际反馈")
 
-            # 一次性消费。放在所有检查之后 —— 检查失败不应烧掉许可。
             self._authority.consume(lease)
-
             self._plan = plan
             self._lease = lease
+            self._context = live_context
             self._pending = list(range(lease.prefix_len))
             self._dispatched = 0
+            self._observed_at_commit = self._controller.cursors()["observed"]
+            self._last_snapshot_capture = snapshot.capture_mono_ns
+            self._last_obs_id = snapshot.obs_id
+            self._next_dispatch_ns = now_ns
             self._state = ExecutorState.RUNNING
-
             self._events.append(
                 "COMMIT",
                 plan_hash=plan.hash,
                 lease_id=lease.lease_id,
                 cert_id=lease.cert_id,
+                prediction_hash=lease.prediction_hash,
                 prefix_len=lease.prefix_len,
                 obs_id=snapshot.obs_id,
                 generation=self._generation,
             )
-
-    # ------------------------------------------------------------ Dispatch
-
-    def tick(self, now_ns: int) -> bool:
-        """推进一步。返回是否实际发出了命令。
-
-        每一步都要重新检查许可状态、代次、期限 —— 不是 commit 时查一次就完。
-        错过时间槽之后不能瞬间补发多条旧动作。
-        """
-        with self._lock:
-            if self._state != ExecutorState.RUNNING or not self._pending:
-                self._controller.tick()
-                return False
-
-            lease = self._lease
-            assert lease is not None and self._plan is not None
-
-            if now_ns > lease.deadline_mono_ns:
-                self._events.append(
-                    "BACKUP", reason=ErrorCode.LEASE_EXPIRED, lease_id=lease.lease_id
-                )
+            if self._events.has_gap:
                 self._pending.clear()
-                self._state = ExecutorState.IDLE
+                self._state = ExecutorState.FAULT
+                self._generation = self._authority.advance_generation()
+                self._lease = None
+                self._plan = None
+                self._controller.cancel()
+                raise Rejection(ErrorCode.EVIDENCE_GAP, "COMMIT 触发 LOG_GAP")
+
+    def _enter_runtime_fault(self, rejection: Rejection) -> None:
+        self._generation = self._authority.advance_generation()
+        self._revoked_after_capture = self._last_snapshot_capture
+        self._pre_revoke_context = self._context
+        self._pending.clear()
+        lease_id = self._lease.lease_id if self._lease else None
+        self._lease = None
+        self._plan = None
+        self._state = ExecutorState.FAULT
+        self._events.append(
+            "BACKUP",
+            reason=rejection.code,
+            detail=rejection.detail,
+            lease_id=lease_id,
+            new_generation=self._generation,
+        )
+        self._controller.cancel()
+
+    def tick(
+        self,
+        now_ns: int,
+        snapshot: Optional[Snapshot] = None,
+        live_context: Optional[Context] = None,
+    ) -> bool:
+        """Advance one controller cycle and dispatch at most one new action."""
+        with self._lock:
+            if self._state != ExecutorState.RUNNING:
                 self._controller.tick()
                 return False
 
-            if self._controller.free_slots() <= 0:
-                # 正常背压，不是错误
+            if not self._pending:
+                self._controller.tick()
+                if self._controller.is_drained:
+                    self._state = ExecutorState.IDLE
+                    self._lease = None
+                    self._plan = None
+                    self._context = None
+                return False
+
+            if self._controller.free_slots() <= 0 or now_ns < self._next_dispatch_ns:
                 self._controller.tick()
                 return False
 
-            step = self._pending.pop(0)
-            action = self._plan.knots[step + 1]
-            ok = self._controller.submit(action, self._generation)
-            if ok:
-                self._dispatched += 1
-                self._events.append(
-                    "DISPATCH",
-                    plan_hash=self._plan.hash,
-                    lease_id=lease.lease_id,
-                    step=step,
-                    generation=self._generation,
+            try:
+                if snapshot is None or live_context is None:
+                    raise Rejection(ErrorCode.STATE_STALE, "新派发缺少 Snapshot 或 Context")
+                assert self._lease is not None and self._plan is not None and self._context is not None
+                self._authority.validate_runtime(self._lease, self._plan.hash, now_ns)
+                self._check_context(live_context, self._lease.context, self._generation)
+                self._check_snapshot_age(snapshot, now_ns)
+                if snapshot.capture_mono_ns <= self._last_snapshot_capture or snapshot.obs_id == self._last_obs_id:
+                    raise Rejection(ErrorCode.STATE_STALE, "观测未更新")
+                if not self._matches_controller_feedback(snapshot, now_ns):
+                    raise Rejection(ErrorCode.STATE_STALE, "快照不是控制器当前实际反馈")
+                observed_since_commit = max(
+                    0, self._controller.cursors()["observed"] - self._observed_at_commit
                 )
-            else:
-                self._pending.insert(0, step)
+                expected_index = min(observed_since_commit, self._lease.prefix_len)
+                if math.dist(snapshot.position, self._plan.knots[expected_index]) > START_TUBE:
+                    raise Rejection(ErrorCode.TRACKING_TUBE, "实际反馈偏离已观测计划节点")
 
-            self._controller.tick()
-            return ok
-
-    # ------------------------------------------------------------ Revoke
+                step = self._pending[0]
+                grip = dict(self._plan.gripper_events).get(step)
+                if grip == "open" and (
+                    snapshot.supported is not True or live_context.task_phase not in _OPEN_PHASES
+                ):
+                    raise Rejection(
+                        ErrorCode.TRACKING_TUBE,
+                        "open 要求 supported=True 且处于允许释放阶段",
+                    )
+                if not self._events.can_append_without_gap():
+                    self._events.note_gap("DISPATCH event would overflow bounded buffer")
+                    raise Rejection(ErrorCode.EVIDENCE_GAP, "派发事件无法完整记录")
+                action = self._plan.knots[step + 1]
+                ok = self._controller.submit(action, self._generation, grip)
+                if ok:
+                    self._pending.pop(0)
+                    self._dispatched += 1
+                    self._last_snapshot_capture = snapshot.capture_mono_ns
+                    self._last_obs_id = snapshot.obs_id
+                    self._next_dispatch_ns = now_ns + int(self._plan.dt * 1e9)
+                    self._events.append(
+                        "DISPATCH",
+                        plan_hash=self._plan.hash,
+                        lease_id=self._lease.lease_id,
+                        step=step,
+                        gripper_event=grip,
+                        obs_id=snapshot.obs_id,
+                        generation=self._generation,
+                    )
+                    if self._events.has_gap:
+                        raise Rejection(ErrorCode.EVIDENCE_GAP, "DISPATCH 触发 LOG_GAP")
+                self._controller.tick()
+                return ok
+            except Rejection as exc:
+                self._enter_runtime_fault(exc)
+                raise
 
     def revoke(self, reason: str) -> None:
-        """撤销屏障。
-
-        锁内只做三件事然后立刻放开 —— 网络等待绝不能占着撤销锁。
-        cancel 发在锁外。
-        """
+        """Invalidate permits and request asynchronous controller cancellation."""
         with self._lock:
-            self._generation += 1  # 旧代次立刻失效
-            self._pending.clear()  # 清本地待发
+            self._generation = self._authority.advance_generation()
+            self._revoked_after_capture = self._last_snapshot_capture
+            self._pre_revoke_context = self._context
+            self._pending.clear()
             self._state = ExecutorState.FAULT
             lease_id = self._lease.lease_id if self._lease else None
             self._lease = None
-            self._events.append("REVOKE", reason=reason, lease_id=lease_id,
-                                new_generation=self._generation)
-
-        self._controller.cancel()  # 锁外发，等 ACK 不占锁
+            self._plan = None
+            self._events.append(
+                "REVOKE",
+                reason=reason,
+                lease_id=lease_id,
+                new_generation=self._generation,
+            )
+            if self._events.supports("CANCEL_REQUEST"):
+                self._events.append(
+                    "CANCEL_REQUEST", reason=reason, generation=self._generation
+                )
+        self._controller.cancel()
 
     def poll_cancel(self) -> Optional[bool]:
-        """查询取消是否已确认。"""
         acked = self._controller.cancel_acked
         if acked is not None:
-            self._events.append("CANCEL_ACK", acked=bool(acked))
+            if acked and self._events.supports("CANCEL_ACCEPTED"):
+                self._events.append("CANCEL_ACCEPTED", generation=self._generation)
+            self._events.append("CANCEL_ACK", acked=bool(acked), confirmed=bool(acked))
         return acked
 
-    def try_recover(self, operator_approved: bool) -> None:
-        """恢复必须同时满足三件事：取消确认、新快照、人工批准。少一样都不恢复。"""
+    def try_recover(
+        self,
+        operator_approved: bool,
+        snapshot: Optional[Snapshot] = None,
+        live_context: Optional[Context] = None,
+        now_ns: Optional[int] = None,
+    ) -> None:
+        """Recover to IDLE only after confirmed cancel, drain and fresh feedback."""
         with self._lock:
             if self._state != ExecutorState.FAULT:
                 return
             if self._controller.cancel_acked is not True:
                 raise Rejection(ErrorCode.CANCEL_UNCONFIRMED, "取消未确认，不恢复")
+            if not self._controller.is_drained:
+                raise Rejection(ErrorCode.CANCEL_UNCONFIRMED, "控制器前缀尚未排空")
             if not operator_approved:
                 raise Rejection(ErrorCode.CANCEL_UNCONFIRMED, "缺少人工批准")
+            if snapshot is None or live_context is None or now_ns is None:
+                raise Rejection(ErrorCode.STATE_STALE, "恢复缺少撤销后的新观测或上下文")
+            self._check_snapshot_age(snapshot, now_ns)
+            if snapshot.capture_mono_ns <= self._revoked_after_capture:
+                raise Rejection(ErrorCode.STATE_STALE, "恢复观测不是撤销后新采样")
+            if not self._matches_controller_feedback(snapshot, now_ns):
+                raise Rejection(ErrorCode.STATE_STALE, "恢复快照不是控制器当前实际反馈")
+            if live_context.epoch != self._generation:
+                raise Rejection(ErrorCode.STALE_GENERATION, "恢复上下文 epoch 不正确")
+            if self._pre_revoke_context is not None:
+                previous = self._pre_revoke_context
+                for field_name in (
+                    "robot",
+                    "boot",
+                    "scene_id",
+                    "controller",
+                    "task_phase",
+                ):
+                    if getattr(live_context, field_name) != getattr(previous, field_name):
+                        raise Rejection(
+                            ErrorCode.CONTEXT_CHANGED,
+                            f"恢复时 {field_name} 变化",
+                        )
+                if live_context.queue_rev < previous.queue_rev:
+                    raise Rejection(ErrorCode.CONTEXT_CHANGED, "恢复时 queue_rev 回退")
+            if self._events.has_gap:
+                raise Rejection(ErrorCode.EVIDENCE_GAP, "事件链已有 LOG_GAP")
             self._state = ExecutorState.IDLE
-            self._events.append("OUTCOME", outcome="recovered",
-                                generation=self._generation)
+            self._context = None
+            self._last_snapshot_capture = snapshot.capture_mono_ns
+            self._last_obs_id = snapshot.obs_id
+            self._events.append(
+                "OUTCOME", outcome="recovered", generation=self._generation, obs_id=snapshot.obs_id
+            )
