@@ -113,8 +113,8 @@ The real-video cache was produced by source SHA256 `9afc79d73e9d4e4e2c8c32d8377b
 
 `smolvla-so100-v1` uses the actual pinned LeRobot SmolVLA base and SmolVLM2
 backbone. The frozen VLM stays outside the optimizer; 99,880,992 action-expert,
-state/action projection and action-time parameters are trainable. The registered
-run completed batch 8, bfloat16 and 5000 optimizer steps. Dev selected step 3750
+state/action projection and action-time parameters are trainable. Training used
+batch 8, bfloat16 and 5000 optimizer steps. Dev selected step 3750
 (loss 0.161077); held-out normalized action MAE was 0.245984 versus the base
 0.673166. The saved 155-tensor overlay has SHA256
 `786fb0b1bdd89824960d57fb88564c0b7bfbd36c011da8e7cf721a7905dca30b`.

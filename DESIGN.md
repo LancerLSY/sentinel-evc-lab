@@ -4,7 +4,7 @@
 - Status: Active
 - Last refreshed: 2026-10-01
 - Primary product surfaces: installable CLI, macOS desktop App, local browser workbench.
-- Evidence reviewed: existing web/index.html/app.js/styles.css, product_contracts.md, physics_ssh_design.md, physics_review_zh.md, user request for attractive UI, visualizations, arm and 3D model entrypoints.
+- Design references: existing web/index.html/app.js/styles.css, product_contracts.md, physics_ssh_design.md and physics_review_zh.md; CLI/App workflows, experiment visualization, robot diagnostics and 3D model inspection.
 
 ## Brand
 - Personality: precise, calm engineering instrument; polished, spacious, useful.
@@ -79,6 +79,6 @@
 - Test/screenshot expectations: actual browser workflows, desktop launch smoke, responsive inspection, screenshots with actual assets/results, preserve historical tests.
 
 ## Open questions
-- [ ] Target physical robot brand/model and driver protocol: user pending; motion remains disabled until reviewed adapter/device test.
-- [ ] Preferred external model format: user pending; implement OBJ/STL/MJCF/URDF entrypoints with honest per-format capabilities.
+- [ ] Physical motion adapters: specify supported robot models and driver protocols, then validate the adapter on the target device before enabling motion.
+- Supported model formats: OBJ/STL/MJCF/URDF inspection and preview; simulation and motion capabilities are specified separately for each format.
 - [ ] Distribution signing/notarization and other operating systems: later release; do not claim notarized standalone cross-platform binary.

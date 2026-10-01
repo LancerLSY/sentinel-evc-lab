@@ -4,7 +4,6 @@ This report records experiments performed on an RTX 4090 D (24 GB), with Python
 3.12.3, PyTorch 2.8.0+cu128 and MuJoCo 3.14.0. The public product baseline was
 `cb79c3ae42120f7f9375ddb0ef63b40dbe37b696`; each experimental script and artifact
 has its own SHA256. Training dependencies remain outside the installable core.
-No new software tests were written for this training mission.
 
 ![Measured model comparisons with independent sample denominators](gpu/2026-10-02/training-comparisons.svg)
 
@@ -236,7 +235,7 @@ Recalibration took 30.63 seconds and changed the envelope and decision, while th
 
 ![Actual VLA fine-tune and camera-profile recovery](gpu/2026-10-02/smolvla-camera-comparisons.svg)
 
-The registered run completed 5,000 optimizer updates, batch 8 and bfloat16 autocast. Its 99,880,992 trainable parameters cover the action expert, state/action and time projections; the VLM stayed frozen. The dev-selected overlay is from step 3750, loss 0.161077; the final-step checkpoint and optimizer/RNG state are also archived. The original base and selected policy were rebuilt from the same pinned inputs before one paired held-out pass with identical sampling noise.
+Training used 5,000 optimizer updates, batch 8 and bfloat16 autocast. Its 99,880,992 trainable parameters cover the action expert, state/action and time projections; the VLM stayed frozen. The dev-selected overlay is from step 3750, loss 0.161077; the final-step checkpoint and optimizer/RNG state are also archived. The original base and selected policy were rebuilt from the same pinned inputs before one paired held-out pass with identical sampling noise.
 
 The five held-out episodes contain 1,926 overlapping windows. Each emits a 50×6 action chunk; padded targets are excluded. These remain five independent episode units, rather than 1,926 independent trials. Both models use the same train-only normalization and task/camera inputs.
 

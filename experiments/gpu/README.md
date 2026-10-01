@@ -1,10 +1,10 @@
-# GPU experiment mission — 2026-10-02
+# WorldGuard and SmolVLA experiments
 
-The user authorized a ten-hour training and research budget, ending at
-2026-10-02 10:01 Asia/Shanghai. These scripts run in an isolated experimental
-environment. The installable Sentinel package keeps its existing dependencies.
-No new software tests are part of this mission; the evidence comes from actual
-training, disjoint evaluation, calibration, ablations and saved model artifacts.
+Training, calibration, ablation and held-out evaluation scripts for numerical
+WorldGuard, MuJoCo object prediction and SO100 recorded-data models. Each run
+records pinned inputs, source identities, model artifacts and evaluation metrics.
+The scripts use an isolated experimental environment; the installable Sentinel
+package keeps its existing dependencies.
 
 ## Fixed inputs and material passport
 
@@ -27,7 +27,7 @@ fields and two recorded cameras. The metadata does not declare physical units
 or controller acknowledgments. Its logged action targets are not Cartesian
 plans, and it lacks object-pose, force and incident annotations.
 
-## Experiments and success criteria
+## Experiments and evaluation protocol
 
 | Run | Model / data | Frozen evaluation |
 |---|---|---|
@@ -90,10 +90,10 @@ python experiments/gpu/train_smolvla.py --dataset-root "$DATA" \
 ```
 
 Each run saves its configuration, source hash, input identities, training log,
-selected weights, calibration and held-out metrics. Run completion establishes
-that those steps executed; scientific acceptance additionally requires the
-reported comparisons. Real-data inference is shadow evidence. Device motion,
-object-state supervision and hardware task success require their own evidence.
+selected weights, calibration and held-out metrics. The comparisons evaluate
+prediction error, calibrated coverage and candidate selection within the stated
+profiles. Real-data inference is shadow evidence; device motion, object-state
+supervision and hardware task success require separate evaluation.
 
 Actual measurements and negative results are recorded in
 [the GPU training report](../../docs/gpu_training_results.md). The first W0 script

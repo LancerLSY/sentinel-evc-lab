@@ -90,7 +90,7 @@ python -m sentinel_evc tamper --out sample_run --run-id sample-001
 python -m pytest -q      # 或 python run_tests.py
 ```
 
-本轮：**24 项通过**。
+历史 v0.1 版本：**24 项通过**。
 
 这个数字只属于本仓库。技术文档和历史参考包里的 57 / 50 / 12 / 65 / 51 项来自
 不同代码库、不同时间，**任何形式的相加或并列都不成立**。

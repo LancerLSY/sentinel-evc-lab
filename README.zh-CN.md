@@ -30,7 +30,7 @@ SSH 实验入口、受限三维模型检查和只读机械臂诊断。产品核�
 | **SSH 实验** | 严格 OpenSSH 启动、源码绑定、返回证据校验 | 需要已有主机别名、密钥代理和 `known_hosts` |
 | **机械臂入口** | mock 诊断与 Universal Robots 只读 dashboard 探测 | 尚无物理运动写入适配器 |
 | **三维模型入口** | OBJ、STL、MJCF、URDF 检查与离线 Canvas 预览 | 预览不会获得执行授权 |
-| **GPU / VLA 研究** | 已训练多组 WorldGuard；已完成真实 SmolVLA 微调 | 离线评估；实时上游动作链仍待接入 |
+| **GPU / VLA 研究** | WorldGuard 模型对照与 SO100 数据上的 SmolVLA 微调 | 离线评估；实时上游动作链仍待接入 |
 
 工作台把“运行是否完成”“证据是否完整”“科学验收是否通过”分开显示。
 一次实验可以正确完成，同时保留未通过的科学门。
@@ -131,7 +131,7 @@ python -m sentinel_evc serve --data-dir runs/workbench --port 8765
 
 1.35× 位移超出已训练动作 contract。完整状态覆盖率降至状态模型 15%、图像模型
 8%，因此产品声明结果为 `MODEL_UNKNOWN`，拒绝全部 100 roots；裸模型选择只作为
-退化诊断保留。本轮实测使用 RTX 4090 D，总运行时间 30.53 s；物理由 MuJoCo workers
+退化诊断保留。该场景实验使用 RTX 4090 D，总运行时间 30.53 s；物理由 MuJoCo workers
 计算，因此该时间不是模型推理延迟基准。
 
 [场景报告](docs/worldguard_scenario_results.md) ·

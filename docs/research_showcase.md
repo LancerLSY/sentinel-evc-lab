@@ -117,6 +117,6 @@ the current GPU report.** Existing latency values belong only to the RTX 4090 D 
 - [Evaluated SmolVLA overlay model card](huggingface/smolvla_model_card.md)
 - [Bitwise-equal loading verification](huggingface/smolvla_loading_verification.json)
 
-The account link is informational. It does not assert that a Sentinel EVC model has
-been published there. Model publication requires the evaluated artifact, a complete
-model card, and verified write credentials.
+The evaluated model overlay, loader and model card are available in the GitHub
+release package. The Hugging Face link identifies the maintainer's profile;
+it does not point to a published Sentinel EVC model repository.
