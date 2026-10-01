@@ -1,0 +1,39 @@
+{
+  "schema": "sentinel-independent-review-record-v1",
+  "review_date_utc": "2026-10-01",
+  "reviewer": "alignment_architect (independent read-only agent)",
+  "recorded_by": "root agent from reviewer report; unsigned record",
+  "worldguard": {
+    "roots": 600,
+    "raw_integrity": "CLEAR",
+    "broad_safety_reliability": "BLOCK",
+    "source_rendering_and_inference": "Six first roots physical futures reproduced bitwise; four roots/scenario RGB/ResNet/PCA reproduced bitwise; all 600 state/visual predictions reproduced bitwise.",
+    "unique_seeds_states_histories_visual_features": 600,
+    "metric_recomputation_mismatches": 0,
+    "low_friction_unsafe_candidates": 400,
+    "low_friction_state_unsafe_selections": 100,
+    "low_friction_visual_unsafe_selections": 100,
+    "camera_visual_unsafe_selections": 7,
+    "camera_visual_xy_joint_coverage": 0.59,
+    "decision_oracle": "Future truth used only after decisions for evaluation.",
+    "required_scope": "Out-of-contract action reject; unseen camera/profile cannot be advertised as supported; hidden physics shift remains unresolved."
+  },
+  "fallback": {
+    "roots": 100,
+    "status": "WATCH: known-profile offline physics result",
+    "metric_recomputation_mismatches": 0,
+    "unsafe_counts_by_duration": {
+      "1.6": 100,
+      "3.2": 0,
+      "4.8": 0
+    },
+    "rule_duration_seconds": 4.8,
+    "rule_uses_future_truth_or_actual_hidden_parameters": false,
+    "unverified_assumption": "Trusted external profile establishes friction >= 0.015. System has not measured that lower bound.",
+    "task_definition": "No forecast risk/drop and tray endpoint error <= 1 cm; not a general payload task definition.",
+    "abort_branch_examples": 0,
+    "deployment_integration": false
+  },
+  "provenance_erratum": "Original frozen_at_utc label is erroneous and later than runs. Original files/hashes retained. Filesystem/preflight order is not externally timestamped preregistration. See individual supplemental errata.",
+  "statistics": "Original root bootstrap is empirical and degenerates at 0/100 or 100/100. Wilson intervals describe sampled root counts; no universal guarantee."
+}

@@ -1,0 +1,108 @@
+{
+  "gate_recomputed": false,
+  "media": {
+    "ur5e-validation-montage.mp4": {
+      "bytes": 1394607,
+      "duration_seconds": 33.75,
+      "fps": 20,
+      "frame_count": 675,
+      "height": 720,
+      "hold_frames": 140,
+      "sha256": "05498141908a113a8df9a5f67b620263da42b5dc2d418eb01ccb68a4cbc735e3",
+      "stored_joint_state_frames": 287,
+      "title_frames": 248,
+      "width": 1280
+    },
+    "ur5e-validation.gif": {
+      "bytes": 1021436,
+      "encoded_duration_seconds": 2.9,
+      "encoded_frame_count": 21,
+      "height": 360,
+      "logical_frame_count": 29,
+      "nominal_fps": 10,
+      "root": 10000,
+      "sha256": "b0fd885ffec3996e834a2cf4f05f85c1f78279bafc32971b013ed4bc758853f9",
+      "width": 640
+    },
+    "ur5e-validation.png": {
+      "bytes": 137504,
+      "height": 720,
+      "root": 10000,
+      "sha256": "6089b1038fd40288a0ce705cfc7b403e731bdeea9619a7345697c4510d822958",
+      "state_index": 40,
+      "width": 1280
+    }
+  },
+  "physics_during_media_render": false,
+  "portable_model": {
+    "directory": "runs/arm-20261002/media-v4/model/portable_ur5e",
+    "loaded_shape": {
+      "ngeom": 32,
+      "nq": 6,
+      "nu": 6,
+      "nv": 6
+    },
+    "official_asset_file_count": 26,
+    "standalone_load_verified": true,
+    "total_file_count": 27,
+    "tree_sha256": "ad04c294bdf0849248d3f881a061020b5e7a3206e33fe7613374ed308c2e7724",
+    "wrapper": "runs/arm-20261002/media-v4/model/portable_ur5e/sentinel_highres_review.xml",
+    "wrapper_sha256": "d332ac7e52368e3c00c7536048efbaab1c0266610edcd39809feedca11eba452"
+  },
+  "renderer_sha256": "25273954692daaebdfc0dfa29726280d588c9d85b6a15fa6f258df777be3abf4",
+  "review_manifest_sha256": "d14c410beea61ac348e6f642e1493d3c94cb8d98929dc65e5b5e55d3ba079e16",
+  "schema": "sentinel-arm-media-v4",
+  "selected": [
+    {
+      "review_reason": "safe",
+      "review_unsafe": false,
+      "root": 0,
+      "scenario": "clear",
+      "segment": 1
+    },
+    {
+      "review_reason": "collision",
+      "review_unsafe": true,
+      "root": 10000,
+      "scenario": "late_suffix",
+      "segment": 2
+    },
+    {
+      "review_reason": "collision",
+      "review_unsafe": true,
+      "root": 20001,
+      "scenario": "narrow_passage",
+      "segment": 3
+    },
+    {
+      "review_reason": "joint_limit",
+      "review_unsafe": true,
+      "root": 30000,
+      "scenario": "joint_limit",
+      "segment": 4
+    },
+    {
+      "review_reason": "tracking",
+      "review_unsafe": true,
+      "root": 40000,
+      "scenario": "tracking_disturbance",
+      "segment": 5
+    },
+    {
+      "review_reason": "collision",
+      "review_unsafe": true,
+      "root": 50000,
+      "scenario": "environment_change",
+      "segment": 6
+    },
+    {
+      "review_reason": "safe",
+      "review_unsafe": false,
+      "root": 20000,
+      "scenario": "narrow_passage",
+      "segment": 7
+    }
+  ],
+  "selection_rule": "clear first root; first review-unsafe root for other scenarios; then first review-safe narrow root (outcome-conditioned)",
+  "state_source": "stored high-resolution replay executed joint trajectory"
+}

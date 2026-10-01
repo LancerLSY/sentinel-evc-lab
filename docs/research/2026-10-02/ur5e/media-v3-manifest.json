@@ -1,0 +1,151 @@
+{
+  "claim_boundary": "MuJoCo simulation evidence, not real-hardware validation; discrete scan is not a continuous collision certificate",
+  "environment": {
+    "actual_available_gpu": "NVIDIA GeForce RTX 4090 D",
+    "mujoco": "3.14.0",
+    "physics": "none during rendering; stored qpos only",
+    "python": "3.12.3",
+    "render_backend": "EGL"
+  },
+  "gate_recomputed": false,
+  "inputs": {
+    "asset_tree_sha256": "e50ffe878114d94303146130cfba303fa7ca41d3c4a862c376cbcf353cd3f608",
+    "parent_manifest_sha256": "ace65d69f24b98f6d868193201add0a56948a840395be8ac3c329b7d0b80ce2f",
+    "parent_source_sha256": "fd295b3409a2d6481414a8e34739f6f6b0f6664eb7181466d080da455e14eea1",
+    "per_root_sha256": "5c2bf5a26035c4941174b9f25535568d34710e4ae221fe424d543ad37ae5d674",
+    "raw_trajectories_sha256": "128f90ba0dc358493d6bb3363aed30169bde13ef41c3c18029ab72189ef9c5e9",
+    "upstream_commit": "4d038b3feae26ec82b46a4d586379114012a8ac7"
+  },
+  "media": {
+    "ur5e-validation-montage.mp4": {
+      "actual_state_frames": 287,
+      "actual_state_seconds_at_1x": 14.35,
+      "bytes": 1358458,
+      "duration_seconds": 33.75,
+      "fps": 20,
+      "frame_count": 675,
+      "height": 720,
+      "hold_frames": 140,
+      "sha256": "89369c3475a006cefc1ee553a0cdc5098adac043b15e6e092f544898d9e84304",
+      "title_frames": 248,
+      "width": 1280
+    },
+    "ur5e-validation.gif": {
+      "bytes": 1008102,
+      "fps": 10,
+      "frame_count": 29,
+      "height": 360,
+      "root": 10000,
+      "sha256": "bfaf592c29bfc8b53943881250c08a0530ea07e7c10bc633abde5088ab1212f5",
+      "width": 640
+    },
+    "ur5e-validation.png": {
+      "bytes": 135307,
+      "height": 720,
+      "root": 10000,
+      "sha256": "f6db6c7e6c31e58579289bf7ae68c0bb1b4c7ea45e73758e126ccb737eee0c9b",
+      "state_index": 40,
+      "width": 1280
+    }
+  },
+  "motion_speed": "recorded states shown at 1x; title and final-state hold frames are explicitly labeled",
+  "physics_rerun": false,
+  "render_only": true,
+  "renderer_sha256": "f88ff54626966cbfb1fe11e594c53408f159495390346576786dfd27162d9a17",
+  "schema": "sentinel-arm-media-v3",
+  "selected": [
+    {
+      "decisions": {
+        "conservative": true,
+        "full": true,
+        "incremental": true,
+        "parent_only": true
+      },
+      "root": 0,
+      "scenario": "clear",
+      "segment": 1,
+      "unsafe": false,
+      "unsafe_reason": "safe"
+    },
+    {
+      "decisions": {
+        "conservative": false,
+        "full": false,
+        "incremental": false,
+        "parent_only": true
+      },
+      "root": 10000,
+      "scenario": "late_suffix",
+      "segment": 2,
+      "unsafe": true,
+      "unsafe_reason": "collision"
+    },
+    {
+      "decisions": {
+        "conservative": false,
+        "full": false,
+        "incremental": false,
+        "parent_only": true
+      },
+      "root": 20001,
+      "scenario": "narrow_passage",
+      "segment": 3,
+      "unsafe": true,
+      "unsafe_reason": "collision"
+    },
+    {
+      "decisions": {
+        "conservative": false,
+        "full": false,
+        "incremental": false,
+        "parent_only": true
+      },
+      "root": 30000,
+      "scenario": "joint_limit",
+      "segment": 4,
+      "unsafe": true,
+      "unsafe_reason": "joint_limit"
+    },
+    {
+      "decisions": {
+        "conservative": false,
+        "full": false,
+        "incremental": false,
+        "parent_only": true
+      },
+      "root": 40000,
+      "scenario": "tracking_disturbance",
+      "segment": 5,
+      "unsafe": true,
+      "unsafe_reason": "tracking"
+    },
+    {
+      "decisions": {
+        "conservative": false,
+        "full": false,
+        "incremental": false,
+        "parent_only": true
+      },
+      "root": 50000,
+      "scenario": "environment_change",
+      "segment": 6,
+      "unsafe": true,
+      "unsafe_reason": "collision"
+    },
+    {
+      "decisions": {
+        "conservative": false,
+        "full": true,
+        "incremental": true,
+        "parent_only": true
+      },
+      "root": 20000,
+      "scenario": "narrow_passage",
+      "segment": 7,
+      "unsafe": false,
+      "unsafe_reason": "safe"
+    }
+  ],
+  "selection_rule": "clear first root; first unsafe root for each other scenario; append first safe narrow_passage root",
+  "state_source": "stored independent-evaluator executed_qpos from frozen full-v2 trajectories.npz"
+}

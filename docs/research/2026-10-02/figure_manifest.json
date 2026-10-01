@@ -1,0 +1,55 @@
+{
+  "schema": "sentinel-saved-metrics-figures-v1",
+  "source_sha256": "0da7305ecf5933dfe4916775448d93f73c2965a9a7f6ed2b76ea26c91f681517",
+  "inputs": [
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/worldguard-scenarios-20261002/metrics.json",
+      "sha256": "8ac3419defb88526c148fa2149aec2b261351996299d8594934f6227bbaeac93"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/low-friction-fallback-20261002/metrics.json",
+      "sha256": "72a4486f0025d7aa6f4a053a48655c7a9097f65bba006cf0f963854e0a86ca36"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/arm-20261002/full-v3/manifest.json",
+      "sha256": "21328bd8d514affcba474fb7cbba7502a0b8ef18ce5ebd12bff151e76bf377c2"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/arm-20261002/full-v3/review/reviewed_metrics.json",
+      "sha256": "985ac6cdf8fca276dffda160d83e85927f97f3d54b86ac341a0dd7e3b72efebe"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "worldguard-scenarios.png",
+      "bytes": 248819,
+      "sha256": "01fde1d69b702157b136a3643947b56da1cd48bfae44e68c4ba837521c3af415"
+    },
+    {
+      "file": "worldguard-scenarios.svg",
+      "bytes": 114367,
+      "sha256": "1802239968edaec349da10a142ab5057c8ce8e77a6ed250d493d390f0d6136b5"
+    },
+    {
+      "file": "low-friction-fallback.png",
+      "bytes": 133337,
+      "sha256": "2215f0c9b9e9bad2260ee1de374c34a223e54a01b153f373998d923894b7c2d3"
+    },
+    {
+      "file": "low-friction-fallback.svg",
+      "bytes": 79457,
+      "sha256": "2e141120e542950f30001c90959cf439a788f8a7bcf300c12c35adaebb9eef27"
+    },
+    {
+      "file": "ur5e-comparison.png",
+      "bytes": 156902,
+      "sha256": "0d74b7e56427c8913066a4ac6a8f80026268820d26a3e7c0af848768e39c6f71"
+    },
+    {
+      "file": "ur5e-comparison.svg",
+      "bytes": 100977,
+      "sha256": "210612bcef3f64a63c424183bc3db62591952b9568493292c467dc3c404293a2"
+    }
+  ],
+  "selection": "all six scenarios and all four declared arm methods; no new experiment"
+}

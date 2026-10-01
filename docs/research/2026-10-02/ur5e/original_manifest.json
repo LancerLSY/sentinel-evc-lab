@@ -1,0 +1,210 @@
+{
+  "actual_available_gpu": "NVIDIA GeForce RTX 4090 D",
+  "asset_file_sha256": {
+    "CHANGELOG.md": "ef67f701df8698fb2e1a77a5de5d9a39aa22e7b4b101f68fc311d34e3ace87ed",
+    "LICENSE": "5ec71ccf66c8d03261448f2441a586765b97f2248c860a1ae19689fb1c45cee6",
+    "README.md": "435600d4f00cfdbd7edec4b60f0cd7fbb539f39abaefcd8bb3994beed3b1156a",
+    "assets/base_0.obj": "9a3b21f1524baef6af8a52d7af90b6e94b79f7e3c2b04a0f6581f74d22291b0b",
+    "assets/base_1.obj": "cf7d54691a2c1eeda280955ebd6bd83c2dbecfc46fb53c10198f05d107511b50",
+    "assets/forearm_0.obj": "64c049a55149c2ab355594d52302b53d3e34da3677ceaa1917c427cde7743146",
+    "assets/forearm_1.obj": "a96fe203015cf532b193f414cd01268c7c36795e51a837dd33afd122334f81f2",
+    "assets/forearm_2.obj": "05b436505fc595aeab26675590c2b56b88a65b2d52d6352096fed9f07cb4c4ca",
+    "assets/forearm_3.obj": "fa31af19cfad7a765b62e8a2d5931cb014b88de84195a7850b4e5ee902112e9a",
+    "assets/shoulder_0.obj": "477387a7e7312782a6040484a3c2c2fcee33f40109f419076e31b6f6e1692c68",
+    "assets/shoulder_1.obj": "8537bba02804640ddf6e260f79fe66e895b3229ed3d44298a95e8e027eb5d435",
+    "assets/shoulder_2.obj": "291714518416bb8f0bafbf123867db011ecbf5146a05245ca5893ee8c57d4e21",
+    "assets/upperarm_0.obj": "14143d4f1175a7dbacc8e2f2f98f1cac5a2b2e238cd46cd03654d31f2610eb53",
+    "assets/upperarm_1.obj": "272899e927f4a32b7c25e34560ec70654c0346cc8ed1c616c0555f3f53b32d14",
+    "assets/upperarm_2.obj": "86c05350d60eb0e7e28a81b544267478b7db997baba41cef19088ebbeffecfa1",
+    "assets/upperarm_3.obj": "b257dab441e6fab64ea03b4b87029d8a96554ad1a513cce944d56acba0ad948a",
+    "assets/wrist1_0.obj": "7ef0c59b5c5d56a9902435c9a058b27d2a38c85fe2bae02d00a9284dd1f4d519",
+    "assets/wrist1_1.obj": "ee6d5c562e6becef94109b0543329080d285d1aef521a01ed98e18a5bf1e8684",
+    "assets/wrist1_2.obj": "88c66dc64f15391287147d50add37729a3f41dadd80b1f859cf2cb6d45daf32a",
+    "assets/wrist2_0.obj": "2ac2e2e39d8f7005bc3b3ab26cd61634be2e14930074615da5318b9ee7c569a8",
+    "assets/wrist2_1.obj": "a721d06dc61d3b3a8ec58c035c9e3358ed30d6991a72e077d8abf3c3c203b633",
+    "assets/wrist2_2.obj": "6df4335c8bd5e881fda2c224f770115ffe9ddd0cd321ebe3c0a4a310796f0987",
+    "assets/wrist3.obj": "0e51748f9c93bd66604360a5cf7e2e8a6e754550be64076333ff4fc19ec90c61",
+    "scene.xml": "e877852d40095926ff7db9cfb85e595b550e03da398bd6f6f58885d39038d1b6",
+    "ur5e.png": "90310086f1187fcda94252ff68f8c4f8be97f65bec8f4eea449179b0979da795",
+    "ur5e.xml": "ffd0a7b336d3c2d27c35a15cc0d4aaa95196769aca190ac8d6522d3318c345a0"
+  },
+  "asset_tree_sha256": "e50ffe878114d94303146130cfba303fa7ca41d3c4a862c376cbcf353cd3f608",
+  "control_frame_seconds": 0.05,
+  "created_unix": 1790884974.4903338,
+  "discrete_check_claim": "sampled configurations only; not a continuous collision certificate",
+  "dt_seconds": 0.002,
+  "dynamic_check": "fresh MjData, position target control, 25 mj_step calls per 50 ms frame",
+  "gpu_claim": "none; CPU MuJoCo physics, EGL rendering",
+  "host": "autodl-container-6c3e4aa234-ff8016ca",
+  "max_discrete_joint_step_rad": 0.01,
+  "media": {
+    "gif": "runs/arm-20261002/full-v2/media/ur5e-validation.gif",
+    "gif_sha256": "0d9f8d65422ef2bbebcdca82c89a2474d01b1ddc36c4565b8d1cbbb6b2365707",
+    "mp4": "runs/arm-20261002/full-v2/media/ur5e-validation.mp4",
+    "mp4_sha256": "db0d6f308ffe52e3dbcbffc85d008e5becee17f267c65d2329d7a116201adf73",
+    "png": "runs/arm-20261002/full-v2/media/ur5e-validation.png",
+    "png_sha256": "378e0aefda6056841abf6a046dca3f7e51b8c773b5fb9fccdc0f2f2099571082"
+  },
+  "media_binding": {
+    "asset_tree_sha256": "e50ffe878114d94303146130cfba303fa7ca41d3c4a862c376cbcf353cd3f608",
+    "displayed_decision": false,
+    "displayed_outcome_unsafe": true,
+    "displayed_policy": "full",
+    "raw_trajectories_sha256": "128f90ba0dc358493d6bb3363aed30169bde13ef41c3c18029ab72189ef9c5e9",
+    "root": 10000,
+    "root_metrics": {
+      "discrete_truth": {
+        "obstacle": true,
+        "ok": false,
+        "reason": "collision",
+        "samples": 76,
+        "self_collision": false
+      },
+      "dynamic_truth": {
+        "obstacle": true,
+        "ok": false,
+        "self_collision": false,
+        "tracking_rmse_rad": 0.0315470307793849,
+        "wall_ms": 95.14505509287119
+      }
+    },
+    "scene": "late_suffix",
+    "source_sha256": "fd295b3409a2d6481414a8e34739f6f6b0f6664eb7181466d080da455e14eea1"
+  },
+  "mujoco_version": "3.14.0",
+  "protocol_frozen_before_full_run": true,
+  "python": "3.12.3",
+  "raw_trajectories_sha256": "128f90ba0dc358493d6bb3363aed30169bde13ef41c3c18029ab72189ef9c5e9",
+  "root_formula": "scenario_index*10000 + local_index",
+  "roots_per_scenario": 30,
+  "scenario_order": [
+    "clear",
+    "late_suffix",
+    "narrow_passage",
+    "joint_limit",
+    "tracking_disturbance",
+    "environment_change"
+  ],
+  "schema": "sentinel-arm-ur5e-v1",
+  "source_sha256": "fd295b3409a2d6481414a8e34739f6f6b0f6664eb7181466d080da455e14eea1",
+  "substeps_per_frame": 25,
+  "summary": {
+    "by_scenario": {
+      "clear": {
+        "conservative_allowed": 30,
+        "full_allowed": 30,
+        "incremental_allowed": 30,
+        "parent_only_allowed": 30,
+        "roots": 30,
+        "unsafe": 0
+      },
+      "environment_change": {
+        "conservative_allowed": 0,
+        "full_allowed": 0,
+        "incremental_allowed": 0,
+        "parent_only_allowed": 30,
+        "roots": 30,
+        "unsafe": 30
+      },
+      "joint_limit": {
+        "conservative_allowed": 0,
+        "full_allowed": 0,
+        "incremental_allowed": 0,
+        "parent_only_allowed": 30,
+        "roots": 30,
+        "unsafe": 30
+      },
+      "late_suffix": {
+        "conservative_allowed": 0,
+        "full_allowed": 0,
+        "incremental_allowed": 0,
+        "parent_only_allowed": 24,
+        "roots": 30,
+        "unsafe": 30
+      },
+      "narrow_passage": {
+        "conservative_allowed": 0,
+        "full_allowed": 10,
+        "incremental_allowed": 10,
+        "parent_only_allowed": 22,
+        "roots": 30,
+        "unsafe": 20
+      },
+      "tracking_disturbance": {
+        "conservative_allowed": 0,
+        "full_allowed": 1,
+        "incremental_allowed": 1,
+        "parent_only_allowed": 30,
+        "roots": 30,
+        "unsafe": 29
+      }
+    },
+    "definitions": {
+      "false_allow": "gate allows final plan AND independent final evaluator labels root unsafe; denominator is unsafe roots",
+      "false_reject": "gate rejects final plan AND independent final evaluator labels root safe; denominator is safe roots",
+      "unsafe": "joint violation, robot-obstacle/self collision, or dynamic tracking RMSE > 0.12 rad"
+    },
+    "incremental_fallback_count": 60,
+    "methods": {
+      "conservative": {
+        "allow_rate": 0.16666666666666666,
+        "complete_validation_calls_per_root": 0,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_allow_rate": 0.0,
+        "false_reject_count": 11,
+        "false_reject_denominator_safe": 41,
+        "false_reject_rate": 0.2682926829268293,
+        "gate_wall_ms_mean": 0.0,
+        "gate_wall_ms_p95": 0.0,
+        "safe_allowed_count": 30
+      },
+      "full": {
+        "allow_rate": 0.22777777777777777,
+        "complete_validation_calls_per_root": 1,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_allow_rate": 0.0,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41,
+        "false_reject_rate": 0.0,
+        "gate_wall_ms_mean": 49.060163574500216,
+        "gate_wall_ms_p95": 120.21516175009306,
+        "safe_allowed_count": 41
+      },
+      "incremental": {
+        "allow_rate": 0.22777777777777777,
+        "complete_validation_calls_per_root": 2,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_allow_rate": 0.0,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41,
+        "false_reject_rate": 0.0,
+        "gate_wall_ms_mean": 149.2294100113213,
+        "gate_wall_ms_p95": 229.72513865679397,
+        "safe_allowed_count": 41
+      },
+      "parent_only": {
+        "allow_rate": 0.9222222222222223,
+        "complete_validation_calls_per_root": 1,
+        "false_allow_count": 125,
+        "false_allow_denominator_unsafe": 139,
+        "false_allow_rate": 0.8992805755395683,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41,
+        "false_reject_rate": 0.0,
+        "gate_wall_ms_mean": 102.08773835458689,
+        "gate_wall_ms_p95": 118.35548616945724,
+        "safe_allowed_count": 41
+      }
+    },
+    "roots": 180,
+    "safe_roots": 41,
+    "unsafe_roots": 139
+  },
+  "upstream_commit": "4d038b3feae26ec82b46a4d586379114012a8ac7",
+  "upstream_license": "BSD-3-Clause",
+  "upstream_repository": "google-deepmind/mujoco_menagerie",
+  "wall_seconds": 60.272698402404785
+}

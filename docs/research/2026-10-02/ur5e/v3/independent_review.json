@@ -1,0 +1,42 @@
+{
+  "schema": "sentinel-independent-review-record-v1",
+  "reviewer": "alignment_architect read-only agent",
+  "recorded_by": "root from reviewer report; unsigned record",
+  "version": "full-v3/media-v4",
+  "artifact_integrity": "CLEAR",
+  "publication_scope": "WATCH: constructed in-process static-prefix experiment with separately implemented higher-resolution replay",
+  "full_v4_external_certificate_or_general_safety": "BLOCK; not implemented or claimed by this experiment",
+  "verified": {
+    "unique_roots": 180,
+    "authorized_static_prefix_reuse": 106,
+    "full_fallback": 74,
+    "parent_denied_full_fallback": 14,
+    "denied_parent_reused": 0,
+    "bound_parent_records": 166,
+    "finite_npz_arrays": 1080,
+    "highres_unsafe_roots": 139,
+    "highres_safe_roots": 41,
+    "full_false_allow": 0,
+    "incremental_false_allow": 0,
+    "full_false_reject": 0,
+    "incremental_false_reject": 0,
+    "parent_false_allow": 125,
+    "conservative_false_reject": 11,
+    "metric_or_cost_recomputation_mismatches": 0,
+    "official_asset_files": 26,
+    "portable_wrapper_files": 1,
+    "gif_encoded_frames": 21,
+    "gif_seconds": 2.9
+  },
+  "implementation_independence": "Separate verifier does not import or call gate scanner/rollout; uses new MjModel/MjData, 1 ms dynamics and <=0.005 rad static sampling. Same MuJoCo engine and constructed cases, not an untouched deployment sample.",
+  "binding_scope": "Validated parent/prefix/context/model/state in-process record; full dynamic rollout remains required; invalid or missing record triggers full final-plan validation.",
+  "remaining_limitations": [
+    "Parent record does not separately include tracking threshold or validator source digest; experiment manifest binds source. Scope is one in-process validator configuration, not an externally signed certificate.",
+    "Legacy complete_validation_calls_per_root field means validator invocations; reuse does not perform two complete static scans.",
+    "Verifier does not itself assert parent per-root hash before consuming it; independent review and archive hashes confirm the exact executed inputs for this publication.",
+    "Timing is fixed-order single-run diagnostic with mixed early exits; no algorithm speedup claim.",
+    "Adversarial obstacle positions are generated from plan kinematics; no deployment-distribution accuracy claim.",
+    "Rendered saved joint trajectories do not reproduce full simulator integration-state snapshots."
+  ],
+  "media": "All source, review, output and media hashes checked; portable model standalone-load verified. Case selection is openly outcome-conditioned, deterministic first unsafe per scenario with one safe narrow control."
+}

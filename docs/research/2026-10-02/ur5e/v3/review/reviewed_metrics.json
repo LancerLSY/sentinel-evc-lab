@@ -1,0 +1,68 @@
+{
+  "fallback_reason_counts": {
+    "context_changed": 60,
+    "initial_integration_state_changed": 30,
+    "parent_denied_or_record_missing": 14
+  },
+  "methods": {
+    "conservative": {
+      "allow_count": 30,
+      "allow_denominator_all": 180,
+      "false_allow_count": 0,
+      "false_allow_denominator_unsafe": 139,
+      "false_reject_count": 11,
+      "false_reject_denominator_safe": 41
+    },
+    "full": {
+      "allow_count": 41,
+      "allow_denominator_all": 180,
+      "false_allow_count": 0,
+      "false_allow_denominator_unsafe": 139,
+      "false_reject_count": 0,
+      "false_reject_denominator_safe": 41
+    },
+    "incremental": {
+      "allow_count": 41,
+      "allow_denominator_all": 180,
+      "false_allow_count": 0,
+      "false_allow_denominator_unsafe": 139,
+      "false_reject_count": 0,
+      "false_reject_denominator_safe": 41
+    },
+    "parent_only": {
+      "allow_count": 166,
+      "allow_denominator_all": 180,
+      "false_allow_count": 125,
+      "false_allow_denominator_unsafe": 139,
+      "false_reject_count": 0,
+      "false_reject_denominator_safe": 41
+    }
+  },
+  "observed_gate_cost_by_incremental_path": {
+    "full_fallback": {
+      "dynamic_rollouts": 90,
+      "mean_parent_ms": 85.3409698937793,
+      "mean_suffix_or_fallback_ms": 49.29764308287083,
+      "mean_total_ms": 134.63861297665014,
+      "roots": 74,
+      "static_samples": 9366
+    },
+    "static_prefix_reuse": {
+      "dynamic_rollouts": 146,
+      "mean_parent_ms": 112.1820563643749,
+      "mean_suffix_or_fallback_ms": 44.54847260923037,
+      "mean_total_ms": 156.73052897360526,
+      "roots": 106,
+      "static_samples": 9546
+    }
+  },
+  "review_safe_roots": 41,
+  "review_unsafe_roots": 139,
+  "roots": 180,
+  "unsafe_reason_counts": {
+    "collision": 80,
+    "joint_limit": 30,
+    "safe": 41,
+    "tracking": 29
+  }
+}

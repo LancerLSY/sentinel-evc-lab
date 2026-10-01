@@ -1,0 +1,62 @@
+{
+  "schema": "sentinel-independent-review-record-v1",
+  "version_reviewed": "full-v2 and media-v3",
+  "reviewer": "alignment_architect read-only agent",
+  "recorded_by": "root from reviewer report; unsigned",
+  "artifact_integrity": "CLEAR",
+  "mechanism_fixture_publication": "WATCH",
+  "v4_certificate_or_independent_safety_accuracy_claim": "BLOCK",
+  "counts_verified": {
+    "roots": 180,
+    "unsafe": 139,
+    "safe": 41,
+    "parent_false_allow": 125,
+    "full_false_allow_against_same_evaluator": 0,
+    "incremental_false_allow_against_same_evaluator": 0,
+    "conservative_false_reject": 11
+  },
+  "limitations": [
+    "Incremental prefix skip originally relied on the constructed generator, without a validated parent record or complete state/model/profile bindings.",
+    "Full final validation and original result labels shared the same check and rollout functions; repeated fresh MjData is not an independent oracle.",
+    "Dynamic rollout always covers the full final plan; only static prefix samples are reused.",
+    "Obstacles are constructed from final-plan FK locations, rather than sampled independently from a deployment environment.",
+    "Protocol-frozen flag was hardcoded; no externally timestamped preregistration.",
+    "Aggregate timing mixes early rejects with dynamic rollouts, uses fixed method order and a single run."
+  ],
+  "observed_cost_ms": {
+    "all_roots": {
+      "parent": 102.08773835458689,
+      "full": 49.060163574500216,
+      "incremental_second": 47.14167165673441,
+      "incremental_total": 149.2294100113213
+    },
+    "both_parent_and_full_static_pass_70_roots": {
+      "parent": 112.38,
+      "full": 116.23,
+      "incremental_second": 113.7,
+      "incremental_total": 226.08
+    },
+    "unchanged_context_120_roots": {
+      "full": 43.59,
+      "incremental_second": 40.72,
+      "incremental_total": 141.97
+    },
+    "changed_context_60_roots": {
+      "full": 59.996,
+      "incremental_second": 59.977,
+      "incremental_total": 163.75
+    }
+  },
+  "media_review": {
+    "mp4_frames": 675,
+    "mp4_duration_seconds": 33.75,
+    "gif_logical_frames": 29,
+    "gif_encoded_frames": 21,
+    "gif_duration_seconds": 2.9,
+    "selection": "Deterministic first unsafe per scenario plus a safe narrow-passage control; outcome-conditioned illustration.",
+    "render_input": "Saved executed joint positions; not full simulator integration state snapshots.",
+    "required_changes": "Replace independent-evaluator/no-cherry-picking wording; bind portable wrapper and use encoded GIF frame counts."
+  },
+  "upstream_origin": "27 upstream files separately matched official fixed-commit GitHub blob IDs; see upstream_verification.json.",
+  "followup": "Original artifacts retained; a bound-prefix and separately implemented higher-resolution verification is being produced as a new version."
+}

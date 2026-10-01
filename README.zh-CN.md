@@ -1,21 +1,43 @@
 # Sentinel EVC Lab
 
-[English](README.md) | **中文**
+[English](README.md) · **中文**
 
-> 给机器人策略的动作块加一道最终提交前的门禁：验证的是真正要被执行的那个动作，
-> 许可有期限、只能用一次、可以撤销，整个过程留下第三方能独立校验的记录。
+<p align="center">
+  <img src="docs/media/sentinel-hero.svg" alt="Sentinel EVC 最终动作校验工作台" width="100%">
+</p>
 
-这是一个同时提供 CLI、原生 macOS App 和浏览器备用入口的本地产品工作台。同一套
-Python 引擎承载数值参考实验、固定 MuJoCo 接触实验、受限三维资产检查和机械臂只读诊断。
+Sentinel EVC 把授权门放在机器人策略动作块的最后提交点：校验**真正要执行**
+的最终动作，签发有时限、一次性的执行许可，并留下可由第三方独立校验的证据。
 
-> **状态**：v0.3 CLI + App 工作台 · 三幕 demo 可复现 · 许可：**MIT**
-> CI：[workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
+这是一个可在本地使用的研究产品，包含 CLI、macOS 原生 App、浏览器工作台、
+SSH 实验入口、受限三维模型检查和只读机械臂诊断。产品核心与各研究 profile
+各自声明能力和证据边界，不把离线实验包装成设备集成。
 
+> **v0.3 · 持续研究中的原型 · MIT**
+>
+> 产品运行时：Python 3.10+ · macOS App：由 Python 环境管理并在本机构建 · 服务仅监听 `127.0.0.1`
 
-## 产品快速开始
+[安装](#五分钟安装) · [机制](#执行许可如何产生) ·
+[实测结果](#实测结果) · [实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) ·
+[研究展示导航](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
-下载仓库后直接打开终端安装向导。需要 Python 3.10+；创建可选的 macOS App
-还需要 Apple Command Line Tools：
+## 当前可用入口
+
+| 入口 | 已可用 | 边界 |
+|---|---|---|
+| **CLI + 本地服务** | 安装、运行、校验、导出；数值与固定 MuJoCo profile | 单机、单工作区 |
+| **macOS 原生 App** | AppKit/WebKit 外壳；使用同一回环工作台；支持 ZIP 证据下载 | 依赖受管 Python 环境；研究版本尚未签名、公证 |
+| **SSH 实验** | 严格 OpenSSH 启动、源码绑定、返回证据校验 | 需要已有主机别名、密钥代理和 `known_hosts` |
+| **机械臂入口** | mock 诊断与 Universal Robots 只读 dashboard 探测 | 尚无物理运动写入适配器 |
+| **三维模型入口** | OBJ、STL、MJCF、URDF 检查与离线 Canvas 预览 | 预览不会获得执行授权 |
+| **GPU / VLA 研究** | 已训练多组 WorldGuard；已完成真实 SmolVLA 微调 | 离线评估；实时上游动作链仍待接入 |
+
+工作台把“运行是否完成”“证据是否完整”“科学验收是否通过”分开显示。
+一次实验可以正确完成，同时保留未通过的科学门。
+
+## 五分钟安装
+
+### 交互安装器
 
 ```bash
 git clone https://github.com/LancerLSY/sentinel-evc-lab.git
@@ -23,345 +45,273 @@ cd sentinel-evc-lab
 ./tools/install.sh
 ```
 
-向导可选择完整版/轻量版、安装目录和是否创建 macOS App，显示实际阶段进度，
-保留失败日志，完成后可打开工作台或查看 SSH 接入命令。若 `python3` 是旧版本，
-运行脚本时指定 `PYTHON=/path/to/python3.12`。Windows 用户可在 PowerShell 中运行
-`.\tools\install.ps1`。
+选择完整 profile 可安装 MuJoCo，选择 core profile 可得到更小的运行环境。
+向导会创建隔离环境、保留公开源码快照、显示真实阶段进度，并可构建 macOS App。
+如果 `python3` 版本过低，可执行
+`PYTHON=/path/to/python3.12 ./tools/install.sh`。Windows 用户在 PowerShell
+中运行 `.\tools\install.ps1`。
 
-无人值守安装显式传入目录；默认 `all` profile 同时安装 MuJoCo：
+### 无人值守安装与启动
 
 ```bash
 ./tools/install.sh "$HOME/Applications/Sentinel-EVC"
 open "$HOME/Applications/Sentinel-EVC/Sentinel EVC.app"
 ```
 
-安装后的 CLI 位于 `Sentinel-EVC/bin/sentinel-evc`。无法使用原生 App 时，可运行
-`sentinel-evc serve`，再用浏览器打开本机回环地址。CLI、App 和浏览器共用四类接口：
-数值/三维实验、模型资产、机械臂只读诊断和分阶段实验计划。离线 Canvas 视窗绘制
-实际解析出的模型几何与签名 MuJoCo 记录轨迹，不生成虚构遥测。
+安装后的 CLI 位于 `Sentinel-EVC/bin/sentinel-evc`。其他桌面平台或不使用 App
+时，执行 `sentinel-evc serve`，打开命令输出的回环地址。
 
-[产品设计](DESIGN.md) · [App 安装说明](docs/install_app.md) · [模型与机械臂接入端口](docs/integration_ports.md)
-
-![MuJoCo 工作台：实际三维轨迹、证据核验和科学验收结果](docs/screenshots/physics-workbench.jpg)
-
-CLI、App 和各接入端口已合并到 `main`。界面分别展示执行是否完成、证据是否完整、
-科学验收是否通过；实验完成后仍会保留失败的科学门。
-
-
-## 本地数值工作台
+### 从源码运行
 
 ```bash
-python -m pip install -e ".[test]"
+python -m pip install -e ".[physics]"
 python -m sentinel_evc serve --data-dir runs/workbench --port 8765
 ```
 
-打开 `http://127.0.0.1:8765`，创建或导入场景，比较四个最终候选，查看实际模拟反馈，停止并批准恢复，回放保存步骤、过滤事件及导出签名 ZIP。每个工作目录只允许一个本地服务。
+打开 `http://127.0.0.1:8765`，可新建或导入场景、比较四个最终候选、
+运行有记录的仿真、查看事件并导出签名 ZIP 证据。
 
-捆绑校准仅覆盖固定 0.35 m 动作族。模型未知标为 `unknown`，物理或后果违规标为 `denied`。标准物理基线选择 1.6 s 候选并完成 40 步；残差模板在默认 .12 m 阈值下可能全部拒绝，这个保守负结果会保留。主机墙钟与观测指令数值时间分开展示。
+[App 安装与分发边界](docs/install_app.md) ·
+[模型、机械臂与执行器接口](docs/integration_ports.md) ·
+[产品验证记录](docs/product_validation.md)
+
+## 执行许可如何产生
+
+<p align="center">
+  <img src="docs/media/execution-pipeline.svg" alt="上游动作经过变换、最终物理检查和 WorldGuard、一次性许可、仿真或驱动适配器，最终生成签名证据" width="100%">
+</p>
+
+1. 上游 VLA、规划器或已记录策略给出动作块。
+2. 重定时、修复、坐标转换等步骤生成最终候选。
+3. 物理约束和已绑定的 WorldGuard profile 校验最终候选。
+4. Authority 签发与计划、上下文绑定且有期限的一次性许可。
+5. Executor 复核最新状态，并作为唯一组件调用 controller。
+6. submitted、accepted、observed 三个游标进入可独立校验的签名日志。
+
+撤销会阻止旧代次继续提交。恢复需要取消确认、排空、最新反馈、当前 epoch
+和明确批准。签名只能证明相对于指定公钥的记录完整性，不能证明传感器诚实或
+动作确实在物理世界发生。
+
+[机制实现矩阵](docs/implementation_matrix.md) ·
+[产品契约](docs/product_contracts.md) ·
+[设计追踪](docs/design_alignment.md)
+
+## 实测结果
+
+以下数字均来自冻结流程与保留的原始产物，只描述指定数据和 profile，
+不构成通用“机器人安全率”。
+
+### RTX 5090 目标配置 / RTX 4090 D 实测
+
+仓库为后续 RTX 5090 目标实验保留配置位置。下表 GPU 数字全部实际测自
+**RTX 4090 D（24 GB）**，没有把 4090 D 的时间写成 5090 结果。
+
+| 实验 | 实测结果 | 含义 |
+|---|---:|---|
+| SmolVLA，5,000 步 | 留出动作标准化 MAE **0.673166 → 0.245984**（下降 **63.46%**） | 固定 SO100 记录与冻结模型/数据版本 |
+| SmolVLA 图像到动作推理 | **P50 229.26 ms · P95 236.90 ms** | 4 线程，内存图像输入至反标准化输出 |
+| W0/W1/W2 ensembles | 共 **36 个已训练成员** | 数值、MuJoCo 对象、视觉对象、真实数据关节研究 |
+| 固定相机视觉 profile | 观测到 **0/500** 不安全选择 | 同一固定仿真测试组；低于名义目标的覆盖率仍保留 |
+| 相机变化、沿用原校准 | **47/500** 不安全选择 | 说明相机身份必须进入受支持 profile |
+| 匹配新 profile 的重校准对照 | **0/500**，动作全部为 **1.6 s** | 只是在既有压力集上恢复，不是新的独立部署证明 |
+| SO100 状态/动作与视觉/状态/动作 | 加图像后标准化误差增加 **10.0%** | 该任务中更简单的状态/动作模型更好 |
+
+最强的物理辨识基线也优于严格学习型数值模型。负结果与正结果一起保留。
+
+### 新分布 W2 审计
+
+一轮独立记录评估在 **600 个新 MuJoCo roots** 上运行既有状态与图像 ensemble：
+六类场景，每类 100 roots，每个 root 四个同胞动作。
+
+| 新独立场景 | 状态 gate | 图像 gate | 主要结论 |
+|---|---:|---:|---|
+| 标称分布 | **0/100** 不安全选择 | **0/100** | 本组没有观测到不安全选择 |
+| 相机变化 | **0/100** | **7/100**（root bootstrap 95% 区间 **3%–12%**） | 不依赖相机的状态 gate 是更强对照 |
+| 隐藏低摩擦 | **100/100** | **100/100** | 四个候选全部不安全，但两个学习 gate 仍各自选出一个 |
+
+1.35× 位移超出已训练动作 contract。完整状态覆盖率降至状态模型 15%、图像模型
+8%，因此产品声明结果为 `MODEL_UNKNOWN`，拒绝全部 100 roots；裸模型选择只作为
+退化诊断保留。本轮实测使用 RTX 4090 D，总运行时间 30.53 s；物理由 MuJoCo workers
+计算，因此该时间不是模型推理延迟基准。
+
+[场景报告](docs/worldguard_scenario_results.md) ·
+[运行 manifest](docs/research/2026-10-02/worldguard-scenarios/manifest.json) ·
+[原始 metrics](docs/research/2026-10-02/worldguard-scenarios/metrics.json)
+
+### 低摩擦物理降级方案
+
+低摩擦审计暴露了明确边界：原 2 s 动作族的四个候选全部不安全，校准可以拒绝，
+却无法凭空产生可执行动作。因此另建一个 **5 s 物理 profile**，在 100 个新 roots
+上比较 1.6、3.2 和 4.8 s 计划。
+
+| 新 profile 里的计划 | 不安全 | 掉落 | 托盘任务完成 | 代价 |
+|---|---:|---:|---:|---:|
+| 固定 1.6 s | **100/100** | **58/100** | **0/100** | 基准时长 |
+| 固定 4.8 s | **0/100** | **0/100** | **100/100** | 动作时长 **3×** |
+
+100 个 roots 中零次观测到不安全，对应 95% Wilson 上界为 **3.70%**，不是零风险
+保证。筛选规则使用配置值 `μ_min=0.015`，系统并未测量摩擦系数；它选择 4.8 s。
+未被采用的 3.2 s 计划在
+100 个 roots 中同样全部安全，但被保守规则拒绝。这是新的、尚未部署的 MuJoCo
+profile，不是对原 2 s 神经 WorldGuard 的修复，也不证明真机未知摩擦下可用。
+
+[低摩擦报告](docs/low_friction_fallback.md) ·
+[运行 manifest](docs/research/2026-10-02/low-friction-fallback/manifest.json)
+
+[完整 GPU 报告](docs/gpu_training_results.md) ·
+[模型卡与加载方式](docs/gpu_model_cards.md) ·
+[已评估 SmolVLA overlay 模型卡](docs/huggingface/smolvla_model_card.md) ·
+[复现命令](experiments/gpu/README.md) ·
+[已校验实验包](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) ·
+[Hugging Face 账号](https://huggingface.co/LancerLSY)
+
+Hugging Face 链接仅确认维护者账号。当前权重请使用已校验的 GitHub Release；
+这里不把尚未发布的 Hub 模型写成已上线。
+打包 loader 已重建有限值 `[1,50,6]` dev-only 输出，并与固定参考逐位相同
+（`maximum_absolute_difference: 0.0`）；详见[加载校验](docs/huggingface/smolvla_loading_verification.json)。
+
+## 三维机械臂研究
+
+<p align="center">
+  <img src="docs/media/ur5e-validation.gif" alt="MuJoCo UR5e late_suffix root 10000 的真实轨迹；单独实现的高分辨率复核器回放发生碰撞，最终计划完整校验将其拒绝" width="82%">
+</p>
+
+当前 MuJoCo Menagerie UR5e 结果覆盖 **180 个同根比较**：六类场景，每类
+30 roots。一个单独实现、不导入 gate runner 的高分辨率复核器使用 0.005 rad
+静态采样和 1 ms MuJoCo 步长，标记 139 个不安全 roots、41 个安全 roots。
+动画使用 `late_suffix / root 10000` 保存的关节轨迹：只校验父计划会放行，
+最终计划完整校验会拒绝，高分辨率回放记录到碰撞。
+GIF 是结果条件化展示：它是在复核标签已知后选出的首个不安全 `late_suffix` 案例，
+用于解释失效，不用于估计发生率。
+
+| 策略 | 放行 | 误放行 / 139 个不安全 | 误拒 / 41 个安全 | 平均实测校验墙钟 |
+|---|---:|---:|---:|---:|
+| 只校验父计划 | 166/180 | **125/139** | 0/41 | 101.15 ms |
+| 最终计划完整校验 | 41/180 | **0/139** | **0/41** | **48.74 ms** |
+| 增量校验 + 强制回退 | 41/180 | **0/139** | **0/41** | **总计 147.65 ms** |
+| 保守拒绝所有变换 | 30/180 | 0/139 | **11/41** | 0 ms；没有校验调用 |
+
+增量路径在 106/180 roots 上授权静态前缀复用，在 74/180 roots 上完整回退；
+14 个父记录缺失或父计划被拒绝的 roots 全部回退。增量阶段平均 46.50 ms，
+父计划校验另需 101.15 ms；端到端计入后，增量路径**慢于 48.74 ms 的完整校验**。
+动态校验始终从第零帧完整回放；只复用绑定后的静态前缀记录，绑定失效就完整回退。
+这个进程内记录绑定前缀、模型、资产、时间步、初始状态和上下文，但不是完整 v4
+外部签名证书。
+
+复用子集平均为 112.18 + 44.55 = 156.73 ms；回退子集平均为
+85.34 + 49.30 = 134.64 ms。这是固定顺序、静态检查可提前结束的一次矩阵观测，
+不是算法基准。高分辨率复核沿用早期运行的同一组 180 个构造 roots，障碍位置带有
+对抗性设计，不是新的自然分布留出集；`0/139` 不是广义可靠性证明。
+
+<p align="center">
+  <img src="docs/media/ur5e-comparison.svg" alt="UR5e 同根场景下父计划、完整、增量与保守策略对比" width="92%">
+</p>
+
+[静态帧](docs/media/ur5e-validation.png) ·
+[七案例 720p 合集](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/ur5e-validation-montage.mp4) ·
+[v3 运行 manifest](docs/research/2026-10-02/ur5e/v3/manifest.json) ·
+[v3 逐 root 结果](docs/research/2026-10-02/ur5e/v3/per_root.json) ·
+[高分辨率复核](docs/research/2026-10-02/ur5e/v3/review/reviewed_metrics.json) ·
+[媒体 manifest](docs/research/2026-10-02/ur5e/media_manifest.json) ·
+[仿真研究 Release](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulation-research-20261002)
+
+合集覆盖七个代表案例：六类场景各一个，另加一个安全窄道案例；案例是在知道复核
+结果后选取。287 个保存的关节状态帧按 1× 展示，共 14.35 s；33.75 s 总时长还包含
+明确标注的标题与停留画面。GIF 将 29 帧逻辑序列编码为 21 帧、2.9 s。媒体渲染
+不会重新运行物理或重新计算 gate。
+
+Release 归档还提供可独立加载的便携 UR5e 模型，共 27 个文件，其中 26 个为已核验的
+官方 Menagerie 资产。[原 v2 manifest](docs/research/2026-10-02/ur5e/manifest.json)、
+[逐 root 记录](docs/research/2026-10-02/ur5e/per_root.json)和
+[复核记录](docs/research/2026-10-02/ur5e/original_review.json)继续公开作为历史资料；
+旧版时间不再作为默认结果。
+
+该机械臂研究验证的是独立实验 profile，并不表示 UR5e 模型、学习型 WorldGuard
+或物理机械臂驱动已经接入产品核心 Executor。当前产品的机械臂接口仍为只读。
+
+[研究展示与实验边界](docs/research_showcase.md)
+
+## 工作台
+
+<p align="center">
+  <img src="docs/screenshots/physics-workbench.jpg" alt="显示三维轨迹、证据状态和科学验收门的 MuJoCo 工作台" width="92%">
+</p>
 
 ```bash
-python -m sentinel_evc run --mode physical --out runs/workbench
-python -m sentinel_evc train-baseline --mode residual --out runs/residual-baseline
-python -m sentinel_evc experiments
-python -m pytest -q
+python -m sentinel_evc run --mode physical --out runs/numeric01
+python -m sentinel_evc train-baseline --mode residual --out runs/residual01
+python -m sentinel_evc physics --out runs/physics01 --seed 7 --render
+python -m sentinel_evc verify-physics --out runs/physics01
 ```
 
-[逐项实现表](docs/implementation_matrix.md) · [验证结果](docs/product_validation.md) · [待做实验](docs/experiment_plan.md) · [接口契约](docs/product_contracts.md)
+内置数值校准只覆盖固定 0.35 m 候选族。未支持的动作族保持 `unknown`，
+物理或风险违规为 `denied`。固定接触 fixture 保留负结果：只按几何选择的
+最快候选可能滑移，且最快分支未通过终态姿态收敛门。
 
-这是可操作的本地数值基础产品，并有独立的 GPU 数值、接触、视觉对象和真实数据关节预测模型。训练结果和产品运动接入按各自 profile 记录。
-
-## GPU 模型与真实数据
-
-[GPU 训练报告](docs/gpu_training_results.md)保存 RTX 4090 D 上的实际训练、固定数据/模型版本、独立校准和全部负结果。数值 GRU、MuJoCo 对象后果模型、图像输入 WorldGuard 与 SO100 真实数据关节模型已完成训练；真实 SmolVLA 已完成 5000 步微调；开发集所选权重使留出动作标准化误差从 0.67317 降到 0.24598，下降 63.46%。4 线程配置下，从内存图像到 50×6 动作块的推理 P50/P95 为 229.26/236.90 ms。
-
-视觉对象模型在固定相机的 500 个仿真根场景中出现 0 次不安全选择，平均动作时长从 1.6 秒降到 1.2856 秒；只改变相机布局后出现 47/500 次不安全选择；冻结预测并用新布局的独立 dev/cal 重校准后，这个既有压力集变为 0/500，动作全部转为 1.6 秒，XY 覆盖率仍为 94.0%。真实 SO100 关节任务中，加入图像反而增加约 10% 标准化误差，因此采用更简单的状态/动作模型作基线。完整报告保留强物理基线、包络宽度、独立样本分母和失败案例。
-
-[训练复现命令](experiments/gpu/README.md) · [模型卡与权重加载](docs/gpu_model_cards.md) · [训练权重下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002)
-
-## 设计对齐与可靠性
-
-[v4 F01–F12 对齐复盘](docs/design_alignment.md)按原设计编号对应实现和剩余接入工作。
-[可靠性报告](docs/reliability_results.md)记录证据重验、关闭时目录所有权、停止竞态修复和
-扩展数值/物理场景验证方法。运行新增数值场景矩阵：
+## SSH 复现
 
 ```bash
-python tools/validate_scenarios.py --out runs/reliability-scenarios
+# 需要已有 OpenSSH alias、Python 3.10+、密钥代理与 known_hosts
+python -m sentinel_evc remote-physics \
+  --host YOUR_ALIAS --out runs/remote01 --seed 7
+python -m sentinel_evc verify-physics --out runs/remote01
 ```
 
-冻结代码 `8c7c840` 的完整测试与备用运行器各 **220 项通过**，新增数值矩阵 **9/9**
-符合预期。三种摩擦/种子组合完成 **75 个已独立核验的 MuJoCo 试验**，科学验收分别
-**7/9、8/9、7/9**：只按几何选择的最快分支在低摩擦下掉落、标准摩擦下滑移、高摩擦下稳定。
-版本、原始紧凑记录与校验摘要见报告。完整 v4 和真机可靠性仍待验证。
+SSH 路径在远端运行同一可信源码，取回证据包，并对照提交源码与传输收据校验。
+它不读取密码，并拒绝变化的主机密钥。远端渲染需要可用 EGL 驱动。
 
-## 复现本机性能测试
+[物理与 SSH 设计](docs/physics_ssh_design.md) ·
+[性能协议](docs/performance_protocol.md) ·
+[实测性能](docs/performance_results.md)
 
-```bash
-python -m pip install -e ".[physics,test]"
-python tools/benchmark_performance.py --out runs/performance-01 --physics-warmup 1
-```
+## 复现参考机制
 
-基准运行 20 轮配对的 1,000 案例几何验证、10 次实时数值运行及三次完整的
-25 试验 MuJoCo 实验。计时包含父证书、失败回退、签名与独立校验；数值运行总时
-也包含 ZIP 导出。预热样本保留，但不计入分位数。详见[计量协议](docs/performance_protocol.md)。
-每次使用新的输出目录。
-
-历史 `main` 快照 `7a16586` 在 Apple M4、10 核 / 16 GiB 上的实际结果：
-
-| 工作负载 | 重复次数 | P50 | P95 |
-|---|---:|---:|---:|
-| 实时数值运行，40 观测步 + 受核验的证据导出 | 10 | 3.236 s | 3.267 s |
-| 完整无渲染 MuJoCo 实验，25 个试验全部核验 | 3 | 12.707 s | 12.737 s |
-| 几何完整检查，1,000 案例含父证书与证据 | 20 | 0.362 s | 0.373 s |
-| 增量 + 失败回退，同一 1,000 案例 | 20 | 0.418 s | 0.446 s |
-
-配对增量/完整路径耗时比的中位数为 **1.151：这组简单几何任务中增量约慢 15.1%**。
-物理实验每次保留 **8/9 项验收通过**，最快分支收敛失败仍然记录。小样本分位数只描述
-本次观测。源码版本、父证书/回退成本、原始样本与复现条件见[完整性能报告](docs/performance_results.md)。
-
-
----
-
-## 这是什么，不是什么
-
-| 能力 | 当前状态 | 明确不承诺 |
-| --- | --- | --- |
-| 动作合同与规范化哈希 | 已实现，数值域 | 不覆盖真实机械臂逆运动学 |
-| 几何完整检查 | 已实现：静态球障碍 + 盒工作空间 + 球形工具 | 不覆盖连杆、夹爪、载荷、动态障碍 |
-| Δ-Cert 增量继承 | 已实现，L=1 约束族 | 不覆盖速度、加速度、夹持、接触 |
-| 一次性执行许可 | 已实现，本地 HMAC | 不是 PKI，不是功能安全 |
-| 撤销屏障 | 已实现，模拟控制器 | 不是电机制动证明 |
-| 证据哈希链与签名 | 已实现，Ed25519 | 只证明记录完整性，不证明传感器诚实 |
-| 真实 VLA 接入 | **实验：真实 SmolVLA 已微调并完成留出评估** | 记录数据上的评估；实时驱动接入仍待完成 |
-| 数值后果预测 | **产品：历史辨识/ridge；实验：严格 v4 GRU 已训练** | GPU 权重与默认产品 profile 分开 |
-| 视觉对象 WorldGuard | **已训练：固定相机 MuJoCo GPU 实验** | 相机变化和真实对象部署需要单独验证 |
-| 机械臂连接 | **已实现：Mock 与 Universal Robots 只读诊断** | 运动适配器和真机执行仍待实现 |
-| 三维模型入口 | **已实现：受限 OBJ/STL/MJCF/URDF 导入与 Canvas 预览** | 导入或编译成功不会批准运动 |
-| MuJoCo 固定装置 | **已实现：签名开放托盘接触实验** | 独立 profile；最快候选目前九项门中一项失败 |
-
-### 三句必须常说的话
-
-1. 本项目里的「许可」「证书」「验证」都有具体适用范围 —— **不是功能安全认证、
-   不是物理停止证明、不是事故责任判断**。
-2. `dt=50 ms`、`K≤4`、tracking reserve 都是**这个数值 profile 的配置**，
-   不是任何机器人的安全速度或人体保护距离。
-3. 「零次观测到失效」只说明这组测试没发现这类问题，**不等于任意场景零事故**。
-
----
-
-## 三分钟看懂
-
-现在的部署链里普遍存在一个缺口：策略模型给出的动作，和最终真正提交给驱动的动作，
-中间隔着若干次变换 —— 归一化、聚合、插值、重定时、前缀截取。
-
-**问题是：验证通常发生在变换之前。**
-
-本仓库用一个可复现的构造样例说明这件事的后果：两条分别通过了完整几何验证的绕障
-轨迹，把它们加权混合之后，得到的轨迹穿过障碍。父轨迹的验证结论对混合结果不成立。
-
-![第一幕对照图：两条各自验证通过的父轨迹，混合之后的最终动作穿过障碍](docs/demo_a.svg)
-
-1. 图中这一组（案例 #0）：两条父轨迹 P1、P2 各自完整检查都通过（最小余量
-   +67.7 mm / +75.0 mm）；按 0.5 / 0.5 混合后，最终动作的最小余量是 **−68.1 mm**，
-   第 6 段起穿过障碍。
-2. 「只验父轨迹就放行」这条路径，把 500 条真正违规的子轨迹**全部放行** ——
-   这就是本项目要解决的问题。
-3. 「最终动作每次全检」能拦住全部 500 条，代价是 1000 次完整检查；「Δ-Cert + 必要全检」
-   同样 0 条放行、0 条误拒，用掉 500 次（**验证阶段的调用次数，不是整机提速**）。
-
-图由 `python tools/make_demo_a_figure.py --lang zh` 生成（`--lang en` 出英文版，
-给 [README.md](README.md) 用）：脚本自己跑一遍第一幕，先跟 `RESULTS.md` 的基线断言，
-不一致就拒绝出图 —— 所以图里没有手填的数字。
-
-跑一次 `demo` 就能看到三条判定路径在同一批数据上的差异。
-
----
-
-## 快速开始（CPU，5 分钟）
+紧凑 CPU Demo 只依赖 core profile，并要求输出到新的空目录。
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\Activate.ps1
-python -m pip install -e ".[test]"
+source .venv/bin/activate
+python -m pip install -e .
 
-python -m sentinel_evc demo --cases 1000 --out runs/my_first_run
-```
-
-然后独立校验这次运行的证据包：
-
-```bash
+python -m sentinel_evc demo --out runs/demo --run-id demo --cases 1000
 python -m sentinel_evc verify \
-  --bundle runs/my_first_run/bundle \
-  --public-key runs/my_first_run/anchors/demo.public \
-  --run-id my_first_run
+  --bundle runs/demo/bundle \
+  --public-key runs/demo/anchors/demo.public \
+  --run-id demo
 ```
 
-再看看篡改之后会发生什么：
+打开 `runs/demo/report.html` 查看离线回放。三幕分别证明：校验后的变换会使旧结论失效；撤销不能抹去已接受的动作；
+第三方无需信任产生证据的运行时，也能校验签名记录。准确复现命令与历史测量见
+[RESULTS.md](RESULTS.md)。
+
+## 当前科学与产品边界
+
+- 数值、固定 MuJoCo、视觉/GPU 与机械臂研究是彼此独立的实验 profile。
+- 导入的 OBJ/STL/MJCF/URDF 只会解析和预览，不会获得运动授权。
+- ROS 2 运动链、物理机器人执行、mTLS、生产 PKI 与公证分发仍待完成。
+- “零次观测到失效”只描述指定样本；覆盖率、误放行、任务成功和物理事故是不同指标。
+- 证据签名只建立记录完整性，不建立传感器真实性、物理因果或责任判断。
+
+[实验计划](docs/experiment_plan.md) ·
+[可靠性记录](docs/reliability_results.md) ·
+[能力矩阵](docs/implementation_matrix.md)
+
+## 开发
 
 ```bash
-python -m sentinel_evc tamper --out runs/my_first_run
+python -m pytest -q
+python run_tests.py
 ```
 
-打开 `runs/my_first_run/report.html` 查看离线回放页（双击即可，无需服务器）。
+核心运行依赖是 `cryptography`；`physics` profile 增加 MuJoCo 和 Pillow。
+本地 UI 不使用 web 框架、前端构建步骤或 CDN。逐包实测许可见
+[依赖与许可证登记](docs/依赖许可.md)。
 
-新实验请用空目录。不要覆盖随包的 `sample_run/`。
-
----
-
-## 三个 Demo 各证明了什么
-
-### 第一幕 · 变换让旧结论失效
-
-三条判定路径跑在**完全相同**的场景、父轨迹和子轨迹上：
-
-| 判定路径 | 错误放行的违规轨迹 | 完整检查调用次数 |
-| --- | --- | --- |
-| a 只验父轨迹就放行 | 500 / 500 | 0 |
-| b 最终全检（基线） | 0 / 500 | 1000 |
-| c Δ-Cert + 必要全检 | 0 / 500 | 500 |
-
-同时，500 条同侧微调的安全子轨迹全部通过，误拒 0 条 —— 这条负对照是必要的，
-它说明这套机制不是「一变就拒」。
-
-> **关于那个 50%：** 它指的是**验证阶段的完整检查调用次数**，不是整机提速。
-> 父证书的建立成本、继承失败的回退成本都必须一并计入才能谈端到端收益。
-> [本机实测](docs/performance_results.md)已计入这些成本；当前简单约束任务中增量路径更慢，不作整机提速主张。
-
-### 第二幕 · 撤销不让已发生的动作消失
-
-七类故障注入：迟到动作、票据过期、许可重放、场景变更、队列版本变更、撤销竞态、
-取消未确认。全部阻断了新的失效提交。
-
-关键结果有两条，第二条同样重要：
-
-- 撤销之后，旧代次**新增**本地提交 = **0**
-- 但撤销**之前**已经提交的那一步，仍然出现在 `observed` 里
-
-软件队列清空、控制器确认取消、实际运动停止是三件不同的事。本仓库的 `observed`
-是模拟结果，不是电机制动的证明。真机演示必须按具体控制器实测。
-
-### 第三幕 · 证据能被第三方独立校验
-
-事件加序号与前项摘要构成哈希链，清单记录事件数、末尾摘要和文件摘要，
-用 Ed25519 签名。校验器是独立实现，只读文件、自己重算，不 import 写入方的代码。
-
-`tamper` 命令演示四种篡改，各自留下不同的失败特征：
-
-| 篡改方式 | 失败的校验层 |
-| --- | --- |
-| 改事件里 1 个字节 | file_digest · hash_chain · tip_hash |
-| 删掉最后 3 行 | file_digest · event_count · tip_hash |
-| 换一把公钥 | signature |
-| 改 run_id | run_id · hash_chain · tip_hash |
-
-签名只证明**相对于指定公钥的记录完整性**。它不证明传感器诚实，不证明动作在
-物理上发生过，不判断责任。包内公钥仅供演示，不是客户 PKI。
-
----
-
-## 结果与限制
-
-`sample_run/` 是一次真实运行的完整输出，随包提供，可用 `verify` 独立校验。
-每个数字的复现命令见 [RESULTS.md](RESULTS.md)。
-
-本仓库已运行固定 MuJoCo 开放托盘 profile 和上述 GPU 实验，包括真实图像编码器与 SmolVLA 检查点。ROS 2 运动链、物理机器人执行与 mTLS 仍待接入。导入的三维资产使用独立检查入口。
-
-「零次观测到失效」只说明这组构造测试没有发现该类问题，不等于任意场景零事故。
-任务成功率、预测覆盖率、误报率和真实事故率是不同的指标，不能合并成一个「安全率」。
-
-### MuJoCo 三维接触实验
-
-可选 `physics` profile 在固定的 XYZ 驱动开放托盘、自由三维载荷和地面接触场景中，
-记录实际伺服/接触状态、完整状态分支、五档物理步长、撤销后动力学和签名证据：
-
-```bash
-python -m pip install -e ".[physics,test]"
-python -m sentinel_evc physics --out runs/physics01 --seed 7 --render
-```
-
-该固定 profile 当前九项门通过八项：几何规则选出的最快候选发生滑移，完整终态姿态
-收敛门失败；负结果保留。它与任意上传模型的几何预览和五步编译检查相互独立，后者
-不会获得 Executor 运动许可。当前结果也不代表机械臂、VLA、v4 GRU 或视觉 WorldGuard。
-
----
-
-## 架构
-
-```
-Snapshot ──> 候选编译 ──> 完整检查 / Δ-Cert 继承 ──> Authority.prepare
-                                                          │
-                                                   Lease（一次性、有期限）
-                                                          │
-                                                          v
-                            Executor.commit ── 复核最新状态、上下文、期限
-                                     │
-                                逐步 dispatch ──> SimController
-                                     │                  │
-                                  revoke            三个游标
-                                     │           submitted / accepted / observed
-                                     v
-                    EventLog ──> 哈希链 ──> 签名 ──> 独立校验 + 静态回放页
-```
-
-五项发布不变量，每条对应 `tests/` 里的一个测试：
-
-1. 未授权通道不能写驱动 —— 只有 `Executor` 调 `controller.submit`
-2. 同一许可不能重复消费
-3. 已提交的不可撤销前缀不能被改写
-4. 撤销后不新增旧代次本地提交
-5. 取消未确认不得恢复旧计划
-
----
-
-## 真实 VLA 接入状态
-
-真实检查点已在 GPU 加载，并在固定 SO100 记录上微调。训练入口将在独立评估后保留十个带哈希的离线动作块窗口。下一步是在实时上游链路记录原始与最终提交动作，并明确关节、单位和坐标系语义。计划见 [docs/下一步_影子模式接入.md](docs/下一步_影子模式接入.md)。
-
----
-
-## 运行测试
-
-```bash
-python -m pytest -q          # 正式方式
-python run_tests.py          # 装不上 pytest 时的备用运行器
-```
-
----
-
-## 依赖纪律
-
-核心运行依赖只有 `cryptography`；`physics` 安装 profile 额外加入 MuJoCo 与 Pillow。
-不引入 torch、不引入 scipy、不引入 web 框架。
-`report.html` 由 Python 字符串模板 + 内联 SVG 生成，没有构建步骤、没有 CDN，
-断网也能打开。
-
-陌生人 `pip install` 一次成功的概率，直接决定这个仓库有没有人用。
-
-逐包的依赖许可登记（实测，不是抄的）见 [docs/依赖许可.md](docs/依赖许可.md)。
-
----
-
-## 如何贡献
-
-欢迎的贡献：新的构造反例、独立的检查器实现、故障注入场景、跨平台复现记录。
-
-提 PR 请附：测试、输入输出样例、已知限制。
-
-特别欢迎**指出本仓库某个结论不成立的证据**。负结果会被保留在仓库里，不会删掉。
-
-当前基础版进度见 [逐项实现表](docs/implementation_matrix.md)，历史计划见 [docs/任务板.md](docs/任务板.md)。
-
----
+贡献请附测试、输入输出样例和已知限制。特别欢迎能推翻仓库结论的反例；
+负结果会保留。参见[当前任务板](docs/任务板.md)。
 
 ## 许可
 
-本项目采用 **MIT 许可证**，全文见 [LICENSE](LICENSE)；
-版权行是 `Copyright (c) 2026 Sentinel EVC Lab contributors`。
-
-两点需要写清楚：
-
-- **MIT 不含专利授权条款。** 本项目核心机制另有专利申请（申请号 202611458350.1），
-  本许可证**不构成任何专利许可或默示许可**。
-- 运行时依赖 `cryptography`（Apache-2.0）与测试依赖 `pytest`（MIT）各自保留其许可，
-  不受本项目许可影响。
-
-仓库当前为公开仓库；代码许可与专利授权的边界如上所述。
+代码采用 [MIT License](LICENSE)。MIT 不含专利授权条款。核心机制另有专利
+申请 **202611458350.1**；软件许可证不构成明示或默示的专利许可。
+第三方依赖保留各自许可证。

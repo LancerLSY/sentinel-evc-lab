@@ -1,0 +1,24 @@
+{
+  "schema": "sentinel-smolvla-loading-verification-v1",
+  "status": "verified",
+  "split": "dev",
+  "heldout_test_rerun": false,
+  "episode_index": 13,
+  "frame_index": 0,
+  "actual_gpu": "NVIDIA GeForce RTX 4090 D",
+  "loader_source_sha256": "8caab98b41b422e0cbad22dd73b040f48db1f59247fc5984b43d2a662b5609cf",
+  "training_source_sha256": "bd6533682e152dab24b55fcec1730e49b04f7ea764f7b2af0826ee6c3d18cb70",
+  "overlay_sha256": "786fb0b1bdd89824960d57fb88564c0b7bfbd36c011da8e7cf721a7905dca30b",
+  "input_sha256": "fa0adb4e17900514440631a755b727599d433a28b7f45572a670ecb5627eafc6",
+  "prediction_sha256": "8ba3d32f6c3eff57d08cf9722e8024554727b0217af94cdeea3101ce02323495",
+  "shape": [
+    1,
+    50,
+    6
+  ],
+  "finite": true,
+  "reference": "fresh pinned policy using original LeRobotDataset metadata",
+  "equal_to_reference": true,
+  "maximum_absolute_difference": 0.0,
+  "elapsed_seconds": 21.686304807662964
+}

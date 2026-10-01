@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="640" viewBox="0 0 1440 640" role="img" aria-labelledby="title desc">
+  <title id="title">Sentinel EVC final-action verification workbench</title>
+  <desc id="desc">A restrained technical illustration of an upstream policy, a final execution gate, a robot arm simulation, and signed evidence.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf6"/>
+      <stop offset="1" stop-color="#f0eee7"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".98"/>
+      <stop offset="1" stop-color="#f7f6f1" stop-opacity=".98"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#152229" flood-opacity=".12"/>
+    </filter>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#16343b" stroke-opacity=".055"/>
+    </pattern>
+  </defs>
+
+  <rect width="1440" height="640" rx="32" fill="url(#paper)"/>
+  <rect width="1440" height="640" rx="32" fill="url(#grid)"/>
+  <circle cx="1230" cy="90" r="210" fill="#1b7774" opacity=".055"/>
+  <circle cx="1030" cy="610" r="260" fill="#c89045" opacity=".045"/>
+
+  <g transform="translate(80 72)">
+    <rect x="0" y="0" width="1280" height="496" rx="28" fill="url(#panel)" stroke="#d8d6cd" filter="url(#shadow)"/>
+
+    <g transform="translate(58 54)">
+      <rect width="54" height="54" rx="15" fill="#17343b"/>
+      <path d="M15 18h24M15 27h16M15 36h24" stroke="#e8b45e" stroke-width="3" stroke-linecap="round"/>
+      <text x="76" y="24" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="700" letter-spacing="2.5" fill="#1b7774">SENTINEL EVC LAB</text>
+      <text x="76" y="58" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="32" font-weight="760" fill="#17282e">Verify the action that will actually run.</text>
+      <text x="76" y="88" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" fill="#5b686c">Final-action binding · single-use permits · independently verifiable evidence</text>
+    </g>
+
+    <g transform="translate(60 206)">
+      <rect width="410" height="224" rx="20" fill="#f4f3ee" stroke="#d6d5ce"/>
+      <text x="26" y="35" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700" letter-spacing="1.8" fill="#6a777a">UPSTREAM ACTION</text>
+      <path d="M42 171C94 125 126 151 169 112s71-22 103-53 64-22 96-43" fill="none" stroke="#7d898c" stroke-width="8" stroke-linecap="round"/>
+      <g fill="#fbfaf6" stroke="#17343b" stroke-width="3">
+        <circle cx="42" cy="171" r="10"/><circle cx="169" cy="112" r="10"/><circle cx="272" cy="59" r="10"/><circle cx="368" cy="16" r="10"/>
+      </g>
+      <rect x="26" y="187" width="116" height="22" rx="11" fill="#e9e7df"/>
+      <text x="84" y="202" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#586468">policy output</text>
+    </g>
+
+    <g transform="translate(494 206)">
+      <rect width="260" height="224" rx="20" fill="#17343b"/>
+      <text x="24" y="34" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700" letter-spacing="1.8" fill="#9ed8d2">FINAL GATE</text>
+      <circle cx="130" cy="111" r="58" fill="#1b7774" opacity=".28" stroke="#73c4bc"/>
+      <path d="M98 111l21 21 45-48" fill="none" stroke="#f8f7f2" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="130" y="193" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#d8e7e5">bound · one use · expires</text>
+    </g>
+
+    <g transform="translate(778 206)">
+      <rect width="440" height="224" rx="20" fill="#f4f3ee" stroke="#d6d5ce"/>
+      <text x="24" y="34" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" font-weight="700" letter-spacing="1.8" fill="#6a777a">SIMULATION / DRIVER ADAPTER</text>
+      <path d="M86 164h260" stroke="#c8c6bd" stroke-width="3"/>
+      <path d="M212 161v-43l55-28 37 25" fill="none" stroke="#17343b" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="212" cy="161" r="18" fill="#1b7774"/>
+      <circle cx="212" cy="116" r="13" fill="#fbfaf6" stroke="#17343b" stroke-width="5"/>
+      <circle cx="268" cy="89" r="13" fill="#fbfaf6" stroke="#17343b" stroke-width="5"/>
+      <circle cx="305" cy="115" r="11" fill="#e8b45e" stroke="#17343b" stroke-width="4"/>
+      <path d="M314 123l18 28M298 124l-8 31" stroke="#17343b" stroke-width="6" stroke-linecap="round"/>
+      <rect x="35" y="68" width="96" height="62" rx="12" fill="#fff" stroke="#d0cec5"/>
+      <path d="M50 112l18-19 15 11 28-27" fill="none" stroke="#1b7774" stroke-width="4" stroke-linecap="round"/>
+      <text x="220" y="198" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#586468">observations → signed evidence</text>
+    </g>
+
+    <path d="M470 318h24M754 318h24" stroke="#1b7774" stroke-width="4" stroke-linecap="round"/>
+    <path d="M486 310l8 8-8 8M770 310l8 8-8 8" fill="none" stroke="#1b7774" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(892 56)">
+      <rect width="326" height="86" rx="16" fill="#fffaf0" stroke="#d9b36d"/>
+      <circle cx="30" cy="30" r="8" fill="#d2933b"/>
+      <text x="50" y="34" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#6d542e">Research boundary stays visible</text>
+      <text x="24" y="59" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" fill="#746d61">MuJoCo profiles validate experiments.</text>
+      <text x="24" y="76" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="12" fill="#746d61">Live robot write integration remains gated.</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,348 @@
+{
+  "argv": [
+    "verify_ur5e_roots.py",
+    "--run",
+    "runs/arm-20261002/full-v3",
+    "--asset-dir",
+    "external/mujoco_menagerie-4d038b3/universal_robots_ur5e",
+    "--previous-run",
+    "runs/arm-20261002/full-v2",
+    "--media-out",
+    "runs/arm-20261002/media-v4",
+    "--upstream-receipt",
+    "upstream_verification.json"
+  ],
+  "asset_archive_receipt": {
+    "declared_upstream_commit": "4d038b3feae26ec82b46a4d586379114012a8ac7",
+    "official_git_tree_api": "https://api.github.com/repos/google-deepmind/mujoco_menagerie/git/trees/4d038b3feae26ec82b46a4d586379114012a8ac7?recursive=1",
+    "receipt_sha256": "8255676d3c1c0210bac61207132a8a978cdf18980a683e93fc6fdcb719b60c5e",
+    "source_archive_sha256": "db0e5007e26b06cdadf3974f1f7507a357dad9122176eba65ba33fcf7de6e1a0",
+    "tree_sha256": "e50ffe878114d94303146130cfba303fa7ca41d3c4a862c376cbcf353cd3f608",
+    "verification_status": "independently verified by root integrator"
+  },
+  "ended_utc": "2026-10-01T20:36:26.819714+00:00",
+  "environment": {
+    "actual_available_gpu": "NVIDIA GeForce RTX 4090 D",
+    "physics": "CPU MuJoCo high-resolution replay",
+    "render": "EGL"
+  },
+  "implementation_independence": "does not import or call run_ur5e_guard discrete_check/rollout; uses a new MjModel and MjData",
+  "imports": {
+    "av": "15.1.0",
+    "mujoco": "3.14.0",
+    "numpy": "2.2.6",
+    "python": "3.12.3"
+  },
+  "input_hashes": {
+    "asset_tree": "e50ffe878114d94303146130cfba303fa7ca41d3c4a862c376cbcf353cd3f608",
+    "per_root": "6e53f5c443388f4ff1f7701375c658502772e2c4c824804d31f3b83fde58365c",
+    "plans": "d6c38668d550bc4e309682ceaed18d174ddad9bb552d8f4dac49f6d63a867bc7",
+    "review_wrapper": "64b39a76496763cf24fb7b778700f68f7b82b433a73ab623b61410eab35c71ec",
+    "run_manifest": "21328bd8d514affcba474fb7cbba7502a0b8ef18ce5ebd12bff151e76bf377c2"
+  },
+  "media_v4": {
+    "media": {
+      "ur5e-validation-montage.mp4": {
+        "bytes": 1394607,
+        "duration_seconds": 33.75,
+        "fps": 20,
+        "frame_count": 675,
+        "height": 720,
+        "hold_frames": 140,
+        "sha256": "05498141908a113a8df9a5f67b620263da42b5dc2d418eb01ccb68a4cbc735e3",
+        "stored_joint_state_frames": 287,
+        "title_frames": 248,
+        "width": 1280
+      },
+      "ur5e-validation.gif": {
+        "bytes": 1021436,
+        "encoded_duration_seconds": 2.9,
+        "encoded_frame_count": 21,
+        "height": 360,
+        "logical_frame_count": 29,
+        "nominal_fps": 10,
+        "root": 10000,
+        "sha256": "b0fd885ffec3996e834a2cf4f05f85c1f78279bafc32971b013ed4bc758853f9",
+        "width": 640
+      },
+      "ur5e-validation.png": {
+        "bytes": 137504,
+        "height": 720,
+        "root": 10000,
+        "sha256": "6089b1038fd40288a0ce705cfc7b403e731bdeea9619a7345697c4510d822958",
+        "state_index": 40,
+        "width": 1280
+      }
+    },
+    "selected": [
+      {
+        "review_reason": "safe",
+        "review_unsafe": false,
+        "root": 0,
+        "scenario": "clear",
+        "segment": 1
+      },
+      {
+        "review_reason": "collision",
+        "review_unsafe": true,
+        "root": 10000,
+        "scenario": "late_suffix",
+        "segment": 2
+      },
+      {
+        "review_reason": "collision",
+        "review_unsafe": true,
+        "root": 20001,
+        "scenario": "narrow_passage",
+        "segment": 3
+      },
+      {
+        "review_reason": "joint_limit",
+        "review_unsafe": true,
+        "root": 30000,
+        "scenario": "joint_limit",
+        "segment": 4
+      },
+      {
+        "review_reason": "tracking",
+        "review_unsafe": true,
+        "root": 40000,
+        "scenario": "tracking_disturbance",
+        "segment": 5
+      },
+      {
+        "review_reason": "collision",
+        "review_unsafe": true,
+        "root": 50000,
+        "scenario": "environment_change",
+        "segment": 6
+      },
+      {
+        "review_reason": "safe",
+        "review_unsafe": false,
+        "root": 20000,
+        "scenario": "narrow_passage",
+        "segment": 7
+      }
+    ],
+    "selection_rule": "clear first root; first review-unsafe root for other scenarios; then first review-safe narrow root (outcome-conditioned)"
+  },
+  "metrics": {
+    "fallback_reason_counts": {
+      "context_changed": 60,
+      "initial_integration_state_changed": 30,
+      "parent_denied_or_record_missing": 14
+    },
+    "methods": {
+      "conservative": {
+        "allow_count": 30,
+        "allow_denominator_all": 180,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_reject_count": 11,
+        "false_reject_denominator_safe": 41
+      },
+      "full": {
+        "allow_count": 41,
+        "allow_denominator_all": 180,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41
+      },
+      "incremental": {
+        "allow_count": 41,
+        "allow_denominator_all": 180,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41
+      },
+      "parent_only": {
+        "allow_count": 166,
+        "allow_denominator_all": 180,
+        "false_allow_count": 125,
+        "false_allow_denominator_unsafe": 139,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41
+      }
+    },
+    "observed_gate_cost_by_incremental_path": {
+      "full_fallback": {
+        "dynamic_rollouts": 90,
+        "mean_parent_ms": 85.3409698937793,
+        "mean_suffix_or_fallback_ms": 49.29764308287083,
+        "mean_total_ms": 134.63861297665014,
+        "roots": 74,
+        "static_samples": 9366
+      },
+      "static_prefix_reuse": {
+        "dynamic_rollouts": 146,
+        "mean_parent_ms": 112.1820563643749,
+        "mean_suffix_or_fallback_ms": 44.54847260923037,
+        "mean_total_ms": 156.73052897360526,
+        "roots": 106,
+        "static_samples": 9546
+      }
+    },
+    "review_safe_roots": 41,
+    "review_unsafe_roots": 139,
+    "roots": 180,
+    "unsafe_reason_counts": {
+      "collision": 80,
+      "joint_limit": 30,
+      "safe": 41,
+      "tracking": 29
+    }
+  },
+  "output_hashes": {
+    "highres_replay_trajectories": "3593e9683d030348d82ec308f6d4c79cccb7c95c3b6498663eb46015554fe729",
+    "reviewed_metrics": "985ac6cdf8fca276dffda160d83e85927f97f3d54b86ac341a0dd7e3b72efebe",
+    "reviewed_per_root": "1a43836848e474f8c6b90ab70413b63ae5d526852e90b409e1aa7385942c269e"
+  },
+  "portable_model": {
+    "directory": "runs/arm-20261002/media-v4/model/portable_ur5e",
+    "loaded_shape": {
+      "ngeom": 32,
+      "nq": 6,
+      "nu": 6,
+      "nv": 6
+    },
+    "official_asset_file_count": 26,
+    "standalone_load_verified": true,
+    "total_file_count": 27,
+    "tree_sha256": "ad04c294bdf0849248d3f881a061020b5e7a3206e33fe7613374ed308c2e7724",
+    "wrapper": "runs/arm-20261002/media-v4/model/portable_ur5e/sentinel_highres_review.xml",
+    "wrapper_sha256": "d332ac7e52368e3c00c7536048efbaab1c0266610edcd39809feedca11eba452"
+  },
+  "previous_run": {
+    "manifest_sha256": "ace65d69f24b98f6d868193201add0a56948a840395be8ac3c329b7d0b80ce2f",
+    "note": "separate earlier 180-root run; not recomputed or pooled with v3; legacy summary contains outdated independent-evaluator wording and is historical only",
+    "reported_summary": {
+      "by_scenario": {
+        "clear": {
+          "conservative_allowed": 30,
+          "full_allowed": 30,
+          "incremental_allowed": 30,
+          "parent_only_allowed": 30,
+          "roots": 30,
+          "unsafe": 0
+        },
+        "environment_change": {
+          "conservative_allowed": 0,
+          "full_allowed": 0,
+          "incremental_allowed": 0,
+          "parent_only_allowed": 30,
+          "roots": 30,
+          "unsafe": 30
+        },
+        "joint_limit": {
+          "conservative_allowed": 0,
+          "full_allowed": 0,
+          "incremental_allowed": 0,
+          "parent_only_allowed": 30,
+          "roots": 30,
+          "unsafe": 30
+        },
+        "late_suffix": {
+          "conservative_allowed": 0,
+          "full_allowed": 0,
+          "incremental_allowed": 0,
+          "parent_only_allowed": 24,
+          "roots": 30,
+          "unsafe": 30
+        },
+        "narrow_passage": {
+          "conservative_allowed": 0,
+          "full_allowed": 10,
+          "incremental_allowed": 10,
+          "parent_only_allowed": 22,
+          "roots": 30,
+          "unsafe": 20
+        },
+        "tracking_disturbance": {
+          "conservative_allowed": 0,
+          "full_allowed": 1,
+          "incremental_allowed": 1,
+          "parent_only_allowed": 30,
+          "roots": 30,
+          "unsafe": 29
+        }
+      },
+      "definitions": {
+        "false_allow": "gate allows final plan AND independent final evaluator labels root unsafe; denominator is unsafe roots",
+        "false_reject": "gate rejects final plan AND independent final evaluator labels root safe; denominator is safe roots",
+        "unsafe": "joint violation, robot-obstacle/self collision, or dynamic tracking RMSE > 0.12 rad"
+      },
+      "incremental_fallback_count": 60,
+      "methods": {
+        "conservative": {
+          "allow_rate": 0.16666666666666666,
+          "complete_validation_calls_per_root": 0,
+          "false_allow_count": 0,
+          "false_allow_denominator_unsafe": 139,
+          "false_allow_rate": 0.0,
+          "false_reject_count": 11,
+          "false_reject_denominator_safe": 41,
+          "false_reject_rate": 0.2682926829268293,
+          "gate_wall_ms_mean": 0.0,
+          "gate_wall_ms_p95": 0.0,
+          "safe_allowed_count": 30
+        },
+        "full": {
+          "allow_rate": 0.22777777777777777,
+          "complete_validation_calls_per_root": 1,
+          "false_allow_count": 0,
+          "false_allow_denominator_unsafe": 139,
+          "false_allow_rate": 0.0,
+          "false_reject_count": 0,
+          "false_reject_denominator_safe": 41,
+          "false_reject_rate": 0.0,
+          "gate_wall_ms_mean": 49.060163574500216,
+          "gate_wall_ms_p95": 120.21516175009306,
+          "safe_allowed_count": 41
+        },
+        "incremental": {
+          "allow_rate": 0.22777777777777777,
+          "complete_validation_calls_per_root": 2,
+          "false_allow_count": 0,
+          "false_allow_denominator_unsafe": 139,
+          "false_allow_rate": 0.0,
+          "false_reject_count": 0,
+          "false_reject_denominator_safe": 41,
+          "false_reject_rate": 0.0,
+          "gate_wall_ms_mean": 149.2294100113213,
+          "gate_wall_ms_p95": 229.72513865679397,
+          "safe_allowed_count": 41
+        },
+        "parent_only": {
+          "allow_rate": 0.9222222222222223,
+          "complete_validation_calls_per_root": 1,
+          "false_allow_count": 125,
+          "false_allow_denominator_unsafe": 139,
+          "false_allow_rate": 0.8992805755395683,
+          "false_reject_count": 0,
+          "false_reject_denominator_safe": 41,
+          "false_reject_rate": 0.0,
+          "gate_wall_ms_mean": 102.08773835458689,
+          "gate_wall_ms_p95": 118.35548616945724,
+          "safe_allowed_count": 41
+        }
+      },
+      "roots": 180,
+      "safe_roots": 41,
+      "unsafe_roots": 139
+    }
+  },
+  "resolution": {
+    "control_frame_seconds": 0.05,
+    "difference_from_gate": "2x denser static sampling and 2x temporal physics resolution",
+    "dt_seconds": 0.001,
+    "static_max_joint_step_rad": 0.005,
+    "substeps_per_frame": 50
+  },
+  "schema": "sentinel-arm-highres-review-v1",
+  "scope": "same fixed 180 constructed roots with adversarial obstacle placement; not an untouched natural distribution",
+  "source_sha256": "25273954692daaebdfc0dfa29726280d588c9d85b6a15fa6f258df777be3abf4",
+  "started_utc": "2026-10-01T20:35:07.142311+00:00"
+}
