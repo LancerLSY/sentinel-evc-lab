@@ -7,12 +7,34 @@
 > every step leaves a record a third party can verify independently.
 
 A numeric reference implementation. It runs in five minutes on an ordinary laptop —
-no GPU, no robot arm, no model weights.
+no GPU, no robot arm, no pretrained checkpoint required.
 
-> **Status**: v0.1 (candidate) · `pytest` **24 passed** · three-act demo reproducible · license: **MIT**
+> **Status**: v0.2 product foundation · `pytest` **68 passed** · three-act demo reproducible · license: **MIT**
 > CI: [workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
-> (workflow badge images do not load for a private repository, so this is a link rather than
-> a badge; the badge goes on after the repository becomes public.)
+
+
+## Local numeric workbench
+
+```bash
+python -m pip install -e ".[test]"
+python -m sentinel_evc serve --data-dir runs/workbench --port 8765
+```
+
+Open `http://127.0.0.1:8765`: create/import a scenario, compare all four final candidates, monitor actual simulated load feedback, stop/approve resume, replay saved steps/filter events, and export signed ZIP evidence. One local service owns one workspace.
+
+The bundled calibration covers only the fixed 0.35 m candidate family. Unknown actions remain `unknown`; physical/risk violations are `denied`. The default physical scenario selects 1.6 s and completes 40 observed commands. The residual template may reject every candidate at the default .12 m threshold; this conservative negative result is retained. Host wall time and observed-command numeric time are distinct.
+
+```bash
+python -m sentinel_evc run --mode physical --out runs/workbench
+python -m sentinel_evc train-baseline --mode residual --out runs/residual-baseline
+python -m sentinel_evc experiments
+python -m pytest -q
+```
+
+[Mechanism matrix](docs/implementation_matrix.md) · [Validation](docs/product_validation.md) · [Pending experiments](docs/experiment_plan.md) · [Contracts](docs/product_contracts.md)
+
+A genuine local numerical product increment. Real VLA, GRU, vision and device experiments remain pending with explicit prerequisites; prototype measurements do not establish those capabilities.
+
 
 ---
 
@@ -27,7 +49,7 @@ no GPU, no robot arm, no model weights.
 | Revocation barrier | Implemented against a simulated controller | Not a motor-braking proof |
 | Evidence hash chain + signature | Implemented, Ed25519 | Proves record integrity only, not sensor honesty |
 | Real VLA integration | **Not started** | Next goal is read-only shadow mode, not closed-loop intervention |
-| Learned consequence prediction (WorldGuard) | **Interface only, no implementation** | No training, no experiments, no conclusions |
+| Numeric consequence prediction | **Implemented: physical ID + trainable ridge residual + root calibration** | Not the v4 GRU, visual WorldGuard or a robot result |
 | Physical robot | **Not started**, out of scope for this round | — |
 
 ### Three things we always say
@@ -157,7 +179,7 @@ failure signature:
 | Flip one byte in an event | file_digest · hash_chain · tip_hash |
 | Delete the last 3 lines | file_digest · event_count · tip_hash |
 | Swap in a different public key | signature |
-| Change the run_id | run_id |
+| Change the run_id | run_id · hash_chain · tip_hash |
 
 A signature only proves **record integrity relative to a specified public key**. It does
 not prove that sensors were honest, that an action physically happened, or who is at
@@ -270,5 +292,4 @@ Two things stated plainly:
 - The runtime dependency `cryptography` (Apache-2.0) and the test dependency `pytest`
   (MIT) keep their own licences, unaffected by this one.
 
-The repository is currently **private**. Whether it becomes public is a separate
-decision, independent of this licence.
+The repository is public. Code licensing and patent rights retain the separate scopes above.

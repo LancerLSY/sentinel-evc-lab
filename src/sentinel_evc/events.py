@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 import json
+import threading
 from collections import deque
 from typing import Optional
 
@@ -31,6 +32,13 @@ EVENT_TYPES = (
     "LOG_GAP",
 )
 
+PRODUCT_EVENT_TYPES = EVENT_TYPES + (
+    "PREDICTION",
+    "LEASE",
+    "CANCEL_REQUEST",
+    "CANCEL_ACCEPTED",
+)
+
 ZERO_HASH = "sha256:" + "0" * 64
 
 
@@ -41,23 +49,39 @@ class EventLog:
     但缺口必须可见。需要完整证据的运行模式下，出现缺口应停止批准新任务。
     """
 
-    def __init__(self, run_id: str, maxlen: int = 100_000):
+    def __init__(
+        self, run_id: str, maxlen: int = 100_000, schema_version: str = "v0.1"
+    ):
+        if not isinstance(run_id, str) or not run_id or len(run_id) > 256:
+            raise ValueError("run_id 必须是有界非空字符串")
+        if isinstance(maxlen, bool) or not isinstance(maxlen, int) or maxlen < 2:
+            raise ValueError("maxlen 至少为 2")
+        if schema_version not in ("v0.1", "product-v1"):
+            raise ValueError("未知事件 schema_version")
         self.run_id = run_id
+        self.schema_version = schema_version
         self._events: deque = deque()
         self._maxlen = maxlen
         self._seq = 0
         self._prev_hash = ZERO_HASH
         self._gap_count = 0
+        self._has_gap = False
+        self._lock = threading.RLock()
 
-    def append(self, etype: str, **payload) -> dict:
-        if etype not in EVENT_TYPES:
-            raise ValueError(f"未定义的事件类型: {etype}")
+    @property
+    def allowed_types(self) -> tuple:
+        return EVENT_TYPES if self.schema_version == "v0.1" else PRODUCT_EVENT_TYPES
 
-        if len(self._events) >= self._maxlen:
-            # 丢最旧的，并把缺口记下来
-            self._events.popleft()
-            self._gap_count += 1
+    def supports(self, etype: str) -> bool:
+        return etype in self.allowed_types
 
+    def can_append_without_gap(self, count: int = 1) -> bool:
+        if isinstance(count, bool) or not isinstance(count, int) or count < 0:
+            raise ValueError("count 必须是非负整数")
+        with self._lock:
+            return not self._has_gap and len(self._events) + count <= self._maxlen
+
+    def _append_one(self, etype: str, payload: dict) -> dict:
         ev = {
             "seq": self._seq,
             "run_id": self.run_id,
@@ -70,8 +94,46 @@ class EventLog:
         self._events.append(ev)
         return ev
 
+    def append(self, etype: str, **payload) -> dict:
+        if etype not in self.allowed_types:
+            raise ValueError(f"未定义的事件类型: {etype}")
+        # Canonical round-trip both rejects NaN/unsupported objects and takes
+        # an immutable JSON-compatible copy of mapping proxies/tuples.
+        payload = json.loads(canonical_json(payload).decode("utf-8"))
+        with self._lock:
+            if etype == "LOG_GAP":
+                while len(self._events) >= self._maxlen:
+                    self._events.popleft()
+                    self._gap_count += 1
+                self._has_gap = True
+                return self._append_one(etype, payload)
+
+            if len(self._events) >= self._maxlen:
+                dropped_now = 0
+                # Reserve one slot for the visible gap marker and one for the
+                # event that detected it. A fresh marker stays visible even
+                # after repeated overflow.
+                while len(self._events) > self._maxlen - 2:
+                    self._events.popleft()
+                    dropped_now += 1
+                self._gap_count += dropped_now
+                self._has_gap = True
+                self._append_one(
+                    "LOG_GAP",
+                    {
+                        "detail": "bounded event buffer overflow",
+                        "dropped": dropped_now,
+                        "dropped_total": self._gap_count,
+                    },
+                )
+            return self._append_one(etype, payload)
+
     def note_gap(self, detail: str) -> None:
         self.append("LOG_GAP", detail=detail, dropped=self._gap_count)
+
+    @property
+    def has_gap(self) -> bool:
+        return self._has_gap
 
     @property
     def tip_hash(self) -> str:
@@ -82,7 +144,8 @@ class EventLog:
         return self._seq
 
     def events(self) -> list:
-        return list(self._events)
+        with self._lock:
+            return list(self._events)
 
     def to_jsonl(self) -> str:
         return "\n".join(

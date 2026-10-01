@@ -15,6 +15,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install -e ".[test]"
       - run: python -m pytest -q
+      - name: Numeric product and training artifact smoke
+        run: |
+          python -m sentinel_evc run --mode physical --fast --out runs/product-ci
+          python -m sentinel_evc train-baseline --mode residual --out runs/baseline-ci
+          python -m sentinel_evc experiments
+          python -m pip wheel --no-deps . --wheel-dir runs/dist
       - name: 端到端冒烟：跑一次 demo 并独立校验
         run: |
           python -m sentinel_evc demo --cases 100 --out runs/ci --run-id ci

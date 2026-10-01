@@ -8,7 +8,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 from dataclasses import dataclass, field
+from collections.abc import Mapping
+from types import MappingProxyType
 from typing import Any, Optional
 
 # ---------------------------------------------------------------- 规范化序列化
@@ -25,7 +28,7 @@ def _canon(obj: Any) -> Any:
         return float(FLOAT_FMT % obj)
     if isinstance(obj, (list, tuple)):
         return [_canon(x) for x in obj]
-    if isinstance(obj, dict):
+    if isinstance(obj, Mapping):
         return {str(k): _canon(v) for k, v in obj.items()}
     return obj
 
@@ -37,7 +40,11 @@ def canonical_json(obj: Any) -> bytes:
     不要在任何对外材料里声称实现了 RFC 8785。
     """
     return json.dumps(
-        _canon(obj), sort_keys=True, separators=(",", ":"), ensure_ascii=False
+        _canon(obj),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
     ).encode("utf-8")
 
 
@@ -46,6 +53,62 @@ def sha256_hex(obj: Any) -> str:
 
 
 # ---------------------------------------------------------------- 动作描述器
+
+
+def _nonempty(value: Any, name: str, max_len: int = 128) -> str:
+    if not isinstance(value, str) or not value or len(value) > max_len:
+        raise ValueError(f"{name} 必须是 1..{max_len} 字符字符串")
+    return value
+
+
+def _digest(value: Any, name: str) -> str:
+    value = _nonempty(value, name, 71)
+    if len(value) != 71 or not value.startswith("sha256:"):
+        raise ValueError(f"{name} 必须是 sha256 摘要")
+    try:
+        int(value[7:], 16)
+    except ValueError as exc:
+        raise ValueError(f"{name} 必须是 sha256 摘要") from exc
+    return value
+
+
+def _finite_real(value: Any, name: str, *, positive: bool = False) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise TypeError(f"{name} 必须是有限数值")
+    result = float(value)
+    if not math.isfinite(result) or (positive and result <= 0.0):
+        raise ValueError(f"{name} 必须是{'正' if positive else ''}有限数值")
+    return result
+
+
+def _vec3(value: Any, name: str) -> tuple:
+    if not isinstance(value, (list, tuple)) or len(value) != 3:
+        raise ValueError(f"{name} 必须是 3 维向量")
+    return tuple(_finite_real(v, f"{name}[{i}]") for i, v in enumerate(value))
+
+
+def _freeze(value: Any) -> Any:
+    """Recursively copy mutable inputs before they enter a hashed DTO."""
+    if isinstance(value, Mapping):
+        if len(value) > 256 or any(not isinstance(k, str) or not k or len(k) > 128 for k in value):
+            raise ValueError("映射键必须是最多 256 个有界非空字符串")
+        frozen = {k: _freeze(v) for k, v in value.items()}
+        return MappingProxyType(frozen)
+    if isinstance(value, (list, tuple)):
+        if len(value) > 4096:
+            raise ValueError("序列超过不可变 DTO 上限")
+        return tuple(_freeze(v) for v in value)
+    if isinstance(value, set):
+        if len(value) > 4096:
+            raise ValueError("集合超过不可变 DTO 上限")
+        return frozenset(_freeze(v) for v in value)
+    if isinstance(value, float) and not math.isfinite(value):
+        raise ValueError("不可变 DTO 不接受 NaN/Inf")
+    if isinstance(value, str) and len(value) > 4096:
+        raise ValueError("字符串超过不可变 DTO 上限")
+    if value is not None and not isinstance(value, (str, int, float, bool)):
+        raise TypeError("不可变 DTO 含不支持的值类型")
+    return value
 
 
 @dataclass(frozen=True)
@@ -62,6 +125,15 @@ class ActionDescriptor:
     frame: str = "world"
     rotation: Optional[str] = None
     gripper: str = "discrete_event"
+
+    def __post_init__(self):
+        _nonempty(self.descriptor_id, "descriptor_id")
+        _nonempty(self.mode, "mode")
+        _nonempty(self.units, "units")
+        _nonempty(self.frame, "frame")
+        if self.rotation is not None:
+            _nonempty(self.rotation, "rotation")
+        _nonempty(self.gripper, "gripper")
 
     def summary(self) -> dict:
         return {
@@ -85,6 +157,10 @@ class Sphere:
     center: tuple
     radius: float
 
+    def __post_init__(self):
+        object.__setattr__(self, "center", _vec3(self.center, "sphere.center"))
+        object.__setattr__(self, "radius", _finite_real(self.radius, "sphere.radius", positive=True))
+
     def summary(self) -> dict:
         return {"type": "sphere", "center": list(self.center), "radius": self.radius}
 
@@ -99,6 +175,22 @@ class Scene:
     ws_hi: tuple
     tool_radius: float = 0.02
     tracking_reserve: float = 0.005
+
+    def __post_init__(self):
+        _nonempty(self.scene_id, "scene_id")
+        obstacles = tuple(self.obstacles)
+        if len(obstacles) > 1024 or any(not isinstance(o, Sphere) for o in obstacles):
+            raise ValueError("obstacles 必须是最多 1024 个 Sphere")
+        lo, hi = _vec3(self.ws_lo, "ws_lo"), _vec3(self.ws_hi, "ws_hi")
+        if any(a >= b for a, b in zip(lo, hi)):
+            raise ValueError("工作空间下界必须严格小于上界")
+        object.__setattr__(self, "obstacles", obstacles)
+        object.__setattr__(self, "ws_lo", lo)
+        object.__setattr__(self, "ws_hi", hi)
+        object.__setattr__(self, "tool_radius", _finite_real(self.tool_radius, "tool_radius"))
+        object.__setattr__(self, "tracking_reserve", _finite_real(self.tracking_reserve, "tracking_reserve"))
+        if self.tool_radius < 0.0 or self.tracking_reserve < 0.0:
+            raise ValueError("工具半径与跟踪预留不能为负")
 
     def summary(self) -> dict:
         return {
@@ -128,8 +220,31 @@ class Plan:
     descriptor: ActionDescriptor = field(default=DEFAULT_DESCRIPTOR)
 
     def __post_init__(self):
+        _nonempty(self.plan_id, "plan_id")
+        knots = tuple(_vec3(k, f"knots[{i}]") for i, k in enumerate(self.knots))
+        object.__setattr__(self, "knots", knots)
         if len(self.knots) < 2:
             raise ValueError("Plan 至少需要 2 个节点")
+        if len(self.knots) > 100_001:
+            raise ValueError("Plan 节点数量超过上限")
+        object.__setattr__(self, "dt", _finite_real(self.dt, "dt", positive=True))
+        if not isinstance(self.descriptor, ActionDescriptor):
+            raise TypeError("descriptor 必须是 ActionDescriptor")
+        events = []
+        seen_steps = set()
+        for i, event in enumerate(self.gripper_events):
+            if not isinstance(event, (tuple, list)) or len(event) != 2:
+                raise ValueError(f"gripper_events[{i}] 必须是 (step, event)")
+            step, kind = event
+            if isinstance(step, bool) or not isinstance(step, int) or not 0 <= step < len(knots) - 1:
+                raise ValueError(f"gripper_events[{i}] step 越界")
+            if kind not in ("open", "close"):
+                raise ValueError(f"gripper_events[{i}] 类型无效")
+            if step in seen_steps:
+                raise ValueError("同一步只能有一个夹爪事件")
+            seen_steps.add(step)
+            events.append((step, kind))
+        object.__setattr__(self, "gripper_events", tuple(events))
 
     @property
     def horizon(self) -> int:
@@ -175,6 +290,16 @@ class TransformRecord:
     # 只有列在这里的变换类型才允许尝试 Δ-Cert 继承
     INHERITABLE = frozenset({"identity", "perturb"})
 
+    def __post_init__(self):
+        _nonempty(self.transform_id, "transform_id")
+        _nonempty(self.kind, "kind")
+        _digest(self.parent_hash, "parent_hash")
+        _digest(self.child_hash, "child_hash")
+        _nonempty(self.version, "version")
+        if not isinstance(self.parameters, Mapping):
+            raise TypeError("parameters 必须是映射")
+        object.__setattr__(self, "parameters", _freeze(self.parameters))
+
     @property
     def inheritable(self) -> bool:
         return self.kind in self.INHERITABLE
@@ -205,6 +330,15 @@ class Context:
     task_phase: str = "transfer"
     queue_rev: int = 0
     committed_prefix_hash: str = "sha256:" + "0" * 64
+
+    def __post_init__(self):
+        for field_name in ("robot", "scene_id", "controller", "task_phase"):
+            _nonempty(getattr(self, field_name), field_name)
+        _digest(self.committed_prefix_hash, "committed_prefix_hash")
+        for field_name in ("boot", "epoch", "queue_rev"):
+            value = getattr(self, field_name)
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                raise ValueError(f"{field_name} 必须是非负整数")
 
     def summary(self) -> dict:
         return {
@@ -239,6 +373,17 @@ class Snapshot:
     position: tuple
     capture_mono_ns: int
     valid: bool = True
+    supported: Optional[bool] = None
+
+    def __post_init__(self):
+        _nonempty(self.obs_id, "obs_id")
+        object.__setattr__(self, "position", _vec3(self.position, "snapshot.position"))
+        if isinstance(self.capture_mono_ns, bool) or not isinstance(self.capture_mono_ns, int) or self.capture_mono_ns < 0:
+            raise ValueError("capture_mono_ns 必须是非负整数")
+        if type(self.valid) is not bool:
+            raise TypeError("valid 必须是 bool")
+        if self.supported is not None and type(self.supported) is not bool:
+            raise TypeError("supported 必须是 bool 或 None")
 
     def summary(self) -> dict:
         return {
@@ -246,6 +391,7 @@ class Snapshot:
             "position": list(self.position),
             "capture_mono_ns": self.capture_mono_ns,
             "valid": self.valid,
+            "supported": self.supported,
         }
 
 
@@ -271,6 +417,23 @@ class Certificate:
     root_id: Optional[str] = None
     depth: int = 0
     proof_scope: str = "numeric-sphere-box-L1-v1"
+
+    def __post_init__(self):
+        for field_name in ("cert_id", "method", "proof_scope"):
+            _nonempty(getattr(self, field_name), field_name)
+        _digest(self.plan_hash, "plan_hash")
+        _digest(self.scene_hash, "scene_hash")
+        object.__setattr__(self, "dt", _finite_real(self.dt, "certificate.dt", positive=True))
+        if isinstance(self.horizon, bool) or not isinstance(self.horizon, int) or self.horizon < 1:
+            raise ValueError("certificate.horizon 必须为正整数")
+        margins = tuple(_finite_real(v, "certificate.margin") for v in self.margins)
+        if len(margins) != self.horizon:
+            raise ValueError("certificate.margins 长度必须等于 horizon")
+        object.__setattr__(self, "margins", margins)
+        if self.method not in ("FULL", "INHERITED"):
+            raise ValueError("certificate.method 无效")
+        if isinstance(self.depth, bool) or not isinstance(self.depth, int) or self.depth < 0:
+            raise ValueError("certificate.depth 必须是非负整数")
 
     def summary(self) -> dict:
         return {
@@ -301,7 +464,24 @@ class Lease:
     cert_id: str
     prefix_len: int
     deadline_mono_ns: int
+    prediction_hash: Optional[str] = None
+    authority_generation: int = 0
     mac: str = ""
+
+    def __post_init__(self):
+        for field_name in ("lease_id", "cert_id"):
+            _nonempty(getattr(self, field_name), field_name)
+        _digest(self.plan_hash, "plan_hash")
+        if not isinstance(self.context, Context):
+            raise TypeError("context 必须是 Context")
+        if isinstance(self.prefix_len, bool) or not isinstance(self.prefix_len, int) or self.prefix_len < 1:
+            raise ValueError("prefix_len 必须是正整数")
+        for field_name in ("deadline_mono_ns", "authority_generation"):
+            value = getattr(self, field_name)
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                raise ValueError(f"{field_name} 必须是非负整数")
+        if self.prediction_hash is not None:
+            _digest(self.prediction_hash, "prediction_hash")
 
     def payload(self) -> dict:
         return {
@@ -311,6 +491,8 @@ class Lease:
             "cert_id": self.cert_id,
             "prefix_len": self.prefix_len,
             "deadline_mono_ns": self.deadline_mono_ns,
+            "prediction_hash": self.prediction_hash,
+            "authority_generation": self.authority_generation,
         }
 
 

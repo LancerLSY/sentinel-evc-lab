@@ -185,6 +185,7 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
         ack_delay_ticks=1,
         exec_delay_ticks=1,
         drop_cancel_ack=(fault == "cancel_unconfirmed"),
+        initial_position=p1.knots[0],
     )
     ex = Executor(authority, controller, log)
 
@@ -220,7 +221,8 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
         # 正常推进两步
         for _ in range(3):
             clock.advance(50_000_000)
-            ex.tick(clock.now_ns)
+            feedback = controller.read_feedback(clock.now_ns)
+            ex.tick(clock.now_ns, Snapshot(f"obs-{clock.now_ns}", feedback["position"], clock.now_ns), ctx)
 
         if fault in ("revoke_race", "cancel_unconfirmed"):
             before = len(controller.submitted)
@@ -229,7 +231,8 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
             # 撤销之后继续推进，观察有没有新增旧代次提交
             for _ in range(5):
                 clock.advance(50_000_000)
-                ex.tick(clock.now_ns)
+                feedback = controller.read_feedback(clock.now_ns)
+                ex.tick(clock.now_ns, Snapshot(f"obs-{clock.now_ns}", feedback["position"], clock.now_ns), ctx)
             after_stale = sum(
                 1 for s in controller.submitted[before:] if s["gen"] < gen_before + 1
             )
@@ -270,3 +273,4 @@ def act_three_evidence(log: EventLog, out_dir: str) -> dict:
 
     log.append("OUTCOME", outcome="run_complete", event_count=log.count)
     return build_bundle(log, out_dir)
+

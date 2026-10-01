@@ -91,6 +91,7 @@ def deviation_bounds(parent: Plan, child: Plan) -> tuple:
 
 def dependency_ok(
     parent_cert: Certificate,
+    parent_plan: Plan,
     child: Plan,
     scene: Scene,
     transform: TransformRecord,
@@ -102,14 +103,26 @@ def dependency_ok(
     """
     if not transform.inheritable:
         return "transform_not_registered"
+    if parent_cert.plan_hash != parent_plan.hash:
+        return "parent_plan_hash_mismatch"
+    if transform.parent_hash != parent_plan.hash:
+        return "transform_parent_hash_mismatch"
+    if transform.child_hash != child.hash:
+        return "transform_child_hash_mismatch"
     if parent_cert.scene_hash != scene.hash:
         return "scene_changed"
+    if parent_cert.proof_scope != "numeric-sphere-box-L1-v1":
+        return "proof_scope_changed"
     if parent_cert.dt != child.dt:
         return "dt_changed"
     if parent_cert.horizon != child.horizon:
         return "horizon_changed"
     if parent_cert.depth + 1 > MAX_INHERIT_DEPTH:
         return "max_depth_exceeded"
+    if parent_plan.descriptor != child.descriptor:
+        return "descriptor_changed"
+    if parent_plan.gripper_events != child.gripper_events:
+        return "gripper_events_changed"
     return None
 
 
@@ -131,7 +144,7 @@ def validate_or_inherit(
 
     # --- 情形二：内容完全相同，查过依赖后直接复用
     if parent_cert.plan_hash == child.hash:
-        reason = dependency_ok(parent_cert, child, scene, transform)
+        reason = dependency_ok(parent_cert, parent_plan, child, scene, transform)
         if reason is None:
             return Verdict(
                 plan_hash=child.hash,
@@ -146,7 +159,7 @@ def validate_or_inherit(
         return _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
 
     # --- 情形三：尝试 Δ 继承
-    reason = dependency_ok(parent_cert, child, scene, transform)
+    reason = dependency_ok(parent_cert, parent_plan, child, scene, transform)
     if reason is not None:
         v = _full_path(child, scene, parent_cert_id=parent_cert.cert_id)
         v.reason_code = reason
@@ -238,10 +251,20 @@ class CertificateStore:
     或自选的证书 ID 一律不构成证据。
     """
 
-    def __init__(self):
+    def __init__(self, max_entries: int = 10_000):
+        if isinstance(max_entries, bool) or not isinstance(max_entries, int) or max_entries < 1:
+            raise ValueError("max_entries 必须是正整数")
         self._certs = {}
+        self._max_entries = max_entries
 
     def register(self, cert: Certificate) -> None:
+        if not isinstance(cert, Certificate):
+            raise TypeError("只接受 Certificate")
+        if cert.cert_id not in self._certs and len(self._certs) >= self._max_entries:
+            raise ValueError("certificate store capacity exceeded")
+        existing = self._certs.get(cert.cert_id)
+        if existing is not None and existing != cert:
+            raise ValueError("certificate id collision")
         self._certs[cert.cert_id] = cert
 
     def get(self, cert_id: str) -> Optional[Certificate]:

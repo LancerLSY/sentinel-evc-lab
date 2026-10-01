@@ -19,6 +19,30 @@ from typing import Optional
 from .contracts import Plan, Scene
 
 
+GEOMETRY_DESCRIPTOR = (
+    "numeric-world-xyz-v1",
+    "absolute_position",
+    "m",
+    "world",
+    None,
+    "discrete_event",
+)
+
+
+def validate_geometry_profile(plan: Plan) -> None:
+    descriptor = plan.descriptor
+    actual = (
+        descriptor.descriptor_id,
+        descriptor.mode,
+        descriptor.units,
+        descriptor.frame,
+        descriptor.rotation,
+        descriptor.gripper,
+    )
+    if actual != GEOMETRY_DESCRIPTOR:
+        raise ValueError("unsupported geometry action descriptor")
+
+
 def _sub(a, b):
     return (a[0] - b[0], a[1] - b[1], a[2] - b[2])
 
@@ -70,6 +94,7 @@ def full_check(plan: Plan, scene: Scene):
       margins[k]              第 k 段所有约束中的最小余量，单位米
       first_violation_segment 第一个余量为负的段下标，全部通过时为 None
     """
+    validate_geometry_profile(plan)
     margins = []
     first_violation: Optional[int] = None
 
@@ -95,6 +120,9 @@ def full_check_sampled(plan: Plan, scene: Scene, samples_per_segment: int = 200)
     用密集采样代替解析最近点。采样必然比解析实现保守性略差（可能高估余量），
     所以比较时要允许一个与采样密度相称的容差。
     """
+    validate_geometry_profile(plan)
+    if isinstance(samples_per_segment, bool) or not isinstance(samples_per_segment, int) or samples_per_segment < 1:
+        raise ValueError("samples_per_segment 必须是正整数")
     margins = []
     first_violation: Optional[int] = None
     slack = scene.tool_radius + scene.tracking_reserve

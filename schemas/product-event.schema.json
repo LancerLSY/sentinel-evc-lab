@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sentinel product-v1 event",
+  "description": "product-v1 event envelope only; payload semantics and typed action bindings are enforced by the core producers and protocol regression tests. Legacy envelope remains unchanged.",
+  "type": "object",
+  "required": [
+    "seq",
+    "run_id",
+    "type",
+    "payload",
+    "prev_hash"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "type": {
+      "enum": [
+        "PROPOSAL",
+        "TRANSFORM",
+        "CERTIFICATE",
+        "PREPARE",
+        "COMMIT",
+        "DISPATCH",
+        "CONTROLLER_ACK",
+        "OBSERVED",
+        "REVOKE",
+        "CANCEL_ACK",
+        "BACKUP",
+        "OUTCOME",
+        "LOG_GAP",
+        "PREDICTION",
+        "LEASE",
+        "CANCEL_REQUEST",
+        "CANCEL_ACCEPTED"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "prev_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

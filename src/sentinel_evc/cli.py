@@ -105,7 +105,7 @@ def cmd_demo(args) -> int:
 
 
 def cmd_verify(args) -> int:
-    ok, msg = verify_bundle(args.bundle, args.public_key, args.run_id)
+    ok, msg = verify_bundle(args.bundle, args.public_key, args.run_id,args.expected_tip)
     print(("PASS — " if ok else "FAIL — ") + msg)
     return 0 if ok else 1
 
@@ -181,6 +181,51 @@ def cmd_tamper(args) -> int:
     return 0 if all_failed and len(profiles) == 4 else 1
 
 
+def cmd_serve(args):
+    from .server import serve
+    if not 0 <= args.port <= 65535:
+        raise ValueError("port must be 0–65535")
+    serve(args.data_dir,args.port)
+    return 0
+
+
+def cmd_run(args):
+    from .scenario import Scenario, strict_json
+    from .runstore import RunStore
+    from .product_pipeline import ProductManager
+    scenario=Scenario.parse(strict_json(Path(args.scenario).read_bytes())) if args.scenario else Scenario.parse({"name":"CLI 数值运行","seed":args.seed,"prediction_mode":args.mode,"risk_limit":args.risk_limit})
+    store=RunStore(args.out)
+    manager=ProductManager(store,realtime=not args.fast)
+    try:
+        record=manager.start(scenario)
+        session=manager._sessions[record['id']]
+        session.thread.join()
+        result=manager.read(record['id'])
+        print(json.dumps({"id":result['id'],"status":result['status'],"selected":result['selected'],"cursors":result['result']['cursors'],"error":result['error'],"verification":result.get('verification')},ensure_ascii=False,indent=2))
+        return 0 if result['status']=="completed" else 3
+    finally:
+        manager.close();store.close()
+
+
+def cmd_baseline(args):
+    from .baseline import run_baseline
+    print(json.dumps(run_baseline(args.out,args.seed,args.mode,args.risk_limit),ensure_ascii=False,indent=2))
+    return 0
+
+
+def cmd_experiments(args):
+    from .experiments import experiment_registry
+    records=[e.summary() for e in experiment_registry()]
+    if args.experiment_id:
+        records=[e for e in records if e['id']==args.experiment_id]
+        if not records:
+            print("unknown experiment",file=sys.stderr);return 2
+        print(json.dumps({"status":"PREREQUISITES_REQUIRED","experiment":records[0]},ensure_ascii=False,indent=2))
+        return 3
+    print(json.dumps({"experiments":records},ensure_ascii=False,indent=2))
+    return 0
+
+
 def main(argv=None) -> int:
     _use_utf8_output()
     ap = argparse.ArgumentParser(
@@ -197,6 +242,7 @@ def main(argv=None) -> int:
     v.add_argument("--bundle", required=True)
     v.add_argument("--public-key", required=True)
     v.add_argument("--run-id", required=True)
+    v.add_argument("--expected-tip",default=None,help="独立保留的末尾锚点")
     v.set_defaults(func=cmd_verify)
 
     t = sub.add_parser("tamper", help="四种篡改测试")
@@ -204,9 +250,39 @@ def main(argv=None) -> int:
     t.add_argument("--run-id", default=None)
     t.set_defaults(func=cmd_tamper)
 
+    ui=sub.add_parser("serve",help="本地单用户数值操作台")
+    ui.add_argument("--port",type=int,default=8765)
+    ui.add_argument("--data-dir",default="runs/workbench")
+    ui.set_defaults(func=cmd_serve)
+
+    run=sub.add_parser("run",help="执行四候选数值闭环并保存签名证据")
+    run.add_argument("--out",default="runs/workbench")
+    run.add_argument("--scenario",default=None)
+    run.add_argument("--seed",type=int,default=7)
+    run.add_argument("--mode",choices=("physical","residual"),default="physical")
+    run.add_argument("--risk-limit",type=float,default=.12)
+    run.add_argument("--fast",action="store_true",help="仅用于数值验证的逻辑时钟模式")
+    run.set_defaults(func=cmd_run)
+
+    baseline=sub.add_parser("train-baseline",help="小规模根分组训练、校准和留出评价")
+    baseline.add_argument("--out",required=True)
+    baseline.add_argument("--seed",type=int,default=10_000_000)
+    baseline.add_argument("--mode",choices=("physical","residual"),default="residual")
+    baseline.add_argument("--risk-limit",type=float,default=.12)
+    baseline.set_defaults(func=cmd_baseline)
+
+    experiments=sub.add_parser("experiments",help="列出尚需模型、设备或数据的实验")
+    experiments.add_argument("--experiment-id",default=None)
+    experiments.set_defaults(func=cmd_experiments)
+
     args = ap.parse_args(argv)
-    return args.func(args)
+    try:
+        return args.func(args)
+    except (ValueError,OSError) as exc:
+        print(str(exc),file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":
     sys.exit(main())
+

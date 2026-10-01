@@ -1,0 +1,423 @@
+{
+  "allowed_candidates": 0,
+  "calibration_hash": "sha256:35083f2c0a458bc86e92034ed99890eb6ce4f78fc23d508989bdc62464d38b36",
+  "dataset_hash": "sha256:3af863fd0813eaebd46e62f3e509405ecad93255588ea63a903e10e31163c252",
+  "false_allow_candidates": 0,
+  "joint_covered_roots": 12,
+  "mae_r": 0.03198110532154879,
+  "model_hash": "sha256:1db82828f1befd05b569db9abd1de5ff9e498a13a52e0e9c153d2545b38a4631",
+  "risk_limit": 0.12,
+  "rows": [
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.22291620431813838,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:742cf14b569ade95d0c30dfa825b9d4e78c9178939f25c96f0b1aa0227be511f"
+        },
+        {
+          "actual_peak": 0.17631679688624632,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:2755f7f69ec7e8c66ca03b64598fb67e9fba32d29da0a2c1f9d5ce6cce9f15bf"
+        },
+        {
+          "actual_peak": 0.12331563766204034,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:8ac50e28da1c56565a300e2cb5fc623f0b25fb87f0d9dcd4de0dfda2dff9aba2"
+        },
+        {
+          "actual_peak": 0.059772722681153696,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:30dbcc2c11bcf7f508721fd4cb386e6eadc11e5dc17d94851223c4eddec9f43f"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000059"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.18230919691797942,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:9bb28518f09076ef900887755ee55c45c2f6d66ee4f355ccb86180b75d0666bc"
+        },
+        {
+          "actual_peak": 0.12578865042766108,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:38dace8b0a625f9284df50ac4bab7c28cf721b6efea2bf1742c413d9847752b2"
+        },
+        {
+          "actual_peak": 0.06984134292938954,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:46809b13f067efbb2dc2717227afd3850dfedf4905437e59ae78ab1287806378"
+        },
+        {
+          "actual_peak": 0.03361372202657098,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:919db0dbf4ffb6be34338cc36b4dffbf5e510181d9bcd72b3cc79fe5f781e2df"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000060"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.1338058897329794,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:2807ed515e743382aaef24e1a506f4991ed7e219e41591f847664def87a576d4"
+        },
+        {
+          "actual_peak": 0.09974105831326055,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:3eb64017db4e1b063dcb45ab44f0f603a45d79f7d2ed6198e76f84f56311f7a7"
+        },
+        {
+          "actual_peak": 0.07717487824364357,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:caf6725ffb3b92a53457e4884cd032e2ff01607cae3bd3e4690d1687fb11e76b"
+        },
+        {
+          "actual_peak": 0.05104017784174628,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:e1add1f59626a2f1b16bb8121e535789509a6ec75c5516251836a4a8dfafeb62"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000061"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.17145790253177096,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:1da23a3532cade7496a3c8f65241b5365dd62c4fbe526d9157aab31814af06d8"
+        },
+        {
+          "actual_peak": 0.14399551557284407,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:97921d70148af22bdbcd6c89c59c2e8fed3216a2532f8fe8b8ea095032ec31aa"
+        },
+        {
+          "actual_peak": 0.11520627722262121,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:8d1474fd7e7abaf28748a80715cbaafc5914178d70491321a3c6b788d6997783"
+        },
+        {
+          "actual_peak": 0.07705797727276414,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:dd7204ae7cc8e2781a15a63ce946f5a73c31db0a39699e9a135e6daf0de826a6"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000062"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.1694383313149544,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:3ad41098b3e620c380ec3f5c197c43dd5be40f1a1e584146477d3a90f0bfcccd"
+        },
+        {
+          "actual_peak": 0.11126102777868316,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:e06d36aae9ad4aae6fe5ae573b31728f24ae3b6e5f8debbb3d095cda6687e0d8"
+        },
+        {
+          "actual_peak": 0.05630775107153861,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:988cfbd55f3776b0d29178506d53c8f8ac85e001e728ff53da064ab9ae64a307"
+        },
+        {
+          "actual_peak": 0.033063062180456015,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:fe5e1f98b24afe3b42cb165ba7b2873777afa9620461c5c8f0e853ed91719ebf"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000063"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.1331819286178455,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:578252d143c7d01d190bfb6f6f19a383cd956a3f2e91af5cea9b6ad398fd9da6"
+        },
+        {
+          "actual_peak": 0.08358848658411379,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:cfd862952df3952c9a85e9774633aa06ad4d41a20d2ca17c6a5f853bd6faa75c"
+        },
+        {
+          "actual_peak": 0.04260481562688251,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:c16fe1c6b3e147c0acc8597b009014178c51dc8e9d71704d53380146e206dfc3"
+        },
+        {
+          "actual_peak": 0.02479750401655536,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:cfc8463dbc52abfed1b57e51f25e0b6551ccc47a91c25b36a3b8ef214166cd77"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000064"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.1692753577140263,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:c29663482bf04389018807bd4ffdd64ac08d325302571c7d55a05dce054e98f4"
+        },
+        {
+          "actual_peak": 0.14096848956668534,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:41ded28f31657691f8f2571e389f442d85248f685510703edf3d91fa50d99c55"
+        },
+        {
+          "actual_peak": 0.11558526078841229,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:a6ae04aff997eb1a200ad92daaebf5a462db1d3d907dca8bb4103d7928591de9"
+        },
+        {
+          "actual_peak": 0.08367436200124158,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:733f47cd53b959265b30860fb28d000a075211d7698f1d2806616d70481beb3c"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000065"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.18210601757544992,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:5224ea3a78e8d6859837029423b6f49e17690ff4c6e31b0332e75c5cb92b0ae9"
+        },
+        {
+          "actual_peak": 0.11581058262306508,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:c0f1e58e0d29e08bc7a84154473c9d677b6bebb4a5814c39c627d4be46de7935"
+        },
+        {
+          "actual_peak": 0.05615359381834946,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:bd7713d298d794eb8adec815fb684f0d0381538171cb1d9f27f404161bbdb6eb"
+        },
+        {
+          "actual_peak": 0.02813438136569131,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:898243bdc6b40caef0a425e350f430cddbd6a6e06f0da86e8b072d85831a6030"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000066"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.20900112264445805,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:5d8bce6e8084689e258525f82ff5c827a1a1b32e6cdcb823f6f65c13b2312a64"
+        },
+        {
+          "actual_peak": 0.1516047756259924,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:9f23ed2475cf5cfe2ddc2559948b5887661d473c027440225e3f33084f6275dc"
+        },
+        {
+          "actual_peak": 0.09305727593577831,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:9ab4b5b24963ac14ede91143f96eed8354e33e22529a36561692d5f0523667a7"
+        },
+        {
+          "actual_peak": 0.03695602899283166,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:f70b336f5308bdb28b78f13059bd83ffa5bfee4a2f1321bf669ac74f353ea953"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000067"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.1789068042282948,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:cbac3091a8708268a119c1a1a4ddcfe5f5d4d0ad3cb58f5f3d47ea128f4f3d9b"
+        },
+        {
+          "actual_peak": 0.14283305617815856,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:d7ac6f27d1cc78c4173649056d212cbc24053ad303c06e72386f551db2b2df7d"
+        },
+        {
+          "actual_peak": 0.12263454687540022,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:f0967cc93afa64cf23e235ee23dc0c9695cc1af9aacdb2d17ed6e53f9068f85b"
+        },
+        {
+          "actual_peak": 0.093906139273436,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:70a56940994284d0a0bd7585e5708f614bd2478f2bb6fd97745f1b8a88b57c6d"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000068"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.14584051490967587,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:009e557115deadb1fbfa52d3773ccb04aff777589317c82d18b44be5dd22c35b"
+        },
+        {
+          "actual_peak": 0.1003510159828431,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:b37ef736d356e0f85a67f35a90f93f822fc694db86a98d2a30e5a832c005c99d"
+        },
+        {
+          "actual_peak": 0.08275450198415765,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:eb1ba1087eef6e0997e87f2932452ea969c6d9adf3829161a3a2ae607757ba5b"
+        },
+        {
+          "actual_peak": 0.061218450526992756,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:66416edc637d0fed397fc3bad60cc2c3b0246bb1ba471b9e9794d29bf37c8c0b"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000069"
+    },
+    {
+      "candidates": [
+        {
+          "actual_peak": 0.1376791179069573,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:0caf8f1264035f33975cc247dd285c27526a921ef42094cf21e572b3e8cd7ef6",
+          "prediction_hash": "sha256:ec4c4c231504f95d6e9ed261f501fbab1295e69c2cb646f6b1b0ad8f68e97b7f"
+        },
+        {
+          "actual_peak": 0.10771652239607862,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:2378605cd9420da58904cf932ffe1841281bb2cb53195ca45fc916d9028204ea",
+          "prediction_hash": "sha256:02461ac26fa1e8ef96d6c1f4b0593122df0d4103c6a904880c2fe7e2a05299a7"
+        },
+        {
+          "actual_peak": 0.07785448173448417,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:cf45345f71cf6c29057bccb2c7ae42dc9e97d6a64b8860d534a0f1804e56dfcb",
+          "prediction_hash": "sha256:607506d2aec6e26a2b33d8b61463f6cc3ce0f68e4c20d8d3b76aa0bb1c36b6e3"
+        },
+        {
+          "actual_peak": 0.04451801424006393,
+          "allowed": false,
+          "covered": true,
+          "plan_hash": "sha256:dd3bcaddd14268d668c743370cd2599621f7548d7b0822641ea615b0c0c1c911",
+          "prediction_hash": "sha256:cc0b288319f394d88a5001f9d1da2f2ff63bc02a81b9b4aba6a521c945b8fd5d"
+        }
+      ],
+      "joint_covered": true,
+      "root_id": "numeric-root-10000070"
+    }
+  ],
+  "scope": "modest deterministic numeric roots; not v4 GRU or robot validation",
+  "test_candidates": 48,
+  "test_roots": 12
+}

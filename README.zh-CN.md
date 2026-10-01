@@ -7,9 +7,32 @@
 
 数值参考实现。在普通笔记本上五分钟跑完，不需要 GPU、机械臂或任何模型权重。
 
-> **状态**：v0.1（候选）· `pytest` **24 项通过** · 三幕 demo 可复现 · 许可：**MIT**
+> **状态**：v0.2 基础工作台 · `pytest` **68 项通过** · 三幕 demo 可复现 · 许可：**MIT**
 > CI：[workflow runs](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
-> （私有仓库里 workflow 徽章图片拉不出来，所以这里放链接而不是 badge；转为公开后再挂徽章。）
+
+
+## 本地数值工作台
+
+```bash
+python -m pip install -e ".[test]"
+python -m sentinel_evc serve --data-dir runs/workbench --port 8765
+```
+
+打开 `http://127.0.0.1:8765`，创建或导入场景，比较四个最终候选，查看实际模拟反馈，停止并批准恢复，回放保存步骤、过滤事件及导出签名 ZIP。每个工作目录只允许一个本地服务。
+
+捆绑校准仅覆盖固定 0.35 m 动作族。模型未知标为 `unknown`，物理或后果违规标为 `denied`。标准物理基线选择 1.6 s 候选并完成 40 步；残差模板在默认 .12 m 阈值下可能全部拒绝，这个保守负结果会保留。主机墙钟与观测指令数值时间分开展示。
+
+```bash
+python -m sentinel_evc run --mode physical --out runs/workbench
+python -m sentinel_evc train-baseline --mode residual --out runs/residual-baseline
+python -m sentinel_evc experiments
+python -m pytest -q
+```
+
+[逐项实现表](docs/implementation_matrix.md) · [验证结果](docs/product_validation.md) · [待做实验](docs/experiment_plan.md) · [接口契约](docs/product_contracts.md)
+
+这是可操作的本地数值基础产品。真实 VLA、GRU、视觉和设备实验仍有明确前提；当前原型指标不能代表这些能力。
+
 
 ---
 
@@ -24,7 +47,7 @@
 | 撤销屏障 | 已实现，模拟控制器 | 不是电机制动证明 |
 | 证据哈希链与签名 | 已实现，Ed25519 | 只证明记录完整性，不证明传感器诚实 |
 | 真实 VLA 接入 | **未开始** | 下一步目标是只读影子模式，不是闭环干预 |
-| 学习式后果预测（WorldGuard） | **仅保留接口，无实现** | 无训练、无实验、无结论 |
+| 数值后果预测 | **已实现：历史辨识、可训练 ridge 残差、根分组校准** | 尚未复现 v4 GRU、视觉 WorldGuard 或真实机器人 |
 | 真机 | **未开始**，不在本轮范围 | —— |
 
 ### 三句必须常说的话
@@ -140,7 +163,7 @@ python -m sentinel_evc tamper --out runs/my_first_run
 | 改事件里 1 个字节 | file_digest · hash_chain · tip_hash |
 | 删掉最后 3 行 | file_digest · event_count · tip_hash |
 | 换一把公钥 | signature |
-| 改 run_id | run_id |
+| 改 run_id | run_id · hash_chain · tip_hash |
 
 签名只证明**相对于指定公钥的记录完整性**。它不证明传感器诚实，不证明动作在
 物理上发生过，不判断责任。包内公钥仅供演示，不是客户 PKI。
@@ -224,7 +247,7 @@ python run_tests.py          # 装不上 pytest 时的备用运行器
 
 特别欢迎**指出本仓库某个结论不成立的证据**。负结果会被保留在仓库里，不会删掉。
 
-当前任务与进度（含 v0.2 影子模式的五个步骤）见 [docs/任务板.md](docs/任务板.md)。
+当前基础版进度见 [逐项实现表](docs/implementation_matrix.md)，历史计划见 [docs/任务板.md](docs/任务板.md)。
 
 ---
 
@@ -240,4 +263,4 @@ python run_tests.py          # 装不上 pytest 时的备用运行器
 - 运行时依赖 `cryptography`（Apache-2.0）与测试依赖 `pytest`（MIT）各自保留其许可，
   不受本项目许可影响。
 
-仓库当前仍为 **private**。是否转为公开是另一件事，与许可证无关。
+仓库当前为公开仓库；代码许可与专利授权的边界如上所述。

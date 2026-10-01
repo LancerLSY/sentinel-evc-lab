@@ -8,6 +8,7 @@
 
 from __future__ import annotations
 
+import re
 import inspect
 import sys
 import tempfile
@@ -17,8 +18,9 @@ from pathlib import Path
 
 
 class _Raises:
-    def __init__(self, exc_type):
+    def __init__(self, exc_type, match=None):
         self.exc_type = exc_type
+        self.match = match
         self.value = None
 
     def __enter__(self):
@@ -29,6 +31,8 @@ class _Raises:
             raise AssertionError(f"期望抛出 {self.exc_type.__name__}，但没有抛出")
         if not issubclass(et, self.exc_type):
             return False
+        if self.match is not None and not re.search(self.match,str(ev)):
+            raise AssertionError("异常信息与预期模式不符")
         self.value = ev
         return True
 
@@ -81,3 +85,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
