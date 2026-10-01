@@ -1,0 +1,51 @@
+{
+  "claims": {
+    "GRU": false,
+    "VLA": false,
+    "authenticated_live_SSH": false,
+    "full_v4_completed": false,
+    "hardware_motion": false
+  },
+  "fallback": {
+    "failed": 0,
+    "passed": 220,
+    "skipped": 0
+  },
+  "historical_regression": {
+    "RESULTS_rows_match": 16,
+    "cases": 1000,
+    "distinct_tamper_failure_features": 4,
+    "fault_injections": 7,
+    "old_generation_new_submissions_after_revoke": 0,
+    "safe_controls_allowed": 500,
+    "sample_run_verified": true,
+    "tamper_profiles_refused": 4,
+    "unsafe_delta_allows": 0,
+    "unsafe_final_full_allows": 0,
+    "unsafe_parent_only_allows": 500,
+    "verified_events": 2031
+  },
+  "physics_source_manifest_sha256": "921b2d8a32209c06ae58deabd9491e0406cbd086835f2fa97949c337044ab7a7",
+  "public_archive_rehearsal": {
+    "deselected_self_recursion": 1,
+    "passed": 219,
+    "scope": "actual source archive extracted locally; not live SSH"
+  },
+  "public_source_manifest_sha256": "d3a429dcf26bc321617eb19cffc2872b5e46b480994dc1f4ed6a1b38263a36e7",
+  "pytest": {
+    "failed": 0,
+    "passed": 220,
+    "skipped": 0,
+    "wall_seconds": 24.587
+  },
+  "review": {
+    "architecture": "WATCH scoped foundation; full-v4 BLOCK",
+    "code": "APPROVE scoped foundation"
+  },
+  "schema": "sentinel-reliability-validation-v1",
+  "source_commit": "8c7c840f2f4b2d93f5434943b4cdb77e4762e347",
+  "syntax": {
+    "python_ast_files": 54,
+    "swift_typecheck": "passed; xcrun swiftc -parse-as-library -typecheck"
+  }
+}

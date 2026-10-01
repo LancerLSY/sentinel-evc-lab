@@ -87,9 +87,12 @@ numeric/physics scenario protocol. Reproduce the numeric matrix with:
 python tools/validate_scenarios.py --out runs/reliability-scenarios
 ```
 
-The matrix checks supported runs, conservative refusals, unsupported actions and
-restart/tamper recovery. Physics acceptance failures remain visible; successful
-software regression does not establish full v4 completion or hardware reliability.
+On frozen code `8c7c840`, the full suite and fallback each passed **220 tests**;
+the additional numeric matrix matched **9/9** expected outcomes. Three friction/seed
+variants completed **75 verified MuJoCo trials**. Scientific gates were **7/9, 8/9,
+7/9**: geometry-only fastest selection dropped at low friction, slipped at nominal
+friction and stayed stable at high friction. See the report for source identity and
+raw compact records. Full v4 and hardware reliability remain pending.
 
 ## Reproduce local performance
 

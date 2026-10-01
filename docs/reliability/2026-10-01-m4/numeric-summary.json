@@ -1,0 +1,15 @@
+{
+  "case_count": 9,
+  "cases_sha256": "sha256:b472d0e314d4f2c277878b7e94cb5149213d100b90da6381fab59d8816d17812",
+  "claims": {
+    "mujoco": false,
+    "real_robot": false,
+    "robot_realtime": false,
+    "vla": false
+  },
+  "failed": [],
+  "metadata_sha256": "sha256:b05919382aae516b970608a09f3bda812deac8726c88d8bb7fefbd25f205b8df",
+  "passed": 9,
+  "schema": "sentinel-additional-scenarios-v1",
+  "status": "completed"
+}

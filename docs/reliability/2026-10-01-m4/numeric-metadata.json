@@ -1,0 +1,18 @@
+{
+  "clock_scope": "numeric scenario matrix uses deterministic logical execution time; no robot real-time claim",
+  "environment": {
+    "implementation": "CPython",
+    "logical_cpu_count": 10,
+    "machine": "arm64",
+    "python": "3.12.14",
+    "release": "27.0.0",
+    "system": "Darwin"
+  },
+  "schema": "sentinel-additional-scenarios-v1",
+  "seeds": [
+    0,
+    7,
+    23
+  ],
+  "source_digest": "sha256:d3a429dcf26bc321617eb19cffc2872b5e46b480994dc1f4ed6a1b38263a36e7"
+}

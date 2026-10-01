@@ -1,0 +1,1505 @@
+{
+  "environment": {
+    "machine": "arm64",
+    "mujoco": "3.14.0",
+    "python": "3.12.14",
+    "system": "Darwin"
+  },
+  "experiments": [
+    {
+      "acceptance": {
+        "all_expected_commands": true,
+        "continued_stop_dynamics": true,
+        "deterministic_root_replay": true,
+        "mutation_refusal": true,
+        "no_engine_warnings": true,
+        "paired_negative": false,
+        "static_stability": true,
+        "step_convergence": false,
+        "zero_old_generation_submissions": true
+      },
+      "branches": [
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.25026577602146816,
+          "outcome": "drop",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-2000us-6",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.1408443917552998,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-2000us-9",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.06114782014803709,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-2000us-12",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.009156385510675654,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-2000us-16",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.24979714490184832,
+          "outcome": "drop",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-1000us-6",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.14124911561570255,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-1000us-9",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.06205824946814382,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-1000us-12",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.008912556758563752,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-1000us-16",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.2498182815119541,
+          "outcome": "drop",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-500us-6",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.14084135855785593,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-500us-9",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.062250518554915577,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-500us-12",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.00892019122066183,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-500us-16",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.24973535613195802,
+          "outcome": "drop",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-250us-6",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.1408460411394086,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-250us-9",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.06205681772450424,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-250us-12",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.008698515322253112,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-250us-16",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.24947103207958432,
+          "outcome": "drop",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-125us-6",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.1408130099715545,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-125us-9",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.06206272183952339,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-125us-12",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.008681442274076185,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-7-125us-16",
+          "timestep": 0.000125
+        }
+      ],
+      "case": "low-friction",
+      "convergence": [
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 0.6,
+          "final_orientation_difference_rad": 0.09759859499367371,
+          "final_position_difference_m": 0.00030521069788065207,
+          "final_velocity_difference_m_s": 3.9102950358836076e-13,
+          "maximum_tracking_difference_m": 0.00011467689793541588,
+          "offset_difference_m": 0.00026432405237369894,
+          "passed": false,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 0.9,
+          "final_orientation_difference_rad": 0.07569735326416363,
+          "final_position_difference_m": 0.0007160105209022397,
+          "final_velocity_difference_m_s": 5.1882784741068914e-12,
+          "maximum_tracking_difference_m": 8.709535203031628e-05,
+          "offset_difference_m": 3.303116785410842e-05,
+          "passed": false,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 1.2,
+          "final_orientation_difference_rad": 0.0023102584799262354,
+          "final_position_difference_m": 0.00040040128701253336,
+          "final_velocity_difference_m_s": 8.412965199603612e-12,
+          "maximum_tracking_difference_m": 6.575006172057987e-05,
+          "offset_difference_m": 5.904115019148004e-06,
+          "passed": true,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 1.6,
+          "final_orientation_difference_rad": 0.0002168769469527718,
+          "final_position_difference_m": 0.00019318001752626342,
+          "final_velocity_difference_m_s": 1.2105356882307174e-11,
+          "maximum_tracking_difference_m": 4.975415678079272e-05,
+          "offset_difference_m": 1.707304817692712e-05,
+          "passed": true,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        }
+      ],
+      "evidence_verified": true,
+      "failed_gates": [
+        "step_convergence",
+        "paired_negative"
+      ],
+      "faults": {
+        "friction_mutation": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 0,
+            "observed": 0,
+            "submitted": 0
+          },
+          "outcome": "stable",
+          "protocol_error": "CONTEXT_CHANGED",
+          "run_id": "physics-7-friction_mutation"
+        },
+        "geometry_mutation": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 0,
+            "observed": 0,
+            "submitted": 0
+          },
+          "outcome": "stable",
+          "protocol_error": "CONTEXT_CHANGED",
+          "run_id": "physics-7-geometry_mutation"
+        },
+        "replay": {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "outcome": "stable",
+          "protocol_error": null,
+          "run_id": "physics-7-replay"
+        },
+        "revoke": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 6,
+            "observed": 6,
+            "submitted": 6
+          },
+          "outcome": "stable",
+          "protocol_error": null,
+          "revoke": {
+            "accepted_tail_observed": 1,
+            "cancel_confirmed": true,
+            "drained": true,
+            "new_old_generation_submissions": 0,
+            "payload_motion_after_request_m": 0.017158530026798274,
+            "physics_elapsed_after_request_s": 0.5480000000000004
+          },
+          "run_id": "physics-7-revoke"
+        }
+      },
+      "friction": 0.1,
+      "index_manifest_sha256": "280fcd9b7e84dded824c8f0d0f687b882bfd10f0eac0f3b58d792ca41049e251",
+      "index_tip": "sha256:adcff6704506c8a40077e1c807402baf3de7cde62276774c22400d9a1c67739a",
+      "integrated": {
+        "command_execution_completed": true,
+        "cursors": {
+          "accepted": 40,
+          "observed": 40,
+          "submitted": 40
+        },
+        "duration": 0.6,
+        "maximum_payload_offset_m": 0.25026577602146816,
+        "outcome": "drop",
+        "physics_warnings": false,
+        "protocol_error": null,
+        "run_id": "physics-7-integrated"
+      },
+      "public_key_sha256": "e7c25828030e7cfaa6cedec482b38c01cc13bf717d3960da3649aa26fd05c067",
+      "seed": 7,
+      "source_manifest_sha256": "921b2d8a32209c06ae58deabd9491e0406cbd086835f2fa97949c337044ab7a7",
+      "static_checks": [
+        {
+          "drift_m": 1.1484301287723042e-08,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.002,
+          "velocity_m_s": 1.4736424829363718e-09
+        },
+        {
+          "drift_m": 7.123167056199975e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.001,
+          "velocity_m_s": 5.329761859514762e-10
+        },
+        {
+          "drift_m": 4.940772735384513e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.0005,
+          "velocity_m_s": 2.555583836737621e-10
+        },
+        {
+          "drift_m": 4.131803288398572e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.00025,
+          "velocity_m_s": 1.6949710759958567e-10
+        },
+        {
+          "drift_m": 3.5969068834518225e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.000125,
+          "velocity_m_s": 1.2897370173142503e-10
+        }
+      ],
+      "summary_sha256": "58a769d19de8f06dca5f34556bad8e96e7f785c85f840980ad4684a6d19fe581",
+      "trial_count": 25,
+      "wall_seconds_run_and_verify": 12.479137415997684
+    },
+    {
+      "acceptance": {
+        "all_expected_commands": true,
+        "continued_stop_dynamics": true,
+        "deterministic_root_replay": true,
+        "mutation_refusal": true,
+        "no_engine_warnings": true,
+        "paired_negative": true,
+        "static_stability": true,
+        "step_convergence": false,
+        "zero_old_generation_submissions": true
+      },
+      "branches": [
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.07711389333858744,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-2000us-6",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.011307230945391942,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-2000us-9",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.005455726859552972,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-2000us-12",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.002441903772019432,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-2000us-16",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.0761996959654416,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-1000us-6",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.01035612030178086,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-1000us-9",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.004786693089500015,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-1000us-12",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.005176936059982454,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-1000us-16",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.07408755515659353,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-500us-6",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.009599289509156991,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-500us-9",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.005496809940370065,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-500us-12",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.005497197992337361,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-500us-16",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.07451362371397587,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-250us-6",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.009721250946649352,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-250us-9",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.005604683274798915,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-250us-12",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.005399587850994714,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-250us-16",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.07386036815110679,
+          "outcome": "slip",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-125us-6",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.009438704162342744,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-125us-9",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.005403809884540179,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-125us-12",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.005173703239606349,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-11-125us-16",
+          "timestep": 0.000125
+        }
+      ],
+      "case": "nominal",
+      "convergence": [
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 0.6,
+          "final_orientation_difference_rad": 0.09509340572708423,
+          "final_position_difference_m": 0.0016440761275593287,
+          "final_velocity_difference_m_s": 1.2432624730089586e-12,
+          "maximum_tracking_difference_m": 0.00011391031933892081,
+          "offset_difference_m": 0.0006532555628690762,
+          "passed": false,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 0.9,
+          "final_orientation_difference_rad": 0.00909078854532247,
+          "final_position_difference_m": 0.0002922656523244414,
+          "final_velocity_difference_m_s": 8.567810643947357e-14,
+          "maximum_tracking_difference_m": 8.73053565825664e-05,
+          "offset_difference_m": 0.00028254678430660735,
+          "passed": true,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 1.2,
+          "final_orientation_difference_rad": 0.005139309895522575,
+          "final_position_difference_m": 0.00020026862063017068,
+          "final_velocity_difference_m_s": 2.734856188363972e-11,
+          "maximum_tracking_difference_m": 6.636232233963842e-05,
+          "offset_difference_m": 0.00020087339025873577,
+          "passed": true,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 1.6,
+          "final_orientation_difference_rad": 0.0015431942057824882,
+          "final_position_difference_m": 0.00022850894911379655,
+          "final_velocity_difference_m_s": 1.6914740191645849e-13,
+          "maximum_tracking_difference_m": 4.969293365544186e-05,
+          "offset_difference_m": 0.00022588461138836526,
+          "passed": true,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        }
+      ],
+      "evidence_verified": true,
+      "failed_gates": [
+        "step_convergence"
+      ],
+      "faults": {
+        "friction_mutation": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 0,
+            "observed": 0,
+            "submitted": 0
+          },
+          "outcome": "stable",
+          "protocol_error": "CONTEXT_CHANGED",
+          "run_id": "physics-11-friction_mutation"
+        },
+        "geometry_mutation": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 0,
+            "observed": 0,
+            "submitted": 0
+          },
+          "outcome": "stable",
+          "protocol_error": "CONTEXT_CHANGED",
+          "run_id": "physics-11-geometry_mutation"
+        },
+        "replay": {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "outcome": "stable",
+          "protocol_error": null,
+          "run_id": "physics-11-replay"
+        },
+        "revoke": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 6,
+            "observed": 6,
+            "submitted": 6
+          },
+          "outcome": "stable",
+          "protocol_error": null,
+          "revoke": {
+            "accepted_tail_observed": 1,
+            "cancel_confirmed": true,
+            "drained": true,
+            "new_old_generation_submissions": 0,
+            "payload_motion_after_request_m": 0.01000256241564407,
+            "physics_elapsed_after_request_s": 0.5480000000000004
+          },
+          "run_id": "physics-11-revoke"
+        }
+      },
+      "friction": 0.35,
+      "index_manifest_sha256": "1c3abc34cc8e9513812f2cd0718bf9eb073ce5ddddc0f42f2a3956c4db3b1274",
+      "index_tip": "sha256:4a83db354bdfb5cec11f796875a172d5cba4bdfad840c8701e4f070f1ad4cb83",
+      "integrated": {
+        "command_execution_completed": true,
+        "cursors": {
+          "accepted": 40,
+          "observed": 40,
+          "submitted": 40
+        },
+        "duration": 0.6,
+        "maximum_payload_offset_m": 0.07711389333858744,
+        "outcome": "slip",
+        "physics_warnings": false,
+        "protocol_error": null,
+        "run_id": "physics-11-integrated"
+      },
+      "public_key_sha256": "42c91bf9a4df0d74f31341ed03cff9e66bbb713c0735b7e88ca390be877ee0b5",
+      "seed": 11,
+      "source_manifest_sha256": "921b2d8a32209c06ae58deabd9491e0406cbd086835f2fa97949c337044ab7a7",
+      "static_checks": [
+        {
+          "drift_m": 1.1428853141648432e-08,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.002,
+          "velocity_m_s": 1.4635709548782226e-09
+        },
+        {
+          "drift_m": 7.075167840486785e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.001,
+          "velocity_m_s": 5.277065572300735e-10
+        },
+        {
+          "drift_m": 4.898905892058991e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.0005,
+          "velocity_m_s": 2.5228226666881366e-10
+        },
+        {
+          "drift_m": 4.090716099192093e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.00025,
+          "velocity_m_s": 1.6689618012113864e-10
+        },
+        {
+          "drift_m": 3.558012107163222e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.000125,
+          "velocity_m_s": 1.2679681899790798e-10
+        }
+      ],
+      "summary_sha256": "27086d3410ba00e60286a04b94865dc76b53577b77a58113e20cdac7fcf04661",
+      "trial_count": 25,
+      "wall_seconds_run_and_verify": 12.649197958002333
+    },
+    {
+      "acceptance": {
+        "all_expected_commands": true,
+        "continued_stop_dynamics": true,
+        "deterministic_root_replay": true,
+        "mutation_refusal": true,
+        "no_engine_warnings": true,
+        "paired_negative": false,
+        "static_stability": true,
+        "step_convergence": false,
+        "zero_old_generation_submissions": true
+      },
+      "branches": [
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.023177001263326398,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-2000us-6",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.008343663937477642,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-2000us-9",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.0041634580122770016,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-2000us-12",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.004155387571330192,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-2000us-16",
+          "timestep": 0.002
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.01581663098803396,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-1000us-6",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.008400749306419748,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-1000us-9",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.006863830176622087,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-1000us-12",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.007424026082806157,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-1000us-16",
+          "timestep": 0.001
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.01819474230177705,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-500us-6",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.008525885021045891,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-500us-9",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.008314105795618426,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-500us-12",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.008307678391997548,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-500us-16",
+          "timestep": 0.0005
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.01985269301991422,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-250us-6",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.009379913655961442,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-250us-9",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.008271719153958352,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-250us-12",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.008424351925857805,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-250us-16",
+          "timestep": 0.00025
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.6,
+          "maximum_payload_offset_m": 0.02035460159031908,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-125us-6",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 0.9,
+          "maximum_payload_offset_m": 0.00942965558848796,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-125us-9",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.2,
+          "maximum_payload_offset_m": 0.008491787081602385,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-125us-12",
+          "timestep": 0.000125
+        },
+        {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "duration": 1.6,
+          "maximum_payload_offset_m": 0.008305138831411906,
+          "outcome": "stable",
+          "physics_warnings": false,
+          "protocol_error": null,
+          "run_id": "physics-23-125us-16",
+          "timestep": 0.000125
+        }
+      ],
+      "case": "high-friction",
+      "convergence": [
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 0.6,
+          "final_orientation_difference_rad": 0.018952656937065538,
+          "final_position_difference_m": 0.000534887089561597,
+          "final_velocity_difference_m_s": 4.7292341265854984e-12,
+          "maximum_tracking_difference_m": 0.00011448909968843736,
+          "offset_difference_m": 0.0005019085704048576,
+          "passed": false,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 0.9,
+          "final_orientation_difference_rad": 0.004244451234720787,
+          "final_position_difference_m": 6.731424135007016e-05,
+          "final_velocity_difference_m_s": 4.6864530222427936e-12,
+          "maximum_tracking_difference_m": 8.740150589176422e-05,
+          "offset_difference_m": 4.9741932526518526e-05,
+          "passed": true,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 1.2,
+          "final_orientation_difference_rad": 0.0021952048723689827,
+          "final_position_difference_m": 0.0002256546655004787,
+          "final_velocity_difference_m_s": 2.2014812825598435e-11,
+          "maximum_tracking_difference_m": 6.616122787672695e-05,
+          "offset_difference_m": 0.00022006792764403364,
+          "passed": true,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        },
+        {
+          "compared_timesteps": [
+            0.00025,
+            0.000125
+          ],
+          "duration": 1.6,
+          "final_orientation_difference_rad": 0.00032582240280333954,
+          "final_position_difference_m": 0.00011210630067600997,
+          "final_velocity_difference_m_s": 4.44183351829552e-12,
+          "maximum_tracking_difference_m": 4.9167343757590236e-05,
+          "offset_difference_m": 0.00011921309444589898,
+          "passed": true,
+          "same_contact_outcome": true,
+          "same_outcome": true
+        }
+      ],
+      "evidence_verified": true,
+      "failed_gates": [
+        "step_convergence",
+        "paired_negative"
+      ],
+      "faults": {
+        "friction_mutation": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 0,
+            "observed": 0,
+            "submitted": 0
+          },
+          "outcome": "stable",
+          "protocol_error": "CONTEXT_CHANGED",
+          "run_id": "physics-23-friction_mutation"
+        },
+        "geometry_mutation": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 0,
+            "observed": 0,
+            "submitted": 0
+          },
+          "outcome": "stable",
+          "protocol_error": "CONTEXT_CHANGED",
+          "run_id": "physics-23-geometry_mutation"
+        },
+        "replay": {
+          "command_execution_completed": true,
+          "cursors": {
+            "accepted": 40,
+            "observed": 40,
+            "submitted": 40
+          },
+          "outcome": "stable",
+          "protocol_error": null,
+          "run_id": "physics-23-replay"
+        },
+        "revoke": {
+          "command_execution_completed": false,
+          "cursors": {
+            "accepted": 6,
+            "observed": 6,
+            "submitted": 6
+          },
+          "outcome": "stable",
+          "protocol_error": null,
+          "revoke": {
+            "accepted_tail_observed": 1,
+            "cancel_confirmed": true,
+            "drained": true,
+            "new_old_generation_submissions": 0,
+            "payload_motion_after_request_m": 0.008812965217907417,
+            "physics_elapsed_after_request_s": 0.5480000000000004
+          },
+          "run_id": "physics-23-revoke"
+        }
+      },
+      "friction": 0.7,
+      "index_manifest_sha256": "0e86eccbba206e6c9db727be29c6e57337417d7fefe7d6bcecf11ca33b1baf8f",
+      "index_tip": "sha256:618008de809cfafa7ec889ac178897ca70f5640dd69a27734c65f7570bc4ef0c",
+      "integrated": {
+        "command_execution_completed": true,
+        "cursors": {
+          "accepted": 40,
+          "observed": 40,
+          "submitted": 40
+        },
+        "duration": 0.6,
+        "maximum_payload_offset_m": 0.023177001263326398,
+        "outcome": "stable",
+        "physics_warnings": false,
+        "protocol_error": null,
+        "run_id": "physics-23-integrated"
+      },
+      "public_key_sha256": "23cc4fdc89964c998d8a6ee9f063e5ada91dce2235a4c4269534d741a8c1cc6d",
+      "seed": 23,
+      "source_manifest_sha256": "921b2d8a32209c06ae58deabd9491e0406cbd086835f2fa97949c337044ab7a7",
+      "static_checks": [
+        {
+          "drift_m": 1.116711167981066e-08,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.002,
+          "velocity_m_s": 1.4162027674885151e-09
+        },
+        {
+          "drift_m": 6.849956546428615e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.001,
+          "velocity_m_s": 5.031588245013195e-10
+        },
+        {
+          "drift_m": 4.7032418515335905e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.0005,
+          "velocity_m_s": 2.3713016962003533e-10
+        },
+        {
+          "drift_m": 3.899325140555021e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.00025,
+          "velocity_m_s": 1.54961654348273e-10
+        },
+        {
+          "drift_m": 3.3770815588418657e-09,
+          "passed": true,
+          "supported": true,
+          "timestep": 0.000125,
+          "velocity_m_s": 1.1681354953663302e-10
+        }
+      ],
+      "summary_sha256": "1cdc085f235ccf9f67fa1788eef7606b194ce5c41bf67680ac475631ab7ecb2a",
+      "trial_count": 25,
+      "wall_seconds_run_and_verify": 12.692742958999588
+    }
+  ],
+  "physics_source_manifest_sha256": "921b2d8a32209c06ae58deabd9491e0406cbd086835f2fa97949c337044ab7a7",
+  "public_source_manifest_sha256": "d3a429dcf26bc321617eb19cffc2872b5e46b480994dc1f4ed6a1b38263a36e7",
+  "schema": "sentinel-extended-physics-reliability-v1",
+  "scope": "three friction/seed variants of same XYZ open tray fixture; headless; no VLA or real robot",
+  "source_commit": "8c7c840f2f4b2d93f5434943b4cdb77e4762e347"
+}

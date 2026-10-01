@@ -4,6 +4,14 @@ Validation history and the current CLI/desktop increment, exercised on macOS wit
 
 ## Main merge and performance validation (2026-10-01)
 
+The latest [alignment and reliability review](reliability_results.md), frozen at
+`8c7c840`, passes 220 tests and the same 220-case fallback suite, matches 9/9
+additional numeric scenarios and verifies 75 real MuJoCo trials across three
+friction/seed combinations. Scientific gates remain 7/9, 8/9 and 7/9, with drop,
+slip and stable integrated outcomes. The [F01–F12 design trace](design_alignment.md)
+distinguishes this scoped foundation from incomplete full v4 integrations.
+The counts and timings below are historical increments, not current totals.
+
 PR #3 is merged. With benchmark and source-portability regressions, the full suite passes **171 tests**.
 The measured clean main commit `7a16586` passed CI. [Actual performance results](performance_results.md)
 include 20 paired geometry repetitions, 10 complete realtime numeric runs and three
