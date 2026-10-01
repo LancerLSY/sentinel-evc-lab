@@ -18,7 +18,7 @@ SSH 实验入口、受限三维模型检查和只读机械臂诊断。产品核�
 > 产品运行时：Python 3.10+ · macOS App：由 Python 环境管理并在本机构建 · 服务仅监听 `127.0.0.1`
 
 [安装](#五分钟安装) · [机制](#执行许可如何产生) ·
-[实测结果](#实测结果) · [实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) ·
+[实测结果](#实测结果) · [完整实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulation-research-20261002) ·
 [研究展示导航](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
 ## 当前可用入口

@@ -1,0 +1,73 @@
+{
+  "schema": "sentinel-research-archive-verification-v1",
+  "source_commit": "17607e766c1e8c7500dab4acf181554a855058d3",
+  "generated_bundles": {
+    "names": [
+      "simulation-data-results.tar.gz",
+      "ur5e-demonstration.tar.gz",
+      "sentinel-smolvla-hub-ready.tar.gz"
+    ],
+    "checks": [
+      "member count agrees with per-file index",
+      "each indexed member is regular and matches size and SHA-256",
+      "all paths are relative with no parent traversal",
+      "no duplicate member paths"
+    ],
+    "result": "passed"
+  },
+  "pinned_dataset_archive": {
+    "name": "svla-so100-pickplace-data.tar.gz",
+    "result": "passed",
+    "checks": [
+      "retained upstream identity and licenses",
+      "per-file size and SHA-256",
+      "safe regular paths"
+    ]
+  },
+  "official_ur5e_origins": "ur5e/upstream_verification.json",
+  "source_archive": {
+    "name": "sentinel-source.zip",
+    "method": "git archive of the source_commit"
+  },
+  "assets": [
+    {
+      "name": "simulation-data-results.tar.gz",
+      "bytes": 238636850,
+      "sha256": "702b58cc8be4378cf9233c6d9dd3eafef9e641e9327e5e9951e56533f7a819cb",
+      "archive_members": 263
+    },
+    {
+      "name": "ur5e-demonstration.tar.gz",
+      "bytes": 24635085,
+      "sha256": "4b9e35e208323eae5e342dff3e57d305c3b7ca748265055a044c8cb99baff679",
+      "archive_members": 64
+    },
+    {
+      "name": "sentinel-smolvla-hub-ready.tar.gz",
+      "bytes": 166845109,
+      "sha256": "556292ebe7b0e705bf309c79aefac2aa54e72242ed71799346f3c4a114f5af1c",
+      "archive_members": 22
+    },
+    {
+      "name": "svla-so100-pickplace-data.tar.gz",
+      "bytes": 469905716,
+      "sha256": "766ae817123ce659b542a5e67d32045c8f22e9536c83504d3afba57174d4891a",
+      "archive_members": 14
+    },
+    {
+      "name": "ur5e-validation-montage.mp4",
+      "bytes": 1394607,
+      "sha256": "05498141908a113a8df9a5f67b620263da42b5dc2d418eb01ccb68a4cbc735e3"
+    },
+    {
+      "name": "sentinel-source.zip",
+      "bytes": 2991845,
+      "sha256": "c23aacce535ab5753198d851d50b683753c602d5deb84caf8c997afa6f60327d"
+    },
+    {
+      "name": "artifact_index.json",
+      "bytes": 2456,
+      "sha256": "e1518da64be8d2131fa4202cd719dae4dca49d7ebd7695b9efde995e3a61862c"
+    }
+  ]
+}

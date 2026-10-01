@@ -1,0 +1,58 @@
+{
+  "schema": "sentinel-github-release-receipt-v1",
+  "tag": "simulation-research-20261002",
+  "target_commit": "17607e766c1e8c7500dab4acf181554a855058d3",
+  "release_id": 401347411,
+  "release_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulation-research-20261002",
+  "assets": [
+    {
+      "name": "simulation-data-results.tar.gz",
+      "bytes": 238636850,
+      "sha256": "702b58cc8be4378cf9233c6d9dd3eafef9e641e9327e5e9951e56533f7a819cb",
+      "asset_id": 604117377,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/simulation-data-results.tar.gz"
+    },
+    {
+      "name": "ur5e-demonstration.tar.gz",
+      "bytes": 24635085,
+      "sha256": "4b9e35e208323eae5e342dff3e57d305c3b7ca748265055a044c8cb99baff679",
+      "asset_id": 604118009,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/ur5e-demonstration.tar.gz"
+    },
+    {
+      "name": "sentinel-smolvla-hub-ready.tar.gz",
+      "bytes": 166845109,
+      "sha256": "556292ebe7b0e705bf309c79aefac2aa54e72242ed71799346f3c4a114f5af1c",
+      "asset_id": 604118163,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/sentinel-smolvla-hub-ready.tar.gz"
+    },
+    {
+      "name": "svla-so100-pickplace-data.tar.gz",
+      "bytes": 469905716,
+      "sha256": "766ae817123ce659b542a5e67d32045c8f22e9536c83504d3afba57174d4891a",
+      "asset_id": 604118531,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/svla-so100-pickplace-data.tar.gz"
+    },
+    {
+      "name": "ur5e-validation-montage.mp4",
+      "bytes": 1394607,
+      "sha256": "05498141908a113a8df9a5f67b620263da42b5dc2d418eb01ccb68a4cbc735e3",
+      "asset_id": 604119508,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/ur5e-validation-montage.mp4"
+    },
+    {
+      "name": "sentinel-source.zip",
+      "bytes": 2991845,
+      "sha256": "c23aacce535ab5753198d851d50b683753c602d5deb84caf8c997afa6f60327d",
+      "asset_id": 604119542,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/sentinel-source.zip"
+    },
+    {
+      "name": "artifact_index.json",
+      "bytes": 2456,
+      "sha256": "e1518da64be8d2131fa4202cd719dae4dca49d7ebd7695b9efde995e3a61862c",
+      "asset_id": 604119592,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/artifact_index.json"
+    }
+  ]
+}

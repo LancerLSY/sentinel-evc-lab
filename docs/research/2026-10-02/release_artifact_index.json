@@ -1,0 +1,54 @@
+{
+  "schema": "sentinel-research-release-index-v1",
+  "source_commit": "17607e766c1e8c7500dab4acf181554a855058d3",
+  "release_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulation-research-20261002",
+  "hardware_measured": "NVIDIA GeForce RTX 4090 D",
+  "hardware_target_unmeasured": "RTX 5090",
+  "experiment_counts": {
+    "worldguard_new_roots": 600,
+    "low_friction_new_roots": 100,
+    "ur5e_roots": 180
+  },
+  "assets": [
+    {
+      "name": "simulation-data-results.tar.gz",
+      "bytes": 238636850,
+      "sha256": "702b58cc8be4378cf9233c6d9dd3eafef9e641e9327e5e9951e56533f7a819cb",
+      "archive_members": 263,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/simulation-data-results.tar.gz"
+    },
+    {
+      "name": "ur5e-demonstration.tar.gz",
+      "bytes": 24635085,
+      "sha256": "4b9e35e208323eae5e342dff3e57d305c3b7ca748265055a044c8cb99baff679",
+      "archive_members": 64,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/ur5e-demonstration.tar.gz"
+    },
+    {
+      "name": "sentinel-smolvla-hub-ready.tar.gz",
+      "bytes": 166845109,
+      "sha256": "556292ebe7b0e705bf309c79aefac2aa54e72242ed71799346f3c4a114f5af1c",
+      "archive_members": 22,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/sentinel-smolvla-hub-ready.tar.gz"
+    },
+    {
+      "name": "svla-so100-pickplace-data.tar.gz",
+      "bytes": 469905716,
+      "sha256": "766ae817123ce659b542a5e67d32045c8f22e9536c83504d3afba57174d4891a",
+      "archive_members": 14,
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/svla-so100-pickplace-data.tar.gz"
+    },
+    {
+      "name": "ur5e-validation-montage.mp4",
+      "bytes": 1394607,
+      "sha256": "05498141908a113a8df9a5f67b620263da42b5dc2d418eb01ccb68a4cbc735e3",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/ur5e-validation-montage.mp4"
+    },
+    {
+      "name": "sentinel-source.zip",
+      "bytes": 2991845,
+      "sha256": "c23aacce535ab5753198d851d50b683753c602d5deb84caf8c997afa6f60327d",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/sentinel-source.zip"
+    }
+  ]
+}

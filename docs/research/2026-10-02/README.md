@@ -28,3 +28,19 @@ hashes accompany the corresponding archives. The private design document and
 authentication credentials are excluded.
 
 The [repaired arm run](ur5e/v3/manifest.json), [separate higher-resolution replay](ur5e/v3/review/verification_manifest.json), [reviewed metrics](ur5e/v3/review/reviewed_metrics.json) and [independent review](ur5e/v3/independent_review.json) preserve all 180 constructed cases. Binding fixes and higher-resolution replay do not create a new statistical holdout.
+
+## Published artifacts
+
+All seven release assets were uploaded and their server SHA-256 digests and sizes
+matched the local artifacts. Anonymous requests followed the public download
+redirects and returned HTTP 200 with the expected content lengths. These records
+cover publication and access; the scientific limitations above still apply.
+
+- [Asset names, sizes and SHA-256](release_artifact_index.json)
+- [GitHub release and asset identifiers](github_release_receipt.json)
+- [Archive contents and per-file verification](release_archive_verification.json)
+- [Anonymous download checks](public_download_verification.json)
+
+The source ZIP records commit `17607e766c1e8c7500dab4acf181554a855058d3`.
+Later changes on `main` add publication receipts and navigation corrections;
+they do not change the archived experiments or their results.
