@@ -6,6 +6,8 @@
   <img src="docs/media/sentinel-hero.svg" alt="Sentinel EVC final-action verification workbench" width="100%">
 </p>
 
+**[Project homepage](https://sentinel-evc-lab.lanceryou.chatgpt.site)** · [GitHub](https://github.com/LancerLSY/sentinel-evc-lab) · [Hugging Face](https://huggingface.co/LancerLSY)
+
 Sentinel EVC places an authorization gate at the last commit point of a robot
 policy's action block. It checks the action that will **actually** execute, issues
 a time-boxed single-use permit, and records evidence that a third party can verify.
@@ -20,7 +22,7 @@ and evidence boundaries.
 > Product runtime: Python 3.10+ · macOS App: Python-managed, locally built · server: `127.0.0.1` only
 
 [Install](#five-minute-setup) · [See the mechanism](#how-the-gate-works) ·
-[Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) ·
+[Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulation-research-20261002) ·
 [Research showcase](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
 ## What is usable today

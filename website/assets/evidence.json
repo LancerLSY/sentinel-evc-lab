@@ -1,0 +1,225 @@
+{
+  "schema": "sentinel-project-homepage-evidence-v1",
+  "source_commit": "a6656f852e763a676292310db16fe2c3c7eae374",
+  "hardware_measured": "RTX 4090 D 24 GB",
+  "ur5e": {
+    "roots": 180,
+    "unsafe": 139,
+    "safe": 41,
+    "reuse": 106,
+    "fallback": 74,
+    "methods": {
+      "conservative": {
+        "allow_count": 30,
+        "allow_denominator_all": 180,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_reject_count": 11,
+        "false_reject_denominator_safe": 41,
+        "mean_ms": 0.0
+      },
+      "full": {
+        "allow_count": 41,
+        "allow_denominator_all": 180,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41,
+        "mean_ms": 48.73728474291662
+      },
+      "incremental": {
+        "allow_count": 41,
+        "allow_denominator_all": 180,
+        "false_allow_count": 0,
+        "false_allow_denominator_unsafe": 139,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41,
+        "mean_ms": 147.64829684152372
+      },
+      "parent_only": {
+        "allow_count": 166,
+        "allow_denominator_all": 180,
+        "false_allow_count": 125,
+        "false_allow_denominator_unsafe": 139,
+        "false_reject_count": 0,
+        "false_reject_denominator_safe": 41,
+        "mean_ms": 101.14738748201893
+      }
+    }
+  },
+  "worldguard": {
+    "camera_shift": {
+      "roots": 100,
+      "scope": "new-root nominal physics with frozen shifted camera layout; state input unchanged and visual profile shifted",
+      "unsafe": {
+        "fastest": 62,
+        "fixed": 0,
+        "state": 0,
+        "visual": 7
+      },
+      "visual_xy_coverage": 0.59
+    },
+    "displacement_shift": {
+      "roots": 100,
+      "scope": "cross-action-contract 1.35x displacement stress; bare-model diagnostic only; product contract policy is MODEL_UNKNOWN reject",
+      "unsafe": {
+        "fastest": 89,
+        "fixed": 1,
+        "state": 0,
+        "visual": 0
+      },
+      "visual_xy_coverage": 0.44,
+      "product_contract": {
+        "action_family_supported": false,
+        "duration_counts": {
+          "0.6": 0,
+          "0.9": 0,
+          "1.2": 0,
+          "1.6": 0
+        },
+        "posthold_unsafe_rate_all_roots": {
+          "bootstrap_95_ci": [
+            0.0,
+            0.0
+          ],
+          "value": 0.0
+        },
+        "posthold_unsafe_selected": 0,
+        "reason": "MODEL_UNKNOWN",
+        "reject_rate": {
+          "bootstrap_95_ci": [
+            1.0,
+            1.0
+          ],
+          "value": 1.0
+        },
+        "rejected": 100,
+        "roots": 100,
+        "safe_rate_all_roots": {
+          "bootstrap_95_ci": [
+            0.0,
+            0.0
+          ],
+          "value": 0.0
+        },
+        "safe_selected": 0,
+        "selected": 0,
+        "unsafe_given_selected": {
+          "bootstrap_95_ci": null,
+          "value": null
+        },
+        "unsafe_rate_all_roots": {
+          "bootstrap_95_ci": [
+            0.0,
+            0.0
+          ],
+          "value": 0.0
+        },
+        "unsafe_selected": 0
+      }
+    },
+    "low_friction": {
+      "roots": 100,
+      "scope": "hidden low-friction physics shift below the training range; original action and camera profiles",
+      "unsafe": {
+        "fastest": 100,
+        "fixed": 100,
+        "state": 100,
+        "visual": 100
+      },
+      "visual_xy_coverage": 0.0
+    },
+    "mass_high": {
+      "roots": 100,
+      "scope": "hidden high-payload-mass physics shift above the training range; original action and camera profiles",
+      "unsafe": {
+        "fastest": 75,
+        "fixed": 0,
+        "state": 0,
+        "visual": 0
+      },
+      "visual_xy_coverage": 0.94
+    },
+    "mass_low": {
+      "roots": 100,
+      "scope": "hidden low-payload-mass physics shift below the training range; original action and camera profiles",
+      "unsafe": {
+        "fastest": 76,
+        "fixed": 0,
+        "state": 0,
+        "visual": 0
+      },
+      "visual_xy_coverage": 0.92
+    },
+    "nominal": {
+      "roots": 100,
+      "scope": "new-root in-distribution nominal physics and original camera profile",
+      "unsafe": {
+        "fastest": 59,
+        "fixed": 0,
+        "state": 0,
+        "visual": 0
+      },
+      "visual_xy_coverage": 0.93
+    }
+  },
+  "smolvla": {
+    "episodes": 5,
+    "normalized_mae": {
+      "base": 0.6731661706839671,
+      "fine": 0.24598394901484866
+    },
+    "native_mae": {
+      "base": 13.321098372631203,
+      "fine": 4.4728497243297705
+    },
+    "window_count": 1926
+  },
+  "fallback": {
+    "roots": 100,
+    "duration_seconds": {
+      "fixed": 1.5999999999999996,
+      "long": 4.8
+    },
+    "unsafe": {
+      "fixed": 100,
+      "long": 0
+    },
+    "task_completed": {
+      "fixed": 0,
+      "long": 100
+    }
+  },
+  "sources": {
+    "ur5e_review": {
+      "path": "docs/research/2026-10-02/ur5e/v3/review/reviewed_metrics.json",
+      "sha256": "985ac6cdf8fca276dffda160d83e85927f97f3d54b86ac341a0dd7e3b72efebe",
+      "url": "https://github.com/LancerLSY/sentinel-evc-lab/blob/a6656f852e763a676292310db16fe2c3c7eae374/docs/research/2026-10-02/ur5e/v3/review/reviewed_metrics.json"
+    },
+    "ur5e_gate": {
+      "path": "docs/research/2026-10-02/ur5e/v3/manifest.json",
+      "sha256": "21328bd8d514affcba474fb7cbba7502a0b8ef18ce5ebd12bff151e76bf377c2",
+      "url": "https://github.com/LancerLSY/sentinel-evc-lab/blob/a6656f852e763a676292310db16fe2c3c7eae374/docs/research/2026-10-02/ur5e/v3/manifest.json"
+    },
+    "worldguard": {
+      "path": "docs/research/2026-10-02/worldguard-scenarios/metrics.json",
+      "sha256": "8ac3419defb88526c148fa2149aec2b261351996299d8594934f6227bbaeac93",
+      "url": "https://github.com/LancerLSY/sentinel-evc-lab/blob/a6656f852e763a676292310db16fe2c3c7eae374/docs/research/2026-10-02/worldguard-scenarios/metrics.json"
+    },
+    "smolvla": {
+      "path": "docs/gpu/2026-10-02/smolvla_result.json",
+      "sha256": "96be9493270d6b5295aecbdcaf31a6a15acc0936205275d2d922b2d9b6f02c84",
+      "url": "https://github.com/LancerLSY/sentinel-evc-lab/blob/a6656f852e763a676292310db16fe2c3c7eae374/docs/gpu/2026-10-02/smolvla_result.json"
+    },
+    "fallback": {
+      "path": "docs/research/2026-10-02/low-friction-fallback/metrics.json",
+      "sha256": "72a4486f0025d7aa6f4a053a48655c7a9097f65bba006cf0f963854e0a86ca36",
+      "url": "https://github.com/LancerLSY/sentinel-evc-lab/blob/a6656f852e763a676292310db16fe2c3c7eae374/docs/research/2026-10-02/low-friction-fallback/metrics.json"
+    },
+    "smolvla_model_card": {
+      "path": "docs/huggingface/smolvla_model_card.md",
+      "sha256": "e3f04c59f276e940fac32d6feb9c5ff5ce3e89b27c9b0cd5f09ab10784c0bdda",
+      "url": "https://github.com/LancerLSY/sentinel-evc-lab/blob/a6656f852e763a676292310db16fe2c3c7eae374/docs/huggingface/smolvla_model_card.md"
+    }
+  }
+}

@@ -6,6 +6,8 @@
   <img src="docs/media/sentinel-hero.svg" alt="Sentinel EVC 最终动作校验工作台" width="100%">
 </p>
 
+**[项目主页](https://sentinel-evc-lab.lanceryou.chatgpt.site)** · [GitHub](https://github.com/LancerLSY/sentinel-evc-lab) · [Hugging Face](https://huggingface.co/LancerLSY)
+
 Sentinel EVC 把授权门放在机器人策略动作块的最后提交点：校验**真正要执行**
 的最终动作，签发有时限、一次性的执行许可，并留下可由第三方独立校验的证据。
 
