@@ -119,10 +119,27 @@ def test_public_source_archive_has_a_fixed_nonsecret_surface():
     assert "README.md" in names
     assert "LICENSE" in names
     assert "src/sentinel_evc/ssh_experiment.py" in names
+    assert "src/sentinel_evc/native/SentinelApp.swift" in names
     assert "tests/test_ssh_experiment.py" in names
+    assert "tools/benchmark_performance.py" in names
     assert not any(".git" in Path(name).parts for name in names)
     assert not any(name.endswith((".token", ".pem", ".key")) for name in names)
     assert "AGENTS.local.md" not in names
+
+
+@pytest.mark.parametrize('link_target', ['README.md', 'missing-file'])
+def test_public_source_archive_refuses_symlinked_benchmark(tmp_path, link_target):
+    (tmp_path / "src/sentinel_evc").mkdir(parents=True)
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "tools").mkdir()
+    (tmp_path / "src/sentinel_evc/module.py").write_text("", encoding="utf-8")
+    (tmp_path / "tests/test_module.py").write_text("", encoding="utf-8")
+    for name in ("pyproject.toml", "README.md", "LICENSE"):
+        (tmp_path / name).write_text(name, encoding="utf-8")
+    (tmp_path / "tools/benchmark_performance.py").symlink_to(tmp_path / link_target)
+
+    with pytest.raises(remote.RemoteExperimentError, match="unsafe"):
+        remote._source_files(tmp_path)
 
 
 def test_remote_bootstrap_runs_package_verification_with_the_dependency_venv():

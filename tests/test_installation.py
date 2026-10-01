@@ -14,8 +14,16 @@ def _source(root: Path) -> Path:
     source = root / "checkout"
     (source / "src/sentinel_evc").mkdir(parents=True)
     (source / "tests").mkdir()
+    (source / "tools").mkdir()
     (source / "src/sentinel_evc/__init__.py").write_text("", encoding="utf-8")
+    (source / "src/sentinel_evc/native").mkdir()
+    (source / "src/sentinel_evc/native/SentinelApp.swift").write_text(
+        "@main struct App { static func main() {} }\n", encoding="utf-8"
+    )
     (source / "tests/test_sample.py").write_text("def test_ok(): pass\n", encoding="utf-8")
+    (source / "tools/benchmark_performance.py").write_text(
+        "print('benchmark')\n", encoding="utf-8"
+    )
     (source / "src/sentinel_evc/__pycache__").mkdir()
     (source / "src/sentinel_evc/__pycache__/bad.pyc").write_bytes(b"private cache")
     for name, content in {
@@ -59,6 +67,8 @@ def test_install_system_publishes_complete_core_install(tmp_path):
     assert "source/src" in result.command.read_text(encoding="utf-8")
     assert "PYTHONDONTWRITEBYTECODE=1" in result.command.read_text(encoding="utf-8")
     assert (target / "source/tests/test_sample.py").is_file()
+    assert (target / "source/tools/benchmark_performance.py").is_file()
+    assert (target / "source/src/sentinel_evc/native/SentinelApp.swift").is_file()
     assert not (target / "source/src/sentinel_evc/__pycache__").exists()
     manifest = json.loads((target / "installation.json").read_text())
     assert manifest["desktop_app"] is False
@@ -67,6 +77,17 @@ def test_install_system_publishes_complete_core_install(tmp_path):
     assert manifest["source_frozen_at"].endswith("+00:00")
     assert runner.commands[1][-1].endswith("/build-source")
     assert not (target / "build-source").exists()
+
+
+@pytest.mark.parametrize('link_target', ['README.md', 'missing-file'])
+def test_public_source_refuses_symlinked_benchmark(tmp_path, link_target):
+    source = _source(tmp_path)
+    benchmark = source / "tools/benchmark_performance.py"
+    benchmark.unlink()
+    benchmark.symlink_to(source / link_target)
+
+    with pytest.raises(ValueError, match="regular file"):
+        installation._copy_public_source(source, tmp_path / "public")
 
 
 def test_source_digest_ignores_runtime_bytecode_cache(tmp_path):

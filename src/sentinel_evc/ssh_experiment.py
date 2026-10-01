@@ -147,7 +147,7 @@ def _host_pin(host: str) -> dict:
 
 def _source_files(root: Path):
     allowed = []
-    for base, suffixes in ((root / "src", {".py", ".html", ".css", ".js", ".md"}),
+    for base, suffixes in ((root / "src", {".py", ".html", ".css", ".js", ".md", ".swift"}),
                            (root / "tests", {".py"})):
         if not base.is_dir() or base.is_symlink():
             raise RemoteExperimentError(f"missing public source directory: {base.name}")
@@ -162,6 +162,11 @@ def _source_files(root: Path):
         if not path.is_file() or path.is_symlink():
             raise RemoteExperimentError(f"missing public source file: {name}")
         allowed.append(path)
+    benchmark = root / "tools" / "benchmark_performance.py"
+    if benchmark.exists() or benchmark.is_symlink() or benchmark.parent.is_symlink():
+        if benchmark.is_symlink() or benchmark.parent.is_symlink() or not benchmark.is_file():
+            raise RemoteExperimentError("public performance benchmark is unsafe")
+        allowed.append(benchmark)
     return tuple(sorted(set(allowed)))
 
 

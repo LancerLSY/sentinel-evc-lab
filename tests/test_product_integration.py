@@ -8,7 +8,7 @@ from urllib.error import HTTPError
 import pytest
 from sentinel_evc.scenario import Scenario
 from sentinel_evc.runstore import RunStore
-from sentinel_evc.product_pipeline import ProductManager
+from sentinel_evc.product_pipeline import ProductManager, ProductSession
 from sentinel_evc.server import LocalServer
 from sentinel_evc.evidence import verify_bundle
 
@@ -48,7 +48,15 @@ def test_product_actual_observed_persisted_signed_and_replayed(tmp_path):
     assert store.read(run['id'])['result']==result
     store.close()
 
-def test_product_stop_drain_approval_resume(tmp_path):
+def test_product_stop_drain_approval_resume(tmp_path, monkeypatch):
+    # This tests cancellation/recovery ordering, not host scheduling guarantees.
+    # Keep actual pacing so the operator can interrupt, while using the same
+    # deterministic lease clock as fast-mode tests on a busy shared CI runner.
+    def logical_now(session):
+        session.clock += 50_000_000
+        return session.clock
+
+    monkeypatch.setattr(ProductSession, 'now', logical_now)
     store=RunStore(tmp_path);manager=ProductManager(store)
     try:
         run=manager.start(Scenario())

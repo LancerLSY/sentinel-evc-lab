@@ -4,13 +4,25 @@ Validation history and the current CLI/desktop increment, exercised on macOS wit
 
 ## Main merge and performance validation (2026-10-01)
 
-PR #3 is merged. With the new reproducible benchmark, the full suite passes **167 tests**.
+PR #3 is merged. With benchmark and source-portability regressions, the full suite passes **171 tests**.
 The measured clean main commit `7a16586` passed CI. [Actual performance results](performance_results.md)
 include 20 paired geometry repetitions, 10 complete realtime numeric runs and three
 25-trial MuJoCo experiments, plus retained warmups. All completed evidence verified;
 the physics profile retained its scientific failure. Delta was slower in the simple
 geometry workload. Timing stage scope is explicit, and the raw sample digest was
 independently checked before publication.
+
+A subsequent report-only CI push exposed a wall-clock scheduling flake in the
+stop/drain/approval/resume test: a loaded shared Linux runner correctly hit
+`LEASE_EXPIRED`. That lifecycle test now retains operator pacing but uses a
+deterministic logical clock. Production deadlines and the expiry regressions are
+unchanged; the recorded performance runs still use actual monotonic wall time.
+
+Managed installation and SSH archives also retain the specifically allowlisted public
+benchmark tool; SSH archives retain native Swift resources needed by the test suite.
+Existing and dangling tool symlinks are refused. The actual exported public archive
+was extracted and its full suite run successfully, with the source manifest matching
+the submitted checkout. This is a local transport-package rehearsal, not a live SSH run.
 
 ## CLI, desktop, model and visual workbench validation (2026-10-01)
 
@@ -30,7 +42,7 @@ Final v0.3 checks: **163 passed** with actual MuJoCo available, and the fallback
 
 The interactive installer was exercised in a real terminal through `./tools/install.sh`: select the core profile, choose a new destination, decline App creation, complete all five real installation stages, and display the SSH command without connecting. The generated managed CLI starts successfully. Automated checks also cover the full profile, App choice, existing-directory refusal, invalid input, cancellation/EOF, dependency failure cleanup with retained logs, post-install launch failure, and noninteractive automation compatibility. PowerShell wiring is provided but has not been exercised on a Windows host in this local validation.
 
-The final managed `all` installation includes independent MuJoCo 3.14.0 and an arm64 App with macOS 12.0 deployment target. Its published source snapshot exactly matches the current `src/`, `tests/`, `pyproject.toml`, `README.md` and `LICENSE`; source SHA-256 is `d492ce3179ac731c5ac3fd17d8942309fd3d6a5628b78f70dafdbd77ed8203db`, frozen at `2026-10-01T07:49:46.712826+00:00`. Deep strict ad-hoc signature and plist validation passed. Installation guards refuse destinations inside copied source trees before doing any work, and post-publication progress failures cannot misreport a completed installation.
+The managed `all` installation frozen before the performance/portability followups includes independent MuJoCo 3.14.0 and an arm64 App with macOS 12.0 deployment target. Its published source snapshot exactly matched `src/`, `tests/`, `pyproject.toml`, `README.md` and `LICENSE` at that freeze; source SHA-256 is `d492ce3179ac731c5ac3fd17d8942309fd3d6a5628b78f70dafdbd77ed8203db`, frozen at `2026-10-01T07:49:46.712826+00:00`. Deep strict ad-hoc signature and plist validation passed. Installation guards refuse destinations inside copied source trees before doing any work, and post-publication progress failures cannot misreport a completed installation.
 
 ## Historical automated checks
 

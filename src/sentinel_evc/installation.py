@@ -233,6 +233,13 @@ def _reject_recursive_target(destination: Path, source: Path) -> None:
 
 def _copy_public_source(source: str | os.PathLike[str] | None, destination: Path) -> Path:
     origin = _resolve_source_checkout(source)
+    benchmark = origin / "tools" / "benchmark_performance.py"
+    if (benchmark.exists() or benchmark.is_symlink() or benchmark.parent.is_symlink()) and (
+        benchmark.is_symlink()
+        or benchmark.parent.is_symlink()
+        or not benchmark.is_file()
+    ):
+        raise ValueError("public performance benchmark must be a regular file")
     destination.mkdir()
     required = ("src", "tests", "pyproject.toml", "README.md", "LICENSE")
     for name in required:
@@ -247,6 +254,13 @@ def _copy_public_source(source: str | os.PathLike[str] | None, destination: Path
             )
         else:
             shutil.copy2(item, target)
+    # Older source checkouts predate the public benchmark, so absence remains
+    # compatible.  When present, copy only this audited tool rather than the
+    # whole tools directory, which may contain local operator material.
+    if benchmark.is_file():
+        target = destination / "tools" / benchmark.name
+        target.parent.mkdir()
+        shutil.copy2(benchmark, target)
     return destination
 
 
