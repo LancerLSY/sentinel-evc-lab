@@ -1,0 +1,163 @@
+{
+  "schema": "sentinel-gpu-results-review-v1",
+  "date": "2026-10-02",
+  "scope": "read-only derivation from completed W2 MuJoCo v2 and W0 strict v4 JSON/NPZ artifacts",
+  "provenance": {
+    "source_commit": "cb79c3ae42120f7f9375ddb0ef63b40dbe37b696",
+    "w2_manifest_sha256": "f03fccb54b0e7ee2b616eae0cd7693430b05abad48ab4e68b0b0224af33278d8",
+    "w2_script_sha256": "6ce811818d3d1dd80ed08d697c536c9f3a49459e07add4b0874ee2349c06142c",
+    "strict_manifest_sha256": "bd4faef7912b15210126f89ada1e7ac5ab52713266e4855d389d5bf473e4a6e4",
+    "strict_script_sha256": "5501652240f4bd19f6a35840edd995cfe9b1dda639e1dacbb7a8a6e9910638da",
+    "frozen_w0_parent_sha256": "5927981711ba8b1794470d6228d1878331d7c15c82f7e55f531f8c0f19e09d42"
+  },
+  "w2_mujoco_v2": {
+    "test_roots": 500,
+    "learned_gate_selection": {
+      "duration_seconds_counts": {
+        "0.6": 0,
+        "0.9": 0,
+        "1.2": 415,
+        "1.6": 85
+      },
+      "duration_seconds_percent": {
+        "0.6": 0.0,
+        "0.9": 0.0,
+        "1.2": 83.0,
+        "1.6": 17.0
+      },
+      "mean_selected_duration_seconds": 1.268,
+      "versus_fixed_1p6": {
+        "mean_duration_reduction_seconds": 0.332,
+        "mean_duration_reduction_percent": 20.75,
+        "implied_candidate_motion_rate_increase_percent": 26.18,
+        "scope_limit": "All evaluation rollouts retain the same 2.0-second forecast window, so this is commanded movement-duration benefit, not measured end-to-end wall-clock throughput."
+      }
+    },
+    "relative_payload_xyz_prediction_error": {
+      "unit": "meter",
+      "x_mae": 0.00725753,
+      "y_mae": 0.00284730,
+      "z_mae": 0.00739279,
+      "pooled_coordinate_mae": 0.005832518,
+      "mean_euclidean_xyz_error": 0.0128455125,
+      "mixed_15d_mae_not_a_length": 0.030131321400403976,
+      "note": "The 15-dimensional aggregate mixes position, velocity, rotation-6D and angular velocity and must not be labelled meters."
+    },
+    "coverage": {
+      "nominal": 0.95,
+      "full_15d_candidate_time_joint_2s": {
+        "covered_roots": 472,
+        "total_roots": 500,
+        "rate": 0.944
+      },
+      "risk_xy_candidate_time_joint_2s": {
+        "covered_roots": 464,
+        "total_roots": 500,
+        "rate": 0.928
+      },
+      "negative_result": "Both empirical test coverages are below the nominal 95% target. The XY envelope alone drives the learned gate."
+    },
+    "policy_outcomes": {
+      "geometry_earliest_0p6_unsafe_roots": 340,
+      "fixed_1p6_unsafe_roots": 0,
+      "learned_gate_unsafe_roots": 1,
+      "unsafe_candidates_by_duration_2s": {
+        "0.6": 340,
+        "0.9": 166,
+        "1.2": 47,
+        "1.6": 0
+      },
+      "only_learned_gate_false_allow": {
+        "root_id": "mujoco-root-00101905",
+        "candidate_index": 2,
+        "duration_seconds": 1.2,
+        "true_peak_xy_offset_m": 0.06047125,
+        "predicted_peak_xy_center_m": 0.031075105,
+        "calibrated_worst_corner_peak_m": 0.05773269,
+        "threshold_m": 0.06,
+        "threshold_exceedance_m": 0.00047125,
+        "drop_in_2s": false,
+        "drop_by_2p5s_posthold": false,
+        "allowed_candidates_for_root": [false, false, true, true]
+      }
+    },
+    "runtime": {
+      "gpu": "NVIDIA GeForce RTX 4090 D",
+      "mujoco": "3.14.0",
+      "torch": "2.8.0+cu128",
+      "elapsed_seconds": 758.3364589214325
+    }
+  },
+  "w0_strict_v4": {
+    "test_roots": 300,
+    "calibration_roots": 199,
+    "alpha": 0.05,
+    "rank": 190,
+    "comparison": {
+      "strict_root_bootstrap": {
+        "r_mae": 0.016460642218589783,
+        "v_mae": 0.07135266065597534,
+        "joint_root_coverage": 0.9533333333333334,
+        "allow_rate": 0.7233333333333334,
+        "rejected_roots": 83,
+        "false_allow_roots": 3,
+        "uncovered_roots": 14,
+        "false_allow_details": [
+          {"root_id": "numeric-root-00900116", "duration_seconds": 1.6},
+          {"root_id": "numeric-root-00900130", "duration_seconds": 1.6},
+          {"root_id": "numeric-root-00900256", "duration_seconds": 1.6}
+        ]
+      },
+      "frozen_engineering_variant": {
+        "r_mae": 0.0169933270663023,
+        "v_mae": 0.07304564118385315,
+        "joint_root_coverage": 0.96,
+        "allow_rate": 0.6933333333333334,
+        "rejected_roots": 92,
+        "false_allow_roots": 2,
+        "uncovered_roots": 12,
+        "false_allow_details": [
+          {"root_id": "numeric-root-00900130", "duration_seconds": 1.6},
+          {"root_id": "numeric-root-00900256", "duration_seconds": 1.6}
+        ]
+      },
+      "observable_history_physics_id": {
+        "r_mae": 0.010335428640246391,
+        "v_mae": 0.04266482964158058,
+        "joint_root_coverage": 0.96,
+        "allow_rate": 0.8133333333333334,
+        "rejected_roots": 56,
+        "false_allow_roots": 1,
+        "uncovered_roots": 12,
+        "false_allow_details": [
+          {"root_id": "numeric-root-00900258", "duration_seconds": 1.6}
+        ]
+      },
+      "strict_independently_trained_no_action": {
+        "r_mae": 0.0408516526222229,
+        "v_mae": 0.19088533520698547,
+        "joint_root_coverage": 0.95,
+        "allow_rate": 0.0,
+        "rejected_roots": 300,
+        "false_allow_roots": 0,
+        "uncovered_roots": 15
+      }
+    },
+    "strict_vs_frozen_engineering_variant": {
+      "r_mae_relative_change_percent": -3.1346707188895873,
+      "v_mae_relative_change_percent": -2.3177023302686006,
+      "coverage_point_change": -0.006666666666666599,
+      "allow_rate_point_change": 0.03,
+      "false_allow_count_change": 1,
+      "interpretation": "Strict is slightly better on mean r/v error and availability, but has one more false allow and slightly lower empirical coverage. Architecture and root-sibling batching changed together, so no single-factor causal attribution is supported."
+    },
+    "strongest_predictive_baseline": "The observable-history physics-ID baseline has the lowest r/v MAE, highest allow rate, and one false allow; strict does not dominate it.",
+    "no_action_negative_result": "The independently trained no-action model rejects all 300 roots and has much larger r/v error; its nominal 95% coverage does not imply useful availability.",
+    "strict_latency": {
+      "scope": "three-member ensemble, one root, four siblings, 40 steps, host transfer included",
+      "p50_ms": 69.98947355896235,
+      "p95_ms": 71.28375181928277
+    },
+    "elapsed_seconds": 733.2026798725128
+  }
+}

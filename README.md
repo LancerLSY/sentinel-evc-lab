@@ -74,7 +74,26 @@ python -m pytest -q
 
 [Mechanism matrix](docs/implementation_matrix.md) · [Validation](docs/product_validation.md) · [Pending experiments](docs/experiment_plan.md) · [Contracts](docs/product_contracts.md)
 
-A genuine local numerical product increment. Real VLA, GRU, vision and device-motion experiments remain pending with explicit prerequisites; prototype measurements do not establish those capabilities.
+A local numerical product increment, with separate GPU-trained numerical, contact,
+visual-object and real-data joint predictors. Product motion integration remains
+profile-specific; the GPU measurements are recorded separately below.
+
+## GPU models and real data
+
+The [GPU training report](docs/gpu_training_results.md) records actual RTX 4090 D
+runs, frozen data/model revisions, independent calibration and retained negative
+results. Numerical GRU, MuJoCo object prediction, image-to-object WorldGuard and
+SO100 real-data joint prediction have completed training. Actual SmolVLA weights
+are loaded and the 5000-step fine-tune is in progress in the same experiment.
+
+The visual object model reduced mean selected movement duration from 1.6 to
+1.2856 seconds, with 0/500 unsafe selections in the fixed-camera simulator group.
+Changing only the cameras produced 47/500 unsafe selections. On real SO100 joint
+recordings, adding images increased normalized prediction error by 10%; the
+simpler state/action model is the better baseline. Full results include strong
+physical baselines, envelope widths, sample denominators and failed cases.
+
+[Reproduce training](experiments/gpu/README.md) · [Model cards and loading](docs/gpu_model_cards.md)
 
 ## Alignment and reliability
 
@@ -135,8 +154,9 @@ parent/fallback costs, measurement boundaries and reproduction.
 | Single-use execution permit | Implemented, local HMAC | Not PKI, not functional safety |
 | Revocation barrier | Implemented against a simulated controller | Not a motor-braking proof |
 | Evidence hash chain + signature | Implemented, Ed25519 | Proves record integrity only, not sensor honesty |
-| Real VLA integration | **Pending** | Next goal is read-only shadow mode, not closed-loop intervention |
-| Numeric consequence prediction | **Implemented: physical ID + trainable ridge residual + root calibration** | Not the v4 GRU, visual WorldGuard or a robot result |
+| Real VLA integration | **Experimental: actual SmolVLA loaded; GPU fine-tune in progress** | Recorded-data evaluation; live driver integration remains pending |
+| Numeric consequence prediction | **Product: physical ID/ridge; experiment: trained strict v4 GRU** | Trained GPU weights are separate from the default product profile |
+| Visual object WorldGuard | **GPU-trained fixed-camera MuJoCo experiment** | Shifted-camera and real-object deployment require separate evidence |
 | Robot connection | **Implemented: mock + Universal Robots read-only diagnostics** | Motion adapter and hardware actuation remain pending |
 | 3D model entrypoint | **Implemented: bounded OBJ/STL/MJCF/URDF import and Canvas preview** | Import or compile success does not authorize motion |
 | MuJoCo fixed fixture | **Implemented: signed open-tray contact experiment** | Separate profile; fastest candidate currently fails one of nine gates |
@@ -282,9 +302,10 @@ fault. The bundled key is for demonstration; it is not a customer PKI.
 independently verifiable with `verify`. Reproduction commands for every number are in
 [RESULTS.md](RESULTS.md).
 
-This repository has run its separate fixed MuJoCo open-tray profile. It has **not** run a
-real VLA, ROS 2 motion stack, physical robot motion, vision model or mTLS. Imported models
-are inspected separately and are never promoted into the trusted motion fixture.
+This repository has run its separate fixed MuJoCo profile and the GPU experiments
+linked above, including actual visual encoders and the SmolVLA checkpoint. ROS 2
+motion, physical robot execution and mTLS remain outside those runs. Imported
+model assets use their separate inspection entrypoint.
 
 "Zero observed failures" only means this set of constructed tests did not find that class
 of problem; it is not zero accidents in arbitrary scenarios. Task success rate, prediction
@@ -323,10 +344,11 @@ Five release invariants, each locked by a test in `tests/`:
 
 ## Real VLA integration status
 
-**Not started.** The next goal is **read-only shadow mode**: record the "raw action block"
-and the "finally submitted action" inside a real upstream chain, change no values, and
-answer offline: "had the gate been enabled at the time, how many submissions would it have
-rejected, and why". Closed-loop intervention is out of scope for this round. The plan is in
+The actual checkpoint has been loaded on the GPU and is being fine-tuned on fixed
+SO100 recordings. The training entrypoint retains ten hashed offline action-chunk
+windows after held-out evaluation. The next integration step is to record raw and
+finally submitted actions inside a live upstream chain with reviewed joint/frame
+semantics. The plan is in
 [docs/下一步_影子模式接入.md](docs/下一步_影子模式接入.md) (Chinese).
 
 ---

@@ -1,0 +1,20 @@
+{
+  "schema": "sentinel-operational-resume-v1",
+  "utc_unix": 1790878322.765686,
+  "checkpoint_step": 2000,
+  "run_identity": "sha256:fb49d382c7cfb184b7d5be90dc7f3da28aad4e4b1391b968b9feb071c5cedeea",
+  "trainable_state_sha256": "6892d8a6ab2180602b2b124c0ba4042525b49bbac86b3287fb7bd3eb63e40182",
+  "old_workers": 2,
+  "new_workers": 8,
+  "stopped_owned_pids": [
+    10468,
+    10542,
+    10543
+  ],
+  "reason": "Measured PyAV stable throughput 15.58 -> 48.37 samples/s; same data/model/sampler/RNG protocol",
+  "last_logged_event": {
+    "event": "dev",
+    "loss": 0.20944728947180355,
+    "step": 2000
+  }
+}

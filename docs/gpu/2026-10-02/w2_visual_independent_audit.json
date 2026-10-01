@@ -1,0 +1,778 @@
+{
+  "artifacts": {
+    "all_exist": true,
+    "all_sha_match": true,
+    "all_size_match": true,
+    "checked": 31,
+    "rows": [
+      {
+        "exists": true,
+        "path": "metrics.json",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/00-overview.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/01-front.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/02-overview.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/03-front.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/04-overview.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/05-front.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/06-overview.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/07-front.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/08-overview.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "raw_images/09-front.png",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "robot-only-member-0.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "robot-only-member-0.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "robot-only-member-1.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "robot-only-member-1.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "robot-only-member-2.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "robot-only-member-2.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "test_predictions.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-member-0.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-member-0.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-member-1.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-member-1.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-member-2.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-member-2.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-no-action-member-0.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-no-action-member-0.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-no-action-member-1.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-no-action-member-1.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-no-action-member-2.jsonl",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual-no-action-member-2.npz",
+        "sha_match": true,
+        "size_match": true
+      },
+      {
+        "exists": true,
+        "path": "visual_cache.npz",
+        "sha_match": true,
+        "size_match": true
+      }
+    ]
+  },
+  "calibration_semantics": {
+    "action_shuffle": {
+      "full_q_equal_original": false,
+      "intervention": "roll future-target time axis by 7 for dev/cal/test",
+      "same_trained_visual_weights": true,
+      "selected_roots": 0,
+      "separately_recomputed_dev_scales_and_calibration": true,
+      "xy_q_equal_original": false
+    },
+    "camera_shift": {
+      "false_allows": 47,
+      "full_q_equal_original": true,
+      "full_scales_equal_original": true,
+      "protocol": "same labels and original dev/cal calibration; shifted cameras only on original test roots; never used for tuning",
+      "test_roots": 500,
+      "xy_q_equal_original": true,
+      "xy_scales_equal_original": true
+    }
+  },
+  "checkpoint_reload": {
+    "all_finite": true,
+    "all_log_best_match": true,
+    "all_sha_match": true,
+    "all_strict": true,
+    "count": 9,
+    "rows": [
+      {
+        "checkpoint": "visual-member-0.npz",
+        "dev_roots": 3,
+        "family": "visual",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.009280362166464329,
+          0.0044789076782763,
+          0.012265117838978767
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 0,
+        "numeric_only": true,
+        "prediction_sha256": "a75f1feeb3954079fb63a9935b632d00a03f6d50493179d48ce8f2dd43bcd0ee",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      },
+      {
+        "checkpoint": "visual-member-1.npz",
+        "dev_roots": 3,
+        "family": "visual",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.013659643009305,
+          0.005920850206166506,
+          0.02194710448384285
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 1,
+        "numeric_only": true,
+        "prediction_sha256": "e2d4600379e4644de8e1f3fd907be18772d743bfd8280690a2e2ae1ef63a68d8",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      },
+      {
+        "checkpoint": "visual-member-2.npz",
+        "dev_roots": 3,
+        "family": "visual",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.01101077999919653,
+          0.0043598744086921215,
+          0.024919884279370308
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 2,
+        "numeric_only": true,
+        "prediction_sha256": "e8d1afe8460f933ac39070ac3f0231e782114be40086f5e930b92faa7aed02d6",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      },
+      {
+        "checkpoint": "robot-only-member-0.npz",
+        "dev_roots": 3,
+        "family": "robot-only",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.04150773212313652,
+          0.02105230651795864,
+          0.06534263491630554
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 0,
+        "numeric_only": true,
+        "prediction_sha256": "5f3e3029475f02d721519e2c6ed9137f26715d1ebadc185d68a7560976024277",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      },
+      {
+        "checkpoint": "robot-only-member-1.npz",
+        "dev_roots": 3,
+        "family": "robot-only",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.04076172411441803,
+          0.02063577249646187,
+          0.06403974443674088
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 1,
+        "numeric_only": true,
+        "prediction_sha256": "282bda4333c6dd62450b8baa1030fd153913181a17d6927adbc6defb837a82d4",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      },
+      {
+        "checkpoint": "robot-only-member-2.npz",
+        "dev_roots": 3,
+        "family": "robot-only",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.04120861366391182,
+          0.02040460705757141,
+          0.06459315121173859
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 2,
+        "numeric_only": true,
+        "prediction_sha256": "0fd383e2fa9d50fcfc7af84cdee960440217699df74a8938a261a678e5cff0b0",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      },
+      {
+        "checkpoint": "visual-no-action-member-0.npz",
+        "dev_roots": 3,
+        "family": "visual-no-action",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.03945134952664375,
+          0.021694784983992577,
+          0.0798691064119339
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 0,
+        "numeric_only": true,
+        "prediction_sha256": "3eae9563e875e7ee0f0158e52dec7e0397dbcb6df7e5499010db5a6745ed3541",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      },
+      {
+        "checkpoint": "visual-no-action-member-1.npz",
+        "dev_roots": 3,
+        "family": "visual-no-action",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.040590669959783554,
+          0.020440958440303802,
+          0.0835941806435585
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 1,
+        "numeric_only": true,
+        "prediction_sha256": "eaed1f4d83af053e866920a7cb3b116c6c1cdad212ddcf29273bf2932d891b8a",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      },
+      {
+        "checkpoint": "visual-no-action-member-2.npz",
+        "dev_roots": 3,
+        "family": "visual-no-action",
+        "finite": true,
+        "limited_dev_xyz_mae_m": [
+          0.0391475111246109,
+          0.019927088171243668,
+          0.08889090269804001
+        ],
+        "log_best_mae_match": true,
+        "log_best_step_match": true,
+        "member": 2,
+        "numeric_only": true,
+        "prediction_sha256": "3eb57f7b763ec49d14fe58347f8df3d225609fe60cd7d13d3134b2dff01318a5",
+        "prediction_shape": [
+          3,
+          4,
+          40,
+          15
+        ],
+        "sha_artifact_match": true,
+        "sha_record_match": true,
+        "strict_load": true,
+        "tensor_map_complete": true
+      }
+    ]
+  },
+  "dataset": {
+    "counts_match": true,
+    "dataset_sha_match": true,
+    "labels_sha_match": true,
+    "manifest_sha_match": true,
+    "root_identity": {
+      "counts": {
+        "cal": 299,
+        "dev": 200,
+        "test": 500,
+        "train": 1000
+      },
+      "pairwise_disjoint": true,
+      "sha256": {
+        "cal": "7b91ef4398a51a179ef02bcc53fdfcff99cf8183b3bd571a1a518e045e8b0d71",
+        "dev": "31d70a6153e88f27e031b7bf1c7e03fe02d52cf2cf7f41158b5c8345254706a9",
+        "test": "bba1efe05e90660d5605e4dcd8296af5d9e6015094b21d893b9df531bac91663",
+        "train": "2482e1907f6184abfb74c9ff5a5edf2d3b8e0fa57e14a26f741a8688e5710423"
+      },
+      "unique": {
+        "cal": true,
+        "dev": true,
+        "test": true,
+        "train": true
+      },
+      "unique_total": 1999
+    },
+    "trajectory_regeneration": false
+  },
+  "input_boundary": {
+    "four_candidates_share_root_history": true,
+    "future_image_passed": false,
+    "future_target_dev_shape": [
+      200,
+      4,
+      40,
+      3
+    ],
+    "initial_output_dev_shape": [
+      200,
+      15
+    ],
+    "initial_output_passed": false,
+    "numeric_history": "history[..., :6] + past_targets",
+    "numeric_history_dim": 9,
+    "payload_numeric_history_passed": false,
+    "truth_dev_shape": [
+      200,
+      4,
+      40,
+      15
+    ],
+    "visual_history_shapes": {
+      "cal": [
+        299,
+        8,
+        128
+      ],
+      "dev": [
+        200,
+        8,
+        128
+      ],
+      "test": [
+        500,
+        8,
+        128
+      ],
+      "train": [
+        1000,
+        8,
+        128
+      ]
+    }
+  },
+  "recoverability_limits": [
+    "raw per-frame layer4 arrays were deleted after projection; projected features/PCA arrays/sample indices suffice for inference, but PCA fitting cannot be independently recomputed from current run artifacts without rerendering",
+    "only ten PNG examples are retained; all historical pixels are reproducible from frozen dataset/cameras/source/MuJoCo/encoder but are not stored",
+    "manifest JSON sorts camera-layout keys, so exact MJCF byte order cannot be regenerated from the manifest dictionary alone; the recorded MJCF hash matches reconstruction from the exact source constants bound by script SHA"
+  ],
+  "saved_result_audit": {
+    "robot_only_gru128": {
+      "duration_counts": {
+        "0.6": 0,
+        "0.9": 0,
+        "1.2": 0,
+        "1.6": 500
+      },
+      "false_allows_2s": 0,
+      "full_coverage_2s": 0.952,
+      "mae_15d_mixed_units": 0.04775901511311531,
+      "mean_duration_s_given_selected": 1.6,
+      "selected_roots": 500,
+      "xy_coverage_2s": 0.942,
+      "xyz_mae_m": [
+        0.021061699837446213,
+        0.014291980303823948,
+        0.05120362713932991
+      ],
+      "xyz_mean_euclidean_m": 0.06288425624370575,
+      "xyz_pooled_mae_m": 0.028852492570877075
+    },
+    "visual_action_shuffle_inference": {
+      "duration_counts": {
+        "0.6": 0,
+        "0.9": 0,
+        "1.2": 0,
+        "1.6": 0
+      },
+      "false_allows_2s": 0,
+      "full_coverage_2s": 0.926,
+      "mae_15d_mixed_units": 0.17694470286369324,
+      "mean_duration_s_given_selected": null,
+      "selected_roots": 0,
+      "xy_coverage_2s": 0.958,
+      "xyz_mae_m": [
+        0.054435163736343384,
+        0.04335770010948181,
+        0.2714163064956665
+      ],
+      "xyz_mean_euclidean_m": 0.28810274600982666,
+      "xyz_pooled_mae_m": 0.12306927144527435
+    },
+    "visual_camera_layout_shift_test_only": {
+      "duration_counts": {
+        "0.6": 0,
+        "0.9": 0,
+        "1.2": 500,
+        "1.6": 0
+      },
+      "false_allows_2s": 47,
+      "full_coverage_2s": 0.944,
+      "mae_15d_mixed_units": 0.05687594413757324,
+      "mean_duration_s_given_selected": 1.2,
+      "selected_roots": 500,
+      "xy_coverage_2s": 0.558,
+      "xyz_mae_m": [
+        0.0227953027933836,
+        0.015337602235376835,
+        0.08186972141265869
+      ],
+      "xyz_mean_euclidean_m": 0.09018591791391373,
+      "xyz_pooled_mae_m": 0.04000098630785942
+    },
+    "visual_independently_trained_no_action": {
+      "duration_counts": {
+        "0.6": 0,
+        "0.9": 0,
+        "1.2": 235,
+        "1.6": 0
+      },
+      "false_allows_2s": 0,
+      "full_coverage_2s": 0.932,
+      "mae_15d_mixed_units": 0.048848576843738556,
+      "mean_duration_s_given_selected": 1.2,
+      "selected_roots": 235,
+      "xy_coverage_2s": 0.942,
+      "xyz_mae_m": [
+        0.0201618280261755,
+        0.013168303295969963,
+        0.05113554373383522
+      ],
+      "xyz_mean_euclidean_m": 0.06168196350336075,
+      "xyz_pooled_mae_m": 0.028155436739325523
+    },
+    "visual_object_gru128": {
+      "duration_counts": {
+        "0.6": 0,
+        "0.9": 0,
+        "1.2": 393,
+        "1.6": 107
+      },
+      "false_allows_2s": 0,
+      "full_coverage_2s": 0.944,
+      "mae_15d_mixed_units": 0.03102179989218712,
+      "mean_duration_s_given_selected": 1.2855999999999999,
+      "selected_roots": 500,
+      "xy_coverage_2s": 0.944,
+      "xyz_mae_m": [
+        0.008648253045976162,
+        0.0038247902411967516,
+        0.010519040748476982
+      ],
+      "xyz_mean_euclidean_m": 0.01707129366695881,
+      "xyz_pooled_mae_m": 0.0076640015468001366
+    }
+  },
+  "schema": "w2-mujoco-visual-independent-audit-v1",
+  "selection_boundary": "strict reload/inference used first 3 dev roots only; saved test predictions were read only to audit frozen reported results, never for selection or calibration",
+  "source": {
+    "actual_script_sha256": "f2296224b5e7a8c8d2cfba1c6ffd34e2ae0481572d745480bbd598284778e73b",
+    "expected_script_sha256": "f2296224b5e7a8c8d2cfba1c6ffd34e2ae0481572d745480bbd598284778e73b",
+    "recorded_script_sha256": "f2296224b5e7a8c8d2cfba1c6ffd34e2ae0481572d745480bbd598284778e73b",
+    "recorded_source_commit": "2159a86136f1b39cbcadb2780a1742d7b42bec67"
+  },
+  "visual_cache": {
+    "alternate_finite": true,
+    "alternate_shape": [
+      500,
+      8,
+      128
+    ],
+    "encoder_sha": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "encoder_sha_match": true,
+    "feature_finite": {
+      "cal": true,
+      "dev": true,
+      "test": true,
+      "train": true
+    },
+    "normalizers_train_recompute_match": {
+      "fit_split": true,
+      "output_mean": true,
+      "output_std": true,
+      "robot_mean": true,
+      "robot_std": true,
+      "target_mean": true,
+      "target_std": true,
+      "visual_mean": true,
+      "visual_std": true
+    },
+    "pca_arrays": [
+      {
+        "camera": 0,
+        "components_shape": [
+          16,
+          512
+        ],
+        "eigenvalues_shape": [
+          16
+        ],
+        "finite": true,
+        "mean_shape": [
+          512
+        ]
+      },
+      {
+        "camera": 1,
+        "components_shape": [
+          16,
+          512
+        ],
+        "eigenvalues_shape": [
+          16
+        ],
+        "finite": true,
+        "mean_shape": [
+          512
+        ]
+      }
+    ],
+    "pca_indices_recomputed_match": true,
+    "pca_indices_train_range": true,
+    "pca_indices_unique": true,
+    "pca_sample_count": 4000,
+    "rendering": {
+      "cal": {
+        "layout_equals_source": true,
+        "layout_sha_match": true,
+        "manifest_layout_order_preserved": false,
+        "mjcf_sha_from_manifest_sorted_layout_match": false,
+        "mjcf_sha_from_source_constant_match": true,
+        "order_note": "manifest JSON sorts camera-name keys; exact MJCF camera insertion order is recovered from the source constant bound by script SHA",
+        "payload_reconstruction_max": 0.0,
+        "rotation6_reconstruction_max": 2.9707169391102184e-08,
+        "tray_reconstruction_max": 0.0
+      },
+      "dev": {
+        "layout_equals_source": true,
+        "layout_sha_match": true,
+        "manifest_layout_order_preserved": false,
+        "mjcf_sha_from_manifest_sorted_layout_match": false,
+        "mjcf_sha_from_source_constant_match": true,
+        "order_note": "manifest JSON sorts camera-name keys; exact MJCF camera insertion order is recovered from the source constant bound by script SHA",
+        "payload_reconstruction_max": 0.0,
+        "rotation6_reconstruction_max": 2.9796924483349585e-08,
+        "tray_reconstruction_max": 0.0
+      },
+      "test": {
+        "layout_equals_source": true,
+        "layout_sha_match": true,
+        "manifest_layout_order_preserved": false,
+        "mjcf_sha_from_manifest_sorted_layout_match": false,
+        "mjcf_sha_from_source_constant_match": true,
+        "order_note": "manifest JSON sorts camera-name keys; exact MJCF camera insertion order is recovered from the source constant bound by script SHA",
+        "payload_reconstruction_max": 0.0,
+        "rotation6_reconstruction_max": 2.978670210485035e-08,
+        "tray_reconstruction_max": 0.0
+      },
+      "test_layout_shift": {
+        "layout_equals_source": true,
+        "layout_sha_match": true,
+        "manifest_layout_order_preserved": false,
+        "mjcf_sha_from_manifest_sorted_layout_match": false,
+        "mjcf_sha_from_source_constant_match": true,
+        "order_note": "manifest JSON sorts camera-name keys; exact MJCF camera insertion order is recovered from the source constant bound by script SHA",
+        "payload_reconstruction_max": 0.0,
+        "rotation6_reconstruction_max": 2.978670210485035e-08,
+        "tray_reconstruction_max": 0.0
+      },
+      "train": {
+        "layout_equals_source": true,
+        "layout_sha_match": true,
+        "manifest_layout_order_preserved": false,
+        "mjcf_sha_from_manifest_sorted_layout_match": false,
+        "mjcf_sha_from_source_constant_match": true,
+        "order_note": "manifest JSON sorts camera-name keys; exact MJCF camera insertion order is recovered from the source constant bound by script SHA",
+        "payload_reconstruction_max": 0.0,
+        "rotation6_reconstruction_max": 2.9753146724154078e-08,
+        "tray_reconstruction_max": 0.0
+      }
+    },
+    "root_ids_match": {
+      "cal": true,
+      "dev": true,
+      "test": true,
+      "train": true
+    },
+    "sha_match": true
+  }
+}

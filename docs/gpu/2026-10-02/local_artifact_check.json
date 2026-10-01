@@ -1,0 +1,25 @@
+{
+  "schema": "sentinel-local-artifact-check-v1",
+  "runs": {
+    "w0-numeric-v1": {
+      "manifest_sha256": "492c9aaf31a9b487e33b7d32cd31d4dac8441df0a5eb5b191b19f1c0ed2965ba",
+      "artifact_count": 17,
+      "mismatches": []
+    },
+    "w0-numeric-design95": {
+      "manifest_sha256": "5b63c9f9b86b936026afc9332b6c6393e72944d9daa5119f93f91252b0bc06e3",
+      "artifact_count": 4,
+      "mismatches": []
+    },
+    "w0-strict-v4": {
+      "manifest_sha256": "bd4faef7912b15210126f89ada1e7ac5ab52713266e4855d389d5bf473e4a6e4",
+      "artifact_count": 21,
+      "mismatches": []
+    },
+    "w2-mujoco-v2": {
+      "manifest_sha256": "f03fccb54b0e7ee2b616eae0cd7693430b05abad48ab4e68b0b0224af33278d8",
+      "artifact_count": 16,
+      "mismatches": []
+    }
+  }
+}

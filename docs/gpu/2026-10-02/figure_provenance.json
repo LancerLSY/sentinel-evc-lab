@@ -1,0 +1,11 @@
+{
+  "schema": "sentinel-figure-provenance-v1",
+  "figure": "training-comparisons.svg",
+  "figure_sha256": "a717b330b308291f43e528e768dd2d8a37226cd07bf23807cef12aaab0482779",
+  "input_sha256": {
+    "w0_strict_metrics.json": "4a506bfd9e696c05769d4c7b181a64b675cca0f7b0e8d456f1d9195fe4fd1917",
+    "w1_test_results.json": "a03a9484cadc69688d16d3c41c79fad7fe8ee27ae3f6bec0535397dbc1c9b6c6",
+    "numeric_mujoco_review.json": "948ef10d9ca646d9a9d24d93f3e0fb4aded11e53354d00cd2c17b5c43c132f41"
+  },
+  "description": "Three measured point comparisons with independent root/episode denominators; no confidence intervals or safety claim."
+}

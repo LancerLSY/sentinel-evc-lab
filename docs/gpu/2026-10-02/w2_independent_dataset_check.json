@@ -1,0 +1,29 @@
+{
+  "checks": [
+    {
+      "split": "train",
+      "roots": 1000,
+      "unique_disjoint": true,
+      "all_four_action_hashes_match": true
+    },
+    {
+      "split": "dev",
+      "roots": 200,
+      "unique_disjoint": true,
+      "all_four_action_hashes_match": true
+    },
+    {
+      "split": "cal",
+      "roots": 299,
+      "unique_disjoint": true,
+      "all_four_action_hashes_match": true
+    },
+    {
+      "split": "test",
+      "roots": 500,
+      "unique_disjoint": true,
+      "all_four_action_hashes_match": true
+    }
+  ],
+  "root_metadata_exact": true
+}

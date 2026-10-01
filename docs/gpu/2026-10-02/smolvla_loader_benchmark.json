@@ -1,0 +1,85 @@
+{
+  "cache_note": "No OS cache was cleared. Results characterize the current running job's warm/shared-cache state; later condition may benefit from decoded-file page cache.",
+  "cpu_constraints": {
+    "affinity_count": 128,
+    "cpu_max": "1600000 100000",
+    "cpuset_effective": "0-127",
+    "os_cpu_count": 128
+  },
+  "dataset": {
+    "batch_size": 8,
+    "camera_keys": [
+      "observation.images.top",
+      "observation.images.wrist"
+    ],
+    "episodes": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      11,
+      12,
+      14,
+      15,
+      19,
+      21,
+      26,
+      27,
+      29,
+      32,
+      33,
+      35,
+      36,
+      37,
+      39,
+      40,
+      42,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49
+    ],
+    "fps": 30,
+    "repo_id": "lerobot/svla_so100_pickplace",
+    "revision": "728583b5eaf9e739a7f119e2def466fa1d552402",
+    "sample_count": 128,
+    "video_backend": "pyav"
+  },
+  "results": [
+    {
+      "batches": 16,
+      "end_to_end_samples_per_second": 13.899311436227702,
+      "end_to_end_seconds": 9.209089283831418,
+      "first_batch_seconds": 1.371930468827486,
+      "num_workers": 2,
+      "samples": 128,
+      "steady_batches": 15,
+      "steady_samples_per_second": 15.582748815862617,
+      "steady_seconds": 7.700823610648513,
+      "worker_cpu_seconds": 61.631004,
+      "worker_spawn_seconds": 0.13632076978683472
+    },
+    {
+      "batches": 16,
+      "end_to_end_samples_per_second": 22.883701196429097,
+      "end_to_end_seconds": 5.593500758521259,
+      "first_batch_seconds": 2.9783268636092544,
+      "num_workers": 8,
+      "samples": 128,
+      "steady_batches": 15,
+      "steady_samples_per_second": 48.372931557696575,
+      "steady_seconds": 2.4807262271642685,
+      "worker_cpu_seconds": 92.21628900000002,
+      "worker_spawn_seconds": 0.13443548604846
+    }
+  ],
+  "schema": "smolvla-loader-benchmark-v1",
+  "scope": "fixed first 128 training-split samples only; no model/preprocessor/GPU/checkpoint/dev/calibration/test access",
+  "source_sha256": "70063c87f03ecd0893272a4e4ec7795518608fdd986906e777e9857952ecc17e",
+  "serialization_note": "Original producer appended a literal backslash-n after the JSON object; this archival copy normalizes the terminal newline only."
+}

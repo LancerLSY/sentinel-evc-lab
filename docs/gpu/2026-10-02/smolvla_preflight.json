@@ -1,0 +1,30 @@
+{
+  "schema": "sentinel-smolvla-real-batch-preflight-v1",
+  "script_sha256": "bd6533682e152dab24b55fcec1730e49b04f7ea764f7b2af0826ee6c3d18cb70",
+  "dataset_revision": "728583b5eaf9e739a7f119e2def466fa1d552402",
+  "base_revision": "d9f33c94a60fb382c90dea2164c96845bd955e28",
+  "backbone_revision": "7b375e1b73b11138ff12fe22c8f2822d8fe03467",
+  "manifest_files_verified": {"dataset": 9, "base": 8, "backbone": 14},
+  "data_split": "train",
+  "batch_shapes": {
+    "observation.images.top": [8, 3, 480, 640],
+    "observation.images.wrist": [8, 3, 480, 640],
+    "observation.state": [8, 6],
+    "action": [8, 50, 6],
+    "language_tokens": [8, 48]
+  },
+  "total_parameters": 450046176,
+  "trainable_parameters": 99880992,
+  "trainable_tensors": 155,
+  "chunk_size": 50,
+  "denoising_steps": 10,
+  "forward_backward_seconds": 1.1598,
+  "peak_allocated_bytes": 2584989184,
+  "peak_reserved_bytes": 2640314368,
+  "loss": 0.38612774,
+  "optimizer_steps": 0,
+  "development_evaluation": false,
+  "calibration_access": false,
+  "heldout_evaluation": false,
+  "scope": "Single actual train batch forward/backward; not a throughput benchmark or completed fine-tune."
+}

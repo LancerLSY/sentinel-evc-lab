@@ -7,10 +7,19 @@ are comparison criteria, not evidence that an experiment has been completed.
 
 ## Assessment and release boundary
 
+**GPU update, 2026-10-02:** actual numerical GRU, observed-object MuJoCo,
+image-to-object WorldGuard and real SO100 joint predictors have now been trained
+and independently evaluated. Actual SmolVLA weights are loaded and fine-tuning
+is in progress. [Training results](gpu_training_results.md) and
+[model cards](gpu_model_cards.md) supersede the missing-training statements below;
+the remainder of this review describes the previously shipped product profile.
+Its live VLA transform/permit bindings, device execution and external trust
+integration still require their own implementation and evidence.
+
 The local numeric product and fixed MuJoCo fixture implement useful, testable
-parts of the mechanism. Full v4 completion remains **BLOCKED** by the missing
-VLA, learned three-dimensional consequence model, real motion driver and external
-trust integration. The current foundation has a **WATCH** architecture assessment:
+parts of the mechanism. Full v4 product completion remains incomplete at live
+VLA/learned-predictor integration, the real motion driver and external trust
+integration. The current foundation has a **WATCH** architecture assessment:
 its bounded profiles can be released with the limitations below visible.
 
 The numeric profile operates on fixed Cartesian position Plans and a one-dimensional
@@ -85,5 +94,6 @@ and additional scenarios are described in [reliability_results.md](reliability_r
    Current SSH jobs deliberately retain source/venv/log/evidence; operator cleanup
    and package-index dependency resolution remain deployment limitations.
 
-These are pending acceptance gates. No VLA, real SSH or hardware results are
-inferred from local fixture, package rehearsal or software regression success.
+These are product integration gates. The separately reported GPU experiments
+establish authenticated SSH training, actual checkpoint loading and scoped model
+evaluation; they do not supply hardware execution or external trust results.

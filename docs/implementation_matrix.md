@@ -2,6 +2,10 @@
 
 This is the first usable local numerical product increment. Repository mechanism IDs M01–M12 are distinct from the original v4 requirement IDs. See [design_alignment.md](design_alignment.md) for the accurate F01–F12 trace and remaining integrations; historical v4 GRU/dataset/robot claims are not substituted with prototype results.
 
+The [2026-10-02 GPU experiments](gpu_training_results.md) add actual trained
+numerical/visual/object predictors and real recorded data. The table describes
+the product runtime, which keeps those experimental model profiles separate.
+
 | Mechanism | Implemented behavior | Remaining experiment |
 |---|---|---|
 | M01 final action binding | immutable descriptor/Plan digest; finite 3D position profile | upstream VLA action adapters and normalization versions |
@@ -11,7 +15,7 @@ This is the first usable local numerical product increment. Repository mechanism
 | M05 single writer | only Executor writes controller commands | real driver capability enforcement |
 | M06 commit/runtime state | fresh actual feedback before dispatch; start/tracking tube; context checks | sensors, synchronization and measured feedback delays |
 | M07 revoke/recover | invalidates unused permits; cancel confirmed + drain + fresh feedback + current epoch + approval | device cancel and physical braking characterization |
-| M08 final-candidate prediction | all four final Plans evaluated; deterministic earliest allowed; strict exact suffix | v4 GRU weights/training, visual/action-conditional model |
+| M08 final-candidate prediction | all four final Plans evaluated; deterministic earliest allowed; strict exact suffix; separate GPU GRU/visual models trained | import and bind trained model/action/normalization/calibration profiles to this runtime |
 | M09 calibrated consequence | root-max rank, independent root groups, model/rule digest; unsupported action family unknown | large calibration/test sets and distribution shift studies |
 | M10 local correction | bounded fixed-end geometric repair, original full recheck; disabled by default | v4 SciPy SQP and complete post-repair prediction pipeline |
 | M11 gripper release | numerical open requires support assertion + allowed phase; actual simulated gripper feedback | hardware support sensing, clamp/force/slip trials |
