@@ -21,8 +21,11 @@ import caches are not forcibly flushed, so this is a warmed local workload.
   comparison, not a speedup for the complete robot-policy system.
 - **Numeric product:** standard seed-7 physical profile, four candidates, real wall-clock
   pacing, 40 actual simulated observations, runtime authorization and persisted signed
-  evidence. Check completed status, all three cursors and evidence integrity. Report ZIP
-  export and independent verification costs explicitly. A 2-second observed-command
+  evidence. Check completed status, all three cursors and evidence integrity. The
+  `verification_stage` includes terminal-record reading/parsing, its internal evidence
+  verification and a second explicit independent verification. `export_stage` measures
+  the verified export path, including another record read/verification and ZIP creation;
+  it is not an isolated compression cost. A 2-second observed-command
   horizon is not a 2-second host execution deadline.
 - **Physics:** full headless MuJoCo fixed tray/payload experiment with five resolutions,
   25 signed trials, signed aggregate completion and complete returned-tree verification.
@@ -38,6 +41,8 @@ provide confidence intervals. Report sample count, minimum and maximum beside th
 Performance comparisons apply only to these fixed workloads and hardware. Failure or
 incomplete evidence is a failed measurement, not an excluded slow sample.
 
-Raw sample and manifest digests make the published summary checkable. Benchmark timing
+The raw-sample digest and signed artifact manifests make the measurements checkable.
+The published compact report binds raw timing samples; full signed run artifacts stay
+in the benchmark output directory and can be regenerated with the same command. Benchmark timing
 metadata is a local measurement record, not a remotely attested timing source. Signed
 trial evidence uses the explicitly supplied demonstration public keys.

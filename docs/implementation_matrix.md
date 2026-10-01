@@ -6,7 +6,7 @@ This is the first usable local numerical product increment. Design mechanisms ar
 |---|---|---|
 | F01 final action binding | immutable descriptor/Plan digest; finite 3D position profile | upstream VLA action adapters and normalization versions |
 | F02 full physical validation | exact segment/sphere and box geometry; model cannot override rejection | link geometry, controller feasibility and recoverable robot terminal sets |
-| F03 incremental certificate | parent/child/scene/time/event bindings; cumulative margins; full fallback | realistic transform distribution, total cost measurement |
+| F03 incremental certificate | parent/child/scene/time/event bindings; cumulative margins; full fallback; paired local total-cost measurement | realistic transform distribution and complex geometry; current simple-profile delta path is slower |
 | F04 lease | bounded prefix, HMAC, one-use, full Context, expiry and prediction registry | process/key isolation and device trust |
 | F05 single writer | only Executor writes controller commands | real driver capability enforcement |
 | F06 commit/runtime state | fresh actual feedback before dispatch; start/tracking tube; context checks | sensors, synchronization and measured feedback delays |

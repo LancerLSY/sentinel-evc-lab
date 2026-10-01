@@ -9,6 +9,10 @@ The measurements are deliberately end to end:
 * physics runs the complete 25-trial MuJoCo experiment through signed index and
   trial verification.
 
+Numeric verification stage includes terminal-record reading and its internal
+verification followed by an explicit verification. Export stage measures the
+verified export path, including its internal verification and ZIP creation.
+
 This is a descriptive benchmark, not a hard-realtime or functional-safety
 claim.  Run it on an otherwise idle host and retain the generated artifacts.
 """

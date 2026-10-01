@@ -89,6 +89,21 @@ fallbacks, signing and independent verification; numeric totals also include ZIP
 export. Warmups are retained and excluded from quantiles. See the
 [measurement protocol](docs/performance_protocol.md). Use a new output directory.
 
+Actual `main` measurements on Apple M4, 10 cores / 16 GiB:
+
+| Workload | Repetitions | P50 | P95 |
+|---|---:|---:|---:|
+| Realtime numeric run, 40 observations + verified evidence export | 10 | 3.236 s | 3.267 s |
+| Complete headless MuJoCo experiment, 25 verified trials | 3 | 12.707 s | 12.737 s |
+| Full geometry path, 1,000 cases including parents and evidence | 20 | 0.362 s | 0.373 s |
+| Delta + fallback path, identical 1,000 cases | 20 | 0.418 s | 0.446 s |
+
+The paired delta/full median ratio is **1.151: delta was about 15.1% slower** in this
+simple geometry workload. MuJoCo retained **8/9 passing gates**, including the failing
+fast-branch convergence result. Small-sample percentiles are descriptive. See the
+[full measured report and raw samples](docs/performance_results.md) for source identity,
+parent/fallback costs, measurement boundaries and reproduction.
+
 
 ---
 
@@ -202,8 +217,8 @@ That negative control matters: it shows the mechanism is not "reject anything th
 > **About that 50%:** it refers to **full-check call counts in the verification stage**,
 > not a whole-system speedup. The cost of establishing parent certificates and the cost of
 > falling back after a failed inheritance must both be added back before anyone talks about
-> end-to-end gains. This repository has no end-to-end timing data, so it makes no speedup
-> claim of any kind.
+> end-to-end gains. The [local benchmark](docs/performance_results.md) now includes those
+> costs: delta was slower in this simple workload. No whole-system speedup is claimed.
 
 ### Act Two · Revocation does not make actions that already happened disappear
 

@@ -1,0 +1,378 @@
+{
+  "configuration": {
+    "enabled": {
+      "geometry": true,
+      "numeric": true,
+      "physics": true
+    },
+    "geometry_cases": 1000,
+    "geometry_repeats": 20,
+    "geometry_warmup": 2,
+    "numeric_modes": [
+      "physical"
+    ],
+    "numeric_repeats": 10,
+    "numeric_warmup": 1,
+    "physics_friction": 0.35,
+    "physics_repeats": 3,
+    "physics_seed": 7,
+    "physics_warmup": 1
+  },
+  "created_at_utc": "2026-10-01T08:11:07.972742+00:00",
+  "environment": {
+    "clock": "time.perf_counter_ns monotonic wall clock",
+    "hardware": {
+      "memory_bytes": 17179869184,
+      "processor": "Apple M4"
+    },
+    "logical_cpu_count": 10,
+    "machine": "arm64",
+    "packages": {
+      "cryptography": "50.0.1",
+      "mujoco": "3.14.0"
+    },
+    "python": "3.12.14",
+    "python_implementation": "CPython",
+    "release": "27.0.0",
+    "system": "Darwin"
+  },
+  "failures": [],
+  "methodology": {
+    "artifacts": "all successful and failed iteration directories are retained under artifacts/",
+    "claim_boundary": "descriptive local wall-clock results; no hard-realtime, robot, VLA, or functional-safety claim",
+    "execution": "sequential in one process; run on an otherwise idle host",
+    "geometry_order": "paired full/delta order alternates by iteration",
+    "timing": "totals are measured directly; stage measurements are diagnostics and percentile totals are never formed by summing stage percentiles",
+    "warmups": "recorded in raw samples and excluded from result quantiles"
+  },
+  "raw_samples": "samples.jsonl",
+  "raw_samples_sha256": "b48d5d96bf653f39a7031e3aed1ced3012fe68d8ad27e7c076c508a2513d9484",
+  "results": {
+    "geometry": {
+      "claim_boundary": "Call-count reduction and wall-clock ratio are reported separately; neither is whole-system speedup.",
+      "delta": {
+        "max_seconds": 0.468426584,
+        "mean_seconds": 0.4214240583500001,
+        "min_seconds": 0.414791625,
+        "p50_seconds": 0.417655292,
+        "p95_seconds": 0.446018792,
+        "p99_seconds": 0.468426584,
+        "quantile_method": "nearest-rank",
+        "sample_count": 20,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      },
+      "full": {
+        "max_seconds": 0.379968083,
+        "mean_seconds": 0.3639382603,
+        "min_seconds": 0.360633208,
+        "p50_seconds": 0.362142417,
+        "p95_seconds": 0.3728875,
+        "p99_seconds": 0.379968083,
+        "quantile_method": "nearest-rank",
+        "sample_count": 20,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      },
+      "operation_counts_per_sample": {
+        "delta": {
+          "cases": 1000,
+          "fallback_full_checks": 500,
+          "final_full_checks": 0,
+          "inherited": 500,
+          "root_full_checks": 1000,
+          "safe_passed": 500,
+          "unsafe_rejected": 500
+        },
+        "full": {
+          "cases": 1000,
+          "fallback_full_checks": 0,
+          "final_full_checks": 1000,
+          "inherited": 0,
+          "root_full_checks": 1000,
+          "safe_passed": 500,
+          "unsafe_rejected": 500
+        }
+      },
+      "paired_delta_minus_full_seconds": {
+        "max_seconds": 0.10628416699999998,
+        "mean_seconds": 0.057485798050000016,
+        "min_seconds": 0.04708325000000002,
+        "p50_seconds": 0.054922125000000044,
+        "p95_seconds": 0.06605070899999999,
+        "p99_seconds": 0.10628416699999998,
+        "quantile_method": "nearest-rank",
+        "sample_count": 20,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      },
+      "paired_delta_over_full_ratio": {
+        "max_ratio": 1.2934872083763664,
+        "mean_ratio": 1.15798128809987,
+        "min_ratio": 1.1262666353793034,
+        "p50_ratio": 1.1511803281880675,
+        "p95_ratio": 1.1738322558002852,
+        "p99_ratio": 1.2934872083763664,
+        "quantile_method": "nearest-rank",
+        "sample_count": 20,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      },
+      "scope": "paired construction, parent certificate, transform, final full or delta-with-fallback validation, signed finalization, and independent verification",
+      "stage_totals_per_sample": {
+        "delta": {
+          "evidence_finalization_seconds": {
+            "max_seconds": 0.038706875,
+            "mean_seconds": 0.03803835425,
+            "min_seconds": 0.037535667,
+            "p50_seconds": 0.037972667,
+            "p95_seconds": 0.038681667,
+            "p99_seconds": 0.038706875,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          },
+          "fallback_full_seconds": {
+            "max_seconds": 0.03510751699999999,
+            "mean_seconds": 0.03097380554999999,
+            "min_seconds": 0.03048134499999998,
+            "p50_seconds": 0.030648738999999953,
+            "p95_seconds": 0.03257967499999998,
+            "p99_seconds": 0.03510751699999999,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          },
+          "final_validation_seconds": {
+            "max_seconds": 0.1365380650000001,
+            "mean_seconds": 0.12373995345000002,
+            "min_seconds": 0.12200950000000006,
+            "p50_seconds": 0.12263802599999989,
+            "p95_seconds": 0.12996572800000036,
+            "p99_seconds": 0.1365380650000001,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          },
+          "parent_certificate_seconds": {
+            "max_seconds": 0.09339323599999999,
+            "mean_seconds": 0.08454707255,
+            "min_seconds": 0.08323552199999995,
+            "p50_seconds": 0.08382421799999999,
+            "p95_seconds": 0.08926551100000012,
+            "p99_seconds": 0.09339323599999999,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          },
+          "successful_inheritance_seconds": {
+            "max_seconds": 0.101430548,
+            "mean_seconds": 0.09276614790000001,
+            "min_seconds": 0.09144133000000008,
+            "p50_seconds": 0.0919888979999999,
+            "p95_seconds": 0.09738605300000004,
+            "p99_seconds": 0.101430548,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          }
+        },
+        "full": {
+          "evidence_finalization_seconds": {
+            "max_seconds": 0.038235375,
+            "mean_seconds": 0.03782185615,
+            "min_seconds": 0.037363125,
+            "p50_seconds": 0.037803916,
+            "p95_seconds": 0.038201583,
+            "p99_seconds": 0.038235375,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          },
+          "fallback_full_seconds": {
+            "max_seconds": 0.0,
+            "mean_seconds": 0.0,
+            "min_seconds": 0.0,
+            "p50_seconds": 0.0,
+            "p95_seconds": 0.0,
+            "p99_seconds": 0.0,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          },
+          "final_validation_seconds": {
+            "max_seconds": 0.07209293200000003,
+            "mean_seconds": 0.06969282139999997,
+            "min_seconds": 0.06906479699999993,
+            "p50_seconds": 0.06948049399999992,
+            "p95_seconds": 0.07123801200000013,
+            "p99_seconds": 0.07209293200000003,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          },
+          "parent_certificate_seconds": {
+            "max_seconds": 0.08669647300000001,
+            "mean_seconds": 0.08343985135000001,
+            "min_seconds": 0.08264965000000005,
+            "p50_seconds": 0.08316066300000004,
+            "p95_seconds": 0.08576978799999989,
+            "p99_seconds": 0.08669647300000001,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          },
+          "successful_inheritance_seconds": {
+            "max_seconds": 0.0,
+            "mean_seconds": 0.0,
+            "min_seconds": 0.0,
+            "p50_seconds": 0.0,
+            "p95_seconds": 0.0,
+            "p99_seconds": 0.0,
+            "quantile_method": "nearest-rank",
+            "sample_count": 20,
+            "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+          }
+        }
+      }
+    },
+    "numeric_physical": {
+      "durations": {
+        "max_seconds": 3.267132,
+        "mean_seconds": 3.2362848917,
+        "min_seconds": 3.183871333,
+        "p50_seconds": 3.235597792,
+        "p95_seconds": 3.267132,
+        "p99_seconds": 3.267132,
+        "quantile_method": "nearest-rank",
+        "sample_count": 10,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      },
+      "export_stage": {
+        "max_seconds": 0.006978542,
+        "mean_seconds": 0.0064069915000000005,
+        "min_seconds": 0.006176208,
+        "p50_seconds": 0.006286833,
+        "p95_seconds": 0.006978542,
+        "p99_seconds": 0.006978542,
+        "quantile_method": "nearest-rank",
+        "sample_count": 10,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      },
+      "scope": "realtime 40-observation ProductManager run, signed finalization, independent verification, and evidence export",
+      "verification_stage": {
+        "max_seconds": 0.005458708,
+        "mean_seconds": 0.0052578749,
+        "min_seconds": 0.005086458,
+        "p50_seconds": 0.005247167,
+        "p95_seconds": 0.005458708,
+        "p99_seconds": 0.005458708,
+        "quantile_method": "nearest-rank",
+        "sample_count": 10,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      }
+    },
+    "physics": {
+      "acceptance_each_run": [
+        {
+          "all_expected_commands": true,
+          "continued_stop_dynamics": true,
+          "deterministic_root_replay": true,
+          "mutation_refusal": true,
+          "no_engine_warnings": true,
+          "paired_negative": true,
+          "static_stability": true,
+          "step_convergence": false,
+          "zero_old_generation_submissions": true
+        },
+        {
+          "all_expected_commands": true,
+          "continued_stop_dynamics": true,
+          "deterministic_root_replay": true,
+          "mutation_refusal": true,
+          "no_engine_warnings": true,
+          "paired_negative": true,
+          "static_stability": true,
+          "step_convergence": false,
+          "zero_old_generation_submissions": true
+        },
+        {
+          "all_expected_commands": true,
+          "continued_stop_dynamics": true,
+          "deterministic_root_replay": true,
+          "mutation_refusal": true,
+          "no_engine_warnings": true,
+          "paired_negative": true,
+          "static_stability": true,
+          "step_convergence": false,
+          "zero_old_generation_submissions": true
+        }
+      ],
+      "claim_boundary": "Local numerical fixture only; no VLA checkpoint, robot arm, hard-realtime, or functional-safety claim.",
+      "durations": {
+        "max_seconds": 12.736527083,
+        "mean_seconds": 12.699374166333333,
+        "min_seconds": 12.6548845,
+        "p50_seconds": 12.706710916,
+        "p95_seconds": 12.736527083,
+        "p99_seconds": 12.736527083,
+        "quantile_method": "nearest-rank",
+        "sample_count": 3,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      },
+      "experiment_stage": {
+        "max_seconds": 12.59378033298708,
+        "mean_seconds": 12.557308347328217,
+        "min_seconds": 12.513288374990225,
+        "p50_seconds": 12.564856334007345,
+        "p95_seconds": 12.59378033298708,
+        "p99_seconds": 12.59378033298708,
+        "quantile_method": "nearest-rank",
+        "sample_count": 3,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      },
+      "infrastructure_gates_pass_each_run": [
+        false,
+        false,
+        false
+      ],
+      "scientific_observations_each_run": [
+        {
+          "failed_convergence_durations_seconds": [
+            0.6
+          ],
+          "integrated_outcome": "slip"
+        },
+        {
+          "failed_convergence_durations_seconds": [
+            0.6
+          ],
+          "integrated_outcome": "slip"
+        },
+        {
+          "failed_convergence_durations_seconds": [
+            0.6
+          ],
+          "integrated_outcome": "slip"
+        }
+      ],
+      "scope": "complete local 25-trial MuJoCo fixture, signed finalization, and independent verification",
+      "simulated_trial_time": {
+        "max_seconds": 57.24400000000068,
+        "mean_seconds": 57.24400000000068,
+        "min_seconds": 57.24400000000068,
+        "p50_seconds": 57.24400000000068,
+        "p95_seconds": 57.24400000000068,
+        "p99_seconds": 57.24400000000068,
+        "quantile_method": "nearest-rank",
+        "sample_count": 3,
+        "sample_size_note": "With fewer than 100 samples, nearest-rank p99 is descriptive and may equal the observed maximum."
+      }
+    }
+  },
+  "schema": "sentinel-performance-benchmark-v1",
+  "source": {
+    "git_commit": "7a16586e867567222bc38eb98f0f54a9d57af72f",
+    "git_tree": "00f6706240a0039cc9bb5b9523e7b7cfe9807630",
+    "measured_file_count": 35,
+    "measured_source_sha256": "ba3796f5921aca4eeb7f3f2997d504401528b8d1ce31d0f2a47b7fff4696545c",
+    "working_tree_dirty": false
+  },
+  "status": "completed"
+}

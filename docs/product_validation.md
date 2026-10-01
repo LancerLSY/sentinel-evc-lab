@@ -2,6 +2,16 @@
 
 Validation history and the current CLI/desktop increment, exercised on macOS with Python 3.12.14. The v4 GRU, real VLA, visual world model and robot trials remain in [experiment_plan.md](experiment_plan.md).
 
+## Main merge and performance validation (2026-10-01)
+
+PR #3 is merged. With the new reproducible benchmark, the full suite passes **167 tests**.
+The measured clean main commit `7a16586` passed CI. [Actual performance results](performance_results.md)
+include 20 paired geometry repetitions, 10 complete realtime numeric runs and three
+25-trial MuJoCo experiments, plus retained warmups. All completed evidence verified;
+the physics profile retained its scientific failure. Delta was slower in the simple
+geometry workload. Timing stage scope is explicit, and the raw sample digest was
+independently checked before publication.
+
 ## CLI, desktop, model and visual workbench validation (2026-10-01)
 
 The v0.3 increment adds managed installation, an AppKit/WebKit macOS App, bounded OBJ/STL/MJCF/URDF assets, read-only robot profiles and persisted local physics jobs. Both entrypoints use the same engine and signed evidence verifier. The App is locally built and ad-hoc signed; distribution signing/notarization and a bundled standalone Python runtime remain pending.
