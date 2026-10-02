@@ -1,0 +1,29 @@
+{
+  "schema": "sentinel-libero-failure-pose-diagnostic-v1",
+  "trajectory_sha256": "a7970523e1c98120caccdc987a04b7c254838aa24ba1b36b18493c5cd849ffda",
+  "presentation_only": true,
+  "included_in_benchmark_metrics": false,
+  "target_body": "akita_black_bowl_1_main",
+  "other_bowl_body": "akita_black_bowl_2_main",
+  "metric_definition": "Body center distances to observed EEF position and plate body center; not contact, fingertip clearance or grasp criteria.",
+  "metrics": {
+    "akita_black_bowl_1_main": {
+      "maximum_center_z_increase_m": 0.0016742421451779732,
+      "final_center_z_change_m": -0.03094672685549016,
+      "minimum_center_to_eef_position_m": 0.07718935424960012,
+      "minimum_center_to_plate_center_m": 0.28817475324457004,
+      "final_center_to_plate_center_m": 0.318498389197285,
+      "final_displacement_m": 0.046513437747362,
+      "maximum_z_frame_index": 41
+    },
+    "akita_black_bowl_2_main": {
+      "maximum_center_z_increase_m": 6.449285550047534e-13,
+      "final_center_z_change_m": 6.443734434924409e-13,
+      "minimum_center_to_eef_position_m": 0.1446746839323275,
+      "minimum_center_to_plate_center_m": 0.1447990084653659,
+      "final_center_to_plate_center_m": 0.1447990084653659,
+      "final_displacement_m": 4.0642364592121146e-11,
+      "maximum_z_frame_index": 39
+    }
+  }
+}

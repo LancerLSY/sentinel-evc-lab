@@ -1,0 +1,2599 @@
+{
+  "assets": {
+    "resolved_tree": {
+      "file_count": 955,
+      "root": "/root/autodl-tmp/sentinel-evc-gpu/20261002/libero-preflight-env/lib/python3.12/site-packages/libero/libero/assets",
+      "scope": "mixed_site_packages_tree",
+      "total_bytes": 188829695,
+      "tree_sha256": "f04f72afb7503afb071f9de7c6734b0eca147f87549df0a9080cc987afb17781"
+    }
+  },
+  "environment": {
+    "actions_executed_per_reset": 0,
+    "control_mode": "relative",
+    "fps": 20,
+    "hard_reset": true,
+    "init_states": true,
+    "max_parallel_tasks": 1,
+    "n_envs": 1,
+    "observation_height": 360,
+    "observation_width": 360,
+    "policy_loaded": false,
+    "suite": "libero_spatial",
+    "trust_remote_code": false,
+    "use_async_envs": false
+  },
+  "included_in_final_analysis": true,
+  "mode": "final",
+  "native_binding": {
+    "libero_protocol": "experiments/vla/libero_protocol.json",
+    "libero_protocol_sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b",
+    "native_final_grid": "states 0..9",
+    "native_task_5_observation": "0/10 policy success in the separate native closed-loop evaluation"
+  },
+  "output_artifacts": [
+    {
+      "bytes": 261055,
+      "path": "cameras/task_00_state_10.npz",
+      "sha256": "c0f241400b4dc4758de38b8a0c25773390612b8ebf7d0ecdb45dbd4c7b868bcb"
+    },
+    {
+      "bytes": 267129,
+      "path": "cameras/task_00_state_11.npz",
+      "sha256": "502d0a77d76f0dfffd476b396ba23da6ba99945956149f77e0b61a376ac54453"
+    },
+    {
+      "bytes": 263093,
+      "path": "cameras/task_00_state_12.npz",
+      "sha256": "60f2b556680114471021db779c4f4ff49b6e5d6d883df2fa1a02fae3cff89578"
+    },
+    {
+      "bytes": 259838,
+      "path": "cameras/task_00_state_13.npz",
+      "sha256": "8e10b30869e6931c17a8ac93c18fc8f693c1d6f070e491e3dcadaa3f275ae490"
+    },
+    {
+      "bytes": 263634,
+      "path": "cameras/task_00_state_14.npz",
+      "sha256": "3588f0c9542735b027f384d3018aa891c4d2ea2239804676c7e23e66740d0e15"
+    },
+    {
+      "bytes": 265008,
+      "path": "cameras/task_00_state_15.npz",
+      "sha256": "82c286f5d67abc9c72ac4615b71a84f87e9f590edcd5bb5fc4e6d34b5106347d"
+    },
+    {
+      "bytes": 266789,
+      "path": "cameras/task_00_state_16.npz",
+      "sha256": "b759658d60f16616e78e8c09f930ea77e116296fe7b6750aa6ed8b15dac4d830"
+    },
+    {
+      "bytes": 261555,
+      "path": "cameras/task_00_state_17.npz",
+      "sha256": "5fbe0161b1105d1207887575c38c184178dff971f2883deee142d2ec11464fc4"
+    },
+    {
+      "bytes": 263466,
+      "path": "cameras/task_00_state_18.npz",
+      "sha256": "c1138ac273ea5107a5f8aef9083609877c197a7072631d523909aad72195216c"
+    },
+    {
+      "bytes": 264956,
+      "path": "cameras/task_00_state_19.npz",
+      "sha256": "1e649e431f13033f4c1941e76b6f48db5fbe77705d587619a2d9e6c5d91bca8e"
+    },
+    {
+      "bytes": 261088,
+      "path": "cameras/task_05_state_10.npz",
+      "sha256": "a75a6f22900ea316a098fd568085494a54b7dd56a3a2fe4bc509f64d9010deba"
+    },
+    {
+      "bytes": 260747,
+      "path": "cameras/task_05_state_11.npz",
+      "sha256": "d85dac4ded8fd6416443ae8d5e99915f647e51280fe9839d88c097f1a50ed93b"
+    },
+    {
+      "bytes": 259532,
+      "path": "cameras/task_05_state_12.npz",
+      "sha256": "91b492bf033252995034a5fd43e17f9e1615e746b418b38e5967a1c23d2030a6"
+    },
+    {
+      "bytes": 260524,
+      "path": "cameras/task_05_state_13.npz",
+      "sha256": "d1fd77cd0ca8a2aac25297a25d4e769464a81b3014900ae42e4ba5d18cdd2284"
+    },
+    {
+      "bytes": 256972,
+      "path": "cameras/task_05_state_14.npz",
+      "sha256": "914826c32d84916d0519dbed070ad80b564a993d3179c2a278f54db64147eb29"
+    },
+    {
+      "bytes": 255343,
+      "path": "cameras/task_05_state_15.npz",
+      "sha256": "f0721d92ddf6b6f39d0ed8fef6b2a338a9affce2d96d76bad22ed1ca74af58a2"
+    },
+    {
+      "bytes": 257417,
+      "path": "cameras/task_05_state_16.npz",
+      "sha256": "44e081983f0cb7ba44bc9032f6f50621040d209a89a1f3af61a8d72b0c3add67"
+    },
+    {
+      "bytes": 259184,
+      "path": "cameras/task_05_state_17.npz",
+      "sha256": "075b3990d0f44179aa76c7a2fd4a8bd0b670899002be3af23447031fe1c9d214"
+    },
+    {
+      "bytes": 259168,
+      "path": "cameras/task_05_state_18.npz",
+      "sha256": "83dff32c3e2dbce0ebec414b24c5f1c02b0eeb62ed21dfc677fe9565ebbc95f7"
+    },
+    {
+      "bytes": 255320,
+      "path": "cameras/task_05_state_19.npz",
+      "sha256": "6014bc4fa73a4dacc064aff734ae4daceee19019071df99fb2cdd9e6b2896bee"
+    },
+    {
+      "bytes": 40362,
+      "path": "records.jsonl",
+      "sha256": "aa72cdef0463cfc47137b679656457cb74aa1b0511edcce9c881ee783295b6cc"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_10.npz",
+      "sha256": "3189b19e97448d9f0a3b9fe5d2f79b3e517d02d18b5986abb8cd3f51c32c6385"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_11.npz",
+      "sha256": "27729fcc8c1a3fcc8de8b20ffcb0411297bc26f5a6d080d0e48144befcf981ae"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_12.npz",
+      "sha256": "305ff6ed15290aa6dd353dd7954265cdfc47b1e452e3f4b27fec1b22df4dd25d"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_13.npz",
+      "sha256": "5e2c60799f7b156ddac8a138a000aa63b7e3ca2017dfce989d1baa07f9916369"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_14.npz",
+      "sha256": "ee08eb3b9bf5cdf039245b14f8ca7686daa8552839c952a8f705089af4b63f78"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_15.npz",
+      "sha256": "98a0a92b019f05e04b636b9ecf0215614a1e702e8cb8c476d403240842d16e0a"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_16.npz",
+      "sha256": "5a5cb3d41052e2c1c937c4857e92dfc2a9e4b8cb0c01ce1a6b5311cd0e8a7f99"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_17.npz",
+      "sha256": "e36f25084f18942f625fc2dcc95dfe589cf58d87f4b8e1e5de856657521ee138"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_18.npz",
+      "sha256": "d7b02031e34182479a5bdea99b10de0248489903e3662536c2fd43b435c58db4"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_00_state_19.npz",
+      "sha256": "aed9cef39b8f8a6e8c454dd549eef0af5bc04dab5a296e57380ba4b3dff6ab10"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_10.npz",
+      "sha256": "ca73316b0c034fa98c61eb6eeecce58cd97ccf0202a07a18f5da6e7d34411d2b"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_11.npz",
+      "sha256": "864691d72cb03db76dbfb0cbb96bbe2aea8af073d3d060e76b1de64a4d476aab"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_12.npz",
+      "sha256": "cbe55c65779c9622c5c023a1e6b94a895fadabdcf12d836d0ce6bad267418dc6"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_13.npz",
+      "sha256": "a71066e6f7d6748fe73d640ea324a8b5f61c322289f5519cd9735fb6a8567367"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_14.npz",
+      "sha256": "49a44061e55da319feba07127e159dcabda318249cb08b091395591e4d0d0950"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_15.npz",
+      "sha256": "fb11a4be772efce017b39f62de77a65c61db5c62e14be8494c4dc71315365edc"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_16.npz",
+      "sha256": "91ee382c58d099760662c64f64282f09882fce729e3a45ab08735f3f81359c03"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_17.npz",
+      "sha256": "61dbb0440f5b284537eb036c590bc35bc44ba4b2ef3fb938bad3f937b79727ba"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_18.npz",
+      "sha256": "4ed16d095aab40fa2ac235fe3be4209f0ac0c825fa1bdce38b332919120c8509"
+    },
+    {
+      "bytes": 2028,
+      "path": "states/task_05_state_19.npz",
+      "sha256": "e724d7c2106b7809578a570db690402c695748dc22a78d588ff464c0a7f94bf3"
+    }
+  ],
+  "preflight_evidence": {
+    "current": {
+      "initial_state_index": 47,
+      "mujoco": "3.8.1",
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-preflight-v2/current/manifest.json",
+      "seed": 41068,
+      "sha256": "df53711fed85c6dacea078e8595ca7a252b5ea41349f718af47f4d4229f94db7",
+      "task_id": 5,
+      "version_label": "current"
+    },
+    "legacy": {
+      "initial_state_index": 47,
+      "mujoco": "3.3.7",
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-preflight-v2/legacy/manifest.json",
+      "seed": 41068,
+      "sha256": "976e5e42c1813ffbe095c9679418997f179ee2254911c66f8eae433e768925ae",
+      "task_id": 5,
+      "version_label": "legacy"
+    }
+  },
+  "protocol_sha256": "225a2e0e99b11ed879ba796b998385d8a7e1250a6280da399d54366d776260a9",
+  "records": [
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 10,
+      "actual_seed": 41031,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "9be4c3fb38aa5adb7bf18a92e597ade355f9e29f3552f6f35594b69014cbea59",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "458860b4fd8e9504403b59a35bed40770cfe4c28d69b218e3809175ebb223777",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 261055,
+        "path": "cameras/task_00_state_10.npz",
+        "sha256": "c0f241400b4dc4758de38b8a0c25773390612b8ebf7d0ecdb45dbd4c7b868bcb"
+      },
+      "initial_state_index": 10,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.07115310468074897,
+            0.20899756125890895,
+            0.8984038468467775
+          ],
+          "quaternion_wxyz": [
+            0.7043928867567357,
+            -2.7822470766955887e-05,
+            2.6679704548784827e-06,
+            0.7098102988160324
+          ],
+          "tilt_rad": 5.590019434243709e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.12181910308537315,
+          0.021338494738988467,
+          -0.0009372731486584351
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.19297220776612212,
+            0.18765906651992048,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.454423394496145e-08,
+            1.6123006522875283e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41031,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "ed10bf4e38803573b29de7282d410677067cea84bc1f888235568d99e19e6ab2",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "dba5275ab8fcfe144f9e1373abab3d79dbc60f83d7189f0a38084d1daa57f2f8",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "f72d22dce9f8d196be9bd64ffa2c335e893ea0ccedbf92deddaebf4667e2aa3f",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_10.npz",
+        "sha256": "3189b19e97448d9f0a3b9fe5d2f79b3e517d02d18b5986abb8cd3f51c32c6385"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 11,
+      "actual_seed": 41032,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "324b567765a430993e1c1de216186efc7506f58b5d33940addde19d90d158512",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "598c1b30c323d0254a58044b0a50da72dd60641b33a9c942380b0b887fc29324",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 267129,
+        "path": "cameras/task_00_state_11.npz",
+        "sha256": "502d0a77d76f0dfffd476b396ba23da6ba99945956149f77e0b61a376ac54453"
+      },
+      "initial_state_index": 11,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.057918548888017216,
+            0.21070746634544374,
+            0.8984038715812133
+          ],
+          "quaternion_wxyz": [
+            0.7071067829262032,
+            -2.774979962026507e-05,
+            3.335974403461092e-06,
+            0.707106778894514
+          ],
+          "tilt_rad": 5.589919930710198e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.142852981492177,
+          0.015693451696659477,
+          -0.0009372484142227133
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.20077153038019424,
+            0.19501401464878426,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.454423394434742e-08,
+            1.612300652299388e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41032,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "3d77bc88eca6a6486ab954c1c8f6b7479ce86c395768abe9f189b5484a5a2316",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "bf9ccd2b05c2d940af1fe92d39ce3607fbb06ab3b1896b5bb474647c65026c7f",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "ea396643679248bcce8bc147e170776d4822ed7167cec066eb5174da8c4a8ac5",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_11.npz",
+        "sha256": "27729fcc8c1a3fcc8de8b20ffcb0411297bc26f5a6d080d0e48144befcf981ae"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 12,
+      "actual_seed": 41033,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "3d73f2c7475685becfd82ac6a9a9894a0c6e0d134ac15be3c1555abe991de606",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "756b8da720994c30c826ebfd19eb5f87d0a2e2c015f1d78149a75b1937996ac1",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 263093,
+        "path": "cameras/task_00_state_12.npz",
+        "sha256": "60f2b556680114471021db779c4f4ff49b6e5d6d883df2fa1a02fae3cff89578"
+      },
+      "initial_state_index": 12,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.055541950628634894,
+            0.18861994565312162,
+            0.8984038715812133
+          ],
+          "quaternion_wxyz": [
+            0.7071067829262032,
+            -2.7749799620263342e-05,
+            3.335974403465041e-06,
+            0.707106778894514
+          ],
+          "tilt_rad": 5.589919930710198e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.13047649465248687,
+          -0.020657440597795368,
+          -0.0009372484142227133
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.18601844528112177,
+            0.209277386250917,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.454423395094192e-08,
+            1.6123006523273177e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41033,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "395e615a3333a7403f7c1bf61b3359a76cb04a8b2b326efcb692655a63ee9ba4",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "fa01247dc7bfaff87a01de55b8a320b0f74f3d6ef69c4fef06fa577cc4a0622f",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "1f7f8eece1176d7988b4b9537f815f6d9bf72037f8a30806f7828f0fff22aa2f",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_12.npz",
+        "sha256": "305ff6ed15290aa6dd353dd7954265cdfc47b1e452e3f4b27fec1b22df4dd25d"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 13,
+      "actual_seed": 41034,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "df7cc82549db0167fb10cf09ed91516ff236ab9a75f7a749f1bf918ec2c5f411",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "6f934fd568d38766cd7bb765380a1ef9030aa1942440f4bda08029b0fa74edec",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 259838,
+        "path": "cameras/task_00_state_13.npz",
+        "sha256": "8e10b30869e6931c17a8ac93c18fc8f693c1d6f070e491e3dcadaa3f275ae490"
+      },
+      "initial_state_index": 13,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.07796925772233664,
+            0.2213826183583975,
+            0.898403715342484
+          ],
+          "quaternion_wxyz": [
+            0.6971099168099568,
+            -2.879694102548661e-05,
+            1.4744545371606324e-06,
+            0.7169642690216695
+          ],
+          "tilt_rad": 5.766932660337997e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.1350426164167941,
+          0.01074607795957025,
+          -0.0009374046529520008
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.21301187413913072,
+            0.21063654039882726,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.45442339450985e-08,
+            1.612300652306452e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41034,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "4f57e15ab710ab8e946b0e5c2da5cb6d675250f20612286ba05c2e91bf0c8c95",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "17ee8ebfdd83aca7df0820fcd6c3ff0fd41fc2511038f06be2dcbabdd742424f",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "4260c84c0d5cd09a4cd1575288b95a0732b880109f71f5ee2c23789b3eac6ecb",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_13.npz",
+        "sha256": "5e2c60799f7b156ddac8a138a000aa63b7e3ca2017dfce989d1baa07f9916369"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 14,
+      "actual_seed": 41035,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "0bcbb330fea7e0009f27a893fa9093499df7a0608a8ae821d4247fbfc84cbc72",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "e3860c15e7ff5bd86513e147568ca5967cd1fcbd8a6740d4e59c8c80f2a64632",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 263634,
+        "path": "cameras/task_00_state_14.npz",
+        "sha256": "3588f0c9542735b027f384d3018aa891c4d2ea2239804676c7e23e66740d0e15"
+      },
+      "initial_state_index": 14,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.08059122807172574,
+            0.19878970778120278,
+            0.8984037931101324
+          ],
+          "quaternion_wxyz": [
+            0.6962187937400693,
+            -2.8700590988386324e-05,
+            1.705851414385338e-06,
+            0.7178296388534603
+          ],
+          "tilt_rad": 5.7502482474815606e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.1335031277303596,
+          -0.010666270268878786,
+          -0.0009373268853035688
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.21409435580208533,
+            0.20945597805008156,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.454423394760495e-08,
+            1.612300652256325e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41035,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "b0132138fe7cae8434875d086bf5bba3e20b9b5836d0538601169a724eaac94a",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "7cc0685e0f9b52d1c46d5dcfff67d5ac62fafb2207b10d5ad88ca7d4de6f6b4f",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "63d8f59aeade1bf7b246473398a35583adf98ee3df15252215a98e90ca30d417",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_14.npz",
+        "sha256": "ee08eb3b9bf5cdf039245b14f8ca7686daa8552839c952a8f705089af4b63f78"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 15,
+      "actual_seed": 41036,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "af14fde85398bfe0c9db89a614b642ce7e25355f4320729c623a3f3063335543",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "4a7c0730ac2b7f827f2ccb94f4b8ffaccaf96785d8f06e06a0cddb81f7f03552",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 265008,
+        "path": "cameras/task_00_state_15.npz",
+        "sha256": "82c286f5d67abc9c72ac4615b71a84f87e9f590edcd5bb5fc4e6d34b5106347d"
+      },
+      "initial_state_index": 15,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.0496015336298917,
+            0.19040738492832504,
+            0.8984038715812133
+          ],
+          "quaternion_wxyz": [
+            0.7071067829262032,
+            -2.7749799620256752e-05,
+            3.33597440345609e-06,
+            0.707106778894514
+          ],
+          "tilt_rad": 5.589919930710198e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.14235533053254976,
+          -0.014909901925668934,
+          -0.0009372484142227133
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.19195686416244145,
+            0.20531728685399397,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.454423395140397e-08,
+            1.6123006523092918e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41036,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "dc173a2ac7a0c765efc0ab19f0c4376d84e5da7a8043f39689e800b934820024",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "f7214838afa22a619d99cfa379e7b06c6cee11314e6ed8677c9d5a54d08940fd",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "33710066686c631ed3bacfd92c268f67c3186d75af6edecd5409b07f9073ca8f",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_15.npz",
+        "sha256": "98a0a92b019f05e04b636b9ecf0215614a1e702e8cb8c476d403240842d16e0a"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 16,
+      "actual_seed": 41037,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "39309cdf7d57c217c104bf883780bdfb0cfd3a822b82c1b07397c16c5e7c7902",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "5ab24ada580b7d6930331a19d1aec86ecfe1aca57b974b8eb286e8c320eb6653",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 266789,
+        "path": "cameras/task_00_state_16.npz",
+        "sha256": "b759658d60f16616e78e8c09f930ea77e116296fe7b6750aa6ed8b15dac4d830"
+      },
+      "initial_state_index": 16,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.052590164279619094,
+            0.19785955438557537,
+            0.8984038715812133
+          ],
+          "quaternion_wxyz": [
+            0.7071067829262032,
+            -2.774979962025696e-05,
+            3.3359744034568857e-06,
+            0.707106778894514
+          ],
+          "tilt_rad": 5.589919930710198e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.15379317387330432,
+          -0.015020727573408305,
+          -0.0009372484142227133
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.20638333815292342,
+            0.21288028195898367,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.45442339452959e-08,
+            1.6123006522707e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41037,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "2edcc62977d6d1ac151df5b12e7482b03dac5ce22adb3c67b24cb4fab0017b87",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "122d898d82cfebbb5e5815e3aaa9c22b7d09af3d2308628faebdda297d88d493",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "ddd8c1bee754fc4f66c924cdb9f9cb1d6d5b338ff0747bffbd576d5a7bc03a7c",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_16.npz",
+        "sha256": "5a5cb3d41052e2c1c937c4857e92dfc2a9e4b8cb0c01ce1a6b5311cd0e8a7f99"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 17,
+      "actual_seed": 41038,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "b028d12466eb6095b612b1c58e0707a32bbdb509d4e1a1cb75bda2464490dd5b",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "818c59229bcbcfd17a9992e1e906047d6ad20991ff6ae4247fea989396305de9",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 261555,
+        "path": "cameras/task_00_state_17.npz",
+        "sha256": "5fbe0161b1105d1207887575c38c184178dff971f2883deee142d2ec11464fc4"
+      },
+      "initial_state_index": 17,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.052394712722681445,
+            0.20884136506482284,
+            0.8984038715812133
+          ],
+          "quaternion_wxyz": [
+            0.7071067829262032,
+            -2.774979962026518e-05,
+            3.335974403458877e-06,
+            0.707106778894514
+          ],
+          "tilt_rad": 5.589919930710198e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.14839169739921734,
+          0.021479868491579096,
+          -0.0009372484142227133
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.2007864101218988,
+            0.18736149657324375,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.454423394717352e-08,
+            1.6123006522617227e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41038,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "0c50f6221589b3568dc808ba409a7f2634b1a414603d5003841cd914fe2202d6",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "ad3ccc2d7d0d2e9cc3f9e7a71aa8640f6c45ce18c9b94dda721fb0aa4d59d584",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "d98bde90c9900e189d3c7b4c9d0e6914231b5aa84fc4ba987029b74dda99eda3",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_17.npz",
+        "sha256": "e36f25084f18942f625fc2dcc95dfe589cf58d87f4b8e1e5de856657521ee138"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 18,
+      "actual_seed": 41039,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "ffc9dd823bd2502fb3533ebd2586c0743fd66ee0107c1c22de72ddd9975cc92a",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "e5eeffd07cdeba1cdaa730b8902b7093cf4b55d0f21b42c03713611031f89e1b",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 263466,
+        "path": "cameras/task_00_state_18.npz",
+        "sha256": "c1138ac273ea5107a5f8aef9083609877c197a7072631d523909aad72195216c"
+      },
+      "initial_state_index": 18,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.09204450540389689,
+            0.18685510635324887,
+            0.8984036173155486
+          ],
+          "quaternion_wxyz": [
+            0.720324218988092,
+            -2.8192667440793034e-05,
+            1.6059992655181647e-06,
+            0.6936375269128605
+          ],
+          "tilt_rad": 5.64767475250286e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.11905766347578473,
+          -0.0075700825014879125,
+          -0.0009375026798873476
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.2111021688796816,
+            0.19442518885473678,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.454423395175765e-08,
+            1.6123006522998617e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41039,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "a559173e36cd74e48e6621f83eeb1dcf536a8618af576407af4f3d2dc098399f",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "c05bc0da1edf145f54cbd35d482d20e82f426c01897acdfefb8c8e11eec7dce9",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "900cb70422f544ee7fb8d270590fc0df49cccec4927ed3ad9bbc626328e3380d",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_18.npz",
+        "sha256": "d7b02031e34182479a5bdea99b10de0248489903e3662536c2fd43b435c58db4"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 19,
+      "actual_seed": 41040,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "67e8f1d6610c58fe2d1142f2bfe1515e506f9dc9c45340398697e3510ac2be6f",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "1d802877c498ee4870971963e2555fde5a8ca364e21235bffbabb8060ebcd89c",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 264956,
+        "path": "cameras/task_00_state_19.npz",
+        "sha256": "1e649e431f13033f4c1941e76b6f48db5fbe77705d587619a2d9e6c5d91bca8e"
+      },
+      "initial_state_index": 19,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.043882057083143786,
+            0.18412526774396024,
+            0.8984038579433634
+          ],
+          "quaternion_wxyz": [
+            0.7008618845352489,
+            -2.757131921440061e-05,
+            3.042776052820896e-06,
+            0.7132970054866796
+          ],
+          "tilt_rad": 5.547742337643562e-05
+        },
+        "bowl_minus_ramekin_position_m": [
+          0.14669575030874582,
+          -0.0010681942299937408,
+          -0.0009372620520725627
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.19057780739188962,
+            0.18519346197395398,
+            0.899341119995436
+          ],
+          "quaternion_wxyz": [
+            0.7071067844070541,
+            -6.454423394559719e-08,
+            1.612300652288173e-07,
+            0.70710677796602
+          ],
+          "tilt_rad": 3.4723222844991394e-07
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41040,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "31db33f6f5fa456a8be02a3bd0b89f03df1e5f10d857301a2487fe1b47d08599",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "f4159323ee77aa9e1d7a949cef9b22c4000427abeb214b2088bcff302f12c19d",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "208c4fd102da2620ac34234688a4e4608a689f9e5cf8d5d82889140d2c8c9bf3",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_00_state_19.npz",
+        "sha256": "aed9cef39b8f8a6e8c454dd549eef0af5bc04dab5a296e57380ba4b3dff6ab10"
+      },
+      "task_id": 0
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 10,
+      "actual_seed": 41031,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "2894fb84d08e047fdba34e8da6944cf69a7e258890d13d84ea674b15dca7435f",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "4d76073024f6cf48267d551f0a74c1178cfc09f136c2f72ac0e0130aa09a5622",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 261088,
+        "path": "cameras/task_05_state_10.npz",
+        "sha256": "a75a6f22900ea316a098fd568085494a54b7dd56a3a2fe4bc509f64d9010deba"
+      },
+      "initial_state_index": 10,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.21552497513887278,
+            0.20595421424875163,
+            0.9343991625454942
+          ],
+          "quaternion_wxyz": [
+            0.7222068405441169,
+            0.10048515122411446,
+            0.09562130685300908,
+            0.6776256927909937
+          ],
+          "tilt_rad": 0.27831912361760225
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.014517404279255686,
+          0.0005246793625931501,
+          0.035061949830384465
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.2010075708596171,
+            0.20542953488615848,
+            0.8993372127151097
+          ],
+          "quaternion_wxyz": [
+            0.7086279638824524,
+            4.033055542866728e-06,
+            -3.4456551008947965e-05,
+            0.7055823180893134
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41031,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "bda1bd8283d95739e5594a09943abcb60899f06fee447647d2e715d8da47682f",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "00bde7f91cfdefd605cc2b0065fe0e79382301e57a6147ccd88ff9aba691904b",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "6fd98c758b139550144a1ca1cda9b5fb7d5d5dd4732e11fe686be010cce7f522",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_10.npz",
+        "sha256": "ca73316b0c034fa98c61eb6eeecce58cd97ccf0202a07a18f5da6e7d34411d2b"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 11,
+      "actual_seed": 41032,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "ec2ce0d4ad2640190c2d51518a5be70a0e95ed02dcde8dc41236dc7866055b51",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "15b74acd1a6509efb61ca34975e8e0b7d51dd26a0bf83a82b8d07c41aa929fb3",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 260747,
+        "path": "cameras/task_05_state_11.npz",
+        "sha256": "d85dac4ded8fd6416443ae8d5e99915f647e51280fe9839d88c097f1a50ed93b"
+      },
+      "initial_state_index": 11,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.20878478677695989,
+            0.18606660118070462,
+            0.9343991625454947
+          ],
+          "quaternion_wxyz": [
+            0.7222068405440274,
+            0.10048515122388998,
+            0.09562130685303034,
+            0.6776256927911196
+          ],
+          "tilt_rad": 0.2783191236173036
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.014517404279243779,
+          0.0005246793625773016,
+          0.03506194983038491
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.1942673824977161,
+            0.18554192181812731,
+            0.8993372127151098
+          ],
+          "quaternion_wxyz": [
+            0.7086279638824685,
+            4.0330555418281e-06,
+            -3.445655100561841e-05,
+            0.705582318089297
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41032,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "6a8c8c9b52d3f323cba484584a096312bae9384d7765510775b6cb515ba8f534",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "ac8a6693244c04fd6e41154fb2dfb8e45c3bd99e4b67a8b82a2b323c46c8bed7",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "d21c1cdf5ab2338bac9182fa10dd340de0331e3d36a316fdc28bdc2b6022384a",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_11.npz",
+        "sha256": "864691d72cb03db76dbfb0cbb96bbe2aea8af073d3d060e76b1de64a4d476aab"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 12,
+      "actual_seed": 41033,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "984c94c5b88a688a6f93fc7f08bee55e81a94b6e27223b69128f7dfa7c8c44d5",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "8a889fe2127c167178b03113683472f398b76cb7e6c7b67d04d20353920ea603",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 259532,
+        "path": "cameras/task_05_state_12.npz",
+        "sha256": "91b492bf033252995034a5fd43e17f9e1615e746b418b38e5967a1c23d2030a6"
+      },
+      "initial_state_index": 12,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.21749679250757994,
+            0.20667266247537394,
+            0.934399162545492
+          ],
+          "quaternion_wxyz": [
+            0.7222068405439819,
+            0.1004851512237972,
+            0.09562130685288489,
+            0.6776256927912028
+          ],
+          "tilt_rad": 0.27831912361696537
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.014517404279206308,
+          0.0005246793625910406,
+          0.03506194983038213
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.20297938822837364,
+            0.2061479831127829,
+            0.8993372127151099
+          ],
+          "quaternion_wxyz": [
+            0.7086279638824982,
+            4.033055538137069e-06,
+            -3.445655099874589e-05,
+            0.7055823180892672
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41033,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "3d588e26c1a5081fd2b089f6186ec1f4a071bdd619ed42d8a37089bc44318ddb",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "f719718dcd384e64b5517c31538d28caadfdbddbf1e33d509113ae562d1a5662",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "ffb756a515dfe385ba7c9857b9939e96558a33aa2b914eb46b47837014e6303f",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_12.npz",
+        "sha256": "cbe55c65779c9622c5c023a1e6b94a895fadabdcf12d836d0ce6bad267418dc6"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 13,
+      "actual_seed": 41034,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "fc0edd4485502df7f586a841baa9de5d5df93b403a487d7c9a0bf9194f32df34",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "4aabceb9f6daf930858b5f0f1580924c2dd964c5ae9c84e209a16c1de7a0a573",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 260524,
+        "path": "cameras/task_05_state_13.npz",
+        "sha256": "d1fd77cd0ca8a2aac25297a25d4e769464a81b3014900ae42e4ba5d18cdd2284"
+      },
+      "initial_state_index": 13,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.20750127028879614,
+            0.1871115567477203,
+            0.9343991625454937
+          ],
+          "quaternion_wxyz": [
+            0.722206840544076,
+            0.10048515122394482,
+            0.09562130685299285,
+            0.6776256927910647
+          ],
+          "tilt_rad": 0.2783191236173315
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.014517404279240337,
+          0.0005246793625850732,
+          0.03506194983038402
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.1929838660095558,
+            0.1865868773851352,
+            0.8993372127151097
+          ],
+          "quaternion_wxyz": [
+            0.7086279638824523,
+            4.033055542876739e-06,
+            -3.4456551007371095e-05,
+            0.7055823180893138
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41034,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "6a51ffe2ca831a10ff618ee9296c0e4475acab7b37b65fded9d4e3d92775e176",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "b1786361a4583a4431fdfe478c90bc213230389e8f1ee4de64e43418b70a20a6",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "5f80d1812185c9bc0d616127cdecec4ba59610ff34329a2215f5a55c87faa084",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_13.npz",
+        "sha256": "a71066e6f7d6748fe73d640ea324a8b5f61c322289f5519cd9735fb6a8567367"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 14,
+      "actual_seed": 41035,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "62b8835f47de50b13d30e5f2422bb39ce4119c3fd39420797baaaabc05d24968",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "f909cdf2b17441b210563d00cbd2abce1d8d449498ab9348f4cbc11985bbbff7",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 256972,
+        "path": "cameras/task_05_state_14.npz",
+        "sha256": "914826c32d84916d0519dbed070ad80b564a993d3179c2a278f54db64147eb29"
+      },
+      "initial_state_index": 14,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.20009387045114266,
+            0.21321733275995294,
+            0.9343991625454927
+          ],
+          "quaternion_wxyz": [
+            0.722206840543862,
+            0.1004851512238173,
+            0.09562130685288157,
+            0.6776256927913267
+          ],
+          "tilt_rad": 0.27831912361699046
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.01451740427920506,
+          0.0005246793625932333,
+          0.035061949830382466
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.1855764661719376,
+            0.2126926533973597,
+            0.8993372127151102
+          ],
+          "quaternion_wxyz": [
+            0.7086279638825497,
+            4.033055533299649e-06,
+            -3.44565509912976e-05,
+            0.7055823180892157
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41035,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "86ee4eb176a4bdb457f832172744ce9497bf11be928868dfe45926265112baf6",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "d03e94e539a322c3a4cb109c40b5e6ff512ae41fec2794e6f470ab8759624df1",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "20dd21d0f4b917b5c5896bf30ec903f70a459a081f318949a6d54bfc655877e0",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_14.npz",
+        "sha256": "49a44061e55da319feba07127e159dcabda318249cb08b091395591e4d0d0950"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 15,
+      "actual_seed": 41036,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "216d26a32590b2d089bf30b625340132bfbdc08010375fc2451ac4914cd77544",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "75eb788f3e6c5a1c809744444c2403b3d0be259adbd17c4c0adefdec384dbd24",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 255343,
+        "path": "cameras/task_05_state_15.npz",
+        "sha256": "f0721d92ddf6b6f39d0ed8fef6b2a338a9affce2d96d76bad22ed1ca74af58a2"
+      },
+      "initial_state_index": 15,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.2294770581054259,
+            0.1995760345815768,
+            0.9343991625454953
+          ],
+          "quaternion_wxyz": [
+            0.7222068405437927,
+            0.10048515122380684,
+            0.09562130685299004,
+            0.6776256927913872
+          ],
+          "tilt_rad": 0.2783191236171258
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.01451740427922607,
+          0.0005246793625781898,
+          0.03506194983038491
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.21495965382619983,
+            0.1990513552189986,
+            0.8993372127151104
+          ],
+          "quaternion_wxyz": [
+            0.7086279638825418,
+            4.033055533271373e-06,
+            -3.4456550992782795e-05,
+            0.7055823180892241
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41036,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "677dc4ebc5722b7d17686cade26b7a53cebf1f77de8c97c6a61b668aee4576e3",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "6200a185f048b5d08e49b23bd873a8116add9494f970d8a229c2c95dec12e45c",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "e3c3838d5a79a6a59589d2b3f8054d451e380d670af8e10e84ed4c63c680632e",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_15.npz",
+        "sha256": "fb11a4be772efce017b39f62de77a65c61db5c62e14be8494c4dc71315365edc"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 16,
+      "actual_seed": 41037,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "d37e77584bc439fb7695ea48b58211346864a5a08d4814e424425bedaa785e6d",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "69a8fd5a8002e0c3f7f70ebdd41562f2ee5af71282f5eaa200f04626869ec85b",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 257417,
+        "path": "cameras/task_05_state_16.npz",
+        "sha256": "44e081983f0cb7ba44bc9032f6f50621040d209a89a1f3af61a8d72b0c3add67"
+      },
+      "initial_state_index": 16,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.2270469793725775,
+            0.21399504541195552,
+            0.9343991625454938
+          ],
+          "quaternion_wxyz": [
+            0.7222068405439129,
+            0.10048515122373677,
+            0.09562130685294488,
+            0.6776256927912765
+          ],
+          "tilt_rad": 0.27831912361696054
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.014517404279213608,
+          0.000524679362580216,
+          0.03506194983038369
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.2125295750933639,
+            0.2134703660493753,
+            0.8993372127151101
+          ],
+          "quaternion_wxyz": [
+            0.7086279638825282,
+            4.033055536082629e-06,
+            -3.4456550995499494e-05,
+            0.7055823180892385
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41037,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "c05b89bdee588c232e8853cc8a741d04dc9360818b99129d86dfd1adf1bf9553",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "7d9ca5e7b7dec902437608775b1311a6d7f4834b13c4737d755417f5764a383d",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "d557f57db3c7c9541c257d13d9c4a86d6d937924611c011f626ef5fc26a85b85",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_16.npz",
+        "sha256": "91ee382c58d099760662c64f64282f09882fce729e3a45ab08735f3f81359c03"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 17,
+      "actual_seed": 41038,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "9edc38f60b46ef88dcfa6591918aed6bf6946fb54ef4a49421e29071d7c3202c",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "26e9f171db2d3ea801bdff8d2cd156a16ccd938a3de04a7d22cefc4838ef1332",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 259184,
+        "path": "cameras/task_05_state_17.npz",
+        "sha256": "075b3990d0f44179aa76c7a2fd4a8bd0b670899002be3af23447031fe1c9d214"
+      },
+      "initial_state_index": 17,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.2034529515976306,
+            0.21302187920136192,
+            0.9343991625454962
+          ],
+          "quaternion_wxyz": [
+            0.7222068405439569,
+            0.10048515122391499,
+            0.09562130685306515,
+            0.6776256927911868
+          ],
+          "tilt_rad": 0.2783191236173885
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.01451740427925119,
+          0.0005246793625747204,
+          0.03506194983038613
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.18893554731837942,
+            0.2124971998387872,
+            0.89933721271511
+          ],
+          "quaternion_wxyz": [
+            0.708627963882488,
+            4.033055539201914e-06,
+            -3.445655100229739e-05,
+            0.705582318089278
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41038,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "b33d38ec05341ae2d90139fbe7e8c6e67a1c86e6fbed8aebb7eae8d0c791a770",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "8d673e0fdad0f4701a54aa1d43c688803f8da6c874d1303f72c33120cc9d3f5c",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "e792f27a6c941cea3202b44a9b89db1bdac2262c043e465fa97ece168a8694b6",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_17.npz",
+        "sha256": "61dbb0440f5b284537eb036c590bc35bc44ba4b2ef3fb938bad3f937b79727ba"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 18,
+      "actual_seed": 41039,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "30669a4d818741767fd0814f5fc68b5e9dc6228a11a8ecb790d45265f45a01ad",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "2e1eeae074c5eba9841fb920f413e551f9febf5fdfee38b37a835f4c8eb467a1",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 259168,
+        "path": "cameras/task_05_state_18.npz",
+        "sha256": "83dff32c3e2dbce0ebec414b24c5f1c02b0eeb62ed21dfc677fe9565ebbc95f7"
+      },
+      "initial_state_index": 18,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.22697828461749414,
+            0.1861940310832782,
+            0.9343991625454934
+          ],
+          "quaternion_wxyz": [
+            0.7222068405440125,
+            0.10048515122387357,
+            0.09562130685295687,
+            0.6776256927911477
+          ],
+          "tilt_rad": 0.27831912361717714
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.014517404279227014,
+          0.0005246793625857671,
+          0.035061949830383465
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.21246088033826713,
+            0.18566935172069243,
+            0.8993372127151099
+          ],
+          "quaternion_wxyz": [
+            0.7086279638824766,
+            4.033055540652703e-06,
+            -3.4456551003127893e-05,
+            0.7055823180892893
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41039,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "adfb617fd9264607b4caa18b0082e55b335fd61cb25fb0271f33bbc2b8ba1957",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "9cb1f6dfde10f4f5d0fa61c7bba4a616015017ba9fa92e59e619f313cf9bd440",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "76b65309802cbac1d498b1d1c099bb6679df6d8a101ff60ef6bf4223a0225d0e",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_18.npz",
+        "sha256": "4ed16d095aab40fa2ac235fe3be4209f0ac0c825fa1bdce38b332919120c8509"
+      },
+      "task_id": 5
+    },
+    {
+      "actions_executed": 0,
+      "actual_initial_state_index": 19,
+      "actual_seed": 41040,
+      "camera_arrays": {
+        "agentview_image": {
+          "dtype": "uint8",
+          "sha256": "877b75c2c64c985afaa627dec369a61e127bd139a6dc4cbb485bf5f8cd76f8ce",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        },
+        "robot0_eye_in_hand_image": {
+          "dtype": "uint8",
+          "sha256": "7df63c273ca6902f9215da0975526c11cd76bfd288b306c7cdef7b2a02e8144e",
+          "shape": [
+            360,
+            360,
+            3
+          ]
+        }
+      },
+      "camera_artifact": {
+        "bytes": 255320,
+        "path": "cameras/task_05_state_19.npz",
+        "sha256": "6014bc4fa73a4dacc064aff734ae4daceee19019071df99fb2cdd9e6b2896bee"
+      },
+      "initial_state_index": 19,
+      "objects": {
+        "bowl": {
+          "body_id": 23,
+          "body_name": "akita_black_bowl_1_main",
+          "position_m": [
+            -0.22724895823675037,
+            0.20437254289455992,
+            0.9343991625454972
+          ],
+          "quaternion_wxyz": [
+            0.7222068405439002,
+            0.10048515122372764,
+            0.09562130685310567,
+            0.6776256927912683
+          ],
+          "tilt_rad": 0.2783191236171711
+        },
+        "bowl_minus_ramekin_position_m": [
+          -0.014517404279246193,
+          0.0005246793625592883,
+          0.03506194983038702
+        ],
+        "ramekin": {
+          "body_id": 26,
+          "body_name": "glazed_rim_porcelain_ramekin_1_main",
+          "position_m": [
+            -0.21273155395750418,
+            0.20384786353200063,
+            0.8993372127151101
+          ],
+          "quaternion_wxyz": [
+            0.7086279638825215,
+            4.033055537074474e-06,
+            -3.445655099866453e-05,
+            0.705582318089244
+          ],
+          "tilt_rad": 6.938355572462903e-05
+        }
+      },
+      "policy_loaded": false,
+      "pre_action": true,
+      "requested_seed": 41040,
+      "sim_state_arrays": {
+        "act": {
+          "dtype": "float64",
+          "sha256": "091976de118732093113c7ff6ba1338ea3430face80637d4f5bad19dbb98008f",
+          "shape": [
+            0
+          ]
+        },
+        "ctrl": {
+          "dtype": "float64",
+          "sha256": "135ea1bf64767ef403afc383314004b9cff97f5da6dcae9732a2e3885c18ddf9",
+          "shape": [
+            9
+          ]
+        },
+        "qpos": {
+          "dtype": "float64",
+          "sha256": "5dd6ef7dad0562e9f092b84d9fa1c5dca765868f2bd400f21310a73ee83dff4c",
+          "shape": [
+            48
+          ]
+        },
+        "qvel": {
+          "dtype": "float64",
+          "sha256": "27ce0856779be05bb4dd065c4489a652d68b5ae60e55b58f5851ada9f57598ab",
+          "shape": [
+            43
+          ]
+        },
+        "time": {
+          "dtype": "float64",
+          "sha256": "ff0a1ee7d7d74bb4149388c9499eac7c5fa1dd5539ff5fe2d15592e6cd821d4a",
+          "shape": [
+            1
+          ]
+        }
+      },
+      "state_artifact": {
+        "bytes": 2028,
+        "path": "states/task_05_state_19.npz",
+        "sha256": "e724d7c2106b7809578a570db690402c695748dc22a78d588ff464c0a7f94bf3"
+      },
+      "task_id": 5
+    }
+  ],
+  "reset_count": 20,
+  "schema": "sentinel-libero-reset-audit-capture-v1",
+  "scope": "Deterministic reset-state diagnostic under the frozen LIBERO assets, init states, seeds, environment parameters, and two MuJoCo package versions.",
+  "script_sha256": "2d5d4aef2d42f9fc4d80e386c36c2c9515b1ff8aadf40bebddb82b802e719a27",
+  "software": {
+    "hf-libero": "0.1.4",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.7",
+    "mujoco_module": "/root/autodl-tmp/sentinel-evc-gpu/20261002/reset-audit-mujoco-3.3.7/mujoco/__init__.py",
+    "platform": "Linux-5.15.0-94-generic-x86_64-with-glibc2.35",
+    "python": "3.12.3",
+    "robosuite": "1.4.0"
+  },
+  "status": "complete",
+  "version_label": "legacy"
+}

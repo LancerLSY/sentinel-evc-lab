@@ -1,0 +1,30 @@
+{
+  "counterfactual_pairs": 100,
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 4090 D",
+    "gpu_memory_bytes": 25252724736,
+    "mujoco": "3.14.0",
+    "torch": "2.8.0+cu128"
+  },
+  "model_artifacts": {
+    "encoder_weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "state_manifest_sha256": "f03fccb54b0e7ee2b616eae0cd7693430b05abad48ab4e68b0b0224af33278d8",
+    "state_metrics_sha256": "322838fc7469dd52420d03556af41f5febe0bda8432afa8995be58394ac42e42",
+    "visual_cache_sha256": "6e11d202c4f189dd2d5dd54f621a07446e5aa2628ae4ded701ac421ca3448c27",
+    "visual_manifest_sha256": "895caf662c018f2cdceef4325e1dac0d5d618a2771a63fe707b071f5910a2b23",
+    "visual_metrics_sha256": "cf5ac26703dc3cb9888020c03f014ade6f6cd8fad80e9c01c2dc253ee25f0253"
+  },
+  "output_hashes": {
+    "counterfactual.json": "cd60de938c38c8b07e95f6c89a5d97c6d5c12b471c08bc830454dce1c6af5f35",
+    "metrics.json": "45e4f2113b13017ced94726c1f46fccef96b9a31531353db951cfcb2f221baa1",
+    "per_root.json": "e49a3531179cf740f4fe2f209b7e3c56853367daa6d0b0f7b0528bebc7ac91c5",
+    "results.npz": "09595bfa6df8ca884c669c4900c785138adc3053594f1269d895b40e05815e70"
+  },
+  "preflight": false,
+  "protocol_sha256": "1ad4220bbe55948db42d1c5d82f36ff196ba9b691ad666d676e3f371d53c8fe4",
+  "root_count": 600,
+  "scope": "offline paired simulation support routing; no product permit, hardware, SO100 or continuous-collision claim",
+  "source_sha256": "ddb44c2ffa4a7cc7df41109606664a51319b76b23a44758b382c9d92d6232f8d",
+  "status": "complete",
+  "wall_seconds": 94.76722717285156
+}

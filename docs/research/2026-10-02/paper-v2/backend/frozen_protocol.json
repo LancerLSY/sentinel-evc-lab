@@ -1,0 +1,99 @@
+{
+  "schema": "sentinel-libero-backend-ablation-protocol-v1",
+  "state": "frozen_before_formal_run",
+  "claim": "Paired fixed-state SmolVLA LIBERO benchmark-version compatibility study comparing MuJoCo 3.8.1 with 3.3.7 under unchanged model weights and 10-action execution horizon.",
+  "versions": {
+    "current": "3.8.1",
+    "legacy": "3.3.7",
+    "isolation": "MuJoCo 3.3.7 is installed with pip --no-deps --target and selected in a fresh process through PYTHONPATH; the current 3.8.1 environment is not modified."
+  },
+  "source_bindings": {
+    "native_runner_sha256": "9d5103e57d6c0d420cf32024fa3b929ed0b90518c18e830296d6bdb5cb635b9e",
+    "native_protocol_sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b",
+    "native_manifest_sha256": "b5d8e982f50ee07452441a5f7070bf305faafc3465ae07b725574aa5324c7c4e",
+    "native_trace_sha256": "3460974091ca0199bdae4bb0be0834c51396023cf882c2e1a262f1c76d42dba3",
+    "reset_runner_sha256": "2d5d4aef2d42f9fc4d80e386c36c2c9515b1ff8aadf40bebddb82b802e719a27",
+    "reset_protocol_sha256": "225a2e0e99b11ed879ba796b998385d8a7e1250a6280da399d54366d776260a9",
+    "reset_current_sha256": "48be0f62e8bae2f82d7c66d2e31f31c0ffdd5232731c365a62f83f643a0d427c",
+    "reset_legacy_sha256": "ec30af51da29afd70f3a1649bc0f290a3aff9aa1d28ad43a2baa7de6001fd473",
+    "reset_comparison_sha256": "97cbf95929f4a56bfd9c427c37c1e801ec851e98a43824711eb2888ab4c8a10f"
+  },
+  "evaluation": {
+    "suite": "libero_spatial",
+    "task_ids": [
+      5,
+      0
+    ],
+    "task_roles": {
+      "5": "primary_on_ramekin_task",
+      "0": "same_object_family_control"
+    },
+    "fixed_initial_state_indices": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "seed_base": 43021,
+    "seed_formula": "43021 + (initial_state_index - 20)",
+    "prediction_chunk_size": 50,
+    "execution_horizon": 10,
+    "policy_reset_before_each_episode": true,
+    "hard_reset": true,
+    "fps": 20,
+    "control_mode": "relative",
+    "episodes_per_version": 20,
+    "total_episodes": 40,
+    "version_execution": "separate processes, sequential rather than concurrent"
+  },
+  "preflight": {
+    "task_id": 0,
+    "initial_state_index": 46,
+    "seed": 43020,
+    "versions": [
+      "current",
+      "legacy"
+    ],
+    "excluded_from_formal_metrics": true
+  },
+  "analysis": {
+    "primary_endpoint": "task 5 paired success delta, MuJoCo 3.3.7 minus MuJoCo 3.8.1",
+    "secondary_endpoints": [
+      "task 0 paired success delta",
+      "per-version Wilson 95% intervals",
+      "paired bootstrap 95% interval",
+      "discordant-pair count",
+      "first reset state and camera hash differences",
+      "first predicted normalized-action difference",
+      "episode crashes and runtime"
+    ],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 44000,
+    "no_retry_rule": "A crashed episode is a failure and is never retried or replaced. Reset state/seed are asserted when an episode_reset event was observed; a pre-reset crash retains null actual state/seed and counts as failure with missing reset evidence.",
+    "input_equality_rule": "Task, init-state file/index, seed, assets, checkpoint, backbone, weights, processors, chunk size, and execution horizon are matched. MuJoCo package version is the treatment.",
+    "difference_rule": "Reset images, simulator state, and first predicted actions may differ across versions and are reported rather than required equal."
+  },
+  "claims": {
+    "scope": "Fixed-state benchmark-version compatibility comparison under two complete MuJoCo package versions.",
+    "version_treatment": "The comparison estimates the effect of changing the complete MuJoCo version in this frozen benchmark stack.",
+    "accuracy_limit": "Neither version is designated physically more accurate, and MuJoCo 3.8.1 is not described as buggy.",
+    "causal_limit": "Reset-mediated causation remains a hypothesis because the treatment changes the complete MuJoCo version rather than isolating a single contact behavior.",
+    "init_state_limit": "Official LIBERO init states are used unchanged; they are not patched or regenerated.",
+    "generalization_limit": "Results do not establish real-robot performance, safety, general LIBERO performance, or effects for other policies."
+  },
+  "references": {
+    "mujoco_3_4_changelog": "https://mujoco.readthedocs.io/en/stable/changelog.html#version-3-4-0-december-5-2025",
+    "lerobot_issue_4390": "https://github.com/huggingface/lerobot/issues/4390",
+    "reference_role": "Motivation and version-history context only; neither source predetermines this study's outcome."
+  },
+  "implementation": {
+    "script": "experiments/vla/run_backend_ablation.py",
+    "script_sha256": "19164e24c3f39a9c89bd4a8ccfe6de489e5175da2decadf1ec847538a1a8102b"
+  }
+}

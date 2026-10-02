@@ -1,0 +1,98 @@
+{
+  "claim_boundary": "MuJoCo simulation evidence from 180 constructed roots. Rejected-branch motion is a labelled counterfactual. Static sampled checks do not establish continuous collision freedom. This is not real-hardware validation, functional-safety certification, or SmolVLA-controlled UR5e motion.",
+  "duration_seconds": 19.95,
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 4090 D, 24564 MiB",
+    "mujoco": "3.14.0",
+    "numpy": "2.2.6",
+    "pyav": "15.1.0",
+    "python": "3.12.3",
+    "render_backend": "EGL expected on headless GPU host",
+    "video_encoder": "PyAV libx264"
+  },
+  "font": "/tmp/SourceHanSerifSC-Regular.otf",
+  "frame_count": 399,
+  "gate_recomputed": false,
+  "inputs": {
+    "highres_replay_trajectories_sha256": "3593e9683d030348d82ec308f6d4c79cccb7c95c3b6498663eb46015554fe729",
+    "portable_model_tree_sha256": "ad04c294bdf0849248d3f881a061020b5e7a3206e33fe7613374ed308c2e7724",
+    "review_manifest_sha256": "d14c410beea61ac348e6f642e1493d3c94cb8d98929dc65e5b5e55d3ba079e16",
+    "review_source_sha256": "25273954692daaebdfc0dfa29726280d588c9d85b6a15fa6f258df777be3abf4",
+    "reviewed_per_root_sha256": "1a43836848e474f8c6b90ab70413b63ae5d526852e90b409e1aa7385942c269e",
+    "run_manifest_sha256": "21328bd8d514affcba474fb7cbba7502a0b8ef18ce5ebd12bff151e76bf377c2",
+    "run_source_sha256": "ffbdc811f08cb335b40088fd438d4b1239b92c05a46ff353e1c6bedf302f16cb"
+  },
+  "language": "English + Simplified Chinese",
+  "outputs": {
+    "sentinel-ur5e-paper-poster.png": {
+      "bytes": 317573,
+      "sha256": "f11b44cf15be573834bed01c24069070b299b4d1d1c8ac7a881f1d58273f608c"
+    },
+    "sentinel-ur5e-paper.mp4": {
+      "bytes": 1582324,
+      "sha256": "07ca1f30df129591ca40670212fa25141c53169242dc6a8a65422795809f6d16"
+    }
+  },
+  "physics_rerun": false,
+  "render_only": true,
+  "renderer_sha256": "fbde06d3a6ffd4a3229356381705954feec7c064bfe864e5a17d2cc9a90549d0",
+  "resolution": {
+    "fps": 20,
+    "height": 1080,
+    "width": 1920
+  },
+  "schema": "sentinel-ur5e-paper-video-v1",
+  "selection": {
+    "cases": [
+      {
+        "chapter": 1,
+        "contact_frame_from_render_model": null,
+        "full_final_gate_allow": true,
+        "full_gate_wall_ms": 154.45343405008316,
+        "parent_only_allow": true,
+        "review_reason": "safe",
+        "review_unsafe": false,
+        "root": 0,
+        "scenario": "clear",
+        "selection_rule": "fixed explanatory ID declared in renderer source and storyboard"
+      },
+      {
+        "chapter": 2,
+        "contact_frame_from_render_model": 38,
+        "full_final_gate_allow": false,
+        "full_gate_wall_ms": 11.213792487978935,
+        "parent_only_allow": true,
+        "review_reason": "collision",
+        "review_unsafe": true,
+        "root": 10000,
+        "scenario": "late_suffix",
+        "selection_rule": "fixed explanatory ID declared in renderer source and storyboard"
+      },
+      {
+        "chapter": 3,
+        "contact_frame_from_render_model": 34,
+        "full_final_gate_allow": false,
+        "full_gate_wall_ms": 10.489016771316528,
+        "parent_only_allow": true,
+        "review_reason": "collision",
+        "review_unsafe": true,
+        "root": 50000,
+        "scenario": "environment_change",
+        "selection_rule": "fixed explanatory ID declared in renderer source and storyboard"
+      }
+    ],
+    "purpose": "fixed explanatory cases, not a statistical sample",
+    "root_ids": [
+      0,
+      10000,
+      50000
+    ]
+  },
+  "source_semantics": {
+    "left": "stored independently reviewed high-resolution final-plan qpos; rejected branches are counterfactual and were not dispatched",
+    "motion_timing": "41 stored states at 0.05 s per state interval (1x)",
+    "obstacles": "final_obstacles from reviewed_per_root.json",
+    "right_allowed": "same stored qpos for a plan the frozen full gate allowed",
+    "right_rejected": "hold at the same initial qpos because the frozen full gate rejected the candidate before dispatch"
+  }
+}

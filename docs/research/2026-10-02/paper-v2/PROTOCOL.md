@@ -1,6 +1,6 @@
 # Sentinel EVC: prospective experiment protocol
 
-The machine-readable protocol is [protocol.json](../../../../../experiments/research_v2/protocol.json). It is frozen and committed before formal execution. This establishes ordering of this new study; it is not external preregistration. Prior results motivated these interventions and are explicitly development evidence. None of the new formal roots is used to train, choose, normalize or calibrate a model.
+The machine-readable sources are [the original cost protocol](../../../../experiments/research_v2/protocol.json) and [the amended intervention protocol](../../../../experiments/research_v2/intervention_protocol.json). They were committed before their respective formal executions (cost: `0ae1c20`; interventions: `ce56e1e`). The intervention amendment fixes descriptor routing and independently asserted branch equality after review, before any formal intervention root ran. It preserves distributions, policies, thresholds and sample sizes. This establishes ordering of this new study; it is not external preregistration. Prior results motivated these interventions and are explicitly development evidence. None of the new formal roots is used to train, choose, normalize or calibrate a model.
 
 ## Scientific questions
 

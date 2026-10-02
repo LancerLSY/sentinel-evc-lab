@@ -1,0 +1,1469 @@
+{
+  "asset_tree": {
+    "file_count": 955,
+    "root": "/root/autodl-tmp/sentinel-evc-gpu/20261002/libero-preflight-env/lib/python3.12/site-packages/libero/libero/assets",
+    "scope": "mixed_site_packages_tree",
+    "total_bytes": 188829695,
+    "tree_sha256": "f04f72afb7503afb071f9de7c6734b0eca147f87549df0a9080cc987afb17781"
+  },
+  "effective_environment": {
+    "camera_name": "agentview_image,robot0_eye_in_hand_image",
+    "camera_name_mapping": null,
+    "control_mode": "relative",
+    "disable_env_checker": true,
+    "episode_length": null,
+    "features": {
+      "action": {
+        "shape": [
+          7
+        ],
+        "type": "ACTION"
+      },
+      "pixels/agentview_image": {
+        "shape": [
+          360,
+          360,
+          3
+        ],
+        "type": "VISUAL"
+      },
+      "pixels/robot0_eye_in_hand_image": {
+        "shape": [
+          360,
+          360,
+          3
+        ],
+        "type": "VISUAL"
+      },
+      "robot_state/eef/mat": {
+        "shape": [
+          3,
+          3
+        ],
+        "type": "STATE"
+      },
+      "robot_state/eef/pos": {
+        "shape": [
+          3
+        ],
+        "type": "STATE"
+      },
+      "robot_state/eef/quat": {
+        "shape": [
+          4
+        ],
+        "type": "STATE"
+      },
+      "robot_state/gripper/qpos": {
+        "shape": [
+          2
+        ],
+        "type": "STATE"
+      },
+      "robot_state/gripper/qvel": {
+        "shape": [
+          2
+        ],
+        "type": "STATE"
+      },
+      "robot_state/joints/pos": {
+        "shape": [
+          7
+        ],
+        "type": "STATE"
+      },
+      "robot_state/joints/vel": {
+        "shape": [
+          7
+        ],
+        "type": "STATE"
+      }
+    },
+    "features_map": {
+      "action": "action",
+      "pixels/agentview_image": "observation.images.image",
+      "pixels/robot0_eye_in_hand_image": "observation.images.image2",
+      "robot_state/eef/mat": "observation.state.eef_mat",
+      "robot_state/eef/pos": "observation.state.eef_pos",
+      "robot_state/eef/quat": "observation.state.eef_quat",
+      "robot_state/gripper/qpos": "observation.state.gripper_qpos",
+      "robot_state/gripper/qvel": "observation.state.gripper_qvel",
+      "robot_state/joints/pos": "observation.state.joint_pos",
+      "robot_state/joints/vel": "observation.state.joint_vel"
+    },
+    "fps": 20,
+    "hard_reset": true,
+    "init_states": true,
+    "is_libero_plus": false,
+    "max_parallel_tasks": 1,
+    "obs_type": "pixels_agent_pos",
+    "observation_height": 360,
+    "observation_width": 360,
+    "render_mode": "rgb_array",
+    "task": "libero_spatial",
+    "task_ids": [
+      5,
+      0
+    ]
+  },
+  "episodes": [
+    {
+      "actual_initial_state_index": 20,
+      "actual_seed": 43021,
+      "crashed": false,
+      "elapsed_seconds": 39.812474727630615,
+      "env_steps": 280,
+      "episode_id": "task05-state20",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.12333247065544128,
+          -0.1704799383878708,
+          0.23521515727043152,
+          -0.06487089395523071,
+          0.49355438351631165,
+          -0.07606756687164307,
+          -0.9349421858787537
+        ],
+        "first_predicted_normalized_action_sha256": "3adbf100bb9bcd1b97f6cf5434695e2c15cf03a687c12327650be9e0b3d6027e",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "199060000191bf50af068271adef01c006615da662d7857365bd3783316fda9a",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "b978eceffd171d890292a06e26a2fdf3f315800f483a082c5c02f0d128104a5c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "22b18165bf4a509c18682ac99eda3b1e64fc0390b363111f211e6a4efdda4918",
+        "raw_chunk_sha256": "b4069d42d2e646e62450b5e1f74e16bcda82a71d352ee11153e31ebed23513d8",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 20,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43021,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 21,
+      "actual_seed": 43022,
+      "crashed": false,
+      "elapsed_seconds": 31.957214832305908,
+      "env_steps": 280,
+      "episode_id": "task05-state21",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.25233566761016846,
+          0.3241524398326874,
+          0.26831603050231934,
+          -0.04377509653568268,
+          0.27535611391067505,
+          0.1006489023566246,
+          -0.9502226710319519
+        ],
+        "first_predicted_normalized_action_sha256": "319729cb2b6acc6e2ef6e5b898b97e6eb5ec19fd7e63f3b4be541751a68cf144",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "7e794abc8548ec835a0d162d583925d3e15ed1675d4528d3780902180b5741e4",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "30321005441304de188ce7957134936ae11129bd077062966f2b225270dd4559",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "cbb7a501bb62fdb27b808ebdea4bfa2c2baeead3037db943a3b5c693e3a3cdc6",
+        "raw_chunk_sha256": "49ef864d3ddb54357c3cc0a9ce8cba7efbeb9fa49da3a063a4044faae4d02e35",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 21,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43022,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 22,
+      "actual_seed": 43023,
+      "crashed": false,
+      "elapsed_seconds": 32.100764989852905,
+      "env_steps": 280,
+      "episode_id": "task05-state22",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.3454095721244812,
+          -0.0030349642038345337,
+          0.33623120188713074,
+          -0.004474304616451263,
+          0.5110358595848083,
+          -0.00430277269333601,
+          -0.960933268070221
+        ],
+        "first_predicted_normalized_action_sha256": "0bf667af9f6822bc439ce505b023275a430a01b68e3039041f605e4ae4f91583",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "fd58350a2c653739859b48f3b36346ec27836c0df72f655585f7f6b364217862",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "aff695562b9d810fa30504e18a04f8421d86393db75db057b91f8c4eba458efc",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "f10344369ac165a0f10ee6e46cc4d778afb9c9158e4cdf7a83addeebaf9914bf",
+        "raw_chunk_sha256": "c91f0d5868e916616822b4588fed664adae58d1e4175908516a4007ae6c6ac68",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 22,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43023,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 23,
+      "actual_seed": 43024,
+      "crashed": false,
+      "elapsed_seconds": 32.94983673095703,
+      "env_steps": 280,
+      "episode_id": "task05-state23",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.43723973631858826,
+          0.118614062666893,
+          0.363050639629364,
+          -0.021620867773890495,
+          0.7983336448669434,
+          -0.02600998803973198,
+          -0.9540844559669495
+        ],
+        "first_predicted_normalized_action_sha256": "567b99fdedf912279e5b0ff85025680bd653f8ab32bb0934f7db3d49965e5c38",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "a62cb0ec2a7dbab960e4c5225db52a379d9add23121c71c8587cfe9300f7eb09",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "ec5250f8916ff886ff25b92affbb859c32e622ee6581c311a3e082237dd9e00c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "09895644651e38e6da8a800135498fdc343b05bb1a96ad6a5f4109b5e82e1a91",
+        "raw_chunk_sha256": "01cc97c8e32df8339de6a8134b41158e20106cdcf21035d3c8a0f74d69a64d6d",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 23,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43024,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 24,
+      "actual_seed": 43025,
+      "crashed": false,
+      "elapsed_seconds": 30.398871421813965,
+      "env_steps": 280,
+      "episode_id": "task05-state24",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.3202694356441498,
+          -0.07709535211324692,
+          0.3827250003814697,
+          -0.04821213334798813,
+          1.0479153394699097,
+          0.111728735268116,
+          -0.940410852432251
+        ],
+        "first_predicted_normalized_action_sha256": "cfd49572611c5d65ae5dc49e26d6a780d77286c82de6e20d0b5c7b0d9423e4e8",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c2803c5038cffb572b4dbbb7d4e1d20dd28e1679a6a5159fb4d5366e97aeb314",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "4ac150074a34685cd02131bb4e8d83c0c4c21ad9c2f6ba0d543e8b9cfa68f0f1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "39185ee88f22743332dd4273696d48734a35a4ea8d2d8632e90c18cca6588863",
+        "raw_chunk_sha256": "d177fc54cdfcda0433f583e8b9b028a506a2988db3bfc1a06ef805024909cae5",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 24,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43025,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 25,
+      "actual_seed": 43026,
+      "crashed": false,
+      "elapsed_seconds": 30.104248523712158,
+      "env_steps": 280,
+      "episode_id": "task05-state25",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.0320524126291275,
+          0.30729132890701294,
+          0.21437999606132507,
+          0.01411496102809906,
+          0.1720363348722458,
+          0.04218035936355591,
+          -0.9550850987434387
+        ],
+        "first_predicted_normalized_action_sha256": "9a4cecd943869115cff8b4f4af5a39526624cbde612976e0a998165dbf88ed3f",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "4cf65fbd7c947ceef62bc065c475f3ff57c977f3d1400d2b21b80298027c1b7f",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "55fdfacd637c6c39253be7a14fe479b59e5d426254100de051232c0aea695e70",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "5a1dbc34224bae0383600568dc23e25dbb269e9aefa0abac0bc8fec3d0870c18",
+        "raw_chunk_sha256": "1ab7dfddb9890143dc89ad4d30388635a4f93f74f1f5fa9771d0acd3308768d4",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 25,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43026,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 26,
+      "actual_seed": 43027,
+      "crashed": false,
+      "elapsed_seconds": 30.88019299507141,
+      "env_steps": 280,
+      "episode_id": "task05-state26",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.417534202337265,
+          0.29326653480529785,
+          0.4597157835960388,
+          -0.4770132005214691,
+          0.9239351153373718,
+          0.08174276351928711,
+          -0.9172043800354004
+        ],
+        "first_predicted_normalized_action_sha256": "905707a343188c84c3a730f250e4ae9de608b8c7467afdc575f89ebbc4b0f64c",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "4e23e724c2285672232fd096cc185a11050b3cfac3249433807a5f0c3956b243",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "5091edd920c3a5c125cac6e7ba9b63cde8093ede4d6062fbf7a225b72ced375b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "86444237bc69d00a26f58426b858e5113d52aaba153df5d9bcbc3dc61392de2d",
+        "raw_chunk_sha256": "fd756d44dba50d67b89d0342060e14a26e29d54b96927282727f7d3aa576b964",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 26,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43027,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 27,
+      "actual_seed": 43028,
+      "crashed": false,
+      "elapsed_seconds": 31.512193202972412,
+      "env_steps": 280,
+      "episode_id": "task05-state27",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.05786178261041641,
+          -0.04461328312754631,
+          0.3960578441619873,
+          -0.12581945955753326,
+          0.3366023302078247,
+          -0.045580003410577774,
+          -0.948283851146698
+        ],
+        "first_predicted_normalized_action_sha256": "00c9743172869fbe54819a81516fc2ccff43ec04b0aa15cc25739a3c09ee4240",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c09aa8e6a7a15ccec59685e22c09c77e74421265eee5611cc93ec2ad71d70078",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "ec6ed3d286fc2fdd684629ce248344a2ec63b9e54b56d25c3cee23399814110e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "b9c2c483fae4fede292de468be80ec33abde1cc2b0c906bee052eaa77a177015",
+        "raw_chunk_sha256": "1a44bdd9ec8f557f7565afdcc30502bdcd9d956aee4d67753db828728442e99b",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 27,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43028,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 28,
+      "actual_seed": 43029,
+      "crashed": false,
+      "elapsed_seconds": 30.786513566970825,
+      "env_steps": 280,
+      "episode_id": "task05-state28",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.4637289345264435,
+          0.834895133972168,
+          0.3267815411090851,
+          -0.018542148172855377,
+          1.007747769355774,
+          0.21529117226600647,
+          -0.9422917366027832
+        ],
+        "first_predicted_normalized_action_sha256": "d9d38983f12309db7d0e9b9df760a26c454b76f0bf9da7f14cb5a0b2ff0b48a2",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "59121defda22a30a91c6f18bbe7c42a6994a3246be88fef68d283ebba22452f9",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "b7d8a0535a310ffde7730640aa4ee94845588790b51cfa97e618ddcd6bcced82",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "0e855072484004fef52e8e6d7ec9b94de08681d2bcb4268604b59c0156272c23",
+        "raw_chunk_sha256": "2db615fb0ccbeec12589c3d4b86a8ace2cb6b89cdbdb1f40271e07aaeac2a388",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 28,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43029,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 29,
+      "actual_seed": 43030,
+      "crashed": false,
+      "elapsed_seconds": 30.977625608444214,
+      "env_steps": 280,
+      "episode_id": "task05-state29",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.2737847566604614,
+          0.4224899709224701,
+          0.2801232933998108,
+          -0.4423629939556122,
+          0.4302999675273895,
+          -0.07314005494117737,
+          -0.9421413540840149
+        ],
+        "first_predicted_normalized_action_sha256": "0317ce6b51fdb3415e381f7d7020f926040ecd2c775e2e240fae4bbc280dec53",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "8915b627f15f9cd20a61d299dbb9224dbab02b51df7a6a965ae892d01d85769d",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "0e641f0a46fdeb45ab948c7f3908ea8d7119d890d54b9f91622ab0eaf67fa7dc",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "b9315b99eb7d5d202955a9fca12992a821bbe52fd9cf4eac6c0ae2a68ad0b555",
+        "raw_chunk_sha256": "330546de5b7d1265fe6c68be172bcc09425cd512a455ba8db8044481965a6c7a",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 29,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 43030,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 20,
+      "actual_seed": 43021,
+      "crashed": false,
+      "elapsed_seconds": 13.15328598022461,
+      "env_steps": 79,
+      "episode_id": "task00-state20",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.16860643029212952,
+          -0.1751275658607483,
+          0.35166335105895996,
+          -0.12886002659797668,
+          0.3613385856151581,
+          -0.020659424364566803,
+          -0.9522166848182678
+        ],
+        "first_predicted_normalized_action_sha256": "0c822f1a8bf1041b3f0c02f143d63d78a9d0565c3923787029baead7b2b375a4",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "7d8787f8cfeb2c06656ea66b2690c02edcc004117a35282104080f335abd4b68",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "aa577210b1f777908e0380dccfa33f8d63e2107e9fb226df43faaa7c2eac4e60",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "3e1f9449d61f42c343eb98df981f20a5ba8998ad546837b9024138bba7a6aedf",
+        "raw_chunk_sha256": "e5feace067af3a66f725dfdf226990c082d6dd5cbe3d6cf0233fd78483ac61a0",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 20,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 43021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 21,
+      "actual_seed": 43022,
+      "crashed": false,
+      "elapsed_seconds": 10.269912719726562,
+      "env_steps": 81,
+      "episode_id": "task00-state21",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.10466517508029938,
+          0.07897049188613892,
+          0.30796298384666443,
+          -0.11677694320678711,
+          -0.05679988116025925,
+          0.2187829613685608,
+          -0.9514286518096924
+        ],
+        "first_predicted_normalized_action_sha256": "fea7100060e3c92a396a4ca52e44b4dacb9989e5897a772b5b013024b3774307",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "489efdb77c1bbbe6c4adf769069098c019be14e94ada6b8d638c2f4d6b70bb1e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "ee483cb8891cbd385bbbada4e4ac8691875f660222c68d39d9a489a4ed6c0f3d",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "036152e939ef359c3ea49e8a6140083dec25f8ad21ea508a996edadc42ec80be",
+        "raw_chunk_sha256": "57b975a0a3aa8977b19b7c81992e83f38a140d755fc7f82bdad3a8e576446408",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 21,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 43022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 22,
+      "actual_seed": 43023,
+      "crashed": false,
+      "elapsed_seconds": 11.013546466827393,
+      "env_steps": 82,
+      "episode_id": "task00-state22",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.07540081441402435,
+          -0.1936822235584259,
+          0.2533743679523468,
+          -0.06787513941526413,
+          0.21602796018123627,
+          0.05396189168095589,
+          -0.9678791761398315
+        ],
+        "first_predicted_normalized_action_sha256": "8efdac2f9be46df5c09bf26b72a0133a9d190ccde0264c566c98a67579cebf49",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "4b448f537e90503acb9521b546a4cc65998a78df71ddf517798e965473a76a4a",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "c0b35e9abf2cba43d2ab6791d4c915ffcf9321dce9c8006b597d12041139fd7f",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "b7ddf763cfa1c097be8acae023fe85375da1fa1fd9d8be418c5e49e646eda19a",
+        "raw_chunk_sha256": "03fdf807d74800190efff23dc161d8e04f7cb3116f8a7293447b49d1d82db54e",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 22,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 43023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 23,
+      "actual_seed": 43024,
+      "crashed": false,
+      "elapsed_seconds": 9.400442123413086,
+      "env_steps": 76,
+      "episode_id": "task00-state23",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.04172578454017639,
+          -0.3598863482475281,
+          0.3236978352069855,
+          -0.1315709799528122,
+          0.025512468069791794,
+          0.16698676347732544,
+          -0.9547820687294006
+        ],
+        "first_predicted_normalized_action_sha256": "1373e819596160f1fdaa89b3289b0ce6e79798155511744023c5e510909f3227",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "83f0b9b2850fc77b789b15e7f1c3f179306302ee0a3b956d29b80dee4295738e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "ff817a8d052d30b08d9a0d116ed644db17e99497feeba059b3715d7830512e3b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "8d2f31c327001f16caad8d5ea6e81f5e781f7164497f0aecd47d63c113a597df",
+        "raw_chunk_sha256": "90e645f9f9028b994ef256cd5850285363fc92dc2043e6042461ff34d89199bb",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 23,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 43024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 24,
+      "actual_seed": 43025,
+      "crashed": false,
+      "elapsed_seconds": 9.453220129013062,
+      "env_steps": 75,
+      "episode_id": "task00-state24",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          1.035157561302185,
+          0.24415086209774017,
+          0.44407719373703003,
+          -0.29320958256721497,
+          0.694909393787384,
+          0.19053328037261963,
+          -0.962978184223175
+        ],
+        "first_predicted_normalized_action_sha256": "27ff91a9a6792c27405f4a6a4e4280d18193029a753cb281ed7f561aedc8590e",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "b09f9accefd4edb7961cf1d08a4a1a367bd4757d535f66fc68148c16efa296df",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "e91a1ca3f4dfbe06e74434b1a1171e45fa26ba05bcbb25de4ce10719657c9fba",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "ac44a3c71ceb9ab6f92bd178807391e1caac266a6959189997144691b30a2855",
+        "raw_chunk_sha256": "6a939340ca8544a21b0d3ae7e24d5c5441f1bb15ca9c644b0f9b1ddbaffe291c",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 24,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 43025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 25,
+      "actual_seed": 43026,
+      "crashed": false,
+      "elapsed_seconds": 9.905754089355469,
+      "env_steps": 77,
+      "episode_id": "task00-state25",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.03555421158671379,
+          -0.02715250477194786,
+          0.22410723567008972,
+          -0.06924377381801605,
+          -0.15946312248706818,
+          0.09415341913700104,
+          -0.9665871858596802
+        ],
+        "first_predicted_normalized_action_sha256": "c94382a2f53ee7ffe906fb9623ca880d4d64b33614298dbcb6bcba1df596f519",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "cdb19eb773f0d10c2c6374c060ecda23b772424b4e6daa6a5f1ca1674d1383ef",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "d211fb9fd1017c1af8a3170fc7991f6dc6fd57c0a75496889d5b1604b8e3e7c0",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "beca59d0aa955810a1047ddf5607038ba20c9aa75a9ef1f722557b84fbe5c946",
+        "raw_chunk_sha256": "055db0b65093974cd9a6954d00a1dd2f62680a235ee8a6e45dea3cec664eb517",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 25,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 43026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 26,
+      "actual_seed": 43027,
+      "crashed": false,
+      "elapsed_seconds": 9.297973394393921,
+      "env_steps": 73,
+      "episode_id": "task00-state26",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.0040204813703894615,
+          -0.21687090396881104,
+          0.3916017711162567,
+          -0.132004976272583,
+          0.11009776592254639,
+          0.10286931693553925,
+          -0.9583167433738708
+        ],
+        "first_predicted_normalized_action_sha256": "d3892cc7c7fd9628809089319871e28120d08641926881f4eb1ad97092a51803",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c893eb8d535cc1b50854395adb33f97aa3f904b6dcfcc042515085fb32de701b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "4b0a7a4904d7b145dc9dc5644b444c11f15eef2efc3d405dda257f91096ce0f8",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "6eeebc65f98f953e037a01713dfb994efdb2f2075c3497e60715d034527f366e",
+        "raw_chunk_sha256": "c7b8f93029c91bfa5871438b650d0d8daaa6b0c061c30bffaafe4b9206bda9c6",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 26,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 43027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 27,
+      "actual_seed": 43028,
+      "crashed": false,
+      "elapsed_seconds": 10.419280529022217,
+      "env_steps": 80,
+      "episode_id": "task00-state27",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.06616698205471039,
+          -0.38219156861305237,
+          0.4009002149105072,
+          -0.17744337022304535,
+          0.1586054265499115,
+          0.16745594143867493,
+          -0.9568272233009338
+        ],
+        "first_predicted_normalized_action_sha256": "10e6ee5718e3f64c6adb3f82ca0f831300e26c07c049f545daf3ce7d420c1a02",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c48089fb8589c9aba92271f04fdbe613e423e53a1f8df51f1cac8e90775815ca",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "225bff12a8c6faa701de3cb7dbebc12a3bab6ad757aa747f3857eea241156a09",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "54b453aa78a1a3128d60ab802298a54ec170ed24547609eb7b2873c0ca6c3a66",
+        "raw_chunk_sha256": "1791d73c86b19d578850136684162f203ed673a4d8d1b14dde1ac5c0751d2fde",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 27,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 43028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 28,
+      "actual_seed": 43029,
+      "crashed": false,
+      "elapsed_seconds": 9.587656021118164,
+      "env_steps": 74,
+      "episode_id": "task00-state28",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.6457271575927734,
+          0.36684462428092957,
+          0.4034678041934967,
+          -0.03985561057925224,
+          1.1313928365707397,
+          0.33982837200164795,
+          -0.9580014944076538
+        ],
+        "first_predicted_normalized_action_sha256": "7c5a57f12fc85cc023f150321ebe32e167687ab46892b1b263cb8e83ff745181",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c147ab03a1f259924334c17857d076e67fd7e85455efda19ba31361920d3255e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "af71a0968ba6e3c7f6fa224b96e648fcd28c4c477a427525314907839c91c834",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "3413d06217ad1bfe5d7640da0e6065e8ff6047d89330ec6c43e5f0412607c7b5",
+        "raw_chunk_sha256": "3e9f20b440c1bc5f9e0a509d0884cde1183292b08338fbf27d31c6cd6b901b38",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 28,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 43029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 29,
+      "actual_seed": 43030,
+      "crashed": false,
+      "elapsed_seconds": 9.816584825515747,
+      "env_steps": 73,
+      "episode_id": "task00-state29",
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.3906007409095764,
+          0.028725257143378258,
+          0.20139585435390472,
+          -0.023638546466827393,
+          -0.20367708802223206,
+          -0.008321139961481094,
+          -0.9557388424873352
+        ],
+        "first_predicted_normalized_action_sha256": "a9ab2852337822d080777678f47cc34087007c5225529a8d0fb7c2ee445113a0",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "5b5cb5c1f6980fb5837140dff53e69bdebda02c9dde6309915a3befcd2a736a1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "b82f87663ec6c2c0e9dcd3a8b9baeb648897aaaaf9cc3487e5fb550094d3c3ed",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "d6e6e237c4d797f365759c333a26251ecb3242f1d4d4a73f4c3d0ffa05341769",
+        "raw_chunk_sha256": "2537ea19b4325f389651c6b02553e7eb483e2998aba1922382e27022b7f5d799",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 29,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 43030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    }
+  ],
+  "episodes_accounted": 20,
+  "included_in_formal_metrics": true,
+  "interpretation_limits": {
+    "accuracy_limit": "Neither version is designated physically more accurate, and MuJoCo 3.8.1 is not described as buggy.",
+    "causal_limit": "Reset-mediated causation remains a hypothesis because the treatment changes the complete MuJoCo version rather than isolating a single contact behavior.",
+    "generalization_limit": "Results do not establish real-robot performance, safety, general LIBERO performance, or effects for other policies.",
+    "init_state_limit": "Official LIBERO init states are used unchanged; they are not patched or regenerated.",
+    "scope": "Fixed-state benchmark-version compatibility comparison under two complete MuJoCo package versions.",
+    "version_treatment": "The comparison estimates the effect of changing the complete MuJoCo version in this frozen benchmark stack."
+  },
+  "metrics": {
+    "0": {
+      "crashes": 0,
+      "episodes": 10,
+      "mean_elapsed_seconds": 10.231765627861023,
+      "success_rate": 1.0,
+      "successes": 10,
+      "wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "5": {
+      "crashes": 0,
+      "episodes": 10,
+      "mean_elapsed_seconds": 32.147993659973146,
+      "success_rate": 0.0,
+      "successes": 0,
+      "wilson_95": [
+        0.0,
+        0.2775327998628892
+      ]
+    }
+  },
+  "mode": "formal",
+  "model_artifacts": {
+    "backbone_sha256": {
+      "config.json": "ea6bc1237e96247f6258de3e202e2e62b93d6f386dc47e7b36b5588bf3a15e17",
+      "model.safetensors": "b9bfd456c9472c0acd5719d6e514c4b859891af205ee1a736552fd3497b8b0c3",
+      "preprocessor_config.json": "149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374",
+      "processor_config.json": "f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c",
+      "special_tokens_map.json": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60",
+      "tokenizer.json": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+      "tokenizer_config.json": "dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913"
+    },
+    "backbone_tree": {
+      "file_count": 15,
+      "root": "/root/autodl-tmp/sentinel-evc-gpu/20261002/models/SmolVLM2-500M-Video-Instruct",
+      "scope": "complete_local_snapshot_tree",
+      "total_bytes": 2034860969,
+      "tree_sha256": "434e2eb9863cd0f8ee17ce94b2cf0bceea61ee19022cfd4e2f21ce444acf842e"
+    },
+    "checkpoint_sha256": {
+      "config.json": "5c9f3ba9f5f37ea7024c9501b0b20b1941f232989c2167853cb46d9071a70dd7",
+      "model.safetensors": "9a9f6413e42c0f332fccbce9a0dc796af2790f82cf002f791cdbf7e01e1afca8",
+      "policy_postprocessor.json": "3b51f092c70c710ce0213ee1b63bf51b4878ec67828dd2d67daf9ef51081a41a",
+      "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9",
+      "policy_preprocessor.json": "122ec5106602b1bf129f49690d05ab2f49748a0ac6119de55ea0677d4e90d248",
+      "policy_preprocessor_step_5_normalizer_processor.safetensors": "b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9"
+    }
+  },
+  "preflight_evidence": {
+    "current": {
+      "initial_state_index": 46,
+      "mujoco": "3.8.1",
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-preflight-v1/current/manifest.json",
+      "seed": 43020,
+      "sha256": "8393c24e21720c1330d944528627a57ee1eea41545d09d34ab2776b2492ba9f2",
+      "task_id": 0,
+      "version_label": "current"
+    },
+    "legacy": {
+      "initial_state_index": 46,
+      "mujoco": "3.3.7",
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-preflight-v1/legacy/manifest.json",
+      "seed": 43020,
+      "sha256": "569a09f8cc9957716d97ae57637170b6118e17c1b320b0f2ca89fff8d6e30449",
+      "task_id": 0,
+      "version_label": "legacy"
+    }
+  },
+  "protocol_sha256": "cf1b8fd439b992058f7ec37cefd0c5248fadb3ad7cbec41490e0b163c0d932ac",
+  "schema": "sentinel-libero-backend-ablation-capture-v1",
+  "script_sha256": "19164e24c3f39a9c89bd4a8ccfe6de489e5175da2decadf1ec847538a1a8102b",
+  "software": {
+    "cuda": "12.8",
+    "hf-libero": "0.1.4",
+    "lerobot": "0.6.1",
+    "mujoco": "3.8.1",
+    "mujoco_module": "/root/autodl-tmp/sentinel-evc-gpu/20261002/libero-preflight-env/lib/python3.12/site-packages/mujoco/__init__.py",
+    "num2words": "0.5.14",
+    "python": "3.12.3",
+    "robosuite": "1.4.0",
+    "torch": "2.8.0+cu128"
+  },
+  "source_bindings": {
+    "native_manifest": {
+      "bytes": 22441,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-spatial-final-100/manifest.json",
+      "sha256": "b5d8e982f50ee07452441a5f7070bf305faafc3465ae07b725574aa5324c7c4e"
+    },
+    "native_protocol": {
+      "bytes": 7222,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-inputs/libero_protocol.json",
+      "sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b"
+    },
+    "native_runner": {
+      "bytes": 39259,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-inputs/run_libero_closedloop.py",
+      "sha256": "9d5103e57d6c0d420cf32024fa3b929ed0b90518c18e830296d6bdb5cb635b9e"
+    },
+    "native_trace": {
+      "bytes": 25206899,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-spatial-final-100/action_trace.jsonl",
+      "sha256": "3460974091ca0199bdae4bb0be0834c51396023cf882c2e1a262f1c76d42dba3"
+    },
+    "reset_comparison": {
+      "bytes": 2535,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/comparison/comparison.json",
+      "sha256": "97cbf95929f4a56bfd9c427c37c1e801ec851e98a43824711eb2888ab4c8a10f"
+    },
+    "reset_current": {
+      "bytes": 74826,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/current/manifest.json",
+      "sha256": "48be0f62e8bae2f82d7c66d2e31f31c0ffdd5232731c365a62f83f643a0d427c"
+    },
+    "reset_legacy": {
+      "bytes": 74751,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/legacy/manifest.json",
+      "sha256": "ec30af51da29afd70f3a1649bc0f290a3aff9aa1d28ad43a2baa7de6001fd473"
+    },
+    "reset_protocol": {
+      "bytes": 5754,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-inputs/reset_audit_protocol.json",
+      "sha256": "225a2e0e99b11ed879ba796b998385d8a7e1250a6280da399d54366d776260a9"
+    },
+    "reset_runner": {
+      "bytes": 26923,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-inputs/audit_libero_reset.py",
+      "sha256": "2d5d4aef2d42f9fc4d80e386c36c2c9515b1ff8aadf40bebddb82b802e719a27"
+    }
+  },
+  "status": "complete",
+  "task_source_sha256": {
+    "bddl": {
+      "0": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "1": "53a7516571412a2f46a27cbf8482d3b76dbad4221858c8f6b565d506c274e61d",
+      "2": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+      "3": "3d4ccf070c3d9883ae0676f2d888588f98c696ddad71b7694f47c379fc99ef36",
+      "4": "4371189e11d9fd29bb548ab9a8adcd741bb0ce41bb66c612672d0e8cb29a52a9",
+      "5": "10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "6": "566c65596f3472e752e6522817bff51bbf3ce5159d7bec1d3554e5ead46b1e55",
+      "7": "dd11837141a30d874ebbbfaae20e91ecc67ec85ab3872ceb4cff3abfcbef7cb0",
+      "8": "c8fbb9effa27b947d04d26862d75273d93cac1806734e53836cd472a08aec1fe",
+      "9": "5293e759381b477e126beaf83d738542bbd4d93f522a3eead1066e612bad4a8c"
+    },
+    "init_states": {
+      "0": "cbbc73792ce546c9bec181fd328a411d3183074840b282671dee481511381d0a",
+      "1": "9b6927b6ef03460ab055141e1a1154ad85e5e290058d8ed3a8a314aff911f864",
+      "2": "27d5b81d739f969e40c72b6c88699e57a91ea61209946b21c593aae5990689cb",
+      "3": "0627f5f5ce3ef23be546571012be8ef603d93bcb4032bc80feb34937ba580140",
+      "4": "deef3df529e0bb57658b973bbb3baf02b02922db065c025a73ebfcd11eb54d46",
+      "5": "2d2c50b7dcbf861fffa94d576f217ed34153e57487010d7a109a220d4d97189b",
+      "6": "ab86fb7b5942dc0fec762eae57e72bf636106b1c10ad8ce57227723d8eb9a81b",
+      "7": "ea9cba2814bc166f3682f3f5a97329467839bcf584069cd419191b6c17adae25",
+      "8": "f43df2d80042130ac8770590d83f1a1e6fd4df7479aebc392aa2ed6e3bd0b83e",
+      "9": "08b0ac928dcc524a66d963851a6a4eece9aeb782b38466006e403a70e3287867"
+    }
+  },
+  "timing": {
+    "elapsed_seconds": 424.3608901500702
+  },
+  "trace": {
+    "bytes": 8002048,
+    "path": "action_trace.jsonl",
+    "sha256": "a3aa0f15024e5e9adcbf65f92874b9ea148ee99c75d67de6a60afb06127d33d6"
+  },
+  "version_label": "current"
+}

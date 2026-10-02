@@ -1,0 +1,99 @@
+{
+  "claim_boundary": [
+    "The native frames are the predeclared official lerobot/smolvla_libero rollout in LIBERO with a Panda robot.",
+    "The wrapper only upscales, lays out, and annotates those frames; it adds no visual evidence.",
+    "The shadow logger observed the official action path and made no intervention or action change.",
+    "This artifact is not an SO100 overlay, UR5e experiment, real-robot result, or safety guarantee."
+  ],
+  "explained_video": {
+    "audio_streams": 0,
+    "average_rate": "20/1",
+    "bytes": 633281,
+    "codec": "h264",
+    "duration_seconds_by_frame_count": 4.15,
+    "first_pts": 0,
+    "fps": 20.0,
+    "frames": 83,
+    "height": 1080,
+    "last_pts": 41984,
+    "path": "libero-task00-state00-explained.mp4",
+    "pixel_format": "yuv420p",
+    "playback_rate_basis": "one preserved native RGB frame per formal env.step at protocol evaluation fps",
+    "sha256": "c17cc63e853882aa8e965092d8aa195dbc7d7467e4066b42192c104d99a15c89",
+    "time_base": "1/10240",
+    "width": 1920
+  },
+  "native_video": {
+    "audio_streams": 0,
+    "average_rate": "80/1",
+    "codec": "h264",
+    "duration_seconds_by_frame_count": 1.0375,
+    "first_pts": 0,
+    "formal_artifact_path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-spatial-final-100/videos/task_00/eval_episode_0.mp4",
+    "fps": 80.0,
+    "frames": 83,
+    "height": 360,
+    "last_pts": 10496,
+    "pixel_format": "yuv420p",
+    "preserved_copy": "native-task00-state00.mp4",
+    "preserved_copy_sha256": "c95de17b78a8986da9c928b4b00b04d7df0a2a7d2c375ea139dfd39c62711840",
+    "source_bytes": 52357,
+    "source_sha256": "c95de17b78a8986da9c928b4b00b04d7df0a2a7d2c375ea139dfd39c62711840",
+    "time_base": "1/10240",
+    "width": 360
+  },
+  "poster": {
+    "bytes": 516839,
+    "path": "libero-task00-state00-poster.png",
+    "sha256": "983de09d8aab7d3dc939f2edb8be27200b37dcdd1d3bfd8fc9008c32f27f3374"
+  },
+  "provenance": {
+    "action_trace": {
+      "bytes": 25206899,
+      "sha256": "3460974091ca0199bdae4bb0be0834c51396023cf882c2e1a262f1c76d42dba3"
+    },
+    "checkpoint": "lerobot/smolvla_libero",
+    "checkpoint_revision": "31d453f7edd78c839a8bbc39744a292686daf0de",
+    "environment": "official LIBERO-Spatial simulated Panda robot",
+    "formal_manifest": {
+      "bytes": 22441,
+      "sha256": "b5d8e982f50ee07452441a5f7070bf305faafc3465ae07b725574aa5324c7c4e"
+    },
+    "protocol": {
+      "bytes": 7222,
+      "sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b"
+    },
+    "selected_env_step_actions": 83,
+    "shadow_logger": {
+      "action_changes": 0,
+      "interventions": 0,
+      "mode": "observe_only"
+    }
+  },
+  "schema": "sentinel-libero-video-wrapper-v1",
+  "selection": {
+    "episode_seed": 41021,
+    "initial_state_index": 0,
+    "outcome_source": "formal_manifest.results.tasks.0.per_episode_success at initial_state_index 0",
+    "rule": "predeclared first final episode only; no outcome-based selection",
+    "success": true,
+    "task_id": 0
+  },
+  "task": {
+    "chinese_translation": "拿起盘子和小烤盅之间的黑色碗，并把它放到盘子上。",
+    "instruction_from_action_trace": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+    "translation_rule": "exact allowlist"
+  },
+  "verification": {
+    "frame_count_equal": true,
+    "full_output_decode": true,
+    "full_source_decode": true,
+    "native_copy_byte_identical": true,
+    "output_frame_rate_matches_protocol_simulation_fps": true,
+    "output_resolution": [
+      1920,
+      1080
+    ],
+    "source_frames_equal_selected_env_step_actions": true
+  }
+}

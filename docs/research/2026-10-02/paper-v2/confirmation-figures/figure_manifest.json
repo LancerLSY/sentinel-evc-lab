@@ -1,0 +1,43 @@
+{
+  "schema": "sentinel-libero-confirmation-figure-v1",
+  "script_sha256": "36b2387670f89c8a40b577f3090a256495f75043cca6b8c5121fa6934d786183",
+  "helper_sha256": "05467e7bbdbc96ca66606905fab5976edaeecaef5e540605605c1778f05d6fa3",
+  "render_runtime": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2"
+  },
+  "inputs": [
+    {
+      "path": "runs/paper-v2/libero-confirmation-final-100-v1/manifest.json",
+      "sha256": "ec87b22d166dd167c3549d3e976bfe29d10c2de128aeef2218ceb67bdcd7efac"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "full-suite-confirmation.svg",
+      "bytes": 18503,
+      "sha256": "ea5b299b9b826e5e17162dba782d2bbb719114393d11873e8732876cd3d0174b"
+    },
+    {
+      "name": "full-suite-confirmation.png",
+      "bytes": 117990,
+      "sha256": "8dee129221d5cb1b9daab92936bed63583800b3679b55c6dec4bf4fa79aa76dd"
+    }
+  ],
+  "successes": 93,
+  "denominator": 100,
+  "task_success_counts": [
+    10,
+    10,
+    10,
+    9,
+    6,
+    9,
+    10,
+    10,
+    9,
+    10
+  ],
+  "no_policy_or_simulator_execution": true
+}

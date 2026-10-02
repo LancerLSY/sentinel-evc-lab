@@ -1,0 +1,82 @@
+{
+  "schema": "sentinel-libero-full-suite-confirmation-protocol-v1",
+  "state": "frozen_before_formal_run",
+  "claim": "Prospective fixed-grid full LIBERO-Spatial confirmation of the official SmolVLA checkpoint under the declared MuJoCo 3.3.7 backend and 10-action execution horizon.",
+  "source_bindings": {
+    "native_runner_sha256": "9d5103e57d6c0d420cf32024fa3b929ed0b90518c18e830296d6bdb5cb635b9e",
+    "native_protocol_sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b",
+    "native_manifest_sha256": "b5d8e982f50ee07452441a5f7070bf305faafc3465ae07b725574aa5324c7c4e",
+    "native_trace_sha256": "3460974091ca0199bdae4bb0be0834c51396023cf882c2e1a262f1c76d42dba3",
+    "reset_comparison_sha256": "97cbf95929f4a56bfd9c427c37c1e801ec851e98a43824711eb2888ab4c8a10f",
+    "horizon_runner_sha256": "8a83eb318a38b54f8f89f473625e224f51b5cbd68360bb6ba7e57b31640d2c73",
+    "horizon_protocol_sha256": "602e8d18c4afa4118bf5c97ce3d490ecdca66dcfeb1dc182f5464ab10e4ea897",
+    "horizon_manifest_sha256": "4f07e80e134d51b01d39ce2264ff3f448fd76d7f1992ed108efe69f6e89eef18",
+    "horizon_trace_sha256": "99c7ec0d4c5cf337cf10a7dd7de87c85ed27a79c15a573fa5bba37f0f2de2d7b",
+    "backend_runner_sha256": "19164e24c3f39a9c89bd4a8ccfe6de489e5175da2decadf1ec847538a1a8102b",
+    "backend_protocol_sha256": "cf1b8fd439b992058f7ec37cefd0c5248fadb3ad7cbec41490e0b163c0d932ac",
+    "backend_current_sha256": "f3fd98744578f0147eaefc791ce45dde0c0d8c2cdd1451eee08cad882a78a8fa",
+    "backend_legacy_sha256": "7dee0992f05a03a85218ca958b4145b21663ae068fecdad78c1a75eb56022cb3",
+    "backend_comparison_sha256": "e3271e0cd341d4f5e96615c29f44e954f136ac1d2f5deb2d45b055584f96b124"
+  },
+  "software": {
+    "python": "3.12",
+    "lerobot": "0.6.1",
+    "hf-libero": "0.1.4",
+    "robosuite": "1.4.0",
+    "mujoco": "3.3.7",
+    "num2words": "0.5.14",
+    "backend_isolation": "MuJoCo 3.3.7 must be selected from the benchmark-validated isolated prefix in a fresh process; the MuJoCo 3.8.1 environment is not modified."
+  },
+  "evaluation": {
+    "suite": "libero_spatial",
+    "task_ids": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "fixed_initial_state_indices": [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],
+    "seed_base": 44021,
+    "seed_formula": "44021 + (initial_state_index - 30)",
+    "prediction_chunk_size": 50,
+    "execution_horizon": 10,
+    "policy_reset_before_each_episode": true,
+    "hard_reset": true,
+    "fps": 20,
+    "control_mode": "relative",
+    "episodes_per_task": 10,
+    "total_episodes": 100,
+    "no_retry_or_replacement": true,
+    "crash_accounting": "Every declared task/state cell remains in the fixed denominator. A crash is a failure; a fatal error marks every unexecuted remaining cell as failure with null reset evidence.",
+    "retained_step_outcomes": [
+      "official reward returned by env.step",
+      "official terminated and truncated flags returned by env.step",
+      "nullable official is_success plus presence and info/final_info provenance",
+      "task, fixed initial-state index, and action-step index"
+    ]
+  },
+  "preflight": {
+    "task_id": 0,
+    "initial_state_index": 44,
+    "seed": 44020,
+    "episodes": 1,
+    "excluded_from_formal_metrics": true
+  },
+  "analysis": {
+    "primary_endpoint": "overall success rate on the predeclared 100-episode grid",
+    "secondary_endpoints": [
+      "per-task success rate and Wilson 95% interval",
+      "overall Wilson 95% interval",
+      "crash count",
+      "raw prediction chunks and environment steps",
+      "wall-clock runtime"
+    ],
+    "reporting_rule": "Report the full fixed denominator and every task; do not project percentages from the earlier two-task diagnostics."
+  },
+  "claims": {
+    "scope": "Independent post-diagnostic full-suite confirmation for one declared official SmolVLA/LIBERO configuration.",
+    "not_a_pairwise_claim": "This grid is not paired with the original 58/100 grid because states, MuJoCo version, and execution horizon differ.",
+    "not_sentinel_efficacy": "The trace is observe-only and this run does not estimate Sentinel intervention efficacy.",
+    "not_so100": "The evaluated policy is lerobot/smolvla_libero, not the repository's SO100 overlay.",
+    "generalization_limit": "The result does not establish real-robot performance, safety, other LIBERO suites, or other policies."
+  },
+  "implementation": {
+    "script": "experiments/vla/run_libero_confirmation.py",
+    "script_sha256": "4dbd71cbf4d3e259736fb0b04d524604dacd8f64f5599e261517619fc258f4aa"
+  }
+}

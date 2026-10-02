@@ -1,0 +1,86 @@
+{
+  "current_manifest": {
+    "bytes": 47241,
+    "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/current/manifest.json",
+    "sha256": "f3fd98744578f0147eaefc791ce45dde0c0d8c2cdd1451eee08cad882a78a8fa"
+  },
+  "interpretation_limits": {
+    "accuracy_limit": "Neither version is designated physically more accurate, and MuJoCo 3.8.1 is not described as buggy.",
+    "causal_limit": "Reset-mediated causation remains a hypothesis because the treatment changes the complete MuJoCo version rather than isolating a single contact behavior.",
+    "generalization_limit": "Results do not establish real-robot performance, safety, general LIBERO performance, or effects for other policies.",
+    "init_state_limit": "Official LIBERO init states are used unchanged; they are not patched or regenerated.",
+    "scope": "Fixed-state benchmark-version compatibility comparison under two complete MuJoCo package versions.",
+    "version_treatment": "The comparison estimates the effect of changing the complete MuJoCo version in this frozen benchmark stack."
+  },
+  "legacy_manifest": {
+    "bytes": 47208,
+    "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/legacy/manifest.json",
+    "sha256": "7dee0992f05a03a85218ca958b4145b21663ae068fecdad78c1a75eb56022cb3"
+  },
+  "metrics": {
+    "0": {
+      "current_success_rate": 1.0,
+      "current_successes": 10,
+      "current_wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "discordant_pairs": 0,
+      "first_input_camera_different_pairs": 10,
+      "first_input_state_different_pairs": 0,
+      "first_predicted_action_different_pairs": 10,
+      "legacy_success_rate": 1.0,
+      "legacy_successes": 10,
+      "legacy_wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "max_first_predicted_action_abs_diff": 0.44170239567756653,
+      "missing_first_chunk_pairs": 0,
+      "paired_bootstrap_95": [
+        0.0,
+        0.0
+      ],
+      "paired_delta_legacy_minus_current": 0.0,
+      "pairs": 10,
+      "reset_unobserved_crashes": 0
+    },
+    "5": {
+      "current_success_rate": 0.0,
+      "current_successes": 0,
+      "current_wilson_95": [
+        0.0,
+        0.2775327998628892
+      ],
+      "discordant_pairs": 7,
+      "first_input_camera_different_pairs": 10,
+      "first_input_state_different_pairs": 0,
+      "first_predicted_action_different_pairs": 10,
+      "legacy_success_rate": 0.7,
+      "legacy_successes": 7,
+      "legacy_wilson_95": [
+        0.39677814746114537,
+        0.8922087325936989
+      ],
+      "max_first_predicted_action_abs_diff": 0.5900619626045227,
+      "missing_first_chunk_pairs": 0,
+      "paired_bootstrap_95": [
+        0.4,
+        1.0
+      ],
+      "paired_delta_legacy_minus_current": 0.7,
+      "pairs": 10,
+      "reset_unobserved_crashes": 0
+    }
+  },
+  "paired_episode_count": 20,
+  "paired_episodes": {
+    "bytes": 9959,
+    "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/comparison/paired_episodes.json",
+    "sha256": "472fa5ddd0100b39d8aaf95c494f295ee225274815382a026699839ad15c5d87"
+  },
+  "protocol_sha256": "cf1b8fd439b992058f7ec37cefd0c5248fadb3ad7cbec41490e0b163c0d932ac",
+  "schema": "sentinel-libero-backend-ablation-comparison-v1",
+  "script_sha256": "19164e24c3f39a9c89bd4a8ccfe6de489e5175da2decadf1ec847538a1a8102b",
+  "status": "complete"
+}

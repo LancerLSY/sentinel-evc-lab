@@ -1,0 +1,6235 @@
+{
+  "asset_tree": {
+    "file_count": 955,
+    "root": "/root/autodl-tmp/sentinel-evc-gpu/20261002/libero-preflight-env/lib/python3.12/site-packages/libero/libero/assets",
+    "scope": "mixed_site_packages_tree",
+    "total_bytes": 188829695,
+    "tree_sha256": "f04f72afb7503afb071f9de7c6734b0eca147f87549df0a9080cc987afb17781"
+  },
+  "effective_environment": {
+    "camera_name": "agentview_image,robot0_eye_in_hand_image",
+    "camera_name_mapping": null,
+    "control_mode": "relative",
+    "disable_env_checker": true,
+    "episode_length": null,
+    "features": {
+      "action": {
+        "shape": [
+          7
+        ],
+        "type": "ACTION"
+      },
+      "pixels/agentview_image": {
+        "shape": [
+          360,
+          360,
+          3
+        ],
+        "type": "VISUAL"
+      },
+      "pixels/robot0_eye_in_hand_image": {
+        "shape": [
+          360,
+          360,
+          3
+        ],
+        "type": "VISUAL"
+      },
+      "robot_state/eef/mat": {
+        "shape": [
+          3,
+          3
+        ],
+        "type": "STATE"
+      },
+      "robot_state/eef/pos": {
+        "shape": [
+          3
+        ],
+        "type": "STATE"
+      },
+      "robot_state/eef/quat": {
+        "shape": [
+          4
+        ],
+        "type": "STATE"
+      },
+      "robot_state/gripper/qpos": {
+        "shape": [
+          2
+        ],
+        "type": "STATE"
+      },
+      "robot_state/gripper/qvel": {
+        "shape": [
+          2
+        ],
+        "type": "STATE"
+      },
+      "robot_state/joints/pos": {
+        "shape": [
+          7
+        ],
+        "type": "STATE"
+      },
+      "robot_state/joints/vel": {
+        "shape": [
+          7
+        ],
+        "type": "STATE"
+      }
+    },
+    "features_map": {
+      "action": "action",
+      "pixels/agentview_image": "observation.images.image",
+      "pixels/robot0_eye_in_hand_image": "observation.images.image2",
+      "robot_state/eef/mat": "observation.state.eef_mat",
+      "robot_state/eef/pos": "observation.state.eef_pos",
+      "robot_state/eef/quat": "observation.state.eef_quat",
+      "robot_state/gripper/qpos": "observation.state.gripper_qpos",
+      "robot_state/gripper/qvel": "observation.state.gripper_qvel",
+      "robot_state/joints/pos": "observation.state.joint_pos",
+      "robot_state/joints/vel": "observation.state.joint_vel"
+    },
+    "fps": 20,
+    "hard_reset": true,
+    "init_states": true,
+    "is_libero_plus": false,
+    "max_parallel_tasks": 1,
+    "obs_type": "pixels_agent_pos",
+    "observation_height": 360,
+    "observation_width": 360,
+    "render_mode": "rgb_array",
+    "task": "libero_spatial",
+    "task_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "effective_policy": {
+    "checkpoint_chunk_size": 50,
+    "execution_horizon": 10,
+    "runtime_contract": {
+      "action_shape": [
+        7
+      ],
+      "camera_keys": [
+        "observation.images.image",
+        "observation.images.image2"
+      ],
+      "checkpoint_declared_state_shape": [
+        6
+      ],
+      "resolution": "use the unmodified official checkpoint, its serialized 8D normalizer statistics, and the official LIBERO 8D observation; SmolVLA pads the generic state projection internally",
+      "state_shape": [
+        8
+      ]
+    }
+  },
+  "episodes": [
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 16.97560405731201,
+      "env_steps": 90,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.2992841601371765,
+          -0.1942674070596695,
+          0.2505115270614624,
+          -0.2933015525341034,
+          -0.12329670041799545,
+          0.0854683592915535,
+          -0.9475475549697876
+        ],
+        "first_predicted_normalized_action_sha256": "9c5e7f1ef6916cd1e354a3172968de939c0f634d0caf995d1d6793bd63c528d3",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "7e6f51b939399919d9253499381d6a6beb932ab5924ce98f7e37915a2dfd83c4",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "219e79dcbf67b7b6a8171d361a696d97f6505abda08d5c3198c70facca6168b1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "1eceb40695f53b52b263a2b539ba02aa1927ade3c0f0791b81951aebc76307ae",
+        "raw_chunk_sha256": "a1b14abd7585e887ed3e4729906e701618f83ed255b63493ff9c996dce960d11",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 12.245965003967285,
+      "env_steps": 80,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.08289945125579834,
+          0.1031704768538475,
+          0.4224379062652588,
+          -0.16629019379615784,
+          -0.023660097271203995,
+          0.16816110908985138,
+          -0.955462634563446
+        ],
+        "first_predicted_normalized_action_sha256": "a0ada2a3cac5a4514ad63126e673e99a961e076024e19fd0ea9c4d4f18dbd4d7",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "614fae3fb9520cd8e318a8113894c0305323b1000b2f8048dd8c43285294be6a",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "3f58c8738b610ee3371eec899c2ae480cd0db94c0fd544d291a4861b67a15107",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "acd7f3955d346164395f6e47156dfe2ed0c43e0f546bb570476ba826520a479c",
+        "raw_chunk_sha256": "8946c9803d0ea30100d196a619c2d194c7e56159d65cc63e918c7b135945ef27",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 13.154542684555054,
+      "env_steps": 77,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.18828901648521423,
+          -0.3563157618045807,
+          0.31796303391456604,
+          -0.04665417969226837,
+          -0.04471491277217865,
+          0.10366012156009674,
+          -0.950445830821991
+        ],
+        "first_predicted_normalized_action_sha256": "5a30423642332b1babff878c437a55930444cb77d475b50a3087052855cde930",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "b4bf839d102e294eae643279179a062ba9e2359a2709431848b2a346b377539b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "9a959dfdf923327098c08acedd03ebde317490e18dd8f3ad55db8b8e84a9189c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "556bbe90a6714784df95d222c5e79475095bd2044359818e1ce4bca7ea1b15bd",
+        "raw_chunk_sha256": "1a4afd30c048073f5af057b4a5c6e3e85dc0f365dd602f7b9a5edbcb1c5c0600",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 11.757586240768433,
+      "env_steps": 75,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.12383780628442764,
+          0.12294238060712814,
+          0.30266618728637695,
+          -0.35480475425720215,
+          0.24959874153137207,
+          0.05836915224790573,
+          -0.9538810849189758
+        ],
+        "first_predicted_normalized_action_sha256": "bb604754f48fc47a50ee85f1b4c9dfd24a1142c0ee5b34de9f51ae2388047301",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "1c35e45db403713548c32e8e47127d37292adc118ae60586d693ccba3b2d63d0",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "df55415aa6d13c5013494428ed5b0b994968f9394883d56075388831d67d7985",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "7354b9f328c63fac224912754ee81a387f9cbb04e1b7df285f96904db2eae6ed",
+        "raw_chunk_sha256": "7676076add4b782cfe0f0c2cbaba654411ca6a0240dd38e5abf217f966f096f4",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 10.861694812774658,
+      "env_steps": 74,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.10573779791593552,
+          0.11039237678050995,
+          0.41433340311050415,
+          -0.03720498085021973,
+          0.016096029430627823,
+          0.14098241925239563,
+          -0.9608636498451233
+        ],
+        "first_predicted_normalized_action_sha256": "bf0d90f2201e9fed56aef8bfdc0e8c1e770434d8a76f4019b8db36772655c0e6",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "3b582fa37456f8f515f1c826b17aaa898f937d1a3c4439a4a464ebb55e3850bc",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "6e63b8ba2de0718edde464a928fb55190fe350271734972143cf84bfe0438a7b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "a908bf29d6db74087d39cb33568be42d6489eb51cc8c6373a0f972abd85dbfd9",
+        "raw_chunk_sha256": "d02b94c22733a81ab913ec79e86c4cc500b24fcb898dbac69bca09a9d6a8f362",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 13.990934610366821,
+      "env_steps": 104,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.10330218076705933,
+          -0.2632611095905304,
+          0.3795083165168762,
+          -0.013519629836082458,
+          -0.12621942162513733,
+          -0.03296170011162758,
+          -0.9376950263977051
+        ],
+        "first_predicted_normalized_action_sha256": "33a8b513d278c573fc42335205fce8864e6799e82bbac827c2d39135006be09c",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "98f64345e764e804bfd6e5ba9d344e06c261c3ae98bcc63c7927db29c1098238",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "ddc9d1c211e37bf153b4b8d55eebc1c0bcd5627d5453f0960be06c8913aa4f32",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "81e90bcf8819f7255702d37976b7dd06509dc3d9b6defd46f9ed8abf924112a4",
+        "raw_chunk_sha256": "ded8d0cdfbde9d8f34b2ad6c0f3b3c1e1bffb7e9ee6b47d2606fe0958d6c1846",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 10.114442586898804,
+      "env_steps": 74,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.057812683284282684,
+          -0.03380740061402321,
+          0.31753790378570557,
+          -0.19008629024028778,
+          0.15901102125644684,
+          0.013315454125404358,
+          -0.9628725647926331
+        ],
+        "first_predicted_normalized_action_sha256": "bdf19d86bb3e2aed3546b05764a31c4fc920db8fbca2478fe7c3892c631d208d",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "3b6d6712aefd550a66664f9fdcd9619efa6944b025a2ab20a8159425192665af",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "2f51c0129537ac603972b901032354ef5a7de83afe74e54784b55a5137e9edf1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "68c6276eed0702e411ba6b8fc8fe3235e284609893fd1f1284a847d6fde62edb",
+        "raw_chunk_sha256": "b602d0d32cee59b7f60004e2caf316f80a2bf719d86424c180cdd6e60de2225c",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 10.742813348770142,
+      "env_steps": 76,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.14191313087940216,
+          0.03406330198049545,
+          0.2871707081794739,
+          0.007163641974329948,
+          0.13112419843673706,
+          -0.05561845004558563,
+          -0.9491118788719177
+        ],
+        "first_predicted_normalized_action_sha256": "0c519c332e4705eae505ee42ef98af645c3c45ed78cc31d6b902ffc1e6279711",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "0c775d8a85474621260a8a66871f67e005adae91840e62903c849eca8d1f8a9e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "ec3a5a9127439b112b66f555af9a550a89dfa3dc566bd6493670f7e059bc8b4e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "2fc3ec52d41796e7f5098c0590da4526d5c47b687b237180c9c796379d31f848",
+        "raw_chunk_sha256": "be23bc8371e6712684919c4c0be67a40b846ccdf98889164028735e64ab3e84c",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 9.617279052734375,
+      "env_steps": 75,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.3232404887676239,
+          -0.13324597477912903,
+          0.43136197328567505,
+          -0.19347332417964935,
+          0.295501172542572,
+          0.27084964513778687,
+          -0.959610641002655
+        ],
+        "first_predicted_normalized_action_sha256": "c8010933a4867748fea0c06db5348b48a0749eced0fb0bf6a8ebb94b4019bdc9",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "e077cbb389efd8984b8c5455c78785cf750baef0693ca622412d334639cbda2f",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "525b9dd8139fd6808d48982e45163aec4f930557c6bfd99647ae3ffc6661fa58",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "1a1d02a4543ee5a61190f6ddc683cc506d4e71ec15d27a66de7e5416dc53cb2d",
+        "raw_chunk_sha256": "217a9be059f681a6c8b4070ccaeaf8d6c6742d411539f4007c0c54cd72aa03bc",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 11.284828662872314,
+      "env_steps": 77,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.6355594992637634,
+          0.4367218017578125,
+          0.5170820355415344,
+          -0.017187900841236115,
+          0.06715592741966248,
+          0.19674479961395264,
+          -0.9580345153808594
+        ],
+        "first_predicted_normalized_action_sha256": "ae230e29b6144f585a42d7d35411dd180413feb6b06577a63eb4e16dd96cef2b",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "3907952659565e95315742153c947bd9647b510abe12b24daeeaa757a1298708",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "43b055da6c8f35f26bc97623a0f5c1575b3aa74bd1c13c063cffbe325a70291b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "374fc25815bd3801420dd192fab26f015ba23d8895821c18d3bc89d70a3776b9",
+        "raw_chunk_sha256": "a6523b8679e10f7dbde4d47c1db4ab2698019f6367d4991a53421846229a774e",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 17.342792510986328,
+      "env_steps": 106,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.18314751982688904,
+          0.5606335401535034,
+          0.20477303862571716,
+          -0.2647114098072052,
+          -0.3601408004760742,
+          0.22367039322853088,
+          -0.940843403339386
+        ],
+        "first_predicted_normalized_action_sha256": "394a553d8816c1ecb3ef011bdd667591210a385d7a64edc861db95252bb638c3",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "42aada6825625b0c7136ba9169112561ea65cfed0d8e610cd289cc459f299cd1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "fe872c373d06691190e22b208a4c3bdf181307e1995f659295c05c8459fe9897",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "2d58291db3cffffe93c6aeccc7427d2baf40afeebaef3ff39ddff1aed388d39d",
+        "raw_chunk_sha256": "899046a5775589c7b51b041cbc82d7e188dbb8f7913823deeb3e5d5459f0129d",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 15.647918224334717,
+      "env_steps": 106,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.23483869433403015,
+          0.7959617972373962,
+          0.3879348039627075,
+          -0.24827152490615845,
+          -0.1487090289592743,
+          0.21951410174369812,
+          -0.9416088461875916
+        ],
+        "first_predicted_normalized_action_sha256": "961566c7ed717d6a38f80154cdfd7e574300cd7239ad5984964cbadcad21acff",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "5613a93c6768e039313f65fc49e7986a227fd72f55ad07ac7a9dca6ecbfec274",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "15fb2f8fbcfd2240a775e93cdd7ea8ed0e7211752cc530f9025df1768a7b8c42",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "864bf4140e026bc7d495c4479a3bcce32e3bedceb053aab74c00c05c90ff4d08",
+        "raw_chunk_sha256": "751c30d65a0c7e263792d7d16b39ab5d1211480b48e042d53aa0186281713cbf",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 13.536951065063477,
+      "env_steps": 107,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.5877269506454468,
+          0.32624900341033936,
+          0.2648037075996399,
+          -0.037733256816864014,
+          -0.20137931406497955,
+          0.16259229183197021,
+          -0.9335532188415527
+        ],
+        "first_predicted_normalized_action_sha256": "01fa3dfc98e10f2ae16ee6d89fc016dfda606e12f8e65d17babaa9435102c019",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "a6ecfea7556122844578cc4903422e535abbf8f3089dd30df33250a3f68a22c9",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "fde402ddac3e084de6297a8c43f94b4242319f6a1f3348f0476ef8105eb039b3",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "9432c5f5439a4511a2189d4be8d7d4888ff54b7c7789c69c5fb50cf8524dd776",
+        "raw_chunk_sha256": "677b691d4d6b78535bcca4b737173fe7dc8e71c59ddb89bf48c650bf95f37ad9",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 13.91324520111084,
+      "env_steps": 109,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.39071208238601685,
+          0.7985990047454834,
+          0.3146054744720459,
+          -0.2103891372680664,
+          -0.23879247903823853,
+          0.03735065460205078,
+          -0.9550859332084656
+        ],
+        "first_predicted_normalized_action_sha256": "e113b206592ee57caf9051aff8d30dcb49db29db8643bcb389301032019ead8a",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "0b96c795fbaa403d3aafc600e4198f41a812e937ffd339d2581686efb3dc6971",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "f76729d50598529e7488d443c57df6f901238eea4848515c1623e194a18ca9f0",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "b4b477e7a31e209d0998eeca9fd0eff4d4be5f2e222581b570fbc0f2e6a2ace1",
+        "raw_chunk_sha256": "a86a754ebd898f63de0bdddf0fedcd8bfe2cd4c06abdbe315015e8fa5404383b",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 13.134867906570435,
+      "env_steps": 104,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.08748999238014221,
+          0.8250548839569092,
+          0.23680062592029572,
+          -0.09322044998407364,
+          -0.20941978693008423,
+          0.1972055733203888,
+          -0.9458024501800537
+        ],
+        "first_predicted_normalized_action_sha256": "ebbfdf38dbbfa64afe5e72c34677838e939bd585398cbf8276ca68a27d5625e8",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "45b633605625d610cebffab7677618ed514e72707aa029b20e8ff76893116064",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "3fdf86b6517b1ac3b977a92eeff33dbc28b61308bb27bccdae432b3a90224a0d",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "64978617c27282c9463895e220a6a53c68430e6bf3136db79a096918b30c8b6e",
+        "raw_chunk_sha256": "1fcee00af7c29ea609eaa8b6ad18035a92db99093ac50ab82f3da2003956912d",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 14.278711318969727,
+      "env_steps": 104,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.359333872795105,
+          0.49882128834724426,
+          0.15812847018241882,
+          0.016851142048835754,
+          -0.3862972557544708,
+          0.03898818790912628,
+          -0.9431368708610535
+        ],
+        "first_predicted_normalized_action_sha256": "0e55ef519d58616ab9dd93b3dd2436c9a0fcd13a813a17872a181f1d18dad0af",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "704e08e969bdf20793557590ed559be70f566485fc2d5bca417031f6270fe53d",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "6a636d7c37a5f184215927288ffd8b9c47a6ed6242e572c00284f2dd6119b1d6",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "6ebe66d6b3d73d011e02bb74261aab2e50c17e25cca767486da6116db23ed65e",
+        "raw_chunk_sha256": "b71e3e522665d1b1610b3c777444e860dbf2ea747bbc18da41a08c0cdcfd8cbb",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 17.146904230117798,
+      "env_steps": 148,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.15630312263965607,
+          0.7843507528305054,
+          0.3057944178581238,
+          -0.11828936636447906,
+          -0.14767709374427795,
+          0.12005992978811264,
+          -0.9494208097457886
+        ],
+        "first_predicted_normalized_action_sha256": "91260f631866c1f1e5b2e2531cdf0dcf4f84eef7948e280c4f778e0dff49751c",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "bb82657b7b6a7b4d8caf9373aca01b5f070d9a45f9be416280b610bb891fb75e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "cdf13148f74d5ccdeca65394dd61dfb9cb9c7a85e24a8ad31bd1d112e5bdd95d",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "ad91986420173d184c509fcecef0b2b30c3636e35fc2fd789909420ab7d8155a",
+        "raw_chunk_sha256": "51fd71ec0cf7dd2cd7f80cffd09350ece431df73dbfee44622203b77104caff7",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 15,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 13.144517183303833,
+      "env_steps": 110,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.4624658524990082,
+          0.46809592843055725,
+          0.19631600379943848,
+          -0.12020061910152435,
+          -0.17537494003772736,
+          0.15001949667930603,
+          -0.9312772750854492
+        ],
+        "first_predicted_normalized_action_sha256": "a4f424ec3afad02c5b545d0cd96742b4093a97bbe507a59be48992fb6fe8ca9c",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "cac7f1c99244382000678e2bc9e84cfb36eb5b845e1d855f6d6dfc0275940c1e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "a21c4e9008d042eb8d2b2cde0dda2e6c9b15715ac49ecf1396816977ae82298a",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "2907ba2a1a996f11555cb264a3bd81479cc0c15c7c990cb443f95eb626fe937f",
+        "raw_chunk_sha256": "e44998968e64e6269b43d77fbb8b05eec56042fe858e450f97a7e727bcdafc60",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 13.215759515762329,
+      "env_steps": 104,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.29988014698028564,
+          0.47550269961357117,
+          0.25193747878074646,
+          -0.1738247275352478,
+          -0.30959954857826233,
+          0.19726622104644775,
+          -0.9388081431388855
+        ],
+        "first_predicted_normalized_action_sha256": "32aacda8c58ed0e951a8e16f0c8b15f7f7cb0f4988b05a58e1d0f3320d6fd0fa",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "18bff6ff0a93929c08a6aace84d97414175c0ca001fb41efa84912349485d6f0",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "2720e5f46dac416a65d34d15a54ad422c3a66d258668a426c3819e285af1d36d",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "01f47bd55fc170f5faec909c877100845ab1cb61df6088968a63d7d69edb40a5",
+        "raw_chunk_sha256": "4ae08d6d4643ec48cfff8624ba649a27135026c823f15b0d28a35f5dca3da3ce",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 13.005929708480835,
+      "env_steps": 107,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.06096342206001282,
+          0.9597430229187012,
+          0.39776575565338135,
+          -0.12627454102039337,
+          -0.1759079545736313,
+          0.20204511284828186,
+          -0.9306528568267822
+        ],
+        "first_predicted_normalized_action_sha256": "d0f5e22203fd31bc0dcdc136df690d4ad1deb3a7fd01a97d9ec7f8386872b9d8",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "467a3210eb5bf4edee2ffe138111fc6062ce2db374060ac4ff1eeae2b3fd5ed1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "568dff04e5900397ba74396afb5f3be37de205a4ba417a7fcfe58d591d07dc58",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "2528337e616667065cf2e08d6e3cfbb94de58b8fd2b15ad3ad7942c59f6dbd4a",
+        "raw_chunk_sha256": "00df90d4bff0fbb36e3f928283bec0816d1a8f9e0f4fa2a8ef0a3a7194e3fb7b",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 1
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 14.505343675613403,
+      "env_steps": 97,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.4885760545730591,
+          -0.03835916519165039,
+          0.17032495141029358,
+          -0.03936900570988655,
+          -0.0710618793964386,
+          -0.009480813518166542,
+          -0.9491526484489441
+        ],
+        "first_predicted_normalized_action_sha256": "df047d5118c02ae179369c7aeb9f5651146004ccaeacbcf1f83471c7d6acc749",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "3c4e132dbf6a6cbf2e6ee0d6eed31b1994798affad00d028ab694a127c9a6e86",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "b09330afe560b98e2f9d50ff22cf2787185f190d5040274559bb37f2e430d6ab",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "128ac8e33cf847ab5b7085a4045da6a0002c7dde8e071a2b79b9f06931e2e8ca",
+        "raw_chunk_sha256": "14cef5a44b94d0c9192e37c65c76d576369b525ab6c7881c1032024e0fff4a3f",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 11.194794416427612,
+      "env_steps": 91,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.12827593088150024,
+          0.07760929316282272,
+          0.3504192531108856,
+          -0.05588480085134506,
+          -0.25555917620658875,
+          0.021012350916862488,
+          -0.9483629465103149
+        ],
+        "first_predicted_normalized_action_sha256": "0bcd8dc050ba8020d8267dda43e8e37c546532a8523a7d8919f3da077606d541",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "1250f8a81053df9f3ecd508763c6249f510f150e5f94f49907cf249a14bd22a2",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "b9b26bdc7c92b60edd6afaf3630eaa7426e57c18ade2c2e95c0615ab12246851",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "f22fdb1374fa7fdb6b90aebd1fa823e575b1d1e6ae316cdc474c1bfe2baf9651",
+        "raw_chunk_sha256": "441deae301a8b6922a032aed7b49e5f7ea825ecd25047a6f6777a43ebc97e7fe",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 11.720999240875244,
+      "env_steps": 97,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.17717038094997406,
+          -0.23742015659809113,
+          0.23541785776615143,
+          0.03418455272912979,
+          -0.15354417264461517,
+          -0.10563221573829651,
+          -0.947817862033844
+        ],
+        "first_predicted_normalized_action_sha256": "d8f760b9e4b2b0fa6c2b509f0e9e490dd737441f4bb536894aaea7cdb74d580b",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "d3295d872abe0232d788e6be6da9de05690047f069168e3ee82c00c52a506f8a",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "21a741c8215acc2ffca67847650b292d659e9515514193398a5646ffd55544f6",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "49ec63e4524936a3054d3d206df91dceeea18c147710d288df984760f649d45f",
+        "raw_chunk_sha256": "a802f3cb4c0d361986b0a38a345f3434a5855595250f1c9b6017bd240976561a",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 12.148094177246094,
+      "env_steps": 96,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.054056890308856964,
+          0.015258610248565674,
+          0.21921905875205994,
+          -0.06550052762031555,
+          -0.11844188719987869,
+          -0.058141984045505524,
+          -0.9655469655990601
+        ],
+        "first_predicted_normalized_action_sha256": "ccbde55f69677e1b8768a4907a37665acccf6bc90d1837a3b4c64d74090cfe0f",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c290472f3f040960cfa7580681b2c266ec5b9ac782c32698ec624083fb180bcd",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "0c84f11ee8bab4af5e5f29ff2d5a409376f0a10093f255c6240974f226d2573b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "720f24583dd1536445cd88facda58e6fa5efbf4fcbf7cea5ff7b4decfb37b6b9",
+        "raw_chunk_sha256": "f4702b46fe18c32627790addee1e746354635d87b08c1d162784e179b61c49bb",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 11.812010049819946,
+      "env_steps": 92,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.15592075884342194,
+          -0.07447563111782074,
+          0.26651477813720703,
+          0.0032805204391479492,
+          -0.20866210758686066,
+          0.043363213539123535,
+          -0.9741238951683044
+        ],
+        "first_predicted_normalized_action_sha256": "63a884b5401f207f998b450e9a2a7614d55e489133d60b5698d3381f510c8db4",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c158f0d319cd3f657cfae3a07b215715d8ebd1454fdec588bae5e57f34faf635",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "eee8069b814ca71eba4012f23c5845b6bef35047e5188312412e2d30ee883641",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "e906fe7464431aaf78a85784c670e984bd126bb0b75634f3eb62a314ce82481b",
+        "raw_chunk_sha256": "1051e62d28548dce1a882433e24dff561644c040c3e19d5d473efe21342ad546",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 12.151716709136963,
+      "env_steps": 100,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.22815655171871185,
+          -0.22150735557079315,
+          0.23202818632125854,
+          0.04372815042734146,
+          -0.22151249647140503,
+          -0.10806816071271896,
+          -0.9647489786148071
+        ],
+        "first_predicted_normalized_action_sha256": "324b1789cda55aaefca7dd22ee559b41f70ef0424be35fcb96869aaf46ee8f0f",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "f7bddcaee2863da963d0c3dc90d403c3f43a1698a8f4c3d7f3cf9a985173760a",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "23b3864a72a66670675230abd1045559fc5a64eb54a6411b0c345d9ea826e387",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "1f394bdbd9cf24cca2056b2cdecdaa0c69f2736cec9bd17c454104611d363c21",
+        "raw_chunk_sha256": "336cae575d33562354f34485938aebe8e1ffc7026c898927f52c72e3b87e4ad5",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 12.463587760925293,
+      "env_steps": 99,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.012743096798658371,
+          -0.1594122052192688,
+          0.3238414525985718,
+          0.011219298467040062,
+          -0.14019116759300232,
+          -0.08077310025691986,
+          -0.9623620510101318
+        ],
+        "first_predicted_normalized_action_sha256": "e24fa4a68445af9eadfb5d4c9c3b445319a2c169b26ee5480b328c01e5702b80",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "41a92fed61b6abd1863fe67eee0e9a1f6d082fd15589dfc964d9520965ed51d8",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "69be89f7c18713e2f995b7de682e738218c0a76fd18066f8923c76ab55d3473b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "e013b10e45701944ef1e9281f4a9613f7c2b6e1483352b1f340de26f8fc10b00",
+        "raw_chunk_sha256": "a1eab0f4dc30f6e13ddab9e5bacdf4987be76c5a9234759c8c43cb3b0f597a3d",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 10.787090301513672,
+      "env_steps": 88,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.19102367758750916,
+          -0.005856428295373917,
+          0.19309571385383606,
+          -0.03977445513010025,
+          -0.15441758930683136,
+          -0.05200313404202461,
+          -0.9558142423629761
+        ],
+        "first_predicted_normalized_action_sha256": "7993d545e7c4fe361022cace82e878c50f5faf51a6ff76d02b0760b55e89c729",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "66ee4508f72692c281a3b27236d21750f08c46b2f5eb52004991d33919ae255e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "b013882e94f214e87902dfc7acad4fb2c13c12806a12dca32295c800ff8a217c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "ef9bc43230f86b745f6a04a433e6a71be9cd8193afba2a620bc66692ed01bc37",
+        "raw_chunk_sha256": "427266f620b7113354c7ccb2ba66f6b733c5596b423a95ded87b2c638fb68d3b",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 11.911099195480347,
+      "env_steps": 98,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.3640959560871124,
+          -0.3022259473800659,
+          0.2982402443885803,
+          -0.005426589399576187,
+          -0.0030140988528728485,
+          0.14795613288879395,
+          -0.9448794722557068
+        ],
+        "first_predicted_normalized_action_sha256": "e153081033baedde09a9db534fa6f10e5a49a8d1d9813fd811fcb4a4f14e42b6",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "423f11d2c56615cf7080e2bce9ca83d28bb834cba8bd27db303f31b40f9c30e6",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "7e25e32c2999a02bfdaf5d7d75b9d53f90bda176da797f7a78898336c8c86540",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "9fdb891e494f5e5602bebd7f54383e2e0231c0b85c4bc6db2d44bac0bafab10f",
+        "raw_chunk_sha256": "4d0b63e6929391f43f1aae285506e1522d7627d708869dfb697a105a1aec5142",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 11.405450105667114,
+      "env_steps": 88,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.34116193652153015,
+          0.012467022985219955,
+          0.34927114844322205,
+          0.03503456711769104,
+          -0.13409322500228882,
+          0.08229164034128189,
+          -0.9690394997596741
+        ],
+        "first_predicted_normalized_action_sha256": "10c72d7ef3972080bdc2575def77a2805959802a5f18e82fb5f34397f90b82ff",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "fc20ea708871664c97f11168e1e22a9f598f909e9763e14416a019f41e798e8e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "25704ed325e5094c9b3dcb51442495535ba91bf46b41728eca3c9277398c9d86",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "269f35a185c33dc6d68cdf2b81d65a26b72c2213ebdde56b61dc7069f2bd6b75",
+        "raw_chunk_sha256": "e1420a8db5467d9f2a0a6d27ad23498254e8df5a43efc4ea2d484806aee770b8",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 2
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 12.19565200805664,
+      "env_steps": 84,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.7108508944511414,
+          -0.037089016288518906,
+          0.1169748455286026,
+          -0.08978672325611115,
+          -0.38762935996055603,
+          -0.15117588639259338,
+          -0.9324874877929688
+        ],
+        "first_predicted_normalized_action_sha256": "fe429203a51d345ad6aee334d91a83365c253eaf4a3b5fd7fbe2e5f46a8e25ee",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "022413e58a33b1e0ae3683f9774600615ca91b3aa21e0f2a51c6f6d33701815b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "fa8911aa189f8dfbf6b4cc1771d73092fe8ed3154c9a0bf31f826effdf7df0c9",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "c393bb9eb669901349999d438c4cdf2cca664e969afa80c18a7e67a1f3722054",
+        "raw_chunk_sha256": "876e9857d0f324708051f1d3011ff6fd1ad27333d27b8d9c97346c6b39d41fca",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 9.986533641815186,
+      "env_steps": 84,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.19914819300174713,
+          0.2180873602628708,
+          0.3390839099884033,
+          -0.21455122530460358,
+          -0.6415249109268188,
+          0.04028679430484772,
+          -0.9371823072433472
+        ],
+        "first_predicted_normalized_action_sha256": "af0ec1b619be791ce6b54520aa67aa4ac9f691fb18fd5ccf43ca62706c7b8274",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "e7f6b61cf8e67266a129a6aba1c4a4084a39bf9f79436cc211e52986af25a48a",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "4896fa562f4b6aa952f0244792d1ce0b2ae99affc526599fb8516d9f56c01668",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "d70760d8e11ed8f428e3dd1b73abf169aea688fe21aae979f567b8fca25237d0",
+        "raw_chunk_sha256": "368f6ed24c1b55586752ca466ecbebf769a059065061955c8ce9b0b5659d6e34",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 11.50357723236084,
+      "env_steps": 86,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.33970797061920166,
+          -0.08915746212005615,
+          0.30115243792533875,
+          -0.03425244987010956,
+          -0.42194265127182007,
+          -0.034038886427879333,
+          -0.9441261291503906
+        ],
+        "first_predicted_normalized_action_sha256": "ac9dd1f818b26388dca0da74ee3595add2eb3a5c2def84123febcee81a4c4cfa",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "8f9a09ba5265189869835ca52a79ae5043754b8f12191bc984732d269a8694cc",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "3b3b5c56d0772d3f3219da82585677a1e17ae8c2908d0102564c3663085aec90",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "782b77aea28fed023f80b824abef21f50974772d5f2220ed7dc5071d42c6276b",
+        "raw_chunk_sha256": "5c95f0f2b6125d103732eed5e856e6eaabfec7b69de572a46ca9534adbe6fe71",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 10.631731986999512,
+      "env_steps": 80,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.48534512519836426,
+          0.6158469915390015,
+          0.31793656945228577,
+          -0.28588899970054626,
+          -0.09890564531087875,
+          -0.1769036501646042,
+          -0.9397820234298706
+        ],
+        "first_predicted_normalized_action_sha256": "74bde5d33014f1ce547f6be7516766d46d40c37189c02248d900bfee8ea960b1",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "be1befa7f9195ac84e2b263ffd6ca13ccfa5ca85a5116718f983b6bb66a40584",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "6b95cb945aad1745a0c8b68664047f2ee49b023efb960e18ed8720e7d6ca29df",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "b09ccbd0a5469aa3e0c70b58aa188674456a9e18ede9cb64b3c4ff88ea9048de",
+        "raw_chunk_sha256": "7411c3f24bb31cafdd5ca6c87c2e2d512c89eba24a353d2a833bbb32d08c451c",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 10.172513723373413,
+      "env_steps": 78,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.3267371952533722,
+          0.19109854102134705,
+          0.28190845251083374,
+          0.08724604547023773,
+          -0.542688250541687,
+          -0.0070561692118644714,
+          -0.9497350454330444
+        ],
+        "first_predicted_normalized_action_sha256": "3df8adadbefb79cabcb3e557ba2bf82a3cf4c9bc0b09638df91ea0cb25b50ceb",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c62fe3b4040863db8c8913c43a0ffbbab1ee9de31cefaac4984b5a1f4d28b802",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "9e28dfc7a17bac9ccea4617bd13a0b65578fc34b3c0823486caaa850ffa952d1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "33af74d66c4b97b05c8e54171813bdfecf57fdbce2f19fc9ab3e242d1b0d943b",
+        "raw_chunk_sha256": "c06097bfc64f10c5c312b10f47f4997508e6be97003d82f3719a28e7648591e5",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 8,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 30.412966012954712,
+      "env_steps": 280,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.21987853944301605,
+          -0.16107258200645447,
+          0.2485823780298233,
+          0.015141844749450684,
+          -0.3690626621246338,
+          -0.0036440137773752213,
+          -0.930358350276947
+        ],
+        "first_predicted_normalized_action_sha256": "41329167de71619204ff1e2352ef5bfc365e62ccce306903f56b81fd58af16df",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "185b220e99672f84a7e3a4046b01bad42cd0167e130f45c04223d7325fde5534",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "88b517c65889b534bf79c1cc339ed128c84877f3dd5850a5c0470283341c956c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "d05a1e8f31c8b4aa26c8e8e06a6af7a806f9749eba13eb7eafb596d94325ef7f",
+        "raw_chunk_sha256": "1d0237a67c15d7a14b42838a308f38d73a60295b909fd5a14c301d8367b5ec50",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 10.333457469940186,
+      "env_steps": 82,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.050028976052999496,
+          -0.0104655921459198,
+          0.27554112672805786,
+          -0.10211575031280518,
+          -0.15776008367538452,
+          -0.22403426468372345,
+          -0.941899836063385
+        ],
+        "first_predicted_normalized_action_sha256": "a19d884d57b56c6b0d12c03bcc274e24eab6464110f56ee8dd679bb7bd5677d2",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c64c9e01aed60fd5c7eb758807e16ba8bd50ed28772b6d0334e34c713dac9857",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "8d9d46e18fd998eb54987862e65b9da2b3c00d9da1cc59efec200e6bbe3c5690",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "4af2add27f9bca12bbbb2c6e12241ab09585556bdb1ef2d1026ff162d383b3a9",
+        "raw_chunk_sha256": "48c95571a77dd816561df180272db0825d7424107862828f853b0629cacd6927",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 11.805475950241089,
+      "env_steps": 92,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.31361153721809387,
+          -0.047446295619010925,
+          0.13606080412864685,
+          -0.039696719497442245,
+          -0.32905101776123047,
+          -0.10184928774833679,
+          -0.918388843536377
+        ],
+        "first_predicted_normalized_action_sha256": "6af53d512b0a2dd6e08a96e794836af1637bd3768919be13ca9dbaf6c0238064",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "7a35f07667d5129db4045a1d8649d3d13b363e96ddd13c3016ecafb3f79f022e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "375a7172b8cc912a2bdee958e5a3951f0b760c4d6e9eb249d38a34b21611476e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "fe4c113e3c4817b5a9e1da358db32e0373a74dae845c51f7a20c1fe638e2e138",
+        "raw_chunk_sha256": "9e426d35da946544352ad09d1f823add037c726435ce90ef0073cb51b635b9ef",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 14.729488134384155,
+      "env_steps": 126,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.9075864553451538,
+          -0.13992303609848022,
+          0.431812047958374,
+          -0.15694892406463623,
+          -0.2021416425704956,
+          0.25887179374694824,
+          -0.9444111585617065
+        ],
+        "first_predicted_normalized_action_sha256": "e8d63a8d4842181b6d2082c7528141700afa749ff7fb657d7b02cf6426ceced9",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "1c830a26e48e876d7911a485a2d324207881fcb245d116b4a4ed8fdba20191c7",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "d20fd27b037041ebe9c6799fcca34c0257b7054a61e7637fea08127a156fb0a0",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "eb823594d3bfb74f6a73b7d9bb2a05ba623a68abdef7f64f067f50e0fb00c508",
+        "raw_chunk_sha256": "3796dc373893f158f4ae1d39a5842647995a4cc9dda143a10d9c7867c7531773",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 13,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 10.606549978256226,
+      "env_steps": 84,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.2646304965019226,
+          -0.029502738267183304,
+          0.2793642580509186,
+          0.051645293831825256,
+          -0.4928218722343445,
+          0.1030113697052002,
+          -0.9342607855796814
+        ],
+        "first_predicted_normalized_action_sha256": "df3ad7ab392d962c21477622dc81a4e6f82efbe85f083bb18521e967f2a30d52",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "5b1df77ace860b5475b2834b6a920b8a9cc0181e32f996a0b20d8f9d31e22562",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "f23a5649dc535bb0e85da50309627820388cbca491ece9c0420bac43733ce948",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "84b5664d743ec737b6b783e659a6881c2dbc10e4566fdb1a5e96190fad4f9a4c",
+        "raw_chunk_sha256": "b549a62af6cd556842dfecc315675502f3ffd30b9f9aa46e075e7ee9988f97a8",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 3
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 33.91149616241455,
+      "env_steps": 280,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.573975682258606,
+          -0.027846241369843483,
+          0.3267187476158142,
+          -1.0237789154052734,
+          0.0040774596855044365,
+          -0.1373191624879837,
+          -0.9387058019638062
+        ],
+        "first_predicted_normalized_action_sha256": "828b1e8ba15c88a4df9e14b44cb511a9c02b2d5fcb20c7c4499bf9bf4df5fbdd",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "812fe87efa9935e68b52d004dc90461b5aec5d4d91366b5c0f65738d8e309452",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "f8239b50e6f8505889ba2903a6719bc5d154b0e2fcff710522a18057343a8d47",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "ae05aa377726527b4545658680a9eff1044754b4dac76cb3a6a1ba0c1711c752",
+        "raw_chunk_sha256": "bb8b32ffaf90892d3c4bbb9382b5d18ce4ec384c8896ed133ee30a4b0b473dad",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 31.431585550308228,
+      "env_steps": 280,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.4287773668766022,
+          -0.1621430218219757,
+          0.5681507587432861,
+          -0.4672744572162628,
+          0.1571175456047058,
+          0.03748747706413269,
+          -0.9434813857078552
+        ],
+        "first_predicted_normalized_action_sha256": "a7625d8550492dcf72f0dfd9b1bb54f45894cf5145c8274ca6ec31fbd973780a",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "0c1d13dbb4b989b0bac8a2933788a12b47558acf2e4f454e4bfb468af4391731",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "78cb2a5f64357652ba7731d2e76b81a494818b4234a7c3f184c5c4b22d31ef79",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "2cfbacd5de394dba20e364bcfc3524b0dea8005fe1dffa2e5dba63a7dc560212",
+        "raw_chunk_sha256": "943819bcf471d4c87f1c0fdd58c77b6872070d4ac8030d12c2b9d56a5b9876e2",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 15.399011850357056,
+      "env_steps": 126,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.4258267879486084,
+          -0.7933798432350159,
+          0.4705318510532379,
+          0.021990999579429626,
+          0.2915279269218445,
+          -0.14826759696006775,
+          -0.9420781135559082
+        ],
+        "first_predicted_normalized_action_sha256": "7cc72261b3badfa687b65cc895fa7db3ec01b3f760dd18f44897f68393d87242",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "3fc3242fc1c44dbaf6e88aa1784d725d6161d3a32e260dd085cc71f55a7ae821",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "18bd501f43f6319e6647a7e8dd53dbcccabca8d4505c161333f82cf684591b55",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "5ccf531e4927d72a453813301721e83e5a50930949b535ff70bce9fff7ff023c",
+        "raw_chunk_sha256": "b9bf1ea0e4a53fa0241def26d59049e765827d7ba3d91418e0cc8fb405ce876c",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 13,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 14.85522174835205,
+      "env_steps": 127,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.5481909513473511,
+          -0.23754146695137024,
+          0.502282977104187,
+          -0.8992580771446228,
+          0.42845189571380615,
+          -0.2402007132768631,
+          -0.963662326335907
+        ],
+        "first_predicted_normalized_action_sha256": "e7111b99ba87b5653af2307f1dcfab26f7f7cff62c8937d322f2cf5cf5e5d986",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "0ab3b49ccac77524ad7cf2332530bccf2df9902738eb868e2e300cb67cbdfefe",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "6a96c9e59a88db9b57eb5641f1bb7d5561147f4173f976f5169a1a4c136e1aca",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "cb9401aef1ccc0c7ab1a7a16f89da69990bf4431ea32482ec693069ef9640d49",
+        "raw_chunk_sha256": "eb24005b9da977b60e901a1cde52733d41f2975117f4c535e0696c6a51736918",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 13,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 31.50481128692627,
+      "env_steps": 280,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.35494157671928406,
+          -0.35843244194984436,
+          0.41370338201522827,
+          -0.05559108033776283,
+          -0.005714475642889738,
+          0.03303312882781029,
+          -0.9704757928848267
+        ],
+        "first_predicted_normalized_action_sha256": "b2d6d7eb51d3fdea17ea85ab840af0178d1a1024d7cde45e3a7b0f334c9f8c6b",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "87bdb7ffc37a2cde4e3041f5edc62927290fb67b48743d605152c35229b5bd0c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "56509ce65352de91fac54a27ebe579fa557f4fd41052f65e1edbf434e27d5f71",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "66ee36e108c6395009a87b6d9576183132d4fab0dd853eaaae7642cccc8ace4d",
+        "raw_chunk_sha256": "11276c5be23cf47caf6441c49cdbec8911f44f9d9fcf876193b9e2a9ce1b9198",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 16.604419231414795,
+      "env_steps": 138,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.2288043200969696,
+          -0.5057902336120605,
+          0.4089759886264801,
+          -0.08409975469112396,
+          -0.031997520476579666,
+          -0.06153367459774017,
+          -0.9359862804412842
+        ],
+        "first_predicted_normalized_action_sha256": "52b89ee37f9ad70988687e5ccac8e805f5e986da1453ad0376ce5dbad3b88bfd",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "4905a0294de827c3548edb5ea9a6dbc367c85e6a9d1aba8f71de41d3f515b81f",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "36bdbd497f3268ec62e764c902c1b23b07900b3613cf0a2e3cd9d877ef791c65",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "53413b22a0260bb861773b49c36536478dd353ae0f9f27931a2654ffa2e18604",
+        "raw_chunk_sha256": "bbcd453baf8c533eed3ee40e570fb6cde3cf48ca48f74ee797ef8044156a5f10",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 14,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 18.115081548690796,
+      "env_steps": 154,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.7258792519569397,
+          -0.17609867453575134,
+          0.6192520260810852,
+          -0.7205256223678589,
+          0.8506803512573242,
+          -0.07816807180643082,
+          -0.9635618925094604
+        ],
+        "first_predicted_normalized_action_sha256": "0699842cb8d15d1bb867e07318aa684f737d1b1ec8afa9907891d3a0a8b59e8b",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "bd4487e06f133ac7f84918d5bf35973125479576219473300a943bd59b709e03",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "8a1b9b8e5c6b185242ce47ef64753f85616b1ddee3604eee8315cd3eab7ab9d6",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "9fd083e4f8d729195f30e3f7ebe8fa71bba95f88ac5f50a9cc39695a6d97f3d5",
+        "raw_chunk_sha256": "dcfecfaa8923110a71d759b4d71cc0e9481bfd4ef231e45e74494bd45d2e22a9",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 16,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 30.622206687927246,
+      "env_steps": 280,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.008394718170166016,
+          -0.3049842417240143,
+          0.30073603987693787,
+          -0.31863856315612793,
+          0.21822749078273773,
+          -0.11995607614517212,
+          -0.9378814697265625
+        ],
+        "first_predicted_normalized_action_sha256": "98eb35fdad19e91cd9b251297d6cb945395a364c9c24ab65fb2818d9913824e8",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "f152002863d4da25a124d20491d4afd1b1322fd8739071ca954bf94b63e45349",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "62de5bd237586243d77eb29e46c8a1a1d08bafd413696154b54b14b09919d3d9",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "a9a8cefa8b8635d69bcb9914ea5dc77ade65a2e488f4f4f3acabcb00e50d6ac8",
+        "raw_chunk_sha256": "e5d0050109afe3a1ac4d56244ded86ed2a15b65ed9467d50b9f2fdb9fb09805e",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 16.378835439682007,
+      "env_steps": 138,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.9128952026367188,
+          -0.2927859127521515,
+          0.532202422618866,
+          -0.8015720844268799,
+          0.6649163961410522,
+          -0.016365863382816315,
+          -0.9513014554977417
+        ],
+        "first_predicted_normalized_action_sha256": "04f0afce34c912503de63419118410d0b8a307f1552631f1cf2044c058e6a833",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "65d2777eee7f0de2c317f83b7b3d2ae59ed4203edcf8bb71001893337a6a2398",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "3aa12e84fe227927d9477939199803c03611443e1c50d4794c11055f0216cef4",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "ba8c35032e8c7ec49c184944c39bbf11078cbb9f3fdb7a1dff6a5b70f1f26837",
+        "raw_chunk_sha256": "ab20464f24924aba50c67b9a3ace0ec37cd6e49b6770190cf833a49e21909cbd",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 14,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 16.468836545944214,
+      "env_steps": 139,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.38323238492012024,
+          -0.21316683292388916,
+          0.401029497385025,
+          -0.19017459452152252,
+          0.2325729876756668,
+          0.020612342283129692,
+          -0.9525542855262756
+        ],
+        "first_predicted_normalized_action_sha256": "326430e5a62fa396ac67daa09fdc2e9ee974b8c495574797df852da84b8c83f3",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "94881a7768576919046e175c7471392197df142e1cfeb63f1fca2e9d56046985",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "086ccd2405d50b2bbf3ab6b21b8255a733605fe5bb2cc93606b6e87becd5afba",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "ab740a120da8cdbfcfd06d6828118dc0654fada3e2914cea8af1eba5c09806c1",
+        "raw_chunk_sha256": "ee808725e2a6d812ea87b89d727e59ffef552ee09ce6304f346a556c1d44e783",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 14,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 4
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 14.44053840637207,
+      "env_steps": 89,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.3007439374923706,
+          0.3521021604537964,
+          0.0827784389257431,
+          -0.27942216396331787,
+          0.19897112250328064,
+          0.007429745048284531,
+          -0.9400370121002197
+        ],
+        "first_predicted_normalized_action_sha256": "1fca89e90f277509acce2953b17a32c297d48f33d2c05b0ed23076fb264c792e",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "9396016d06259f05c525c3c35d4e6a1d3c500e4bad2adceda4a54f9c12c06724",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "b6116375a4db2ec393945588c6fe7df26ba8fda6ce4967ed87e6405285e86600",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "754dca6066cc34734045af059dbd04ca20ee93d0f040138d2a39eebd1602d2b2",
+        "raw_chunk_sha256": "f0ccb5531770e3d247486c3321d4c25915ea29767d16ff3a425f147caf7e0e77",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 14.407680988311768,
+      "env_steps": 91,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.061915986239910126,
+          0.27619001269340515,
+          0.2835996150970459,
+          -0.12979808449745178,
+          0.1762068271636963,
+          0.13872164487838745,
+          -0.9246264696121216
+        ],
+        "first_predicted_normalized_action_sha256": "43cf9b0e3087a7fee9639fa57867a56900695a3fc9330559c157ce36ffe65288",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "bb636ef7c878620d5c13f5c908cb65d88cdefa6bcc56e3305cf8307ea94ca8af",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "ebd6ae4b9aafe0ba2c52071508ac8baa7d5e1930c4dc1e3ef86327d2f5aa1de4",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "1de48a0bd7309d1fbc6e8000da5e7ece6c35cf0c0a62d051951c5c847cd7d433",
+        "raw_chunk_sha256": "75ff11d9d31697dd994701bd2645e1b6c09c722f172871df61d76468f1a7292b",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 13.623405933380127,
+      "env_steps": 95,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.26453331112861633,
+          -0.21747735142707825,
+          0.2760784327983856,
+          0.0273454412817955,
+          0.016466453671455383,
+          -0.1784917414188385,
+          -0.9429370164871216
+        ],
+        "first_predicted_normalized_action_sha256": "fb43cc9ce5d4b537e07df50b40c342887f1e43ce473fb884257a0785a2e46425",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "03e17f45af9ee0df18205e722f051ef23a8176e27c1e7e9944164b95f49ddf69",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "8e36cd83c66333d3810384cc99832aded8cc29001f815265785745bcf1a5b345",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "63c652a24daa97c3194b5e1c7ee16ff44212713001389cc6be2948c73627027d",
+        "raw_chunk_sha256": "17b9f1bdd54ca4b58e559c273ef861df8d519d3b977ee77f86e80f84d0ed12f1",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 15.479628562927246,
+      "env_steps": 93,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.08601938188076019,
+          0.12025679647922516,
+          0.2148367166519165,
+          0.017099536955356598,
+          0.7042515873908997,
+          0.04785151034593582,
+          -0.938882052898407
+        ],
+        "first_predicted_normalized_action_sha256": "c536c94a47c5c8a706ce7909ece1462949174dfd94130f87fc73a154441220cf",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "351c8afa474b85fadf9d8bdcc6252f45f339350465e5e0e090599e031d1fc51b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "99c0729618550c1bec60741819e9894214430980ee42fa76d67ae6a4182c64ad",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "19bd6902f5531be5ff6d82bffbb9617fd7c19002944a3f4e453126e293600977",
+        "raw_chunk_sha256": "4bd4beb7262440641059d0fba8a68327c70fbd1daf4b6267a5fe2eb43c425e30",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 36.056705951690674,
+      "env_steps": 280,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.03792876750230789,
+          0.15587887167930603,
+          0.3258395791053772,
+          -0.007206536829471588,
+          0.10134933143854141,
+          0.025396287441253662,
+          -0.9434084296226501
+        ],
+        "first_predicted_normalized_action_sha256": "4b4ac8c4c80de58590797e220631037cf10e2308480f0c11f9b0d042e3c2b168",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "740f0685b74f18cd1e8bd642ca5e7dc189ca17109ef8d1bb8400dc0737719c93",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "fc6289dd0683d2b88c3670dd55c68f1d915a05c29aee339f52bb1353b205b836",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "8bef19b037ff3d09a2d41e69072eb1c704afca7d74777bb2b293bd9086a6ac94",
+        "raw_chunk_sha256": "f80376052d949cd68d5cb9822176e7406a11ee9b7b801da8f83336819fef0748",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 11.404188632965088,
+      "env_steps": 86,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.04315587505698204,
+          -0.026114001870155334,
+          0.26259487867355347,
+          -0.044100694358348846,
+          0.11317178606987,
+          -0.05433295667171478,
+          -0.9307600855827332
+        ],
+        "first_predicted_normalized_action_sha256": "1c1824da439931ed4f1eebc1849e155a99e012c3a78a916aafc8c289d0f02d4e",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "31f33ef5fc71012d012d4d839be14f9eda94c20a1a9174354d0f1c6ece5485ec",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "f17b2f0da093503717193a0dd182ccdf6b9c5aef7afe66623891ed40580d0baa",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "329efe07c577a7e790c66d7cae3361a4b983428e8da13ee7dbb3b174f6dc0e1c",
+        "raw_chunk_sha256": "99cba63591d61d3de655de98683be05567a6cd2f3db3d015d65dd54141c47440",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 11.902610063552856,
+      "env_steps": 96,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.03276406601071358,
+          -0.1125761941075325,
+          0.22762423753738403,
+          -0.038430534303188324,
+          0.46134495735168457,
+          -0.07583858072757721,
+          -0.9404805302619934
+        ],
+        "first_predicted_normalized_action_sha256": "18ea958eba96644fc2f072e08ab58d073b0c8d6e1f0ef7eeb66a9c9e1db5121f",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "06f9fa36a9211d1f2df4e07682dff859dfafc2e3a82733eef3d54ead10173ecc",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "20c7cb00415c26d8f36794fcc3305bde9ecfea574afe15376e643dd6345bf22c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "6b6d2e6912f86a9d54d216b2af052df7814d1f78a09def8f2beccf6869b7a863",
+        "raw_chunk_sha256": "5963116879de45cc033b9cc635f198212c9b355b428d70907d474d390db9923f",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 11.788329839706421,
+      "env_steps": 90,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.19029417634010315,
+          -0.03133758157491684,
+          0.1806613802909851,
+          -0.008532793261110783,
+          0.2189488261938095,
+          0.03578175604343414,
+          -0.9314367175102234
+        ],
+        "first_predicted_normalized_action_sha256": "c3fdbe2b2ca9a0029733d6a97c1d199a2504ded1fcd77c1448a975e8f6dda4d1",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "4041c72ecb355b12df094cf59f038e59166938f1875f8ca039031d1e8c1aa7f5",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "c48c36f5565d7095045a5ad952bc908bec9fafae885c8c19837e8dd8dc067267",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "abb41c7394ef411cb6908fe122c94abf70c9751f8a2077e323e7d1e57d5295d9",
+        "raw_chunk_sha256": "b390c168bae2845e4bd02f39a8252a63c590307a435778dcff1631f6e5dc0573",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 11.121407508850098,
+      "env_steps": 88,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.49690887331962585,
+          0.08543092012405396,
+          0.4335962235927582,
+          -0.27170464396476746,
+          0.6036837100982666,
+          0.18478268384933472,
+          -0.936837375164032
+        ],
+        "first_predicted_normalized_action_sha256": "c6b7626c00b0675c33193e743c4cef840b26f46f95ec83fb0b5da2263b65a1f6",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "51df1dd98e358a10adacf3c92e16d16e7a41a975809d98a5465164388bba0dd1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "1af92f4440af7ab191260be6165fea0ce69c48c80cd89be03a3ec7cf894d88fe",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "57f1f07c21c325f523faf201137c0da2a6faa325ddc2dd28b9911ee23e4f3ac0",
+        "raw_chunk_sha256": "b90ebf1f328d99121309d8850b4fbb9cd8706968b3df74a2fb8a41935534c52d",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 12.194722652435303,
+      "env_steps": 96,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.05926474928855896,
+          0.33444538712501526,
+          0.28655463457107544,
+          -0.0404222309589386,
+          -0.04376186430454254,
+          0.13977304100990295,
+          -0.9393842220306396
+        ],
+        "first_predicted_normalized_action_sha256": "84ec261895843ed96ebb7e8734ecacf6c34df56d1497945f826326c1e111020e",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "8579201b300d6928331204fd755dc05617af8d250971e5d54131fe526741c4cb",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "92fa91cb5bf6edaadab761cdc053cd71eff900cc04e3fc6ed56d41fe216b6361",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "0c6987c1adf7ed07b9800886702f19e1f5221182d0a56162c425c1ec473301d2",
+        "raw_chunk_sha256": "007d6ecc12f649e6cfa543f3c8abde46d649cc0091f9257c2f37eedb7a85a566",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 14.206584692001343,
+      "env_steps": 101,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.7245047092437744,
+          -0.4209200143814087,
+          0.11843723058700562,
+          -0.11688405275344849,
+          -0.709114134311676,
+          0.030693160369992256,
+          -0.9560496211051941
+        ],
+        "first_predicted_normalized_action_sha256": "0dac902019e4899a501f0116bf28f23008e34907af6a4eec7a65e1eaad887a27",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "663c0105d06ea3afcc18b32fba9ac8fbe252db1a4297160b2678f22030d3ee2b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "788b3c4f59a750f276571b25e15beac51254ac67c74f86e3393542ea1474a414",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "1c27f8dac037789711d977701cfc45b3861a4d9280c4a2b7ef290fb6467560ec",
+        "raw_chunk_sha256": "a64d2b89627fe16461dc2fd100506c0c51a347f228a01d1756d046a649eb7e92",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 11.28883957862854,
+      "env_steps": 98,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.24819892644882202,
+          -0.04195468872785568,
+          0.3700072169303894,
+          -0.21553735435009003,
+          -0.9852862358093262,
+          -0.032382022589445114,
+          -0.9377104640007019
+        ],
+        "first_predicted_normalized_action_sha256": "525e1b4d9684bcedaaed58e6f53cfc65824d07b0ce0696a47cf08087d0be3256",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "ca5e04f3c29e54aaa9abbc0d7503ba139a6b365d1e839109e58712a0ad89e731",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "c57be622867fe4034b4d8b094e2d41a94cb64372ee3895b281eecd61d2794bf1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "ae1b4092394b14e35b40b6ec46d922b06ca4679da0037e67678ce5dff56dfd93",
+        "raw_chunk_sha256": "d3c673dee99cf518a3b427e67397487db3fea285462cffd69b3e44196e9295e7",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 11.741009950637817,
+      "env_steps": 100,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.026151388883590698,
+          -0.4599144458770752,
+          0.22433358430862427,
+          0.07604090869426727,
+          -0.40270742774009705,
+          -0.1029268354177475,
+          -0.9613513946533203
+        ],
+        "first_predicted_normalized_action_sha256": "6285550ec0f2541044dec2ffc89563275b4de585af4b20a58be9c655de2e3a1b",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "a5ca43128d1f244238044684c0c2b246175744f3e128e184a0e2835bde9fdee2",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "f92b35e1bfae0646c32f1a549b7e08a6eae9651c16fd23fcea1b8131a7969180",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "255318e9a071275c73e74017e6151d926625a74f75030257aed1146f64d40d9d",
+        "raw_chunk_sha256": "0c848c935c8c8097a9a62d325b6cfa5f1dc699024891241217ac7e3b84db0b9c",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 12.793617963790894,
+      "env_steps": 110,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.24229231476783752,
+          -0.11266893148422241,
+          0.2977938652038574,
+          -0.3295150101184845,
+          -0.36098232865333557,
+          0.08972730487585068,
+          -0.9569224119186401
+        ],
+        "first_predicted_normalized_action_sha256": "978885b163de1b6478f8838b43181408a9d570d9030ec05ea0eac26bdedfbcfc",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "490099cb237b6fe87885b18164fc20a75c5ba555f60f891ddb69b90353b78be9",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "613899ed72e419f02c70d92daaed75dfba727f9009a463ee82dd0ec2ac348f20",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "c085b7eedab4ca6ba8cc3e1f68f34782c8f4d6ef050376ee1e2805683eab2c76",
+        "raw_chunk_sha256": "1def23c9bd5c67302f60232afe5ed81e20c357d0cc3de73d4351ca3685d5a6b8",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 12.269728899002075,
+      "env_steps": 99,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.1858636885881424,
+          -0.2923208773136139,
+          0.2632175087928772,
+          -0.029727160930633545,
+          -0.48834431171417236,
+          0.09975985437631607,
+          -0.9629606604576111
+        ],
+        "first_predicted_normalized_action_sha256": "45d453514f7e96a973b664ecac7841079c27562098127665141534f4c20e68eb",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "79c276cb82ce5fadc01bf5577b56a632d68079428124a223521ce537be8554a4",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "d7f16b2feccb1b6e45f1b71f5253cd069a3434f413a1db6961f36531e139f61b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "727c1d50bb2c2102b86662838e94db9125935d2b69397849453ef92537c82693",
+        "raw_chunk_sha256": "4562a476afc101f78da43cb54030e3381e7eea4b5e5eebfed4af4e6bf6db4bbe",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 12.849661827087402,
+      "env_steps": 102,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.30279332399368286,
+          -0.7171996235847473,
+          0.19357459247112274,
+          0.05628782510757446,
+          -0.8556028604507446,
+          0.10803227126598358,
+          -0.9532085657119751
+        ],
+        "first_predicted_normalized_action_sha256": "d4fccde20cd50ff7318c66da7c68e88eaa30644a4159822e79a85980da7664df",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "efdd888f344c1bf5fba35720b522d47f7bc8ce5e788bc733e585caccd75ff627",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "45c6f9bf50fc2788357754a54ad738b13b62bb15559c647b97cadf04f9269376",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "223521dcddc519ceb7417d8e8b16fd492c32f6c97fc56dba0b150a01c2b50749",
+        "raw_chunk_sha256": "cc352ee32e97850a78fb4771f9f3ff9b2f41aaa9e767a50e2a38e23ea5d7f884",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 12.565808534622192,
+      "env_steps": 102,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.11460421979427338,
+          -0.25435298681259155,
+          0.3149453401565552,
+          -0.20333053171634674,
+          -0.47585099935531616,
+          -0.12366823852062225,
+          -0.9592589735984802
+        ],
+        "first_predicted_normalized_action_sha256": "d8a5f6f43c14b44def85350f1c075c3a5f51511c1cfe563500730af591c7f464",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "78fe407dc91bce786359291ceb6083d6e53ab1b21125fc1f6d5e6a65d93cf636",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "c5c9320e18a949d181f57b039f44f7a15a09e49ec35ec3b493c509ded8176dcc",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "67129fef96eb2418220362f78c02350de31d8962520e0a899db6315f1c3a9071",
+        "raw_chunk_sha256": "fdcbe90b2e1cdc862c300ade76ac987fe647f618e51e75c6a1c1b31ba7250dfa",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 13.882338047027588,
+      "env_steps": 114,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.23517222702503204,
+          0.0054456740617752075,
+          0.12044064700603485,
+          0.0023500300012528896,
+          -0.6565659642219543,
+          -0.12727850675582886,
+          -0.9429535269737244
+        ],
+        "first_predicted_normalized_action_sha256": "077decd3504920847c67c196213b8e630ebc58e88c21b8a787586ffbc4965ece",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c0db5d30884e5c9b376487b88190831bf6d206f3b597fc112946d522d8c51e6c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "174130247e7ac18733c00350199736e9cfe6d434674de5fb10cfb12dacfa5493",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "22e030baf116c6c76bdf8a02282fdff6d3c500949caa8aec776087a601cd5f08",
+        "raw_chunk_sha256": "7fc9951a39106369c9a4f71fd4ed9ef273675d56a79e222a028eece56284dd09",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 13.409773826599121,
+      "env_steps": 101,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.7496078014373779,
+          -0.528873085975647,
+          0.3109684884548187,
+          -0.14380332827568054,
+          -0.09707164764404297,
+          0.12969538569450378,
+          -0.9565685987472534
+        ],
+        "first_predicted_normalized_action_sha256": "cad2491c05f57cc91cb8d35c77cf03ead260ca3c7dacf30b8d5d750de64e3032",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "27067bcb350a8f58fbdeb8bdf7455acb8a076c8b8cbcd9d7f9af839662608b03",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "06ef621129849da567d559dc1bb699c916a01555ce6792372182067aad678896",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "dff74e3e64597dbc81883e7a5564e09991c284219e18cd75d9339f5d0c26fdb9",
+        "raw_chunk_sha256": "585bf7a87adf545dc8656e3bda892a92dcc7d34195e0d03de9e93550c57c427a",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 12.140040159225464,
+      "env_steps": 100,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.8017219305038452,
+          -0.35075607895851135,
+          0.2925717532634735,
+          -0.018489036709070206,
+          -0.814500093460083,
+          -0.024322614073753357,
+          -0.9508554935455322
+        ],
+        "first_predicted_normalized_action_sha256": "f13e718f2f608f412dc8906a3f831dbbe985c5a528a7f571dbafc51947507c8e",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "7d7834c3a52b5be4964a0ac272355290c9307ca99a0c7b5a10aedbf445805884",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "bbbf9bbd1768b21bf15316e5ccc05ced23a00a5596b47e7947ffc0726ad0f497",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "91b0f02dc86ecdd05b3bda9df0c2e942039f3cdab0b86508e5ba2a1001fd7ffe",
+        "raw_chunk_sha256": "017bdfaf75c8e2e441a16c4f8f7f9bf89c28e53275a637ff4ad706d2139814a1",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 6
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 15.518268585205078,
+      "env_steps": 110,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.26805418729782104,
+          -0.8443122506141663,
+          -0.11063053458929062,
+          -0.17300236225128174,
+          -0.07699567079544067,
+          -0.16266374289989471,
+          -0.9584048390388489
+        ],
+        "first_predicted_normalized_action_sha256": "046d3a74932e3b6c3893cbde15bf179db0bd571472d8902a4a359e8ab7373000",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "95a24e27b1a36c5518e214b2a782dd00567c318c0fed9f41353635e08074df20",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "44c03c743b6df4917fba236a0e80740733ca2d821f65c933d171cf3238beb921",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "4a3e3266d987a26931b944eab5d2f7226d69555bddde1a5c36bfdf6e5e41aed9",
+        "raw_chunk_sha256": "5c5b6d130adb1e82a18d1ad04d89ac78eab46a73c42865b4dc6173a8d48d9570",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 11,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 14.241777181625366,
+      "env_steps": 116,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.10537005215883255,
+          -0.30821922421455383,
+          0.11925520747900009,
+          -0.6320556402206421,
+          0.2598358392715454,
+          -0.09358254075050354,
+          -0.9414339661598206
+        ],
+        "first_predicted_normalized_action_sha256": "1109bbf996e8577e72019a3c5eadc812c14e9eab9e8595f013b48302244a8699",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "5a63ddd9694627c7120d1ac26950b7ff625319b88822274ecf0e80e47f57df49",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "3837b3ada798a3213ecdc5a857c10c5578333280156169077db8cb91ca6c8098",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "fb41c462b7fa82a207c75955a4fc5198bf0e635896b34fdc1e2890eca84fdeaa",
+        "raw_chunk_sha256": "fbbd4583c10e2cce5f5a2eb8fba6074fbb461f12e657eae1aa91a992df833c41",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 24.315480947494507,
+      "env_steps": 208,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.26787540316581726,
+          -0.6354700326919556,
+          0.07093045860528946,
+          -0.007901221513748169,
+          0.18127144873142242,
+          -0.15179608762264252,
+          -0.9500985741615295
+        ],
+        "first_predicted_normalized_action_sha256": "3eedb71799519d2cade3fdc59b6dc6bf72b7cca73a608548d48b9cc534b69718",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "f10698bfbbb3b5bfea128108e207677570137c2bdbfd1931c642fee182576dc3",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "af9770f13417ef7c8ed4ba5c4fb7a16bb07a39aabbffcdd0aff5f5da66b940ad",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "6e8698864be70a269eadde4a6f4559a88e6539e2c87fd0e0cf0c6599cbdfd106",
+        "raw_chunk_sha256": "6ecf7858ad14bcd043060b1db21172e1e8ec1914a485a90944b42328b0fb5c5f",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 21,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 14.160232067108154,
+      "env_steps": 119,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.014445353299379349,
+          -0.22026754915714264,
+          0.182375967502594,
+          -0.15290574729442596,
+          0.6838871240615845,
+          -0.22403834760189056,
+          -0.950875461101532
+        ],
+        "first_predicted_normalized_action_sha256": "2d18fbfc9383bb747654c5a932459e42df7cabd3fa1acd2bf425041f2017947f",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "0e31b8d9a1dc97c3bd719e4205ee105b509bcc75b95068665d2e32fec5ab7309",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "1f6c2b21c9e8773b90aebf0ec5f138c5799e53799d29509ebc5b01d19ee2435f",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "c0121180ae71a4928bda7de2aacec22045c3f9f99b59e71c6db112363a5ab1b7",
+        "raw_chunk_sha256": "ac673c3867201963bc8b274c03571be3aea482b5bafda13a20810d92e3191ae3",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 16.514044523239136,
+      "env_steps": 134,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.06253596395254135,
+          -0.7137948274612427,
+          0.08068175613880157,
+          0.011226095259189606,
+          0.31868287920951843,
+          -0.07818926125764847,
+          -0.9502219557762146
+        ],
+        "first_predicted_normalized_action_sha256": "6f1755c6fa0f621534da5982a6d0b58c1a396cf61d7bcecbfe0e5d939c95be6e",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "7aa4e7fadffaad8b2b0689f6aa49ee6b554be03a3715c7e7dfd512ed387ad7a6",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "d47a36c8680c8d93998500d496835ec30c0276507eeac03993647704086d44ed",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "26cddb32d3d8a446b5881c0d72790d66d73a545b7c498371b7c7304f16b23d26",
+        "raw_chunk_sha256": "18e15511b4da442d39b895d6c118a89bd32d9623e14250ae7fbd33a7ea2d2338",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 14,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 14.277055263519287,
+      "env_steps": 117,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.024967506527900696,
+          -1.1615642309188843,
+          0.1603269875049591,
+          0.055608153343200684,
+          -0.002771221101284027,
+          -0.25094130635261536,
+          -0.9425956606864929
+        ],
+        "first_predicted_normalized_action_sha256": "709ec60f65b7b7e21f37f8fe1a3f35e8797435ea82daa2bc3b29ef03d381051e",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c27605a3967ecba94a3e112f19cfc66d2e4de23f716ad66244c84d48b467de3b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "5df8319a657092fe72190cdecbd6445f907dc42492b0adcdbe880f02de01dda1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "478a4a6d7b69996947bc0e31a845abc7dd913079f2c716f4d66a513ad0cbe687",
+        "raw_chunk_sha256": "dd3a3ffea8a3acd46699285b9015c82274ebdc3132925f8692b01a50b80d766b",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 14.11966347694397,
+      "env_steps": 115,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.0020092204213142395,
+          -0.5605261921882629,
+          0.17312245070934296,
+          -0.1502712517976761,
+          0.9835609197616577,
+          -0.1610209196805954,
+          -0.9479976296424866
+        ],
+        "first_predicted_normalized_action_sha256": "79dd23c0062ab3450b11742306e0704908055b42010f1b628d225ff9d6558086",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "4d04611c5b9397dfdf8b8c1b4d8cc2deb2172bdcc60b1656d366902044eee217",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "07d5d7dc451be8d4612a8f9363e09e9758b5f4c883b9e7410fa18a2c44ec7450",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "d4d439392eafc05f88b9b9a4616cb46739e4fd04b0e9371296280d561e9dc574",
+        "raw_chunk_sha256": "f6faffbe34bbff21739f51bc0152e94f6f895c64275483d9c97867a713f54ede",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 14.196459531784058,
+      "env_steps": 115,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.17563554644584656,
+          -0.25076478719711304,
+          0.06384555250406265,
+          -0.1751602590084076,
+          0.28700801730155945,
+          -0.2549606263637543,
+          -0.9419957995414734
+        ],
+        "first_predicted_normalized_action_sha256": "550fe8afa3193b10c06c8969b5423dbe167ee73279b39869a7267241285e0336",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "8489f5a749c52001241172eba464d9799d9ee9c913ddf4ad21bf31588086435d",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "8b5e87e12b9d2c80be3db8969daf704e166beda459c37a84033238ddf5093bb6",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "02bfc34eb6c0ac7b2b3be0f319fbd8a1035579227a796c12a84c565974fdf593",
+        "raw_chunk_sha256": "13172096a634c5b3f129a8f6a4e730a253b769600baba7a61b907ca93db818d4",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 12.175495624542236,
+      "env_steps": 112,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.015008915215730667,
+          -0.8143899440765381,
+          0.18032532930374146,
+          -0.17437522113323212,
+          0.39394813776016235,
+          -0.20500263571739197,
+          -0.9554247856140137
+        ],
+        "first_predicted_normalized_action_sha256": "628adae6894b433a85247cfaae18794796af99dfadb8c30c09b4ffa100bbe019",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "956c80156ea1428247009d01ab6850044925414ba56b42e7ad9d32dcd6cb8ea1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "8e78d8a2149451dcb5c6d464ce383c2801826ab711b74a982015d13a5ab56deb",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "4bff9a6ddc12df93d0faf4b4cc2ee30059d73aebb2a8385eaad78bfa413ea8d3",
+        "raw_chunk_sha256": "6fa2e92a7acd0ef581be3e6a7bcd87d49723a8c18f1363e5743636a71843d4b0",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 15.03088927268982,
+      "env_steps": 133,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.15516579151153564,
+          -0.7121769189834595,
+          0.1195237934589386,
+          -0.02157680317759514,
+          -0.015819761902093887,
+          -0.154511958360672,
+          -0.9545400738716125
+        ],
+        "first_predicted_normalized_action_sha256": "c92ad359b382779146c57621e0a79c4ca72e9b62d487d2d17ef594355e222ab3",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "0a00a3ea997ca32170f0d121cb71d1e71e2d62730915b594a70db5d652eda271",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "c0c01f23545e43705df08344ca7fd131a8a5cef69baa54b96387f5b131245b5c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "a3b5a31ef5303e72f7a32d41a33a39e0264711a854223dc66781dd4760399cac",
+        "raw_chunk_sha256": "093f44f86dc9c1c5648f453195a562daac23dca111c714a413731e57eae0f3d6",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 14,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 7
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 12.77564811706543,
+      "env_steps": 92,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.09287801384925842,
+          0.16646315157413483,
+          0.16209827363491058,
+          -0.09622764587402344,
+          -0.32165318727493286,
+          0.061163127422332764,
+          -0.9450917840003967
+        ],
+        "first_predicted_normalized_action_sha256": "81cacb9fa819a189f4483d2af004ed352dfcfe0c0861279bc1a321b37da634b9",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "dd8d52b3a624b540f82a72c441d1ce20360ee441f0b7490b0a79e92ab1e97923",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "7ce5d50a614942aa6145f9cc9c9ae8af89f659a0b639f3bc7cdeace6ef865eaf",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "9614f75109e6885a232dda7085267c7f17c8a77f1177291fe1644dfb7975d108",
+        "raw_chunk_sha256": "ddad71bd88e5d2d0a80d21d61b745cd8a6df113e27fe89950332e7a8cc66fc13",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 11.21599531173706,
+      "env_steps": 96,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.0812409371137619,
+          0.379737913608551,
+          0.39775383472442627,
+          -0.11834196001291275,
+          -0.6027364730834961,
+          0.2242581993341446,
+          -0.9238835573196411
+        ],
+        "first_predicted_normalized_action_sha256": "348472cac68d0651988f37d2b112e1ee16e257f8b0b9c0524b828f8ccf8e98e7",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "863e639e3791fd215701ced6fdc3c9ebb0faec02c8a3b88c4e3c56c31c4ce201",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "d76a4e183bb87f1c8fc2800a65295dfbdd9543ee3aad8d5b67a29ec711b53164",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "478a60b0efb2750a5d2339b327b275b70f6c0d154d1f0d9f4f6c1e4223df6e81",
+        "raw_chunk_sha256": "e383ea05be228b8a6d0835ccbab6f86961bb99f5244bbf0ae586f771b9ba8857",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 11.10267424583435,
+      "env_steps": 88,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.08873698860406876,
+          -0.17309097945690155,
+          0.2286590337753296,
+          0.060889534652233124,
+          -0.2737034857273102,
+          0.112163245677948,
+          -0.9394091367721558
+        ],
+        "first_predicted_normalized_action_sha256": "8f702ba70085a3a25f5320756ca565f93bebef7441c650fbd137bd95cf680aa5",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "27d3df81d3a33eb511d078186d9217b83215d8dc4282b80013d56c5660714a43",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "44d0d6d973d60034f65c88557a2dbb5203813bffd02c4a212a8485cfd2a5a7b9",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "9242e43bdc2e4e277063064959715497dfa2d85424668ed03719f3fb958c708e",
+        "raw_chunk_sha256": "e457348ebc1588f445231cca5cb68acc53cd3103bda06d69ac74fefc8b296c07",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 31.193275928497314,
+      "env_steps": 280,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.039968814700841904,
+          0.21101820468902588,
+          0.15942791104316711,
+          -0.10215584188699722,
+          -0.16627177596092224,
+          -0.014714807271957397,
+          -0.9495711922645569
+        ],
+        "first_predicted_normalized_action_sha256": "ec8a7c837784eeac14929bce98f17af053e041d18cfa4e03f3c43c9ff818fdee",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "89efa7f9122d2d608bfe801c543c32829211ef04f01bd2344868a3fa55b4a11f",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "0800a81b2a9b03eed97b4a9a97881d5d5631939a1ab3b1e60b333e88bfbb6a94",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "c7dd1644e868094103a70f19b82c741330f3458d1825fbe08a04136003521d43",
+        "raw_chunk_sha256": "f45d208a82aaec0921199e0df9143f0297799c3b1eb0d9d008e8dc8b38025c90",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 0.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 28,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": false,
+      "sum_reward": 0.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 10.803023338317871,
+      "env_steps": 87,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.41274935007095337,
+          0.3793189823627472,
+          0.3337399959564209,
+          0.12028388679027557,
+          -0.24213872849941254,
+          0.20728713274002075,
+          -0.9670294523239136
+        ],
+        "first_predicted_normalized_action_sha256": "ec0ca4edcda331f9614320231079f9c36bbbca34a1a15ac822125bde5649de16",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "587392a88bab44337ace77c303da918a69552e1a03a7373fa09396e153e971ae",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "1422a43d3b4d61d5f4a0a0d1477a9814d457cb42df0128a3f2f893224112b800",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "028ddf76f01fa79f654257236ec7a5f3d7c1dbb0af488be11917eda08b02193d",
+        "raw_chunk_sha256": "63467210b960f3c4602f685e41ff4b085fb7ccdffaf94e1a7a502c60f35e69af",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 11.208153247833252,
+      "env_steps": 88,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.10724244266748428,
+          0.28859204053878784,
+          0.26663118600845337,
+          -0.04748157411813736,
+          -0.5868582725524902,
+          0.06265822052955627,
+          -0.9441624879837036
+        ],
+        "first_predicted_normalized_action_sha256": "e7743a022f35d85e2b28f7a6479896619e8092a258248b0b211993da21fc68e3",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "29043a94a9a7d1c1bf3aa0ae9746fb1dbe05dce061522c3b26151ccb94596d1e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "5fb7f32ba893247e15063fd9e43d6cbfdd12588520a0264e35c57a91e96824ec",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "54d386ba19fe82ff258c85d00c42b76522e25ede17c548aef06e2ae3f319359f",
+        "raw_chunk_sha256": "bb024036d7d42eb4230d4b5a648e49ab0cd5a8f0ac5c372e69f39beda1b069ea",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 9,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 11.63667917251587,
+      "env_steps": 91,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.01313011534512043,
+          0.17259904742240906,
+          0.2697544991970062,
+          -0.07162311673164368,
+          -0.21966856718063354,
+          0.03545147180557251,
+          -0.9355918169021606
+        ],
+        "first_predicted_normalized_action_sha256": "6b8738809d9e0572bab1c971c0613534c628a8cc878879f15bdfecc9d4661d71",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "f4eb5e67922acf3ea6893c4a0dbed993115ef2096f3f1494db93660df714d4f7",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "ad259c521439311c868367f755cedb895f1ee4ed8e1f65a99c9641c1dc94e983",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "1f0c81bc020251f1ba502084e3b0c063ddcd2797577e321f7b0490d071de2c88",
+        "raw_chunk_sha256": "2bac63f662bff634278d560298d87865936441fb6c3a1030e997ccaf4445dea3",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 11.56240200996399,
+      "env_steps": 93,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.27504074573516846,
+          0.15833264589309692,
+          0.13062095642089844,
+          -0.014040528796613216,
+          -0.25121498107910156,
+          0.05431552603840828,
+          -0.9364833235740662
+        ],
+        "first_predicted_normalized_action_sha256": "b501315e81310508edc3e2cc1ce5265096cfe1286299a2f4f78324cdc16d2553",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "1d11557f2ad47c03be876aa51f08e25ab1393434a070722133e44fd6a407cea1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "66d5cca00b23d4ae7ab70c7d1208375ec8e2ea439ba456c0c68eae49bdc0e9e9",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "143c383fbda962c1ed55d84bd8c0f1b0626ea86e24c8d41c26519a63cbcd380c",
+        "raw_chunk_sha256": "9f15d1c99835eadce22234132956e606f556d8e33e92c5dcdfe3e672b2ced53f",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 12.198664903640747,
+      "env_steps": 96,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.10517770051956177,
+          -0.02206575497984886,
+          0.28080853819847107,
+          -0.07460956275463104,
+          -0.15533046424388885,
+          0.3472248315811157,
+          -0.9327535033226013
+        ],
+        "first_predicted_normalized_action_sha256": "734c1df2a60ebf93d662329779374b437e7b14e8e22e007c9d04a11bd623f99d",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "48544e7117499bf251cbba3d94b51c361138d8b397842aa09151fc091909ad46",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "22da1c16ab92de8bba931517d5e975196180d01276b04461a8b8d695361882b1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "ef99eeab6325d85864a5d1560e1f9eeca4491bbf54c5605fbbdaa4ab73d00ded",
+        "raw_chunk_sha256": "7a647e2542d3bccf65d5e36594163cecd4dbf60f7be0c080f7892d565424421f",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 11.463250398635864,
+      "env_steps": 92,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.2892158329486847,
+          0.3469623625278473,
+          0.30699068307876587,
+          -0.023127522319555283,
+          -0.6039793491363525,
+          0.22042874991893768,
+          -0.9460183382034302
+        ],
+        "first_predicted_normalized_action_sha256": "31af2568905407d0f1a8eeebc8899dffa758e529dde22e3c0151ce6ce0a0a3fe",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "20ec70b696090e35bdf875c4d48c7755fd34793a2fd776dea8ac9e4adc3e4d2b",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "07abf4700c1b23fafcd64513adc6379bff5b97262ffe13cac2db5518715e4ac3",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "2cea07b686e3429e71ee212e55ea4a88b43f647850837333fc04186b0e6c129a",
+        "raw_chunk_sha256": "94e15b8f89041fab0b5dc270473fff97be8a995c26dfe9e95dc2413a5361a756",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 10,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 8
+    },
+    {
+      "actual_initial_state_index": 30,
+      "actual_seed": 44021,
+      "crashed": false,
+      "elapsed_seconds": 15.580193281173706,
+      "env_steps": 116,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.7094917893409729,
+          -0.3424100875854492,
+          0.5312513113021851,
+          -0.7993009090423584,
+          0.02884592115879059,
+          -0.12047572433948517,
+          -0.9472100138664246
+        ],
+        "first_predicted_normalized_action_sha256": "b8ea1bacb7b09c08de1ee14d7c7996cca4c7b652439d70c7717dd9c7949bf1b7",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "c73fd66add7120f9697365a082394fa7ca8e708930f7a0df3462c555398b90a1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "2ef038902374df9283a84c5032f3e85e8d85d74729ddea7540041182f067eee1",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "274aa42facd918693b1a2e9625703d615a60d03cbfba66287cfa2d71e911a781",
+        "raw_chunk_sha256": "1095a2b14c958fbebe5a9f3e7fe79475901fada158a414b205358e2b1e40c1cf",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 30,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44021,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 31,
+      "actual_seed": 44022,
+      "crashed": false,
+      "elapsed_seconds": 14.32763409614563,
+      "env_steps": 116,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.4390767812728882,
+          -0.11515139788389206,
+          0.8497346639633179,
+          -1.4217500686645508,
+          -0.3886220455169678,
+          -0.05728781968355179,
+          -0.9420482516288757
+        ],
+        "first_predicted_normalized_action_sha256": "729495e03ad6c8fc3d760471a19c15359b60f54d10ac9fedf26d607b6aaf4bee",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "73bf7f3346a3ec141b643a0ed6b0aa39dd5425da6031138a78357636bf5db90c",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "eb6339fe0b495c5b20f338668199aee7d45aea776bf4f4809337b700687d8369",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "327c47caf28e9d8c46b2f73ff0ef44ea2c4cc89d95e21f5e0d688a9ff79df020",
+        "raw_chunk_sha256": "d12d782f598b304a0a782dbb4db7dda0d767ec7dd9bfdfe5d98aca05776c07f5",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 31,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44022,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 32,
+      "actual_seed": 44023,
+      "crashed": false,
+      "elapsed_seconds": 13.939448356628418,
+      "env_steps": 114,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.1618509590625763,
+          -0.9109137654304504,
+          0.5251165628433228,
+          -0.05577898025512695,
+          0.14326810836791992,
+          -0.26955845952033997,
+          -0.9573903679847717
+        ],
+        "first_predicted_normalized_action_sha256": "0a1d11375b646063813259dae3a584b7faeefb10b6395aa6c6b00bb941fdc9f5",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "73d43f46e6ad11bdb1e606d5bbbbe883fb96f8dcc469dd61962154bd5ee16786",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "fd07d377f59858d98af3cc367bb73b5c134537e998bea15205a32444f099bc73",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "5c6491ee492a17633040a5e0507ab6b6044245bccbf2c42265a5fe9e308b8a6a",
+        "raw_chunk_sha256": "e79e090bb09ed80df7e098e98549de535c409dc778414754bdc3d6ab71336372",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 32,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44023,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 33,
+      "actual_seed": 44024,
+      "crashed": false,
+      "elapsed_seconds": 13.982482194900513,
+      "env_steps": 111,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.4066264033317566,
+          -0.4208122491836548,
+          0.6069210767745972,
+          -0.9320223331451416,
+          0.4525454342365265,
+          -0.29647332429885864,
+          -0.9511118531227112
+        ],
+        "first_predicted_normalized_action_sha256": "9b166908f773b0fc3821e18594cf2723345f966a04234cb4207d0ba166a36e1a",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "6941af83f1159bb98c972df53f9d9156fda2e91ebe5bd82abd163d43507ad198",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "03f208227596cc05769534798c6f5a09b3e058efb39544ae83e1f84f8b7feeb3",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "66796734eacb762116207e69389d3951f948881036f6147cdd608837ddc6818d",
+        "raw_chunk_sha256": "3ed083243e42c21b1c7d3075a25bd915710b6135e5a3869e6c502bf60e5ec801",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 33,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44024,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 34,
+      "actual_seed": 44025,
+      "crashed": false,
+      "elapsed_seconds": 13.573292255401611,
+      "env_steps": 112,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.27135807275772095,
+          -0.7629402279853821,
+          0.5855807662010193,
+          0.10184338688850403,
+          -0.15150076150894165,
+          -0.06703313440084457,
+          -0.970598042011261
+        ],
+        "first_predicted_normalized_action_sha256": "a2ea257b5035a6788687a958da08042c0794e8dd1a70f52b0ce57667e61161d0",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "296802f5305fe0cab6a50f0c4f4ad82237102339659d68543d694132f937b871",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "3b062e09f00ff79c8015dfe712b6c689953a8a85b30cb4deaa40b2688976677e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "6043dba224df312fdc97b99fc54f492a303d184610ccabe18cfdbaeac3ebc3ad",
+        "raw_chunk_sha256": "f0457dcbe6844a9fbb122ea980b7ef1f0c13901ba229375225c0b91ae8e02661",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 34,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44025,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 35,
+      "actual_seed": 44026,
+      "crashed": false,
+      "elapsed_seconds": 13.583395004272461,
+      "env_steps": 116,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.43290263414382935,
+          -0.9517062306404114,
+          0.8066890239715576,
+          -0.005681917071342468,
+          -0.035760119557380676,
+          -0.29614895582199097,
+          -0.9604203701019287
+        ],
+        "first_predicted_normalized_action_sha256": "05313e64269f0caf68c68c9e6ac84ec4d2b42701471f83e76dec54cde7776f83",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "af4934260ef02f9950dd6fa9184a81e6e55050808eb7409896982a1f243b80aa",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "c5d8bfbe60a0d6d1ff6240298461badb0073c8539d5399c5dffcaf6fb385c1b7",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "94e60276eaaf3405d72fe5cc1ed5b03a59454853d2913a88c4e4b5a19c0d3dfc",
+        "raw_chunk_sha256": "f49f66b3a3977989f3765ff20a5e285dc5d565c7226ce0457e96a3159b288f63",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 35,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44026,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 36,
+      "actual_seed": 44027,
+      "crashed": false,
+      "elapsed_seconds": 13.960270404815674,
+      "env_steps": 116,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.6692487001419067,
+          -0.536874532699585,
+          0.8424016237258911,
+          -0.6233971118927002,
+          0.6420336961746216,
+          -0.4711490571498871,
+          -0.9405968189239502
+        ],
+        "first_predicted_normalized_action_sha256": "0b511ec389737059880a4846e75c9457d465956d93817c43466cf1abc136b76b",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "5ef6da8afa034f175a34924408841db7ec2f8077001530fb8793bd961b9dee26",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "91423ab19589eaca4e9feb286cd5060e39b5ae31e3c0ad81a56697a36b123dca",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "b75e20ee63273593d932873c515b3f7a350ec00dd051e54594215596617d43cf",
+        "raw_chunk_sha256": "89186788a78697791a779ddd24e072813da05c5260dcb97f48e41ac7a9a53070",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 36,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 12,
+      "reset_observed": true,
+      "seed": 44027,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 37,
+      "actual_seed": 44028,
+      "crashed": false,
+      "elapsed_seconds": 18.68731379508972,
+      "env_steps": 161,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          -0.010515190660953522,
+          -0.40214964747428894,
+          0.44590556621551514,
+          -0.4494333863258362,
+          0.10965238511562347,
+          -0.11776833236217499,
+          -0.9227582216262817
+        ],
+        "first_predicted_normalized_action_sha256": "82c79b982d1c75b0d0d4021a6927ccd4b70a185b77962f779d03038520ff0bb9",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "87bdf42edf87012de071b51c19cf23c7690820e5b014702fa48bc4bfee1ad8c8",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "d748cebe597e6614f19802729988cfed85c2e42a840a3ab58cec01283a051e3e",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "38f5e512f144e3f2a6d2bb5004d5353da416024c8ee711efd7d1a3e42e7b52e5",
+        "raw_chunk_sha256": "be4f2b76a164b6a9cf4440c6b4afd9ce5cbc94f802cdbbe2d889391a27cc8934",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 37,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 17,
+      "reset_observed": true,
+      "seed": 44028,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 38,
+      "actual_seed": 44029,
+      "crashed": false,
+      "elapsed_seconds": 15.508816719055176,
+      "env_steps": 124,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.5279742479324341,
+          -0.8424624800682068,
+          0.7715410590171814,
+          -0.31742963194847107,
+          0.5231622457504272,
+          0.055838026106357574,
+          -0.9609642028808594
+        ],
+        "first_predicted_normalized_action_sha256": "1b79d6fd138d7a5ec97194c480cf8ea85fdc87a84f3c71bd6f81327cb677e4a4",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "77bdcb33fb7fcb135848f49b784740d30bd5bffaabac2c8ef9b2af353d384bb4",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "09a9a85e2c52966859e26eee73c17c148c34aebc102841ef189b35f80bb852de",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "1d3182e0c20d855cb4e5f511545cba48e10db0414059fa904ecac6b57a7688a3",
+        "raw_chunk_sha256": "2950c92b729f09bdb51422df3aa18abc6b47ca0f4add29c3b2a6f137f5de255c",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 38,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 13,
+      "reset_observed": true,
+      "seed": 44029,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    },
+    {
+      "actual_initial_state_index": 39,
+      "actual_seed": 44030,
+      "crashed": false,
+      "elapsed_seconds": 14.69822382926941,
+      "env_steps": 122,
+      "execution_horizon": 10,
+      "first_chunk": {
+        "first_predicted_normalized_action": [
+          0.5622978210449219,
+          -0.49569758772850037,
+          0.8239998817443848,
+          -0.1840091496706009,
+          -0.6504407525062561,
+          -0.08996129035949707,
+          -0.9400054812431335
+        ],
+        "first_predicted_normalized_action_sha256": "07449ed6f8d594aed2c0e373048d0f35dd4b7042c8b3865cae3209fb6cf2f7d1",
+        "input_camera_frames": {
+          "observation.images.image": {
+            "dtype": "torch.float32",
+            "sha256": "cb8ec049536c2d1d4c47d1b0697e71e4709c5c0ff8eb340683d0ca2b99a6a98d",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          },
+          "observation.images.image2": {
+            "dtype": "torch.float32",
+            "sha256": "705cf9a558b8599c2e28172a5d14fa51182e35de05d09c31d9905d6ef16dd938",
+            "shape": [
+              1,
+              3,
+              360,
+              360
+            ]
+          }
+        },
+        "input_state_sha256": "5396a3a3683525aa9151dd4520cffc314df4b707098a86c120ebf57652269724",
+        "raw_chunk_sha256": "f952b20acc79037e0d237e66bf8026d4ace0f76cdfacc6ef2c760e92f9507fc9",
+        "raw_chunk_shape": [
+          1,
+          50,
+          7
+        ]
+      },
+      "initial_state_index": 39,
+      "max_reward": 1.0,
+      "prediction_chunk_size": 50,
+      "raw_chunks": 13,
+      "reset_observed": true,
+      "seed": 44030,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 9
+    }
+  ],
+  "episodes_accounted": 100,
+  "fatal_failure": null,
+  "included_in_formal_metrics": true,
+  "interpretation_limits": {
+    "generalization_limit": "The result does not establish real-robot performance, safety, other LIBERO suites, or other policies.",
+    "not_a_pairwise_claim": "This grid is not paired with the original 58/100 grid because states, MuJoCo version, and execution horizon differ.",
+    "not_sentinel_efficacy": "The trace is observe-only and this run does not estimate Sentinel intervention efficacy.",
+    "not_so100": "The evaluated policy is lerobot/smolvla_libero, not the repository's SO100 overlay.",
+    "scope": "Independent post-diagnostic full-suite confirmation for one declared official SmolVLA/LIBERO configuration."
+  },
+  "metrics": {
+    "0": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 1.0,
+      "successes": 10,
+      "wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "1": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 1.0,
+      "successes": 10,
+      "wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "2": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 1.0,
+      "successes": 10,
+      "wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "3": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 0.9,
+      "successes": 9,
+      "wilson_95": [
+        0.5958499732047615,
+        0.9821237869049271
+      ]
+    },
+    "4": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 0.6,
+      "successes": 6,
+      "wilson_95": [
+        0.31267376973365824,
+        0.8318196702937638
+      ]
+    },
+    "5": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 0.9,
+      "successes": 9,
+      "wilson_95": [
+        0.5958499732047615,
+        0.9821237869049271
+      ]
+    },
+    "6": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 1.0,
+      "successes": 10,
+      "wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "7": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 1.0,
+      "successes": 10,
+      "wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "8": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 0.9,
+      "successes": 9,
+      "wilson_95": [
+        0.5958499732047615,
+        0.9821237869049271
+      ]
+    },
+    "9": {
+      "crashes": 0,
+      "episodes": 10,
+      "success_rate": 1.0,
+      "successes": 10,
+      "wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ]
+    },
+    "overall": {
+      "crashes": 0,
+      "env_steps": 11592,
+      "episodes": 100,
+      "raw_chunks": 1199,
+      "success_rate": 0.93,
+      "successes": 93,
+      "wilson_95": [
+        0.8625048526092651,
+        0.9656807389327273
+      ]
+    }
+  },
+  "mode": "formal",
+  "model_artifacts": {
+    "backbone_sha256": {
+      "config.json": "ea6bc1237e96247f6258de3e202e2e62b93d6f386dc47e7b36b5588bf3a15e17",
+      "model.safetensors": "b9bfd456c9472c0acd5719d6e514c4b859891af205ee1a736552fd3497b8b0c3",
+      "preprocessor_config.json": "149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374",
+      "processor_config.json": "f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c",
+      "special_tokens_map.json": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60",
+      "tokenizer.json": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+      "tokenizer_config.json": "dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913"
+    },
+    "backbone_tree": {
+      "file_count": 15,
+      "root": "/root/autodl-tmp/sentinel-evc-gpu/20261002/models/SmolVLM2-500M-Video-Instruct",
+      "scope": "complete_local_snapshot_tree",
+      "total_bytes": 2034860969,
+      "tree_sha256": "434e2eb9863cd0f8ee17ce94b2cf0bceea61ee19022cfd4e2f21ce444acf842e"
+    },
+    "checkpoint_sha256": {
+      "config.json": "5c9f3ba9f5f37ea7024c9501b0b20b1941f232989c2167853cb46d9071a70dd7",
+      "model.safetensors": "9a9f6413e42c0f332fccbce9a0dc796af2790f82cf002f791cdbf7e01e1afca8",
+      "policy_postprocessor.json": "3b51f092c70c710ce0213ee1b63bf51b4878ec67828dd2d67daf9ef51081a41a",
+      "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9",
+      "policy_preprocessor.json": "122ec5106602b1bf129f49690d05ab2f49748a0ac6119de55ea0677d4e90d248",
+      "policy_preprocessor_step_5_normalizer_processor.safetensors": "b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9"
+    }
+  },
+  "preflight_evidence": {
+    "checks": {
+      "backend": true,
+      "count": true,
+      "episode": true,
+      "excluded": true,
+      "mode": true,
+      "model": true,
+      "outcomes": true,
+      "protocol": true,
+      "schema": true,
+      "script": true,
+      "sources": true,
+      "status": true,
+      "trace": true
+    },
+    "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-confirmation-preflight-task0-state44-v1/manifest.json",
+    "sha256": "d3cd7bc8210df67a196de91fd5584ed09ccc5969fd9b55148167de4cc83a2eb1"
+  },
+  "protocol_sha256": "b0181947d9dc4b943c95dfaad933fbfa420a7220428b18b99e968e23e07146b8",
+  "schema": "sentinel-libero-confirmation-v1",
+  "script_sha256": "4dbd71cbf4d3e259736fb0b04d524604dacd8f64f5599e261517619fc258f4aa",
+  "software": {
+    "cuda": "12.8",
+    "hf-libero": "0.1.4",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.7",
+    "num2words": "0.5.14",
+    "python": "3.12.3",
+    "robosuite": "1.4.0",
+    "torch": "2.8.0+cu128"
+  },
+  "source_bindings": {
+    "backend_comparison": {
+      "bytes": 3403,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/comparison/comparison.json",
+      "sha256": "e3271e0cd341d4f5e96615c29f44e954f136ac1d2f5deb2d45b055584f96b124"
+    },
+    "backend_current": {
+      "bytes": 47241,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/current/manifest.json",
+      "sha256": "f3fd98744578f0147eaefc791ce45dde0c0d8c2cdd1451eee08cad882a78a8fa"
+    },
+    "backend_legacy": {
+      "bytes": 47208,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/legacy/manifest.json",
+      "sha256": "7dee0992f05a03a85218ca958b4145b21663ae068fecdad78c1a75eb56022cb3"
+    },
+    "backend_protocol": {
+      "bytes": 4814,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/frozen-confirmation/backend_protocol.json",
+      "sha256": "cf1b8fd439b992058f7ec37cefd0c5248fadb3ad7cbec41490e0b163c0d932ac"
+    },
+    "backend_runner": {
+      "bytes": 34532,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/frozen-confirmation/run_backend_ablation.py",
+      "sha256": "19164e24c3f39a9c89bd4a8ccfe6de489e5175da2decadf1ec847538a1a8102b"
+    },
+    "horizon_manifest": {
+      "bytes": 42633,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-replan-final-40/manifest.json",
+      "sha256": "4f07e80e134d51b01d39ce2264ff3f448fd76d7f1992ed108efe69f6e89eef18"
+    },
+    "horizon_protocol": {
+      "bytes": 2758,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/frozen-confirmation/replan_protocol.json",
+      "sha256": "602e8d18c4afa4118bf5c97ce3d490ecdca66dcfeb1dc182f5464ab10e4ea897"
+    },
+    "horizon_runner": {
+      "bytes": 23416,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/frozen-confirmation/run_replan_ablation.py",
+      "sha256": "8a83eb318a38b54f8f89f473625e224f51b5cbd68360bb6ba7e57b31640d2c73"
+    },
+    "horizon_trace": {
+      "bytes": 13926241,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-replan-final-40/action_trace.jsonl",
+      "sha256": "99c7ec0d4c5cf337cf10a7dd7de87c85ed27a79c15a573fa5bba37f0f2de2d7b"
+    },
+    "native_manifest": {
+      "bytes": 22441,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-spatial-final-100/manifest.json",
+      "sha256": "b5d8e982f50ee07452441a5f7070bf305faafc3465ae07b725574aa5324c7c4e"
+    },
+    "native_protocol": {
+      "bytes": 7222,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/frozen-confirmation/libero_protocol.json",
+      "sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b"
+    },
+    "native_runner": {
+      "bytes": 39259,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/frozen-confirmation/run_libero_closedloop.py",
+      "sha256": "9d5103e57d6c0d420cf32024fa3b929ed0b90518c18e830296d6bdb5cb635b9e"
+    },
+    "native_trace": {
+      "bytes": 25206899,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-spatial-final-100/action_trace.jsonl",
+      "sha256": "3460974091ca0199bdae4bb0be0834c51396023cf882c2e1a262f1c76d42dba3"
+    },
+    "reset_comparison": {
+      "bytes": 2535,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/comparison/comparison.json",
+      "sha256": "97cbf95929f4a56bfd9c427c37c1e801ec851e98a43824711eb2888ab4c8a10f"
+    }
+  },
+  "status": "complete",
+  "task_source_sha256": {
+    "bddl": {
+      "0": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "1": "53a7516571412a2f46a27cbf8482d3b76dbad4221858c8f6b565d506c274e61d",
+      "2": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+      "3": "3d4ccf070c3d9883ae0676f2d888588f98c696ddad71b7694f47c379fc99ef36",
+      "4": "4371189e11d9fd29bb548ab9a8adcd741bb0ce41bb66c612672d0e8cb29a52a9",
+      "5": "10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "6": "566c65596f3472e752e6522817bff51bbf3ce5159d7bec1d3554e5ead46b1e55",
+      "7": "dd11837141a30d874ebbbfaae20e91ecc67ec85ab3872ceb4cff3abfcbef7cb0",
+      "8": "c8fbb9effa27b947d04d26862d75273d93cac1806734e53836cd472a08aec1fe",
+      "9": "5293e759381b477e126beaf83d738542bbd4d93f522a3eead1066e612bad4a8c"
+    },
+    "init_states": {
+      "0": "cbbc73792ce546c9bec181fd328a411d3183074840b282671dee481511381d0a",
+      "1": "9b6927b6ef03460ab055141e1a1154ad85e5e290058d8ed3a8a314aff911f864",
+      "2": "27d5b81d739f969e40c72b6c88699e57a91ea61209946b21c593aae5990689cb",
+      "3": "0627f5f5ce3ef23be546571012be8ef603d93bcb4032bc80feb34937ba580140",
+      "4": "deef3df529e0bb57658b973bbb3baf02b02922db065c025a73ebfcd11eb54d46",
+      "5": "2d2c50b7dcbf861fffa94d576f217ed34153e57487010d7a109a220d4d97189b",
+      "6": "ab86fb7b5942dc0fec762eae57e72bf636106b1c10ad8ce57227723d8eb9a81b",
+      "7": "ea9cba2814bc166f3682f3f5a97329467839bcf584069cd419191b6c17adae25",
+      "8": "f43df2d80042130ac8770590d83f1a1e6fd4df7479aebc392aa2ed6e3bd0b83e",
+      "9": "08b0ac928dcc524a66d963851a6a4eece9aeb782b38466006e403a70e3287867"
+    }
+  },
+  "timing": {
+    "elapsed_seconds": 1462.9696276187897
+  },
+  "trace": {
+    "bytes": 29775889,
+    "env_step_actions": 11592,
+    "env_step_outcomes": 11592,
+    "interventions": 0,
+    "max_postprocess_to_env_step_abs_diff": 0.0,
+    "passthrough_comparisons": 11592,
+    "path": "action_trace.jsonl",
+    "raw_chunks": 1199,
+    "sha256": "a78454f9c5e138e056cd61d9243c7ac7fff1b6855df161d6e8903d1cb38792ab"
+  }
+}

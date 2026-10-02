@@ -1,0 +1,26 @@
+{
+  "schema": "sentinel-native-libero-figure-v1",
+  "script_sha256": "05467e7bbdbc96ca66606905fab5976edaeecaef5e540605605c1778f05d6fa3",
+  "inputs": [
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-spatial-final-100/manifest.json",
+      "sha256": "b5d8e982f50ee07452441a5f7070bf305faafc3465ae07b725574aa5324c7c4e"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/libero-replan-final-40/manifest.json",
+      "sha256": "4f07e80e134d51b01d39ce2264ff3f448fd76d7f1992ed108efe69f6e89eef18"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "native-policy-and-horizon.svg",
+      "bytes": 25913,
+      "sha256": "97d1e4083d1e8b6af2ce7c9da7000230f2a677dd60becf9eb1f0ec3da269db38"
+    },
+    {
+      "name": "native-policy-and-horizon.png",
+      "bytes": 156442,
+      "sha256": "5800a8135b249def42aef8e74ddb3913f46a99bffd17e5cb8a8f217c24407e19"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/paper-v2-interventions-final/metrics.json": "45e4f2113b13017ced94726c1f46fccef96b9a31531353db951cfcb2f221baa1",
+    "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/paper-cost-v2/summary.json": "cbac2b84f94e16801713c0477af23580591e8a450503146ffadf3978f9f99384",
+    "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/broad-fallback-final/metrics.json": "e21a1e7323271a1c4b2f2c594c85b424ce53e58c4904d43dbed669e0bcce6207",
+    "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/broad-fallback-final/per_root.json": "7965acdfbb2194732e48cc57ed0e8e708c116391fc4aaf1787709297ab15d2c8"
+  },
+  "outputs": {
+    "routing-utility.svg": "ef8a3825e573c4c10c3db960e3215dad5cdf0846142055dff4ef51411c5c6542",
+    "routing-utility.png": "8a0dcc6b37da4f11e73ac0087618457075cd7439f6e25d7f8d546caef8028b1e",
+    "verification-cost.svg": "d1fd05127766c4bafcf7b44fa71a03f4908b818dc2f1c66e12469b9b590218c0",
+    "verification-cost.png": "e7930f8bbead6a9ed908524dd26d69a513a861448b3a53d46c5240e2e8a51e82",
+    "physical-stress.svg": "a707bfd2befcc4e7b883662b5665526d2dbb5b94570e8e341f825adf8de3d5a4",
+    "physical-stress.png": "f337d62d0c31ece927587bf8f711caa439a751cd589538999d054c4d1b2c3e97"
+  },
+  "script_sha256": "84a5b4fdf61f2460a573f29d196a643a2a63fa9662ea092452dbb96c67a62251"
+}

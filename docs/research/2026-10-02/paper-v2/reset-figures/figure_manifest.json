@@ -1,0 +1,48 @@
+{
+  "schema": "sentinel-libero-reset-figure-v1",
+  "script_sha256": "499570d8b2f7969e5bbd717983aaaff16e5f167306549bfeffaa338a1b37176b",
+  "selection": "First ordered formal initial state 10 for each declared task 0 and 5",
+  "presentation_only": true,
+  "inputs": [
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/comparison/comparison.json",
+      "sha256": "97cbf95929f4a56bfd9c427c37c1e801ec851e98a43824711eb2888ab4c8a10f"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/current/manifest.json",
+      "sha256": "48be0f62e8bae2f82d7c66d2e31f31c0ffdd5232731c365a62f83f643a0d427c"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/current/cameras/task_00_state_10.npz",
+      "sha256": "a28e4ceb1cc946dc51e19267ea647b3d1c9926fc8cb0c57fb113e21f0eeb283a"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/current/cameras/task_05_state_10.npz",
+      "sha256": "fc26d1a633d1fcb680e02772337da8b0513979d6f5cb9aa61818e9cf98e805f3"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/legacy/manifest.json",
+      "sha256": "ec30af51da29afd70f3a1649bc0f290a3aff9aa1d28ad43a2baa7de6001fd473"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/legacy/cameras/task_00_state_10.npz",
+      "sha256": "c0f241400b4dc4758de38b8a0c25773390612b8ebf7d0ecdb45dbd4c7b868bcb"
+    },
+    {
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/legacy/cameras/task_05_state_10.npz",
+      "sha256": "a75a6f22900ea316a098fd568085494a54b7dd56a3a2fe4bc509f64d9010deba"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "reset-version-comparison.png",
+      "bytes": 765865,
+      "sha256": "ef22af8c24f7e5e95f06f8bc07b2f814e2b4081d636e6521d2cc2e7810bab1c4"
+    },
+    {
+      "name": "reset-version-comparison.svg",
+      "bytes": 1354512,
+      "sha256": "bd3522a85c5f46767a4f800cba9fc0f7ae61ced915be4ba427e3a88c02369d95"
+    }
+  ]
+}

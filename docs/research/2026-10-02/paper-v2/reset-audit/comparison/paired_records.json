@@ -1,0 +1,2262 @@
+[
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.0030166549112863794,
+      "max_abs": 0.002465802119180238,
+      "mean_abs": 0.0014016310115817822,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 2003.2246504074374,
+        "max_abs": 158.0,
+        "mean_abs": 0.329184670781893,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 4349.9004586312085,
+        "max_abs": 182.0,
+        "mean_abs": 1.1298045267489711,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 10,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0030166575644460687,
+          "max_abs": 0.0024658036404639483,
+          "mean_abs": 0.0014022845863964951,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.02119326852990408,
+        "tilt_abs_diff_rad": 2.795104554361757e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663858e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335804829818e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41031,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": false,
+        "l2": 4.7697009830883764e-17,
+        "max_abs": 3.469446951953614e-17,
+        "mean_abs": 9.637352644315595e-18,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.019953093918758893,
+        "max_abs": 0.011799140092206839,
+        "mean_abs": 0.0009216476565299002,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 3.560282944807478e-05,
+        "max_abs": 2.2706437927498866e-05,
+        "mean_abs": 2.12786916602847e-06,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 1.2452854769178659e-06,
+      "max_abs": 1.2442250697519697e-06,
+      "mean_abs": 4.3884813148246476e-07,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 78.57480512225277,
+        "max_abs": 28.0,
+        "mean_abs": 0.005061728395061729,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 123.15031465652046,
+        "max_abs": 47.0,
+        "mean_abs": 0.00984567901234568,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 11,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 3.203946690646002e-06,
+          "max_abs": 3.203516378835758e-06,
+          "mean_abs": 1.0924229462000445e-06,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 2.7950034606191758e-05,
+        "tilt_abs_diff_rad": 2.7950050508282457e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663858e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335804829818e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41032,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 2.9915319240806974e-05,
+        "max_abs": 1.4750608124947107e-05,
+        "mean_abs": 1.6822631625627998e-06,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 1.4774800904614724e-05,
+        "max_abs": 7.051415322011515e-06,
+        "mean_abs": 7.996180473384828e-07,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 1.2452854769185933e-06,
+      "max_abs": 1.2442250697519697e-06,
+      "mean_abs": 4.388481314917166e-07,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 134.47676379211393,
+        "max_abs": 41.0,
+        "mean_abs": 0.006183127572016461,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 138.43048797140028,
+        "max_abs": 46.0,
+        "mean_abs": 0.0101929012345679,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 12,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 3.2039466906462134e-06,
+          "max_abs": 3.203516378835758e-06,
+          "mean_abs": 1.0924229462069834e-06,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 2.7950034606191758e-05,
+        "tilt_abs_diff_rad": 2.7950050508282457e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663858e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335804829818e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41033,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 2.99153192408015e-05,
+        "max_abs": 1.4750608124947107e-05,
+        "mean_abs": 1.6822631620816918e-06,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 1.4774800904666265e-05,
+        "max_abs": 7.051415322008401e-06,
+        "mean_abs": 7.996180475853802e-07,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 1.8755437699136728e-06,
+      "max_abs": 1.4004628134944852e-06,
+      "mean_abs": 1.0547807993699365e-06,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 89.39798655450804,
+        "max_abs": 34.0,
+        "mean_abs": 0.004840534979423868,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 178.72045210327775,
+        "max_abs": 47.0,
+        "mean_abs": 0.01157664609053498,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 13,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 3.584285481006556e-06,
+          "max_abs": 3.3597541225782734e-06,
+          "mean_abs": 1.7084143798991776e-06,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 4.8339495530528393e-05,
+        "tilt_abs_diff_rad": 2.9720177804560446e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663863e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335805199892e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41034,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 3.607198328952939e-05,
+        "max_abs": 1.4848221718189148e-05,
+        "mean_abs": 2.378813242633415e-06,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 9.794361725652894e-05,
+        "max_abs": 9.095478059679976e-05,
+        "mean_abs": 4.1051243834518725e-06,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 1.7944282908926345e-06,
+      "max_abs": 1.3226952630951416e-06,
+      "mean_abs": 9.230598015016097e-07,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 182.7812900709479,
+        "max_abs": 42.0,
+        "mean_abs": 0.008834876543209877,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 247.3014354992708,
+        "max_abs": 47.0,
+        "mean_abs": 0.02013888888888889,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 14,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 3.498985016961914e-06,
+          "max_abs": 3.28198657217893e-06,
+          "mean_abs": 1.5766933820539804e-06,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 3.567608117636999e-05,
+        "tilt_abs_diff_rad": 2.9553333675996084e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.9592919016638665e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335805477448e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41035,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.00014745307797154778,
+        "max_abs": 0.00010319118587387432,
+        "mean_abs": 6.7507826352584065e-06,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 7.951210244168214e-05,
+        "max_abs": 7.743228250600906e-05,
+        "mean_abs": 2.8478249374918392e-06,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 1.2452854769185933e-06,
+      "max_abs": 1.2442250697519697e-06,
+      "mean_abs": 4.388481314917166e-07,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 94.77341399358788,
+        "max_abs": 25.0,
+        "mean_abs": 0.00529320987654321,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 123.0081298126266,
+        "max_abs": 47.0,
+        "mean_abs": 0.010552983539094651,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 15,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 3.203946690646143e-06,
+          "max_abs": 3.203516378835758e-06,
+          "mean_abs": 1.0924229462046704e-06,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 2.7950034606191758e-05,
+        "tilt_abs_diff_rad": 2.7950050508282457e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663858e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335804829818e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41036,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 2.991531924080274e-05,
+        "max_abs": 1.4750608124947107e-05,
+        "mean_abs": 1.682263169991845e-06,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 1.4774800904596437e-05,
+        "max_abs": 7.051415322013293e-06,
+        "mean_abs": 7.996180475482902e-07,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 1.2452854769185933e-06,
+      "max_abs": 1.2442250697519697e-06,
+      "mean_abs": 4.388481314917166e-07,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 117.65627905046122,
+        "max_abs": 39.0,
+        "mean_abs": 0.005866769547325103,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 132.9699214108213,
+        "max_abs": 46.0,
+        "mean_abs": 0.010969650205761317,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 16,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 3.2039466906462134e-06,
+          "max_abs": 3.203516378835758e-06,
+          "mean_abs": 1.0924229462069834e-06,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 2.7950034606191758e-05,
+        "tilt_abs_diff_rad": 2.7950050508282457e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663858e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335804829818e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41037,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 2.991531924080162e-05,
+        "max_abs": 1.4750608124947107e-05,
+        "mean_abs": 1.682263161989488e-06,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 1.477480090461155e-05,
+        "max_abs": 7.051415322017722e-06,
+        "mean_abs": 7.996180473165932e-07,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 1.2452854769178659e-06,
+      "max_abs": 1.2442250697519697e-06,
+      "mean_abs": 4.3884813148246476e-07,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 94.49338601193207,
+        "max_abs": 38.0,
+        "mean_abs": 0.005079732510288066,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 183.45844216061576,
+        "max_abs": 47.0,
+        "mean_abs": 0.010748456790123456,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 17,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 3.2039466906460724e-06,
+          "max_abs": 3.203516378835758e-06,
+          "mean_abs": 1.0924229462023576e-06,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 2.7950034606191758e-05,
+        "tilt_abs_diff_rad": 2.7950050508282457e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663858e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335804829818e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41038,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 2.99153192408006e-05,
+        "max_abs": 1.4750608124947107e-05,
+        "mean_abs": 1.6822631619945144e-06,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 1.4774800904665953e-05,
+        "max_abs": 7.051415322010856e-06,
+        "mean_abs": 7.996180472777884e-07,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.00028095590372351795,
+      "max_abs": 0.00020992606292449811,
+      "mean_abs": 0.0001327154433155379,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 503.0924368344251,
+        "max_abs": 72.0,
+        "mean_abs": 0.0655761316872428,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 1022.3248016163943,
+        "max_abs": 83.0,
+        "mean_abs": 0.24239197530864198,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 18,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0002809743800539719,
+          "max_abs": 0.00020992758420823598,
+          "mean_abs": 0.00013336907689607638,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.005018664170525359,
+        "tilt_abs_diff_rad": 2.8527598726209077e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663886e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.53633580538493e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41039,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": false,
+        "l2": 4.163336342344337e-17,
+        "max_abs": 2.7755575615628914e-17,
+        "mean_abs": 7.709882115452476e-18,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.003774057172337256,
+        "max_abs": 0.002024363971017129,
+        "mean_abs": 0.00016805797471457985,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 0.00012125756745862387,
+        "max_abs": 0.00010013271393679873,
+        "mean_abs": 4.828873690697075e-06,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.0035638638307926556,
+      "max_abs": 0.0035264143511998802,
+      "mean_abs": 0.0013476546734757326,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 2317.0843748124494,
+        "max_abs": 151.0,
+        "mean_abs": 0.4007150205761317,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 4491.922194339523,
+        "max_abs": 169.0,
+        "mean_abs": 1.25997170781893,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 19,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0035638651936357735,
+          "max_abs": 0.003526414263051232,
+          "mean_abs": 0.0013483082482904478,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.008448661598599435,
+        "tilt_abs_diff_rad": 2.7528274577616098e-05
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 1.959291901663858e-06,
+          "max_abs": 1.9592913090837882e-06,
+          "mean_abs": 6.536335804829818e-07,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 9.424321830774485e-08,
+        "tilt_abs_diff_rad": 9.699917989545308e-08
+      }
+    },
+    "seed": 41040,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.010301387677601732,
+        "max_abs": 0.006079666558870933,
+        "mean_abs": 0.0004963175128410344,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.0152805961224716e-05,
+        "max_abs": 9.577996462135468e-06,
+        "mean_abs": 1.3694093614870985e-06,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 0
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.03578209318920541,
+      "max_abs": 0.03476485831597187,
+      "mean_abs": 0.014432218269336642,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4218.617664591092,
+        "max_abs": 172.0,
+        "mean_abs": 0.671195987654321,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 8538.911347472815,
+        "max_abs": 183.0,
+        "mean_abs": 2.3634747942386833,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 10,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.03532735478156138,
+          "max_abs": 0.03430737340033607,
+          "mean_abs": 0.014362671489070333,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.24724444723229538,
+        "tilt_abs_diff_rad": 0.09498011811983306
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0005494254584803293,
+          "max_abs": 0.0004574849156357974,
+          "mean_abs": 0.0002695078630764458,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.01656742651612946,
+        "tilt_abs_diff_rad": 0.0020276047202606546
+      }
+    },
+    "seed": 41031,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": false,
+        "l2": 6.834017936133213e-17,
+        "max_abs": 6.245004513516506e-17,
+        "mean_abs": 1.0022846750088219e-17,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.13083506718935006,
+        "max_abs": 0.11600471180801113,
+        "mean_abs": 0.00513888529962712,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.4713801338756674,
+        "max_abs": 2.35991777986424,
+        "mean_abs": 0.08289843061082441,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.03578209318856108,
+      "max_abs": 0.03476485831504458,
+      "mean_abs": 0.014432218269673983,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4179.832054042363,
+        "max_abs": 173.0,
+        "mean_abs": 0.6714043209876543,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 11632.114339190446,
+        "max_abs": 198.0,
+        "mean_abs": 4.053708847736625,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 11,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.035327354780830815,
+          "max_abs": 0.034307373399396934,
+          "mean_abs": 0.01436267148929348,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.2472444472120245,
+        "tilt_abs_diff_rad": 0.09498011810661772
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0005494254585359945,
+          "max_abs": 0.00045748491564764904,
+          "mean_abs": 0.00026950786320633263,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426518997622,
+        "tilt_abs_diff_rad": 0.0020276047322788818
+      }
+    },
+    "seed": 41032,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": false,
+        "l2": 4.883423751465251e-16,
+        "max_abs": 4.718447854656915e-16,
+        "mean_abs": 7.324388009679852e-17,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.13083506717978519,
+        "max_abs": 0.1160047117959328,
+        "mean_abs": 0.005138885299522689,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.471380134225205,
+        "max_abs": 2.3599177801155524,
+        "mean_abs": 0.08289843064844467,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.03578209318587706,
+      "max_abs": 0.034764858311210484,
+      "mean_abs": 0.014432218270833241,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4224.157312411554,
+        "max_abs": 178.0,
+        "mean_abs": 0.6701774691358025,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 9026.399005140422,
+        "max_abs": 183.0,
+        "mean_abs": 2.6807998971193414,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 12,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.03532735477781679,
+          "max_abs": 0.034307373395533663,
+          "mean_abs": 0.01436267149000379,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.24724444713210594,
+        "tilt_abs_diff_rad": 0.09498011804944068
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0005494254587425196,
+          "max_abs": 0.00045748491567682015,
+          "mean_abs": 0.0002695078637175626,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426530711523,
+        "tilt_abs_diff_rad": 0.0020276047801929577
+      }
+    },
+    "seed": 41033,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.13083506714203988,
+        "max_abs": 0.11600471174882232,
+        "mean_abs": 0.005138885298993718,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.47138013560541,
+        "max_abs": 2.3599177810985097,
+        "mean_abs": 0.08289843079851968,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.03578209318837661,
+      "max_abs": 0.03476485831479911,
+      "mean_abs": 0.01443221826968417,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4200.654115730073,
+        "max_abs": 174.0,
+        "mean_abs": 0.6707484567901234,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 9414.914816396376,
+        "max_abs": 199.0,
+        "mean_abs": 2.9068287037037037,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 13,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.03532735478063437,
+          "max_abs": 0.03430737339915513,
+          "mean_abs": 0.014362671489283302,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.24724444720838878,
+        "tilt_abs_diff_rad": 0.0949801181024992
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0005494254585417147,
+          "max_abs": 0.0004574849156439853,
+          "mean_abs": 0.00026950786322956405,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426519453313,
+        "tilt_abs_diff_rad": 0.002027604734608406
+      }
+    },
+    "seed": 41034,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": false,
+        "l2": 7.601177430610147e-17,
+        "max_abs": 5.551115123125783e-17,
+        "mean_abs": 1.5419764230904953e-17,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.13083506717805043,
+        "max_abs": 0.11600471179383313,
+        "mean_abs": 0.005138885299474629,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.471380134291043,
+        "max_abs": 2.359917780159804,
+        "mean_abs": 0.08289843065592774,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.03578209318898424,
+      "max_abs": 0.03476485831565901,
+      "mean_abs": 0.014432218269461191,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4311.1586609634305,
+        "max_abs": 172.0,
+        "mean_abs": 0.689673353909465,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 8329.21082696314,
+        "max_abs": 184.0,
+        "mean_abs": 2.1852803497942386,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 14,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.03532735478130368,
+          "max_abs": 0.034307373400010444,
+          "mean_abs": 0.014362671489152648,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.24724444722574251,
+        "tilt_abs_diff_rad": 0.09498011811498472
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0005494254585030994,
+          "max_abs": 0.00045748491564856497,
+          "mean_abs": 0.00026950786312029035,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426517282085,
+        "tilt_abs_diff_rad": 0.0020276047241784907
+      }
+    },
+    "seed": 41035,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": false,
+        "l2": 6.206941440966717e-17,
+        "max_abs": 5.551115123125783e-17,
+        "mean_abs": 9.348232064986128e-18,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.1308350671862608,
+        "max_abs": 0.11600471180394412,
+        "mean_abs": 0.005138885299608491,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.4713801339911607,
+        "max_abs": 2.35991777994659,
+        "mean_abs": 0.08289843062322876,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.035782093186536204,
+      "max_abs": 0.034764858312111346,
+      "mean_abs": 0.014432218270614324,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4149.944939393775,
+        "max_abs": 171.0,
+        "mean_abs": 0.6538143004115227,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 8794.938544412917,
+        "max_abs": 180.0,
+        "mean_abs": 2.5557767489711933,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 15,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.03532735477854111,
+          "max_abs": 0.03430737339643647,
+          "mean_abs": 0.01436267148987666,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.24724444714828198,
+        "tilt_abs_diff_rad": 0.09498011806270842
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.000549425458700063,
+          "max_abs": 0.00045748491567487726,
+          "mean_abs": 0.0002695078636096952,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426528433078,
+        "tilt_abs_diff_rad": 0.0020276047700807055
+      }
+    },
+    "seed": 41036,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.1308350671496966,
+        "max_abs": 0.1160047117583192,
+        "mean_abs": 0.005138885299119688,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.471380135309447,
+        "max_abs": 2.3599177808911396,
+        "mean_abs": 0.08289843076632539,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.035782093189087705,
+      "max_abs": 0.03476485831581591,
+      "mean_abs": 0.014432218269447664,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4164.792671910572,
+        "max_abs": 176.0,
+        "mean_abs": 0.6514866255144033,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 8216.241902475851,
+        "max_abs": 177.0,
+        "mean_abs": 2.169868827160494,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 16,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.03532735478142012,
+          "max_abs": 0.034307373400166846,
+          "mean_abs": 0.014362671489158088,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.24724444722931516,
+        "tilt_abs_diff_rad": 0.0949801181180989
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0005494254584978935,
+          "max_abs": 0.00045748491564906457,
+          "mean_abs": 0.000269507863101028,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426516665564,
+        "tilt_abs_diff_rad": 0.002027604722219573
+      }
+    },
+    "seed": 41037,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.13083506718795299,
+        "max_abs": 0.1160047118059302,
+        "mean_abs": 0.005138885299641043,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.4713801339399186,
+        "max_abs": 2.3599177799110884,
+        "mean_abs": 0.08289843061727052,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.03578209318833342,
+      "max_abs": 0.03476485831469536,
+      "mean_abs": 0.014432218269808403,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4305.017886141705,
+        "max_abs": 174.0,
+        "mean_abs": 0.6892875514403293,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 8830.937889035344,
+        "max_abs": 183.0,
+        "mean_abs": 2.528945473251029,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 17,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.035327354780566846,
+          "max_abs": 0.034307373399043134,
+          "mean_abs": 0.014362671489379234,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.2472444472032873,
+        "tilt_abs_diff_rad": 0.0949801181012889
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0005494254585570914,
+          "max_abs": 0.0004574849156522287,
+          "mean_abs": 0.0002695078632593088,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426520284277,
+        "tilt_abs_diff_rad": 0.0020276047373085364
+      }
+    },
+    "seed": 41038,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": false,
+        "l2": 1.3877787807814457e-17,
+        "max_abs": 1.3877787807814457e-17,
+        "mean_abs": 1.5419764230904951e-18,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.13083506717566698,
+        "max_abs": 0.11600471179076939,
+        "mean_abs": 0.005138885299464552,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.47138013436697,
+        "max_abs": 2.3599177802183986,
+        "mean_abs": 0.0828984306638841,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.03578209318853537,
+      "max_abs": 0.03476485831499235,
+      "mean_abs": 0.014432218269729966,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4103.519099504717,
+        "max_abs": 177.0,
+        "mean_abs": 0.6452957818930041,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 10468.485707111608,
+        "max_abs": 198.0,
+        "mean_abs": 3.429909979423868,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 18,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.035327354780794504,
+          "max_abs": 0.034307373399340924,
+          "mean_abs": 0.014362671489337555,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.24724444720998964,
+        "tilt_abs_diff_rad": 0.09498011810563808
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.0005494254585434741,
+          "max_abs": 0.0004574849156514238,
+          "mean_abs": 0.0002695078632196646,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426519319285,
+        "tilt_abs_diff_rad": 0.0020276047334436436
+      }
+    },
+    "seed": 41039,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.1308350671788341,
+        "max_abs": 0.11600471179470723,
+        "mean_abs": 0.00513888529951602,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.4713801342586614,
+        "max_abs": 2.3599177801405853,
+        "mean_abs": 0.0828984306519818,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  },
+  {
+    "bowl_minus_ramekin_position": {
+      "exact_equal": false,
+      "l2": 0.03578209318913185,
+      "max_abs": 0.03476485831594969,
+      "mean_abs": 0.014432218269230551,
+      "shape": [
+        3
+      ]
+    },
+    "cameras": {
+      "agentview_image": {
+        "exact_equal": false,
+        "l2": 4170.927834427252,
+        "max_abs": 176.0,
+        "mean_abs": 0.6569264403292181,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "exact_equal": false,
+        "l2": 8226.238934045132,
+        "max_abs": 181.0,
+        "mean_abs": 2.1640920781893005,
+        "shape": [
+          360,
+          360,
+          3
+        ]
+      }
+    },
+    "initial_state_index": 19,
+    "objects": {
+      "bowl": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.035327354781500696,
+          "max_abs": 0.0343073734003137,
+          "mean_abs": 0.014362671488980868,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.24724444723675762,
+        "tilt_abs_diff_rad": 0.09498011812025872
+      },
+      "ramekin": {
+        "position": {
+          "exact_equal": false,
+          "l2": 0.000549425458469876,
+          "max_abs": 0.0004574849156359917,
+          "mean_abs": 0.00026950786305360297,
+          "shape": [
+            3
+          ]
+        },
+        "quaternion_angle_rad": 0.016567426515754186,
+        "tilt_abs_diff_rad": 0.0020276047181958493
+      }
+    },
+    "seed": 41040,
+    "sim_state": {
+      "act": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          0
+        ]
+      },
+      "ctrl": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          9
+        ]
+      },
+      "qpos": {
+        "exact_equal": false,
+        "l2": 0.13083506719142737,
+        "max_abs": 0.11600471181032353,
+        "mean_abs": 0.0051388852996705646,
+        "shape": [
+          48
+        ]
+      },
+      "qvel": {
+        "exact_equal": false,
+        "l2": 2.4713801338245345,
+        "max_abs": 2.3599177798225015,
+        "mean_abs": 0.08289843060524768,
+        "shape": [
+          43
+        ]
+      },
+      "time": {
+        "exact_equal": true,
+        "l2": 0.0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "shape": [
+          1
+        ]
+      }
+    },
+    "task_id": 5
+  }
+]

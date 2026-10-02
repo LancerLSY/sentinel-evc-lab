@@ -1,0 +1,53 @@
+{
+  "artifacts": {
+    "frozen_protocol.json": {
+      "bytes": 2982,
+      "sha256": "f3fd92e5c5516d50747019ebed6730f19be1077ba9f38e359d047adfd681dd24"
+    },
+    "metrics.json": {
+      "bytes": 219355,
+      "sha256": "e21a1e7323271a1c4b2f2c594c85b424ce53e58c4904d43dbed669e0bcce6207"
+    },
+    "per_root.json": {
+      "bytes": 1706259,
+      "sha256": "7965acdfbb2194732e48cc57ed0e8e708c116391fc4aaf1787709297ab15d2c8"
+    },
+    "preflight_evidence.json": {
+      "bytes": 444,
+      "sha256": "81c667b684917d6d54e76450bd13f7cea5057db05d5f8bd69e2af0befbbb38f7"
+    },
+    "root_states.npz": {
+      "bytes": 148734,
+      "sha256": "b9d22b9087094aa9d31e376b6c7b8a8146d18407cc5024c327d94f863cf8be8b"
+    }
+  },
+  "elapsed_seconds": 11.938080549240112,
+  "environment": {
+    "gpu_host": "NVIDIA GeForce RTX 4090 D",
+    "mujoco": "3.14.0",
+    "platform": "Linux-5.15.0-94-generic-x86_64-with-glibc2.35",
+    "python": "3.12.3 | packaged by Anaconda, Inc. | (main, May  6 2024, 19:46:43) [GCC 11.2.0]",
+    "workers": 6
+  },
+  "frozen_sources": {
+    "experiments/gpu/run_broad_fallback.py": "64baadb0e09b40aca417ec9c6d22f1d092cd7c6e60e3e0a5f0f1041531e8defe",
+    "experiments/gpu/train_mujoco_world.py": "6ce811818d3d1dd80ed08d697c536c9f3a49459e07add4b0874ee2349c06142c",
+    "src/sentinel_evc/physics.py": "7d919bd761ca8a3dac215e8821c5c97e14cabfb6c59ce9ae0bb34db4b2b5c3a4"
+  },
+  "preflight": false,
+  "protocol_sha256": "f3fd92e5c5516d50747019ebed6730f19be1077ba9f38e359d047adfd681dd24",
+  "root_base": 730000,
+  "root_count": 324,
+  "roots_per_cell": 12,
+  "sample_semantics": {
+    "additional_hold": "new risk during 0.5 s after forecast",
+    "forecast_secondary": "5.0 s candidate window",
+    "primary_outcome": "full 5.5 s candidate plus posthold window",
+    "servo_force_and_tracking": "50 ms endpoint samples; not substep maxima"
+  },
+  "schema": "sentinel-broad-physical-fallback-v1",
+  "scope": "bounded 27-cell stratified MuJoCo simulator stress; not rectangular-domain qualification",
+  "script_sha256": "64baadb0e09b40aca417ec9c6d22f1d092cd7c6e60e3e0a5f0f1041531e8defe",
+  "source_commit": "797c12d3af04ee4335803c0ea5bd695c9c74d67e",
+  "status": "complete"
+}

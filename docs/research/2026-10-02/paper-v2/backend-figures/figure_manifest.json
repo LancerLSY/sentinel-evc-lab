@@ -1,0 +1,66 @@
+{
+  "inputs": [
+    {
+      "bytes": 3403,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/comparison/comparison.json",
+      "sha256": "e3271e0cd341d4f5e96615c29f44e954f136ac1d2f5deb2d45b055584f96b124"
+    },
+    {
+      "bytes": 9959,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/comparison/paired_episodes.json",
+      "sha256": "472fa5ddd0100b39d8aaf95c494f295ee225274815382a026699839ad15c5d87"
+    },
+    {
+      "bytes": 47241,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/current/manifest.json",
+      "sha256": "f3fd98744578f0147eaefc791ce45dde0c0d8c2cdd1451eee08cad882a78a8fa"
+    },
+    {
+      "bytes": 47208,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-final-v1/legacy/manifest.json",
+      "sha256": "7dee0992f05a03a85218ca958b4145b21663ae068fecdad78c1a75eb56022cb3"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 191128,
+      "name": "backend-version-success.png",
+      "sha256": "35e4a94b4941dd628dc783e7786f2e598cf7789cfdef2ef86bf7b6f3f75863ee"
+    },
+    {
+      "bytes": 18148,
+      "name": "backend-version-success.svg",
+      "sha256": "17f48b45952192528ddc6996b575d6425993819950a216a4b9df75d2e5b2d458"
+    }
+  ],
+  "schema": "sentinel-libero-backend-figure-v1",
+  "script": {
+    "bytes": 8940,
+    "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-inputs/plot_backend_results.py",
+    "sha256": "a640a8cd05cf5b8df2c31e9f46c0c7e93642d327be3dcd438e71444eb24e9a79"
+  },
+  "sources": [
+    {
+      "bytes": 34532,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-inputs/run_backend_ablation.py",
+      "sha256": "19164e24c3f39a9c89bd4a8ccfe6de489e5175da2decadf1ec847538a1a8102b"
+    },
+    {
+      "bytes": 4814,
+      "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/backend-inputs/backend_protocol.json",
+      "sha256": "cf1b8fd439b992058f7ec37cefd0c5248fadb3ad7cbec41490e0b163c0d932ac"
+    }
+  ],
+  "study": {
+    "claim_boundary": "No isolated reset-mechanism or physical-accuracy claim.",
+    "gpu_label": "RTX 4090 D 24GB",
+    "interval": "descriptive paired bootstrap 95%, 10,000 samples",
+    "paired_cells": 20,
+    "pairs_per_task": 10,
+    "tasks": [
+      5,
+      0
+    ],
+    "treatment": "complete MuJoCo package version: 3.3.7 versus 3.8.1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "sentinel-backend-replay-renderer-status-v1",
+  "source": "experiments/vla/replay_backend_comparison.py",
+  "source_sha256": "14b3c120cf186bbf40b3172325cb93cf52f940cd45c6d3f4e2119ce66e0d570f",
+  "capture_produced": false,
+  "encoded_movie_produced": false,
+  "verification": "static source review only",
+  "selected_case": {
+    "task_id": 5,
+    "initial_state_index": 21,
+    "seed": 43022,
+    "selection": "first ordered discordant formal backend pair",
+    "post_hoc": true
+  },
+  "formal_comparison_sha256": "e3271e0cd341d4f5e96615c29f44e954f136ac1d2f5deb2d45b055584f96b124",
+  "claim_limit": "Renderer source is not an executed simulator capture or additional benchmark outcome."
+}

@@ -1,0 +1,49 @@
+{
+  "artifacts": {
+    "contact_sheet": {
+      "bytes": 1932501,
+      "height": 720,
+      "path": "task5_state0_failure_contact_first_mid_final.png",
+      "sha256": "8f4d8fe9f0ed60ccd800464a5a7e1e9f00d1e048f6fd3294fb0dbc76e837a9d4",
+      "width": 3840
+    },
+    "poster": {
+      "bytes": 669321,
+      "height": 720,
+      "path": "task5_state0_failure_poster_midframe.png",
+      "sha256": "d0ccd6cba0d01bfc3f13312c8c2a536c27aa7a9334f625ba4fd7ad05193057fb",
+      "width": 1280
+    }
+  },
+  "purpose": "presentation-only decoded stills; no policy inference or simulator execution",
+  "schema": "sentinel-libero-replay-media-receipt-v1",
+  "selection": {
+    "contact_frame_indices": [
+      0,
+      140,
+      280
+    ],
+    "contact_times_seconds": [
+      0.0,
+      7.0,
+      14.0
+    ],
+    "poster_frame_index": 140,
+    "poster_time_seconds": 7.0
+  },
+  "source": {
+    "bilingual_video": {
+      "bytes": 2870225,
+      "fps": 20.0,
+      "frames": 281,
+      "height": 720,
+      "path": "task5_state0_failure_bilingual_20hz.mp4",
+      "sha256": "12606e6133985db98b6a386ac5a77157c6b791441feca0acb9508b827448e619",
+      "width": 1280
+    },
+    "replay_manifest": {
+      "path": "manifest.json",
+      "sha256": "a8199e141bc9be2d81b7c7c5075c09ee9487dc100cbd549e5b90498e7e809489"
+    }
+  }
+}

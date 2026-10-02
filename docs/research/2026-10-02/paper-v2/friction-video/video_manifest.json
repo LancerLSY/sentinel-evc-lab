@@ -1,0 +1,193 @@
+{
+  "aggregate_context": {
+    "fixed_1p6_unbound": {
+      "completion": {
+        "count": 0,
+        "n": 100,
+        "rate": 0.0,
+        "wilson95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ]
+      },
+      "drops": {
+        "count": 49,
+        "n": 100,
+        "rate": 0.49,
+        "wilson95": [
+          0.3942199893044113,
+          0.5865198806597283
+        ]
+      },
+      "duration_counts": {
+        "0.6": 0,
+        "0.9": 0,
+        "1.2": 0,
+        "1.6": 100,
+        "3.2": 0,
+        "4.8": 0
+      },
+      "mean_duration_s": 1.5999999999999996,
+      "rejection": {
+        "count": 0,
+        "n": 100,
+        "rate": 0.0,
+        "wilson95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ]
+      },
+      "unsafe": {
+        "count": 100,
+        "n": 100,
+        "rate": 1.0,
+        "wilson95": [
+          0.9630065017930143,
+          1.0
+        ]
+      },
+      "unsafe_given_execution": {
+        "count": 100,
+        "n": 100,
+        "rate": 1.0,
+        "wilson95": [
+          0.9630065017930143,
+          1.0
+        ]
+      }
+    },
+    "fixed_4p8_unbound": {
+      "completion": {
+        "count": 100,
+        "n": 100,
+        "rate": 1.0,
+        "wilson95": [
+          0.9630065017930143,
+          1.0
+        ]
+      },
+      "drops": {
+        "count": 0,
+        "n": 100,
+        "rate": 0.0,
+        "wilson95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ]
+      },
+      "duration_counts": {
+        "0.6": 0,
+        "0.9": 0,
+        "1.2": 0,
+        "1.6": 0,
+        "3.2": 0,
+        "4.8": 100
+      },
+      "mean_duration_s": 4.8,
+      "rejection": {
+        "count": 0,
+        "n": 100,
+        "rate": 0.0,
+        "wilson95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ]
+      },
+      "unsafe": {
+        "count": 0,
+        "n": 100,
+        "rate": 0.0,
+        "wilson95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ]
+      },
+      "unsafe_given_execution": {
+        "count": 0,
+        "n": 100,
+        "rate": 0.0,
+        "wilson95": [
+          3.469446951953614e-18,
+          0.03699349820698568
+        ]
+      }
+    }
+  },
+  "branches": {
+    "fallback_duration_s": 4.8,
+    "fallback_index": 5,
+    "fast_duration_s": 1.6,
+    "fast_index": 3
+  },
+  "claim_boundary": "Offline MuJoCo tray/payload replay from a frozen constructed root. Exact friction and mass are evaluator-only annotations, not decision inputs. No robot arm, VLA, hardware, or general safety claim.",
+  "decision_input": {
+    "camera_layout_sha256": "d865e14e16cdec469926bede226e6731b113432bfa4cbe541c0ca270c1fa007b",
+    "declared_mu_floor": 0.015,
+    "friction_profile_id": "declared-floor-015",
+    "payload_profile_id": "payload-040-160g",
+    "provenance": "operator profile declaration assigned before root sampling"
+  },
+  "duration_seconds": 10.2,
+  "environment": {
+    "encoder": "libx264",
+    "gpu": "NVIDIA GeForce RTX 4090 D, 24564 MiB",
+    "mujoco": "3.14.0",
+    "numpy": "2.2.6",
+    "pyav": "15.1.0",
+    "python": "3.12.3"
+  },
+  "evaluator_only_annotations": {
+    "friction": 0.030651746706159447,
+    "integration_state_sha256": "41e131675be1e43daac8c3849c8a7e392ed1b736575039ec94c65a5fabcba1d4",
+    "mass_kg": 0.12089597106328728,
+    "seed": 711000
+  },
+  "frame_count": 204,
+  "input_hashes": {
+    "manifest_sha256": "5925caf589c0afce46dec3900dc1179cf12d470373dcf64d168e4acb612f6b6b",
+    "per_root_sha256": "e49a3531179cf740f4fe2f209b7e3c56853367daa6d0b0f7b0528bebc7ac91c5",
+    "protocol_sha256": "1ad4220bbe55948db42d1c5d82f36ff196ba9b691ad666d676e3f371d53c8fe4",
+    "results_npz_sha256": "09595bfa6df8ca884c669c4900c785138adc3053594f1269d895b40e05815e70"
+  },
+  "model": {
+    "nbody": 3,
+    "nq": 10,
+    "nv": 9,
+    "physics_source_sha256": "7d919bd761ca8a3dac215e8821c5c97e14cabfb6c59ce9ae0bb34db4b2b5c3a4",
+    "physics_xml_sha256": "e5ea40e1a55666754901164aa2f5b851e40d0219ce7412069421fac9e2d45f45",
+    "render_xml_change": "visual.global offscreen framebuffer only; physics XML otherwise byte-identical",
+    "render_xml_sha256": "c4d2d66840e2df6150d5c90646b7893dfd0a0ac787ab081e1ed5dde3b6848a10"
+  },
+  "outputs": {
+    "friction-failure-vs-fallback-poster.png": {
+      "bytes": 201777,
+      "sha256": "b52a4ad0a06ed7883e1d5f1dafeda52c0dce5b2283d083c6f49ccd38d87b718a"
+    },
+    "friction-failure-vs-fallback.mp4": {
+      "bytes": 479323,
+      "sha256": "86ccabcca8b2e9cbdecca75769e17a69b093b51b51b7714a32a5cbc1f9f8ad8e"
+    }
+  },
+  "physics_rerun": false,
+  "render_only": true,
+  "renderer_sha256": "eb43b4ea61d7cad0e131a98d792c23dc81cf8441c0fc467e4d17ae76f5aa1a7b",
+  "replay_verification": {
+    "fast_first_drop_frame": 23,
+    "fast_first_risk_frame": 12,
+    "max_relative_position_vs_truth_error": 2.9754228636491575e-08,
+    "poster_frame": 23,
+    "qpos_derived_drop_matches_frozen_labels": true,
+    "qpos_derived_unsafe_matches_frozen_labels": true
+  },
+  "resolution": {
+    "fps": 20,
+    "height": 1080,
+    "width": 1920
+  },
+  "root_id": "low_friction-711000",
+  "root_selection": "first frozen low_friction test root by protocol seed order",
+  "schema": "sentinel-friction-video-v1",
+  "stored_motion_frames": 110,
+  "stored_motion_seconds": 5.5,
+  "task": "transport payload without slip"
+}

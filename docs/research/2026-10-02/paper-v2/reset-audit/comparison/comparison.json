@@ -1,0 +1,60 @@
+{
+  "current_manifest": {
+    "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/current/manifest.json",
+    "sha256": "48be0f62e8bae2f82d7c66d2e31f31c0ffdd5232731c365a62f83f643a0d427c"
+  },
+  "interpretation_limits": {
+    "causal_limit": "A cross-version reset difference alone does not establish that MuJoCo version caused the separate task-5 0/10 policy result.",
+    "issue_limit": "The upstream issue motivates this audit but is not treated as evidence that the reported behavior occurs in this environment.",
+    "not_measured": [
+      "policy inference",
+      "task success",
+      "intervention efficacy",
+      "safety",
+      "training"
+    ],
+    "scope": "Deterministic reset-state diagnostic under the frozen LIBERO assets, init states, seeds, environment parameters, and two MuJoCo package versions."
+  },
+  "legacy_manifest": {
+    "path": "/root/autodl-tmp/sentinel-evc-gpu/20261002/runs/reset-audit-final/legacy/manifest.json",
+    "sha256": "ec30af51da29afd70f3a1649bc0f290a3aff9aa1d28ad43a2baa7de6001fd473"
+  },
+  "paired_records": {
+    "bytes": 50617,
+    "path": "paired_records.json",
+    "sha256": "eaebdf6884e1eb71da8e0752922fdaa5cbf6dbab1d332812ab5327eb3aec83e1"
+  },
+  "paired_reset_count": 20,
+  "per_task": {
+    "0": {
+      "camera_changed_pairs": {
+        "agentview_image": 10,
+        "robot0_eye_in_hand_image": 10
+      },
+      "max_bowl_orientation_delta_rad": 0.02119326852990408,
+      "max_bowl_position_delta_m": 0.0035638651936357735,
+      "max_bowl_tilt_abs_diff_rad": 2.9720177804560446e-05,
+      "max_ramekin_position_delta_m": 1.959291901663886e-06,
+      "max_relative_position_delta_m": 0.0035638638307926556,
+      "mean_bowl_position_delta_m": 0.0006884600142087014,
+      "pairs": 10
+    },
+    "5": {
+      "camera_changed_pairs": {
+        "agentview_image": 10,
+        "robot0_eye_in_hand_image": 10
+      },
+      "max_bowl_orientation_delta_rad": 0.24724444723675762,
+      "max_bowl_position_delta_m": 0.03532735478156138,
+      "max_bowl_tilt_abs_diff_rad": 0.09498011812025872,
+      "max_ramekin_position_delta_m": 0.0005494254587425196,
+      "max_relative_position_delta_m": 0.03578209318920541,
+      "mean_bowl_position_delta_m": 0.035327354780497026,
+      "pairs": 10
+    }
+  },
+  "protocol_sha256": "225a2e0e99b11ed879ba796b998385d8a7e1250a6280da399d54366d776260a9",
+  "schema": "sentinel-libero-reset-audit-comparison-v1",
+  "script_sha256": "2d5d4aef2d42f9fc4d80e386c36c2c9515b1ff8aadf40bebddb82b802e719a27",
+  "status": "complete"
+}

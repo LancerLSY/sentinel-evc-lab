@@ -4,6 +4,14 @@ This page is the short route from the product README to reproducible research
 artifacts. Each row keeps the evaluated profile separate from the product-core
 executor and from physical robot claims.
 
+## Prospective support, cost and 3D evidence
+
+The [new protocol/results report](research/2026-10-02/paper-v2/RESULTS.md) retains the 600-root routing study, 100 hidden-friction counterfactual pairs and 60-root fair cost study. The strongest fixed-duration comparator completes all 600 routing tasks, while the integrated policy completes only 300 and rejects 300. This utility gap and the worse incremental P95 remain visible.
+
+The native official SmolVLA checkpoint is separately evaluated on 100 fixed LIBERO/Panda rollouts (58/100). A 40-rollout paired feedback ablation leaves task 5 largely unresolved (0/10 → 1/10); a 40-reset no-policy version audit finds 35.327 mm bowl-position changes for that task. The [exact-action failure film](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/task5_state0_failure_bilingual_20hz.mp4) preserves the original failed task 5/state 0, its 280 actions and zero reward. A separately frozen 40-rollout backend comparison on fresh states finds task 5 success 0/10 under MuJoCo 3.8.1 versus 7/10 under 3.3.7, with control 10/10 in both. This is a complete-version benchmark-compatibility effect, without identifying a single contact cause or physical accuracy. A prospective full-suite confirmation at ten fresh states per task records 93/100 (descriptive Wilson 95 86.25–96.57%), zero crashes and seven retained capped failures, under isolated MuJoCo 3.3.7 and execution horizon 10. The top-drawer task remains 6/10. This is a separate grid, not a paired gain over 58/100. These are official-model diagnostics, separate from the SO100 overlay and Sentinel intervention efficacy.
+
+The [1080p UR5e film](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/sentinel-ur5e-paper.mp4) labels task, changed plan, decision and outcome on full robot meshes. The [contact-failure film](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/friction-failure-vs-fallback.mp4) compares fast slip/drop with a slower successful fallback from one prospectively ordered root. Both use stored simulator trajectories, with source/data/output hashes in their manifests.
+
 ## Current evidence map
 
 | Study | Evidence | What it establishes | What it does not establish |

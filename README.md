@@ -22,7 +22,7 @@ and evidence boundaries.
 > Product runtime: Python 3.10+ · macOS App: Python-managed, locally built · server: `127.0.0.1` only
 
 [Install](#five-minute-setup) · [See the mechanism](#how-the-gate-works) ·
-[Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulation-research-20261002) ·
+[Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/paper-validation-20261002) ·
 [Research showcase](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
 ## What is usable today
@@ -99,6 +99,35 @@ does not claim that a signature proves sensor honesty or physical execution.
 [Implementation matrix](docs/implementation_matrix.md) ·
 [Product contracts](docs/product_contracts.md) ·
 [Design trace](docs/design_alignment.md)
+
+## Prospective experiments and clear 3D demonstrations
+
+[**Frozen protocols and full results**](docs/research/2026-10-02/paper-v2/RESULTS.md) ·
+[**Data, source and 1080p videos**](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/paper-validation-20261002)
+
+| New study | Measured outcome | Main limitation |
+|---|---|---|
+| Support routing, 600 fresh roots | 300 completed, 300 rejected, 0 observed unsafe selections | fixed 4.8 s completed all 600; rejection is incomplete |
+| Physical stress, 27 cells / 324 roots | 4.8 s completes 324/324; 1.6 s completes 184/324 with 78 drops | floor policy equals fixed 4.8 s; finite sample, 3× motion duration |
+| Hidden future friction, 100 paired roots | 1.6 s outcomes differ in 100/100 identical-input pairs | ambiguity requires a trusted bound or additional sensing |
+| Fair UR5e verification cost, 60 roots | full and incremental agree on 60/60; mean marginal saving 0.996 ms | incremental P95 is worse; hazard diversity remains limited |
+| Original official SmolVLA/LIBERO, 100 fixed rollouts | 58/100 success; task 5 fails 10/10 | official Panda checkpoint, observe-only logging; not the SO100 overlay |
+| Paired backend comparison, 40 fresh rollouts | task 5: 0/10 → 7/10; control: 10/10 → 10/10 | complete MuJoCo 3.8.1 / 3.3.7 treatment; benchmark compatibility, not physical accuracy |
+| Full-suite fresh-state confirmation, 100 rollouts | **93/100 success**; zero crashes; task 4 remains 6/10 | official Panda checkpoint, isolated MuJoCo 3.3.7, horizon 10; separate grid from original 58/100 |
+
+[![Full-mesh UR5e: task, changed plan, decision and outcome](docs/research/2026-10-02/paper-v2/video/sentinel-ur5e-paper-poster.png)](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/sentinel-ur5e-paper.mp4)
+
+**UR5e, 1080p · 19.95 s.** The red pane illustrates rejected proposed motion; it was not dispatched. The adjacent pane shows allow/execution or no candidate dispatch. Official full robot meshes and stored MuJoCo joint states are used. These three examples explain the earlier mechanism fixtures, not the new cost study or physical hardware.
+
+[![Same initial state: fast slip/drop versus slow completion](docs/research/2026-10-02/paper-v2/friction-video/friction-failure-vs-fallback-poster.png)](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/friction-failure-vs-fallback.mp4)
+
+**Contact failure, 1080p · 10.2 s.** The same new low-friction root contrasts 1.6 s with 4.8 s: the payload drops versus completes the transport. The live displacement graph explains the risk threshold; the fallback takes three times as long. Videos reconstruct actual saved simulation states and include bilingual captions.
+
+[![Official SmolVLA native Panda rollout: task, action path and result](docs/research/2026-10-02/paper-v2/libero-video/libero-task00-state00-poster.png)](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/libero-task00-state00-explained.mp4)
+
+**Original native Panda configuration, 4.15 s.** The predeclared task 0/state 0 succeeds in 83 actual actions under MuJoCo 3.8.1 with 50 actions executed per prediction chunk. Original 360×360 simulator RGB is placed in a bilingual 1080p canvas and played at the actual 20 Hz control clock. This film belongs to the original 58/100 study, which retains all 42 failures; the fresh 93/100 confirmation uses a separate grid and configuration.
+
+[Retained failure replay](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/task5_state0_failure_bilingual_20hz.mp4) replays the original task 5/state 0 actions exactly: zero reward, no task success, maximum target-bowl center rise 1.674 mm. It is a post-hoc diagnostic and adds no benchmark episode.
 
 ## Measured results
 

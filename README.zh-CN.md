@@ -20,7 +20,7 @@ SSH 实验入口、受限三维模型检查和只读机械臂诊断。产品核�
 > 产品运行时：Python 3.10+ · macOS App：由 Python 环境管理并在本机构建 · 服务仅监听 `127.0.0.1`
 
 [安装](#五分钟安装) · [机制](#执行许可如何产生) ·
-[实测结果](#实测结果) · [完整实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulation-research-20261002) ·
+[实测结果](#实测结果) · [最新实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/paper-validation-20261002) ·
 [研究展示导航](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
 ## 当前可用入口
@@ -97,6 +97,35 @@ python -m sentinel_evc serve --data-dir runs/workbench --port 8765
 [机制实现矩阵](docs/implementation_matrix.md) ·
 [产品契约](docs/product_contracts.md) ·
 [设计追踪](docs/design_alignment.md)
+
+## 冻结实验方案与清晰的三维演示
+
+[**冻结协议与完整结果**](docs/research/2026-10-02/paper-v2/RESULTS.zh-CN.md) ·
+[**数据、源码与 1080p 视频**](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/paper-validation-20261002)
+
+| 新实验 | 实测结果 | 主要限制 |
+|---|---|---|
+| 支持域路由，600 个新 roots | 完成 300、拒绝 300，零次观测到不安全选择 | 固定 4.8 秒完成全部 600；拒绝计为未完成 |
+| 物理压力，27 组 / 324 个 roots | 4.8 秒完成 324/324；1.6 秒完成 184/324、掉落 78 次 | 下界策略等于固定 4.8 秒；有限仿真样本，耗时三倍 |
+| 未来隐藏摩擦变化，100 对 roots | 相同输入下，1.6 秒动作的结果在 100/100 对中不同 | 需要可信物理边界或补充观测 |
+| 公平 UR5e 校验成本，60 个 roots | 全检与增量 60/60 判定一致；平均边际节省 0.996 ms | 增量 P95 更差，危险类型仍有限 |
+| 原始官方 SmolVLA/LIBERO 闭环，100 次固定任务 | 成功 58/100；task5 失败 10/10 | 官方 Panda 模型、仅观察记录；与 SO100 overlay 分开 |
+| 配对版本闭环，40 次新状态执行 | task5：0/10 → 7/10；对照：10/10 → 10/10 | 完整 MuJoCo 3.8.1 / 3.3.7 处理；基准兼容性，不是物理精度结论 |
+| 全任务新初态确认，100 次执行 | **成功93/100**；零崩溃；task4仍为6/10 | 官方 Panda 模型、隔离MuJoCo3.3.7、执行间隔10；与原58/100为不同网格 |
+
+[![完整 UR5e 网格：任务、计划变化、判定与结果](docs/research/2026-10-02/paper-v2/video/sentinel-ur5e-paper-poster.png)](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/sentinel-ur5e-paper.mp4)
+
+**UR5e，1080p · 19.95 秒。** 红色画面展示被拒绝计划的反事实运动，该计划没有下发；旁边展示放行执行或不下发候选。视频使用官方完整机械臂网格与保存的 MuJoCo 关节状态。三个案例解释早期机制 fixture，不代表新成本实验或真机录像。
+
+[![相同初态：快速动作打滑掉落，慢速动作完成运输](docs/research/2026-10-02/paper-v2/friction-video/friction-failure-vs-fallback-poster.png)](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/friction-failure-vs-fallback.mp4)
+
+**接触失效，1080p · 10.2 秒。** 同一个新低摩擦样本对比 1.6 秒和 4.8 秒动作：载荷掉落与完成运输。实时位移曲线解释风险阈值；后备动作耗时为三倍。视频重建真实保存的仿真状态，带中英双语说明。
+
+[![官方 SmolVLA 原生 Panda 任务、动作链与结果](docs/research/2026-10-02/paper-v2/libero-video/libero-task00-state00-poster.png)](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/libero-task00-state00-explained.mp4)
+
+**原始 Panda 配置，4.15 秒。** 预先指定的 task0/state0 在 MuJoCo 3.8.1、每个预测片段执行 50 个动作的配置下，经过 83 个实际动作后成功。360×360 仿真 RGB 放在中英双语 1080p 画布上，按真实 20 Hz 控制时钟播放。这个视频属于原始 58/100 研究，全部 42 次失败仍被保留；93/100 确认实验使用另外的网格与配置。
+
+[保留的失败视频](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/task5_state0_failure_bilingual_20hz.mp4)精确重放原始 task5/state0 动作：零奖励、任务失败、目标碗体中心最高仅上升 1.674 mm。它是事后诊断，不增加基准样本。
 
 ## 实测结果
 

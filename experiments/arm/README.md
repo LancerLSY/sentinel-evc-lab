@@ -58,8 +58,10 @@ wrapper; its standalone loading was verified.
 Timing is a fixed-order single-run diagnostic with early static exits. Reported
 incremental totals include parent validation; they establish no algorithm speedup.
 The legacy `complete_validation_calls_per_root` metric counts validator invocations,
-not complete static scans. Parent records are scoped to this in-process validator
-configuration; they do not independently bind validator source or tracking threshold.
+not complete static scans. Historical v3 parent records were scoped to that in-process validator configuration.
+The new frozen cost runner binds validator source and tracking threshold, rotates
+timing order and charges the same parent cost to both methods; see the
+[prospective cost report](../../docs/research/2026-10-02/paper-v2/RESULTS.md).
 
 [Public results and review](../../docs/research/2026-10-02/ur5e/v3/independent_review.json) ·
 [Official asset verification](../../docs/research/2026-10-02/ur5e/upstream_verification.json)

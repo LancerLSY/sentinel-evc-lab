@@ -1,0 +1,71 @@
+{
+  "acceptance_gate": {
+    "drop_count": 0,
+    "minimum_completion_rate_all_roots": 0.95,
+    "outcome_window": "full_5p5_seconds",
+    "scope": "observed research gate only",
+    "unsafe_count": 0
+  },
+  "base_displacement_xyz_m": [0.35, 0.1, 0.08],
+  "bootstrap_replicates": 10000,
+  "claim_limits": [
+    "bounded stratified MuJoCo simulator stress, not rectangular-domain qualification",
+    "no neural-network inference",
+    "no deployment integration or real-robot claim",
+    "no mathematical or functional-safety guarantee",
+    "50 ms force and tracking samples are not substep maxima",
+    "rejections remain failures to complete in the all-root denominator"
+  ],
+  "decision_inputs": [
+    "actual candidate target acceleration",
+    "declared trusted profile friction floor mu=0.015",
+    "observed payload support at the frozen root"
+  ],
+  "displacement_scale_bins": [[0.8, 1.0], [1.0, 1.2], [1.2, 1.5]],
+  "drop_absolute_xy_m": [0.14, 0.12],
+  "durations_s": [1.6, 3.2, 4.8],
+  "execution": {
+    "gpu_optional": true,
+    "mkl_threads": 4,
+    "omp_threads": 4,
+    "physics": "CPU MuJoCo 3.14.*",
+    "workers": 6
+  },
+  "formal_root_base": 730000,
+  "formal_roots_per_cell": 12,
+  "forecast_frames": 100,
+  "frame_dt_s": 0.05,
+  "friction_bins": [[0.015, 0.05], [0.05, 0.2], [0.2, 0.8]],
+  "frozen_sources": {
+    "experiments/gpu/run_broad_fallback.py": "64baadb0e09b40aca417ec9c6d22f1d092cd7c6e60e3e0a5f0f1041531e8defe",
+    "experiments/gpu/train_mujoco_world.py": "6ce811818d3d1dd80ed08d697c536c9f3a49459e07add4b0874ee2349c06142c",
+    "src/sentinel_evc/physics.py": "7d919bd761ca8a3dac215e8821c5c97e14cabfb6c59ce9ae0bb34db4b2b5c3a4"
+  },
+  "gravity_m_s2": 9.81,
+  "hidden_from_decisions": ["root friction", "payload mass", "future outcomes"],
+  "mu_floor": 0.015,
+  "mu_floor_semantics": "declared trusted profile configuration, not a friction measurement",
+  "parameter_design": {
+    "formal_per_cell": "eight exact parameter corners plus four independently seeded random interior points",
+    "random_friction": "log-uniform within the cell",
+    "random_mass_and_displacement_scale": "uniform within the cell"
+  },
+  "payload_mass_bins_kg": [[0.02, 0.06], [0.06, 0.13], [0.13, 0.2]],
+  "policies": ["fixed_1p6", "fixed_4p8", "floor_0p015_shortest"],
+  "posthold_frames": 10,
+  "preflight_root_base": 830000,
+  "preflight_roots_per_cell": 1,
+  "reporting": [
+    "primary full-5.5-second aggregate and per-cell unsafe, drop, completion, and reject Wilson 95 intervals",
+    "secondary 5.0-second forecast outcomes and additional-hold risk",
+    "10000-replicate paired root bootstrap comparisons",
+    "50 ms sampled servo-force saturation counts and peaks",
+    "50 ms sampled maximum tracking error",
+    "forecast-window versus additional-hold risk"
+  ],
+  "risk_threshold_xy_m": 0.06,
+  "completion_endpoint_tolerance_m": 0.01,
+  "schema": "sentinel-broad-physical-fallback-protocol-v1",
+  "status": "frozen",
+  "test_parameter_selection": false
+}
