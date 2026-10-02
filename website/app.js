@@ -2,7 +2,7 @@
 
 const zh = {
   navOverview:"概览",navDemo:"演示",navMethod:"机制",navResults:"实验",navReproduce:"复现",
-  eyebrow:"机器人策略校验 · 开源研究",headline:"在最终动作上，作出执行决定。",hero:"为经过变换的机器人计划设置执行门，通过一次性许可与可独立校验的证据，连接动作、决策和实际记录。",artifacts:"数据与模型",hfProfile:"Hugging Face 主页",videoLink:"视频",forthcoming:"待发布",
+  eyebrow:"机器人策略校验 · 开源研究",headline:"在最终动作上，作出执行决定。",hero:"为经过变换的机器人计划设置执行门，通过一次性许可与可独立校验的证据，连接动作、决策和实际记录。",artifacts:"数据与模型",hfModel:"Hugging Face 模型",videoLink:"视频",forthcoming:"待发布",
   demoKicker:"01 / 仿真演示",demoTitle:"计划变了，校验结论也应重新判断。",videoCaption:"七段保存的 UR5e MuJoCo 案例 · 720p · 33.75 秒。案例在评估后选取，视频包含标题与最终状态停留画面。",mediaSource:"媒体来源与哈希",
   overviewKicker:"02 / 项目概览",overviewTitle:"把检查放在真正提交动作的地方。",abstract1:"机器人策略生成的动作块，在执行前可能经过重定时、修复、坐标转换或拼接。原计划上的判定不会自动覆盖变换后的运动。Sentinel EVC 将校验结论绑定到最终动作和当前执行上下文。",abstract2:"本地研究工作台包含最终计划校验、带完整回退的受限证书复用、控制器单写者与签名证据。独立研究 profile 分别评估 UR5e 运动、WorldGuard 后果预测，以及 SO100 记录数据上的 SmolVLA 动作重建。",statArm:"误放行 / 139 个不安全的 UR5e 构造 roots",statSmol:"标准化动作 MAE 降幅 / 五个留出 episodes",statWG:"新 MuJoCo roots / 六类分布变化场景",
   methodKicker:"03 / 核心机制",methodTitle:"让判定对应真正要执行的动作。",pipe1:"提出动作",pipe1s:"策略动作块",pipe2:"生成变换",pipe2s:"重定时 · 修复 · 拼接",pipe3:"最终复核",pipe3s:"最终计划 + 上下文",pipe4:"执行许可",pipe4s:"单次使用 · 有效期",pipe5:"提交执行",pipe5s:"控制器单写者",pipe6:"验证证据",pipe6s:"签名事件记录",bindingTitle:"动作与上下文绑定。",bindingBody:"计划、模型/profile 身份和当前上下文共同确定判定的适用范围。修改的后缀、变化的场景或过期的观测不能继承无关结论。",fallbackTitle:"复用有明确边界。",fallbackBody:"UR5e 研究只复用精确匹配的静态前缀。动态校验始终从第零帧开始；父记录无效时，执行完整校验。",evidenceTitle:"执行留下可核查的记录。",evidenceBody:"submitted、accepted、observed 三种状态分别记录。撤销阻止旧代次新增提交；事件与哈希支持独立证据验证。",methodScope:"产品核心支持受限数值与固定接触 profile。训练后的神经模型和 UR5e 研究属于独立实验 profile；真机运动写入适配器尚未启用。",designTrace:"查看机制实现与设计对应关系",

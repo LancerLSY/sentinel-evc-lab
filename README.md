@@ -6,7 +6,7 @@
   <img src="docs/media/sentinel-hero.svg" alt="Sentinel EVC final-action verification workbench" width="100%">
 </p>
 
-**[Project homepage](https://sentinel-evc-lab.lanceryou.chatgpt.site)** · [GitHub](https://github.com/LancerLSY/sentinel-evc-lab) · [Hugging Face](https://huggingface.co/LancerLSY)
+**[Project homepage](https://sentinel-evc-lab.lanceryou.chatgpt.site)** · [GitHub](https://github.com/LancerLSY/sentinel-evc-lab) · [Hugging Face](https://huggingface.co/LancerLSY/sentinel-smolvla-so100)
 
 Sentinel EVC places an authorization gate at the last commit point of a robot
 policy's action block. It checks the action that will **actually** execute, issues
@@ -170,10 +170,12 @@ WorldGuard and not evidence about an unknown-friction physical robot.
 [Evaluated SmolVLA overlay card](docs/huggingface/smolvla_model_card.md) ·
 [Reproduction commands](experiments/gpu/README.md) ·
 [Verified artifact release](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) ·
-[Hugging Face account](https://huggingface.co/LancerLSY)
+[Hugging Face model](https://huggingface.co/LancerLSY/sentinel-smolvla-so100)
 
-The Hugging Face link identifies the maintainer account. Use the verified GitHub release
-for current trained artifacts; this README does not claim an unpublished Hub model.
+The evaluated SmolVLA overlay, verified loader and model card are published on
+Hugging Face. All 21 payload files match the selected local bundle; see the
+[Hub publication receipt](docs/huggingface/smolvla_hub_publication.json). The overlay
+requires the pinned original SmolVLA base and frozen backbone.
 The packaged loader rebuilt a finite `[1,50,6]` dev-only prediction that was bitwise
 equal to the pinned reference (`maximum_absolute_difference: 0.0`); see the
 [loading verification](docs/huggingface/smolvla_loading_verification.json).

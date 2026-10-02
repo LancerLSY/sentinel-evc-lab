@@ -35,8 +35,10 @@ The UR5e results are constructed-case comparisons; the SmolVLA result measures
 held-out recorded-action reconstruction. WorldGuard plots retain the camera and
 low-friction failures. The separate low-friction fallback is a MuJoCo research
 profile. GPU measurements identify the actual RTX 4090 D; RTX 5090 is unmeasured.
-The Hugging Face button links the account profile, while the evaluated model
-overlay remains a GitHub Release asset.
+The Hugging Face button links the published
+[SmolVLA overlay repository](https://huggingface.co/LancerLSY/sentinel-smolvla-so100).
+The GitHub Release retains a mirror; the Hub publication receipt verifies the
+21 uploaded payload files against the selected local bundle.
 
 ## Editing and publication
 

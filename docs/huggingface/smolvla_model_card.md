@@ -57,11 +57,29 @@ optimizer/RNG state, original videos and frozen upstream weights.
 
 ## Load and predict
 
-Use the isolated experiment environment with `lerobot[smolvla]==0.6.1`, PyTorch
-CUDA, `av>=15,<16`, datasets, pandas and pyarrow as described in the
+Use Python **3.12 or newer** with `lerobot[smolvla]==0.6.1` and CUDA-enabled
+PyTorch. The [GPU experiment report](https://github.com/LancerLSY/sentinel-evc-lab/blob/main/docs/gpu_training_results.md)
+records Python 3.12.3 and **PyTorch 2.8.0+cu128** for the GPU host. Install the data and
+policy dependencies with:
+
+```bash
+python -m pip install 'lerobot[smolvla]==0.6.1' 'datasets>=4.8,<5' \
+  'pandas>=2,<3' 'pyarrow>=21,<30' 'av>=15,<16'
+```
+
+Use a PyTorch CUDA build compatible with the GPU host, as described in the
 [training instructions](https://github.com/LancerLSY/sentinel-evc-lab/tree/main/experiments/gpu).
-After obtaining this bundle, download exactly the upstream files recorded in
-its identity:
+Download this model bundle into a local directory first:
+
+```python
+from huggingface_hub import snapshot_download
+
+bundle = snapshot_download("LancerLSY/sentinel-smolvla-so100",
+                           local_dir="sentinel-smolvla-so100")
+```
+
+Run the following commands from that directory. Download exactly the upstream
+files recorded in its identity:
 
 ```python
 import json

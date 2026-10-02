@@ -13,7 +13,7 @@ executor and from physical robot claims.
 | GPU WorldGuard W0/W1/W2 | [training report](gpu_training_results.md), [model cards](gpu_model_cards.md) | recorded offline numerical, visual, contact and real-recording comparisons | general safety or live VLA-to-driver integration |
 | W2 new-distribution audit | [scenario report](worldguard_scenario_results.md), [run manifest](../docs/research/2026-10-02/worldguard-scenarios/manifest.json) | 600 new roots across nominal, hidden-physics, displacement and camera shifts | robustness to arbitrary environments or real cameras |
 | Low-friction fallback | [study report](low_friction_fallback.md), [run manifest](../docs/research/2026-10-02/low-friction-fallback/manifest.json) | a separate 5 s known-profile action family supplies stable 4.8 s candidates in 100 constructed roots | a repair of the original neural profile or a deployed unknown-friction response |
-| SmolVLA fine-tune | [reproduction guide](../experiments/gpu/README.md), [verified release](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) | actual checkpoint fine-tuning and held-out recorded-data evaluation | a deployed model on Hugging Face or an actuated robot run |
+| SmolVLA fine-tune | [reproduction guide](../experiments/gpu/README.md), [verified release](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) | actual checkpoint fine-tuning and held-out recorded-data evaluation | an Inference Provider deployment or an actuated robot run |
 | UR5e arm study | [v3 manifest](research/2026-10-02/ur5e/v3/manifest.json), [higher-resolution review](research/2026-10-02/ur5e/v3/review/reviewed_metrics.json) | MuJoCo Menagerie UR5e same-root comparison, separate high-resolution replay and bound trajectory media | product-core or physical-device integration |
 
 ## Research figures
@@ -113,10 +113,12 @@ the current GPU report.** Existing latency values belong only to the RTX 4090 D 
 - [Anonymous download verification](research/2026-10-02/public_download_verification.json)
 - [Earlier GPU release artifact index](gpu/2026-10-02/release_artifact_index.json)
 - [Load-verified SmolVLA model package](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/simulation-research-20261002/sentinel-smolvla-hub-ready.tar.gz)
-- [Maintainer's Hugging Face account](https://huggingface.co/LancerLSY)
+- [Published SmolVLA model repository](https://huggingface.co/LancerLSY/sentinel-smolvla-so100)
 - [Evaluated SmolVLA overlay model card](huggingface/smolvla_model_card.md)
 - [Bitwise-equal loading verification](huggingface/smolvla_loading_verification.json)
 
-The evaluated model overlay, loader and model card are available in the GitHub
-release package. The Hugging Face link identifies the maintainer's profile;
-it does not point to a published Sentinel EVC model repository.
+The evaluated model overlay, loader and model card are published in the Hugging
+Face model repository, with the GitHub Release retained as a mirror. The
+[Hub publication receipt](huggingface/smolvla_hub_publication.json) verifies all 21
+payload files, including the 206,362,641-byte overlay. Loading still requires the
+pinned original base and backbone; no Inference Provider deployment is claimed.

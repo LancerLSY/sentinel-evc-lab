@@ -6,7 +6,7 @@
   <img src="docs/media/sentinel-hero.svg" alt="Sentinel EVC 最终动作校验工作台" width="100%">
 </p>
 
-**[项目主页](https://sentinel-evc-lab.lanceryou.chatgpt.site)** · [GitHub](https://github.com/LancerLSY/sentinel-evc-lab) · [Hugging Face](https://huggingface.co/LancerLSY)
+**[项目主页](https://sentinel-evc-lab.lanceryou.chatgpt.site)** · [GitHub](https://github.com/LancerLSY/sentinel-evc-lab) · [Hugging Face](https://huggingface.co/LancerLSY/sentinel-smolvla-so100)
 
 Sentinel EVC 把授权门放在机器人策略动作块的最后提交点：校验**真正要执行**
 的最终动作，签发有时限、一次性的执行许可，并留下可由第三方独立校验的证据。
@@ -165,10 +165,11 @@ profile，不是对原 2 s 神经 WorldGuard 的修复，也不证明真机未�
 [已评估 SmolVLA overlay 模型卡](docs/huggingface/smolvla_model_card.md) ·
 [复现命令](experiments/gpu/README.md) ·
 [已校验实验包](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/gpu-experiments-20261002) ·
-[Hugging Face 账号](https://huggingface.co/LancerLSY)
+[Hugging Face 模型](https://huggingface.co/LancerLSY/sentinel-smolvla-so100)
 
-Hugging Face 链接仅确认维护者账号。当前权重请使用已校验的 GitHub Release；
-这里不把尚未发布的 Hub 模型写成已上线。
+已评估的 SmolVLA overlay、加载器与模型卡已发布至 Hugging Face。21 个模型包文件
+均与选中的本地版本一致，详见 [Hub 发布校验记录](docs/huggingface/smolvla_hub_publication.json)。
+该 overlay 需要配合固定的原始 SmolVLA base 与冻结骨干加载。
 打包 loader 已重建有限值 `[1,50,6]` dev-only 输出，并与固定参考逐位相同
 （`maximum_absolute_difference: 0.0`）；详见[加载校验](docs/huggingface/smolvla_loading_verification.json)。
 
