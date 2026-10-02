@@ -1,0 +1,246 @@
+{
+  "claim_limits": [
+    "offline paired MuJoCo support routing",
+    "not hardware",
+    "not external preregistration",
+    "not SO100 closedloop",
+    "not continuous safety proof"
+  ],
+  "data_partitions": {
+    "calibration": "frozen original W2 only",
+    "dev": {
+      "roots_per_scene": 2,
+      "seed_starts": {
+        "camera_shift": 795000,
+        "displacement_shift": 794000,
+        "low_friction": 791000,
+        "mass_high": 793000,
+        "mass_low": 792000,
+        "nominal": 790000
+      }
+    },
+    "independent_unit": "root; siblings, frames, policies and repeats remain paired",
+    "prior_test_seed_blocks": [
+      "610000-615099",
+      "620000-620099"
+    ],
+    "test": {
+      "roots_per_scene": 100,
+      "seed_starts": {
+        "camera_shift": 715000,
+        "displacement_shift": 714000,
+        "low_friction": 711000,
+        "mass_high": 713000,
+        "mass_low": 712000,
+        "nominal": 710000
+      }
+    },
+    "train": "frozen original W2 only"
+  },
+  "evc_cost": {
+    "amortized_K": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "asset_commit": "4d038b3feae26ec82b46a4d586379114012a8ac7",
+    "equal_parent_cost": "Cparent/K + Cdelta versus Cparent/K + Cfull",
+    "obstacles": "sampled before plan without FK",
+    "preflight_root_base": 820000,
+    "preflight_roots_per_scene": 2,
+    "primary": "marginal Cdelta vs Cfull",
+    "review": "1ms 0.005rad independent implementation",
+    "scene_stride": 1000,
+    "test_root_base": 720000,
+    "test_roots_per_scene": 10,
+    "timed_repeats": 3,
+    "warmup": 1
+  },
+  "execution": {
+    "hardware": "RTX 4090 D (24 GB)",
+    "torch_threads": 4,
+    "workers": 6
+  },
+  "frozen_model_artifacts": {
+    "encoder_weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "state_manifest_sha256": "f03fccb54b0e7ee2b616eae0cd7693430b05abad48ab4e68b0b0224af33278d8",
+    "state_metrics_sha256": "322838fc7469dd52420d03556af41f5febe0bda8432afa8995be58394ac42e42",
+    "visual_cache_sha256": "6e11d202c4f189dd2d5dd54f621a07446e5aa2628ae4ded701ac421ca3448c27",
+    "visual_manifest_sha256": "895caf662c018f2cdceef4325e1dac0d5d618a2771a63fe707b071f5910a2b23",
+    "visual_metrics_sha256": "cf5ac26703dc3cb9888020c03f014ade6f6cd8fad80e9c01c2dc253ee25f0253"
+  },
+  "frozen_sources": {
+    "experiments/arm/run_paper_cost.py": "bd904caf8683e130b100012af3ec035df61c8faa6853de3fc534ae28ae77f080",
+    "experiments/arm/run_ur5e_guard.py": "8f42d6e5b696b7560cba94b99aea2cab8e818403fa26bdd42dcf171a5b3d33d0",
+    "experiments/arm/verify_ur5e_roots.py": "62677ba28caee2c49240bf226ae72a57f5701b75c7c7ae30d3d2099814bb69f8",
+    "experiments/gpu/evaluate_worldguard_scenarios.py": "712902f58c7cd6dce33c2983c085fec5d099f412a56e95e9784752cd618bd792",
+    "experiments/gpu/run_paper_interventions.py": "ddb44c2ffa4a7cc7df41109606664a51319b76b23a44758b382c9d92d6232f8d",
+    "experiments/gpu/train_mujoco_visual.py": "f2296224b5e7a8c8d2cfba1c6ffd34e2ae0481572d745480bbd598284778e73b",
+    "experiments/gpu/train_mujoco_world.py": "6ce811818d3d1dd80ed08d697c536c9f3a49459e07add4b0874ee2349c06142c",
+    "src/sentinel_evc/physics.py": "7d919bd761ca8a3dac215e8821c5c97e14cabfb6c59ce9ae0bb34db4b2b5c3a4"
+  },
+  "pre_formal_amendment": {
+    "cost_run": "uses original frozen protocol at commit 0ae1c20; unchanged cost sources",
+    "prior_protocol_sha256": "4f59d2baa3b3dde470858a165d22c3112181bda3a88f4419469fbffd4286da7e",
+    "reason": "Independent review required explicit declared descriptor routing and independently checked counterfactual equality. No formal intervention roots were run; distributions/policies/thresholds/sample sizes unchanged."
+  },
+  "preregistration": {
+    "external": false,
+    "ordering": "commit before formal execution",
+    "prior_results_informed_design": true
+  },
+  "protocol_id": "paper-v2-interventions-amendment-1-20261002",
+  "same_information_counterfactual": {
+    "durations_s": [
+      1.6,
+      4.8
+    ],
+    "future_friction_branches": [
+      0.3,
+      0.025
+    ],
+    "pairs": 100,
+    "preflight_seed_start": 796000,
+    "required": "same observation/history/action bytes; only future friction changes",
+    "seed_start": 716000
+  },
+  "schema": "sentinel-paper-v2-protocol-v1",
+  "statistics": {
+    "binary": "Wilson95",
+    "bootstrap_seed": 20261006,
+    "cost_bootstrap_seed": 9102026,
+    "multiplicity": "scene-stratified estimates; no unplanned significance claims",
+    "paired_bootstrap_replicates": 10000
+  },
+  "status": "frozen",
+  "stop_conditions": [
+    "source/model hash mismatch",
+    "nonempty output",
+    "test seed overlaps dev/prior",
+    "test outcome changes policy"
+  ],
+  "worldguard_intervention": {
+    "completion": "no risk during 5.5s and endpoint error <=.01m; rejection is incomplete",
+    "durations_s": [
+      0.6,
+      0.9,
+      1.2,
+      1.6,
+      3.2,
+      4.8
+    ],
+    "endpoint_tolerance_m": 0.01,
+    "evaluation_s": 5.0,
+    "forbidden_decision_inputs": [
+      "actual root friction",
+      "actual root mass",
+      "future labels",
+      "test results"
+    ],
+    "frame_dt_s": 0.05,
+    "history_frames": 8,
+    "policies": [
+      "fixed_1p6_unbound",
+      "fixed_4p8_unbound",
+      "declared_support_floor",
+      "unknown_reject",
+      "integrated_support_gate"
+    ],
+    "posthold_s": 0.5,
+    "primary_metrics": [
+      "unsafe/all roots",
+      "completion/all roots",
+      "rejection/all roots"
+    ],
+    "risk_xy_m": 0.06,
+    "routes": {
+      "camera_shift": "frozen state W2",
+      "low_friction": "declared floor .015 fallback",
+      "nominal": "frozen visual W2",
+      "other": "UNKNOWN"
+    },
+    "scenes": {
+      "camera_shift": {
+        "camera_profile": "shifted",
+        "displacement_scale": 1.0,
+        "friction_range": [
+          0.08,
+          0.8
+        ],
+        "mass_range_kg": [
+          0.04,
+          0.16
+        ],
+        "scope": "new-root nominal physics with frozen shifted camera layout; state input unchanged and visual profile shifted"
+      },
+      "displacement_shift": {
+        "camera_profile": "original",
+        "displacement_scale": 1.35,
+        "friction_range": [
+          0.08,
+          0.8
+        ],
+        "mass_range_kg": [
+          0.04,
+          0.16
+        ],
+        "scope": "cross-action-contract 1.35x displacement stress; bare-model diagnostic only; product contract policy is MODEL_UNKNOWN reject"
+      },
+      "low_friction": {
+        "camera_profile": "original",
+        "declared_profile_floor": 0.015,
+        "displacement_scale": 1.0,
+        "friction_range": [
+          0.015,
+          0.05
+        ],
+        "mass_range_kg": [
+          0.04,
+          0.16
+        ],
+        "scope": "hidden low-friction physics shift below the training range; original action and camera profiles"
+      },
+      "mass_high": {
+        "camera_profile": "original",
+        "displacement_scale": 1.0,
+        "friction_range": [
+          0.08,
+          0.8
+        ],
+        "mass_range_kg": [
+          0.17,
+          0.2
+        ],
+        "scope": "hidden high-payload-mass physics shift above the training range; original action and camera profiles"
+      },
+      "mass_low": {
+        "camera_profile": "original",
+        "displacement_scale": 1.0,
+        "friction_range": [
+          0.08,
+          0.8
+        ],
+        "mass_range_kg": [
+          0.02,
+          0.035
+        ],
+        "scope": "hidden low-payload-mass physics shift below the training range; original action and camera profiles"
+      },
+      "nominal": {
+        "camera_profile": "original",
+        "displacement_scale": 1.0,
+        "friction_range": [
+          0.08,
+          0.8
+        ],
+        "mass_range_kg": [
+          0.04,
+          0.16
+        ],
+        "scope": "new-root in-distribution nominal physics and original camera profile"
+      }
+    },
+    "w2_contract": "first four candidates, first 40 future frames only"
+  }
+}

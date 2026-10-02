@@ -50,6 +50,30 @@ def floor_choice(start, scale, floor, np):
             return index
     return -1
 
+def declared_descriptor(spec):
+    """Operator declaration fixed before sampling; not an estimated parameter."""
+    cameras = visual.CAMERAS if spec["camera_profile"] == "original" else visual.SHIFTED_CAMERAS
+    return {"camera_layout_sha256": visual._sha_value(cameras),
+            "payload_profile_id": "payload-040-160g" if spec["mass_range_kg"] == [.04, .16] else "payload-unqualified",
+            "friction_profile_id": "nominal-080-800" if spec["friction_range"] == [.08, .8] else "declared-floor-015",
+            "declared_mu_floor": spec.get("declared_profile_floor"),
+            "provenance": "operator profile declaration assigned before root sampling"}
+
+def route_from_inputs(descriptor, future, start, np):
+    # Check the actual final action bytes against the supported family, rather
+    # than consuming an evaluator scene label. This router never receives labels.
+    expected = np.asarray([targets(start, d, 1., np) for d in DURATIONS])
+    if future.shape != expected.shape or not np.allclose(future, expected, atol=1e-7, rtol=0):
+        return "ACTION_FAMILY_UNSUPPORTED"
+    if descriptor["payload_profile_id"] != "payload-040-160g":
+        return "MODEL_UNKNOWN"
+    if descriptor["friction_profile_id"] == "declared-floor-015":
+        return "DECLARED_FLOOR_FALLBACK" if descriptor["declared_mu_floor"] == .015 else "MODEL_UNKNOWN"
+    if descriptor["friction_profile_id"] != "nominal-080-800":
+        return "MODEL_UNKNOWN"
+    return ("VISUAL_ORIGINAL_PROFILE" if descriptor["camera_layout_sha256"] == visual._sha_value(visual.CAMERAS)
+            else "CAMERA_PROFILE_MISMATCH_ROUTE_STATE")
+
 def branch(mujoco, model, state, start, prior_target, plan, np, capture=False):
     data = mujoco.MjData(model)
     mujoco.mj_setState(model, data, state, mujoco.mjtState.mjSTATE_INTEGRATION)
@@ -167,19 +191,23 @@ def main():
     n=partition["roots_per_scene"]
     for scene in SCENES:
         spec=protocol["worldguard_intervention"]["scenes"][scene]
+        descriptor=declared_descriptor(spec)  # Created before any root is sampled.
         tasks=[(scene,partition["seed_starts"][scene]+i,spec) for i in range(n)]
         with concurrent.futures.ProcessPoolExecutor(max_workers=args.workers) as pool:
             rows=list(pool.map(generate,tasks))
         split={key:np.stack([row[key] for row in rows]) for key in ("history","past_targets","future_targets","truth","unsafe","drop","endpoint","integration_state")}
         abort=(split["history"][:,-1,21]<.5)|(np.linalg.norm(split["history"][:,-1,6:8],axis=1)>.06)
         choices={"fixed_1p6_unbound":np.full(n,3),"fixed_4p8_unbound":np.full(n,5),"unknown_reject":np.full(n,-1)}
-        floor=spec.get("declared_profile_floor")
+        floor=descriptor["declared_mu_floor"]
         physical=np.asarray([floor_choice(row["history"][-1,:3],spec["displacement_scale"],floor,np) if floor is not None else -1 for row in rows])
         choices["declared_support_floor"]=physical.copy()
-        integrated=np.full(n,-1); coverage=None; route="MODEL_UNKNOWN"
-        if scene in ("nominal","camera_shift"):
+        routes=[route_from_inputs(descriptor,row["future_targets"],row["history"][-1,:3],np) for row in rows]
+        if len(set(routes)) != 1:
+            raise ValueError("profile/action routing differs within frozen scene")
+        integrated=np.full(n,-1); coverage=None; route=routes[0]
+        if route in ("VISUAL_ORIGINAL_PROFILE","CAMERA_PROFILE_MISMATCH_ROUTE_STATE"):
             model_split={"history":split["history"],"past_targets":split["past_targets"],"future_targets":split["future_targets"][:,:4,:40],"truth":split["truth"][:,:4],"initial_output":split["history"][:,-1,6:21]}
-            if scene=="nominal":
+            if route=="VISUAL_ORIGINAL_PROFILE":
                 encoder,_=visual._encoder(args.weights,torch,torchvision,device)
                 raw,pathmeta=visual._render_raw(scene,model_split,visual.CAMERAS,args.out/"raw.npy",encoder,SimpleNamespace(out=args.out,render_batch_size=64),mujoco,np,torch,torchvision,device)
                 model_split["visual"]=visual._project(raw,pca,np); del raw,encoder
@@ -193,10 +221,8 @@ def main():
             allowed=cal["allowed"].astype(bool); integrated=np.where(allowed.any(1),allowed.argmax(1),-1)
             coverage=proportion(int(cal["risk_xy_covered"].sum()),n)
             saved[scene+"_prediction"]=pred; saved[scene+"_allowed"]=allowed
-        elif scene=="low_friction":
+        elif route=="DECLARED_FLOOR_FALLBACK":
             integrated=physical.copy(); route="DECLARED_FLOOR_FALLBACK"
-        elif scene=="displacement_shift":
-            route="ACTION_FAMILY_UNSUPPORTED"
         choices["integrated_support_gate"]=integrated
         for choice in choices.values():
             choice[abort]=-1
@@ -214,6 +240,7 @@ def main():
         metrics[scene]={"policies":scene_metrics,"paired_differences":paired,"route":route,"supported_w2_xy_coverage":coverage,"roots":n}
         for row_i,row in enumerate(rows):
             root_records.append({"root_id":row["root_id"],"evaluator_only":row["metadata"],"declared_profile":spec,
+                                 "router_input":descriptor,"action_family_checked_from_final_targets":True,
                                  "decision_route":route,"choices":{k:int(v[row_i]) for k,v in choices.items()},
                                  "outcomes_by_duration":[{"duration_s":d,"unsafe":bool(split["unsafe"][row_i,j]),"drop":bool(split["drop"][row_i,j]),"endpoint_m":float(split["endpoint"][row_i,j])} for j,d in enumerate(DURATIONS)]})
             if row["capture_qpos"].size:
@@ -225,14 +252,31 @@ def main():
     for i in range(2 if args.preflight else protocol["same_information_counterfactual"]["pairs"]):
         seed=796000+i if args.preflight else 716000+i
         row=generate(("counterfactual",seed,protocol["worldguard_intervention"]["scenes"]["nominal"]))
-        inputs=b"".join(row[k].tobytes() for k in ("history","past_targets","future_targets"))
-        outcomes=[]
+        outcomes=[]; branch_inputs=[]; state_hashes=[]; config_hashes=[]
         for friction in (.3,.025):
-            model=mujoco.MjModel.from_xml_string(model_xml(PhysicsConfig(friction=friction,payload_mass=row["metadata"]["mass_kg"],seed=seed)))
-            results=[branch(mujoco,model,row["integration_state"],row["history"][-1,:3],row["past_targets"][-1],row["future_targets"][j],np) for j in (3,5)]
+            config=PhysicsConfig(friction=friction,payload_mass=row["metadata"]["mass_kg"],seed=seed)
+            model=mujoco.MjModel.from_xml_string(model_xml(config))
+            copied={k:row[k].copy() for k in ("history","past_targets","future_targets","integration_state")}
+            data=mujoco.MjData(model)
+            mujoco.mj_setState(model,data,copied["integration_state"],mujoco.mjtState.mjSTATE_INTEGRATION)
+            restored=np.zeros_like(copied["integration_state"])
+            mujoco.mj_getState(model,data,restored,mujoco.mjtState.mjSTATE_INTEGRATION)
+            if not np.array_equal(restored,copied["integration_state"]):
+                raise ValueError("counterfactual state restoration mismatch")
+            branch_inputs.append(b"".join(copied[k].tobytes() for k in ("history","past_targets","future_targets")))
+            state_hashes.append(hashlib.sha256(restored.tobytes()).hexdigest())
+            nonfriction_xml=model_xml(PhysicsConfig(friction=.3,payload_mass=config.payload_mass,seed=config.seed))
+            config_hashes.append(hashlib.sha256(nonfriction_xml.encode()).hexdigest())
+            results=[branch(mujoco,model,restored,copied["history"][-1,:3],copied["past_targets"][-1],copied["future_targets"][j],np) for j in (3,5)]
             outcomes.append([{"duration_s":DURATIONS[j],"unsafe":bool(x[1]),"drop":bool(x[2]),"endpoint_m":float(x[3])} for j,x in zip((3,5),results)])
-        digest=hashlib.sha256(inputs).hexdigest()
-        counter.append({"root_id":f"counterfactual-{seed}","input_hash_nominal":digest,"input_hash_low":digest,"byte_equal_inputs":True,"outcomes":outcomes})
+        equal=branch_inputs[0]==branch_inputs[1] and state_hashes[0]==state_hashes[1] and config_hashes[0]==config_hashes[1]
+        if not equal:
+            raise ValueError("counterfactual has unintended non-friction differences")
+        counter.append({"root_id":f"counterfactual-{seed}","input_hash_nominal":hashlib.sha256(branch_inputs[0]).hexdigest(),
+                        "input_hash_low":hashlib.sha256(branch_inputs[1]).hexdigest(),"byte_equal_inputs":equal,
+                        "state_sha256_by_branch":state_hashes,"nonfriction_model_sha256_by_branch":config_hashes,
+                        "targets_sha256":hashlib.sha256(row["future_targets"].tobytes()).hexdigest(),
+                        "mass_kg_both_branches":row["metadata"]["mass_kg"],"future_friction_by_branch":[.3,.025],"outcomes":outcomes})
     dump(args.out/"metrics.json",metrics); dump(args.out/"per_root.json",root_records); dump(args.out/"counterfactual.json",counter)
     np.savez_compressed(args.out/"results.npz",**saved)
     manifest={"status":"complete","preflight":args.preflight,"protocol_sha256":sha(args.protocol),"source_sha256":sha(__file__),"model_artifacts":artifacts,
