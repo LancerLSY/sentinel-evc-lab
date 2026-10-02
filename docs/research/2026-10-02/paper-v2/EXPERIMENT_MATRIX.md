@@ -26,6 +26,12 @@ The stored 3.2 s sibling analysis and the outcome-selected failure video replay 
 
 GPU: **RTX 4090 D (24 GB)**. Contact and UR5e studies use MuJoCo 3.14.0; native-policy lanes pin their own complete simulator versions. The confirmation uses a fresh process with isolated MuJoCo 3.3.7, leaving the 3.8.1 environment intact. No hardware robot motion is measured.
 
+The native studies' historical installed asset directory was not archived. Its
+digest includes download-cache metadata and interrupted downloads; it is not a
+portable model-content identity. The separate diagnostic replay procedure freezes
+official model files individually, while retaining the original source receipts
+and all observation, action and outcome checks. See the [reproducibility note](REPRODUCIBILITY_NOTE.md).
+
 [Complete results](RESULTS.md) · [中文结果](RESULTS.zh-CN.md) · [Physical-study commands](../../../../experiments/research_v2/README.md) · [Native-policy commands](../../../../experiments/vla/README.md)
 
 The optional paired backend replay renderer is distributed as source only. No executed paired-film capture is included in this release; the four published films have separate verified media manifests.

@@ -1,10 +1,10 @@
 {
   "schema": "sentinel-backend-replay-renderer-status-v1",
   "source": "experiments/vla/replay_backend_comparison.py",
-  "source_sha256": "14b3c120cf186bbf40b3172325cb93cf52f940cd45c6d3f4e2119ce66e0d570f",
+  "source_sha256": "114bc3546731209484553aecbbe7d3881fee8b95140f72157a656199af4f3a51",
   "capture_produced": false,
   "encoded_movie_produced": false,
-  "verification": "static source review only",
+  "verification": "portable content-binding source review; capture pending",
   "selected_case": {
     "task_id": 5,
     "initial_state_index": 21,
@@ -13,5 +13,7 @@
     "post_hoc": true
   },
   "formal_comparison_sha256": "e3271e0cd341d4f5e96615c29f44e954f136ac1d2f5deb2d45b055584f96b124",
-  "claim_limit": "Renderer source is not an executed simulator capture or additional benchmark outcome."
+  "claim_limit": "Renderer source is not an executed simulator capture or additional benchmark outcome.",
+  "historical_source_sha256": "14b3c120cf186bbf40b3172325cb93cf52f940cd45c6d3f4e2119ce66e0d570f",
+  "replay_assets_manifest_sha256": "e743224025f6966a2aa7c9cda51dc0c9aa3b800d68d576c12ec8e88d4f0877af"
 }

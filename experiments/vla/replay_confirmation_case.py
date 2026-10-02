@@ -23,7 +23,8 @@ import numpy as np
 
 from replay_backend_comparison import _empty, _processed_camera_png, _receipt, _require
 from replay_libero_failure import _body_names, _body_pose, _unbatch, _write_video
-from run_libero_closedloop import _array_digest, _jsonable, _sha256, _tree_identity
+from portable_replay_assets import load_portable_assets_manifest, verify_portable_assets
+from run_libero_closedloop import _array_digest, _jsonable, _sha256
 
 
 TASK_ID = 4
@@ -43,6 +44,8 @@ def _args() -> argparse.Namespace:
     parser.add_argument("--confirmation-manifest", type=Path, required=True)
     parser.add_argument("--confirmation-trace", type=Path, required=True)
     parser.add_argument("--checkpoint", type=Path, required=True)
+    parser.add_argument("--replay-assets-manifest", type=Path, required=True)
+    parser.add_argument("--replay-assets-sha256", required=True)
     parser.add_argument("--font", type=Path, required=True)
     parser.add_argument("--libero-config", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -63,6 +66,7 @@ def _formal_episode(manifest: dict[str, Any], state: int) -> dict[str, Any]:
 
 
 def _validate_sources(args: argparse.Namespace) -> dict[str, Any]:
+    load_portable_assets_manifest(args.replay_assets_manifest, args.replay_assets_sha256)
     manifest = _load(args.confirmation_manifest)
     protocol = _load(args.confirmation_protocol)
     _require(_sha256(args.confirmation_manifest) == FORMAL_MANIFEST_SHA256, "formal manifest mismatch")
@@ -194,18 +198,27 @@ def _resolve_model(sim: Any) -> dict[str, Any]:
 
     bowl = unique("target black bowl", lambda name: name.endswith("akita_black_bowl_1_main"))
     plate = unique("plate", lambda name: name.endswith("plate_1_main"))
-    top_joints = [name for name in joints if "drawer" in name.lower() and "top" in name.lower()]
-    if len(top_joints) != 1:
-        top_bodies = [name for name in bodies if "drawer" in name.lower() and "top" in name.lower()]
-        derived: list[str] = []
-        for name in top_bodies:
-            body_id = _body_id(sim.model, name)
-            count = int(sim.model.body_jntnum[body_id])
-            start = int(sim.model.body_jntadr[body_id])
-            derived.extend(joints[start : start + count])
-        top_joints = sorted(set(name for name in derived if name))
+    top_bodies = [name for name in bodies if name.lower().endswith("cabinet_top")]
+    _require(len(top_bodies) == 1, f"cannot uniquely resolve top-drawer body: {top_bodies}")
+    top_body_id = _body_id(sim.model, top_bodies[0])
+    top_joint_start = int(sim.model.body_jntadr[top_body_id])
+    top_joint_count = int(sim.model.body_jntnum[top_body_id])
+    top_joints = [
+        name for name in joints[top_joint_start : top_joint_start + top_joint_count]
+        if name and name.lower().endswith("top_level")
+    ]
     _require(len(top_joints) == 1, f"cannot uniquely resolve top-drawer joint: {top_joints}")
-    return {"body_inventory": bodies, "joint_inventory": joints, "target_bowl": bowl, "plate": plate, "top_drawer_joint": top_joints[0]}
+    top_joint_id = _joint_id(sim.model, top_joints[0])
+    _require(int(sim.model.jnt_type[top_joint_id]) == 2, "resolved top-drawer joint is not prismatic/slide")
+    return {
+        "body_inventory": bodies,
+        "joint_inventory": joints,
+        "target_bowl": bowl,
+        "plate": plate,
+        "top_drawer_body": top_bodies[0],
+        "top_drawer_joint": top_joints[0],
+        "top_drawer_joint_type": "slide",
+    }
 
 
 def _joint_position(sim: Any, name: str) -> float:
@@ -335,9 +348,9 @@ def main() -> int:
     _require(versions["mujoco"] == "3.3.7", "replay requires isolated MuJoCo 3.3.7")
     for package in ("lerobot", "hf-libero", "robosuite", "num2words"):
         _require(versions[package] == bound["manifest"]["software"][package], f"software mismatch: {package}")
-    asset_tree = _tree_identity(Path(get_libero_path("assets")), "mixed_site_packages_tree")
-    for key in ("scope", "file_count", "total_bytes", "tree_sha256"):
-        _require(asset_tree[key] == bound["manifest"]["asset_tree"][key], f"asset tree mismatch: {key}")
+    portable_assets = verify_portable_assets(
+        Path(get_libero_path("assets")), args.replay_assets_manifest, args.replay_assets_sha256
+    )
     suite = benchmark.get_benchmark_dict()["libero_spatial"]()
     init_root = Path(get_libero_path("init_states")) / "libero_spatial"
     bddl_root = Path(get_libero_path("bddl_files")) / "libero_spatial"
@@ -513,6 +526,9 @@ def main() -> int:
             "confirmation_protocol": _receipt(args.confirmation_protocol),
             "confirmation_manifest": _receipt(args.confirmation_manifest),
             "confirmation_trace": _receipt(args.confirmation_trace),
+            "portable_asset_verifier": _receipt(Path(__file__).with_name("portable_replay_assets.py")),
+            "replay_assets_manifest": portable_assets["manifest"],
+            "reconstructed_asset_content": portable_assets["content"],
             "checkpoint_sha256": bound["manifest"]["model_artifacts"]["checkpoint_sha256"],
             "action_sequence_sha256": {label: capture["action_sequence_sha256"] for label, capture in captures.items()},
         },
@@ -523,7 +539,8 @@ def main() -> int:
             "projection": "task_ids only; every other canonical effective-environment field is identical",
         },
         "software": {"python": platform.python_version(), "torch": torch.__version__, "cuda": torch.version.cuda, **versions},
-        "asset_tree": asset_tree,
+        "original_frozen_asset_tree": bound["manifest"]["asset_tree"],
+        "portable_assets": portable_assets,
         "task_source_sha256": task_sources,
         "resolved_model": resolved,
         "cases": {

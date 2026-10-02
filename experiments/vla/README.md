@@ -49,6 +49,12 @@ It also verifies the BDDL and fixed-init-state file hash for every one of the
 ten LIBERO-Spatial tasks.  A different installed tree stops the run; do not
 edit the protocol to accept it after seeing outcomes.
 
+This historical directory digest includes download-cache metadata and interrupted
+downloads. The original directory was not archived and cannot be reconstructed
+from a fresh Hub download. The formal protocols retain that identity. New
+diagnostic replays instead freeze and verify the actual official model files
+individually; see the [portable-asset reproducibility note](../../docs/research/2026-10-02/paper-v2/REPRODUCIBILITY_NOTE.md).
+
 Set `LIBERO_CONFIG_PATH` to a directory containing `config.yaml`.  The file
 must point `assets`, `bddl_files`, and `init_states` to the resolved isolated
 installation.  Then run the disjoint compatibility episode first:

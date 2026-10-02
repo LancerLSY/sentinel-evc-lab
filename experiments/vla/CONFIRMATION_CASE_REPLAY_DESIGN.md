@@ -25,9 +25,25 @@ The replay requires confirmation manifest SHA-256
 and trace SHA-256
 `a78454f9c5e138e056cd61d9243c7ac7fff1b6855df161d6e8903d1cb38792ab`.
 It also verifies the frozen confirmation runner/protocol receipts, checkpoint
-files, full asset tree, task source hashes, MuJoCo 3.3.7, reset state and seed,
+files, the historical frozen asset-tree receipt, task source hashes, MuJoCo
+3.3.7, reset state and seed,
 the first processed state/camera hashes, every stored `env.step` action, and
 every stored official outcome. Any mismatch stops capture.
+
+Capture additionally requires the pre-frozen
+[`sentinel-libero-portable-assets-v1` manifest](libero_portable_assets.json)
+with SHA-256
+`e743224025f6966a2aa7c9cda51dc0c9aa3b800d68d576c12ec8e88d4f0877af`.
+It declares 239 files totaling 189,311,115 bytes and canonical reconstructed
+content SHA-256
+`c7fef2c780dbab2bbdaf375a2a8bbac171341718988f01cd5309bbb4d692e015`.
+Every reconstructed non-cache, non-`.incomplete`
+asset must be declared and every declaration must exist. The gate rejects path
+traversal and symbolic links, verifies byte counts and SHA-256, verifies the
+official fixed-revision SHA-256 or Git blob SHA-1 for each file, and binds a
+canonical digest over sorted path/content/size records. This reconstructed
+content is recorded separately from the historical whole-tree receipt; it is
+not claimed to reproduce the interrupted historical tree byte for byte.
 
 The formal environment declaration contains all ten task IDs. Replay projects
 that frozen list to task 4 only to avoid constructing nine unused environments.
@@ -52,7 +68,9 @@ retains:
 
 Body and joint inventories are retained. Capture stops if it cannot uniquely
 resolve the target black-bowl body, plate body, or top-drawer joint from the
-actual model names.
+actual model names. The frozen XML inventory resolves the top drawer through
+the unique `cabinet_top` body suffix and `top_level` slide-joint suffix; the
+compiled joint must also report MuJoCo's prismatic/slide type.
 
 ## Media and interpretation
 

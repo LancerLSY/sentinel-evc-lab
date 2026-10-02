@@ -21,7 +21,8 @@ from typing import Any
 
 import numpy as np
 
-from run_libero_closedloop import _array_digest, _jsonable, _sha256, _tree_identity
+from portable_replay_assets import load_portable_assets_manifest, verify_portable_assets
+from run_libero_closedloop import _array_digest, _jsonable, _sha256
 
 
 TASK_ID = 5
@@ -46,6 +47,8 @@ def _args() -> argparse.Namespace:
     parser.add_argument("--legacy-manifest", type=Path, required=True)
     parser.add_argument("--legacy-trace", type=Path, required=True)
     parser.add_argument("--native-protocol", type=Path, required=True)
+    parser.add_argument("--replay-assets-manifest", type=Path, required=True)
+    parser.add_argument("--replay-assets-sha256", required=True)
     parser.add_argument("--checkpoint", type=Path, required=True)
     parser.add_argument("--font", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -85,6 +88,7 @@ def _episode(manifest: dict[str, Any]) -> dict[str, Any]:
 
 
 def _validate_sources(args: argparse.Namespace) -> dict[str, Any]:
+    load_portable_assets_manifest(args.replay_assets_manifest, args.replay_assets_sha256)
     protocol = _load(args.backend_protocol)
     native = _load(args.native_protocol)
     comparison = _load(args.comparison)
@@ -240,9 +244,9 @@ def _capture(args: argparse.Namespace, bound: dict[str, Any]) -> None:
     _require(versions["mujoco"] == expected["mujoco"], "active MuJoCo version mismatch")
     for package in ("lerobot", "hf-libero", "robosuite", "num2words"):
         _require(versions[package] == bound["native"]["software"][package], f"software mismatch: {package}")
-    asset_tree = _tree_identity(Path(get_libero_path("assets")), "mixed_site_packages_tree")
-    for key in ("scope", "file_count", "total_bytes", "tree_sha256"):
-        _require(asset_tree[key] == bound["manifests"][label]["asset_tree"][key], f"asset tree mismatch: {key}")
+    portable_assets = verify_portable_assets(
+        Path(get_libero_path("assets")), args.replay_assets_manifest, args.replay_assets_sha256
+    )
     suite = benchmark.get_benchmark_dict()["libero_spatial"]()
     init_root = Path(get_libero_path("init_states")) / "libero_spatial"
     bddl_root = Path(get_libero_path("bddl_files")) / "libero_spatial"
@@ -379,6 +383,9 @@ def _capture(args: argparse.Namespace, bound: dict[str, Any]) -> None:
             "selected_formal_manifest": _receipt(formal_manifest_path),
             "selected_formal_trace": _receipt(formal_trace_path),
             "native_protocol": _receipt(args.native_protocol),
+            "portable_asset_verifier": _receipt(Path(__file__).with_name("portable_replay_assets.py")),
+            "replay_assets_manifest": portable_assets["manifest"],
+            "reconstructed_asset_content": portable_assets["content"],
             "checkpoint_sha256": bound["checkpoint_hashes"],
             "formal_action_count": len(source["actions"]),
             "action_sequence_sha256": hashlib.sha256("\n".join(source["action_hashes"]).encode()).hexdigest(),
@@ -387,7 +394,8 @@ def _capture(args: argparse.Namespace, bound: dict[str, Any]) -> None:
         "first_observation": {"checks": checks, "processed": observed_context, "camera_pngs": camera_artifacts},
         "environment": asdict(env_cfg),
         "software": {"python": platform.python_version(), "torch": torch.__version__, "cuda": torch.version.cuda, **versions},
-        "asset_tree": asset_tree,
+        "original_frozen_asset_tree": bound["manifests"][label]["asset_tree"],
+        "portable_assets": portable_assets,
         "task_source_sha256": task_sources,
         "outcome": {
             "steps": len(steps), "sum_reward": sum_reward, "max_reward": max_reward,
@@ -481,9 +489,19 @@ def _compose(args: argparse.Namespace, bound: dict[str, Any]) -> None:
     for key in (
         "backend_protocol", "backend_runner", "comparison", "paired_episodes",
         "current_manifest", "current_trace", "legacy_manifest", "legacy_trace",
-        "native_protocol", "checkpoint_sha256",
+        "native_protocol", "portable_asset_verifier", "checkpoint_sha256",
+        "replay_assets_manifest", "reconstructed_asset_content",
     ):
         _require(current_manifest["source"][key] == legacy_manifest["source"][key], f"capture provenance differs: {key}")
+    for source_key, local_path in (
+        ("replay_assets_manifest", args.replay_assets_manifest),
+        ("portable_asset_verifier", Path(__file__).with_name("portable_replay_assets.py")),
+    ):
+        local_receipt = _receipt(local_path)
+        _require(
+            all(current_manifest["source"][source_key][key] == local_receipt[key] for key in ("sha256", "bytes")),
+            f"capture {source_key} content differs from compose input",
+        )
     import imageio.v2 as imageio
     from PIL import Image
 
@@ -529,6 +547,7 @@ def _compose(args: argparse.Namespace, bound: dict[str, Any]) -> None:
             "current_formal_manifest": _receipt(args.current_manifest), "current_formal_trace": _receipt(args.current_trace),
             "legacy_formal_manifest": _receipt(args.legacy_manifest), "legacy_formal_trace": _receipt(args.legacy_trace),
             "current_capture_manifest": _receipt(args.current_capture), "legacy_capture_manifest": _receipt(args.legacy_capture),
+            "replay_assets_manifest": _receipt(args.replay_assets_manifest),
             "font": _receipt(args.font),
         },
         "display": {

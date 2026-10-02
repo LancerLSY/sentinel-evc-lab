@@ -1,0 +1,1920 @@
+{
+  "files": {
+    "articulated_objects/flat_stove.xml": {
+      "bytes": 7180,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "b64cb1d72dedd7dbc1b64e29d1368846d14da80a"
+      },
+      "sha256": "046748f5543cdfc1500d74f8ca60a992ad6633717396a2d4f505eb79aa102cb1"
+    },
+    "articulated_objects/flat_stove/button_dark_texture.png": {
+      "bytes": 156406,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "c4c9f069e1e5f976879466de9c2e158ed338f3d1fbf2a37c837abe8d432783a1"
+      },
+      "sha256": "c4c9f069e1e5f976879466de9c2e158ed338f3d1fbf2a37c837abe8d432783a1"
+    },
+    "articulated_objects/flat_stove/metal.png": {
+      "bytes": 196878,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+      },
+      "sha256": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+    },
+    "articulated_objects/flat_stove/steel-scratched.png": {
+      "bytes": 391216,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "7e22a111d516cc84addde9b2b18353d8a6ec521b9b79ec5e9c169e2d9000d3fe"
+      },
+      "sha256": "7e22a111d516cc84addde9b2b18353d8a6ec521b9b79ec5e9c169e2d9000d3fe"
+    },
+    "articulated_objects/flat_stove/stove_burner/burnerplate.stl": {
+      "bytes": 35284,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "46740b572af7ae501a1e520460d8494af07d54f3"
+      },
+      "sha256": "93526fc3f2585e828c115f0f20d5ff43129ce7dc46c9fcc8216c4015c717bd00"
+    },
+    "articulated_objects/flat_stove/stove_knob_base/steel-scratched.png": {
+      "bytes": 391216,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "7e22a111d516cc84addde9b2b18353d8a6ec521b9b79ec5e9c169e2d9000d3fe"
+      },
+      "sha256": "7e22a111d516cc84addde9b2b18353d8a6ec521b9b79ec5e9c169e2d9000d3fe"
+    },
+    "articulated_objects/flat_stove/stove_knob_base/stove_knob_base.mtl": {
+      "bytes": 251,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "1b2ad651492e61c775026ee325c8fb6163f265bf"
+      },
+      "sha256": "17acbcdc52bbdda65d99ad2a6cea7e02fe3b08b3c7ebf60ca601d4d31a4ba6cb"
+    },
+    "articulated_objects/flat_stove/stove_knob_base/stove_knob_base.obj": {
+      "bytes": 7395,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "c6e0744a307b701c00519c7734f64189948374ec"
+      },
+      "sha256": "99d1c64c341affafd125b9e5a4aa9af97767e508b29e5052a60e7b25c1bebf75"
+    },
+    "articulated_objects/flat_stove/stove_knob_base/stove_knob_base.xml": {
+      "bytes": 4197,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "af75c8cd795c607da917f3261535b64e52dfbdfb"
+      },
+      "sha256": "ff762270a8befbe7186a43463ade9e5ee3fe96a0fa3088c9794be16cf7ad66f7"
+    },
+    "articulated_objects/flat_stove/stove_knob_base/stove_knob_base_col.obj": {
+      "bytes": 13281,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "f71f74b19a21185f2400b3a3545417a0d1a89895"
+      },
+      "sha256": "2f7c5d703e13af5e31e01512de8a54b409f1be14ea2bf8585c3c338acee74347"
+    },
+    "articulated_objects/flat_stove/stove_knob_base/visual/stove_knob_base_vis.msh": {
+      "bytes": 13408,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "35c6f02defaa7e977b2600730802bdfb21435b7a"
+      },
+      "sha256": "d65ed847f007e5f3e1a01edb45c63ccb9f881f92479ec516028fb654f4077ddc"
+    },
+    "articulated_objects/flat_stove/stove_knob_button/button_dark_texture.png": {
+      "bytes": 156406,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "c4c9f069e1e5f976879466de9c2e158ed338f3d1fbf2a37c837abe8d432783a1"
+      },
+      "sha256": "c4c9f069e1e5f976879466de9c2e158ed338f3d1fbf2a37c837abe8d432783a1"
+    },
+    "articulated_objects/flat_stove/stove_knob_button/steel-scratched.png": {
+      "bytes": 391216,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "7e22a111d516cc84addde9b2b18353d8a6ec521b9b79ec5e9c169e2d9000d3fe"
+      },
+      "sha256": "7e22a111d516cc84addde9b2b18353d8a6ec521b9b79ec5e9c169e2d9000d3fe"
+    },
+    "articulated_objects/flat_stove/stove_knob_button/stove_knob_button.mtl": {
+      "bytes": 257,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "629d6eb5f518f79b355f5c3fce6972e30a487cc1"
+      },
+      "sha256": "f8a35f9db3d21472a9edfed0e93a93274dbfe7790673ea62e7d7c11b4ed56bce"
+    },
+    "articulated_objects/flat_stove/stove_knob_button/stove_knob_button.obj": {
+      "bytes": 36265,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "cf1a149774bfd5ac48ec72670148244e4d1a938e"
+      },
+      "sha256": "317e8b897829d92287f27668d32b612a8c24e4ff731aa6597c329ea0058a1640"
+    },
+    "articulated_objects/flat_stove/stove_knob_button/stove_knob_button.xml": {
+      "bytes": 5154,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "663288fa6905bb924da023ddf2f3545ebc943375"
+      },
+      "sha256": "51f6fd5bc9356e035e85e95e7aba54705b20c17e9ba756fb3c2fa78d389003fa"
+    },
+    "articulated_objects/flat_stove/stove_knob_button/stove_knob_button_col.obj": {
+      "bytes": 17251,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "1c9ffd7e0409b6d427716927623e2459d9fd1582"
+      },
+      "sha256": "ba922135bb321396a45ab37ebbbd53785bdffb86ebf0f095c55c0b7638a88e94"
+    },
+    "articulated_objects/flat_stove/stove_knob_button/visual/stove_knob_button_vis.msh": {
+      "bytes": 34792,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "6cfac06573063313b1bbf565be497e0764dc99ee"
+      },
+      "sha256": "b7cff7b5899505d5abcfed347a86fe7ef837203560838b9d9453196a91f8a743"
+    },
+    "articulated_objects/wooden_cabinet.xml": {
+      "bytes": 14435,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "25be7cb2b37dafb6272c6b1f9561eb9b841fdf4c"
+      },
+      "sha256": "eca251258c7ff6a05fa181a316c767508801812f4ea870921f3ce28fd82ea7af"
+    },
+    "articulated_objects/wooden_cabinet/dark_fine_wood.png": {
+      "bytes": 42358,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+      },
+      "sha256": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+    },
+    "articulated_objects/wooden_cabinet/metal.png": {
+      "bytes": 196878,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+      },
+      "sha256": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_base/dark_fine_wood.png": {
+      "bytes": 42358,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+      },
+      "sha256": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_base/visual/wooden_cabinet_base_vis.msh": {
+      "bytes": 21400,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "e8d8a999b50da6c7f2b4896bab59a19749be4f32"
+      },
+      "sha256": "8bcf371361562de9ac8ac2fe06db6b6b695dde3cbe50e86de5a6e272d21e1f9c"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_base/wooden_cabinet_base.mtl": {
+      "bytes": 493,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "19ffce7e5647580c08c4424edf3abea218d16f0c"
+      },
+      "sha256": "d27518e28b7acd8ee6ee87b7346be3dfcb26fa8738655ced2fd31511649e95db"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_base/wooden_cabinet_base.obj": {
+      "bytes": 14231,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "490e9d18a3d4352b0ca33c99d50fad85e91b1d86"
+      },
+      "sha256": "078566aa8c6f2d35e07298396076b4b77bd9426919503eb84eb71ddb1d608549"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_base/wooden_cabinet_base.xml": {
+      "bytes": 3037,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "d0933207c5330bab28e2db41f11c17fb5d71969b"
+      },
+      "sha256": "3bf642de516e408bec7d8aa4cfbb9252d7f3a53ad17a79114a7037a90bbd3171"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_base/wooden_cabinet_base_col.obj": {
+      "bytes": 11202,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "2f8f50ebf2a6eefab21e41b1faeb4d3cec743a6d"
+      },
+      "sha256": "1e44c01a525ceb50e190bbf5f6bf42ca932859c298da30febeb5250f6ae15722"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom/dark_fine_wood.png": {
+      "bytes": 42358,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+      },
+      "sha256": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom/visual/wooden_cabinet_bottom_vis.msh": {
+      "bytes": 9088,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "26ffd95a0eebcc7abf96f4afb106ec1311116478"
+      },
+      "sha256": "23181bdeb6ce44e3634318e6c946fa00f568eb25256b8546558775eda691700c"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom/wooden_cabinet_bottom.mtl": {
+      "bytes": 252,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "3c711c85a800416c1ea8191ed1cbdf2fabb7bdfd"
+      },
+      "sha256": "9713106daaf2d8ce68086c8dfe4bfd6fffc419cdd1594a0e5bf71a25abb6773e"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom/wooden_cabinet_bottom.obj": {
+      "bytes": 5341,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "818a91e25119fffdac887617d2c0763d7e638503"
+      },
+      "sha256": "175eb7d8e351ca648b229687826eb21f3eea1ae868f29639f6236cb31c9c0562"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom/wooden_cabinet_bottom.xml": {
+      "bytes": 2350,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "3788246076751e251d0f49c40afcc042353b3e45"
+      },
+      "sha256": "a466dbada22f6766802daae274594a1cd274a2783a44961eee68798daa85fc13"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom/wooden_cabinet_bottom_col.obj": {
+      "bytes": 5609,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "af403f737ecef2c9b01ae72e9d3fec520bf546fd"
+      },
+      "sha256": "7da66a6916224c9bcd868bf287d54b9b39901df4abab1b04a9a60cc5b0ada415"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom_handle/dark_fine_wood.png": {
+      "bytes": 42358,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+      },
+      "sha256": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom_handle/visual/wooden_cabinet_bottom_handle_vis.msh": {
+      "bytes": 40192,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "af2f7d708366aae9fc6d878d7bea1493b6d9c755"
+      },
+      "sha256": "a61587cbcebb8a8ad5dc0d8c60e6db4747a5a118397485a0a5eb5e171c2d397e"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom_handle/wooden_cabinet_bottom_handle.mtl": {
+      "bytes": 437,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "c46aae1cb8447f169997118df8deb2199c73d0ee"
+      },
+      "sha256": "5743e439d6a8d8c45401b16f5eeca80093c4fb0857ba54fc421853ff083140da"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom_handle/wooden_cabinet_bottom_handle.obj": {
+      "bytes": 22912,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "1f2cf2263dc8715737bc7b2f0dc2a2ba4fd1a608"
+      },
+      "sha256": "bafafa9ea5cc2cd140d1a56064f9ce24d3769112e2b5147347a6325262443ac2"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom_handle/wooden_cabinet_bottom_handle.xml": {
+      "bytes": 1704,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "73c403305b30e076202dc8ef4cb2ea2acd705dae"
+      },
+      "sha256": "166ec7fd884e9119f2f13ae5f232ce0273b017770c16ad726b81e87e5b6fa7ca"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_bottom_handle/wooden_cabinet_bottom_handle_col.obj": {
+      "bytes": 2820,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "dd2da7097c1cd32be86bf50762fcb6d6b54e5668"
+      },
+      "sha256": "b0a2f56c4d2996e06965639b84f963af43bcea72ce21f96de090e1a2326109f5"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle/dark_fine_wood.png": {
+      "bytes": 42358,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+      },
+      "sha256": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle/visual/wooden_cabinet_middle_vis.msh": {
+      "bytes": 9088,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "74bc8594b02936b1b652ba6abb43d3973da15a0b"
+      },
+      "sha256": "580eead06792affbd91c1b5c17e3d1c94082fcb247eb4812d1a8ac4c120253c5"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle/wooden_cabinet_middle.mtl": {
+      "bytes": 252,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "9c6f534eeda444ee74907625ffb1772d98311994"
+      },
+      "sha256": "b24b7d41e88e3c078b3c5cc9f5bbb75af0b801219c9a588f4c580e34af02da8c"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle/wooden_cabinet_middle.obj": {
+      "bytes": 5332,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "58996074a8ad9de5cc1fcd67d2144d079f4ec7a8"
+      },
+      "sha256": "06e38b9682eeecd5ec04588d43485a85ea964fb9b75f95b7613f48d74b88b7a7"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle/wooden_cabinet_middle.xml": {
+      "bytes": 2350,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "095ce2ba4e5cfed3d8d32797760a91b4e803a1d1"
+      },
+      "sha256": "793356bcfba7fcaf76789d103887682bfe3ffe045aa45b085b41aefff8583b12"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle/wooden_cabinet_middle_col.obj": {
+      "bytes": 5609,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "8bc326bcd34d1fd107ee31f656c4ab940f44658e"
+      },
+      "sha256": "379aa9b1a94f19b24bbcd5d8884dddfb2e4c08d79fcc7040a995e07335b6f16c"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle_handle/metal.png": {
+      "bytes": 196878,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+      },
+      "sha256": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle_handle/visual/wooden_cabinet_middle_handle_vis.msh": {
+      "bytes": 40192,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "e14ba760bcc35281e8a15c2d49a689ceb94e6b2f"
+      },
+      "sha256": "1688f375dde79450d9e5cfcb5dc17a16c27018c9dbf74513577588d54e62e0a8"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle_handle/wooden_cabinet_middle_handle.mtl": {
+      "bytes": 437,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "711a33f5480ac1113ffc7e4f14cd3c71511eaab8"
+      },
+      "sha256": "5c2352078b630e50a5d614f49e0aac2c50f7b816e2616539e5269c8fce77a99c"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle_handle/wooden_cabinet_middle_handle.obj": {
+      "bytes": 22912,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "dac4a6638cbfddb772ebc1b4e3224772b8d06800"
+      },
+      "sha256": "87564ff8aa2a426a0b8028f899a8289fc71da73675f347ae34bbd9ef3f184399"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle_handle/wooden_cabinet_middle_handle.xml": {
+      "bytes": 1695,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "30dc5a80b8c5d8a3ebdd5b8217394b18703671c6"
+      },
+      "sha256": "aa06707477c7cb27bf66a2576079f46f8af6124a5e88a2f6b25c09f248227387"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_middle_handle/wooden_cabinet_middle_handle_col.obj": {
+      "bytes": 2820,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "202fffa3a424c5195e9a18ff81ee08d631ae8916"
+      },
+      "sha256": "37777567eaa147df8e98caa5e4cdac7459b46ec908a4063e7b05b21aedabc363"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top/dark_fine_wood.png": {
+      "bytes": 42358,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+      },
+      "sha256": "9aaa94ef4cd61592b566569bba3569276a38ea5ff22ed4b978b77b038b38a11f"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top/visual/wooden_cabinet_top_vis.msh": {
+      "bytes": 9088,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "e47e2966277288ffc240ddb9b6fbba835f03ef9c"
+      },
+      "sha256": "2b7c08ad3740ad45965eaedd9cf07f64ea12dd4044cac7e71fa5b601b4cbb481"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top/wooden_cabinet_top.mtl": {
+      "bytes": 253,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "27e9ca508964c98db224d9b7cf5fa26dbf1a4aa1"
+      },
+      "sha256": "292058e4d6ed4288f511b9690646f852cfa3dd92422120571b5840491193845d"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top/wooden_cabinet_top.obj": {
+      "bytes": 5342,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "e7102c3858c7bcadd16381e745680591fca22498"
+      },
+      "sha256": "1c53811ea4d2df3e0fcfaa6e9d657ebfcaa2d9392f24646a1627a36661a8ee28"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top/wooden_cabinet_top.xml": {
+      "bytes": 2326,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "53e6bb9d5cfef16f308dac8f77865016a448f506"
+      },
+      "sha256": "34068772ecb0a277fd367203c8b34dc5dc587705b4e340bd2c845516cca41375"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top/wooden_cabinet_top_col.obj": {
+      "bytes": 5606,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "aef64c1bc92bcec5e1fb2a64a29dc6ca604a8962"
+      },
+      "sha256": "7b8d28d0e0630892b6b60ba6acd8c0276ad6368d74db8dc6b73c8ad6778b8621"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top_handle/metal.png": {
+      "bytes": 196878,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+      },
+      "sha256": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top_handle/visual/wooden_cabinet_top_handle_vis.msh": {
+      "bytes": 40192,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "cb4cc931e5349e12ba23554af9bef8fb4a9f80b3"
+      },
+      "sha256": "58924271007a30a14eda7111e7eefd7be3f8b04a1d31bbf4964d7da419282df6"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top_handle/wooden_cabinet_top_handle.mtl": {
+      "bytes": 434,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "6687ded9bb7e5e794cb7ed64a77f213d4c39bad3"
+      },
+      "sha256": "37a437fc60a1dcec13e2e73b7dd46b27402b56e14ee0220406c59598636eeb85"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top_handle/wooden_cabinet_top_handle.obj": {
+      "bytes": 22909,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "6b3a88ba7562eee254108336a87ddb5aa5ba8b01"
+      },
+      "sha256": "bafde2d9e79540aed7a4afaff122c0495534652343b558debd861e5b412e39b0"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top_handle/wooden_cabinet_top_handle.xml": {
+      "bytes": 1671,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "fec28e2cdf3dcdbecb02d9597ebe62959f5f907c"
+      },
+      "sha256": "eb7e584cfa8cafadaa9aeb86d0a33e9de1cfdd0f221b2f9cae3540e5acc14ed5"
+    },
+    "articulated_objects/wooden_cabinet/wooden_cabinet_top_handle/wooden_cabinet_top_handle_col.obj": {
+      "bytes": 2817,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "b27f829b01f62d43d5d393e62b1bf2fed67211e8"
+      },
+      "sha256": "214ed5978d473d9de08a0a91bfb8d834cab8b18d6c8605b2e51eda9dc6b67f68"
+    },
+    "scenes/black_book/black_book.mtl": {
+      "bytes": 657,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "816b86737f9684bfba4785c83d5217a3b6d7aa13"
+      },
+      "sha256": "48a3690643d78b1db5770a3747f0e3da18f391e066d8a954578cc2ff255c4b97"
+    },
+    "scenes/black_book/black_book.obj": {
+      "bytes": 512689,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "34025c798161d9293fa521ad2781f8bcdda68764"
+      },
+      "sha256": "affcdf1de967906914c37d819def2b16f00b8ca4c63002e6fdc32a636cf77e25"
+    },
+    "scenes/black_book/black_book.xml": {
+      "bytes": 1094,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "572749cac2d61accd69de02b77f1e1c3f5089a02"
+      },
+      "sha256": "545baee0e196261da00e96270b055bb91658988e25dc8a859e20750d17fcdfa5"
+    },
+    "scenes/black_book/black_book_texture.png": {
+      "bytes": 186624,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "b743b0e878a10e579371707f3d135c6e7a80a8c307fffabfe1fea6a784830ec2"
+      },
+      "sha256": "b743b0e878a10e579371707f3d135c6e7a80a8c307fffabfe1fea6a784830ec2"
+    },
+    "scenes/black_book/collision/black_book_ch.stl": {
+      "bytes": 3884,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "ed65ad7a26968e7a322ee67e34258d13ae5040df"
+      },
+      "sha256": "90567f718d3b2fcc4ce7722c95b5bff891b9e0920d2b2ec389e149e26e655f52"
+    },
+    "scenes/black_book/visual/black_book_vis.msh": {
+      "bytes": 773296,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "ca4a7f95bad5dee37a99c0374df132eadf5f8304770e5830f3286d730c844049"
+      },
+      "sha256": "ca4a7f95bad5dee37a99c0374df132eadf5f8304770e5830f3286d730c844049"
+    },
+    "scenes/coffee_table_seats/FabricLeatherBuffaloRustic001_COL_VAR1_4K.png": {
+      "bytes": 12825082,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "6fabe46d134c4e0c7058795535df2e84a34bd5e2af83f881037a398f20629d57"
+      },
+      "sha256": "6fabe46d134c4e0c7058795535df2e84a34bd5e2af83f881037a398f20629d57"
+    },
+    "scenes/coffee_table_seats/coffee_table_seats.mtl": {
+      "bytes": 293,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "dfd171b1c1f172a11283c76538cb7ef2435fedaa"
+      },
+      "sha256": "56cf5412654c21a39b31e7a4820cd3f363b7c921588640ea6a5252c15dacdfee"
+    },
+    "scenes/coffee_table_seats/coffee_table_seats.obj": {
+      "bytes": 1633914,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "f90232a7940d323d7cf4bd7701618fdf9659abc8"
+      },
+      "sha256": "69c4d8590bb31d773c1263fbe0b50bd07e7f62a8be522398b47733a41122cf92"
+    },
+    "scenes/coffee_table_seats/coffee_table_seats.xml": {
+      "bytes": 1205,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "ce49fec39ab49746af9ae5f759e17e564d2e0f08"
+      },
+      "sha256": "a054e2190c18635a58193e8a49af140dc7f9fe7c570f30c3114216fff94ea624"
+    },
+    "scenes/coffee_table_seats/collision/coffee_table_seats_ch.stl": {
+      "bytes": 103284,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9017472a107c5e56c5222ca5212163b3156d19d10c773a717a835046d3cd81c3"
+      },
+      "sha256": "9017472a107c5e56c5222ca5212163b3156d19d10c773a717a835046d3cd81c3"
+    },
+    "scenes/coffee_table_seats/visual/coffee_table_seats_vis.msh": {
+      "bytes": 2073616,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "a206214be7f9ebb9d1a0358fffe07efbdae513e822371803480da67d4b7ae0fd"
+      },
+      "sha256": "a206214be7f9ebb9d1a0358fffe07efbdae513e822371803480da67d4b7ae0fd"
+    },
+    "scenes/desk/desk.mtl": {
+      "bytes": 657,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "03b24252a3584ff238013d64f2c3d692390c25a2"
+      },
+      "sha256": "15468f6c5158879f62e3d6e6390e997e78b71f7ce801f5874aac7b76c9c87568"
+    },
+    "scenes/desk/desk.obj": {
+      "bytes": 380512,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "d8ec9217d234051506bdef07816b03e4b9556149"
+      },
+      "sha256": "e3d72e58b3154b963a6bfd94ca298f4a3e45ab35461dc4aeb14001574fd337a6"
+    },
+    "scenes/desk/desk.xml": {
+      "bytes": 2453,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "f197d078b7836e381fa8b687ec21fca95aafac78"
+      },
+      "sha256": "2d2e9d4bcab289fdad9b35958634c9ffb6faba9ef3103f53dfe98222556b8834"
+    },
+    "scenes/desk/desk_col.obj": {
+      "bytes": 6524,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "52dcd9625b6173d0dd0f28d4b5654be4fdf3d799"
+      },
+      "sha256": "9e2da6ad271c02fdeb3d01e2b32d60d6911c30a3ec8345d0bae5ea9397fd3303"
+    },
+    "scenes/desk/desk_texture.png": {
+      "bytes": 489350,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "f1f228aca1dab2c88833d00d10983d3df62e64569bb61ad66865490cbd08a5c3"
+      },
+      "sha256": "f1f228aca1dab2c88833d00d10983d3df62e64569bb61ad66865490cbd08a5c3"
+    },
+    "scenes/desk/visual/desk_vis.msh": {
+      "bytes": 742624,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "b883c91335372a5f7be2af0b83b95d2db429a5010110c8ca9739aef03d15f8f3"
+      },
+      "sha256": "b883c91335372a5f7be2af0b83b95d2db429a5010110c8ca9739aef03d15f8f3"
+    },
+    "scenes/floor_lamp/collision/floor_lamp_ch.stl": {
+      "bytes": 149584,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "47f1aa661fb6f911b3ace8b56dc2ea048a2a62b1e65a197252a2076561723191"
+      },
+      "sha256": "47f1aa661fb6f911b3ace8b56dc2ea048a2a62b1e65a197252a2076561723191"
+    },
+    "scenes/floor_lamp/floor_lamp.mtl": {
+      "bytes": 2447,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "3a525c1434e9ff8d0ea6ccd9f4dbf987b62ce1c3"
+      },
+      "sha256": "7dee3862d3a05ce58f0184efe96374d0a31f913c70053e89907b2862e1bdf504"
+    },
+    "scenes/floor_lamp/floor_lamp.obj": {
+      "bytes": 5687626,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "24e5894dc48fd27a09582847122a558c91cc0d00"
+      },
+      "sha256": "350b693a756f59e86a58900f7125681db5fddc2664a712177473f83578acb70f"
+    },
+    "scenes/floor_lamp/floor_lamp.xml": {
+      "bytes": 1088,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "255e97f34a6b230593c9485343ae138fe4a7976e"
+      },
+      "sha256": "e159e83b0d6db2cb79634c3c67e290cbf87f87012c6acf0f57669d6ca6d70141"
+    },
+    "scenes/floor_lamp/lamp_texture.png": {
+      "bytes": 24160,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "a9735321ebc866113449bc4debb0c078752389d2b50541313ae7788f0fcde80d"
+      },
+      "sha256": "a9735321ebc866113449bc4debb0c078752389d2b50541313ae7788f0fcde80d"
+    },
+    "scenes/floor_lamp/visual/floor_lamp_vis.msh": {
+      "bytes": 7983160,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "6de4776381809fdc2f7a6eae997a8269fb40fe09ef977e05a3e4fa1949a4e949"
+      },
+      "sha256": "6de4776381809fdc2f7a6eae997a8269fb40fe09ef977e05a3e4fa1949a4e949"
+    },
+    "scenes/fridge/collision/fridge_ch.stl": {
+      "bytes": 43284,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7d61fc964e2cacc69c28cbbc1cbe673ad47b9b41"
+      },
+      "sha256": "24021f65a7de77d8a5ca40cc628881125a19c7b46ae163814459a21eab0fb458"
+    },
+    "scenes/fridge/fridge.mtl": {
+      "bytes": 265,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "2926b5c68853c0722df159a355039e1b3d889be5"
+      },
+      "sha256": "fc75ca1e3572dcaf01bd695663726a0b0e3ea92ba326b2853e16ac9783097c3c"
+    },
+    "scenes/fridge/fridge.obj": {
+      "bytes": 878298,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "2fdb991eb1c1b10293db960e65fe4b16ddc64127"
+      },
+      "sha256": "e30e81dbca9c09d5fe53759bb5ecad545586b9c898b9e712e55c58d6ec9107fe"
+    },
+    "scenes/fridge/fridge.xml": {
+      "bytes": 1057,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "ec80d6280eb9361b8533550cb099cd370b8425ea"
+      },
+      "sha256": "1693356b04eb8a03e9a1e04a2707a052be72b2583088dc1e24489fb00bfcff58"
+    },
+    "scenes/fridge/kitchen_fridge_background.png": {
+      "bytes": 26145,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "f29dcf2c6135094db9dc5800756fa41806d0d9f299d9bf897bc464ab6c2cc163"
+      },
+      "sha256": "f29dcf2c6135094db9dc5800756fa41806d0d9f299d9bf897bc464ab6c2cc163"
+    },
+    "scenes/fridge/metal.png": {
+      "bytes": 196878,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+      },
+      "sha256": "93784216a66b52be9c8ccc3732e50f511815291e32f34f97bd139ed7229061fa"
+    },
+    "scenes/fridge/steel-scratched.png": {
+      "bytes": 391216,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "7e22a111d516cc84addde9b2b18353d8a6ec521b9b79ec5e9c169e2d9000d3fe"
+      },
+      "sha256": "7e22a111d516cc84addde9b2b18353d8a6ec521b9b79ec5e9c169e2d9000d3fe"
+    },
+    "scenes/fridge/visual/fridge_vis.msh": {
+      "bytes": 1395808,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "41edbedd182c3c27ffe8bc2c2808f61bc575c80bc37d717a17af71d10a04a208"
+      },
+      "sha256": "41edbedd182c3c27ffe8bc2c2808f61bc575c80bc37d717a17af71d10a04a208"
+    },
+    "scenes/kitchen_background/collision/kitchen_background_ch.stl": {
+      "bytes": 5284,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "41f21089b79fb704c6abdb0566f5172fb7a50732"
+      },
+      "sha256": "1bdfe6d57957507209c52c1c1e417e0046095318c9a5eb5dabd7a7e5e58bda9b"
+    },
+    "scenes/kitchen_background/kitchen_background.mtl": {
+      "bytes": 2509,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "fdd907d2ed2ef763a0b35219c7436c6e9dd6b833"
+      },
+      "sha256": "4689a75145a7cb9a7ab2890ee77a3c41e9b1d35b0105caf78ae9b23c6f440179"
+    },
+    "scenes/kitchen_background/kitchen_background.obj": {
+      "bytes": 4942104,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "d281a3daea9c27e195b2c71b7f613848a51fc5d2"
+      },
+      "sha256": "bbbe1c1bcc350199686cef73309188d5cf20a0790195df2d3196ca7ec8e41665"
+    },
+    "scenes/kitchen_background/kitchen_background.png": {
+      "bytes": 172490,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "cb9379766b531eb8e6f44a1fa3df92430e0c73c6c3856a88521510e689bca15a"
+      },
+      "sha256": "cb9379766b531eb8e6f44a1fa3df92430e0c73c6c3856a88521510e689bca15a"
+    },
+    "scenes/kitchen_background/kitchen_background.xml": {
+      "bytes": 1194,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "76e3aa06b734bf8dae91e002deeaa9c7744bffb9"
+      },
+      "sha256": "75b39ca51105f7f20753acc398d7d336c61b3ca801b9af9b38085c77fa39c4f9"
+    },
+    "scenes/kitchen_background/visual/kitchen_background_vis.msh": {
+      "bytes": 7534528,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "6b2487166e07650ba787129919fb3c4f77bfd912fdd4e265f5bf68992175417a"
+      },
+      "sha256": "6b2487166e07650ba787129919fb3c4f77bfd912fdd4e265f5bf68992175417a"
+    },
+    "scenes/kitchen_background_hot_pot/collision/kitchen_background_hot_pot_ch.stl": {
+      "bytes": 52284,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "3a25097efbbd712282cdf3e10525cb53047bb82a"
+      },
+      "sha256": "89fce5022a9c4651182adb331eb27b10aef2ba9cc3229f36d82c843f780885ef"
+    },
+    "scenes/kitchen_background_hot_pot/kitchen_background_hot_pot.mtl": {
+      "bytes": 376,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "f6e305e900c9c4eff22820e0c855ce6f3e9d332d"
+      },
+      "sha256": "2c1f20c1ea418dc76580ae3bea4b490bbc0c4748882f0f28d5b5b334288270ce"
+    },
+    "scenes/kitchen_background_hot_pot/kitchen_background_hot_pot.obj": {
+      "bytes": 536306,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "78b14c67282b0fb47afac614f02ae5f4600cf75a"
+      },
+      "sha256": "2be420109a73493e40f14b0c7ffc327b4d208f972a6296ebf313330cbdc557ed"
+    },
+    "scenes/kitchen_background_hot_pot/kitchen_background_hot_pot.xml": {
+      "bytes": 1278,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "3f24d154c8fdc25e6f471081b4d1b796007e1e59"
+      },
+      "sha256": "f9c219f2aa7712ccbf57a8b552b364c3e256d2a03f8574a57eacb2266b8a47d4"
+    },
+    "scenes/kitchen_background_hot_pot/visual/kitchen_background_hot_pot_vis.msh": {
+      "bytes": 845440,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "05c173fb9ae96f7ed2fdccbeb14abb38e8db601f7802e9b78db04d9a5e2b0ce2"
+      },
+      "sha256": "05c173fb9ae96f7ed2fdccbeb14abb38e8db601f7802e9b78db04d9a5e2b0ce2"
+    },
+    "scenes/kitchen_background_pot/collision/kitchen_background_pot_ch.stl": {
+      "bytes": 183784,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "91f3a0265ed7173debf1a4fd12216f0c2edf696967d84a21ac5f36a0875df996"
+      },
+      "sha256": "91f3a0265ed7173debf1a4fd12216f0c2edf696967d84a21ac5f36a0875df996"
+    },
+    "scenes/kitchen_background_pot/kitchen_background_pot.mtl": {
+      "bytes": 1197,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "8a6d981986f12e404e51d218887f6e88c2c09278"
+      },
+      "sha256": "8c56bb556574611511e276edd04c5b1b6591c1afb1cebbc7ee40caf2c9247b14"
+    },
+    "scenes/kitchen_background_pot/kitchen_background_pot.obj": {
+      "bytes": 3828839,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "db309cbcf570a1a2ba70dfc5f5ca92de6c928b46"
+      },
+      "sha256": "40396518a0149e7d2fb2310828c62baec65122db8ace5c6b611b61f5b3541a33"
+    },
+    "scenes/kitchen_background_pot/kitchen_background_pot.png": {
+      "bytes": 19103,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "d953b50c28c2e7c42e5a31bee757984ea398ce464917edb4d02cb188dfc9b44f"
+      },
+      "sha256": "d953b50c28c2e7c42e5a31bee757984ea398ce464917edb4d02cb188dfc9b44f"
+    },
+    "scenes/kitchen_background_pot/kitchen_background_pot.xml": {
+      "bytes": 1242,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "65646e467269a2f4c86ec64c2ced3593464d983e"
+      },
+      "sha256": "66707641ae01fd0754cf7c0e1a5131297bb914abde1219b2f3a3ffaa9aa74fce"
+    },
+    "scenes/kitchen_background_pot/visual/kitchen_background_pot_vis.msh": {
+      "bytes": 4344316,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "f3348ee8738bcaf84b6f9df6cae65d764bbc159410aea32d5d40c09dc58b69ec"
+      },
+      "sha256": "f3348ee8738bcaf84b6f9df6cae65d764bbc159410aea32d5d40c09dc58b69ec"
+    },
+    "scenes/kitchen_background_stove/collision/kitchen_background_stove_ch.stl": {
+      "bytes": 17584,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "9e5ca16cff0db69b20301621579396c8399d5be2"
+      },
+      "sha256": "3d67469f09eb72441b8a4aedd6ad4067beae53e295d5813897c0fb7e14e42ecb"
+    },
+    "scenes/kitchen_background_stove/kitchen_background_stove.mtl": {
+      "bytes": 861,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7ac8452c30ac8d83ece972be1b122e49f42c6aca"
+      },
+      "sha256": "93567e4194b28fe7d652ad5e332a56071b358d1d085893700f850a29a3825177"
+    },
+    "scenes/kitchen_background_stove/kitchen_background_stove.obj": {
+      "bytes": 5189498,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "b6a4c4ef5a651d2f481623d8fe178a21f52bd62c"
+      },
+      "sha256": "d0ee253d9b09e3138f55a92d3b04ac17cf35b1f0d740d340cdcf17127327455f"
+    },
+    "scenes/kitchen_background_stove/kitchen_background_stove.png": {
+      "bytes": 38611,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "05be4ff65b6f9f4e89332b97628e9b9f1a176562afca6e14f5d325bd41f36e72"
+      },
+      "sha256": "05be4ff65b6f9f4e89332b97628e9b9f1a176562afca6e14f5d325bd41f36e72"
+    },
+    "scenes/kitchen_background_stove/kitchen_background_stove.xml": {
+      "bytes": 1260,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "3969a362a7ddcf123da94fd5a71bff50d2bbb4ba"
+      },
+      "sha256": "7e837d229d8b1e297c9698f332691871afebdaa0381d0a661266c22c05796787"
+    },
+    "scenes/kitchen_background_stove/visual/kitchen_background_stove_vis.msh": {
+      "bytes": 6212608,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "0efe7517df5bb76730dd0b951dcf40644e7c494005a89421229b422217998702"
+      },
+      "sha256": "0efe7517df5bb76730dd0b951dcf40644e7c494005a89421229b422217998702"
+    },
+    "scenes/libero_coffee_table_base_style.xml": {
+      "bytes": 5888,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "ce8e0d8af33d44fcb0c852df1adede7f6ed1208f"
+      },
+      "sha256": "7fe7417a4eb449670d0b7a2cf3f770435b0e476e1aaf0dd34c91d4845805ffd7"
+    },
+    "scenes/libero_coffee_table_blue_style.xml": {
+      "bytes": 4855,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "e2061c87feaab8676f6d2eb0c3c01c863df2a424"
+      },
+      "sha256": "9cff2ac1b9cfe30134223361487999a32aab5c3026c97e5a1892e3b6b6df9809"
+    },
+    "scenes/libero_coffee_table_warm_style.xml": {
+      "bytes": 5410,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "f417be70dfc09d170f996083fc119db2932936f4"
+      },
+      "sha256": "65b43df25770d396594c531e2ee1368c436a9886f4c93c621e0d9d10032873a3"
+    },
+    "scenes/libero_floor_base_style.xml": {
+      "bytes": 4216,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "77d2b3d8f8784b6d1c73de74c19f8fceeb3e5010"
+      },
+      "sha256": "df092a7d8ac7a5c4d1ce48e9a6dacf2f7ebaa362580e20de46d9644f3d5d1039"
+    },
+    "scenes/libero_floor_blue_style.xml": {
+      "bytes": 3890,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "43c6de79babf65eb37eea27037792df00f641ea1"
+      },
+      "sha256": "c8568aaba852cb1c1baee619f9bd990ce5c36990491bd26ce3b5015c129511a5"
+    },
+    "scenes/libero_floor_coffee_style.xml": {
+      "bytes": 4122,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "c51d3aafb5a3f414a9aac78341f1fe377d69dee1"
+      },
+      "sha256": "127ec02b0a0d40181094a9474ff8f4c4f71f25cc92675e2774a26ebbd14de36a"
+    },
+    "scenes/libero_floor_warm_style.xml": {
+      "bytes": 3910,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7ba0c0aab6658e4e1d6238c7e3c845b88367857d"
+      },
+      "sha256": "546cefa5d9ec0b368261214747b4e9372fab4b6b6fef26774034d48651cee0cd"
+    },
+    "scenes/libero_kitchen_tabletop_base_style.xml": {
+      "bytes": 7214,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "2906c2935d0f74a7d243a5c10a53bffb2e849341"
+      },
+      "sha256": "f867e7cb59e8ef27aea10edb7c341eca5d3230da8c354aff2a072cc557fd2977"
+    },
+    "scenes/libero_living_room_tabletop_base_style.xml": {
+      "bytes": 6745,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "76ad901e30ee01cfe1d962b8838f633afa68ff75"
+      },
+      "sha256": "e22de70abac444dc7602546c46931580a3f06753ce941d0921f4f145e8eec70c"
+    },
+    "scenes/libero_study_base_style.xml": {
+      "bytes": 9420,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "ed7d598c8925ac11b7a71ef754bfaa94c29cc3cd"
+      },
+      "sha256": "dbc88d0ada642f99762ddd25b778981721fd1c010ad9c0cd114dade7c5b8f909"
+    },
+    "scenes/libero_tabletop_base_style.xml": {
+      "bytes": 4857,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7aaf3b8b910d012fd1f7220139b4f9bc6ef0ae4b"
+      },
+      "sha256": "bb118118e3e02a0f23295c072d77c5a7c6b44cc773032dc79c17070b4e133f86"
+    },
+    "scenes/libero_tabletop_blue_style.xml": {
+      "bytes": 4924,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "663bf66b090adfb58f55b69a76f29da267905388"
+      },
+      "sha256": "4a1421361fa661f33e864bf77036b6dff65cd27eba8a64d2319b6fb18e46541a"
+    },
+    "scenes/libero_tabletop_warm_style.xml": {
+      "bytes": 4655,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "c6525587540e6976ef53c61617757b50d78fc984"
+      },
+      "sha256": "4ff0e2e91f884c42c0f956c1ff7f6687a502c100a8e4e71b10a3cc32b69352ec"
+    },
+    "scenes/living_room/collision/living_room_ch.stl": {
+      "bytes": 29784,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "6f028539b5dd7c4775d6a9f4fedfaaaca1fe2b3d"
+      },
+      "sha256": "76fb1072aa0c59348b226e7918b792befc81481749e73f254d5dc9a627d2206a"
+    },
+    "scenes/living_room/living_room.mtl": {
+      "bytes": 1557,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "9aacb5cad197eba967d1985c35fd2083c2c9cf99"
+      },
+      "sha256": "4efddafb9136f32e0a6c2d5dde7c041233c81eba28e4c93d417d178c1a2935ed"
+    },
+    "scenes/living_room/living_room.obj": {
+      "bytes": 4207621,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "6c28ca37563cda57cba906c45b9b0f3b55706d2e"
+      },
+      "sha256": "0a70956c57f794e8b777342b30d82d4cbea4effa33c0d3fe56dd8c81c45262ee"
+    },
+    "scenes/living_room/living_room.xml": {
+      "bytes": 1108,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "9be2899091f5d7ccf2f149ce011e1220f6ceb051"
+      },
+      "sha256": "b5ee3ca16c2c57fefb4118c8470367f2856479a50b88e2cc4aaefa090c8d6558"
+    },
+    "scenes/living_room/living_room_wall_unit.png": {
+      "bytes": 65012,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "7e6f264015ca84d29a2850a7854517d0017ed53902ae3d851ae76441f5644730"
+      },
+      "sha256": "7e6f264015ca84d29a2850a7854517d0017ed53902ae3d851ae76441f5644730"
+    },
+    "scenes/living_room/visual/living_room_vis.msh": {
+      "bytes": 6514576,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "326c50b18dfce7d338473ab8d99edce64c752cfef0203495faa2471dcafd4f8b"
+      },
+      "sha256": "326c50b18dfce7d338473ab8d99edce64c752cfef0203495faa2471dcafd4f8b"
+    },
+    "scenes/living_room_table/collision/living_room_table_ch.stl": {
+      "bytes": 232084,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "deae447cb884f4d692e934a62a3b8ec7a30cf6746f7cd5cbb6a943d57a16dbd2"
+      },
+      "sha256": "deae447cb884f4d692e934a62a3b8ec7a30cf6746f7cd5cbb6a943d57a16dbd2"
+    },
+    "scenes/living_room_table/living_room_table.mtl": {
+      "bytes": 312,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "5061e4edea0745f88e13e5b063022b2d229daa29"
+      },
+      "sha256": "c09113aa7cc34606d5527ff2434522654d466ae9430db97cf1394ce5b0e2ed93"
+    },
+    "scenes/living_room_table/living_room_table.obj": {
+      "bytes": 1079843,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "bb71e32031f04fd33e987557abbaa1308500a76b"
+      },
+      "sha256": "b4b51693da6e25bb57673593b02a79f5716b3db3603a1d8448893f65ba499fbe"
+    },
+    "scenes/living_room_table/living_room_table.xml": {
+      "bytes": 2331,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "f9ce4654248ffdc12345ad4e475b62d7a554422c"
+      },
+      "sha256": "ea29b7ed138bd120d36a407c46bf7175ce551da94adf89852ec139813c4a892e"
+    },
+    "scenes/living_room_table/living_room_table_col.obj": {
+      "bytes": 5609,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "dd1c6addf1c217289b0171ae85ebe966cdb75c98"
+      },
+      "sha256": "345910a269da99c11d8dd31f9fddb5aa550ca2eed94052d427e6487aa57453b2"
+    },
+    "scenes/living_room_table/living_room_table_texture.png": {
+      "bytes": 1331834,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "38f401fdbbdeae06bf4c674f2488ab4bda8b89519a1d58976c7265b1f7c8c1e7"
+      },
+      "sha256": "38f401fdbbdeae06bf4c674f2488ab4bda8b89519a1d58976c7265b1f7c8c1e7"
+    },
+    "scenes/living_room_table/visual/living_room_table_vis.msh": {
+      "bytes": 1699504,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9877f90c22971b98840ca6f8611fec6e0a8bec85f0e5f0a78e9e08bb57a8e2ec"
+      },
+      "sha256": "9877f90c22971b98840ca6f8611fec6e0a8bec85f0e5f0a78e9e08bb57a8e2ec"
+    },
+    "scenes/office_book_shelf/ceramic.png": {
+      "bytes": 1442030,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "beef464a2aa9143ba6a25a44adcbfd1f1aff16c5969edbf08019b61025388402"
+      },
+      "sha256": "beef464a2aa9143ba6a25a44adcbfd1f1aff16c5969edbf08019b61025388402"
+    },
+    "scenes/office_book_shelf/collision/office_book_shelf_ch.stl": {
+      "bytes": 1084,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "b526e87364574c1ff408eacadb6643fa7b1ba4b9"
+      },
+      "sha256": "2e72ff7ca450fc64b8132b7ce882066fc433dd25376adc2efade58a8da8eab85"
+    },
+    "scenes/office_book_shelf/office_book_shelf.mtl": {
+      "bytes": 263,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "39c762b703ed703876258387b5be5e2954f32d21"
+      },
+      "sha256": "5ffafaefcd4708ae85cbe22f01c79e30c372c75c5f82aa3f399e9d4c1e986875"
+    },
+    "scenes/office_book_shelf/office_book_shelf.obj": {
+      "bytes": 20800,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "974c62840a5920895e5ad5bf48948b2e010367c0"
+      },
+      "sha256": "4abe774a4326ca5182f215aeb218dcde57669e427703d49d7f30db440c0e846b"
+    },
+    "scenes/office_book_shelf/office_book_shelf.xml": {
+      "bytes": 1160,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "e30526d0c089dd1d6b0310bc345cc7537944dcf2"
+      },
+      "sha256": "9384d6dcef48737224697b7eebc7d7f9fac383185afe1fa17264311c974d87a0"
+    },
+    "scenes/office_book_shelf/visual/office_book_shelf_vis.msh": {
+      "bytes": 45160,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "54f6fc1af56ee2fc31fdf9f48a873c55d56cae8e"
+      },
+      "sha256": "6386615fc43e41bd8df6544cdf95acf18fc0becf6e36266bfb5c66b7410472a5"
+    },
+    "scenes/plant/collision/plant_ch.stl": {
+      "bytes": 11584,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "460157590ad0161db5bf4b1a69555f037624d2c9"
+      },
+      "sha256": "89d8e7c2dc9f4810250b1cbc27a85d4fbda48d01d0fb8c413c39c0cd99632954"
+    },
+    "scenes/plant/plant.mtl": {
+      "bytes": 240,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "63ba9f699457c837b40edd0c46c478c68c822954"
+      },
+      "sha256": "7c7885de4b335d8415c87d5b90275eb5dc3576da8679827cc248951fb43cc3b5"
+    },
+    "scenes/plant/plant.obj": {
+      "bytes": 574967,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "d708c9d383a3f445ff97c5d1e46fd607713ad4ea"
+      },
+      "sha256": "b2d1399a5fea865d719711ea036812f3ffa8fa21bd6e1eb6784aa6950c2191b9"
+    },
+    "scenes/plant/plant.xml": {
+      "bytes": 1034,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7f6294cb0fc39de61985e1c8c4117d1e47f453c1"
+      },
+      "sha256": "d53aa60b8544e01fb39da706d93af5abebd1b035d7522641b79c02e502bd13e6"
+    },
+    "scenes/plant/plant_texture.png": {
+      "bytes": 1583401,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "216886be0ecd4a765b5f00fe664dd27f25d7af19caef1c2012c4cca429d66349"
+      },
+      "sha256": "216886be0ecd4a765b5f00fe664dd27f25d7af19caef1c2012c4cca429d66349"
+    },
+    "scenes/plant/visual/plant_vis.msh": {
+      "bytes": 732472,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "648fed3592f88784f1dfde93387ca744b1b428ffed5d6a3a7317108b3cae45c5"
+      },
+      "sha256": "648fed3592f88784f1dfde93387ca744b1b428ffed5d6a3a7317108b3cae45c5"
+    },
+    "scenes/short_coffee_table/Marble062_COL_4K.png": {
+      "bytes": 9625750,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "6cc288b8006e1931f1904ae50741539e4c44c1ed67686822386c96aad013864c"
+      },
+      "sha256": "6cc288b8006e1931f1904ae50741539e4c44c1ed67686822386c96aad013864c"
+    },
+    "scenes/short_coffee_table/collision/short_coffee_table_ch.stl": {
+      "bytes": 15084,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "8dcd441f1d9b24c311f9411e956d818c9229d3ba"
+      },
+      "sha256": "95af4b4fd392d9baa4ebdc068bf8492b6d8690acaf3525869e03e7aae0ef1cec"
+    },
+    "scenes/short_coffee_table/short_coffee_table.mtl": {
+      "bytes": 285,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "aac578ee904a4cbc0ce85cd7227c6b70b6e05d99"
+      },
+      "sha256": "6e3feed0aa8d87394f329240cacc125ec3d580fd4fe3d57459712c4074a78f14"
+    },
+    "scenes/short_coffee_table/short_coffee_table.obj": {
+      "bytes": 58190,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "3bcff59da77e7ca041a2f4b9764bf599290d092d"
+      },
+      "sha256": "dbfd6d4262300a810d0318290d47b4171f885a7626b95f8e1e4fe2d8dc438a8d"
+    },
+    "scenes/short_coffee_table/short_coffee_table.xml": {
+      "bytes": 1180,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "6d901eaed33690456c4328987e1601913edea9d6"
+      },
+      "sha256": "0789382cbd8c0964990161ecdc3763676397058e140e9021839ed2d0c5afc8bf"
+    },
+    "scenes/short_coffee_table/visual/short_coffee_table_vis.msh": {
+      "bytes": 73888,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "f6ba2703e12ed852939837ce484fc216d10ba106"
+      },
+      "sha256": "e7f47b07696dce2187e9517ee02d62e02095ac80b7dfdf232861e41c8e3d1d05"
+    },
+    "scenes/study_background/collision/study_background_ch.stl": {
+      "bytes": 5584,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "b900d0d9f397b6567f4084993e26117bfc6ce382"
+      },
+      "sha256": "f1a1627ff3d55278d614cd9274470bc7588c587d8413c1db16990928883053dd"
+    },
+    "scenes/study_background/study_background.mtl": {
+      "bytes": 242,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7d8f046f25b6d66e80c2b965b67e4e6df8ab1f4e"
+      },
+      "sha256": "6970c2753063d9f48354499174adcc34b96b209a12e114ca9f0ac5c3f348a1c1"
+    },
+    "scenes/study_background/study_background.obj": {
+      "bytes": 602332,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "79495e958f309b8566609d75da5b87f327e13578"
+      },
+      "sha256": "69d7501354daf5e1a947e66cae538be10b65424eda45df9e267375b3ae7ab078"
+    },
+    "scenes/study_background/study_background.png": {
+      "bytes": 1184577,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "7a8ed45bfbe8aebc689cc72a1c3fba0bfd6f0847ba8a830bb1c0eac595e19252"
+      },
+      "sha256": "7a8ed45bfbe8aebc689cc72a1c3fba0bfd6f0847ba8a830bb1c0eac595e19252"
+    },
+    "scenes/study_background/study_background.xml": {
+      "bytes": 1158,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "c0156a0fb469de8eca24c72545e72ed66fb5895c"
+      },
+      "sha256": "84e751686a7bb6d1a69602b44aa1817f075ef0e2518af34e1fc1bc497dd11414"
+    },
+    "scenes/study_background/visual/study_background_vis.msh": {
+      "bytes": 777616,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "15f667adb66f79ad7c6fe472a51d27b33d8a2f5a9457c91488aca26e02424811"
+      },
+      "sha256": "15f667adb66f79ad7c6fe472a51d27b33d8a2f5a9457c91488aca26e02424811"
+    },
+    "scenes/study_wall_painting/collision/study_wall_painting_ch.stl": {
+      "bytes": 1984,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "4dd0368c2091e1ebb7f8fb64a18e41aed6cd98b2"
+      },
+      "sha256": "d57d02c12b00e43d39e3e7e13437f5a341542f1930a3cd8b82293c4f55a85670"
+    },
+    "scenes/study_wall_painting/study_wall_painting.mtl": {
+      "bytes": 272,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7fe700a636ba7978409e18260c4202e1cd212467"
+      },
+      "sha256": "32be6cc8db04754eabdcc60c53757ce3e90ec47737dff8f15f58962293b49aa4"
+    },
+    "scenes/study_wall_painting/study_wall_painting.obj": {
+      "bytes": 47958,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "d6bf29195d3e5d519a8d831cd43c7716560551d4"
+      },
+      "sha256": "43f8609112979f744209c49089218e5df6effbd8c93ac5a1f0518a4ba87a2bfa"
+    },
+    "scenes/study_wall_painting/study_wall_painting.png": {
+      "bytes": 432815,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "fa1bf8b6658d03b9b20ff6ea0276fed8b68d50894579d43caca2a94fd246063a"
+      },
+      "sha256": "fa1bf8b6658d03b9b20ff6ea0276fed8b68d50894579d43caca2a94fd246063a"
+    },
+    "scenes/study_wall_painting/study_wall_painting.xml": {
+      "bytes": 1194,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "76e72ab1ee74f427864402a63f1f9a191b3b7c7b"
+      },
+      "sha256": "54befd605ead9fa01ea29cac461c121bc95feba2d2b92d8b0b7617cd9d80d0a5"
+    },
+    "scenes/study_wall_painting/visual/study_wall_painting_vis.msh": {
+      "bytes": 98080,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "280e336a61f5c4d4a438a19832a79d46832fe5f6"
+      },
+      "sha256": "ba42ab1796e320228178614b43b837531620c91503ba12b3b4b59f062e431821"
+    },
+    "scenes/wall_decoration/visual/wall_decoration_vis.msh": {
+      "bytes": 1312,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "4f4fcdc55997a371eb2e44aea1687f7d29431768"
+      },
+      "sha256": "30c873f6e13e19a721672219d0b964a3de9ddacc6b44906888c9bf366254e1bb"
+    },
+    "scenes/wall_decoration/wall_decoration.mtl": {
+      "bytes": 254,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "4b1ac92539293c8db1fdc2086e61ee5b62735fd5"
+      },
+      "sha256": "784f16ffe5e144a3242e87a2ff029133e0f734b821a2d93d254c65bf7a10e754"
+    },
+    "scenes/wall_decoration/wall_decoration.obj": {
+      "bytes": 1117,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "69b43a86137f9a817318c063f424aa0af88970d1"
+      },
+      "sha256": "ad6e1499c17eabae6605e4b79d4ce2238c2e2d2130dd0e0415b06dc8fb890827"
+    },
+    "scenes/wall_decoration/wall_decoration_texture.jpg": {
+      "bytes": 1924813,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "fd6d3721066054b772ebe4829cfcbec9816690df89f83349dd262029a3ecb457"
+      },
+      "sha256": "fd6d3721066054b772ebe4829cfcbec9816690df89f83349dd262029a3ecb457"
+    },
+    "scenes/wall_decoration/wall_decoration_texture.png": {
+      "bytes": 4492846,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "b30b2b6f7499d05a4c502e3699027e14e9646023f4035b14b56f1fb55703bc3e"
+      },
+      "sha256": "b30b2b6f7499d05a4c502e3699027e14e9646023f4035b14b56f1fb55703bc3e"
+    },
+    "serving_region.xml": {
+      "bytes": 616,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "0adaca1fc7bc81f2f90a018f17eb34c363bbfbdb"
+      },
+      "sha256": "d0dd1d7611b9c535883a8bee9bc475a85014d2d235f9c894ef57f13c6bd64335"
+    },
+    "stable_hope_objects/cookies/cookies.mtl": {
+      "bytes": 48,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "2eceea945c97d9c7280736d82ba39e0e8795afc0"
+      },
+      "sha256": "ff20af8773aad284ea9020ef6271bb26b256d2e0c0cc830112cff8ccc16bcd29"
+    },
+    "stable_hope_objects/cookies/cookies.xml": {
+      "bytes": 1063,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7c16b7430f3a38572ba776a88fea3954cd5c4704"
+      },
+      "sha256": "f79f4e6274a286b10ea8f8799690c56c7ddbb2ca2c63703c06c92febb966bf70"
+    },
+    "stable_hope_objects/cookies/texture_map.png": {
+      "bytes": 3248302,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "e1c4be04c8a9d60ba33ef100354c451a4b02f1bdc2fc7607708b2ff4ff82d783"
+      },
+      "sha256": "e1c4be04c8a9d60ba33ef100354c451a4b02f1bdc2fc7607708b2ff4ff82d783"
+    },
+    "stable_hope_objects/cookies/visual/cookies_vis.msh": {
+      "bytes": 1928248,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "bd2f87872eb6ac780525ec5bd710d690d520f7d6725b10625f8ee403115308df"
+      },
+      "sha256": "bd2f87872eb6ac780525ec5bd710d690d520f7d6725b10625f8ee403115308df"
+    },
+    "stable_scanned_objects/akita_black_bowl/akita_black_bowl.mtl": {
+      "bytes": 244,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "b66fa78b69d06d16e2d27c6a76b72680cd7262e3"
+      },
+      "sha256": "00c6007476fbec0bf87390e24ab9e029369a5d8a3dfa8caf4fa1c8b17aa66367"
+    },
+    "stable_scanned_objects/akita_black_bowl/akita_black_bowl.obj": {
+      "bytes": 4232879,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "8af9a0720117cbfd791c718862207dcb4485957d"
+      },
+      "sha256": "026d7a302a831a595cf011580ff8fbe6f4c0234c478af96d6f42344822bc18a5"
+    },
+    "stable_scanned_objects/akita_black_bowl/akita_black_bowl.xml": {
+      "bytes": 10343,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "43d6ae58c8b9b0c8e74bca041043e1901a8e892c"
+      },
+      "sha256": "18c1074cfa09baea739bb75928f9bd2bd80e22ac18655f6a27f005dbf77ccfda"
+    },
+    "stable_scanned_objects/akita_black_bowl/akita_black_bowl_col.obj": {
+      "bytes": 40089,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "1eb2764398bc4197da1d1ac675f823a4075611b7"
+      },
+      "sha256": "ac0a7aff7543aa32c65cf64d39191ca5127763a39b3ab25329b9fa828224cc39"
+    },
+    "stable_scanned_objects/akita_black_bowl/texture.png": {
+      "bytes": 12751242,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "8a646d98b084b7400dd91beed9c83e10b4a4dca572896b3974356b7937a4bd85"
+      },
+      "sha256": "8a646d98b084b7400dd91beed9c83e10b4a4dca572896b3974356b7937a4bd85"
+    },
+    "stable_scanned_objects/akita_black_bowl/visual/akita_black_bowl_vis.msh": {
+      "bytes": 4592392,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "6474d536a740e995c3a2eaeb74c61e14da94131b0b222c250b61b30b13d11229"
+      },
+      "sha256": "6474d536a740e995c3a2eaeb74c61e14da94131b0b222c250b61b30b13d11229"
+    },
+    "stable_scanned_objects/glazed_rim_porcelain_ramekin/glazed_rim_porcelain_ramekin.mtl": {
+      "bytes": 279,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7bf478fe3f1fee5bfaa4f3998250af0f0b8eb25f"
+      },
+      "sha256": "f74b78748dffa7f8c37f9a9976afc64ab5f501474617f202a855777c0ad8c43b"
+    },
+    "stable_scanned_objects/glazed_rim_porcelain_ramekin/glazed_rim_porcelain_ramekin.obj": {
+      "bytes": 1602426,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7f8535dee4f874a0461be853e347f8fbfd2e7b61"
+      },
+      "sha256": "d85490ca8132d4ff403ca974814f966ea9a81a824914683adafa4d3130f88be2"
+    },
+    "stable_scanned_objects/glazed_rim_porcelain_ramekin/glazed_rim_porcelain_ramekin.xml": {
+      "bytes": 6886,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "5960a507d3f7766c4cb2ac962eb4807503cec166"
+      },
+      "sha256": "61cf1b665e52faf68a98b044da3fc2b42f2303485b6445743741fbf99d3f9bcf"
+    },
+    "stable_scanned_objects/glazed_rim_porcelain_ramekin/glazed_rim_porcelain_ramekin_col.obj": {
+      "bytes": 24771,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "9cd72533245d8bd2e140606f0e171a60655e7a01"
+      },
+      "sha256": "6e9a21e5f552d4e45ebe515fe6deaf7993de06e578e31255aac9acc75ad2077a"
+    },
+    "stable_scanned_objects/glazed_rim_porcelain_ramekin/texture.png": {
+      "bytes": 311263,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "7323b1d08b6242dd9127f853e23bb5b2651c8665dcb3c78ed00a632aef567750"
+      },
+      "sha256": "7323b1d08b6242dd9127f853e23bb5b2651c8665dcb3c78ed00a632aef567750"
+    },
+    "stable_scanned_objects/glazed_rim_porcelain_ramekin/visual/glazed_rim_porcelain_ramekin_vis.msh": {
+      "bytes": 1757608,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9ef1877c027112d27fca3e8b16e7c226fb02f52345750b8d8c8217ad0c41c5eb"
+      },
+      "sha256": "9ef1877c027112d27fca3e8b16e7c226fb02f52345750b8d8c8217ad0c41c5eb"
+    },
+    "stable_scanned_objects/plate/model.mtl": {
+      "bytes": 410,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "6b8ec6d2159b72d8f090a4d79bd65e059ad17164"
+      },
+      "sha256": "857543aabcc8a25b1c200b087d6bbe7395cd865666930960fa0f0aec421ea6aa"
+    },
+    "stable_scanned_objects/plate/model.obj": {
+      "bytes": 297757,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "97e8080b0720239af2245dfebf575fddd64fb30b"
+      },
+      "sha256": "5ec42f48b0b6805d3803860b932cb8013e069fda208117c17d7f09aaeb6790d4"
+    },
+    "stable_scanned_objects/plate/plate.xml": {
+      "bytes": 3158,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "004fadc5500c3d2bb76d44c3b894856e6882c031"
+      },
+      "sha256": "72b4de23b2daa3169843b784998c0c3c30a6559c6c85917c6b86e3d39fa241e6"
+    },
+    "stable_scanned_objects/plate/plate_col.obj": {
+      "bytes": 9608,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "8b00f6a233cabf09ec6f970bce26489b56b45762"
+      },
+      "sha256": "5bc6426530e03d18c3ccafc231cf3660867b39167ab7eaf520efa439dc50bd94"
+    },
+    "stable_scanned_objects/plate/texture.png": {
+      "bytes": 8660937,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "6b742142bf0e29a90d76c4b0254a4481e9eff4807eff3ac6c4ac67a5888fb005"
+      },
+      "sha256": "6b742142bf0e29a90d76c4b0254a4481e9eff4807eff3ac6c4ac67a5888fb005"
+    },
+    "stable_scanned_objects/plate/visual/model_vis.msh": {
+      "bytes": 374128,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "7d3278b1cefb2ed496094cad18f0c66004ee65ab933122ec8d5efdc78daa96b4"
+      },
+      "sha256": "7d3278b1cefb2ed496094cad18f0c66004ee65ab933122ec8d5efdc78daa96b4"
+    },
+    "textures/brown_ceramic_tile.png": {
+      "bytes": 1192761,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "76f19ce9c0a307a447d9c65edcf0757e405358e6d22e2a52cfa2cd6dc5c63224"
+      },
+      "sha256": "76f19ce9c0a307a447d9c65edcf0757e405358e6d22e2a52cfa2cd6dc5c63224"
+    },
+    "textures/canvas_sky_blue.png": {
+      "bytes": 1748434,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "19201f8c7f35ff0668ebde2145f40163c3955b7885b4dd14ca7e430bdc58a621"
+      },
+      "sha256": "19201f8c7f35ff0668ebde2145f40163c3955b7885b4dd14ca7e430bdc58a621"
+    },
+    "textures/capriccio_sky.png": {
+      "bytes": 939041,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "39fc56c01dc26c840e1a20d1f695796caa130b70dd6ee3159da22a70e0421fd5"
+      },
+      "sha256": "39fc56c01dc26c840e1a20d1f695796caa130b70dd6ee3159da22a70e0421fd5"
+    },
+    "textures/ceramic.png": {
+      "bytes": 1442030,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "beef464a2aa9143ba6a25a44adcbfd1f1aff16c5969edbf08019b61025388402"
+      },
+      "sha256": "beef464a2aa9143ba6a25a44adcbfd1f1aff16c5969edbf08019b61025388402"
+    },
+    "textures/cream-plaster.png": {
+      "bytes": 696397,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "5f989033f089158b2c8f0f1f7881f6922b018a5b154558b2edcc9f41a21ab983"
+      },
+      "sha256": "5f989033f089158b2c8f0f1f7881f6922b018a5b154558b2edcc9f41a21ab983"
+    },
+    "textures/dapper_gray_floor.png": {
+      "bytes": 176753,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "99f641e7f34f43896155816c265b7206972ebd3997e83ab98f3be210222deec0"
+      },
+      "sha256": "99f641e7f34f43896155816c265b7206972ebd3997e83ab98f3be210222deec0"
+    },
+    "textures/dark_blue_wall.png": {
+      "bytes": 1216412,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "ecb999e23c85dfef374feeea938c6864f8fc14ba22b8a4c1b37785812d0923c5"
+      },
+      "sha256": "ecb999e23c85dfef374feeea938c6864f8fc14ba22b8a4c1b37785812d0923c5"
+    },
+    "textures/dark_floor_texture.png": {
+      "bytes": 432717,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "182b1d927029d6284b5cbe3e317b111cbc5b147b692fd0f19e4181a02d08f647"
+      },
+      "sha256": "182b1d927029d6284b5cbe3e317b111cbc5b147b692fd0f19e4181a02d08f647"
+    },
+    "textures/dark_gray_plaster.png": {
+      "bytes": 172397,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "122ac950498a1e157ddbe54df9a585344059018e36328341d2dd4eef72f5337c"
+      },
+      "sha256": "122ac950498a1e157ddbe54df9a585344059018e36328341d2dd4eef72f5337c"
+    },
+    "textures/dark_green_plaster_wall.png": {
+      "bytes": 6873572,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "a2a9531fc002626a79a7ac3aaaee26a15bb5fee03253ab80f6b3004f3c9d1878"
+      },
+      "sha256": "a2a9531fc002626a79a7ac3aaaee26a15bb5fee03253ab80f6b3004f3c9d1878"
+    },
+    "textures/gray_ceramic_tile.png": {
+      "bytes": 435890,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "93a1c2b647f31aded62b4125439e17aa1a55c8f4e77820909d9a1c235f6c7315"
+      },
+      "sha256": "93a1c2b647f31aded62b4125439e17aa1a55c8f4e77820909d9a1c235f6c7315"
+    },
+    "textures/gray_floor.png": {
+      "bytes": 1289546,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "8c806924415a06b5fa49d852ad14a0b1bb07afc225153eb832f3369bcefabc60"
+      },
+      "sha256": "8c806924415a06b5fa49d852ad14a0b1bb07afc225153eb832f3369bcefabc60"
+    },
+    "textures/gray_plaster.png": {
+      "bytes": 700270,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "5c3f8353cdebc86273b8619205f3bb1bc2be252d3db41d77848a32d9eda0d965"
+      },
+      "sha256": "5c3f8353cdebc86273b8619205f3bb1bc2be252d3db41d77848a32d9eda0d965"
+    },
+    "textures/gray_wall.png": {
+      "bytes": 7088154,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "c90b41e7f3f0b32635804f47811bc8deba14cf561b1af40ec62972fb6039cef9"
+      },
+      "sha256": "c90b41e7f3f0b32635804f47811bc8deba14cf561b1af40ec62972fb6039cef9"
+    },
+    "textures/grigia_caldera_porcelain_floor.png": {
+      "bytes": 87431,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "1382cde9e4674cd7c251c5c79f0035d863c4c2e2fb49c01baee316f4401025ea"
+      },
+      "sha256": "1382cde9e4674cd7c251c5c79f0035d863c4c2e2fb49c01baee316f4401025ea"
+    },
+    "textures/kona_gotham.png": {
+      "bytes": 17680,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "e5c809ed713d65fcfbb560456c1ad412ce8777ecd5abe76ade04ca1c2bb411c8"
+      },
+      "sha256": "e5c809ed713d65fcfbb560456c1ad412ce8777ecd5abe76ade04ca1c2bb411c8"
+    },
+    "textures/light-gray-floor-tile.png": {
+      "bytes": 73373,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5"
+      },
+      "sha256": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5"
+    },
+    "textures/light-gray-plaster.png": {
+      "bytes": 516639,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191"
+      },
+      "sha256": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191"
+    },
+    "textures/light_blue_wall.png": {
+      "bytes": 180284,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "0e53979a16a1464ba0ba693e38cf71fb541875a5529e00853ed9b3c739687df2"
+      },
+      "sha256": "0e53979a16a1464ba0ba693e38cf71fb541875a5529e00853ed9b3c739687df2"
+    },
+    "textures/light_floor.png": {
+      "bytes": 868219,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "f6e69937f87ef7d956e4434535ab2ff99939216cc03c842cd9b4ba16023b32e6"
+      },
+      "sha256": "f6e69937f87ef7d956e4434535ab2ff99939216cc03c842cd9b4ba16023b32e6"
+    },
+    "textures/light_gray_plaster.png": {
+      "bytes": 1309377,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "d590eae1c249dd8644a698ab1776aa1380262630cf79556a1cb2f9a726729844"
+      },
+      "sha256": "d590eae1c249dd8644a698ab1776aa1380262630cf79556a1cb2f9a726729844"
+    },
+    "textures/light_grey_plaster.png": {
+      "bytes": 392158,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "c7fc746d496fcaed1c716ad5fc5f8237095613e09dd80eae3e969f599cee9c06"
+      },
+      "sha256": "c7fc746d496fcaed1c716ad5fc5f8237095613e09dd80eae3e969f599cee9c06"
+    },
+    "textures/marble_floor.png": {
+      "bytes": 158880,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "097ed503a7e6280549a8f249d92f6813f491a3e20b7b8d9a29d5f03b6e4c973c"
+      },
+      "sha256": "097ed503a7e6280549a8f249d92f6813f491a3e20b7b8d9a29d5f03b6e4c973c"
+    },
+    "textures/martin_novak_wood_table.png": {
+      "bytes": 940180,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "9d714fbf44d4d44f279761c0ddd0b2fd7271446cdbb85fcbef8677fe5f929850"
+      },
+      "sha256": "9d714fbf44d4d44f279761c0ddd0b2fd7271446cdbb85fcbef8677fe5f929850"
+    },
+    "textures/meeka-beige-plaster.png": {
+      "bytes": 657870,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "a24b1b67ef66a52358dfe7382e955cc9eca699ae846072d9745f78000e41b10c"
+      },
+      "sha256": "a24b1b67ef66a52358dfe7382e955cc9eca699ae846072d9745f78000e41b10c"
+    },
+    "textures/new_light_gray_plaster.png": {
+      "bytes": 1457824,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "5a51d3ac1fc9991c1530eefdf7922aefdbd18f4cb1fd08ca0ee81e74b586defd"
+      },
+      "sha256": "5a51d3ac1fc9991c1530eefdf7922aefdbd18f4cb1fd08ca0ee81e74b586defd"
+    },
+    "textures/rustic_floor.png": {
+      "bytes": 350989,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "915563b7009b30fe63c69b0107f36cc40448ab3e9b83ce8a67f5ebbb2f94c7fe"
+      },
+      "sha256": "915563b7009b30fe63c69b0107f36cc40448ab3e9b83ce8a67f5ebbb2f94c7fe"
+    },
+    "textures/seamless_wood_planks_floor.png": {
+      "bytes": 3174441,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "c7a70ef3fad0cafc1d196e49f9ff1b483d0a5e62ed457b108a9c9b2c9ed1dd13"
+      },
+      "sha256": "c7a70ef3fad0cafc1d196e49f9ff1b483d0a5e62ed457b108a9c9b2c9ed1dd13"
+    },
+    "textures/smooth_light_gray_plaster.png": {
+      "bytes": 516639,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191"
+      },
+      "sha256": "d0bdaf13b44ab6ef3122451f6b3853e40bdf20bb9be7662649683ba525dfe191"
+    },
+    "textures/stucco_wall.png": {
+      "bytes": 282099,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "b4c2cc15cf253c3c2e7e88930cae7d5b699552f9397673ba5df874f871c6c84d"
+      },
+      "sha256": "b4c2cc15cf253c3c2e7e88930cae7d5b699552f9397673ba5df874f871c6c84d"
+    },
+    "textures/table_light_wood.png": {
+      "bytes": 202250,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "c260c4543647d53da9379078a788d183a334734103739a42dce1a004a2eb0e33"
+      },
+      "sha256": "c260c4543647d53da9379078a788d183a334734103739a42dce1a004a2eb0e33"
+    },
+    "textures/tile_grigia_caldera_porcelain_floor.png": {
+      "bytes": 73373,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5"
+      },
+      "sha256": "a2aae4ba3b38c3ab9851eca9ad6e76cef9357ef75b3e9a4b280f694ca30acbc5"
+    },
+    "textures/white_marble_floor.png": {
+      "bytes": 652993,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "d79fb61f545669659a6bbdfd68c750fe4fd2830e448465f223fe4c224b8d17ca"
+      },
+      "sha256": "d79fb61f545669659a6bbdfd68c750fe4fd2830e448465f223fe4c224b8d17ca"
+    },
+    "textures/white_wall.png": {
+      "bytes": 15793,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "c02f6ad8cbd0e217da8d0068eca3dcff5752611c46999666ad7d4835de05bf12"
+      },
+      "sha256": "c02f6ad8cbd0e217da8d0068eca3dcff5752611c46999666ad7d4835de05bf12"
+    },
+    "textures/yellow_linen_wall_texture.png": {
+      "bytes": 607573,
+      "official": {
+        "algorithm": "sha256",
+        "digest": "292d1bb3a8536b2faf73c91b9d6b11ac90c58136cbaade2af0d7b941f70904aa"
+      },
+      "sha256": "292d1bb3a8536b2faf73c91b9d6b11ac90c58136cbaade2af0d7b941f70904aa"
+    },
+    "wall.xml": {
+      "bytes": 755,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "7d1581fb08ed16c8f1a0b943e22ab3de0151e8a7"
+      },
+      "sha256": "81c5c1694f3093bb91f9632c090aa7d7722f2be53ec3d39df578f395690d81f4"
+    },
+    "wall_frames.stl": {
+      "bytes": 20084,
+      "official": {
+        "algorithm": "git-blob-sha1",
+        "digest": "f4389690be228b08999a11bd50eb71d9231c0cc0"
+      },
+      "sha256": "fa14ddb8e90326d9a14aa6124f234882e8867fa491e171c6a5a93748780e35f3"
+    }
+  },
+  "repo_id": "lerobot/libero-assets",
+  "repo_type": "dataset",
+  "revision": "0b3ea86be5fe169d0fd036ae63d1070ec09e90f6",
+  "schema": "sentinel-libero-portable-assets-v1"
+}
