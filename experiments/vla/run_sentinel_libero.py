@@ -889,13 +889,19 @@ def _wrap_policy(policy: Any, recorder: NativeRunRecorder) -> None:
     policy.select_action = select
 
 
-def _wrap_env(env: Any, recorder: NativeRunRecorder) -> None:
+def _wrap_env(
+    env: Any,
+    recorder: NativeRunRecorder,
+    bind_live_scene: Callable[[], None] | None = None,
+) -> None:
     original_reset = env.reset
     recorder.original_step = env.step
 
     def reset(*args: Any, **kwargs: Any) -> Any:
         output = original_reset(*args, **kwargs)
         capture_mono_ns = time.monotonic_ns()
+        if bind_live_scene is not None:
+            bind_live_scene()
         underlying = env.envs[0]
         actual = int(underlying.init_state_id - underlying._reset_stride)
         recorder.on_reset(output, actual, capture_mono_ns)
@@ -1229,29 +1235,26 @@ def main() -> int:
                 )
             instruction = str(env.call("task_description")[0])
             task_has_demo = any(key[0] == task_id for key in render_episode_keys)
-            scene_exporter = None
-            if task_has_demo:
-                scene_exporter = NativeSceneExporter.from_environment(
+            recorder.set_env(env, task_id, None)
+            task_model_id: str | None = None
+
+            def bind_live_scene() -> None:
+                nonlocal task_model_id
+                if not task_has_demo:
+                    recorder.scene_exporter = None
+                    return
+                recorder.scene_exporter = NativeSceneExporter.from_environment(
                     env,
                     task_id,
                     task_suite="libero_spatial",
                     task_name=instruction,
                 )
-                scene_asset = f"viewer-model-task{task_id}.json"
-                (args.output_dir / scene_asset).write_text(
-                    json.dumps(scene_exporter.export_scene(), separators=(",", ":"), sort_keys=True) + "\n",
-                    encoding="utf-8",
-                )
-                model_index["models"].append(
-                    {
-                        "task_id": task_id,
-                        "asset": scene_asset,
-                        "modelId": scene_exporter.model_id,
-                        "body_order": "scene.bodies sorted by bodyIndex; frame pose arrays use the same indices",
-                    }
-                )
-            recorder.set_env(env, task_id, scene_exporter)
-            _wrap_env(env, recorder)
+                live_model_id = recorder.scene_exporter.model_id
+                if task_model_id is not None and live_model_id != task_model_id:
+                    raise RuntimeError("hard reset changed the task model identity; one asset cannot represent both models")
+                task_model_id = live_model_id
+
+            _wrap_env(env, recorder, bind_live_scene)
             for state_index in state_indices:
                 seed = seed_base + state_index - state_indices[0]
                 set_seed(seed)
@@ -1291,6 +1294,23 @@ def main() -> int:
                 recorder.finish_episode(episode_result, episode_error)
                 if episode_error is not None:
                     raise episode_error
+            if task_has_demo:
+                scene_exporter = recorder.scene_exporter
+                if scene_exporter is None:
+                    raise RuntimeError("render task completed without a live native scene exporter")
+                scene_asset = f"viewer-model-task{task_id}.json"
+                (args.output_dir / scene_asset).write_text(
+                    json.dumps(scene_exporter.export_scene(), separators=(",", ":"), sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
+                model_index["models"].append(
+                    {
+                        "task_id": task_id,
+                        "asset": scene_asset,
+                        "modelId": scene_exporter.model_id,
+                        "body_order": "scene.bodies sorted by bodyIndex; frame pose arrays use the same indices",
+                    }
+                )
         if model_index["models"]:
             (args.output_dir / "viewer-model.json").write_text(
                 json.dumps(model_index, separators=(",", ":"), sort_keys=True) + "\n",
