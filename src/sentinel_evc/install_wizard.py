@@ -133,7 +133,13 @@ def run_wizard(*, source=None, target=None, profile="all", python_executable=Non
             "轻量版  · CLI、工作台、模型预览、只读诊断",
         ), default=1 if profile == "all" else 2)
         profile = "all" if selected == 1 else "core"
-        default_target = str(Path(target or Path.cwd() / "sentinel-evc-install").expanduser().absolute())
+        if target is not None:
+            target_path = Path(target)
+        elif sys.platform == "darwin":
+            target_path = Path.home() / "Applications" / "Sentinel-EVC"
+        else:
+            target_path = Path.cwd() / "sentinel-evc-install"
+        default_target = str(target_path.expanduser().absolute())
         while True:
             destination = Path(terminal.ask("安装目录", default_target)).expanduser().resolve()
             if destination.exists():

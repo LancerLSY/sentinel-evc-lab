@@ -1,0 +1,31 @@
+{
+  "schema": "sentinel-controller-independent-source-check-v1",
+  "method": "A separate SSH read recomputed inspect.getsourcefile/getsource SHA-256 values in the pinned installed environment and matched all retained source receipts.",
+  "records": [
+    {
+      "symbol": "Controller.scale_action",
+      "file_sha256": "61f99a2daeb4eb6e39bfb996d94c5a5689ef3bc771d030d070193ea56d6a8332",
+      "function_source_sha256": "e640bba5c78d80939b01b5f857d221a3b7a9de9969becd2286c75f382034eed8"
+    },
+    {
+      "symbol": "OperationalSpaceController.set_goal",
+      "file_sha256": "cfa62a0e719bc53ef0c701efa66f7b3e2272d4fca2150ec73c05bb145eba85cb",
+      "function_source_sha256": "ee507b85baaf675542e9960bacec9e33a3acca78a6a98ee99a64ceb0c999ecc2"
+    },
+    {
+      "symbol": "SingleArm.control",
+      "file_sha256": "d233b1b785e8f88ffb5df1357666b02a397ae930ce98181b079e0496ab35fc57",
+      "function_source_sha256": "34820bee44709801d8c8bf246c91d134b061be926ef3b7be26ed2bac0ce1fafe"
+    },
+    {
+      "symbol": "PandaGripper.format_action",
+      "file_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+      "function_source_sha256": "38c8621c00529d0ed67d3df1d53013516094f88f8f8cb98dbb7f7284f720ee4f"
+    }
+  ],
+  "receipt_sha256": {
+    "controller-contract-receipt.json": "4225e1215419ec9a02c48ff9dc7220726df89dbf99ba7892f1c11c1c576cbf06",
+    "gripper-contract-receipt.json": "7812494efdc3f007ab29821734eb2bf5be7e5185474aa41c319b6aaa1ef957c9"
+  },
+  "receipt_written_utc": "2026-10-02T19:17:38.491652+00:00"
+}
