@@ -38,8 +38,7 @@ trainable parameters. Dev selected update 3750, loss 0.161077. The split was
 30 train / 5 dev / 10 reserved calibration / 5 test episodes; normalization fit
 only training data. Calibration episodes were untouched by this policy run.
 
-Actual hardware: **RTX 4090 D, 24 GB**. RTX 5090 is a future target configuration
-and has no measurements here. Four-thread, batch-one, in-memory image-to-action
+Actual hardware: **RTX 4090 D, 24 GB**. Four-thread, batch-one, in-memory image-to-action
 inference measured P50/P95 **229.26/236.90 ms**, including preprocessing and
 unnormalization, excluding video decoding, transport and actuation.
 

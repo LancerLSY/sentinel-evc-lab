@@ -64,6 +64,5 @@ configuration; they do not independently bind validator source or tracking thres
 [Public results and review](../../docs/research/2026-10-02/ur5e/v3/independent_review.json) ·
 [Official asset verification](../../docs/research/2026-10-02/ur5e/upstream_verification.json)
 
-The reference execution uses an RTX 4090 D host for EGL rendering; physics is
-CPU MuJoCo. An RTX 5090 may be used as a target deployment configuration, but
-it is not the measured reference hardware.
+The reference execution uses an **RTX 4090 D (24 GB)** host for EGL rendering;
+physics is CPU MuJoCo.

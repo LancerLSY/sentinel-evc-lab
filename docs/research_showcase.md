@@ -96,8 +96,8 @@ retained separately. Official model-file origins are recorded in the
 
 ## Hardware statement
 
-**RTX 5090 is a target configuration. RTX 4090 D is the measured configuration for
-the current GPU report.** Existing latency values belong only to the RTX 4090 D run.
+**RTX 4090 D (24 GB) is the measured hardware for the current GPU report.**
+Existing latency values belong to this configuration.
 
 ## Artifact access
 

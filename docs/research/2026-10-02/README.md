@@ -18,8 +18,7 @@ The erroneous `frozen_at_utc` labels in the two original protocols are retained
 with their original hashes. Supplemental errata explain the available file
 ordering evidence. No externally timestamped preregistration is claimed.
 Bootstrap and Wilson intervals describe sampled roots; they are not universal
-robot safety guarantees. Actual measured hardware is RTX 4090 D. RTX 5090 is
-an unmeasured target configuration.
+robot safety guarantees. Actual measured hardware is **RTX 4090 D (24 GB)**.
 
 Frozen upstream neural weights and SmolVLA optimizer/RNG snapshots are omitted
 from public packages. The model card identifies every required upstream file

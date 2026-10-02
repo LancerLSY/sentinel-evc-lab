@@ -105,10 +105,9 @@ does not claim that a signature proves sensor honesty or physical execution.
 These numbers come from recorded procedures and retained artifacts. They are observations
 on the named data and profiles, not a general robot-safety rate.
 
-### RTX 5090 target configuration / RTX 4090 D measured
+### Measured hardware: RTX 4090 D (24 GB)
 
-The repository is prepared for a later RTX 5090 target run. All GPU values below were
-actually measured on an **RTX 4090 D (24 GB)**; no 5090 timing is reported.
+All GPU values below were measured on an **RTX 4090 D (24 GB)**.
 
 | Experiment | Measured result | Interpretation |
 |---|---:|---|

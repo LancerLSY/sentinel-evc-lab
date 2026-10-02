@@ -34,7 +34,7 @@ Open http://127.0.0.1:8877. Serve over HTTP so the replay and chart JSON can loa
 The UR5e results are constructed-case comparisons; the SmolVLA result measures
 held-out recorded-action reconstruction. WorldGuard plots retain the camera and
 low-friction failures. The separate low-friction fallback is a MuJoCo research
-profile. GPU measurements identify the actual RTX 4090 D; RTX 5090 is unmeasured.
+profile. GPU measurements identify the actual **RTX 4090 D (24 GB)**.
 The Hugging Face button links the published
 [SmolVLA overlay repository](https://huggingface.co/LancerLSY/sentinel-smolvla-so100).
 The GitHub Release retains a mirror; the Hub publication receipt verifies the

@@ -3,7 +3,6 @@
   "source_commit": "17607e766c1e8c7500dab4acf181554a855058d3",
   "release_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulation-research-20261002",
   "hardware_measured": "NVIDIA GeForce RTX 4090 D",
-  "hardware_target_unmeasured": "RTX 5090",
   "experiment_counts": {
     "worldguard_new_roots": 600,
     "low_friction_new_roots": 100,

@@ -3,7 +3,7 @@
   "repo_id": "LancerLSY/sentinel-smolvla-so100",
   "repo_type": "model",
   "url": "https://huggingface.co/LancerLSY/sentinel-smolvla-so100",
-  "hub_commit_sha": "af56153a539990c8177a4c378aa134fdf21e61a3",
+  "hub_commit_sha": "1fe97cccc59662bf1a4b341cf15cf68b8ec2baa7",
   "visibility": "public",
   "verification_status": "passed",
   "metadata_endpoint": "https://huggingface.co/api/models/LancerLSY/sentinel-smolvla-so100?blobs=true",
@@ -44,17 +44,17 @@
     },
     {
       "path": "README.md",
-      "bytes": 5354,
-      "sha256": "8ef116e9640eeca4884a0089a488628bcdadb33e0ff69dd983396c317937ad02",
-      "hub_blob_id": "0634b23700b6b8724cee21da1d34e8237af1ce61",
+      "bytes": 5282,
+      "sha256": "4eb86ae9750533b40abdcfdb76f1689766f57b74d71ee2c017084b0071e82ff5",
+      "hub_blob_id": "6f755d987278ab3b1bbdf595d9c9d82f86c88b3a",
       "verification": "git-blob-sha1",
       "hub_lfs_sha256": null
     },
     {
       "path": "artifact_index.json",
-      "bytes": 3550,
-      "sha256": "097dc9098356412d733ab933ac03c719419da0be0630657f8aaa2aa1bfb29cb8",
-      "hub_blob_id": "07662bbf7cd9538b814bf6c2104d6dd62ea02677",
+      "bytes": 3511,
+      "sha256": "c4cf6132e365979fc1107ebaaf97e3721dfe7b797d55b451c96301bc353b5e37",
+      "hub_blob_id": "170682b4e361f2da4e55c1a5c72edacca84083ea",
       "verification": "git-blob-sha1",
       "hub_lfs_sha256": null
     },
@@ -186,5 +186,6 @@
       "verification": "lfs-sha256",
       "hub_lfs_sha256": "786fb0b1bdd89824960d57fb88564c0b7bfbd36c011da8e7cf721a7905dca30b"
     }
-  ]
+  ],
+  "verified_at_utc": "2026-10-02T02:02:34.414597+00:00"
 }
