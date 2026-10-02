@@ -1,12 +1,12 @@
 {
   "schema": "sentinel-project-static-assets-v1",
   "homepage": "https://lansiyao.com/research/sentinel-vla/project/",
-  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/sentinel-project-page.zip",
+  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-web-20261003/sentinel-project-page.zip",
   "files": [
     {
       "path": "app.js",
-      "bytes": 40654,
-      "sha256": "4a63733a616012940818bbd7e5ea63cfb8e68d82503cf222ee0092382503022d"
+      "bytes": 40663,
+      "sha256": "f07d321d1e6583062f2dc852bae880fc8f83813df4fc583084f76cbb3d09e1ad"
     },
     {
       "path": "assets/LICENSE-UR5E-BSD-3-Clause.txt",
@@ -80,8 +80,8 @@
     },
     {
       "path": "assets/native-demo-index.json",
-      "bytes": 6579,
-      "sha256": "108fa8ad05392cf78b45458501680139f5795dc43000905898d79f6fe8796e9b"
+      "bytes": 6963,
+      "sha256": "100eb130abbe6701d3f83e66673ec23b2bd9594d1eda08c99a0933fbca9e00da"
     },
     {
       "path": "assets/native-formal-active-v3-overview.png",
@@ -275,13 +275,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 58310,
-      "sha256": "1279d670245d2b916c005928bc57e853c886bc78a39925a317946a6707438eea"
+      "bytes": 58307,
+      "sha256": "bd608e36946bf449e56166854df42de1a8d0c5de77f4833df3f289d861c021d3"
     },
     {
       "path": "native-project.js",
-      "bytes": 25024,
-      "sha256": "84d7f63526b74f018c523e40d7f7f0ce03de1564e01efb5dd22f67b9e0691534"
+      "bytes": 25208,
+      "sha256": "5ddd89008008b19deb366c02f6ea76405e4da3eb8a714050ee7b5ddf598244ad"
     },
     {
       "path": "native-viewer.js",

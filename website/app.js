@@ -1,7 +1,7 @@
 "use strict";
 
 const zh = {
-  downloadNativeData:"原生产品证据包",downloadNativeDataDesc:"原始签名运行、公钥、配对结果、失败、审计视频与模型/姿态数据",downloadNativeSource:"产品源码快照",downloadNativeSourceDesc:"CLI、App、网关、运行脚本、网页代码与保存的协议",downloadNativePage:"便携项目页",downloadNativePageDesc:"双语界面、交互任务网格、原回放记录与双视角影片",nativeAssetIndex:"原生产品下载索引与 SHA-256",
+  downloadNativeData:"原生产品证据包",downloadNativeDataDesc:"原始签名运行、公钥、配对结果、失败、审计视频与模型/姿态数据",downloadNativeSource:"产品源码快照",downloadNativeSourceDesc:"CLI、App、网关、运行脚本、网页代码与保存的协议",downloadNativePage:"便携项目页",downloadNativePageDesc:"双语界面、交互任务网格、原回放记录与双视角影片",nativeAssetIndex:"当前源码与网页下载索引及 SHA-256",
   nativeVideoScope:"所选任务的独立视频播放器 · 两个 720×720 展示视角、20 fps。字幕显示保存的动作、授权、整次运行游标与实际结果。回放时逐步核对了每个动作、已签名的 360×360 观测哈希及当前步结果。影片不增加基准样本，失败序列属于事后诊断。视频播放器与三维控制各自独立。",
   nativeEvidenceKicker:"实际写入边界上的测量",
   nativeEvidenceTitle:"保留原请求，拒绝无效权限，留下可核验的证据。",

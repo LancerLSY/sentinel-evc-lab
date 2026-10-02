@@ -57,16 +57,18 @@
     return [...new Uint8Array(value)].map(item=>item.toString(16).padStart(2,"0")).join("");
   }
 
-  async function fetchJSON(path, {limit=REPLAY_LIMIT, sha256=null}={}) {
+  async function fetchJSON(path, {limit=REPLAY_LIMIT, sha256=null, decodedSha256=null}={}) {
     if (!localAsset(path)) throw new Error("Artifact path is outside the project asset directory.");
     const response = await fetch(path);
     if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
     const declared=Number(response.headers.get("content-length"));if(Number.isFinite(declared)&&declared>limit)throw new Error("Artifact exceeds the site playback size limit.");
     if(!response.body)throw new Error("Artifact response has no readable body.");
-    const transportDecoded=/gzip/i.test(response.headers.get("content-encoding")||""), raw=await readBytes(response.body,limit);
-    if(sha256&&!transportDecoded){const actual=await digest(raw);if(actual&&actual!==sha256)throw new Error("Artifact SHA-256 does not match the retained index.");}
+    const raw=await readBytes(response.body,limit), gzipPayload=raw[0]===0x1f&&raw[1]===0x8b;
+    const expected=path.endsWith(".gz")&&!gzipPayload?decodedSha256:sha256;
+    if(sha256&&!expected)throw new Error("Decoded artifact SHA-256 is missing from the retained index.");
+    if(expected){const actual=await digest(raw);if(!actual||actual!==expected)throw new Error("Artifact SHA-256 does not match the retained index.");}
     let bytes=raw;
-    if(path.endsWith(".gz")&&!transportDecoded){
+    if(gzipPayload){
       if(typeof DecompressionStream!=="function")throw new Error("This browser cannot decompress the retained gzip model.");
       bytes=await readBytes(new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip")),MODEL_LIMIT);
     }
@@ -81,7 +83,7 @@
       }
       if (item.video && !localAsset(item.video)) throw new Error(`Invalid video path in demo entry ${index}.`);
       if (item.poster && !localAsset(item.poster)) throw new Error(`Invalid poster path in demo entry ${index}.`);
-      for(const key of ["modelSha256","replaySha256","sourceManifestSha256","sourceResultSha256"]){if(item[key]!==undefined&&!/^[a-f0-9]{64}$/.test(item[key]))throw new Error(`Invalid ${key} in demo entry ${index}.`);}
+      for(const key of ["modelSha256","modelDecodedSha256","replaySha256","sourceManifestSha256","sourceResultSha256"]){if(item[key]!==undefined&&!/^[a-f0-9]{64}$/.test(item[key]))throw new Error(`Invalid ${key} in demo entry ${index}.`);}
     });
     return value;
   }
@@ -264,7 +266,7 @@
     ui("nativeTask").value=String(index);ui("nativeInstruction").textContent=instruction(demo.instruction);ui("nativeTerminal").textContent="—";
     setArtifactState("loadingReplay");setMessage(t("loadingReplay"));renderLinks(demo);
     try {
-      const [model,replayValue]=await Promise.all([fetchJSON(demo.model,{limit:MODEL_LIMIT,sha256:demo.modelSha256}),fetchJSON(demo.replay,{limit:REPLAY_LIMIT,sha256:demo.replaySha256})]);
+      const [model,replayValue]=await Promise.all([fetchJSON(demo.model,{limit:MODEL_LIMIT,sha256:demo.modelSha256,decodedSha256:demo.modelDecodedSha256}),fetchJSON(demo.replay,{limit:REPLAY_LIMIT,sha256:demo.replaySha256})]);
       if(generation!==loadGeneration)return;
       episode=findEpisode(replayValue,demo);
       if(!episode||!Array.isArray(episode.frames)||!episode.frames.length)throw new Error("The selected task/state has no retained frames.");

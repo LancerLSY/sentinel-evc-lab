@@ -25,7 +25,8 @@
       "poster": "assets/native-v3-active-task00-state46-poster.png",
       "posterSha256": "10ae448353349916bf877206de4a612391d5e7dd23e94f3e0001274ad7d7328b",
       "mediaManifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
-      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32"
+      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+      "modelDecodedSha256": "a33f5182717064499a6b1014c19dd844d42e0edf9bf57b640912d9e5fde4e03b"
     },
     {
       "taskId": 4,
@@ -45,7 +46,8 @@
       "poster": "assets/native-v3-active-task04-state46-poster.png",
       "posterSha256": "6a7f37f0408c28d4e3749ba67f9729df26df359dd9d50e6c7332c2a26cbf5970",
       "mediaManifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
-      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32"
+      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+      "modelDecodedSha256": "18f686c3b677c8503d1a2440be6bbf48c989aae231a354988821adc394b7740c"
     },
     {
       "taskId": 5,
@@ -65,7 +67,8 @@
       "poster": "assets/native-v3-active-task05-state46-poster.png",
       "posterSha256": "c8d5f9303597911a74e188951cf363d4e0d401185348b09bbf2406647ae979d4",
       "mediaManifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
-      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32"
+      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+      "modelDecodedSha256": "456847e96f309b1cfb632a847a5b903f949d501c9e554502bab922dd8cf4a181"
     },
     {
       "taskId": 0,
@@ -88,7 +91,8 @@
       "mediaManifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
       "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
       "additionalBenchmarkSamples": 0,
-      "sourceEpisodeCountedInFormalStatistics": true
+      "sourceEpisodeCountedInFormalStatistics": true,
+      "modelDecodedSha256": "a33f5182717064499a6b1014c19dd844d42e0edf9bf57b640912d9e5fde4e03b"
     }
   ],
   "mediaProvenance": {
