@@ -458,6 +458,8 @@ def main() -> None:
     plan_path = args.run / "trajectories.npz"
     parent = json.loads(manifest_path.read_text())
     rows = json.loads(per_root_path.read_text())
+    if sha256(per_root_path) != parent["per_root_sha256"]:
+        raise RuntimeError("per_root.json hash mismatch")
     if sha256(plan_path) != parent["raw_trajectories_sha256"]:
         raise RuntimeError("plan artifact hash mismatch")
     asset_sha = tree_sha(args.asset_dir)
