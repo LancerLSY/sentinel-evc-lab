@@ -1,0 +1,56 @@
+{
+  "backbone": "/root/autodl-tmp/sentinel-evc-gpu/20261002/models/SmolVLM2-500M-Video-Instruct",
+  "checkpoint": "/root/autodl-tmp/sentinel-evc-gpu/20261002/models/smolvla_libero-31d453f",
+  "controller_contract_receipt": {
+    "path": "/root/sentinel-product-v1-20261003/source-2ede56b/docs/research/2026-10-03/native-product/controller-contract-receipt.json",
+    "sha256": "4225e1215419ec9a02c48ff9dc7220726df89dbf99ba7892f1c11c1c576cbf06"
+  },
+  "execution_horizon": 10,
+  "expected_mujoco": "3.3.7",
+  "gripper_contract_receipt": {
+    "path": "/root/sentinel-product-v1-20261003/source-2ede56b/docs/research/2026-10-03/native-product/gripper-contract-receipt.json",
+    "sha256": "7812494efdc3f007ab29821734eb2bf5be7e5185474aa41c319b6aaa1ef957c9"
+  },
+  "identity_protocol": "/root/sentinel-product-v1-20261003/source-2ede56b/experiments/vla/libero_protocol.json",
+  "initial_state_indices": [
+    46,
+    47,
+    48,
+    49
+  ],
+  "lease_ttl_ms": 250.0,
+  "max_feedback_age_ms": 1500.0,
+  "mode": "active",
+  "profile": "/root/sentinel-product-v1-20261003/source-2ede56b/experiments/vla/profiles/libero_native_raw_float32.json",
+  "record_pose_stride": 10,
+  "render_episode_keys": [
+    [
+      0,
+      46
+    ],
+    [
+      4,
+      46
+    ],
+    [
+      5,
+      46
+    ]
+  ],
+  "render_episodes": 3,
+  "run_id": "native-formal-active-v3",
+  "seed_base": 44046,
+  "task_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "torch_threads": 4
+}

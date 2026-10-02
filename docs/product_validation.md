@@ -1,6 +1,35 @@
 # Product foundation validation
 
-Validation history and the current CLI/desktop increment, exercised on macOS with Python 3.12.14. The v4 GRU, real VLA, visual world model and robot trials remain in [experiment_plan.md](experiment_plan.md).
+Validation history for the CLI/desktop workbench, numerical/contact profiles
+and native VLA request gateway. Full v4 model integration and physical robot
+trials remain tracked in [experiment_plan.md](experiment_plan.md).
+
+## Native VLA product acceptance (2026-10-03)
+
+The [fixed paired native evaluation](research/2026-10-03/native-product/RESULTS.md)
+compares 40 actual-inference episodes in each mode. Both direct baseline and
+active authorization achieve 33/40 task successes, with all 5,420 requests
+and 40 complete action sequences byte-identical. Six authorization-fault classes
+are denied in all 60 attempts before the instrumented writer. Mean authorization
+plus admission cost is 0.802 ms; P95 is 1.040 ms. Seven task failures remain in
+each denominator. This validates a pinned in-process request contract, not
+Panda physical safety or installed-competitor superiority.
+
+A fresh managed macOS App from source `5de3bda8b8ad6436203b079d0fe733937db2403a`
+passed deep strict local code-signature verification and its retained source
+digest check. The App imported the complete active bundle with a separately
+selected public key, displayed all 40 episode choices and the actual Panda
+task geometry. The inspected task0/state46 terminal frame showed all seven
+action components, the one-use permit, 77/77/77 cursors and official success.
+Its exported ZIP was imported and independently verified in another workspace.
+[Acceptance receipt](research/2026-10-03/native-product/app-acceptance.json).
+
+![Actual native App with the complete formal active record](screenshots/native-formal-active-v3-overview.png)
+
+The App is locally built and ad-hoc signed; this is not distribution signing or
+notarization. Its default macOS install directory is `~/Applications/Sentinel-EVC`.
+The evidence viewer requires no model inference environment for imported runs;
+live native inference retains its existing pinned ML environment.
 
 ## Main merge and performance validation (2026-10-01)
 

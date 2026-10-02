@@ -1,0 +1,14 @@
+[
+  {
+    "file": "robosuite-v1.4.0-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/ARISE-Initiative/robosuite/v1.4.0/LICENSE",
+    "sha256": "177978cbece0a4c454c2aaec5b3f145b39270814874c43109da9e829c39d9cba",
+    "bytes": 1474
+  },
+  {
+    "file": "LIBERO-LICENSE.txt",
+    "source": "https://raw.githubusercontent.com/Lifelong-Robot-Learning/LIBERO/master/LICENSE",
+    "sha256": "e2885fd30a08381b799c4a33385522b23d637b4051b8f9a7f9f2519944b68ff6",
+    "bytes": 1080
+  }
+]

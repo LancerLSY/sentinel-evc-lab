@@ -1,0 +1,194 @@
+{
+  "claimLimits": [
+    "companions replay retained official actions and are excluded from benchmark counts",
+    "the posthoc failure diagnostic was selected only because it is the first failed active cell in frozen order",
+    "presentation camera pixels are not substituted for the signed model-input observation hashes",
+    "fault authorization results have no scene replay and are intentionally absent"
+  ],
+  "generator": {
+    "path": "render_native_companion.py",
+    "sha256": "sha256:28bcedb156e9a9fe53a6a7acabcc65a1ccee74bf5402f5681eb12da6fee8ab9a",
+    "sourceCommit": "a3071f9d7c0b88e60c878c7b350054e34510a9c7"
+  },
+  "media": [
+    {
+      "actionsVerified": 77,
+      "durationSeconds": 3.9,
+      "fps": 20,
+      "frames": 78,
+      "initialStateIndex": 46,
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "mismatches": 0,
+      "modelId": "6c619b3a50414f7cb47c54998188e44c2802f9fe524e95bb28b65b07089a3ded",
+      "observationHashesVerified": 78,
+      "outcomesVerified": 77,
+      "poses": {
+        "bytes": 208606,
+        "path": "poses-task00-state46.jsonl.gz",
+        "provenance": "fresh audited native replay; additional per-step poses are derived, not additional signed formal measurements",
+        "sha256": "sha256:b6d69a41c0c7efbbd771c41100cd0d3b48b7fdca8f2deddec34b012b358e4c27"
+      },
+      "purpose": "predeclared",
+      "retainedPosesCompared": 78,
+      "sourceEpisodeId": "task00-state46-3dec6f5c",
+      "sourceSuccess": true,
+      "taskId": 0,
+      "video": {
+        "bytes": 962247,
+        "firstFrameMd5": "md5:3e1328119bd1625db61e8cc7cb153b98",
+        "height": 876,
+        "lastFrameMd5": "md5:330e3a3670e8876533ac5d206583cfd9",
+        "path": "companion-task00-state46.mp4",
+        "sha256": "sha256:32aad611a04489f55186670ec642c84182aaca4d59f22426c1130cc4418c60bb",
+        "width": 1440
+      }
+    },
+    {
+      "actionsVerified": 131,
+      "durationSeconds": 6.6,
+      "fps": 20,
+      "frames": 132,
+      "initialStateIndex": 46,
+      "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "mismatches": 0,
+      "modelId": "5d413f6d483c6d25b1c3c81212fc6ca62a3db12032cc4aceae1a802664872c07",
+      "observationHashesVerified": 132,
+      "outcomesVerified": 131,
+      "poses": {
+        "bytes": 327671,
+        "path": "poses-task04-state46.jsonl.gz",
+        "provenance": "fresh audited native replay; additional per-step poses are derived, not additional signed formal measurements",
+        "sha256": "sha256:abb2042b8d96f6c52f5a68ad88055d0eb3bb9ce72ec35491cf7782affa5820c0"
+      },
+      "purpose": "predeclared",
+      "retainedPosesCompared": 132,
+      "sourceEpisodeId": "task04-state46-e0c2d735",
+      "sourceSuccess": true,
+      "taskId": 4,
+      "video": {
+        "bytes": 1503992,
+        "firstFrameMd5": "md5:ab2145a3475624da9015df73222077d9",
+        "height": 876,
+        "lastFrameMd5": "md5:30b9ea76c56f6ff22b645fdc94d3d3c6",
+        "path": "companion-task04-state46.mp4",
+        "sha256": "sha256:d8525c8678014e861529ed72275c3ac149c91128d6353d1653771cf7fe89e663",
+        "width": 1440
+      }
+    },
+    {
+      "actionsVerified": 83,
+      "durationSeconds": 4.2,
+      "fps": 20,
+      "frames": 84,
+      "initialStateIndex": 46,
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "mismatches": 0,
+      "modelId": "d9537e93cdb909fc8aeda0b2b030b8643700c09cd3228f9f0f1942c92a7a5e7f",
+      "observationHashesVerified": 84,
+      "outcomesVerified": 83,
+      "poses": {
+        "bytes": 303283,
+        "path": "poses-task05-state46.jsonl.gz",
+        "provenance": "fresh audited native replay; additional per-step poses are derived, not additional signed formal measurements",
+        "sha256": "sha256:e3a7b37fa75ff17a6e745dcf2dde4c05a1ebdcdea276b3db78ff4b3acbbbdaaa"
+      },
+      "purpose": "predeclared",
+      "retainedPosesCompared": 84,
+      "sourceEpisodeId": "task05-state46-9d2857c3",
+      "sourceSuccess": true,
+      "taskId": 5,
+      "video": {
+        "bytes": 983605,
+        "firstFrameMd5": "md5:055964a56a5538dfbd7807c48e0cfe8b",
+        "height": 876,
+        "lastFrameMd5": "md5:cfc8646809568a12d8fe66f0cc30829f",
+        "path": "companion-task05-state46.mp4",
+        "sha256": "sha256:e40687abed72f5f010aac1652ff2101b35eb65e896e7a6bf8e01c63bec1414ee",
+        "width": 1440
+      }
+    },
+    {
+      "actionsVerified": 280,
+      "durationSeconds": 14.05,
+      "fps": 20,
+      "frames": 281,
+      "initialStateIndex": 47,
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "mismatches": 0,
+      "modelId": "6c619b3a50414f7cb47c54998188e44c2802f9fe524e95bb28b65b07089a3ded",
+      "observationHashesVerified": 281,
+      "outcomesVerified": 280,
+      "poses": {
+        "bytes": 667960,
+        "path": "poses-task00-state47.jsonl.gz",
+        "provenance": "fresh audited native replay; additional per-step poses are derived, not additional signed formal measurements",
+        "sha256": "sha256:aa7b7684159ddce8e7281eef26ff92a363f4bcd901f555ba26860d3aa55cce05"
+      },
+      "purpose": "posthoc_failure_diagnostic",
+      "retainedPosesCompared": 29,
+      "sourceEpisodeId": "task00-state47-f0ed3be3",
+      "sourceSuccess": false,
+      "taskId": 0,
+      "video": {
+        "bytes": 2634858,
+        "firstFrameMd5": "md5:2871f72ba5cf3d6ce842e0f2318a7f15",
+        "height": 876,
+        "lastFrameMd5": "md5:f86e2de987e08e28c76cedb5cc74ba81",
+        "path": "companion-task00-state47.mp4",
+        "sha256": "sha256:b6c2e3b3a1bdc5316322d9ccf29a16a2928401f17fa88df710cc88c6f2854154",
+        "width": 1440
+      }
+    }
+  ],
+  "rendering": {
+    "frameRate": 20,
+    "interpolation": false,
+    "policyInference": false,
+    "presentationCapture": "same live simulator after each verified reset or env.step; no physics step added",
+    "presentationRenderSize": [
+      720,
+      720
+    ],
+    "presentationViews": [
+      "agentview",
+      "robot0_eye_in_hand"
+    ],
+    "trajectoryAuthority": "signed 360 px native observations"
+  },
+  "sceneAssets": [
+    {
+      "bytes": 9484890,
+      "modelId": "6c619b3a50414f7cb47c54998188e44c2802f9fe524e95bb28b65b07089a3ded",
+      "path": "viewer-model-task0.json.gz",
+      "sha256": "sha256:5cf76f4b8b071f19552520bc71bf6ab4a55274cc0170041f06c4fb128102d941"
+    },
+    {
+      "bytes": 9484902,
+      "modelId": "5d413f6d483c6d25b1c3c81212fc6ca62a3db12032cc4aceae1a802664872c07",
+      "path": "viewer-model-task4.json.gz",
+      "sha256": "sha256:3028af42cd93e096a9bddeaaa09c23c8049930f7ce14f2f2af58e2372b501f3c"
+    },
+    {
+      "bytes": 9484883,
+      "modelId": "d9537e93cdb909fc8aeda0b2b030b8643700c09cd3228f9f0f1942c92a7a5e7f",
+      "path": "viewer-model-task5.json.gz",
+      "sha256": "sha256:18bd61c23870fb944bc03fa2fc5d6d7d61682070bfd602b5d78783b3a8034669"
+    }
+  ],
+  "schema": "sentinel-native-companion-media-v1",
+  "source": {
+    "bundle": "sentinel-native-vla-bundle.zip",
+    "bundleSha256": "sha256:b95b1886ac8aad4d744b540c2b085ca18c06dabf445945ab3eec0ff92562208a",
+    "publicKeySha256": "sha256:49b37b42791801fdc73d5a677423dcc5c1f45e49df73d5eff7baa21448784558",
+    "replaySha256": "sha256:3d7f5e1c4318343bdea3a7ddb7784d13f5d658d7f7f326a6d76ce7b221f5f94d",
+    "resultSha256": "sha256:1100825384b358e550a6dd8ad06cb3811e664c35471a2ae4402460890896d33e",
+    "runId": "native-formal-active-v3",
+    "signatureVerification": {
+      "scope": "signed-record-integrity",
+      "trust": "user-selected-public-key",
+      "verified": true
+    },
+    "sourceCommit": "2ede56bd655554ad03b9dc93731ca1660aae9010"
+  },
+  "status": "complete"
+}

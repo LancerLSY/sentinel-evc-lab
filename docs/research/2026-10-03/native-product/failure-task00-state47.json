@@ -1,0 +1,55 @@
+{
+  "schema": "sentinel-native-failure-diagnostic-v1",
+  "selection": "post-hoc diagnosis of the first ordered failed active cell; source episode is already included in the 40-cell denominator and the diagnosis adds no benchmark samples",
+  "task_id": 0,
+  "initial_state_index": 47,
+  "source_episode_id": "task00-state47-f0ed3be3",
+  "source_result_sha256": "1100825384b358e550a6dd8ad06cb3811e664c35471a2ae4402460890896d33e",
+  "source_replay_sha256": "3d7f5e1c4318343bdea3a7ddb7784d13f5d658d7f7f326a6d76ce7b221f5f94d",
+  "derived_media_manifest_sha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
+  "derived_pose_sha256": "aa7b7684159ddce8e7281eef26ff92a363f4bcd901f555ba26860d3aa55cce05",
+  "target_body": "akita_black_bowl_1_main",
+  "target_body_index": 23,
+  "plate_body_index": 27,
+  "frames": 281,
+  "actual_actions": 280,
+  "reward_zero_on_all_actions": true,
+  "max_target_lift_mm": 9.688415630535797,
+  "max_target_displacement_mm": 9.947014618066943,
+  "final_target_displacement_mm": 9.653921976070407,
+  "target_center_to_plate_center_mm": {
+    "initial": 153.97307536261724,
+    "final": 163.41133605553634
+  },
+  "target_gripper_contact_steps": [
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    80,
+    81,
+    82,
+    83,
+    84
+  ],
+  "target_gripper_contact_geoms": [
+    "gripper0_finger2_collision",
+    "gripper0_finger2_pad_collision"
+  ],
+  "target_plate_contact_steps": [],
+  "interpretation": "contact without sustained grasp/lift/place in this retained trajectory; not an isolated causal diagnosis of policy, mechanics, object friction or perception",
+  "target_definition": {
+    "source_dependency": "libero/task-0/bddl",
+    "sha256": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+    "objects_of_interest": [
+      "akita_black_bowl_1",
+      "plate_1"
+    ],
+    "initial_predicate": "(On akita_black_bowl_1 main_table_between_plate_ramekin_region)",
+    "goal_predicate": "(And (On akita_black_bowl_1 plate_1))",
+    "scope": "target identity and placement goal from the retained task definition"
+  }
+}

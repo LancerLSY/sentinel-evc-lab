@@ -1,0 +1,11 @@
+task_id,episodes_each,baseline_successes,active_successes,action_identical_pairs
+0,4,3,3,4
+1,4,4,4,4
+2,4,4,4,4
+3,4,4,4,4
+4,4,3,3,4
+5,4,4,4,4
+6,4,3,3,4
+7,4,3,3,4
+8,4,3,3,4
+9,4,2,2,4

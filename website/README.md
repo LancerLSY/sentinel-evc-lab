@@ -2,9 +2,16 @@
 
 Public homepage: https://lansiyao.com/research/sentinel-vla/project/
 
-A static, bilingual research homepage with the recorded UR5e demonstration,
-full-mesh 3D trajectory replay, source-backed comparison charts, local installation
-commands and experiment downloads. It needs no JavaScript packages or build step.
+A static, bilingual product homepage with native Panda request authorization,
+task-specific 3D replay, dual-camera videos, measured product behavior, local
+installation and retained research results. It needs no JavaScript packages or
+frontend build step.
+
+The Git checkout contains the page code and small data. Download
+[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/sentinel-project-page.zip)
+and extract it at the repository root to populate `website/` with the large
+meshes, replay JSON and videos. [ASSETS.json](ASSETS.json) identifies every
+published page file by size and SHA-256. It contains this project page only.
 
 ## Local preview
 
@@ -15,6 +22,22 @@ python3 -m http.server 8877 --bind 127.0.0.1 --directory website
 ```
 
 Open http://127.0.0.1:8877. Serve over HTTP so the replay and chart JSON can load.
+
+## Native product replay
+
+Select tasks 0, 4 or 5/state 46 to inspect the predeclared successful episodes;
+select task 0/state 47 for the first ordered failure diagnostic. Every original
+action, permit, cursor, observation hash and outcome is retained. The failed
+episode's 29 stored poses match the audited reconstruction; 252 extra poses
+are explicitly marked as derived visualization data. Its source episode remains
+one of the seven counted formal failures. The 3D viewer and dual-camera video
+have independent controls.
+
+[Product results](../docs/research/2026-10-03/native-product/RESULTS.md),
+[media and failure interpretation](../docs/research/2026-10-03/native-product/MEDIA.md)
+and the release retain the source bundle, separate public key, frozen protocol,
+media manifests and upstream LIBERO/robosuite notices. Browser transport hashes
+are distinct from independent signature verification of the original bundle.
 
 ## Data and interpretation
 
@@ -35,8 +58,8 @@ Open http://127.0.0.1:8877. Serve over HTTP so the replay and chart JSON can loa
 - Video, poster, workbench screenshot and fallback figure derive from the retained
   project artifacts. Replay metadata includes the model, NPZ, review and media
   identities. Large research archives remain in the linked GitHub Release.
-- `SHA256SUMS` records the bundled asset digests. Run `shasum -a 256 -c SHA256SUMS`
-  from this directory to verify them.
+- `ASSETS.json` records the complete portable page's asset digests.
+  `SHA256SUMS` records the smaller source-checkout snapshot's bundled files.
 
 The UR5e results are constructed-case comparisons; the SmolVLA result measures
 held-out recorded-action reconstruction. WorldGuard plots retain the camera and
@@ -49,7 +72,8 @@ The GitHub Release retains a mirror; the Hub publication receipt verifies the
 
 ## Editing and publication
 
-Edit `index.html`, `styles.css`, `app.js` and `replay-viewer.js`. Chinese strings are in `app.js`; English
+Edit `index.html`, `styles.css`, `app.js`, `native-project.js`, `native-viewer.js`
+and `replay-viewer.js`. Chinese strings are in `app.js`; English
 strings are in the HTML. Replace the disabled arXiv resource and software citation
 only after the paper URL and bibliographic metadata are available. Keep chart data
 bound to retained source files and refresh asset hashes after changes.

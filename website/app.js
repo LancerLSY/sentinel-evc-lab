@@ -1,6 +1,30 @@
 "use strict";
 
 const zh = {
+  downloadNativeData:"原生产品证据包",downloadNativeDataDesc:"原始签名运行、公钥、配对结果、失败、审计视频与模型/姿态数据",downloadNativeSource:"产品源码快照",downloadNativeSourceDesc:"CLI、App、网关、运行脚本、网页代码与保存的协议",downloadNativePage:"便携项目页",downloadNativePageDesc:"双语界面、交互任务网格、原回放记录与双视角影片",nativeAssetIndex:"原生产品下载索引与 SHA-256",
+  nativeVideoScope:"所选任务的独立视频播放器 · 两个 720×720 展示视角、20 fps。字幕显示保存的动作、授权、整次运行游标与实际结果。回放时逐步核对了每个动作、已签名的 360×360 观测哈希及当前步结果。影片不增加基准样本，失败序列属于事后诊断。视频播放器与三维控制各自独立。",
+  nativeEvidenceKicker:"实际写入边界上的测量",
+  nativeEvidenceTitle:"保留原请求，拒绝无效权限，留下可核验的证据。",
+  nativeEvidenceIntro:"40 对 LIBERO 任务，两组均使用官方 SmolVLA 实际推理，GPU 为 RTX 4090 D（24 GB）。所有计划样本与失败均保留。",
+  nativeMetricOutcome:"直接执行与主动授权的任务成功次数一致",
+  nativeMetricBytes:"动作字节保持一致，40/40 条完整配对序列相同",
+  nativeMetricFaults:"无效授权全部拒绝，越权写入器调用为零",
+  nativeMetricCost:"授权加写入前准入的均值；P95 为 1.040 ms",
+  nativeEvidenceDetails:"查看六类拒绝记录与所有计划任务格",
+  faultCondition:"注入条件",
+  faultReason:"保存的拒绝原因",
+  faultBlocked:"阻断 / 尝试",
+  faultWriter:"越权写入器调用",
+  nativeEvidenceScope:"两组保留相同的七个任务失败，固定网格披露四个先前诊断格。60 次故障来自独立的合成软件故障组，过期通过注入越过期限的时间戳实现。网关计时不含推理、env.step 与记录开销。20 Hz 仿真与回放时钟不是墙钟实时保证。这里评价执行接入，不表示策略提升或已安装竞品的性能优势。",
+  nativeEvidenceReport:"完整结果、失败与计时边界",
+  nativeEvidenceDownload:"签名证据包、独立公钥与视频",
+  nativeEvidenceData:"精确对照 JSON",
+  faultReplaced:"授权后动作被替换",
+  faultContext:"执行上下文变化",
+  faultExpired:"许可过期",
+  faultReplay:"已消费许可重放",
+  faultFeedback:"反馈身份变化",
+  faultGeneration:"旧授权代次被撤销",
   replayIntro:"查看最终候选动作，再比较两种执行判定。",
   modelGeometry:"原仿真网格",
   viewOrbit:"三维",
@@ -41,19 +65,28 @@ const zh = {
   paperScope:"路由完成 300/600，固定 4.8 秒完成 600/600。拒绝计为未完成。每组 100 个样本中零次观测不安全事件，对应 Wilson 上界 3.70%。可信配置声明不等于测出了摩擦。",
   paperCost:"60 个预设 UR5e 样本中，障碍物在生成计划前独立采样；全检与增量判定一致。边际平均节省 0.996 ms，但增量 P95 更差，不主张尾延迟改善。",
   paperReport:"冻结设计、失败原因、配对结果与区间",
-  navOverview:"概览",navDemo:"演示",navMethod:"机制",navResults:"实验",navReproduce:"复现",
-  eyebrow:"机器人策略校验 · 开源研究",headline:"在最终动作上，作出执行决定。",hero:"为经过变换的机器人计划设置执行门，通过一次性许可与可独立校验的证据，连接动作、决策和实际记录。",personalHome:"个人主页",researchOverview:"研究概览",artifacts:"数据与源码",hfModel:"Hugging Face 模型",videoLink:"视频",forthcoming:"待发布",
+  navProduct:"产品",navNative:"原生回放",navOverview:"概览",navDemo:"演示",navMethod:"机制",navResults:"实验",navReproduce:"复现",
+  eyebrow:"本地执行控制 · 可核验回放",headline:"在最终动作上，作出执行决定。",hero:"面向机器人策略请求的本地执行边界：绑定最终精确字节、单次授权、观察实际写入，并保留签名回放。",personalHome:"个人主页",researchOverview:"研究概览",artifacts:"数据与源码",hfModel:"SO100 模型 · Hugging Face",videoLink:"原生回放",forthcoming:"待发布",
+  productKicker:"产品 / 从策略到证据",productHeadline:"从最终请求到实际反馈，一条可以检查的事务链。",productLead:"Sentinel EVC 在本地运行，位于策略集成与实际写入器之间。原生 Panda profile 把官方后处理器输出与当前反馈、上下文绑定到有期限且只能使用一次的许可；数值与 MuJoCo profile 分别提供各自有边界的检查。",
+  accessCli:"安装并运行本地工作台",accessApp:"导入、检查与回放已核验记录",accessSsh:"源码绑定的远程实验",accessVla:"接入现有 LeRobot / LIBERO Python 环境",
+  boundaryRequest:"最终请求",boundaryRequestBody:"后处理后的 shape · dtype · 精确字节",boundaryPermit:"单次许可",boundaryPermitBody:"反馈 · profile · 上下文 · 有效期",boundaryWriter:"实际写入器",boundaryWriterBody:"在环境调用前一刻完成准入",boundaryReplay:"签名回放",boundaryReplayBody:"submitted · accepted · observed · outcome",
+  transactionTitle:"控制事务 ≠ 共享日志",transactionBody:"共享日志记录各组件报告的内容；控制事务决定这一个精确请求是否可以进入写入器。Sentinel 同时保留二者，不把一条日志本身当作执行权限。",
+  adoptionKicker:"为什么在现有系统中加入 Sentinel？",adoptionTitle:"保留正在使用的 VLA 技术栈，在实际写入器前增加事务边界。",adoptionLead:"Sentinel 不替代策略推理、运动规划或可视化。它让最后一次软件交接可以检查：授权后处理后的精确请求，依据当前执行上下文单次消费，在写入器处确认，并保留可独立核验的证据。",
+  adoptionExact:"授权真正将被写入的字节",adoptionExactBody:"绑定 shape、dtype 与后处理器输出的精确字节，并在环境写入器前一刻重新核对同一个请求。",adoptionPermit:"让权限绑定实时上下文",adoptionPermitBody:"短有效期、单次使用，并绑定实际反馈、profile、上下文与 generation，避免许可变成通用权限。",adoptionEvidence:"保留执行状态证据",adoptionEvidenceBody:"分开记录 submitted、accepted、observed 游标；独立核验 Ed25519 签名包；在同一回放中查看保存的动作、判定与任务网格。",adoptionSurface:"保持较小的接入面",adoptionSurfaceBody:"标准库网关与密码学核验器在现有机器学习环境旁运行。接入 Sentinel 本身不要求增加 ROS 技术栈。",
+  integrationKicker:"已有系统职责对照",integrationTitle:"周边技术栈负责什么，Sentinel 增加什么。",integrationScope:"这是基于文档的原生基线职责对照，不是已安装竞品的性能基准或排名。",stackOwns:"现有栈负责",sentinelAdds:"Sentinel 增加",lerobotOwns:"策略部署、官方处理器，以及针对 reset、过期 action chunk 和 epoch 的 RTC 处理。",lerobotAdds:"授权最终生成的精确动作字节，并在捕获的写入器处执行准入检查。",moveitOwns:"物理限制、自碰撞/世界碰撞检查、力中止、轨迹拼接与下发。",moveitAdds:"为自身网关路径增加请求完整性证据；原生 Panda profile 不替代这些物理控制。",foxgloveOwns:"三维遥测可视化与记录数据回放工作流。",foxgloveAdds:"在精确请求、授权判定与观察到的写入器状态转移之间建立签名关联。",rerunOwns:"共享记录、日志与可视化。",rerunAdds:"增加单次许可语义，并在回放中对齐保存的任务网格、动作、判定与结果。",
+  productInstallLink:"安装 CLI 与 App",gatewayLink:"原生 VLA 网关契约",positionLink:"机制与生态定位",so100Link:"Hugging Face 上已发布的 SO100 模型",productBoundaryScope:"原生 Panda profile 只建立进程内请求完整性，不证明无碰撞、WorldGuard 支持、传感器真实、物理制动或任务完成。物理与数值验证使用独立声明的 profile。",
   demoKicker:"01 / 仿真演示",demoTitle:"计划变了，校验结论也应重新判断。",videoCaption:"UR5e 全网格 MuJoCo 回放 · 1080p · 19.95 秒。三个清晰案例：安全对照、后缀变化、场景变化；被拒绝的运动明确标为反事实且未下发。",mediaSource:"媒体来源与哈希",
   overviewKicker:"02 / 项目概览",overviewTitle:"把检查放在真正提交动作的地方。",abstract1:"机器人策略生成的动作块，在执行前可能经过重定时、修复、坐标转换或拼接。原计划上的判定不会自动覆盖变换后的运动。Sentinel EVC 将校验结论绑定到最终动作和当前执行上下文。",abstract2:"本地研究工作台包含最终计划校验、带完整回退的受限证书复用、控制器单写者与签名证据。独立研究 profile 分别评估 UR5e 运动、WorldGuard 后果预测，以及 SO100 记录数据上的 SmolVLA 动作重建。",statArm:"误放行 / 139 个不安全的 UR5e 构造 roots",statSmol:"标准化动作 MAE 降幅 / 五个留出 episodes",statWG:"新 MuJoCo roots / 六类分布变化场景",
   methodKicker:"03 / 核心机制",methodTitle:"让判定对应真正要执行的动作。",pipe1:"提出动作",pipe1s:"策略动作块",pipe2:"生成变换",pipe2s:"重定时 · 修复 · 拼接",pipe3:"最终复核",pipe3s:"最终计划 + 上下文",pipe4:"执行许可",pipe4s:"单次使用 · 有效期",pipe5:"提交执行",pipe5s:"控制器单写者",pipe6:"验证证据",pipe6s:"签名事件记录",bindingTitle:"动作与上下文绑定。",bindingBody:"计划、模型/profile 身份和当前上下文共同确定判定的适用范围。修改的后缀、变化的场景或过期的观测不能继承无关结论。",fallbackTitle:"复用有明确边界。",fallbackBody:"UR5e 研究只复用精确匹配的静态前缀。动态校验始终从第零帧开始；父记录无效时，执行完整校验。",evidenceTitle:"执行留下可核查的记录。",evidenceBody:"submitted、accepted、observed 三种状态分别记录。撤销阻止旧代次新增提交；事件与哈希支持独立证据验证。",methodScope:"产品核心支持受限数值与固定接触 profile。训练后的神经模型和 UR5e 研究属于独立实验 profile；真机运动写入适配器尚未启用。",designTrace:"查看机制实现与设计对应关系",
-  replayKicker:"04 / 记录轨迹的三维回放",replayTitle:"查看判定背后的实际运动。",caseCollision:"01 · 后缀变换",caseSafe:"02 · 窄道通过",orbitHelp:"拖动旋转 · 滚轮缩放",resetView:"重置视角",play:"播放",pause:"暂停",replayTime:"回放时间",recordedCase:"保存的案例",parentVerdict:"只校验父计划",finalVerdict:"最终计划校验",recordedOutcome:"整条轨迹复核",armLegend:"UR5e 原始网格模型",obstacleLegend:"固定球形障碍物",traceLegend:"保存的手腕路径",loadingReplay:"正在加载保存的轨迹…",downloadReplay:"下载轨迹与源文件哈希",replayScope:"原始 UR5e 可视网格，每例使用 41 帧保存的关节状态进行前向计算。不重新积分动力学，也不插值姿态。被拒绝动作展示为反事实回放，未下发执行。两个案例在复核后选取；碰撞标签对应整条轨迹，不表示当前帧。蓝色路径是 Wrist 3 的轨迹，不是安装工具的末端路径。UR5e 模型来自 MuJoCo Menagerie，采用 BSD-3-Clause 许可。",lateCase:"后缀变换",safeCase:"窄道案例",allowed:"放行",denied:"拒绝",collision:"碰撞",safe:"安全",replayReady:"41 帧原始姿态 · 米 / 弧度 / 秒",replayError:"轨迹暂时无法加载，可下载原始 JSON 查看。",
-  resultsKicker:"05 / 实验对比",resultsTitle:"比较决策、误差与实际代价。",armStudy:"UR5e 最终计划校验",armStudyMeta:"180 个构造 roots · 139 个不安全 · 41 个安全",armStudyBody:"六类场景在同一组 roots 上比较四种策略。独立复核器使用更密集的静态采样和 1 ms MuJoCo 回放，不导入 gate runner。",falseAllows:"误放行",falseRejects:"误拒绝",cost:"实测代价",armScope:"106 次静态前缀复用，74 次完整回退。增量路径计入父计划后为 147.65 ms，完整校验为 48.74 ms，不主张提速。这些数据来自构造案例上的固定顺序观测，未建立自然分布留出或连续碰撞证明。",armReport:"方法、分母与代价统计",parentOnly:"只校验父计划",full:"最终计划完整校验",incremental:"增量校验 + 回退",conservative:"拒绝所有变换",faCaption:"误放行 / 139 个不安全 roots · 越低越好",frCaption:"误拒绝 / 41 个安全 roots · 越低越好",costCaption:"平均端到端校验墙钟，包含父计划成本 · ms",
+  replayKicker:"05 / 旧版 UR5E 记录轨迹三维回放",replayTitle:"查看判定背后的实际运动。",caseCollision:"01 · 后缀变换",caseSafe:"02 · 窄道通过",orbitHelp:"拖动旋转 · 滚轮缩放",resetView:"重置视角",play:"播放",pause:"暂停",replayTime:"回放时间",recordedCase:"保存的案例",parentVerdict:"只校验父计划",finalVerdict:"最终计划校验",recordedOutcome:"整条轨迹复核",armLegend:"UR5e 原始网格模型",obstacleLegend:"固定球形障碍物",traceLegend:"保存的手腕路径",loadingReplay:"正在加载保存的轨迹…",downloadReplay:"下载轨迹与源文件哈希",replayScope:"原始 UR5e 可视网格，每例使用 41 帧保存的关节状态进行前向计算。不重新积分动力学，也不插值姿态。被拒绝动作展示为反事实回放，未下发执行。两个案例在复核后选取；碰撞标签对应整条轨迹，不表示当前帧。蓝色路径是 Wrist 3 的轨迹，不是安装工具的末端路径。UR5e 模型来自 MuJoCo Menagerie，采用 BSD-3-Clause 许可。",lateCase:"后缀变换",safeCase:"窄道案例",allowed:"放行",denied:"拒绝",collision:"碰撞",safe:"安全",replayReady:"41 帧原始姿态 · 米 / 弧度 / 秒",replayError:"轨迹暂时无法加载，可下载原始 JSON 查看。",
+  nativeReplayKicker:"产品演示 / 原生 PANDA 记录",nativeReplayTitle:"在同一时间轴查看策略动作、授权判定和观测执行。",nativeReplayIntro:"选择一条保存的 SmolVLA/LIBERO Episode。保存的 Panda 任务网格、策略动作、授权判定和控制器游标在同一条 20 Hz 保存时间轴上推进。",nativeInstructionLabel:"当前任务指令",nativeTerminalLabel:"Episode 结果",nativeTaskLabel:"保存的任务",nativeGeometryLabel:"保存的任务网格 · 为便于观察隐藏封闭房间外壳",nativePoseBadge:"物理姿态记录",nativeNoInterpolation:"不插值",nativeLoading:"正在加载保存的原生回放…",nativeOrbitHelp:"拖动旋转 · 滚轮缩放 · 方向键旋转",nativeTimelineLabel:"保存的指令时间轴",nativeCommandKicker:"保存的指令与授权",nativeActionLabel:"策略动作",nativeActionHelp:"7 个模型输出值：相对平移 Δx/y/z、相对旋转 Δrx/ry/rz 与夹爪指令。它们是模型动作单位，不是实测 SI 速度。",nativeDecisionLabel:"请求完整性授权",nativeReasonLabel:"记录原因",nativeCursorsLabel:"整次运行游标 submitted / accepted / observed",nativeStateLabel:"保存的状态摘要",nativeOutcomeLabel:"当前步结果",nativeRawLabel:"原始保存哈希与结果字段",nativeAttemptsTitle:"保存的故障授权尝试",nativeReplayScope:"查看器只绘制保存的 MuJoCo body 姿态，不运行新动力学，也不插值缺失姿态。permit 记录该次请求的指令完整性与授权，不等同于碰撞校验。被拒绝的故障尝试只展示其真实保存记录，绝不会生成虚构机器人运动。源证据包在发布前已完成核验；当前浏览器页面不执行签名验证。请使用保存的公钥独立核验下载的证据包。",
+  resultsKicker:"06 / 实验对比",resultsTitle:"比较决策、误差与实际代价。",armStudy:"UR5e 最终计划校验",armStudyMeta:"180 个构造 roots · 139 个不安全 · 41 个安全",armStudyBody:"六类场景在同一组 roots 上比较四种策略。独立复核器使用更密集的静态采样和 1 ms MuJoCo 回放，不导入 gate runner。",falseAllows:"误放行",falseRejects:"误拒绝",cost:"实测代价",armScope:"106 次静态前缀复用，74 次完整回退。增量路径计入父计划后为 147.65 ms，完整校验为 48.74 ms，不主张提速。这些数据来自构造案例上的固定顺序观测，未建立自然分布留出或连续碰撞证明。",armReport:"方法、分母与代价统计",parentOnly:"只校验父计划",full:"最终计划完整校验",incremental:"增量校验 + 回退",conservative:"拒绝所有变换",faCaption:"误放行 / 139 个不安全 roots · 越低越好",frCaption:"误拒绝 / 41 个安全 roots · 越低越好",costCaption:"平均端到端校验墙钟，包含父计划成本 · ms",
   smolStudy:"SO100 记录动作上的 SmolVLA",smolMeta:"五个留出 episodes · 1,926 个重叠窗口",smolBody:"冻结视觉语言骨干，微调动作专家。固定基础模型与开发集选中的 overlay 使用相同采样噪声，进行一次配对留出评估。",smolScope:"衡量动作重建，不是真机任务成功率。窗口之间重叠，独立单位是 episode；数据集未声明原生物理单位。",smolMetric:"动作 MAE / 训练动作标准差",smolImprovement:"标准化 MAE 降幅",modelCard:"模型卡、检查点与加载方法",base:"固定基础模型",fine:"微调 overlay",
   wgStudy:"分布变化下的 WorldGuard",scenario:"场景",nominal:"标称分布",cameraShift:"相机变化",lowFriction:"低摩擦",massLow:"低载荷质量",massHigh:"高载荷质量",displacementShift:"未支持的位移",wgBody:"600 个新 roots、六类场景，每个 root 有四个同胞计划。状态和视觉 ensemble 沿用原始校准，困难案例保留在对比中。",wgMetric:"不安全选择 / 100 个 roots · 越低越好",wgReport:"完整场景结果与不确定性",fastest:"最快几何候选",fixed:"固定 1.6 s",state:"状态 WorldGuard",visual:"视觉 WorldGuard",wgNominal:"两个学习 gate 在这 100 个标称 roots 中均未观测到不安全选择；零观测不代表普遍零风险。",wgCamera:"视觉 gate 产生 7/100 个不安全选择，XY 联合覆盖率为 59%；相机 profile 变化不会被原始校准自动覆盖。",wgFriction:"四个原始候选全部不安全。两个学习 gate 均选出不安全动作，表明原动作族没有可用的安全替代。",wgMass:"隐藏载荷质量超出训练范围。这组数据中状态与视觉 gate 均为 0/100 个不安全选择；结论仅适用于记录的场景。",wgUnknown:"1.35× 位移超出已训练动作族。产品 contract 以 MODEL_UNKNOWN 拒绝全部 100 个 roots；没有动作被选中，拒绝不计为任务成功。",unsupported:"超出受支持的动作 contract",
   fallbackKicker:"MuJoCo 物理 profile 降级方案",fallbackStudy:"原候选都失败时，评估新的动作族。",fallbackStudyBody:"独立的 5 s MuJoCo profile 使用 100 个新低摩擦 roots。4.8 s 候选为 0/100 个不安全选择、100/100 个托盘终点任务，运动时长是 1.6 s 的三倍。",fallbackScope:"规则假定 μ_min = 0.015，系统未测量摩擦。3.2 s 候选在这组数据中也全部安全，但被保守规则拒绝。零次失败的 Wilson 上界为 3.70%。该 profile 尚未部署，也不是对原神经 gate 的修复。",fallbackReport:"降级规则与保留结果",hardware:"GPU 实测使用 RTX 4090 D（24 GB）。全部图表取自保存的结果文件，证据下载包含源文件身份与哈希。",downloadEvidence:"下载图表数据与来源身份",
-  workbenchKicker:"06 / 研究工作台",workbenchTitle:"本地运行，查看实际证据。",productTitle:"CLI、桌面和 SSH 入口",productBody:"可安装 CLI 与 macOS App 共用本地引擎。运行数值和固定 MuJoCo 接触 profile，回放保存的轨迹，导出签名证据包。",product1:"OBJ、STL、MJCF、URDF 检查",product2:"严格 SSH 实验与源码绑定结果",product3:"机械臂只读诊断",product4:"独立证据验证",productScope:"研究原型。macOS App 在本地构建，未提供分发签名与公证；模型导入不会获得运动许可，真机接口仍为只读。",installGuide:"安装方式与支持的能力",
-  reproduceKicker:"07 / 复现",reproduceTitle:"从源码到可验证的运行记录。",quickStart:"本地快速开始",copy:"复制",copied:"已复制",copyFailed:"请选择文本复制",reproduceBody:"使用 Python 3.10+ 从源码运行，或通过交互安装器选择 core/physics profile 并构建 macOS App。CLI 输出本地工作台地址，仿真保存实际结果与证据。",trainingEnv:"GPU 训练使用独立的固定环境。模型 overlay 需要原始冻结的 SmolVLA base/backbone，不是独立策略检查点。",trainingGuide:"训练、校准与评估命令",replaySourceNote:"原仿真目录校验包含下载缓存；诊断回放源码逐文件绑定官方模型内容。",replaySourceLink:"查看回放复现说明",downloadResults:"仿真数据与结果",downloadResultsDesc:"保留 roots、模型、校准、预测和日志",downloadArm:"UR5e 演示包",downloadArmDesc:"便携官方模型、保存的轨迹和视频",downloadModel:"SmolVLA 可训练 overlay",downloadModelDesc:"选中权重、已校验加载器和模型卡",downloadData:"固定 SO100 数据集",downloadDataDesc:"50 个记录 episodes、两个相机与来源身份",licenseNote:"发布索引包含文件大小与 SHA-256，归档包含逐文件身份与许可。Sentinel 代码采用 MIT；MIT 不授予专利权。上游来源和核心机制专利说明见仓库。",artifactIndex:"文件索引与校验和",
-  citationKicker:"08 / 引用",citationTitle:"引用研究软件与仿真产物。",citationBody:"当前软件和仿真资料可引用项目仓库。论文引用将在 arXiv 记录公开后补入。",footer:"开放代码 · 保存的实验 · 可复现的证据"
+  workbenchKicker:"APP / 本地工作台",workbenchTitle:"本地运行，查看实际证据。",productTitle:"CLI、桌面和 SSH 入口",productBody:"使用独立选择的公钥导入签名原生运行；选择任务，检查真实网格、动作与授权，并导出原始证据。App 与 CLI 共用本地引擎。",product1:"OBJ、STL、MJCF、URDF 检查",product2:"严格 SSH 实验与源码绑定结果",product3:"机械臂只读诊断",product4:"独立证据验证",productScope:"本地开发者预览版。实际 App 已导入全部 40 条正式运行，导出 ZIP 再次独立核验通过。App 分发签名与公证仍待完善，真机接口仍为只读。",installGuide:"安装方式与支持的能力",
+  reproduceKicker:"08 / 复现",reproduceTitle:"从源码到可验证的运行记录。",quickStart:"本地快速开始",copy:"复制",copied:"已复制",copyFailed:"请选择文本复制",reproduceBody:"使用 Python 3.10+ 从源码运行，或通过交互安装器选择 core/physics profile 并构建 macOS App。CLI 输出本地工作台地址，仿真保存实际结果与证据。",trainingEnv:"GPU 训练使用独立的固定环境。模型 overlay 需要原始冻结的 SmolVLA base/backbone，不是独立策略检查点。",trainingGuide:"训练、校准与评估命令",replaySourceNote:"原仿真目录校验包含下载缓存；诊断回放源码逐文件绑定官方模型内容。",replaySourceLink:"查看回放复现说明",downloadResults:"仿真数据与结果",downloadResultsDesc:"保留 roots、模型、校准、预测和日志",downloadArm:"UR5e 演示包",downloadArmDesc:"便携官方模型、保存的轨迹和视频",downloadModel:"SmolVLA 可训练 overlay",downloadModelDesc:"选中权重、已校验加载器和模型卡",downloadData:"固定 SO100 数据集",downloadDataDesc:"50 个记录 episodes、两个相机与来源身份",licenseNote:"发布索引包含文件大小与 SHA-256，归档包含逐文件身份与许可。Sentinel 代码采用 MIT；MIT 不授予专利权。上游来源和核心机制专利说明见仓库。",artifactIndex:"文件索引与校验和",
+  citationKicker:"09 / 引用",citationTitle:"引用研究软件与仿真产物。",citationBody:"当前软件和仿真资料可引用项目仓库。论文引用将在 arXiv 记录公开后补入。",footer:"开放代码 · 保存的实验 · 可复现的证据"
 };
 const english = new Map();
 document.querySelectorAll("[data-i18n]").forEach(el => english.set(el.dataset.i18n, el.textContent));
@@ -76,6 +109,7 @@ function languageUpdate() {
   document.title = locale === "zh" ? "Sentinel EVC — 最终机器人动作校验" : "Sentinel EVC — Verify the Final Robot Action";
   if (evidence) { renderArm(); renderSmol(); renderWorldguard(); }
   if (replay) { updateReplay(); }
+  window.dispatchEvent(new CustomEvent("sentinel-language",{detail:{locale}}));
 }
 
 function bars(target, rows, maximum) {

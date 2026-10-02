@@ -1,0 +1,157 @@
+{
+  "claim_boundary": "States46-49 are disjoint from formal-v2 states40-45, but four cells had prior diagnostic use and are disclosed; fault state45 is authorization-fault qualification, not a new independent task benchmark.",
+  "configs": {
+    "active": {
+      "bytes": 1487,
+      "path": "/root/sentinel-product-v1-20261003/formal-native-v3/active.json",
+      "sha256": "9cd81e1009ace1ef073bc87e6c7dd48d9bd89404a34a6083591af304bf4faf71"
+    },
+    "baseline": {
+      "bytes": 1491,
+      "path": "/root/sentinel-product-v1-20261003/formal-native-v3/baseline.json",
+      "sha256": "bfb633bdddda6840c19273cf48f475ef2782c0668c66941c2c157c8e18d09ae5"
+    },
+    "fault": {
+      "bytes": 1521,
+      "path": "/root/sentinel-product-v1-20261003/formal-native-v3/fault.json",
+      "sha256": "ff46402bb424545e99f30c0e5f6c3476e52800268da9998a72e0872977c99d17"
+    }
+  },
+  "excluded_qualification": {
+    "freeze_manifest_path": "/root/sentinel-product-v1-20261003/qualification-raw-float32-task0-state41-v1-freeze/freeze-manifest.json",
+    "freeze_manifest_sha256": "a3e48efba13515e9aaa851c14f79b7d874867f036d4013c1057aa7103b4a15c9",
+    "receipt_path": "/root/sentinel-product-v1-20261003/qualification-raw-float32-task0-state41-v1/receipt.json",
+    "receipt_sha256": "175624119380afd7580d50a574853880659abe5a2d4ee40594a3d720bc186337"
+  },
+  "frozen_utc": "2026-10-02T19:22:02.522578+00:00",
+  "preregistered_grid": {
+    "active": {
+      "episodes": 40,
+      "states": [
+        46,
+        47,
+        48,
+        49
+      ],
+      "tasks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "baseline": {
+      "episodes": 40,
+      "states": [
+        46,
+        47,
+        48,
+        49
+      ],
+      "tasks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "demo_cells": [
+      [
+        0,
+        46
+      ],
+      [
+        4,
+        46
+      ],
+      [
+        5,
+        46
+      ]
+    ],
+    "fault": {
+      "episodes": 10,
+      "faults_per_episode": 6,
+      "states": [
+        45
+      ],
+      "tasks": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  },
+  "prior_diagnostic_disclosure": [
+    "task0/state46 backend preflight",
+    "task5/state47 reset audit",
+    "task0/state48 replan preflight",
+    "task0/state49 official preflight"
+  ],
+  "schema": "sentinel-native-formal-freeze-v3",
+  "source_acquisition": {
+    "archive_bytes": 11290060,
+    "archive_path": "/root/sentinel-product-v1-20261003/source-2ede56b.tar.gz",
+    "archive_sha256": "519f58ab11cb862a6e21bc2e4653390c11536c9d15d4daea6655a3c7fd778606",
+    "url": "https://codeload.github.com/LancerLSY/sentinel-evc-lab/tar.gz/2ede56bd655554ad03b9dc93731ca1660aae9010"
+  },
+  "source_commit": "2ede56bd655554ad03b9dc93731ca1660aae9010",
+  "source_files": {
+    "docs/research/2026-10-03/native-product/RAW_REQUEST_PROTOCOL.md": {
+      "bytes": 4941,
+      "sha256": "79dd58b794c36dcbf448cafb85505f425da110c50b484834ce10baf4d10496cc"
+    },
+    "docs/research/2026-10-03/native-product/controller-contract-receipt.json": {
+      "bytes": 2852,
+      "sha256": "4225e1215419ec9a02c48ff9dc7220726df89dbf99ba7892f1c11c1c576cbf06"
+    },
+    "docs/research/2026-10-03/native-product/gripper-contract-receipt.json": {
+      "bytes": 837,
+      "sha256": "7812494efdc3f007ab29821734eb2bf5be7e5185474aa41c319b6aaa1ef957c9"
+    },
+    "experiments/vla/export_native_scene.py": {
+      "bytes": 28336,
+      "sha256": "50792d85a2a9d3d1f3c53cbe52045d2d38de38d21f0b1163f2dbb8856d77b954"
+    },
+    "experiments/vla/libero_native_profile.py": {
+      "bytes": 2616,
+      "sha256": "a787f60b95f605d5acee7dfa2468b967695a4e7d5cb6a5bb7c2e6c286a414557"
+    },
+    "experiments/vla/libero_protocol.json": {
+      "bytes": 7222,
+      "sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b"
+    },
+    "experiments/vla/profiles/libero_native_raw_float32.json": {
+      "bytes": 1017,
+      "sha256": "d19b142d67b736bd26286f13bcf6c2ae2238e9e7a0b1bab6fd3adaa6722fa3ae"
+    },
+    "experiments/vla/run_sentinel_libero.py": {
+      "bytes": 63962,
+      "sha256": "01a39d0a2e20a7252398edbcce7aed956caf44140ce95677d5c75dc2faeaf75e"
+    },
+    "src/sentinel_evc/native_gateway.py": {
+      "bytes": 26794,
+      "sha256": "c5be0dd7ad13ab09b04bfb4df19c036a0e3e874f012b868e3f120a5c9e3f915b"
+    }
+  },
+  "source_root": "/root/sentinel-product-v1-20261003/source-2ede56b"
+}

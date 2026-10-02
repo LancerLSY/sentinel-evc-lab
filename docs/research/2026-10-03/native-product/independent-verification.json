@@ -1,0 +1,281 @@
+[
+  {
+    "mode": "baseline",
+    "run_id": "native-formal-baseline-v3",
+    "verification": {
+      "ok": true,
+      "scope": "signed-record-integrity",
+      "trust": "user-selected-public-key",
+      "hardware_execution_proven": false
+    },
+    "episodes": 40,
+    "metrics": {
+      "accepted": 5420,
+      "crashes": 0,
+      "elapsed_seconds": 535.3097424507141,
+      "env_steps": 5420,
+      "episodes": 40,
+      "fault_attempts": 0,
+      "fault_attempts_blocked": 0,
+      "latency_ms": {
+        "active_submit_including_env_step": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null
+        },
+        "feedback_age_at_authorize": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null
+        },
+        "gateway_authorize": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null
+        },
+        "gateway_submit_admission_before_writer": {
+          "count": 0,
+          "mean": null,
+          "p50": null,
+          "p95": null,
+          "p99": null
+        },
+        "native_env_step": {
+          "count": 5420,
+          "mean": 27.287736811254614,
+          "p50": 26.588594,
+          "p95": 35.771171,
+          "p99": 40.555425
+        },
+        "policy_inference_to_raw_chunk": {
+          "count": 559,
+          "mean": 352.23854710554565,
+          "p50": 340.608769,
+          "p95": 464.776563,
+          "p99": 503.281473
+        }
+      },
+      "observed": 5420,
+      "postprocessed_action_profile": {
+        "component_max": [
+          1.0317970514297485,
+          0.9446627497673035,
+          1.0099685192108154,
+          0.11072394251823425,
+          0.1509905606508255,
+          0.2047121375799179,
+          1.0761147737503052
+        ],
+        "component_min": [
+          -0.9235753417015076,
+          -0.8115848302841187,
+          -1.0598527193069458,
+          -0.1262136995792389,
+          -0.209009051322937,
+          -0.14993275701999664,
+          -1.088950753211975
+        ],
+        "count": 5420
+      },
+      "postprocessor_to_env_exact_comparisons": 5420,
+      "postprocessor_to_env_max_abs_diff": 0.0,
+      "raw_policy_chunks": 559,
+      "shadow_would_reject": 0,
+      "submitted": 5420,
+      "task_success_rate": 0.825,
+      "task_successes": 33
+    }
+  },
+  {
+    "mode": "active",
+    "run_id": "native-formal-active-v3",
+    "verification": {
+      "ok": true,
+      "scope": "signed-record-integrity",
+      "trust": "user-selected-public-key",
+      "hardware_execution_proven": false
+    },
+    "episodes": 40,
+    "metrics": {
+      "accepted": 5420,
+      "crashes": 0,
+      "elapsed_seconds": 548.3571083545685,
+      "env_steps": 5420,
+      "episodes": 40,
+      "fault_attempts": 0,
+      "fault_attempts_blocked": 0,
+      "latency_ms": {
+        "active_submit_including_env_step": {
+          "count": 5420,
+          "mean": 28.595409463468634,
+          "p50": 27.055267,
+          "p95": 38.859826,
+          "p99": 45.121429
+        },
+        "feedback_age_at_authorize": {
+          "count": 5420,
+          "mean": 50.51509347324723,
+          "p50": 13.702978,
+          "p95": 340.492767,
+          "p99": 466.724544
+        },
+        "gateway_authorize": {
+          "count": 5420,
+          "mean": 0.5543782496309962,
+          "p50": 0.519771,
+          "p95": 0.7245,
+          "p99": 0.796374
+        },
+        "gateway_submit_admission_before_writer": {
+          "count": 5420,
+          "mean": 0.24718096660516606,
+          "p50": 0.232985,
+          "p95": 0.317396,
+          "p99": 0.348709
+        },
+        "native_env_step": {
+          "count": 5420,
+          "mean": 28.126895555535057,
+          "p50": 26.60958,
+          "p95": 38.272193,
+          "p99": 44.536673
+        },
+        "policy_inference_to_raw_chunk": {
+          "count": 559,
+          "mean": 351.50514619141325,
+          "p50": 327.860134,
+          "p95": 454.555571,
+          "p99": 467.021391
+        }
+      },
+      "observed": 5420,
+      "postprocessed_action_profile": {
+        "component_max": [
+          1.0317970514297485,
+          0.9446627497673035,
+          1.0099685192108154,
+          0.11072394251823425,
+          0.1509905606508255,
+          0.2047121375799179,
+          1.0761147737503052
+        ],
+        "component_min": [
+          -0.9235753417015076,
+          -0.8115848302841187,
+          -1.0598527193069458,
+          -0.1262136995792389,
+          -0.209009051322937,
+          -0.14993275701999664,
+          -1.088950753211975
+        ],
+        "count": 5420
+      },
+      "postprocessor_to_env_exact_comparisons": 5420,
+      "postprocessor_to_env_max_abs_diff": 0.0,
+      "raw_policy_chunks": 559,
+      "shadow_would_reject": 0,
+      "submitted": 5420,
+      "task_success_rate": 0.825,
+      "task_successes": 33
+    }
+  },
+  {
+    "mode": "fault",
+    "run_id": "native-formal-fault-v3",
+    "verification": {
+      "ok": true,
+      "scope": "signed-record-integrity",
+      "trust": "user-selected-public-key",
+      "hardware_execution_proven": false
+    },
+    "episodes": 10,
+    "metrics": {
+      "accepted": 1413,
+      "crashes": 0,
+      "elapsed_seconds": 176.53529119491577,
+      "env_steps": 1413,
+      "episodes": 10,
+      "fault_attempts": 60,
+      "fault_attempts_blocked": 60,
+      "latency_ms": {
+        "active_submit_including_env_step": {
+          "count": 1413,
+          "mean": 27.94333589738146,
+          "p50": 27.297708,
+          "p95": 36.126617,
+          "p99": 40.838776
+        },
+        "feedback_age_at_authorize": {
+          "count": 1413,
+          "mean": 50.01455800707714,
+          "p50": 13.550747,
+          "p95": 338.211486,
+          "p99": 461.327293
+        },
+        "gateway_authorize": {
+          "count": 1413,
+          "mean": 0.5550851365888182,
+          "p50": 0.523144,
+          "p95": 0.72899,
+          "p99": 0.767625
+        },
+        "gateway_submit_admission_before_writer": {
+          "count": 1413,
+          "mean": 0.24416168506723285,
+          "p50": 0.231409,
+          "p95": 0.315753,
+          "p99": 0.330047
+        },
+        "native_env_step": {
+          "count": 1413,
+          "mean": 27.482413468506724,
+          "p50": 26.840486,
+          "p95": 35.53238,
+          "p99": 40.338244
+        },
+        "policy_inference_to_raw_chunk": {
+          "count": 145,
+          "mean": 352.85536624137933,
+          "p50": 326.05945,
+          "p95": 458.430633,
+          "p99": 463.562277
+        }
+      },
+      "observed": 1413,
+      "postprocessed_action_profile": {
+        "component_max": [
+          1.0249216556549072,
+          0.9615468382835388,
+          0.9297503232955933,
+          0.11667374521493912,
+          0.16147355735301971,
+          0.2131093144416809,
+          1.0399587154388428
+        ],
+        "component_min": [
+          -0.8655784726142883,
+          -0.7075525522232056,
+          -1.0595968961715698,
+          -0.14037837088108063,
+          -0.1753048300743103,
+          -0.1575080007314682,
+          -1.058870792388916
+        ],
+        "count": 1413
+      },
+      "postprocessor_to_env_exact_comparisons": 1413,
+      "postprocessor_to_env_max_abs_diff": 0.0,
+      "raw_policy_chunks": 145,
+      "shadow_would_reject": 0,
+      "submitted": 1413,
+      "task_success_rate": 0.8,
+      "task_successes": 8
+    }
+  }
+]

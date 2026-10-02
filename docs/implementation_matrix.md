@@ -1,6 +1,9 @@
 # Mechanism implementation matrix — product foundation
 
-This is the first usable local numerical product increment. Repository mechanism IDs M01–M12 are distinct from the original v4 requirement IDs. See [design_alignment.md](design_alignment.md) for the accurate F01–F12 trace and remaining integrations; historical v4 GRU/dataset/robot claims are not substituted with prototype results.
+This matrix separates the numerical/contact core from the native VLA request
+gateway. Repository mechanism IDs M01–M12 are distinct from the original v4
+requirement IDs. See [design_alignment.md](design_alignment.md) for the F01–F12
+trace and remaining integrations.
 
 The [2026-10-02 GPU experiments](gpu_training_results.md) add actual trained
 numerical/visual/object predictors and real recorded data. The table describes
@@ -20,7 +23,7 @@ the physical checks in the numerical table below.
 | Portable evidence | independent public-key selection, bounded staged ZIP import, fresh verification and signed export | demo trust source, no customer PKI or sensor authenticity |
 | App replay | exact task-model binding, real visual meshes and stored body poses, request/decision/cursor timeline | no new browser dynamics or interpolated motion |
 
-The [frozen paired protocol](research/2026-10-03/native-product/PROTOCOL.md)
+The [raw-request paired protocol](research/2026-10-03/native-product/RAW_REQUEST_PROTOCOL.md)
 separates normal task outcomes from six synthetic invalid-authorization attempts.
 
 ## Numerical product mechanisms

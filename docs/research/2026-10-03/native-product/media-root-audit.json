@@ -1,0 +1,11 @@
+{
+  "schema": "sentinel-native-final-media-root-audit-v1",
+  "media_manifest_sha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
+  "media_validation_sha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+  "generator_commit": "a3071f9d7c0b88e60c878c7b350054e34510a9c7",
+  "generator_sha256_matches_frozen_git_blob": true,
+  "source_bundle_and_independently_selected_key_hashes_match": true,
+  "all_selected_video_pose_scene_poster_hashes_and_sizes_match": true,
+  "decoded_pose_payloads_identical_to_previously_audited_rendering": true,
+  "scope": "independent local identity verification; complete decode and replay checks are retained in GPU receipts"
+}

@@ -1,0 +1,191 @@
+{
+  "schema": "sentinel-native-public-artifacts-v1",
+  "release_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003",
+  "formal_source_commit": "2ede56bd655554ad03b9dc93731ca1660aae9010",
+  "hardware": "RTX 4090 D (24 GB)",
+  "assets": [
+    {
+      "filename": "native-v3-baseline.zip",
+      "bytes": 44924570,
+      "sha256": "2e7cc0e1766357c86cdcd3ad5e5c7114afbe78bcc26aff7b53c92a81c46072ab",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v3-baseline.zip",
+      "role": "completed fixed native raw-request evaluation",
+      "run_id": "native-formal-baseline-v3"
+    },
+    {
+      "filename": "native-v3-baseline.public",
+      "bytes": 32,
+      "sha256": "f2c14b1f8c2216e044239e9dd5adc6c3202b7b4a652c6c6ddaf0a4d8a1ac8d30",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v3-baseline.public",
+      "role": "separately retained raw Ed25519 public key; user must select trust source",
+      "run_id": "native-formal-baseline-v3"
+    },
+    {
+      "filename": "native-v3-active.zip",
+      "bytes": 48135379,
+      "sha256": "b95b1886ac8aad4d744b540c2b085ca18c06dabf445945ab3eec0ff92562208a",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v3-active.zip",
+      "role": "completed fixed native raw-request evaluation",
+      "run_id": "native-formal-active-v3"
+    },
+    {
+      "filename": "native-v3-active.public",
+      "bytes": 32,
+      "sha256": "49b37b42791801fdc73d5a677423dcc5c1f45e49df73d5eff7baa21448784558",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v3-active.public",
+      "role": "separately retained raw Ed25519 public key; user must select trust source",
+      "run_id": "native-formal-active-v3"
+    },
+    {
+      "filename": "native-v3-fault.zip",
+      "bytes": 4159717,
+      "sha256": "949ebded4b278e9876a0af6a9dc101f4eefbcd41f1fa05cbd3070aa99b2290af",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v3-fault.zip",
+      "role": "completed fixed native raw-request evaluation",
+      "run_id": "native-formal-fault-v3"
+    },
+    {
+      "filename": "native-v3-fault.public",
+      "bytes": 32,
+      "sha256": "1b35c8c9ef310869a45e4e2199b1cd1d567ad53279c26f1dbbe293edef13206a",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v3-fault.public",
+      "role": "separately retained raw Ed25519 public key; user must select trust source",
+      "run_id": "native-formal-fault-v3"
+    },
+    {
+      "filename": "native-v2-baseline-retained.zip",
+      "bytes": 45562960,
+      "sha256": "6c8bbceb555e0d5fa716b58c84184d395f11503ee8935419b98cad301cee120a",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v2-baseline-retained.zip",
+      "role": "retained earlier bounded-profile result; active/fault are partial compatibility failures",
+      "run_id": "native-formal-baseline-v2"
+    },
+    {
+      "filename": "native-v2-baseline.public",
+      "bytes": 32,
+      "sha256": "1ddf1a58af97c96be48712a44ac33bd4b3c3e7f620f2cd56d95ef0bd307e8a3f",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v2-baseline.public",
+      "role": "separately retained raw Ed25519 public key",
+      "run_id": "native-formal-baseline-v2"
+    },
+    {
+      "filename": "native-v2-active-retained.zip",
+      "bytes": 880300,
+      "sha256": "960fa897ea821ed602d90a5326cb8854e99fcddd044c5d044539e8080b180425",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v2-active-retained.zip",
+      "role": "retained earlier bounded-profile result; active/fault are partial compatibility failures",
+      "run_id": "native-formal-active-v2"
+    },
+    {
+      "filename": "native-v2-active.public",
+      "bytes": 32,
+      "sha256": "ec537ef8cab3db860569a99476454519a1e624bc855e4d79bbb4a3e5dfb952ae",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v2-active.public",
+      "role": "separately retained raw Ed25519 public key",
+      "run_id": "native-formal-active-v2"
+    },
+    {
+      "filename": "native-v2-fault-retained.zip",
+      "bytes": 539096,
+      "sha256": "99c1d9793a28cc017c62d3fdb833fcf36e72cda0c60560acb553cbd515a6fa9b",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v2-fault-retained.zip",
+      "role": "retained earlier bounded-profile result; active/fault are partial compatibility failures",
+      "run_id": "native-formal-fault-v2"
+    },
+    {
+      "filename": "native-v2-fault.public",
+      "bytes": 32,
+      "sha256": "ddf478b009f83df7e02f0cf4ab9076e8838c11a60b15e196c6e53d79d8ade4d4",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v2-fault.public",
+      "role": "separately retained raw Ed25519 public key",
+      "run_id": "native-formal-fault-v2"
+    },
+    {
+      "filename": "native-v1-serialization-failure.tar.gz",
+      "bytes": 9419078,
+      "sha256": "11ef8b9361ef427bf0dcd248f131b218d9fd5051db07d171e5a19e8dd0e10d27",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v1-serialization-failure.tar.gz",
+      "role": "invalid unsigned run archive; excluded from formal statistics"
+    },
+    {
+      "filename": "native-raw-float32-qualification-excluded.zip",
+      "bytes": 225149,
+      "sha256": "6dc1895771264871e933cd2fc3c1db75cd774fbebbab62290d4f48028117d7f6",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-raw-float32-qualification-excluded.zip",
+      "role": "excluded previously observed compatibility qualification",
+      "run_id": "native-qualification-raw-float32-task0-state41-v1"
+    },
+    {
+      "filename": "native-raw-float32-qualification.public",
+      "bytes": 32,
+      "sha256": "655dfe2a126e930afcb70d6f4d4435fc519ef6ec4a9fb56603034a581f4b137e",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-raw-float32-qualification.public",
+      "role": "separately retained raw Ed25519 public key",
+      "run_id": "native-qualification-raw-float32-task0-state41-v1"
+    },
+    {
+      "filename": "companion-task00-state46-middle.png",
+      "bytes": 668783,
+      "sha256": "10ae448353349916bf877206de4a612391d5e7dd23e94f3e0001274ad7d7328b",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/companion-task00-state46-middle.png",
+      "role": "audited presentation companion or its retained middle-frame poster; not additional benchmark evidence"
+    },
+    {
+      "filename": "companion-task00-state46.mp4",
+      "bytes": 962247,
+      "sha256": "32aad611a04489f55186670ec642c84182aaca4d59f22426c1130cc4418c60bb",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/companion-task00-state46.mp4",
+      "role": "audited presentation companion or its retained middle-frame poster; not additional benchmark evidence"
+    },
+    {
+      "filename": "companion-task00-state47-middle.png",
+      "bytes": 676863,
+      "sha256": "35370f34086cc297999256af2720d6d9092853ee16a0fcc6781407c5e13ee23f",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/companion-task00-state47-middle.png",
+      "role": "audited presentation companion or its retained middle-frame poster; not additional benchmark evidence"
+    },
+    {
+      "filename": "companion-task00-state47.mp4",
+      "bytes": 2634858,
+      "sha256": "b6c2e3b3a1bdc5316322d9ccf29a16a2928401f17fa88df710cc88c6f2854154",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/companion-task00-state47.mp4",
+      "role": "audited presentation companion or its retained middle-frame poster; not additional benchmark evidence"
+    },
+    {
+      "filename": "companion-task04-state46-middle.png",
+      "bytes": 779451,
+      "sha256": "6a7f37f0408c28d4e3749ba67f9729df26df359dd9d50e6c7332c2a26cbf5970",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/companion-task04-state46-middle.png",
+      "role": "audited presentation companion or its retained middle-frame poster; not additional benchmark evidence"
+    },
+    {
+      "filename": "companion-task04-state46.mp4",
+      "bytes": 1503992,
+      "sha256": "d8525c8678014e861529ed72275c3ac149c91128d6353d1653771cf7fe89e663",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/companion-task04-state46.mp4",
+      "role": "audited presentation companion or its retained middle-frame poster; not additional benchmark evidence"
+    },
+    {
+      "filename": "companion-task05-state46-middle.png",
+      "bytes": 645428,
+      "sha256": "c8d5f9303597911a74e188951cf363d4e0d401185348b09bbf2406647ae979d4",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/companion-task05-state46-middle.png",
+      "role": "audited presentation companion or its retained middle-frame poster; not additional benchmark evidence"
+    },
+    {
+      "filename": "companion-task05-state46.mp4",
+      "bytes": 983605,
+      "sha256": "e40687abed72f5f010aac1652ff2101b35eb65e896e7a6bf8e01c63bec1414ee",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/companion-task05-state46.mp4",
+      "role": "audited presentation companion or its retained middle-frame poster; not additional benchmark evidence"
+    },
+    {
+      "filename": "sentinel-project-page.zip",
+      "bytes": 61222296,
+      "sha256": "5a532a39d22c0ff614ce45d11f4d1e0d0f098523bd4059cb17cb49167ba5f413",
+      "download_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/sentinel-project-page.zip",
+      "role": "portable project-only website, code, exact replay transport assets, audited media and upstream notices"
+    }
+  ],
+  "trust_note": "Signature verification checks record integrity relative to the separately selected public key; it does not establish hardware execution, sensor truth or a trusted public-key authority."
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "sentinel-native-root-audit-v1",
+  "source_and_configs_match_frozen_hashes": true,
+  "comparison_sha256": "0989df712330b582d69ec074f3689301f4e39b2e56b598d8420dde2887cf5e4d",
+  "remote_comparison_bytes_identical": true,
+  "paired_grid_count": 40,
+  "paired_action_count": 5420,
+  "prior_diagnostic_cells": [
+    [
+      0,
+      46
+    ],
+    [
+      0,
+      48
+    ],
+    [
+      0,
+      49
+    ],
+    [
+      5,
+      47
+    ]
+  ],
+  "remaining_cells": 36,
+  "remaining_successes_each": 29,
+  "failure_cells": [
+    {
+      "task_id": 0,
+      "initial_state_index": 47,
+      "steps": 280
+    },
+    {
+      "task_id": 4,
+      "initial_state_index": 47,
+      "steps": 280
+    },
+    {
+      "task_id": 6,
+      "initial_state_index": 46,
+      "steps": 280
+    },
+    {
+      "task_id": 7,
+      "initial_state_index": 49,
+      "steps": 280
+    },
+    {
+      "task_id": 8,
+      "initial_state_index": 46,
+      "steps": 280
+    },
+    {
+      "task_id": 9,
+      "initial_state_index": 48,
+      "steps": 280
+    },
+    {
+      "task_id": 9,
+      "initial_state_index": 49,
+      "steps": 280
+    }
+  ]
+}

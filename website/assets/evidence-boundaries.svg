@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">Sentinel EVC: four separate evidence paths</title><desc id="desc">Recorded SO100 action reconstruction, UR5e final-plan validation, tray payload support routing, and native official SmolVLA LIBERO closed-loop evaluation have separate model, embodiment and endpoint boundaries.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="#718399"/></marker></defs>
+<rect width="1200" height="700" rx="18" fill="#f5f7fb"/>
+<g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" fill="#172943">
+<text x="46" y="55" font-size="28" font-weight="700">Four evidence paths / 四条独立证据路径</text>
+<text x="46" y="85" font-size="16" fill="#596b80">Match the model, robot and endpoint before comparing results. / 先匹配模型、机械臂与指标，再比较结果。</text>
+<g fill="#fff" stroke="#dce4ef"><rect x="36" y="116" width="1128" height="118" rx="12"/><rect x="36" y="248" width="1128" height="118" rx="12"/><rect x="36" y="380" width="1128" height="118" rx="12"/><rect x="36" y="512" width="1128" height="118" rx="12"/></g>
+<g font-size="19" font-weight="700"><text x="58" y="151">Recorded SO100</text><text x="58" y="283">UR5e simulation</text><text x="58" y="415">Contact simulation</text><text x="58" y="547">Native LIBERO</text></g>
+<g font-size="15" fill="#596b80"><text x="58" y="178">记录数据 · 六维动作</text><text x="58" y="310">完整网格 · 关节计划</text><text x="58" y="442">托盘 / 载荷 · 接触物理</text><text x="58" y="574">Panda · 七维相对动作</text></g>
+<g stroke="#718399" stroke-width="2" marker-end="url(#arrow)"><path d="M275 174H314"/><path d="M678 174H716"/><path d="M275 306H314"/><path d="M678 306H716"/><path d="M275 438H314"/><path d="M678 438H716"/><path d="M275 570H314"/><path d="M678 570H716"/></g>
+<g font-size="18" font-weight="600"><text x="336" y="158">Sentinel SmolVLA overlay</text><text x="336" y="290">Full / bound incremental check</text><text x="336" y="422">W2 routing + slow physical plan</text><text x="336" y="554">Official SmolVLA + env.step</text></g>
+<g font-size="15" fill="#596b80"><text x="336" y="188">冻结骨干与模型 · 相同采样噪声</text><text x="336" y="320">最终计划与上下文绑定 · 无效则全检</text><text x="336" y="452">声明物理下界 · 同初态候选对比</text><text x="336" y="584">匹配模型与环境 · 观察器不改动作</text></g>
+<g font-size="18" font-weight="600" fill="#247f77"><text x="738" y="158">Held-out normalized action MAE</text><text x="738" y="290">False allows / rejects + cost</text><text x="738" y="422">Risk + drops + completion + time</text><text x="738" y="554">100 fixed-state task outcomes</text></g>
+<g font-size="15" fill="#596b80"><text x="738" y="188">离线动作重建，不能换算任务成功率</text><text x="738" y="320">独立密集复核；拒绝轨迹只作反事实展示</text><text x="738" y="452">拒绝计为未完成；慢速基线必须保留</text><text x="738" y="584">真实模拟闭环；不代表 SO100 或干预收益</text></g>
+<text x="46" y="673" font-size="16" fill="#596b80">No arbitrary SO100 → UR5e / Panda mapping. / 不使用任意映射把不同模型或机械臂的结果混在一起。</text>
+</g></svg>

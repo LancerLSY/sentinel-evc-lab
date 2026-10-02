@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="910" viewBox="0 0 1320 910" role="img" aria-labelledby="t d">
+<title id="t">Native VLA authorization: paired behavior, faults and cost</title><desc id="d">40 paired episodes: direct baseline and Sentinel both succeed 33/40, all 5420 action bytes unchanged. 60 synthetic faults rejected with 0 forbidden writer calls. Gateway authorize plus admission mean 0.802 ms, P95 1.040 ms. RTX 4090 D (24 GB), fixed engineering grid, not a competitor benchmark.</desc>
+<rect width="1320" height="910" rx="24" fill="#f6f9fc"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#172f42}.h{font-size:28px;font-weight:700}.k{font-size:13px;letter-spacing:2px;fill:#557789}.m{font-size:16px}.s{font-size:14px;fill:#526b7d}.n{font-size:36px;font-weight:700}.b{font-size:18px;font-weight:700}</style>
+<text x="42" y="40" class="k">PRODUCT EVIDENCE / NATIVE REQUEST BOUNDARY</text>
+<text x="42" y="82" class="h">Keep the policy behavior. Add verifiable control permission.</text>
+<text x="42" y="112" class="s">RTX 4090 D (24 GB) · LIBERO / Panda · MuJoCo 3.3.7 · actual inference in both lanes</text>
+<rect x="42" y="140" width="394" height="135" rx="10" fill="#ffffff"/>
+<text x="64" y="181" class="b">Baseline = Sentinel</text>
+<text x="64" y="225" class="n">33/40 = 33/40</text>
+<text x="64" y="251" class="s">40 paired outcomes match</text>
+<rect x="462" y="140" width="394" height="135" rx="10" fill="#ffffff"/>
+<text x="484" y="181" class="b">Exact requests preserved</text>
+<text x="484" y="225" class="n">5,420 / 5,420</text>
+<text x="484" y="251" class="s">0 different action bytes</text>
+<rect x="882" y="140" width="394" height="135" rx="10" fill="#ffffff"/>
+<text x="904" y="181" class="b">Invalid attempts blocked</text>
+<text x="904" y="225" class="n">60 / 60</text>
+<text x="904" y="251" class="s">0 forbidden writer calls</text>
+<rect x="42" y="295" width="754" height="348" rx="10" fill="#ffffff"/>
+<text x="66" y="328" class="b">Every planned task/state cell remains in the denominator</text>
+<text x="66" y="355" class="s">Each column has four independently inferred baseline/active pairs.</text>
+<text x="174" y="388" class="m">0</text>
+<rect x="168" y="410" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="187.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">77</text>
+<rect x="168" y="455" width="39" height="26" rx="5" fill="#bd5c48"/>
+<text x="187.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">280</text>
+<rect x="168" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="187.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">74</text>
+<rect x="168" y="545" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="187.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">75</text>
+<text x="231" y="388" class="m">1</text>
+<rect x="225" y="410" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="244.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">110</text>
+<rect x="225" y="455" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="244.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">260</text>
+<rect x="225" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="244.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">110</text>
+<rect x="225" y="545" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="244.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">103</text>
+<text x="288" y="388" class="m">2</text>
+<rect x="282" y="410" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="301.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">93</text>
+<rect x="282" y="455" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="301.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">92</text>
+<rect x="282" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="301.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">86</text>
+<rect x="282" y="545" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="301.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">99</text>
+<text x="345" y="388" class="m">3</text>
+<rect x="339" y="410" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="358.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">83</text>
+<rect x="339" y="455" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="358.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">85</text>
+<rect x="339" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="358.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">82</text>
+<rect x="339" y="545" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="358.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">85</text>
+<text x="402" y="388" class="m">4</text>
+<rect x="396" y="410" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="415.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">131</text>
+<rect x="396" y="455" width="39" height="26" rx="5" fill="#bd5c48"/>
+<text x="415.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">280</text>
+<rect x="396" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="415.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">136</text>
+<rect x="396" y="545" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="415.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">135</text>
+<text x="459" y="388" class="m">5</text>
+<rect x="453" y="410" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="472.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">83</text>
+<rect x="453" y="455" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="472.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">85</text>
+<rect x="453" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="472.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">91</text>
+<rect x="453" y="545" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="472.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">94</text>
+<text x="516" y="388" class="m">6</text>
+<rect x="510" y="410" width="39" height="26" rx="5" fill="#bd5c48"/>
+<text x="529.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">280</text>
+<rect x="510" y="455" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="529.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">115</text>
+<rect x="510" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="529.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">106</text>
+<rect x="510" y="545" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="529.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">102</text>
+<text x="573" y="388" class="m">7</text>
+<rect x="567" y="410" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="586.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">126</text>
+<rect x="567" y="455" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="586.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">117</text>
+<rect x="567" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="586.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">115</text>
+<rect x="567" y="545" width="39" height="26" rx="5" fill="#bd5c48"/>
+<text x="586.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">280</text>
+<text x="630" y="388" class="m">8</text>
+<rect x="624" y="410" width="39" height="26" rx="5" fill="#bd5c48"/>
+<text x="643.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">280</text>
+<rect x="624" y="455" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="643.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">93</text>
+<rect x="624" y="500" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="643.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">92</text>
+<rect x="624" y="545" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="643.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">94</text>
+<text x="687" y="388" class="m">9</text>
+<rect x="681" y="410" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="700.5" y="428" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">117</text>
+<rect x="681" y="455" width="39" height="26" rx="5" fill="#137f83"/>
+<text x="700.5" y="473" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">114</text>
+<rect x="681" y="500" width="39" height="26" rx="5" fill="#bd5c48"/>
+<text x="700.5" y="518" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">280</text>
+<rect x="681" y="545" width="39" height="26" rx="5" fill="#bd5c48"/>
+<text x="700.5" y="563" text-anchor="middle" font-family="Arial" font-size="13" style="fill:#ffffff">280</text>
+<text x="66" y="429" class="m">State 46</text>
+<text x="66" y="474" class="m">State 47</text>
+<text x="66" y="519" class="m">State 48</text>
+<text x="66" y="564" class="m">State 49</text>
+<text x="168" y="598" class="s">Task ID →     cell labels = actual action count</text>
+<rect x="66" y="609" width="14" height="14" rx="3" fill="#137f83"/>
+<text x="88" y="622" class="s">Success</text>
+<rect x="191" y="609" width="14" height="14" rx="3" fill="#bd5c48"/>
+<text x="213" y="622" class="s">280-step task failure (all seven retained)</text>
+<rect x="816" y="295" width="460" height="348" rx="10" fill="#ffffff"/>
+<text x="840" y="328" class="b">Gateway cost before writer entry</text>
+<text x="840" y="355" class="s">5,420 measured active requests</text>
+<text x="840" y="402" class="s">MEAN</text>
+<rect x="905" y="382" width="192.374211896679" height="23" rx="4" fill="#137f83"/>
+<text x="1227" y="402" class="m">0.802</text>
+<text x="840" y="454" class="s">P50</text>
+<rect x="905" y="434" width="180.63984000000002" height="23" rx="4" fill="#137f83"/>
+<text x="1227" y="454" class="m">0.753</text>
+<text x="840" y="506" class="s">P95</text>
+<rect x="905" y="486" width="249.66144000000003" height="23" rx="4" fill="#137f83"/>
+<text x="1227" y="506" class="m">1.040</text>
+<text x="840" y="558" class="s">P99</text>
+<rect x="905" y="538" width="274.50744" height="23" rx="4" fill="#137f83"/>
+<text x="1227" y="558" class="m">1.144</text>
+<text x="840" y="607" class="s">ms · excludes inference, env.step and recording</text>
+<text x="840" y="629" class="s">Simulator 20 Hz ≠ wall-clock real-time guarantee</text>
+<rect x="42" y="663" width="1234" height="164" rx="10" fill="#ffffff"/>
+<text x="66" y="698" class="b">Six invalid authorization conditions · separate software-fault lane</text>
+<text x="66" y="735" class="m">Replaced action</text>
+<text x="66" y="768" class="b">10/10 blocked</text>
+<text x="66" y="795" class="s">writer calls: 0</text>
+<text x="267" y="735" class="m">Changed context</text>
+<text x="267" y="768" class="b">10/10 blocked</text>
+<text x="267" y="795" class="s">writer calls: 0</text>
+<text x="468" y="735" class="m">Expired permit</text>
+<text x="468" y="768" class="b">10/10 blocked</text>
+<text x="468" y="795" class="s">writer calls: 0</text>
+<text x="669" y="735" class="m">Permit reused</text>
+<text x="669" y="768" class="b">10/10 blocked</text>
+<text x="669" y="795" class="s">writer calls: 0</text>
+<text x="870" y="735" class="m">Old feedback</text>
+<text x="870" y="768" class="b">10/10 blocked</text>
+<text x="870" y="795" class="s">writer calls: 0</text>
+<text x="1071" y="735" class="m">Revoked generation</text>
+<text x="1071" y="768" class="b">10/10 blocked</text>
+<text x="1071" y="795" class="s">writer calls: 0</text>
+<text x="42" y="859" class="s">Fixed engineering grid: tasks0–9, states46–49; four prior diagnostic cells disclosed. No installed competitor ranking.</text>
+<text x="42" y="884" class="s">Official checkpoint performance; in-process request integrity. No Panda collision, WorldGuard or physical-stop validation.</text>
+</svg>

@@ -12,17 +12,17 @@ Sentinel EVC places an authorization gate at the last commit point of a robot
 policy's action block. It checks the action that will **actually** execute, issues
 a time-boxed single-use permit, and records evidence that a third party can verify.
 
-The repository is a local research product with a CLI, native macOS App, browser
-workbench, SSH experiment runner, bounded 3D model inspection, and read-only robot
-diagnostics. The product core and each research profile keep separate capability
-and evidence boundaries.
+The local execution workbench includes a CLI, native macOS App, browser replay,
+SSH experiment runner, bounded 3D model inspection, and read-only robot diagnostics.
+It works alongside an existing policy environment. Each supported profile
+declares its own authorization and validation contract.
 
-> **v0.3 · active research prototype · MIT**
+> **v0.3 · local developer preview · MIT**
 >
 > Product runtime: Python 3.10+ · macOS App: Python-managed, locally built · server: `127.0.0.1` only
 
 [Install](#five-minute-setup) · [See the mechanism](#how-the-gate-works) ·
-[Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/paper-validation-20261002) ·
+[Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003) ·
 [Research showcase](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
 ## What is usable today
@@ -39,6 +39,36 @@ and evidence boundaries.
 
 The workbench always shows execution completion, evidence integrity, and scientific
 acceptance separately. A run may complete correctly while a scientific gate fails.
+
+## Why add Sentinel to an existing VLA stack
+
+**Keep the policy. Control the final request.** Sentinel binds the official
+postprocessor's exact shape, dtype and bytes to current feedback and execution
+context. A short-lived permit is consumed once at the environment writer;
+the request, decision and observed transition become a portable signed record.
+
+| Measured native behavior | Result |
+|---|---|
+| Direct baseline vs Sentinel active | **33/40 vs 33/40** task successes; all seven failures retained |
+| Complete paired action sequences | **40/40 byte-identical**, covering **5,420** requests |
+| Six invalid-authorization classes | **60/60 blocked**, **0** forbidden writer calls |
+| Authorization + admission cost | **0.802 ms mean · 1.040 ms P95**, excluding inference and `env.step` |
+| Actual App import/export | complete 40-episode bundle verified with an independently selected key; exported ZIP reverified |
+
+This fixed engineering grid used **RTX 4090 D (24 GB)** and actual official
+SmolVLA/LIBERO inference in both lanes. The native profile establishes
+in-process request integrity; physical checks have separate profiles.
+[Results and every failure](docs/research/2026-10-03/native-product/RESULTS.md) ·
+[Frozen design](docs/research/2026-10-03/native-product/RAW_REQUEST_PROTOCOL.md) ·
+[Native evidence and videos](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003).
+
+LeRobot supplies policy deployment and RTC, MoveIt Pro supplies motion and
+physical controls, and Foxglove/Rerun supply visualization workflows. Sentinel
+focuses on final-request authorization and verifiable write-boundary evidence.
+These are complementary roles; no installed competitor ranking is claimed.
+[Documented ecosystem roles](docs/native_method_position.md).
+
+![Actual macOS App inspecting the signed formal native run](docs/screenshots/native-formal-active-v3-overview.png)
 
 ## Five-minute setup
 

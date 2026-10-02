@@ -1,0 +1,98 @@
+{
+  "cameraOrientationAudit": {
+    "agentview": {
+      "direct": 0.0026131687242798352,
+      "verticallyFlipped": 55.55477366255144
+    },
+    "comparison": "mean absolute uint8 pixel difference against reset model observation",
+    "conclusion": "native sim.render orientation matches the signed model-observation orientation; no flip applied",
+    "initialStateIndex": 46,
+    "renderSize": [
+      360,
+      360
+    ],
+    "robot0_eye_in_hand": {
+      "direct": 0.04657150205761317,
+      "verticallyFlipped": 64.51823302469136
+    },
+    "seed": 44046,
+    "taskId": 0
+  },
+  "mediaManifestSha256": "sha256:a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
+  "schema": "sentinel-native-companion-validation-v1",
+  "status": "complete",
+  "videos": [
+    {
+      "codec": "h264",
+      "completeDecode": true,
+      "decodedFrames": 78,
+      "durationSeconds": 3.9,
+      "expectedFrames": 78,
+      "expectedSha256": "sha256:32aad611a04489f55186670ec642c84182aaca4d59f22426c1130cc4418c60bb",
+      "fps": 20.0,
+      "hashMatches": true,
+      "height": 876,
+      "metadataMatches": true,
+      "path": "companion-task00-state46.mp4",
+      "pixelFormat": "yuv420p(progressive)",
+      "poster": "companion-task00-state46-middle.png",
+      "posterSha256": "sha256:10ae448353349916bf877206de4a612391d5e7dd23e94f3e0001274ad7d7328b",
+      "sha256": "sha256:32aad611a04489f55186670ec642c84182aaca4d59f22426c1130cc4418c60bb",
+      "width": 1440
+    },
+    {
+      "codec": "h264",
+      "completeDecode": true,
+      "decodedFrames": 132,
+      "durationSeconds": 6.6,
+      "expectedFrames": 132,
+      "expectedSha256": "sha256:d8525c8678014e861529ed72275c3ac149c91128d6353d1653771cf7fe89e663",
+      "fps": 20.0,
+      "hashMatches": true,
+      "height": 876,
+      "metadataMatches": true,
+      "path": "companion-task04-state46.mp4",
+      "pixelFormat": "yuv420p(progressive)",
+      "poster": "companion-task04-state46-middle.png",
+      "posterSha256": "sha256:6a7f37f0408c28d4e3749ba67f9729df26df359dd9d50e6c7332c2a26cbf5970",
+      "sha256": "sha256:d8525c8678014e861529ed72275c3ac149c91128d6353d1653771cf7fe89e663",
+      "width": 1440
+    },
+    {
+      "codec": "h264",
+      "completeDecode": true,
+      "decodedFrames": 84,
+      "durationSeconds": 4.2,
+      "expectedFrames": 84,
+      "expectedSha256": "sha256:e40687abed72f5f010aac1652ff2101b35eb65e896e7a6bf8e01c63bec1414ee",
+      "fps": 20.0,
+      "hashMatches": true,
+      "height": 876,
+      "metadataMatches": true,
+      "path": "companion-task05-state46.mp4",
+      "pixelFormat": "yuv420p(progressive)",
+      "poster": "companion-task05-state46-middle.png",
+      "posterSha256": "sha256:c8d5f9303597911a74e188951cf363d4e0d401185348b09bbf2406647ae979d4",
+      "sha256": "sha256:e40687abed72f5f010aac1652ff2101b35eb65e896e7a6bf8e01c63bec1414ee",
+      "width": 1440
+    },
+    {
+      "codec": "h264",
+      "completeDecode": true,
+      "decodedFrames": 281,
+      "durationSeconds": 14.05,
+      "expectedFrames": 281,
+      "expectedSha256": "sha256:b6c2e3b3a1bdc5316322d9ccf29a16a2928401f17fa88df710cc88c6f2854154",
+      "fps": 20.0,
+      "hashMatches": true,
+      "height": 876,
+      "metadataMatches": true,
+      "path": "companion-task00-state47.mp4",
+      "pixelFormat": "yuv420p(progressive)",
+      "poster": "companion-task00-state47-middle.png",
+      "posterSha256": "sha256:35370f34086cc297999256af2720d6d9092853ee16a0fcc6781407c5e13ee23f",
+      "sha256": "sha256:b6c2e3b3a1bdc5316322d9ccf29a16a2928401f17fa88df710cc88c6f2854154",
+      "width": 1440
+    }
+  ]
+}

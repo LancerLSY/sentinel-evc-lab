@@ -1,0 +1,41 @@
+{
+  "schema": "sentinel-native-app-acceptance-v1",
+  "scope": "observed local usability and export integrity; unsigned acceptance record",
+  "app_source_commit": "5de3bda8b8ad6436203b079d0fe733937db2403a",
+  "installed_source_sha256": "bb149e8dffd59190864dc8dd53280db490cb7993be175161ec107baaafe1d0e3",
+  "codesign_deep_strict": "pass; local ad-hoc signing, not distribution notarization",
+  "run_id": "native-formal-active-v3",
+  "imported_episodes": 40,
+  "independent_key_selected": true,
+  "record_integrity_verified": true,
+  "task_successes": 33,
+  "submitted_accepted_observed": [
+    5420,
+    5420,
+    5420
+  ],
+  "inspected_cell": {
+    "task_id": 0,
+    "initial_state_index": 46,
+    "frames": 78,
+    "terminal_cursors": [
+      77,
+      77,
+      77
+    ],
+    "reward": 1,
+    "success": true,
+    "seven_action_components_visible": true,
+    "actual_task_mesh_displayed": true,
+    "permit_displayed": true
+  },
+  "export_reimport": {
+    "verified": true,
+    "episodes": 40,
+    "archive_sha256": "118b2f282bda638f2e2a239d9e53c2eeb7dfcebcb861568f2645874c08db6cfc"
+  },
+  "screenshots": {
+    "native-formal-active-v3-overview.png": "69fe9bc95a6a36ed152908ab792e2ec2247b933c95ed4374caaaded9f16fd2fd",
+    "native-formal-active-v3.png": "e9638ae11d4efd62657e07248cd4b1952e9573cbb3d440ada5bd63cf6d201d49"
+  }
+}

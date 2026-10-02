@@ -11,16 +11,16 @@
 Sentinel EVC 把授权门放在机器人策略动作块的最后提交点：校验**真正要执行**
 的最终动作，签发有时限、一次性的执行许可，并留下可由第三方独立校验的证据。
 
-这是一个可在本地使用的研究产品，包含 CLI、macOS 原生 App、浏览器工作台、
-SSH 实验入口、受限三维模型检查和只读机械臂诊断。产品核心与各研究 profile
-各自声明能力和证据边界，不把离线实验包装成设备集成。
+本地执行工作台提供 CLI、macOS 原生 App、浏览器回放、SSH 实验入口、
+受限三维模型检查和只读机械臂诊断，可与已有策略环境一起使用。
+每个受支持的 profile 分别声明授权与校验契约。
 
-> **v0.3 · 持续研究中的原型 · MIT**
+> **v0.3 · 本地开发者预览版 · MIT**
 >
 > 产品运行时：Python 3.10+ · macOS App：由 Python 环境管理并在本机构建 · 服务仅监听 `127.0.0.1`
 
 [安装](#五分钟安装) · [机制](#执行许可如何产生) ·
-[实测结果](#实测结果) · [最新实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/paper-validation-20261002) ·
+[实测结果](#实测结果) · [最新实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003) ·
 [研究展示导航](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
 ## 当前可用入口
@@ -37,6 +37,34 @@ SSH 实验入口、受限三维模型检查和只读机械臂诊断。产品核�
 
 工作台把“运行是否完成”“证据是否完整”“科学验收是否通过”分开显示。
 一次实验可以正确完成，同时保留未通过的科学门。
+
+## 为什么在现有 VLA 系统中加入 Sentinel
+
+**保留已有策略，控制最终请求。** Sentinel 把官方后处理器输出的精确
+shape、dtype 和字节绑定到当前反馈及执行上下文。短时许可在环境写入器前
+只能消费一次，动作、判定和实际反馈共同形成可携带的签名记录。
+
+| 原生接入实测 | 结果 |
+|---|---|
+| 直接执行与 Sentinel 主动授权 | **33/40 对 33/40** 次任务成功，七个失败全部保留 |
+| 完整配对动作序列 | **40/40 字节一致**，覆盖 **5,420** 个请求 |
+| 六类无效授权 | **60/60 阻断**，**0** 次越权写入器调用 |
+| 授权加写入前准入耗时 | **均值 0.802 ms · P95 1.040 ms**，不含推理和 `env.step` |
+| 实际 App 导入与导出 | 独立公钥核验完整 40 条运行记录，导出 ZIP 再次核验通过 |
+
+固定工程对照在 **RTX 4090 D（24 GB）** 上运行，两组都使用官方
+SmolVLA/LIBERO 实际推理。原生 profile 建立进程内请求完整性，物理检查由
+其他 profile 分别声明。
+[完整结果与每个失败](docs/research/2026-10-03/native-product/RESULTS.md) ·
+[冻结方案](docs/research/2026-10-03/native-product/RAW_REQUEST_PROTOCOL.md) ·
+[原生证据包与视频](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003)。
+
+LeRobot 提供策略部署与 RTC，MoveIt Pro 提供运动与物理控制，Foxglove/Rerun
+提供可视化工作流。Sentinel 专注最终请求授权与可核验的写入证据，适合与
+这些系统配合使用；当前没有已安装竞品的性能排名。
+[有来源的职责对照](docs/native_method_position.md)。
+
+![macOS App 查看已签名的正式原生运行](docs/screenshots/native-formal-active-v3-overview.png)
 
 ## 五分钟安装
 
