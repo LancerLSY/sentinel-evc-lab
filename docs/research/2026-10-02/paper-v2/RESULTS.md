@@ -156,6 +156,8 @@ The [confirmation protocol](CONFIRMATION_PROTOCOL.md) and step-outcome recorder 
 
 All seven failures reach the 280-step cap with zero official reward: task3/state35; task4/states30,31,34,37; task5/state34; task8/state33. The **6/10 top-drawer task** remains the weakest. No failed cell is retried, replaced or removed. Robot-state, action and outcome traces alone do not identify the remaining contact or grasp failure causes.
 
+A separate post-hoc drawer replay completes the recorded 280 actions for task4/state30, but the state32 success illustration fails its initial camera-identity gate despite matching instruction and processed robot state. The runner stops before any state32 action; no paired film is produced. [Retained failure receipt](confirmation-replay/README.md) records the compatibility gap and partial artifacts. The confirmation counts above remain unchanged.
+
 Independent review reparses all 47,467 events and verifies 100 actual state/seed resets, 1,199 raw prediction chunks, and 11,592 aligned selected/postprocessed/environment actions and official step outcomes. Every postprocessed/environment action is byte-identical, maximum difference zero, with zero interventions. Every successful episode ends with reward 1 and official success termination. Total traced wall time is 1,462.97 s (24.38 min), including inference, simulation and recording; it is not an inference-only benchmark. The [complete manifest](confirmation/manifest.json) and [frozen protocol](confirmation/frozen_protocol.json) retain every episode, fourteen source bindings and the excluded preflight digest.
 
 ![Fresh-state full-suite confirmation and descriptive intervals](confirmation-figures/full-suite-confirmation.svg)

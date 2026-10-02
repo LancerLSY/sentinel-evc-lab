@@ -1,0 +1,113 @@
+{
+  "schema": "sentinel-libero-confirmation-replay-failure-v1",
+  "status": "failed",
+  "included_in_benchmark_metrics": false,
+  "policy_inference": false,
+  "new_benchmark_samples": 0,
+  "completed_comparison_film": false,
+  "failure": {
+    "case": "success",
+    "task_id": 4,
+    "initial_state_index": 32,
+    "seed": 44023,
+    "stage": "first_processed_observation_gate",
+    "checks": {
+      "instruction": true,
+      "processed_robot_state": true,
+      "processed_camera_hashes": false
+    },
+    "camera_hash_provenance": "Expected hashes come from the retained formal trace. Actual hashes were collected by one post-failure, no-action reset diagnostic with the same state, seed, frozen runtime, and portable assets; the failed runner logged only the boolean mismatch, so byte identity between the failed attempt and diagnostic reset is not claimed.",
+    "processed_cameras": {
+      "observation.images.image": {
+        "shape": [1, 3, 360, 360],
+        "dtype": "torch.float32",
+        "expected_sha256": "3fc3242fc1c44dbaf6e88aa1784d725d6161d3a32e260dd085cc71f55a7ae821",
+        "actual_sha256": "4a5e4629620ff0b2054b0a8f847326d51ab256a3f542e1bd8a54648134a519fe"
+      },
+      "observation.images.image2": {
+        "shape": [1, 3, 360, 360],
+        "dtype": "torch.float32",
+        "expected_sha256": "18bd501f43f6319e6647a7e8dd53dbcccabca8d4505c161333f82cf684591b55",
+        "actual_sha256": "fe17bca1856b5fb833f5b136301f2f9fb844a9641ef4fec7baf983bd764b93f8"
+      }
+    },
+    "exception": "RuntimeError: success first observation mismatch: {'instruction': True, 'processed_robot_state': True, 'processed_camera_hashes': False}"
+  },
+  "completed_partial_case": {
+    "selection": "failure",
+    "task_id": 4,
+    "initial_state_index": 30,
+    "seed": 44021,
+    "recorded_actions_replayed": 280,
+    "first_observation_checks": {
+      "instruction": true,
+      "processed_robot_state": true,
+      "processed_camera_hashes": true
+    },
+    "per_step_official_outcomes_matched": true,
+    "artifacts": {
+      "native_rgb_video": {
+        "path": "runs/paper-v2/confirmation-case-replay-v1/task4-state30-failure-native-rgb-20hz.mp4",
+        "sha256": "81d954a9de1defe88c189e3836fa3ff936c82fe22744c8b910b68ad273ac327d",
+        "bytes": 1026733,
+        "fps_requested": 20,
+        "frames_submitted_to_encoder": 281,
+        "frame_semantics": "initial reset frame followed by one post-action native render for each of 280 recorded actions",
+        "encoded_frame_count_independently_verified": false
+      },
+      "first_camera_1_png": {
+        "path": "runs/paper-v2/confirmation-case-replay-v1/task4-state30-first-camera-1.png",
+        "sha256": "28d46bf513d4a25e45b8762d7dd40b463c43231f50e24eddfa75bbbe78e9a473",
+        "bytes": 108618
+      },
+      "first_camera_2_png": {
+        "path": "runs/paper-v2/confirmation-case-replay-v1/task4-state30-first-camera-2.png",
+        "sha256": "1cae79b3c76057041dc27240a07aa4cabfe8873d248c89c52ad1c5f019ea5cab",
+        "bytes": 93298
+      }
+    }
+  },
+  "source_bindings": {
+    "git_commit": "f59f81fda07665f873076f4a4e8e31918d2f7120",
+    "replay_runner_sha256": "aaf77e84adc7a1efcf22e3ae50ec2258998340e8c572762059cff13532de708a",
+    "portable_asset_verifier_sha256": "a2fffc2a311e4b1391f5892a58ded52144f6c55b063fe5983a289b303f4b14f9",
+    "confirmation_runner_sha256": "4dbd71cbf4d3e259736fb0b04d524604dacd8f64f5599e261517619fc258f4aa",
+    "confirmation_protocol_sha256": "b0181947d9dc4b943c95dfaad933fbfa420a7220428b18b99e968e23e07146b8",
+    "confirmation_manifest_sha256": "ec87b22d166dd167c3549d3e976bfe29d10c2de128aeef2218ceb67bdcd7efac",
+    "confirmation_action_trace": {
+      "path": "runs/paper-v2/libero-confirmation-final-100-v1/action_trace.jsonl",
+      "sha256": "a78454f9c5e138e056cd61d9243c7ac7fff1b6855df161d6e8903d1cb38792ab"
+    },
+    "public_input_archive_sha256": "aa1557afab004ef09328fb48158230e9ba8e886037580c66dbdd38ce37eb8807"
+  },
+  "asset_bindings": {
+    "historical_formal_tree": {
+      "scope": "mixed_site_packages_tree",
+      "file_count": 955,
+      "total_bytes": 188829695,
+      "tree_sha256": "f04f72afb7503afb071f9de7c6734b0eca147f87549df0a9080cc987afb17781"
+    },
+    "portable_reconstructed_content": {
+      "manifest_sha256": "e743224025f6966a2aa7c9cda51dc0c9aa3b800d68d576c12ec8e88d4f0877af",
+      "file_count": 239,
+      "total_bytes": 189311115,
+      "canonical_tree_sha256": "c7fef2c780dbab2bbdaf375a2a8bbac171341718988f01cd5309bbb4d692e015",
+      "historical_whole_tree_match_claimed": false
+    }
+  },
+  "runtime": {
+    "python": "3.12.3",
+    "lerobot": "0.6.1",
+    "hf-libero": "0.1.4",
+    "robosuite": "1.4.0",
+    "mujoco": "3.3.7",
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "num2words": "0.5.14"
+  },
+  "claim_boundary": [
+    "This failed post-hoc replay adds no benchmark episode and changes no published denominator.",
+    "The task4/state30 raw clip is a partial artifact; no success comparison film or complete replay manifest was produced.",
+    "The camera mismatch is retained as evidence and was not bypassed, normalized, or replaced."
+  ]
+}
