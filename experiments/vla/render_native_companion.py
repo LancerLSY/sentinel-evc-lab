@@ -93,30 +93,50 @@ def _canvas(
     *,
     title: str,
     instruction: str,
-    step: int,
-    action: list[float] | None,
-    verdict: str,
-    result: str,
+    source_frame: dict[str, Any],
+    episode_status: str,
     font: ImageFont.ImageFont,
 ) -> np.ndarray:
     height, width = left.shape[:2]
-    header = 132
+    header = 156
     canvas = Image.new("RGB", (width * 2, height + header), (10, 15, 24))
     canvas.paste(Image.fromarray(left), (0, header))
     canvas.paste(Image.fromarray(right), (width, header))
     draw = ImageDraw.Draw(canvas)
-    action_text = "reset" if action is None else " ".join(f"{value:+.3f}" for value in action)
+    step = int(source_frame["step"])
+    action = source_frame.get("action")
+    if action is None:
+        action_text = "reset"
+        audit = "action=N/A observation=MATCH outcome=N/A"
+    else:
+        xyz = " ".join(f"{value:+.3f}" for value in action[:3])
+        rotation = " ".join(f"{value:+.3f}" for value in action[3:6])
+        action_text = f"Δxyz[{xyz}] Δrot[{rotation}] gripper[{action[6]:+.3f}]"
+        audit = "action=MATCH observation=MATCH outcome=MATCH"
+    permit = source_frame.get("permit_id")
+    permit_label = str(permit)[:8] if permit else "none"
+    cursors = source_frame["cursors"]
+    outcome = source_frame.get("outcome") or {}
+    outcome_text = (
+        f"reward={outcome.get('reward', 'N/A')} terminated={outcome.get('terminated', 'N/A')} "
+        f"truncated={outcome.get('truncated', 'N/A')} episode={episode_status}"
+    )
     lines = [
         title,
         f"Instruction: {instruction}",
-        f"Step {step:03d} / {step / 20.0:05.2f}s | action [{action_text}]",
-        f"Integrity: {verdict} | outcome: {result}",
-        f"agentview ({width} px presentation render)                  eye-in-hand ({width} px presentation render)",
+        f"Step {step:03d} / {step / 20.0:05.2f}s | {action_text}",
+        f"Signed source: decision={source_frame['decision']} permit={permit_label} "
+        f"cursors={cursors['submitted']}/{cursors['accepted']}/{cursors['observed']}",
+        f"Audit: {audit} | {outcome_text}",
     ]
     y = 7
     for line in lines:
         draw.text((14, y), line, fill=(238, 244, 252), font=font)
         y += 24
+    draw.text((14, y), f"agentview ({width} px presentation render)",
+              fill=(238, 244, 252), font=font)
+    draw.text((width + 14, y), f"eye-in-hand ({width} px presentation render)",
+              fill=(238, 244, 252), font=font)
     return np.asarray(canvas, dtype=np.uint8)
 
 
@@ -260,13 +280,14 @@ def render(args: argparse.Namespace) -> dict[str, Any]:
                             right = _camera(sim, "robot0_eye_in_hand", args.render_size)
                             terminal = index == len(source["frames"]) - 1
                             status = ("SUCCESS" if source_result["success"] else "FAILED") if terminal else "RUNNING"
-                            title = ("PREDECLARED ACTIVE REPLAY" if purpose == "predeclared"
-                                     else "POSTHOC FAILURE DIAGNOSTIC - EXCLUDED")
+                            title = (
+                                f"Sentinel active replay · task{task_id}/state{state_index}"
+                                if purpose == "predeclared"
+                                else f"POSTHOC FAILURE DIAGNOSTIC · task{task_id}/state{state_index} · EXCLUDED"
+                            )
                             frame = _canvas(
-                                left, right, title=title, instruction=instruction, step=index,
-                                action=action_values,
-                                verdict="SIGNED SOURCE + ACTION + OBSERVATION + OUTCOME MATCH",
-                                result=status, font=font,
+                                left, right, title=title, instruction=instruction,
+                                source_frame=source_frame, episode_status=status, font=font,
                             )
                             frame_md5 = _md5_bytes(frame.tobytes())
                             first_md5 = first_md5 or frame_md5
@@ -292,7 +313,7 @@ def render(args: argparse.Namespace) -> dict[str, Any]:
                     "video": {"path": video_path.name, "bytes": video_path.stat().st_size,
                               "sha256": _file_sha256(video_path),
                               "firstFrameMd5": first_md5, "lastFrameMd5": last_md5,
-                              "width": args.render_size * 2, "height": args.render_size + 132},
+                              "width": args.render_size * 2, "height": args.render_size + 156},
                     "poses": {"path": pose_path.name, "bytes": pose_path.stat().st_size,
                               "sha256": _file_sha256(pose_path),
                               "provenance": "fresh audited native replay; additional per-step poses are derived, not additional signed formal measurements"},
