@@ -1,0 +1,6 @@
+{
+  "schema_id": "libero-panda-relative-7d-qualified-v1",
+  "lower": [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.1],
+  "upper": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.1],
+  "semantics": "Official LeRobot LIBERO postprocessor output for Panda relative control: 3 translation deltas, 3 axis-angle rotation deltas, and one gripper request. Request bounds were frozen after the excluded task5/state21 shadow qualification; they are not physical safety limits."
+}

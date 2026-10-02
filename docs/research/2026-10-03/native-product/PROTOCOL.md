@@ -32,6 +32,32 @@ formal profile is frozen. A changed profile or timing budget requires a new
 qualification receipt before formal execution. It cannot be widened after
 seeing formal outcomes. Configuration and source digests are retained.
 
+### Qualified configuration frozen before formal execution
+
+Excluded shadow qualification `native-vla-1790964712-d555f216` completed the
+task in 85 steps with byte-identical requests, but the initial profile would
+reject 60 gripper requests and one cold-inference feedback age. Its actual
+gripper range was [-1.013519048690796, 1.0313690900802612]; its maximum
+feedback age was 969.604816 ms. These are retained compatibility failures.
+
+The formal profile is therefore
+[`libero_native_qualified.json`](../../../../experiments/vla/profiles/libero_native_qualified.json),
+file SHA-256 `186ac529fa82e19c92360579cf707bcdd5eaec245b56487841067f7bce6e9b3e`.
+Translation/axis-angle requests remain in [-1,1], and the raw gripper request
+envelope is [-1.1,1.1]. Requests are never clipped or rescaled by Sentinel.
+Feedback age is at most **1500 ms**, measured from the actual reset/step return
+and including cold inference. The separate one-use permit lasts **250 ms**
+after authorization. Neither duration is a physical safety or hard-real-time
+bound.
+
+Excluded active qualification `native-vla-1790964895-a15d6850` used this
+configuration and completed the same task in 85 steps, with 85 submitted,
+accepted and observed requests, zero crashes/rejections, and 85 exact-byte
+comparisons. Its signed bundle passed all seven verification layers. This
+one-task qualification does not establish support for arbitrary policy outputs;
+any later out-of-profile request remains a reported failure. The profile and
+timing budget cannot change during the preregistered formal grid.
+
 ## Fault attempts
 
 Each fault episode attempts `action_replacement`, `lease_replay`,
