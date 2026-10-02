@@ -1,0 +1,87 @@
+{
+  "schema": "sentinel-libero-replan-protocol-v1",
+  "state": "frozen_before_formal_run",
+  "claim": "paired native LIBERO ablation of execution horizon 50 versus 10 with unchanged SmolVLA weights and 50-action prediction chunks",
+  "native_bindings": {
+    "runner_sha256": "9d5103e57d6c0d420cf32024fa3b929ed0b90518c18e830296d6bdb5cb635b9e",
+    "protocol_sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b",
+    "formal_manifest_sha256": "b5d8e982f50ee07452441a5f7070bf305faafc3465ae07b725574aa5324c7c4e",
+    "formal_trace_sha256": "3460974091ca0199bdae4bb0be0834c51396023cf882c2e1a262f1c76d42dba3",
+    "formal_episodes": 100,
+    "formal_successes": 58
+  },
+  "evaluation": {
+    "suite": "libero_spatial",
+    "task_ids": [
+      5,
+      0
+    ],
+    "task_roles": {
+      "5": "primary_failure_task",
+      "0": "successful_control_task"
+    },
+    "fixed_initial_state_indices": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "seed_base": 42021,
+    "branches": {
+      "execute_50": {
+        "prediction_chunk_size": 50,
+        "execution_horizon": 50
+      },
+      "execute_10": {
+        "prediction_chunk_size": 50,
+        "execution_horizon": 10
+      }
+    },
+    "branch_order": "alternate by pair ordinal; even pairs execute_50 first, odd pairs execute_10 first",
+    "hard_reset_each_branch": true,
+    "same_state_and_seed_within_pair": true,
+    "max_steps": 280,
+    "fps": 20,
+    "control_mode": "relative",
+    "required_pair_checks": [
+      "first_chunk_input_state_hash_equal",
+      "first_chunk_camera_hashes_equal",
+      "first_10_predicted_actions_bitwise_equal",
+      "raw_prediction_chunk_shape_is_1x50x7"
+    ]
+  },
+  "preflight": {
+    "task_id": 0,
+    "initial_state_index": 48,
+    "seed": 42020,
+    "branches": [
+      "execute_50",
+      "execute_10"
+    ],
+    "excluded_from_formal_metrics": true
+  },
+  "analysis": {
+    "primary_endpoint": "task 5 paired success delta, execute_10 minus execute_50",
+    "secondary_endpoints": [
+      "task 0 paired success delta",
+      "per-branch Wilson 95% intervals",
+      "paired bootstrap 95% interval",
+      "raw chunks per environment step",
+      "wall time per episode"
+    ],
+    "bootstrap_samples": 20000,
+    "bootstrap_seed": 43000,
+    "crash_rule": "the crashed branch and every branch that cannot subsequently run are failures; no retry or replacement",
+    "scope_limit": "descriptive fixed-state ablation; no retraining, tuning, intervention, real-robot, or general benchmark claim"
+  },
+  "implementation": {
+    "script": "experiments/vla/run_replan_ablation.py",
+    "script_sha256": "8a83eb318a38b54f8f89f473625e224f51b5cbd68360bb6ba7e57b31640d2c73"
+  }
+}
