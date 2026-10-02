@@ -19,7 +19,9 @@ occurs inside the upstream environment, after the `env.step` API. See the
 [controller receipt](controller-contract-receipt.json),
 [gripper receipt](gripper-contract-receipt.json), and upstream
 [Controller.scale_action](https://raw.githubusercontent.com/ARISE-Initiative/robosuite/v1.4.0/robosuite/controllers/base_controller.py).
-Gripper example calls in the receipt are sequential on a stateful instance.
+Gripper example calls in the receipt are sequential on one stateful instance,
+in the recorded execution order `minus_2 → minus_1 → zero → plus_1 → plus_2`;
+the sorted JSON key order is not the call order.
 These are mapping provenance, not collision or dynamic validation.
 
 The new [raw float32 profile](../../../../experiments/vla/profiles/libero_native_raw_float32.json)
