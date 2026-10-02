@@ -1,0 +1,163 @@
+{
+  "schema": "sentinel-libero-reset-audit-protocol-v1",
+  "state": "frozen_before_final_run",
+  "purpose": "Parameter-fixed, no-policy reset fidelity audit motivated by a reported MuJoCo-version sensitivity in LIBERO.",
+  "native_binding": {
+    "libero_protocol": "experiments/vla/libero_protocol.json",
+    "libero_protocol_sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b",
+    "native_final_grid": "states 0..9",
+    "native_task_5_observation": "0/10 policy success in the separate native closed-loop evaluation"
+  },
+  "versions": {
+    "current": "3.8.1",
+    "legacy": "3.3.7",
+    "isolation": "Install mujoco==3.3.7 with pip --no-deps --target into a separate prefix and launch a fresh process with that prefix first on PYTHONPATH; do not modify the current environment."
+  },
+  "software": {
+    "python_prefix": "3.12.",
+    "lerobot": "0.6.1",
+    "hf-libero": "0.1.4",
+    "robosuite": "1.4.0"
+  },
+  "assets": {
+    "repo_id": "lerobot/libero-assets",
+    "revision": "0b3ea86be5fe169d0fd036ae63d1070ec09e90f6",
+    "resolved_tree": {
+      "scope": "mixed_site_packages_tree",
+      "file_count": 955,
+      "total_bytes": 188829695,
+      "tree_sha256": "f04f72afb7503afb071f9de7c6734b0eca147f87549df0a9080cc987afb17781"
+    }
+  },
+  "tasks": {
+    "0": {
+      "role": "control",
+      "language": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "bddl_file": "pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate.bddl",
+      "bddl_sha256": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "init_file": "pick_up_the_black_bowl_between_the_plate_and_the_ramekin_and_place_it_on_the_plate.pruned_init",
+      "init_sha256": "cbbc73792ce546c9bec181fd328a411d3183074840b282671dee481511381d0a",
+      "body_tokens": {
+        "bowl": "akita_black_bowl_1",
+        "ramekin": "glazed_rim_porcelain_ramekin_1"
+      }
+    },
+    "5": {
+      "role": "reported_failure_task",
+      "language": "pick up the black bowl on the ramekin and place it on the plate",
+      "bddl_file": "pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate.bddl",
+      "bddl_sha256": "10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "init_file": "pick_up_the_black_bowl_on_the_ramekin_and_place_it_on_the_plate.pruned_init",
+      "init_sha256": "2d2c50b7dcbf861fffa94d576f217ed34153e57487010d7a109a220d4d97189b",
+      "body_tokens": {
+        "bowl": "akita_black_bowl_1",
+        "ramekin": "glazed_rim_porcelain_ramekin_1"
+      }
+    }
+  },
+  "environment": {
+    "suite": "libero_spatial",
+    "fps": 20,
+    "init_states": true,
+    "hard_reset": true,
+    "control_mode": "relative",
+    "max_parallel_tasks": 1,
+    "n_envs": 1,
+    "use_async_envs": false,
+    "trust_remote_code": false,
+    "observation_height": 360,
+    "observation_width": 360,
+    "policy_loaded": false,
+    "actions_executed_per_reset": 0
+  },
+  "preflight": {
+    "task_id": 5,
+    "initial_state_index": 47,
+    "seed": 41068,
+    "versions": [
+      "current",
+      "legacy"
+    ],
+    "excluded_from_final_analysis": true,
+    "formal_binding": "Each formal capture verifies both preflight manifests, including exact version label, task/state/seed, pre-action/no-policy/zero-action record, asset tree, native protocol, environment, and artifact hashes, then retains each preflight manifest's absolute path and SHA-256."
+  },
+  "final": {
+    "task_ids": [
+      0,
+      5
+    ],
+    "initial_state_indices": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "seed_base": 41021,
+    "seed_formula": "41021 + initial_state_index",
+    "resets_per_version": 20,
+    "total_resets": 40,
+    "excluded_state_indices": {
+      "native_final": "0..9",
+      "this_preflight": 47,
+      "other_preflights": [
+        48,
+        49
+      ]
+    }
+  },
+  "retained_evidence": {
+    "raw_rgb": [
+      "agentview_image",
+      "robot0_eye_in_hand_image"
+    ],
+    "sim_state": [
+      "qpos",
+      "qvel",
+      "act",
+      "ctrl",
+      "time"
+    ],
+    "object_pose": [
+      "bowl position and quaternion",
+      "ramekin position and quaternion",
+      "bowl-minus-ramekin relative position",
+      "bowl and ramekin tilt"
+    ],
+    "timing": "immediately after reset and before any action"
+  },
+  "comparison": {
+    "unit": "paired task and initial-state index with the same requested seed",
+    "reported": [
+      "exact camera equality and pixel absolute differences",
+      "qpos/qvel/act/ctrl/time absolute differences",
+      "bowl and ramekin translation and rotation differences",
+      "bowl-minus-ramekin relative-position and tilt differences",
+      "task 0 control versus task 5 descriptive contrast"
+    ],
+    "threshold": null,
+    "tuning_after_final_start": false
+  },
+  "claims": {
+    "scope": "Deterministic reset-state diagnostic under the frozen LIBERO assets, init states, seeds, environment parameters, and two MuJoCo package versions.",
+    "not_measured": [
+      "policy inference",
+      "task success",
+      "intervention efficacy",
+      "safety",
+      "training"
+    ],
+    "causal_limit": "A cross-version reset difference alone does not establish that MuJoCo version caused the separate task-5 0/10 policy result.",
+    "issue_limit": "The upstream issue motivates this audit but is not treated as evidence that the reported behavior occurs in this environment."
+  },
+  "implementation": {
+    "script": "experiments/vla/audit_libero_reset.py",
+    "script_sha256": "2d5d4aef2d42f9fc4d80e386c36c2c9515b1ff8aadf40bebddb82b802e719a27",
+    "upstream_issue": "https://github.com/huggingface/lerobot/issues/4390"
+  }
+}
