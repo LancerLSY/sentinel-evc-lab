@@ -18,7 +18,8 @@ For each native request, active mode:
 
 1. receives actual feedback returned by `env.reset` or the preceding
    `env.step`;
-2. checks the declared 7-D schema, finite values and component envelope;
+2. checks the declared 7-D schema, exact request shape/dtype and finite
+   representation domain;
 3. binds the exact array-byte digest to the feedback digest, environment step,
    execution context, queue revision and revocation generation;
 4. issues a short-lived one-use permit after policy inference and official
@@ -74,15 +75,15 @@ A minimal active qualification configuration is:
   "backbone": "/models/smolvlm2_500m_video_instruct",
   "identity_protocol": "experiments/vla/libero_protocol.json",
   "expected_mujoco": "3.3.7",
-  "profile": "experiments/vla/profiles/libero_native_qualified.json",
+  "profile": "experiments/vla/profiles/libero_native_raw_float32.json",
   "task_ids": [0],
-  "initial_state_indices": [21],
-  "seed_base": 44021,
+  "initial_state_indices": [41],
+  "seed_base": 44041,
   "execution_horizon": 10,
   "lease_ttl_ms": 250.0,
   "max_feedback_age_ms": 1500.0,
   "record_pose_stride": 10,
-  "render_episode_keys": [[0, 21]],
+  "render_episode_keys": [[0, 41]],
   "render_episodes": 1
 }
 ```
@@ -107,7 +108,7 @@ The supported fault names are `action_replacement`, `lease_replay`,
   "backbone": "/models/smolvlm2_500m_video_instruct",
   "identity_protocol": "experiments/vla/libero_protocol.json",
   "expected_mujoco": "3.3.7",
-  "profile": "experiments/vla/profiles/libero_native_qualified.json",
+  "profile": "experiments/vla/profiles/libero_native_raw_float32.json",
   "max_feedback_age_ms": 1500.0,
   "lease_ttl_ms": 250.0,
   "task_ids": [0],
@@ -123,15 +124,19 @@ The supported fault names are `action_replacement`, `lease_replay`,
 }
 ```
 
-Before a formal paired run, freeze and hash the JSON configurations and use a
-disjoint qualification episode. A recommended new grid is tasks 0–9 and fixed
-initial-state indices 40–44, with the same task/state/seed cells for baseline
-and active modes. Existing studies already use lower index ranges. Record the
-actual postprocessed component minima/maxima in qualification before freezing
-the profile; do not widen bounds after seeing formal outcomes. Deterministic
-CUDA mode, policy reset and fixed seeds are enabled, but paired actions must
-still be compared and any numerical difference reported rather than replaced
-with recorded actions.
+Before a paired run, freeze and hash the JSON configurations and retain the
+excluded qualification episode. The current
+[raw-request protocol](research/2026-10-03/native-product/RAW_REQUEST_PROTOCOL.md)
+fixes tasks 0–9/states 46–49 for an engineering comparison; four prior diagnostic
+cells are explicitly disclosed. Select the named raw-float32 profile: its limits
+cover the complete finite IEEE float32 representation domain at this pinned API,
+and the upstream controller retains its own clipping/scaling. These are not
+motion limits. The earlier bounded-request profile failed on legitimate raw
+requests; its [signed failures](research/2026-10-03/native-product/V2_NEGATIVE_RESULTS.md)
+remain retained. Do not widen bounds or change timing after paired outcomes.
+Deterministic CUDA mode, policy reset and fixed seeds are enabled, but paired
+actions must still be compared and any numerical difference reported rather
+than replaced with recorded actions.
 
 ## Signed product artifacts
 

@@ -95,7 +95,7 @@ sentinel-evc native-import --archive /path/to/sentinel-native-vla-bundle.zip \
 submitted / accepted / observed 游标。导入记录不会启动推理或授予机械臂运动权限。
 
 [原生门禁契约与配置](docs/native_vla_gateway.md) ·
-[冻结配对协议](docs/research/2026-10-03/native-product/PROTOCOL.md) ·
+[原生请求配对协议](docs/research/2026-10-03/native-product/RAW_REQUEST_PROTOCOL.md) ·
 [方法与相关工具](docs/native_method_position.md)
 
 ![原生请求授权与实际环境反馈](docs/media/native-request-flow.svg)

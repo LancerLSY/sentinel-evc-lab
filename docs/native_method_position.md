@@ -42,7 +42,7 @@ controls. No installed competitor performance comparison is reported.
 - **Reproducibility:** independently choose a public key, verify the retained
   bundle, and inspect actual task geometry, body poses and source identities.
 
-The [frozen protocol](research/2026-10-03/native-product/PROTOCOL.md) defines the
+The [raw-request protocol](research/2026-10-03/native-product/RAW_REQUEST_PROTOCOL.md) defines the
 grid and boundaries before outcomes are observed. The [native contract](native_vla_gateway.md)
 defines permit and revocation semantics.
 

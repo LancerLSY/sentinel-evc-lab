@@ -99,7 +99,7 @@ frame shows the request, authorization and submitted/accepted/observed cursors.
 Importing a recording does not run inference or grant robot motion authority.
 
 [Native gateway contract and configuration](docs/native_vla_gateway.md) ·
-[Frozen paired protocol](docs/research/2026-10-03/native-product/PROTOCOL.md) ·
+[Raw-request paired protocol](docs/research/2026-10-03/native-product/RAW_REQUEST_PROTOCOL.md) ·
 [Method and related tools](docs/native_method_position.md)
 
 ![Native request authorization and observed execution](docs/media/native-request-flow.svg)
