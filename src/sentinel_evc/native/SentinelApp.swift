@@ -31,7 +31,12 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         let delegate = SentinelApp()
         app.delegate = delegate
         app.setActivationPolicy(.regular)
-        app.run()
+        // NSApplication.delegate and WKWebView.navigationDelegate are weak.
+        // Keep the owner of the window, backend process, and pipe callbacks
+        // alive for the complete application run loop.
+        withExtendedLifetime(delegate) {
+            app.run()
+        }
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {

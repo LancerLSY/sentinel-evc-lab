@@ -46,7 +46,7 @@ def _jsonable(value: Any) -> Any:
     if hasattr(value, "detach"):
         value = value.detach().to("cpu")
     if hasattr(value, "tolist"):
-        return value.tolist()
+        return _jsonable(value.tolist())
     if isinstance(value, dict):
         return {str(key): _jsonable(item) for key, item in value.items()}
     if isinstance(value, (list, tuple)):
