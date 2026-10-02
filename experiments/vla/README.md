@@ -302,6 +302,10 @@ python experiments/vla/plot_backend_results.py \
   --output-dir /path/to/new-backend-figure
 ```
 
-The optional `replay_backend_comparison.py` is distributed as a statically
-reviewed reproduction utility. No executed paired-film capture is included
+The original release distributed `replay_backend_comparison.py` as a statically
+reviewed reproduction utility. No executed paired-film capture was included
 in the release; use the individual verified native-success and failure films.
+
+The separate [backend replay companion](../../docs/research/2026-10-02/paper-v2/backend/BACKEND_REPLAY.md)
+now retains an executed paired capture, its portable official asset binding,
+runtime receipt and 1080p bilingual video. It does not change the formal grid.

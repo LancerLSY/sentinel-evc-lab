@@ -1,0 +1,371 @@
+{
+  "actual_reset": {
+    "initial_state_index": 21,
+    "seed": 43022
+  },
+  "artifacts": {
+    "native_rgb_video": {
+      "bytes": 278840,
+      "duration_seconds": 4.25,
+      "fps": 20,
+      "frame_semantics": "post-action frames only; no extra initial frame",
+      "frames": 85,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/outputs/legacy/task5-state21-legacy-native-rgb.mp4",
+      "sha256": "130978171bf60516310884885db485e3700fe3febb48b5e0fd719aa44225559c",
+      "source": "LIBERO Panda environment render after each recorded env.step action"
+    },
+    "trajectory": {
+      "bytes": 51297,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/outputs/legacy/trajectory.json",
+      "sha256": "8a4f9dab0c9934b5e0484701970a884bad1d80d5887d80e28bcaee48a12594ce"
+    }
+  },
+  "claim_boundary": [
+    "Post-hoc exact-action replay; excluded from every formal denominator.",
+    "The observer makes zero action changes and performs no policy inference.",
+    "The complete MuJoCo version is the treatment; this replay does not isolate reset causation or physical accuracy."
+  ],
+  "environment": {
+    "camera_name": "agentview_image,robot0_eye_in_hand_image",
+    "camera_name_mapping": null,
+    "control_mode": "relative",
+    "disable_env_checker": true,
+    "episode_length": null,
+    "features": {
+      "action": {
+        "shape": [
+          7
+        ],
+        "type": "ACTION"
+      },
+      "pixels/agentview_image": {
+        "shape": [
+          360,
+          360,
+          3
+        ],
+        "type": "VISUAL"
+      },
+      "pixels/robot0_eye_in_hand_image": {
+        "shape": [
+          360,
+          360,
+          3
+        ],
+        "type": "VISUAL"
+      },
+      "robot_state/eef/mat": {
+        "shape": [
+          3,
+          3
+        ],
+        "type": "STATE"
+      },
+      "robot_state/eef/pos": {
+        "shape": [
+          3
+        ],
+        "type": "STATE"
+      },
+      "robot_state/eef/quat": {
+        "shape": [
+          4
+        ],
+        "type": "STATE"
+      },
+      "robot_state/gripper/qpos": {
+        "shape": [
+          2
+        ],
+        "type": "STATE"
+      },
+      "robot_state/gripper/qvel": {
+        "shape": [
+          2
+        ],
+        "type": "STATE"
+      },
+      "robot_state/joints/pos": {
+        "shape": [
+          7
+        ],
+        "type": "STATE"
+      },
+      "robot_state/joints/vel": {
+        "shape": [
+          7
+        ],
+        "type": "STATE"
+      }
+    },
+    "features_map": {
+      "action": "action",
+      "pixels/agentview_image": "observation.images.image",
+      "pixels/robot0_eye_in_hand_image": "observation.images.image2",
+      "robot_state/eef/mat": "observation.state.eef_mat",
+      "robot_state/eef/pos": "observation.state.eef_pos",
+      "robot_state/eef/quat": "observation.state.eef_quat",
+      "robot_state/gripper/qpos": "observation.state.gripper_qpos",
+      "robot_state/gripper/qvel": "observation.state.gripper_qvel",
+      "robot_state/joints/pos": "observation.state.joint_pos",
+      "robot_state/joints/vel": "observation.state.joint_vel"
+    },
+    "fps": 20,
+    "hard_reset": true,
+    "init_states": true,
+    "is_libero_plus": false,
+    "max_parallel_tasks": 1,
+    "obs_type": "pixels_agent_pos",
+    "observation_height": 360,
+    "observation_width": 360,
+    "render_mode": "rgb_array",
+    "task": "libero_spatial",
+    "task_ids": [
+      5
+    ]
+  },
+  "first_observation": {
+    "camera_pngs": {
+      "observation.images.image": {
+        "bytes": 105043,
+        "path": "/root/autodl-tmp/sentinel-backend-replay/outputs/legacy/first-camera-1.png",
+        "sha256": "da8de52e9b7ba783ce7377650724b6db9c9349861c2e50cc366f31b98f3db479"
+      },
+      "observation.images.image2": {
+        "bytes": 95355,
+        "path": "/root/autodl-tmp/sentinel-backend-replay/outputs/legacy/first-camera-2.png",
+        "sha256": "db99f1e6604e783462c9e588392018bcffdb8aafb12434c39932e8268ce3486e"
+      }
+    },
+    "checks": {
+      "instruction": true,
+      "processed_camera_hashes": true,
+      "processed_robot_state": true
+    },
+    "processed": {
+      "camera_frames": {
+        "observation.images.image": {
+          "dtype": "torch.float32",
+          "sha256": "dce0c829521d3215bee575d8adda8e39d33d7d34b67b199564cd4dd322d47256",
+          "shape": [
+            1,
+            3,
+            360,
+            360
+          ]
+        },
+        "observation.images.image2": {
+          "dtype": "torch.float32",
+          "sha256": "220c82b5632db9c6c5623abf863bd3ab829ce08780ab8f7ef32f8cddbda9c8ba",
+          "shape": [
+            1,
+            3,
+            360,
+            360
+          ]
+        }
+      },
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "state": {
+        "dtype": "torch.float32",
+        "sha256": "cbb7a501bb62fdb27b808ebdea4bfa2c2baeead3037db943a3b5c693e3a3cdc6",
+        "shape": [
+          1,
+          8
+        ],
+        "values": [
+          [
+            -0.21833418309688568,
+            -0.002463387791067362,
+            1.1572033166885376,
+            3.140573740005493,
+            0.003047185018658638,
+            -0.09248615056276321,
+            0.03872326388955116,
+            -0.03872232884168625
+          ]
+        ]
+      }
+    }
+  },
+  "included_in_benchmark_metrics": false,
+  "observer_interventions": 0,
+  "original_frozen_asset_tree": {
+    "file_count": 955,
+    "root": "/root/autodl-tmp/sentinel-evc-gpu/20261002/libero-preflight-env/lib/python3.12/site-packages/libero/libero/assets",
+    "scope": "mixed_site_packages_tree",
+    "total_bytes": 188829695,
+    "tree_sha256": "f04f72afb7503afb071f9de7c6734b0eca147f87549df0a9080cc987afb17781"
+  },
+  "outcome": {
+    "final_action_time_seconds": 4.25,
+    "max_reward": 1.0,
+    "steps": 85,
+    "success": true,
+    "sum_reward": 1.0
+  },
+  "policy_inference": false,
+  "portable_assets": {
+    "content": {
+      "coverage": "all regular non-cache non-incomplete files under configured LIBERO assets root",
+      "excluded": [
+        ".cache/**",
+        "*.incomplete"
+      ],
+      "file_count": 239,
+      "scope": "canonical_reconstructed_content",
+      "total_bytes": 189311115,
+      "tree_sha256": "c7fef2c780dbab2bbdaf375a2a8bbac171341718988f01cd5309bbb4d692e015"
+    },
+    "historical_whole_tree_match_claimed": false,
+    "manifest": {
+      "bytes": 74111,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/libero-portable-assets.json",
+      "sha256": "e743224025f6966a2aa7c9cda51dc0c9aa3b800d68d576c12ec8e88d4f0877af"
+    },
+    "root": "/root/autodl-tmp/sentinel-backend-replay/env/lib/python3.12/site-packages/libero/libero/assets",
+    "source": {
+      "repo_id": "lerobot/libero-assets",
+      "repo_type": "dataset",
+      "revision": "0b3ea86be5fe169d0fd036ae63d1070ec09e90f6"
+    }
+  },
+  "schema": "sentinel-libero-backend-exact-action-capture-v1",
+  "script_sha256": "114bc3546731209484553aecbbe7d3881fee8b95140f72157a656199af4f3a51",
+  "selection": {
+    "initial_state_index": 21,
+    "post_hoc": true,
+    "rule": "first state-ordered discordant task5 pair in the frozen paired rows",
+    "seed": 43022,
+    "task_id": 5
+  },
+  "software": {
+    "cuda": "12.8",
+    "hf-libero": "0.1.4",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.7",
+    "num2words": "0.5.14",
+    "python": "3.12.3",
+    "robosuite": "1.4.0",
+    "torch": "2.8.0+cu128"
+  },
+  "source": {
+    "action_sequence_sha256": "a50735c7febf34e490fa56810db9d4961a02a51f14a45afb59e15abd4d34e15f",
+    "backend_protocol": {
+      "bytes": 4814,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/repo/experiments/vla/backend_protocol.json",
+      "sha256": "cf1b8fd439b992058f7ec37cefd0c5248fadb3ad7cbec41490e0b163c0d932ac"
+    },
+    "backend_runner": {
+      "bytes": 34532,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/repo/experiments/vla/run_backend_ablation.py",
+      "sha256": "19164e24c3f39a9c89bd4a8ccfe6de489e5175da2decadf1ec847538a1a8102b"
+    },
+    "checkpoint_sha256": {
+      "config.json": "5c9f3ba9f5f37ea7024c9501b0b20b1941f232989c2167853cb46d9071a70dd7",
+      "model.safetensors": "9a9f6413e42c0f332fccbce9a0dc796af2790f82cf002f791cdbf7e01e1afca8",
+      "policy_postprocessor.json": "3b51f092c70c710ce0213ee1b63bf51b4878ec67828dd2d67daf9ef51081a41a",
+      "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9",
+      "policy_preprocessor.json": "122ec5106602b1bf129f49690d05ab2f49748a0ac6119de55ea0677d4e90d248",
+      "policy_preprocessor_step_5_normalizer_processor.safetensors": "b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9"
+    },
+    "comparison": {
+      "bytes": 3403,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/comparison/comparison.json",
+      "sha256": "e3271e0cd341d4f5e96615c29f44e954f136ac1d2f5deb2d45b055584f96b124"
+    },
+    "current_manifest": {
+      "bytes": 47241,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/current/manifest.json",
+      "sha256": "f3fd98744578f0147eaefc791ce45dde0c0d8c2cdd1451eee08cad882a78a8fa"
+    },
+    "current_trace": {
+      "bytes": 8002048,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/current/action_trace.jsonl",
+      "sha256": "a3aa0f15024e5e9adcbf65f92874b9ea148ee99c75d67de6a60afb06127d33d6"
+    },
+    "formal_action_count": 85,
+    "legacy_manifest": {
+      "bytes": 47208,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/legacy/manifest.json",
+      "sha256": "7dee0992f05a03a85218ca958b4145b21663ae068fecdad78c1a75eb56022cb3"
+    },
+    "legacy_trace": {
+      "bytes": 5040932,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/legacy/action_trace.jsonl",
+      "sha256": "d648a2851ac997103f2c689e3f979906298657a5d9d8ea48676075a02ba6eb24"
+    },
+    "native_protocol": {
+      "bytes": 7222,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/repo/experiments/vla/libero_protocol.json",
+      "sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b"
+    },
+    "paired_episodes": {
+      "bytes": 9959,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/comparison/paired_episodes.json",
+      "sha256": "472fa5ddd0100b39d8aaf95c494f295ee225274815382a026699839ad15c5d87"
+    },
+    "portable_asset_verifier": {
+      "bytes": 6227,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/repo/experiments/vla/portable_replay_assets.py",
+      "sha256": "a2fffc2a311e4b1391f5892a58ded52144f6c55b063fe5983a289b303f4b14f9"
+    },
+    "reconstructed_asset_content": {
+      "coverage": "all regular non-cache non-incomplete files under configured LIBERO assets root",
+      "excluded": [
+        ".cache/**",
+        "*.incomplete"
+      ],
+      "file_count": 239,
+      "scope": "canonical_reconstructed_content",
+      "total_bytes": 189311115,
+      "tree_sha256": "c7fef2c780dbab2bbdaf375a2a8bbac171341718988f01cd5309bbb4d692e015"
+    },
+    "replay_assets_manifest": {
+      "bytes": 74111,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/libero-portable-assets.json",
+      "sha256": "e743224025f6966a2aa7c9cda51dc0c9aa3b800d68d576c12ec8e88d4f0877af"
+    },
+    "selected_formal_manifest": {
+      "bytes": 47208,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/legacy/manifest.json",
+      "sha256": "7dee0992f05a03a85218ca958b4145b21663ae068fecdad78c1a75eb56022cb3"
+    },
+    "selected_formal_trace": {
+      "bytes": 5040932,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/legacy/action_trace.jsonl",
+      "sha256": "d648a2851ac997103f2c689e3f979906298657a5d9d8ea48676075a02ba6eb24"
+    }
+  },
+  "status": "complete",
+  "task_source_sha256": {
+    "bddl": {
+      "0": "9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "1": "53a7516571412a2f46a27cbf8482d3b76dbad4221858c8f6b565d506c274e61d",
+      "2": "5e19880ebc844f86b89f63b172aab0b7a89f85b6e6955891f544f0ea7d0795d5",
+      "3": "3d4ccf070c3d9883ae0676f2d888588f98c696ddad71b7694f47c379fc99ef36",
+      "4": "4371189e11d9fd29bb548ab9a8adcd741bb0ce41bb66c612672d0e8cb29a52a9",
+      "5": "10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "6": "566c65596f3472e752e6522817bff51bbf3ce5159d7bec1d3554e5ead46b1e55",
+      "7": "dd11837141a30d874ebbbfaae20e91ecc67ec85ab3872ceb4cff3abfcbef7cb0",
+      "8": "c8fbb9effa27b947d04d26862d75273d93cac1806734e53836cd472a08aec1fe",
+      "9": "5293e759381b477e126beaf83d738542bbd4d93f522a3eead1066e612bad4a8c"
+    },
+    "init_states": {
+      "0": "cbbc73792ce546c9bec181fd328a411d3183074840b282671dee481511381d0a",
+      "1": "9b6927b6ef03460ab055141e1a1154ad85e5e290058d8ed3a8a314aff911f864",
+      "2": "27d5b81d739f969e40c72b6c88699e57a91ea61209946b21c593aae5990689cb",
+      "3": "0627f5f5ce3ef23be546571012be8ef603d93bcb4032bc80feb34937ba580140",
+      "4": "deef3df529e0bb57658b973bbb3baf02b02922db065c025a73ebfcd11eb54d46",
+      "5": "2d2c50b7dcbf861fffa94d576f217ed34153e57487010d7a109a220d4d97189b",
+      "6": "ab86fb7b5942dc0fec762eae57e72bf636106b1c10ad8ce57227723d8eb9a81b",
+      "7": "ea9cba2814bc166f3682f3f5a97329467839bcf584069cd419191b6c17adae25",
+      "8": "f43df2d80042130ac8770590d83f1a1e6fd4df7479aebc392aa2ed6e3bd0b83e",
+      "9": "08b0ac928dcc524a66d963851a6a4eece9aeb782b38466006e403a70e3287867"
+    }
+  },
+  "timing": {
+    "elapsed_seconds": 10.410996913909912
+  },
+  "version_label": "legacy"
+}

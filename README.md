@@ -129,6 +129,8 @@ does not claim that a signature proves sensor honesty or physical execution.
 
 [Retained failure replay](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/task5_state0_failure_bilingual_20hz.mp4) replays the original task 5/state 0 actions exactly: zero reward, no task success, maximum target-bowl center rise 1.674 mm. It is a post-hoc diagnostic and adds no benchmark episode.
 
+[Paired backend replay](docs/research/2026-10-02/paper-v2/backend/BACKEND_REPLAY.md) shows task 5/state 21 under MuJoCo 3.8.1 and 3.3.7: failure after 280 actions versus success after 85 actions. The 1080p bilingual film replays the recorded actions with no policy inference or intervention; its display-only final-frame hold adds no simulated motion. [Replay data, source and video](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulator-replays-20261002).
+
 ## Measured results
 
 These numbers come from recorded procedures and retained artifacts. They are observations

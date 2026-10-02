@@ -1,0 +1,132 @@
+{
+  "artifacts": {
+    "bilingual_paired_video": {
+      "bytes": 2969906,
+      "fps": 20,
+      "frames": 280,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/outputs/comparison/backend-comparison-bilingual.mp4",
+      "sha256": "00e80ffb085ce746b93636c55dbb0d8956cf35cb5601b3fc8da853644a30d843"
+    },
+    "poster": {
+      "bytes": 581024,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/outputs/comparison/task5-state21-backend-paired-poster.png",
+      "sha256": "3bc8538c9a0184f5a7fdba840c936f3f67f66bfc30d9903afd1201f12f69d946"
+    }
+  },
+  "claim_boundary": [
+    "The same official initial-state index and seed are used, while first camera observations differ under the complete MuJoCo version treatment.",
+    "This paired replay does not isolate a reset mechanism and does not identify either MuJoCo version as physically more accurate.",
+    "It replays formal env.step actions exactly with zero observer intervention and is excluded from all benchmark denominators.",
+    "The shorter successful clip holds its final frame only for synchronized display; the hold adds no action, simulation, reward, or motion."
+  ],
+  "display": {
+    "current_native_motion_frames": 280,
+    "current_native_motion_seconds": 14.0,
+    "duration_seconds": 14.0,
+    "fps": 20,
+    "frames": 280,
+    "hold_rule": "repeat the final successful native RGB frame; no additional action, physics step, reward, or motion",
+    "legacy_display_only_hold_frames": 195,
+    "legacy_display_only_hold_seconds": 9.75,
+    "legacy_native_motion_frames": 85,
+    "legacy_native_motion_seconds": 4.25,
+    "post_action_frames_only": true,
+    "resolution": [
+      1920,
+      1080
+    ]
+  },
+  "included_in_benchmark_metrics": false,
+  "inputs": {
+    "backend_protocol": {
+      "bytes": 4814,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/repo/experiments/vla/backend_protocol.json",
+      "sha256": "cf1b8fd439b992058f7ec37cefd0c5248fadb3ad7cbec41490e0b163c0d932ac"
+    },
+    "backend_runner": {
+      "bytes": 34532,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/repo/experiments/vla/run_backend_ablation.py",
+      "sha256": "19164e24c3f39a9c89bd4a8ccfe6de489e5175da2decadf1ec847538a1a8102b"
+    },
+    "comparison": {
+      "bytes": 3403,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/comparison/comparison.json",
+      "sha256": "e3271e0cd341d4f5e96615c29f44e954f136ac1d2f5deb2d45b055584f96b124"
+    },
+    "current_capture_manifest": {
+      "bytes": 13687,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/outputs/current/manifest.json",
+      "sha256": "2770983581436bd19adcb7e929d347d7352103f97f689c26ef6ac8d76e07466d"
+    },
+    "current_formal_manifest": {
+      "bytes": 47241,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/current/manifest.json",
+      "sha256": "f3fd98744578f0147eaefc791ce45dde0c0d8c2cdd1451eee08cad882a78a8fa"
+    },
+    "current_formal_trace": {
+      "bytes": 8002048,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/current/action_trace.jsonl",
+      "sha256": "a3aa0f15024e5e9adcbf65f92874b9ea148ee99c75d67de6a60afb06127d33d6"
+    },
+    "font": {
+      "bytes": 24543332,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/SourceHanSerifSC-Regular.otf",
+      "sha256": "78aa7a328fd974df2d688c8a9fd74a33d8334dfa84ab24d9d11efb2ffc464117"
+    },
+    "legacy_capture_manifest": {
+      "bytes": 13674,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/outputs/legacy/manifest.json",
+      "sha256": "03de5c362db1e9560868f31cf760585bc420dbc71d7e5e58eb1e63135ddf8e0b"
+    },
+    "legacy_formal_manifest": {
+      "bytes": 47208,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/legacy/manifest.json",
+      "sha256": "7dee0992f05a03a85218ca958b4145b21663ae068fecdad78c1a75eb56022cb3"
+    },
+    "legacy_formal_trace": {
+      "bytes": 5040932,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/legacy/action_trace.jsonl",
+      "sha256": "d648a2851ac997103f2c689e3f979906298657a5d9d8ea48676075a02ba6eb24"
+    },
+    "paired_episodes": {
+      "bytes": 9959,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/formal/backend-final-v1/comparison/paired_episodes.json",
+      "sha256": "472fa5ddd0100b39d8aaf95c494f295ee225274815382a026699839ad15c5d87"
+    },
+    "replay_assets_manifest": {
+      "bytes": 74111,
+      "path": "/root/autodl-tmp/sentinel-backend-replay/inputs/libero-portable-assets.json",
+      "sha256": "e743224025f6966a2aa7c9cda51dc0c9aa3b800d68d576c12ec8e88d4f0877af"
+    }
+  },
+  "observer_interventions": 0,
+  "outcomes": {
+    "current": {
+      "final_action_time_seconds": 14.0,
+      "max_reward": 0.0,
+      "steps": 280,
+      "success": false,
+      "sum_reward": 0.0
+    },
+    "legacy": {
+      "final_action_time_seconds": 4.25,
+      "max_reward": 1.0,
+      "steps": 85,
+      "success": true,
+      "sum_reward": 1.0
+    }
+  },
+  "policy_inference": false,
+  "schema": "sentinel-libero-backend-paired-replay-film-v1",
+  "script_sha256": "114bc3546731209484553aecbbe7d3881fee8b95140f72157a656199af4f3a51",
+  "selection": {
+    "current_formal_outcome": "failure",
+    "initial_state_index": 21,
+    "legacy_formal_outcome": "success",
+    "post_hoc": true,
+    "rule": "first state-ordered discordant task5 pair in frozen paired rows",
+    "seed": 43022,
+    "task_id": 5
+  },
+  "status": "complete"
+}

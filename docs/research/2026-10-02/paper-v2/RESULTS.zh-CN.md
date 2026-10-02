@@ -144,6 +144,10 @@
 
 ## 视频里的红色和绿色表示什么
 
+[版本配对回放](backend/BACKEND_REPLAY.md)选择任务 5 中按初态顺序排列的第一组结果不同样本：state 21、seed 43022。逐项重放正式下发动作后，MuJoCo 3.8.1 在 280 步后失败、奖励为 0；3.3.7 在第 85 步成功、奖励为 1。各分支的初始机器人状态、相机、全部动作和官方逐步结果均匹配原记录。1080p、20 fps 视频共 280 个展示帧，较短分支的最后一帧保持 195 帧（9.75 秒），字幕明确说明这段没有新增仿真动作或运动。
+
+这项事后诊断不增加正式实验样本、不调用策略推理、没有观察器干预。回放采用单独冻结并逐文件校验的官方资产绑定，见[复现说明](REPRODUCIBILITY_NOTE.md)。结果支持完整版本处理的兼容性差异，不据此判断哪个版本更接近真实物理，也不单独确定失败原因。[数据、源码与视频](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulator-replays-20261002)。
+
 [完整 UR5e 三维视频](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/sentinel-ur5e-paper.mp4)使用官方完整机械臂网格与保存的关节轨迹，展示安全对照、后缀变化和场景变化。红色画面是被拒绝计划的反事实运动，没有向执行端下发；旁边显示放行执行或不下发候选。拒绝后的静止画面用于解释决定，没有测量真机刹停能力。
 
 [接触失效对比视频](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/friction-failure-vs-fallback.mp4)使用新正式实验的第一个低摩擦初态，展示 1.6 秒动作导致载荷打滑掉落，4.8 秒动作完成运输。下方曲线给出位移与 6 厘米风险阈值。这段场景是托盘和载荷；机械臂完整网格在上一段视频中。

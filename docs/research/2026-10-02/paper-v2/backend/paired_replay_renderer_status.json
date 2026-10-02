@@ -1,19 +1,38 @@
 {
   "schema": "sentinel-backend-replay-renderer-status-v1",
+  "status": "complete",
   "source": "experiments/vla/replay_backend_comparison.py",
   "source_sha256": "114bc3546731209484553aecbbe7d3881fee8b95140f72157a656199af4f3a51",
-  "capture_produced": false,
-  "encoded_movie_produced": false,
-  "verification": "portable content-binding source review; capture pending",
-  "selected_case": {
-    "task_id": 5,
-    "initial_state_index": 21,
-    "seed": 43022,
-    "selection": "first ordered discordant formal backend pair",
-    "post_hoc": true
+  "source_commit": "f59f81fda07665f873076f4a4e8e31918d2f7120",
+  "capture_produced": true,
+  "encoded_movie_produced": true,
+  "verification": "both strict exact-action captures completed; composed H.264 movie fully decoded as 1920x1080, 20 fps, 280 frames, 14.00 seconds, with no audio stream",
+  "selected_case": {"task_id": 5, "initial_state_index": 21, "seed": 43022, "selection": "first ordered discordant formal backend pair", "post_hoc": true},
+  "outcomes": {
+    "current_mujoco_3_8_1": {"steps": 280, "sum_reward": 0.0, "success": false},
+    "legacy_mujoco_3_3_7": {"steps": 85, "sum_reward": 1.0, "success": true}
   },
+  "artifacts": {
+    "comparison_manifest_sha256": "b18daee873f117dee6c4f54307b51c953f4b42961116f9ea9f1d1403aa2b32ad",
+    "current_manifest_sha256": "2770983581436bd19adcb7e929d347d7352103f97f689c26ef6ac8d76e07466d",
+    "legacy_manifest_sha256": "03de5c362db1e9560868f31cf760585bc420dbc71d7e5e58eb1e63135ddf8e0b",
+    "environment_receipt_sha256": "1b978e2ebc628c4bde20866aaa587404fe2befe6265e43830c2fb1edd0e6db0d",
+    "movie_sha256": "00e80ffb085ce746b93636c55dbb0d8956cf35cb5601b3fc8da853644a30d843",
+    "poster_sha256": "3bc8538c9a0184f5a7fdba840c936f3f67f66bfc30d9903afd1201f12f69d946"
+  },
+  "portable_assets": {
+    "manifest_sha256": "e743224025f6966a2aa7c9cda51dc0c9aa3b800d68d576c12ec8e88d4f0877af",
+    "file_count": 239,
+    "total_bytes": 189311115,
+    "content_tree_sha256": "c7fef2c780dbab2bbdaf375a2a8bbac171341718988f01cd5309bbb4d692e015",
+    "historical_whole_tree_match_claimed": false
+  },
+  "runtime_activation": {
+    "sitecustomize_content": "from lerobot.policies.smolvla.configuration_smolvla import SmolVLAConfig\n",
+    "sitecustomize_sha256": "8ff876e679139133e427dd909e2a5a6b0c41d9e466798a08a18f05fc1769747c"
+  },
+  "pinned_core_packages": {"lerobot": "0.6.1", "hf-libero": "0.1.4", "robosuite": "1.4.0", "mujoco_current": "3.8.1", "mujoco_legacy": "3.3.7"},
   "formal_comparison_sha256": "e3271e0cd341d4f5e96615c29f44e954f136ac1d2f5deb2d45b055584f96b124",
-  "claim_limit": "Renderer source is not an executed simulator capture or additional benchmark outcome.",
-  "historical_source_sha256": "14b3c120cf186bbf40b3172325cb93cf52f940cd45c6d3f4e2119ce66e0d570f",
-  "replay_assets_manifest_sha256": "e743224025f6966a2aa7c9cda51dc0c9aa3b800d68d576c12ec8e88d4f0877af"
+  "claim_limit": "Post-hoc exact-action replay with zero observer intervention and no policy inference; excluded from benchmark denominators and not a causal isolation or physical-accuracy comparison.",
+  "historical_source_sha256": "14b3c120cf186bbf40b3172325cb93cf52f940cd45c6d3f4e2119ce66e0d570f"
 }

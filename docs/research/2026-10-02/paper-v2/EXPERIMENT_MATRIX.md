@@ -34,4 +34,4 @@ and all observation, action and outcome checks. See the [reproducibility note](R
 
 [Complete results](RESULTS.md) · [中文结果](RESULTS.zh-CN.md) · [Physical-study commands](../../../../experiments/research_v2/README.md) · [Native-policy commands](../../../../experiments/vla/README.md)
 
-The optional paired backend replay renderer is distributed as source only. No executed paired-film capture is included in this release; the four published films have separate verified media manifests.
+The original `paper-validation-20261002` release contains four verified films. A separate [backend replay companion](backend/BACKEND_REPLAY.md) retains the executed task-5/state-21 paired film and exact-action capture receipts; it adds no formal benchmark episodes.

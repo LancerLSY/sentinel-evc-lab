@@ -174,6 +174,10 @@ The 720p bilingual film contains 281 actual simulator RGB frames (initial frame 
 
 ## Clear 3D evidence
 
+The [paired backend diagnostic](backend/BACKEND_REPLAY.md) reconstructs the first state-ordered discordant task-5 pair, state 21 and seed 43022, using the recorded environment actions. MuJoCo 3.8.1 reproduces failure after 280 actions with zero reward; MuJoCo 3.3.7 reproduces success after 85 actions with reward 1. Initial robot state, cameras, every action and every official outcome match each branch's formal record. The 1080p, 20 fps film contains 280 display frames; the shorter branch holds its last frame for 195 frames (9.75 s), explicitly labelled as display only.
+
+This post-hoc replay adds no benchmark episode, policy inference or observer intervention. It uses a separately frozen, per-file-verified official asset binding, as described in the [reproducibility note](REPRODUCIBILITY_NOTE.md). It supports the reported complete-version compatibility difference, without identifying either version as physically more accurate or isolating a causal mechanism. [Data, source and film](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/simulator-replays-20261002).
+
 [The 1080p UR5e film](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/sentinel-ur5e-paper.mp4) uses the official pinned full robot meshes and saved independent-review trajectories. Its three illustrative IDs are fixed before rendering. A red pane shows the unsafe proposed final trajectory as a **counterfactual, not dispatched motion**; the adjacent pane shows the recorded allow/reject outcome from the same initial state. Bilingual captions identify task, changed suffix/context, physical obstacle, decision, risk and trajectory time.
 
 This video rerenders the earlier 180-root mechanism fixtures; it is not presented as footage of the new 60-root obstacle study or of SmolVLA controlling UR5e. A rejected pane is a visualization of no candidate dispatch, not a measured hardware braking/hold experiment.
