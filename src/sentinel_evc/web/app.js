@@ -7,6 +7,7 @@ function state(value) { return `<span class="state ${escapeHTML(value)}">${escap
 function notice(message) { $('notice').textContent=message; $('notice').hidden=!message; }
 async function api(path,body) { const options=body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json','X-Sentinel-Token':token},body:JSON.stringify(body)}; const response=await fetch(path,options); const value=await response.json(); if(!response.ok)throw Error(value.error?.message || '请求失败'); return value; }
 function number(v,d=3) { return Number.isFinite(v)?v.toFixed(d):'—'; }
+window.SentinelWorkbench = {api, escapeHTML, notice, number};
 function fill(s) { for(const field of ['name','seed','displacement','risk_limit','prediction_mode'])$(field).value=s[field]; }
 async function listRuns() { const {runs}=await api('/api/runs'); $('run-list').innerHTML=runs.length?runs.map(run=>`<button class="run-item ${run.id===selected?'selected':''}" data-id="${escapeHTML(run.id)}"><span>${escapeHTML(run.name)}</span>${state(run.status)}<small>${escapeHTML(new Date(run.created_at).toLocaleString())}</small></button>`).join(''):'<p class="empty">还没有运行记录。<br>创建第一条数值场景开始。</p>'; $('run-list').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>loadRun(b.dataset.id)); }
 function plot(history,limit) { if(!history.length)return '<p class="empty">等待实际控制器反馈…</p>'; const w=650,h=190,p=28,max=Math.max(limit||0,...history.map(x=>Math.abs(x.r)),.01)*1.2,total=Math.max(2,history.at(-1).time); const x=t=>p+t/total*(w-p*2),y=r=>h/2-r/max*(h/2-p);const path=history.map((v,i)=>`${i?'L':'M'}${x(v.time).toFixed(2)},${y(v.r).toFixed(2)}`).join(' '); return `<svg class="chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="实际观测负载位移随数值时间变化"><line x1="${p}" x2="${w-p}" y1="${h/2}" y2="${h/2}"/><line class="limit" x1="${p}" x2="${w-p}" y1="${y(limit)}" y2="${y(limit)}"/><line class="limit" x1="${p}" x2="${w-p}" y1="${y(-limit)}" y2="${y(-limit)}"/><path d="${path}"/><text x="${p}" y="185">0 s</text><text x="${w-p-20}" y="185">${number(total,1)} s</text><text x="${p}" y="16">r · m</text></svg>`; }
@@ -22,6 +23,7 @@ const response=await fetch('/api/runs',{method:'POST',headers:{'Content-Type':'a
 $('template').onchange=()=>fill(templates.find(t=>t.id===$('template').value).scenario);$('refresh').onclick=()=>listRuns().catch(e=>notice(e.message));
 const pageCopy = {
   runs: ['实验工作台', '比较候选、检查许可，并追踪实际控制器反馈。', 'L0 · 数值参考'],
+  native: ['AI执行', '核验并回放 VLA 的真实保存记录、动作和授权游标。', '签名记录 · 非物理证明'],
   physics: ['三维实验', '检查真实接触动力学、轨迹与科学验收门。', 'MuJoCo · 真实物理'],
   assets: ['模型资产', '导入、预览并检查机器人和场景几何。', 'OBJ · STL · MJCF · URDF'],
   robots: ['机械臂接入', '创建驱动配置并执行不会产生运动的只读诊断。', '只读诊断'],
@@ -49,6 +51,7 @@ function showPage(name) {
     physicsPollTimer = null;
   }
   if (name !== 'physics') stopPhysicsPlayback();
+  if (name !== 'native') window.SentinelNativeUI?.deactivate();
   activePage = name;
   document.querySelectorAll('.page').forEach(element => {
     element.hidden = element.id !== `${name}-page`;
@@ -93,6 +96,7 @@ async function refreshSelectedPhysics() {
 async function loadPage(name) {
   try {
     if (name === 'runs') await listRuns();
+    if (name === 'native') await window.SentinelNativeUI.load();
     if (name === 'physics') {
       const jobs = await listPhysics();
       if (selectedJob) await loadPhysics(selectedJob);

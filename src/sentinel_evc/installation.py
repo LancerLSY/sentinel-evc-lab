@@ -279,6 +279,27 @@ def _copy_public_source(source: str | os.PathLike[str] | None, destination: Path
         target = destination / "tools" / tool.name
         target.parent.mkdir(exist_ok=True)
         shutil.copy2(tool, target)
+    # Ship only the curated native VLA entrypoints. Heavy inference packages
+    # stay in a separately selected environment; core installation stays small.
+    native_files = (
+        "experiments/vla/run_sentinel_libero.py",
+        "experiments/vla/libero_native_profile.py",
+        "experiments/vla/export_native_scene.py",
+        "experiments/vla/summarize_native_runs.py",
+        "experiments/vla/run_libero_closedloop.py",
+        "experiments/vla/libero_protocol.json",
+        "experiments/vla/libero_portable_assets.json",
+        "docs/native_vla_gateway.md",
+    )
+    for relative in native_files:
+        item = origin / relative
+        if not item.exists() and not item.is_symlink():
+            continue
+        if item.is_symlink() or any(parent.is_symlink() for parent in item.parents if parent != origin and origin in parent.parents) or not item.is_file():
+            raise ValueError("native VLA source must be a regular public file")
+        target = destination / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(item, target)
     return destination
 
 

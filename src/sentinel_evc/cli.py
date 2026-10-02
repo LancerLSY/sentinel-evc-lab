@@ -189,6 +189,39 @@ def cmd_serve(args):
     return 0
 
 
+def cmd_native_import(args) -> int:
+    from .native_runs import MAX_ARCHIVE, NativeRunStore
+    from .runstore import RunStore
+    archive, public_key = Path(args.archive), Path(args.public_key)
+    if archive.is_symlink() or not archive.is_file() or archive.stat().st_size > MAX_ARCHIVE:
+        raise ValueError('需要不超过 256 MiB 的本地 ZIP 证据包。')
+    if public_key.is_symlink() or not public_key.is_file() or public_key.stat().st_size != 32:
+        raise ValueError('需要独立选择的 32 字节 Ed25519 原始公钥。')
+    # Follow the same workspace ownership contract as the numeric service.
+    workspace = RunStore(args.data_dir)
+    try:
+        store = NativeRunStore(workspace.root / 'native-runs')
+        record = store.import_archive(archive.read_bytes(), args.run_id, public_key.read_bytes())
+    finally:
+        workspace.close()
+    print(json.dumps({'id':record['id'],'verification':record['verification'],
+                      'episode_count':record['episode_count'], 'open':'sentinel-evc serve --data-dir '+str(args.data_dir)},ensure_ascii=False,indent=2))
+    return 0
+
+
+def cmd_native_run(args) -> int:
+    import subprocess
+    source = Path(args.source).resolve() if args.source else Path(__file__).resolve().parents[2]
+    runner = source / 'experiments' / 'vla' / 'run_sentinel_libero.py'
+    if not runner.is_file():
+        raise ValueError('此安装没有 VLA runner；请用 --source 指向仓库检出目录。')
+    configuration = Path(args.config).resolve()
+    if not configuration.is_file():
+        raise ValueError('需要本地 VLA 配置 JSON。')
+    return subprocess.run([args.python, str(runner), '--config', str(configuration),
+                           '--output-dir', str(Path(args.out).resolve())], check=False).returncode
+
+
 def cmd_run(args):
     from .scenario import Scenario, strict_json
     from .runstore import RunStore
@@ -361,6 +394,20 @@ def main(argv=None) -> int:
     ui.add_argument("--port",type=int,default=8765)
     ui.add_argument("--data-dir",default="runs/workbench")
     ui.set_defaults(func=cmd_serve)
+
+    native_run=sub.add_parser('native-run',help='使用已有 VLA 环境运行原生策略和执行授权门禁')
+    native_run.add_argument('--config',required=True)
+    native_run.add_argument('--out',required=True)
+    native_run.add_argument('--python',default=sys.executable,help='已有 LeRobot/LIBERO 环境的 Python')
+    native_run.add_argument('--source',default=None,help='包含 experiments/vla 的仓库检出目录')
+    native_run.set_defaults(func=cmd_native_run)
+
+    native_import=sub.add_parser('native-import',help='核验并导入原生 VLA ZIP 记录到 App/工作台')
+    native_import.add_argument('--archive',required=True)
+    native_import.add_argument('--public-key',required=True)
+    native_import.add_argument('--run-id',required=True)
+    native_import.add_argument('--data-dir',default='runs/workbench')
+    native_import.set_defaults(func=cmd_native_import)
 
     run=sub.add_parser("run",help="执行四候选数值闭环并保存签名证据")
     run.add_argument("--out",default="runs/workbench")

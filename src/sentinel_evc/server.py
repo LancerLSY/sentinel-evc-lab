@@ -11,6 +11,7 @@ from .scenario import Scenario, InputError, strict_json, TEMPLATES
 from .runstore import RunStore
 
 MAX_BODY = 12 * 1024 * 1024
+MAX_NATIVE_BODY = 88 * 1024 * 1024
 
 class LocalServer(ThreadingHTTPServer):
     daemon_threads = False
@@ -22,6 +23,7 @@ class LocalServer(ThreadingHTTPServer):
         from .assets import AssetStore
         from .robot_connectors import RobotRegistry
         from .physics_jobs import PhysicsJobs
+        from .native_runs import NativeRunStore
         self.store, self.manager, self.token = store, manager, secrets.token_urlsafe(32)
         self.physics_jobs = None
         super().__init__(address, Handler)
@@ -29,6 +31,7 @@ class LocalServer(ThreadingHTTPServer):
             self.assets = AssetStore(store.root / "models")
             self.robots = RobotRegistry(store.root / "robots")
             self.physics_jobs = PhysicsJobs(store.root / "physics-jobs")
+            self.native_runs = NativeRunStore(store.root / "native-runs")
             port = self.server_address[1]
             self.hosts = {'127.0.0.1:'+str(port),'localhost:'+str(port)}
             self.origins = {'http://'+host for host in self.hosts}
@@ -79,6 +82,21 @@ class Handler(BaseHTTPRequestHandler):
     def error(self,status,code,message):
         self.reply(status,{'error':{'code':code,'message':message}})
 
+    def archive_reply(self, path):
+        try:
+            self.send_response(200)
+            self.send_header('Content-Type','application/zip')
+            self.send_header('Content-Length',str(path.stat().st_size))
+            self.send_header('Cache-Control','no-store')
+            self.send_header('X-Content-Type-Options','nosniff')
+            self.send_header('Content-Disposition','attachment; filename="sentinel-native-vla.zip"')
+            self.end_headers()
+            with path.open('rb') as handle:
+                while chunk := handle.read(65536):
+                    self.wfile.write(chunk)
+        finally:
+            path.unlink(missing_ok=True)
+
     def allowed(self,mutation=False):
         if self.headers.get('Host') not in self.server.hosts:
             self.error(403,'HOST_REJECTED','不支持此主机。');return False
@@ -103,7 +121,25 @@ class Handler(BaseHTTPRequestHandler):
             parts=self.parts()
             if parts == ['api','session']:
                 physics_engine=self.server.physics_jobs.engine_status()
-                return self.reply(200,{'token':self.server.token,'profile':'numeric-simulator-product-v1','templates':TEMPLATES,'physics_engine':physics_engine,'capabilities':{'stop':True,'resume':True,'export':True,'real_robot':False,'model_import':True,'robot_diagnostics':True,'physics_jobs':physics_engine['available']}})
+                return self.reply(200,{'token':self.server.token,'profile':'numeric-simulator-product-v1','templates':TEMPLATES,'physics_engine':physics_engine,'capabilities':{'stop':True,'resume':True,'export':True,'real_robot':False,'model_import':True,'robot_diagnostics':True,'physics_jobs':physics_engine['available'],'native_vla_recordings':True}})
+            if parts == ['api','native-runs']:
+                return self.reply(200, {'runs': self.server.native_runs.list()})
+            if len(parts) in (3,4,5) and parts[:2] == ['api','native-runs']:
+                run_id = parts[2]
+                if len(parts)==3:
+                    return self.reply(200, {'run': self.server.native_runs.get(run_id)})
+                if len(parts)==4 and parts[3]=='replay':
+                    return self.reply(200, self.server.native_runs.replay(run_id))
+                if len(parts)==4 and parts[3]=='model':
+                    return self.reply(200, self.server.native_runs.asset(run_id,'viewer-model.json'),'application/json; charset=utf-8')
+                if len(parts)==4 and parts[3]=='download':
+                    return self.archive_reply(self.server.native_runs.export(run_id))
+                if len(parts)==5 and parts[3]=='files':
+                    suffix=parts[4].rsplit('.',1)[-1].lower()
+                    types={'json':'application/json; charset=utf-8','mp4':'video/mp4','png':'image/png','jpg':'image/jpeg','jpeg':'image/jpeg','webp':'image/webp'}
+                    if suffix not in types:
+                        raise KeyError('unsupported media')
+                    return self.reply(200,self.server.native_runs.asset(run_id,parts[4]),types[suffix])
             if parts == ['api','assets']:
                 return self.reply(200, {'assets': self.server.assets.list()})
             if len(parts) in (3,4) and parts[:2] == ['api','assets']:
@@ -141,11 +177,11 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3]=='download':
                     path=self.server.store.export(run_id)
                     return self.reply(200,path.read_bytes(),'application/zip')
-            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js'}
+            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js','native-ui.js':'native-ui.js','native-viewer.js':'native-viewer.js'}
             name='/'.join(parts)
             if name in assets:
                 resource=files('sentinel_evc').joinpath('web',assets[name])
-                ctype={'index.html':'text/html; charset=utf-8','styles.css':'text/css; charset=utf-8','app.js':'text/javascript; charset=utf-8','viewer.js':'text/javascript; charset=utf-8'}[assets[name]]
+                ctype='text/html; charset=utf-8' if assets[name].endswith('.html') else 'text/css; charset=utf-8' if assets[name].endswith('.css') else 'text/javascript; charset=utf-8'
                 return self.reply(200,resource.read_bytes(),ctype)
             raise KeyError('route not found')
         except KeyError:
@@ -158,12 +194,15 @@ class Handler(BaseHTTPRequestHandler):
         try:
             parts=self.parts()
             length=self.headers.get('Content-Length','')
-            if self.headers.get('Transfer-Encoding') or not length.isdigit() or not 0 < int(length) <= MAX_BODY:
+            body_limit = MAX_NATIVE_BODY if parts == ['api','native-runs','import'] else MAX_BODY
+            if self.headers.get('Transfer-Encoding') or not length.isdigit() or not 0 < int(length) <= body_limit:
                 return self.error(413,'BODY_LIMIT','请求大小超出范围。')
             if self.headers.get('Content-Type','').split(';')[0].strip() != 'application/json':
                 return self.error(415,'CONTENT_TYPE','需要 application/json。')
             self.connection.settimeout(5)
             body=strict_json(self.rfile.read(int(length)))
+            if parts == ['api','native-runs','import']:
+                return self.reply(201, {'run': self.server.native_runs.import_request(body)})
             if parts == ['api','assets']:
                 if not isinstance(body,dict) or set(body) != {'name','format','content_base64'}:
                     raise InputError('需要 name、format、content_base64 模型参数。')
