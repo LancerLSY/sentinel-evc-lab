@@ -1,0 +1,17 @@
+{
+  "files": {
+    "LICENSE-UR5E-BSD-3-Clause.txt": {
+      "bytes": 1470,
+      "sha256": "5ec71ccf66c8d03261448f2441a586765b97f2248c860a1ae19689fb1c45cee6"
+    },
+    "export_ur5e_viewer.py": {
+      "bytes": 12135,
+      "sha256": "39aa39f30799ed5388d954d5f6d49fbe07c47898d5301f04c0a6694eea3f605a"
+    },
+    "ur5e-viewer-model.json": {
+      "bytes": 5175630,
+      "sha256": "0c0f9e78a51261d7d0b5234b34adf402b647a655a3766ce0e1f49749aeb6b5c1"
+    }
+  },
+  "schema": "sentinel-ur5e-viewer-assets-v2"
+}
