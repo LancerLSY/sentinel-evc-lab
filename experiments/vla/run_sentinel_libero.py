@@ -574,7 +574,7 @@ class NativeRunRecorder:
             if name == "action_replacement":
                 import numpy as np
 
-                altered = np.asarray(_jsonable(action), dtype=np.asarray(_jsonable(action)).dtype).copy()
+                altered = np.asarray(action).copy()
                 altered.reshape(-1)[0] += 0.001 if altered.reshape(-1)[0] <= 0.998 else -0.001
                 self.gateway.submit(
                     permit,
@@ -1266,7 +1266,11 @@ def main() -> int:
                 episode_error: Exception | None = None
                 try:
                     render = (task_id, state_index) in render_episode_keys and rendered < render_episodes
-                    video_dir = args.output_dir / "videos" if render else None
+                    video_dir = (
+                        args.output_dir / "videos" / f"task{task_id:02d}-state{state_index:02d}"
+                        if render
+                        else None
+                    )
                     episode_result = eval_one(
                         env,
                         policy=policy,

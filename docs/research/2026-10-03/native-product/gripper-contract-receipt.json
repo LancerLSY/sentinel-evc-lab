@@ -1,0 +1,45 @@
+{
+  "actuator_ctrlrange": [
+    [
+      0.0,
+      0.04
+    ],
+    [
+      -0.04,
+      0.0
+    ]
+  ],
+  "class": "robosuite.models.grippers.panda_gripper.PandaGripper",
+  "dof": 1,
+  "format_action_examples": {
+    "minus_1": [
+      1.0,
+      -1.0
+    ],
+    "minus_2": [
+      1.0,
+      -1.0
+    ],
+    "plus_1": [
+      0.99,
+      -0.99
+    ],
+    "plus_2": [
+      0.98,
+      -0.98
+    ],
+    "zero": [
+      1.0,
+      -1.0
+    ]
+  },
+  "schema": "sentinel-live-gripper-contract-v1",
+  "source": {
+    "distribution_relative_path": "robosuite/models/grippers/panda_gripper.py",
+    "end_line": 58,
+    "file_sha256": "a3760a8fc4599fa6f79914304b82466f3c1bda1a945943ca693bb57f00dc59eb",
+    "function_source_sha256": "38c8621c00529d0ed67d3df1d53013516094f88f8f8cb98dbb7f7284f720ee4f",
+    "start_line": 43
+  },
+  "speed": 0.01
+}

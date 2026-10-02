@@ -58,6 +58,25 @@ one-task qualification does not establish support for arbitrary policy outputs;
 any later out-of-profile request remains a reported failure. The profile and
 timing budget cannot change during the preregistered formal grid.
 
+### Retained invalid runs and frozen source
+
+The initial formal baseline completed the 50-cell action grid, but NumPy 2
+boolean scalars caused final JSON serialization to fail before a signed
+receipt existed. It is marked invalid and excluded. Source commit
+`a3548ed452f8e1f24566ce69100514e759c30025` makes scalar normalization recursive;
+all three formal lanes restart from this source with the original grid,
+profile and timing settings.
+
+The [v2 freeze manifest](freeze-v2/freeze-manifest.json) was recorded at
+`2026-10-02T18:37:28.983981+00:00`, SHA-256
+`20c27332c7fdb4aa078f26eb988a3c0527e57ec4de0a00f524127f6f7cdce2e4`.
+Its [baseline](freeze-v2/baseline.json), [active](freeze-v2/active.json) and
+[fault](freeze-v2/fault.json) configurations are retained unchanged. An initial
+v2 launch omitted `LIBERO_CONFIG_PATH` and exited before any episode; its
+invalid-launch receipt is retained separately. The actual launcher supplies
+the existing pinned LIBERO configuration directory. Neither invalid run
+contributes to formal success or latency statistics.
+
 ## Fault attempts
 
 Each fault episode attempts `action_replacement`, `lease_replay`,

@@ -13,12 +13,22 @@ records. SmolVLA training uses 5000 fine-tuning updates, with paired held-out ev
 and saved-weight/10-window verification. [Training results](gpu_training_results.md) and
 [model cards](gpu_model_cards.md) supersede the missing-training statements below;
 the remainder of this review describes the previously shipped product profile.
-Its live VLA transform/permit bindings, device execution and external trust
-integration still require their own implementation and evidence.
+The native simulation integration below supersedes the missing VLA request
+binding statement. Device execution and external trust remain separate gates.
+
+**Native integration, 2026-10-03:** the official SmolVLA/LIBERO path now retains
+raw predicted chunks, selected actions, official postprocessing and exact
+seven-dimensional environment requests. A separate native gateway binds those
+requests to real reset/step feedback and one-use permits before the captured
+writer is entered. Excluded qualification verified 85 byte-identical actions
+and actual submitted/accepted/observed cursors. The CLI/App can import signed
+records with an independently selected key and replay task-specific compiled
+meshes. The [contract](native_vla_gateway.md) and
+[paired protocol](research/2026-10-03/native-product/PROTOCOL.md) define scope.
 
 The local numeric product and fixed MuJoCo fixture implement useful, testable
-parts of the mechanism. Full v4 product completion remains incomplete at live
-VLA/learned-predictor integration, the real motion driver and external trust
+parts of the mechanism. Full v4 product completion remains incomplete at native
+Panda physical/learned-predictor validation, the real motion driver and external trust
 integration. The current foundation has a **WATCH** architecture assessment:
 its bounded profiles can be released with the limitations below visible.
 
@@ -37,12 +47,12 @@ completion of the requirement across v4 integrations.
 
 | ID | Design requirement | Current implementation and evidence | Remaining scope |
 |---|---|---|---|
-| F01 | Retain raw model actions and final executable actions | Partial: all four numeric final Plans, predictions, selection and replay retained; physics records scripted Plan and actual feedback | Real VLA raw outputs, decoding/normalization and per-step raw-to-final alignment |
+| F01 | Retain raw model actions and final executable actions | Scoped: numeric final Plans plus native official SmolVLA chunks, selected/postprocessed requests, exact bytes and actual environment feedback | arbitrary VLA adapters and additional transform provenance |
 | F02 | Explicit units, frame, mode, timing and gripper semantics | Scoped: immutable ActionDescriptor/Plan, finite constructors, dt and gripper contract tests | Joint ordering, normalization versions, camera/robot frames and actual adapter contracts |
 | F03 | Register action transforms with new digests and dependencies | Partial: TransformRecord binds parent/child, kind, parameters and version in delta demo | Product upstream transform chain, affected ranges and dependency classifications |
 | F04 | Full original-constraint validation and delta inheritance | Scoped numeric static geometry: cumulative margins, scene/time/event bindings, independent full comparison and full fallback; physics uses full compiled-model binding | Robot link/dynamic/recoverable-terminal constraints; physical delta inheritance |
-| F05 | Separate prepare/commit and recheck live context | Scoped local implementation: all current numeric Context fields, fresh feedback, generation, prediction validity and single-use lease | Normalization/calibration/firmware identity, distributed CAS/transport and hardware timing qualification |
-| F06 | Single command writer; revoke blocks new old-generation sends | Scoped numeric/MuJoCo Executor; revocation, cancel/drain and fault regressions | Enforced hardware driver capabilities and process/key isolation |
+| F05 | Separate prepare/commit and recheck live context | Scoped numeric and native gateway: fresh feedback, full declared context, generation, expiry and single-use request permit | distributed CAS/transport, customer trust and hardware timing qualification |
+| F06 | Single command writer; revoke blocks new old-generation sends | Scoped numeric Executor and native gateway admission barrier; captured simulator writer requires a valid permit in active mode | enforced hardware driver capabilities, physical cancel and process/key isolation |
 | F07 | Record irrevocable work and submitted/accepted/observed cursors | Scoped simulated controller and MuJoCo actual trace; accepted tail retained | Device acceptance semantics, queue bounds and measured physical braking tail |
 | F08 | World model evaluates final candidates; changed actions invalidate prediction | Scoped numeric four-final-Plan evaluation, exact suffix inheritance, root offsets and runtime envelope; registry field mutations now deny approval | Actual VLA and three-dimensional WorldGuard, repair-to-reprediction chain |
 | F09 | Explicit unknown/no-solution/timeout fallback; no stale success replay | Scoped numeric rejection, MODEL_UNKNOWN, expiry, preparation cancellation, fault drain and approved recovery; new independent runs after failures | Device-specific approved fallback/braking policy and terminal-set validation |

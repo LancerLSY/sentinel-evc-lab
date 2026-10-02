@@ -6,6 +6,25 @@ The [2026-10-02 GPU experiments](gpu_training_results.md) add actual trained
 numerical/visual/object predictors and real recorded data. The table describes
 the product runtime, which keeps those experimental model profiles separate.
 
+## Native Panda integration
+
+The [native gateway](native_vla_gateway.md) adds a separate seven-dimensional
+LIBERO/Panda request contract. Its authorization must not be interpreted as
+the physical checks in the numerical table below.
+
+| Product operation | Implemented native behavior | Support boundary |
+|---|---|---|
+| Policy to environment | official checkpoint/processors, raw chunk, selected action, postprocessed ndarray and actual `env.step` identity retained | pinned SmolVLA/LIBERO runtime |
+| Request authorization | exact dtype/shape/bytes bound to feedback, task context, queue revision, step and revocation generation; expiring one-use permit | in-process request integrity, not collision/dynamics validation |
+| Dispatch and observation | admission checks precede the captured writer; submitted/accepted/observed cursors use actual transitions | an entered synchronous step may finish after revoke |
+| Portable evidence | independent public-key selection, bounded staged ZIP import, fresh verification and signed export | demo trust source, no customer PKI or sensor authenticity |
+| App replay | exact task-model binding, real visual meshes and stored body poses, request/decision/cursor timeline | no new browser dynamics or interpolated motion |
+
+The [frozen paired protocol](research/2026-10-03/native-product/PROTOCOL.md)
+separates normal task outcomes from six synthetic invalid-authorization attempts.
+
+## Numerical product mechanisms
+
 | Mechanism | Implemented behavior | Remaining experiment |
 |---|---|---|
 | M01 final action binding | immutable descriptor/Plan digest; finite 3D position profile | upstream VLA action adapters and normalization versions |

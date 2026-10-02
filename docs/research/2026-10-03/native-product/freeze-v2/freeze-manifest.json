@@ -1,0 +1,50 @@
+{
+  "change_from_v1": "one-line recursive scalar normalization in _jsonable; grid/profile/timing/horizon unchanged",
+  "configs": {
+    "active": {
+      "bytes": 981,
+      "path": "/root/sentinel-product-v1-20261003/formal-native-v2/active.json",
+      "sha256": "2d23ff4deda47a5a797f2d7c4fb4a29934b840c166ef2f83c39a4eeeb7bb7dca"
+    },
+    "baseline": {
+      "bytes": 985,
+      "path": "/root/sentinel-product-v1-20261003/formal-native-v2/baseline.json",
+      "sha256": "174cacc62a4fcd8ed27162971429af48924fba907d71c59e33ebdd5e6da6e4b0"
+    },
+    "fault": {
+      "bytes": 1007,
+      "path": "/root/sentinel-product-v1-20261003/formal-native-v2/fault.json",
+      "sha256": "e57e7e01a57f139a6e525e92700c49b4186556f6b0475c37adda10863b17267a"
+    }
+  },
+  "frozen_utc": "2026-10-02T18:37:28.983981+00:00",
+  "previous_invalid_run": {
+    "path": "/root/sentinel-product-v1-20261003/formal-baseline-v1/INVALID_RUN.json",
+    "sha256": "799f224fa1a3b1447cd3802e9cf503cdac89e905749cdae87156d574700d5cec"
+  },
+  "schema": "sentinel-native-formal-freeze-v2",
+  "source_commit": "a3548ed452f8e1f24566ce69100514e759c30025",
+  "source_files": {
+    "experiments/vla/export_native_scene.py": {
+      "bytes": 28336,
+      "sha256": "50792d85a2a9d3d1f3c53cbe52045d2d38de38d21f0b1163f2dbb8856d77b954"
+    },
+    "experiments/vla/libero_protocol.json": {
+      "bytes": 7222,
+      "sha256": "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b"
+    },
+    "experiments/vla/profiles/libero_native_qualified.json": {
+      "bytes": 449,
+      "sha256": "186ac529fa82e19c92360579cf707bcdd5eaec245b56487841067f7bce6e9b3e"
+    },
+    "experiments/vla/run_sentinel_libero.py": {
+      "bytes": 63874,
+      "sha256": "cfd0acc8096ce95f17ad88db4c2046edfc2d6a94f7cc180bd3b52c40c5c487b6"
+    },
+    "src/sentinel_evc/native_gateway.py": {
+      "bytes": 26794,
+      "sha256": "c5be0dd7ad13ab09b04bfb4df19c036a0e3e874f012b868e3f120a5c9e3f915b"
+    }
+  },
+  "source_root": "/root/sentinel-product-v1-20261003/public-a3548ed"
+}

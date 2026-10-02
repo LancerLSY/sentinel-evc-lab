@@ -285,6 +285,7 @@ def _copy_public_source(source: str | os.PathLike[str] | None, destination: Path
         "experiments/vla/run_sentinel_libero.py",
         "experiments/vla/libero_native_profile.py",
         "experiments/vla/profiles/libero_native_qualified.json",
+        "experiments/vla/profiles/libero_native_raw_float32.json",
         "experiments/vla/export_native_scene.py",
         "experiments/vla/summarize_native_runs.py",
         "experiments/vla/run_libero_closedloop.py",

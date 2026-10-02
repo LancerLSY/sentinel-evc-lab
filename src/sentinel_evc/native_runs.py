@@ -163,8 +163,15 @@ class NativeRunStore:
 
     def get(self, run_id: str) -> dict:
         directory = self._directory(run_id)
-        self._verify(directory, run_id)
-        return self._result(directory, run_id)
+        manifest = self._verify(directory, run_id)
+        return {
+            **self._result(directory, run_id),
+            "verified_video_sha256": {
+                name: digest
+                for name, digest in manifest["files"].items()
+                if name.endswith(".mp4")
+            },
+        }
 
     def list(self) -> list[dict]:
         rows = []

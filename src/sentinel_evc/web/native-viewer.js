@@ -142,6 +142,12 @@ window.SentinelNativeViewer = class {
     return this.bodyNames.map(name => value[name]);
   }
 
+  _isRoomShell(mesh) {
+    const bodyIndex = Number(mesh.bodyIndex ?? mesh.body_index);
+    const name = String(mesh.name || '').toLowerCase();
+    return bodyIndex === 0 && (mesh.infinitePlaneRenderedFinite === true || name.startsWith('wall_'));
+  }
+
   setRecord(model, episode) {
     if (!model || !Array.isArray(model.meshes) || !model.meshes.length || model.meshes.length>512) throw new Error('任务模型不含受支持的可渲染网格。');
     if (!episode || !Array.isArray(episode.frames) || !episode.frames.length || episode.frames.length>5000) throw new Error('Episode 没有受支持的回放帧。');
@@ -178,7 +184,12 @@ window.SentinelNativeViewer = class {
       throw new Error('记录帧的 modelId 与任务模型不一致。');
     }
     for (const mesh of this.meshes) this._delete(mesh);
-    this.meshes = model.meshes.map(mesh => this._upload({...mesh, bodyIndex: Number(mesh.bodyIndex ?? mesh.body_index)}));
+    this.meshes = model.meshes.map(mesh => this._upload({
+      ...mesh,
+      bodyIndex: Number(mesh.bodyIndex ?? mesh.body_index),
+      hiddenRoomShell: this._isRoomShell(mesh),
+    }));
+    this.hiddenRoomMeshCount = this.meshes.filter(mesh => mesh.hiddenRoomShell).length;
     this._delete(this.trace);
     this.record = episode;
     this.traceBodyIndex = Number(model.endEffectorBodyIndex ?? model.end_effector_body_index ?? bodyNames.length - 1);
@@ -202,6 +213,8 @@ window.SentinelNativeViewer = class {
       if (this._point(point)) radius=Math.max(radius,Math.hypot(...point.map((value,axis)=>value-this.target[axis])));
     }
     this.distance = Math.max(.75, radius * 3.1);
+    this.minimumDistance = Math.max(.18, this.distance * .22);
+    this.maximumDistance = Math.max(8, this.distance * 4.5);
     this.defaultView = {yaw: -0.8, pitch: 0.45, distance: this.distance, target: [...this.target]};
     this.frameIndex = 0;
     this.draw(0);
@@ -270,6 +283,7 @@ window.SentinelNativeViewer = class {
     const poseEntry=this.poseFrames.findLast ? this.poseFrames.findLast(item=>item.index<=this.frameIndex) : [...this.poseFrames].reverse().find(item=>item.index<=this.frameIndex);
     const pose=poseEntry || this.poseFrames[0], frame=pose.frame, positions=this._positions(frame), rotations=this._rotations(frame);
     for(const mesh of this.meshes){
+      if(mesh.hiddenRoomShell)continue;
       const point=positions[mesh.bodyIndex];
       if(this._point(point))this._drawMesh(mesh,this._matrix(this._rotation(rotations[mesh.bodyIndex]),point));
     }
@@ -295,7 +309,7 @@ window.SentinelNativeViewer = class {
 
   _bindControls() {
     let pointer=null;
-    this.canvas.addEventListener('pointerdown',event=>{pointer=[event.clientX,event.clientY];this.canvas.setPointerCapture(event.pointerId);});
+    this.canvas.addEventListener('pointerdown',event=>{this.canvas.focus({preventScroll:true});pointer=[event.clientX,event.clientY];this.canvas.setPointerCapture(event.pointerId);});
     this.canvas.addEventListener('pointermove',event=>{
       if(!pointer)return;
       this.yaw-=(event.clientX-pointer[0])*.008;
@@ -304,7 +318,7 @@ window.SentinelNativeViewer = class {
     });
     const release=()=>{pointer=null;};
     this.canvas.addEventListener('pointerup',release);this.canvas.addEventListener('pointercancel',release);
-    this.canvas.addEventListener('wheel',event=>{event.preventDefault();this.distance=Math.max(.12,Math.min(30,this.distance*Math.exp(event.deltaY*.001)));this.draw();},{passive:false});
+    this.canvas.addEventListener('wheel',event=>{if(document.activeElement!==this.canvas)return;event.preventDefault();this.distance=Math.max(this.minimumDistance||.12,Math.min(this.maximumDistance||30,this.distance*Math.exp(event.deltaY*.00045)));this.draw();},{passive:false});
     window.addEventListener('resize',()=>this.draw());
   }
 };

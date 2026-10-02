@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="330" viewBox="0 0 1200 330" role="img" aria-labelledby="title desc">
+  <title id="title">Native request authorization: policy, exact request, permit, writer and real feedback</title>
+  <desc id="desc">Official SmolVLA processors produce a seven-value request. Sentinel binds its exact array bytes to feedback and context, issues a one-use permit and checks it immediately before env.step. The actual transition and cursors enter a signed evidence bundle. This Panda profile does not validate physical collision or dynamics.</desc>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#3761cc" stroke-width="1.5"/></marker></defs>
+  <rect width="1200" height="330" rx="18" fill="#f7f9fd"/>
+  <g font-family="Arial, sans-serif" fill="#172439">
+    <text x="36" y="43" font-size="22" font-weight="700">The final request is the authorization unit</text>
+    <text x="36" y="70" font-size="14" fill="#53657f">Pinned policy and processors · exact native bytes · actual environment feedback</text>
+    <g stroke="#d4ddeb" fill="#fff" stroke-width="1.5">
+      <rect x="36" y="98" width="198" height="108" rx="12"/>
+      <rect x="267" y="98" width="198" height="108" rx="12"/>
+      <rect x="498" y="98" width="198" height="108" rx="12"/>
+      <rect x="729" y="98" width="198" height="108" rx="12"/>
+      <rect x="960" y="98" width="204" height="108" rx="12"/>
+    </g>
+    <g font-size="17" font-weight="700">
+      <text x="54" y="129">Official policy</text><text x="285" y="129">Final request</text>
+      <text x="516" y="129">One-use permit</text><text x="747" y="129">Native writer</text>
+      <text x="978" y="129">Observed result</text>
+    </g>
+    <g font-size="14" fill="#53657f">
+      <text x="54" y="158">SmolVLA chunk</text><text x="54" y="184">Select → postprocess</text>
+      <text x="285" y="158">shape · dtype · bytes</text><text x="285" y="184">7-D relative request</text>
+      <text x="516" y="158">feedback · context</text><text x="516" y="184">deadline · generation</text>
+      <text x="747" y="158">consume authorization</text><text x="747" y="184">captured env.step</text>
+      <text x="978" y="158">state · task outcome</text><text x="978" y="184">three execution cursors</text>
+    </g>
+    <g stroke="#3761cc" stroke-width="2" fill="none" marker-end="url(#a)">
+      <path d="M237 151H260"/><path d="M468 151H491"/><path d="M699 151H722"/><path d="M930 151H953"/>
+    </g>
+    <rect x="36" y="228" width="1128" height="48" rx="10" fill="#eaf0ff"/>
+    <text x="56" y="258" font-size="15" fill="#234ba2">Signed evidence: raw chunk → selected action → authorized bytes → submitted / accepted / observed → stored 3D poses</text>
+    <text x="36" y="308" font-size="13" fill="#53657f">Scope: native request integrity. Panda collision, dynamics, WorldGuard and physical-stop validation are separate requirements.</text>
+  </g>
+</svg>

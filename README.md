@@ -30,11 +30,12 @@ and evidence boundaries.
 | Surface | Available now | Boundary |
 |---|---|---|
 | **CLI + local service** | install, run, verify, export; numeric and fixed MuJoCo profiles | local single-workspace service |
-| **Native macOS App** | AppKit/WebKit shell for the same loopback workbench; ZIP evidence download | requires a managed Python environment; unsigned/unnotarized research build |
+| **Native macOS App** | same loopback workbench; independently keyed native-run import, task-specific 3D replay and signed ZIP export | requires a managed Python environment; locally built, without distribution signing/notarization |
 | **SSH experiments** | strict OpenSSH launch, source binding, returned-evidence verification | existing host alias, key agent and `known_hosts` required |
 | **Robot entry** | mock diagnostics and Universal Robots read-only dashboard probe | no physical motion/write adapter yet |
 | **3D model entry** | OBJ, STL, MJCF and URDF inspection; offline Canvas preview | inspection does not grant execution authority |
-| **GPU/VLA research** | trained WorldGuard families and an actual SmolVLA fine-tune on fixed recorded data | offline evaluation; live upstream action chain pending |
+| **Native VLA integration** | official SmolVLA/Panda inference, exact 7-D request authorization, one-use permits and recorded environment feedback | LIBERO simulation; no Panda collision, dynamics, WorldGuard or physical-stop validation |
+| **GPU/model research** | trained WorldGuard families and a SmolVLA fine-tune on fixed SO100 recordings | separate experimental profiles; the SO100 overlay is not the native Panda checkpoint |
 
 The workbench always shows execution completion, evidence integrity, and scientific
 acceptance separately. A run may complete correctly while a scientific gate fails.
@@ -79,6 +80,30 @@ candidates, run a recorded simulation, inspect events, and export signed ZIP evi
 [Model, robot and executor ports](docs/integration_ports.md) ·
 [Product validation](docs/product_validation.md)
 
+### Use an existing VLA environment
+
+Keep the heavy ML stack in its existing environment. The installed CLI can
+launch the native runner using that environment's Python:
+
+```bash
+sentinel-evc native-run --python /path/to/vla/bin/python \
+  --config /path/to/native-active.json --out /path/to/new-run
+sentinel-evc native-import --archive /path/to/sentinel-native-vla-bundle.zip \
+  --public-key /path/to/independently-retained.public --run-id ACTUAL_RUN_ID \
+  --data-dir /path/to/workbench-data
+```
+
+Open **Native VLA runs** in the App to select a task and stored time step.
+The scene uses the task's actual MuJoCo visual meshes and body poses; the same
+frame shows the request, authorization and submitted/accepted/observed cursors.
+Importing a recording does not run inference or grant robot motion authority.
+
+[Native gateway contract and configuration](docs/native_vla_gateway.md) ·
+[Frozen paired protocol](docs/research/2026-10-03/native-product/PROTOCOL.md) ·
+[Method and related tools](docs/native_method_position.md)
+
+![Native request authorization and observed execution](docs/media/native-request-flow.svg)
+
 ## How the gate works
 
 <p align="center">
@@ -87,7 +112,9 @@ candidates, run a recorded simulation, inspect events, and export signed ZIP evi
 
 1. An upstream VLA, planner, or recorded policy proposes an action block.
 2. Retiming, repair, frame conversion, or any other transform creates the final candidate.
-3. Physical checks and the bound WorldGuard profile evaluate that final candidate.
+3. The selected profile evaluates the final candidate: physical/WorldGuard checks
+   in the bounded numerical profile, or request identity/schema/context in the
+   native Panda profile.
 4. The authority issues a plan/context-bound permit with a deadline and one use.
 5. The executor checks fresh state and is the only component allowed to call the controller.
 6. Submitted, accepted, and observed cursors enter a signed, independently verifiable log.

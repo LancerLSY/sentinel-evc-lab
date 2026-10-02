@@ -1,0 +1,8 @@
+{
+  "schema_id": "libero-panda-relative-7d-raw-float32-v1",
+  "lower": [-3.4028234663852886e38, -3.4028234663852886e38, -3.4028234663852886e38, -3.4028234663852886e38, -3.4028234663852886e38, -3.4028234663852886e38, -3.4028234663852886e38],
+  "upper": [3.4028234663852886e38, 3.4028234663852886e38, 3.4028234663852886e38, 3.4028234663852886e38, 3.4028234663852886e38, 3.4028234663852886e38, 3.4028234663852886e38],
+  "request_shape": [1, 7],
+  "request_dtypes": ["float32"],
+  "semantics": "Exact finite float32 request at the pinned official LIBERO env.step API: 3 relative translation values, 3 axis-angle values, and one gripper value. The limits describe the complete finite IEEE float32 representation domain, not robot motion or physical safety limits. The pinned native OSC controller performs its own clipping and scaling after this API boundary; Sentinel does not clip or rescale the submitted bytes. Controller mapping provenance and physical validation are separate from this request-integrity profile."
+}

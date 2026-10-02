@@ -1,0 +1,114 @@
+{
+  "controller": {
+    "action_input_transform": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "action_output_transform": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "action_scale": [
+      0.05,
+      0.05,
+      0.05,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "class": "robosuite.controllers.osc.OperationalSpaceController",
+    "control_dim": 6,
+    "control_freq": 20,
+    "impedance_mode": "fixed",
+    "input_max": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "input_min": [
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0,
+      -1.0
+    ],
+    "output_max": [
+      0.05,
+      0.05,
+      0.05,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "output_min": [
+      -0.05,
+      -0.05,
+      -0.05,
+      -0.5,
+      -0.5,
+      -0.5
+    ],
+    "uncoupling": true,
+    "use_delta": true
+  },
+  "environment": {
+    "control_mode": "relative",
+    "fps": 20,
+    "hard_reset": true,
+    "seed": 44045,
+    "state_index": 45,
+    "suite": "libero_spatial",
+    "task_id": 0
+  },
+  "interpretation": "OSC arm components are clipped to input bounds by Controller.scale_action before linear mapping to output bounds; the seventh gripper request is outside the 6D OSC controller contract and follows SingleArm gripper handling. This is request-to-controller mapping provenance, not physical safety validation.",
+  "robot": {
+    "class": "robosuite.robots.single_arm.SingleArm",
+    "controller_config_control_delta": true,
+    "name": "MountedPanda"
+  },
+  "schema": "sentinel-live-controller-contract-v1",
+  "software": {
+    "hf-libero": "0.1.4",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.7",
+    "robosuite": "1.4.0"
+  },
+  "source": [
+    {
+      "distribution_relative_path": "robosuite/controllers/base_controller.py",
+      "end_line": 123,
+      "file_sha256": "61f99a2daeb4eb6e39bfb996d94c5a5689ef3bc771d030d070193ea56d6a8332",
+      "function_source_sha256": "e640bba5c78d80939b01b5f857d221a3b7a9de9969becd2286c75f382034eed8",
+      "label": "Controller.scale_action",
+      "start_line": 104
+    },
+    {
+      "distribution_relative_path": "robosuite/controllers/osc.py",
+      "end_line": 276,
+      "file_sha256": "cfa62a0e719bc53ef0c701efa66f7b3e2272d4fca2150ec73c05bb145eba85cb",
+      "function_source_sha256": "ee507b85baaf675542e9960bacec9e33a3acca78a6a98ee99a64ceb0c999ecc2",
+      "label": "OperationalSpaceController.set_goal",
+      "start_line": 202
+    },
+    {
+      "distribution_relative_path": "robosuite/robots/single_arm.py",
+      "end_line": 277,
+      "file_sha256": "d233b1b785e8f88ffb5df1357666b02a397ae930ce98181b079e0496ab35fc57",
+      "function_source_sha256": "34820bee44709801d8c8bf246c91d134b061be926ef3b7be26ed2bac0ce1fafe",
+      "label": "SingleArm.control",
+      "start_line": 216
+    }
+  ]
+}

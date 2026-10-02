@@ -49,7 +49,7 @@ Windows 当前提供 CLI 安装入口，不声称提供原生 App：
 .\tools\install.ps1 -Target "$env:LOCALAPPDATA\Sentinel-EVC" -Profile all
 ```
 
-安装目标必须尚不存在。安装器先在同级临时目录完成虚拟环境、依赖、公开源码副本、启动器和 App 构建，全部成功后才发布目标；失败不会留下看似可用的半安装目录。公开源码副本包含 `src/`、`tests/`、`pyproject.toml`、`README.md` 和 `LICENSE`，供 SSH 作业与证据清单绑定使用，不包含 Git 历史、运行结果或私有配置。
+安装目标必须尚不存在。安装器先在同级临时目录完成虚拟环境、依赖、公开源码副本、启动器和 App 构建，全部成功后才发布目标；失败不会留下看似可用的半安装目录。公开源码副本包含 `src/`、`tests/`、`pyproject.toml`、`README.md`、`LICENSE`，以及原生 VLA runner、模型导出器、比较脚本、冻结身份协议和请求 profile，供运行与证据清单绑定使用。不包含 Git 历史、运行结果或私有配置。
 
 安装后的命令位于 `bin/sentinel-evc`（Windows 为 `bin\sentinel-evc.cmd`），App 位于 `Sentinel EVC.app`。例如：
 
@@ -60,6 +60,15 @@ open "Sentinel-EVC/Sentinel EVC.app"
 ```
 
 ## App 的运行边界
+
+“原生 VLA 运行”入口接收运行 ZIP、实际 run ID 和独立选择的 32 字节 Ed25519
+原始公钥。核验成功后可按任务查看真实模型网格、动作、授权判定和执行游标，
+导出时重新核验签名。使用 CLI `native-import` 时先退出同一工作区的 App，
+导入成功后再启动；工作区采用单所有者锁。
+
+`native-run` 使用 `--python` 指定已有 LeRobot/LIBERO 环境。基础安装只负责
+轻量引擎，不会自动安装 GPU 模型栈。配置与能力范围见
+[原生 VLA 门禁](native_vla_gateway.md)。回放导入不构成新物理仿真或设备授权。
 
 App 是 1320×900 的原生窗口，启动安装目录中的受管 Python，等待后端公布随机端口，再打开 `127.0.0.1` 工作台。启动页和错误页都在 App 内显示；退出 App 会终止子进程。后端仍执行 Host、Origin、CSRF 和 loopback 限制。
 

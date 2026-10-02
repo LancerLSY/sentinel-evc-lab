@@ -28,11 +28,12 @@ SSH 实验入口、受限三维模型检查和只读机械臂诊断。产品核�
 | 入口 | 已可用 | 边界 |
 |---|---|---|
 | **CLI + 本地服务** | 安装、运行、校验、导出；数值与固定 MuJoCo profile | 单机、单工作区 |
-| **macOS 原生 App** | AppKit/WebKit 外壳；使用同一回环工作台；支持 ZIP 证据下载 | 依赖受管 Python 环境；研究版本尚未签名、公证 |
+| **macOS 原生 App** | 共用本地工作台；独立公钥核验导入原生运行、按任务三维回放、导出签名 ZIP | 依赖受管 Python 环境；本机构建，尚无分发签名与公证 |
 | **SSH 实验** | 严格 OpenSSH 启动、源码绑定、返回证据校验 | 需要已有主机别名、密钥代理和 `known_hosts` |
 | **机械臂入口** | mock 诊断与 Universal Robots 只读 dashboard 探测 | 尚无物理运动写入适配器 |
 | **三维模型入口** | OBJ、STL、MJCF、URDF 检查与离线 Canvas 预览 | 预览不会获得执行授权 |
-| **GPU / VLA 研究** | WorldGuard 模型对照与 SO100 数据上的 SmolVLA 微调 | 离线评估；实时上游动作链仍待接入 |
+| **原生 VLA 接入** | 官方 SmolVLA/Panda 推理、精确 7-D 请求授权、一次性许可与真实环境反馈 | LIBERO 仿真；尚无 Panda 碰撞、动力学、WorldGuard 或物理停止验证 |
+| **GPU / 模型研究** | WorldGuard 模型对照与固定 SO100 数据上的 SmolVLA 微调 | 各实验 profile 分别报告；SO100 overlay 与原生 Panda 检查点不同 |
 
 工作台把“运行是否完成”“证据是否完整”“科学验收是否通过”分开显示。
 一次实验可以正确完成，同时保留未通过的科学门。
@@ -77,6 +78,28 @@ python -m sentinel_evc serve --data-dir runs/workbench --port 8765
 [模型、机械臂与执行器接口](docs/integration_ports.md) ·
 [产品验证记录](docs/product_validation.md)
 
+### 使用已有 VLA 环境
+
+模型依赖保留在已有环境中。安装后的 CLI 使用该环境的 Python 启动原生运行：
+
+```bash
+sentinel-evc native-run --python /path/to/vla/bin/python \
+  --config /path/to/native-active.json --out /path/to/new-run
+sentinel-evc native-import --archive /path/to/sentinel-native-vla-bundle.zip \
+  --public-key /path/to/independently-retained.public --run-id ACTUAL_RUN_ID \
+  --data-dir /path/to/workbench-data
+```
+
+在 App 中进入“原生 VLA 运行”，选择任务与保存的时间点。三维场景使用该任务
+真实的 MuJoCo 可视网格与 body 姿态，同一帧显示动作请求、授权判定和
+submitted / accepted / observed 游标。导入记录不会启动推理或授予机械臂运动权限。
+
+[原生门禁契约与配置](docs/native_vla_gateway.md) ·
+[冻结配对协议](docs/research/2026-10-03/native-product/PROTOCOL.md) ·
+[方法与相关工具](docs/native_method_position.md)
+
+![原生请求授权与实际环境反馈](docs/media/native-request-flow.svg)
+
 ## 执行许可如何产生
 
 <p align="center">
@@ -85,7 +108,8 @@ python -m sentinel_evc serve --data-dir runs/workbench --port 8765
 
 1. 上游 VLA、规划器或已记录策略给出动作块。
 2. 重定时、修复、坐标转换等步骤生成最终候选。
-3. 物理约束和已绑定的 WorldGuard profile 校验最终候选。
+3. 按所选 profile 校验最终候选：受限数值 profile 执行物理与 WorldGuard 检查；
+   原生 Panda profile 检查请求身份、格式与执行上下文。
 4. Authority 签发与计划、上下文绑定且有期限的一次性许可。
 5. Executor 复核最新状态，并作为唯一组件调用 controller。
 6. submitted、accepted、observed 三个游标进入可独立校验的签名日志。
