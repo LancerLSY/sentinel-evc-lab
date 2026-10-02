@@ -1,6 +1,6 @@
 # Sentinel EVC project homepage
 
-Public homepage: https://sentinel-evc-lab.lanceryou.chatgpt.site
+Public homepage: https://lansiyao.com/research/sentinel-vla/project/
 
 A static, bilingual research homepage with the recorded UR5e demonstration,
 schematic 3D trajectory replay, source-backed comparison charts, local installation
@@ -47,9 +47,10 @@ strings are in the HTML. Replace the disabled arXiv resource and software citati
 only after the paper URL and bibliographic metadata are available. Keep chart data
 bound to retained source files and refresh asset hashes after changes.
 
-The deployed static files mirror this directory's HTML, CSS, JavaScript and assets.
-Sites deployment configuration and short-lived source credentials are managed
-outside this repository. To host independently, serve this directory on any static
+The public project page is hosted within the existing personal website at
+`/research/sentinel-vla/project/`, linked from `/research/sentinel-vla/`.
+This directory remains a portable static snapshot. Deployment configuration and
+short-lived source credentials are managed outside this repository. To host independently, serve this directory on any static
 hosting provider. Code uses the repository's MIT license; upstream UR5e model
 assets retain their BSD-3-Clause attribution in the linked demonstration archive.
 

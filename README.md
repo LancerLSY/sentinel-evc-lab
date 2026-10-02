@@ -6,7 +6,7 @@
   <img src="docs/media/sentinel-hero.svg" alt="Sentinel EVC final-action verification workbench" width="100%">
 </p>
 
-**[Project homepage](https://sentinel-evc-lab.lanceryou.chatgpt.site)** · [GitHub](https://github.com/LancerLSY/sentinel-evc-lab) · [Hugging Face](https://huggingface.co/LancerLSY/sentinel-smolvla-so100)
+**[Project homepage](https://lansiyao.com/research/sentinel-vla/project/)** · [GitHub](https://github.com/LancerLSY/sentinel-evc-lab) · [Hugging Face](https://huggingface.co/LancerLSY/sentinel-smolvla-so100)
 
 Sentinel EVC places an authorization gate at the last commit point of a robot
 policy's action block. It checks the action that will **actually** execute, issues
