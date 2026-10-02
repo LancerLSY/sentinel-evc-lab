@@ -63,15 +63,19 @@
     if (!response.ok) throw new Error(`${path}: HTTP ${response.status}`);
     const declared=Number(response.headers.get("content-length"));if(Number.isFinite(declared)&&declared>limit)throw new Error("Artifact exceeds the site playback size limit.");
     if(!response.body)throw new Error("Artifact response has no readable body.");
-    const raw=await readBytes(response.body,limit), gzipPayload=raw[0]===0x1f&&raw[1]===0x8b;
-    const expected=path.endsWith(".gz")&&!gzipPayload?decodedSha256:sha256;
-    if(sha256&&!expected)throw new Error("Decoded artifact SHA-256 is missing from the retained index.");
-    if(expected){const actual=await digest(raw);if(!actual||actual!==expected)throw new Error("Artifact SHA-256 does not match the retained index.");}
+    const raw=await readBytes(response.body,limit), gzipPayload=raw[0]===0x1f&&raw[1]===0x8b, modelFile=path.endsWith(".gz");
+    async function verify(bytes,expected) {
+      const actual=await digest(bytes);if(!actual||actual!==expected)throw new Error("Artifact SHA-256 does not match the retained index.");
+    }
+    if(modelFile&&gzipPayload&&sha256)await verify(raw,sha256);
     let bytes=raw;
     if(gzipPayload){
-      if(typeof DecompressionStream!=="function")throw new Error("This browser cannot decompress the retained gzip model.");
-      bytes=await readBytes(new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip")),MODEL_LIMIT);
+      if(typeof DecompressionStream!=="function")throw new Error("This browser cannot decompress the retained gzip artifact.");
+      bytes=await readBytes(new Blob([raw]).stream().pipeThrough(new DecompressionStream("gzip")),limit);
     }
+    const expected=modelFile?decodedSha256:sha256;
+    if(sha256&&!expected)throw new Error("Decoded artifact SHA-256 is missing from the retained index.");
+    if(expected)await verify(bytes,expected);
     return JSON.parse(new TextDecoder().decode(bytes));
   }
 
@@ -83,7 +87,8 @@
       }
       if (item.video && !localAsset(item.video)) throw new Error(`Invalid video path in demo entry ${index}.`);
       if (item.poster && !localAsset(item.poster)) throw new Error(`Invalid poster path in demo entry ${index}.`);
-      for(const key of ["modelSha256","modelDecodedSha256","replaySha256","sourceManifestSha256","sourceResultSha256"]){if(item[key]!==undefined&&!/^[a-f0-9]{64}$/.test(item[key]))throw new Error(`Invalid ${key} in demo entry ${index}.`);}
+      for(const key of ["modelSha256","modelDecodedSha256","replaySha256"]){if(!/^[a-f0-9]{64}$/.test(item[key]||""))throw new Error(`Missing or invalid ${key} in demo entry ${index}.`);}
+      for(const key of ["sourceManifestSha256","sourceResultSha256"]){if(item[key]!==undefined&&!/^[a-f0-9]{64}$/.test(item[key]))throw new Error(`Invalid ${key} in demo entry ${index}.`);}
     });
     return value;
   }

@@ -1,7 +1,7 @@
 {
   "schema": "sentinel-project-static-assets-v1",
   "homepage": "https://lansiyao.com/research/sentinel-vla/project/",
-  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-web-20261003/sentinel-project-page.zip",
+  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-web-20261003/sentinel-project-page-v2.zip",
   "files": [
     {
       "path": "app.js",
@@ -275,13 +275,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 58307,
-      "sha256": "bd608e36946bf449e56166854df42de1a8d0c5de77f4833df3f289d861c021d3"
+      "bytes": 58316,
+      "sha256": "fd53d93e1fc5e5a164f04b82b786619d1f0e8aa4c5795be10f0768977c2aa209"
     },
     {
       "path": "native-project.js",
-      "bytes": 25208,
-      "sha256": "5ddd89008008b19deb366c02f6ea76405e4da3eb8a714050ee7b5ddf598244ad"
+      "bytes": 25500,
+      "sha256": "79114f726b34916d1963ba436fd87fc31b895250a545b76fcd29503bc2b4d6c3"
     },
     {
       "path": "native-viewer.js",

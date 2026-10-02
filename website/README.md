@@ -12,7 +12,7 @@ identity or the decoded source-model identity. This supports CDN transport
 compression without confusing it with the model file's own compression.
 
 The Git checkout contains the page code and small data. Download
-[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-web-20261003/sentinel-project-page.zip)
+[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-web-20261003/sentinel-project-page-v2.zip)
 and extract it at the repository root to populate `website/` with the large
 meshes, replay JSON and videos. [ASSETS.json](ASSETS.json) identifies every
 published page file by size and SHA-256. It contains this project page only.
