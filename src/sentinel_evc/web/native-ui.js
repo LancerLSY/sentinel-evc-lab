@@ -101,6 +101,7 @@ window.SentinelNativeUI = (() => {
     }).join('') : '<p class="empty">还没有已核验的 VLA 记录。<br>导入签名 ZIP，或先使用 native-run 生成记录。</p>';
     list.querySelectorAll('[data-native-run]').forEach(button => { button.onclick = () => loadRun(button.dataset.nativeRun).catch(showError); });
     if (preserve && selectedId && !runs.some(run => run.id === selectedId)) clearSelection('所选记录已不存在或完整性核验失败。');
+    window.SentinelCompareUI?.updateRuns(runs);
     return runs;
   }
 
@@ -325,6 +326,11 @@ window.SentinelNativeUI = (() => {
     element('native-timeline').value=index;
     viewer?.draw(index);
     const frame=episode.frames[index], decision=String(frame.decision ?? 'unknown');
+    const poses = viewer?.poseFrames || [];
+    const priorPose = poses.findLast ? poses.findLast(item => item.index <= index) : [...poses].reverse().find(item => item.index <= index);
+    const pose = priorPose || poses[0];
+    element('native-pose-note').textContent = pose ? (pose.index===index ? `三维姿态：当前 step ${frame.step} 的保存记录` : `动作与反馈：step ${frame.step}；该步姿态未保留，三维显示${priorPose?'此前':'此后'} step ${pose.frame.step} 的保存姿态。`) : '当前任务没有可显示的保存姿态。';
+
     element('native-time').textContent=`${Number.isFinite(frame.timeSeconds)?frame.timeSeconds.toFixed(3):'—'} s · 帧 ${index+1}/${episode.frames.length}`;
     element('native-action').textContent=actionSummary(frame.action);
     element('native-action-hash').textContent=frame.action_bytes_hash?`bytes ${String(frame.action_bytes_hash).slice(0,18)}…`:'此帧没有动作字节摘要';
@@ -408,5 +414,16 @@ window.SentinelNativeUI = (() => {
 
   function deactivate() { stopPlayback(); }
 
-  return {load,deactivate};
+  async function jumpToEvidence(ref) {
+    if (!ref || typeof ref.run_id !== 'string' || !Number.isInteger(ref.episode_index) || !Number.isInteger(ref.frame_index)) throw new Error('分歧引用不合法。');
+    await loadRun(ref.run_id);
+    if (selectedId !== ref.run_id) return;
+    if (ref.episode_index < 0 || ref.episode_index >= replay.episodes.length) throw new Error('分歧 Episode 不存在。');
+    await selectEpisode(String(ref.episode_index));
+    if (ref.frame_index < 0 || ref.frame_index >= episode.frames.length || episode.frames[ref.frame_index].step !== ref.step) throw new Error('分歧帧引用不匹配。');
+    setFrame(ref.frame_index);
+    element('native-view-title').scrollIntoView({block:'start'});
+  }
+
+  return {load,deactivate,jumpToEvidence};
 })();

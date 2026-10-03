@@ -121,7 +121,7 @@ class Handler(BaseHTTPRequestHandler):
             parts=self.parts()
             if parts == ['api','session']:
                 physics_engine=self.server.physics_jobs.engine_status()
-                return self.reply(200,{'token':self.server.token,'profile':'numeric-simulator-product-v1','templates':TEMPLATES,'physics_engine':physics_engine,'capabilities':{'stop':True,'resume':True,'export':True,'real_robot':False,'model_import':True,'robot_diagnostics':True,'physics_jobs':physics_engine['available'],'native_vla_recordings':True}})
+                return self.reply(200,{'token':self.server.token,'profile':'numeric-simulator-product-v1','templates':TEMPLATES,'physics_engine':physics_engine,'capabilities':{'stop':True,'resume':True,'export':True,'real_robot':False,'model_import':True,'robot_diagnostics':True,'physics_jobs':physics_engine['available'],'native_vla_recordings':True,'native_vla_compare':True}})
             if parts == ['api','native-runs']:
                 return self.reply(200, {'runs': self.server.native_runs.list()})
             if len(parts) in (3,4,5) and parts[:2] == ['api','native-runs']:
@@ -134,6 +134,8 @@ class Handler(BaseHTTPRequestHandler):
                     return self.reply(200, self.server.native_runs.asset(run_id,'viewer-model.json'),'application/json; charset=utf-8')
                 if len(parts)==4 and parts[3]=='download':
                     return self.archive_reply(self.server.native_runs.export(run_id))
+                if len(parts)==5 and parts[3]=='compare':
+                    return self.reply(200,self.server.native_runs.compare(run_id,parts[4]))
                 if len(parts)==5 and parts[3]=='files':
                     suffix=parts[4].rsplit('.',1)[-1].lower()
                     types={'json':'application/json; charset=utf-8','mp4':'video/mp4','png':'image/png','jpg':'image/jpeg','jpeg':'image/jpeg','webp':'image/webp'}
@@ -177,7 +179,7 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3]=='download':
                     path=self.server.store.export(run_id)
                     return self.reply(200,path.read_bytes(),'application/zip')
-            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js','native-ui.js':'native-ui.js','native-viewer.js':'native-viewer.js'}
+            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js','native-ui.js':'native-ui.js','native-viewer.js':'native-viewer.js','native-compare-ui.js':'native-compare-ui.js'}
             name='/'.join(parts)
             if name in assets:
                 resource=files('sentinel_evc').joinpath('web',assets[name])

@@ -6,6 +6,7 @@ The selected public key is an integrity anchor, not proof of physical execution.
 from __future__ import annotations
 
 import base64
+import hashlib
 import io
 import json
 import math
@@ -142,11 +143,11 @@ class NativeRunStore:
         return manifest
 
     @staticmethod
-    def _result(directory: Path, run_id: str) -> dict:
+    def _result(directory: Path, run_id: str, raw: bytes | None = None) -> dict:
         source = directory / "bundle" / "result.json"
         if source.stat().st_size > 8 * 1024 * 1024:
             raise ValueError("原生运行结果超出 8 MiB。")
-        value = strict_json(source.read_bytes())
+        value = strict_json(source.read_bytes() if raw is None else raw)
         if not isinstance(value, dict) or value.get("schema") != SCHEMA or value.get("run_id") != run_id:
             raise ValueError("原生运行结果版本或运行编号不匹配。")
         if not isinstance(value.get("episodes"), list) or len(value["episodes"]) > 500:
@@ -207,6 +208,50 @@ class NativeRunStore:
         value = strict_json(self.asset(run_id, "replay.json"))
         _validate_replay(value, self.get(run_id))
         return value
+
+    def _comparison_source(self, run_id: str) -> dict:
+        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+        directory = self._directory(run_id)
+        manifest = self._verify(directory, run_id)
+        manifest_bytes = (directory / "bundle" / "manifest.json").read_bytes()
+        public_key = (directory / "public.key").read_bytes()
+        Ed25519PublicKey.from_public_bytes(public_key).verify(
+            (directory / "bundle" / "manifest.sig").read_bytes(), manifest_bytes)
+        if strict_json(manifest_bytes) != manifest:
+            raise ValueError("核验过程中 manifest 发生变化。")
+        def signed_bytes(name):
+            path = directory / "bundle" / name
+            if path.is_symlink() or path.stat().st_size > MAX_FILE:
+                raise ValueError("比较输入资产不合法。")
+            raw = path.read_bytes()
+            if "sha256:" + hashlib.sha256(raw).hexdigest() != manifest["files"].get(name):
+                raise ValueError("实际载入的比较输入与签名清单不一致。")
+            return raw
+        result = self._result(directory, run_id, signed_bytes("result.json"))
+        replay = strict_json(signed_bytes("replay.json"))
+        _validate_replay(replay, result)
+        model_body_counts = {}
+        for name in manifest["files"]:
+            if name.startswith("viewer-model") and name.endswith(".json"):
+                model = strict_json(signed_bytes(name))
+                _validate_model(model)
+                if isinstance(model.get("bodies"), list):
+                    model_body_counts[model.get("modelId", model.get("model_id"))] = len(model["bodies"])
+        return {
+            "result": result,
+            "replay": replay,
+            "model_body_counts": model_body_counts,
+            "source": {
+                "run_id": run_id,
+                "public_key_sha256": "sha256:" + hashlib.sha256(public_key).hexdigest(),
+                "manifest_sha256": "sha256:" + hashlib.sha256(manifest_bytes).hexdigest(),
+                "files": dict(sorted(manifest["files"].items())),
+            },
+        }
+
+    def compare(self, left_id: str, right_id: str) -> dict:
+        from .native_compare import compare_verified_runs
+        return compare_verified_runs(self._comparison_source(left_id), self._comparison_source(right_id))
 
     def import_archive(self, archive: bytes, run_id: str, public_key: bytes) -> dict:
         run_id = _run_id(run_id)

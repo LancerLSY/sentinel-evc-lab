@@ -209,6 +209,59 @@ def cmd_native_import(args) -> int:
     return 0
 
 
+def _native_compare_bytes(report) -> bytes:
+    return (json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2) + "\n").encode("utf-8")
+
+
+def cmd_native_compare(args) -> int:
+    from .native_runs import NativeRunStore
+    from .runstore import RunStore
+    allowed = {"action", "observation", "cursor", "outcome", "authorization"}
+    selected = {item.strip() for item in (args.fail_on or "").split(",") if item.strip()}
+    if selected - allowed:
+        raise ValueError("--fail-on 仅支持 action,observation,cursor,outcome,authorization。")
+    if args.out and args.verify_report:
+        raise ValueError("--out 与 --verify-report 不能同时使用。")
+    workspace = RunStore(args.data_dir)
+    try:
+        report = NativeRunStore(workspace.root / "native-runs").compare(args.left, args.right)
+    finally:
+        workspace.close()
+    payload = _native_compare_bytes(report)
+    if args.verify_report:
+        source = Path(args.verify_report)
+        if source.is_symlink() or not source.is_file():
+            raise ValueError("需要已有的派生比较报告文件。")
+        from .scenario import strict_json
+        if source.stat().st_size > 32 * 1024 * 1024:
+            raise ValueError("派生比较报告超过 32 MiB。")
+        def normalized(value):
+            if isinstance(value, dict):
+                return {key: normalized(item) for key, item in value.items()}
+            if isinstance(value, list):
+                return [normalized(item) for item in value]
+            return int(value) if type(value) is float and value.is_integer() else value
+        if _native_compare_bytes(normalized(strict_json(source.read_bytes()))) != _native_compare_bytes(normalized(report)):
+            print("派生比较报告核验失败：当前已验签记录重算结果与文件不一致。", file=sys.stderr)
+            return 1
+        print(json.dumps({"verification": "PASS", "scope": report["scope"],
+                          "left": args.left, "right": args.right}, ensure_ascii=False, indent=2))
+    elif args.out:
+        destination = Path(args.out)
+        if destination.exists() or destination.is_symlink():
+            raise ValueError("输出文件已存在；不会覆盖已有比较报告。")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        with destination.open("xb") as stream:
+            stream.write(payload)
+        print(json.dumps({"report": str(destination), "summary": report["summary"]}, ensure_ascii=False, indent=2))
+    else:
+        sys.stdout.buffer.write(payload)
+    if not report["eligibility"]["compatible"]:
+        return 1
+    field_names = {category: category + "_differences" for category in allowed}
+    return 1 if any(report["summary"][field_names[category]] for category in selected) else 0
+
+
 def cmd_native_run(args) -> int:
     import subprocess
     source = Path(args.source).resolve() if args.source else Path(__file__).resolve().parents[2]
@@ -408,6 +461,15 @@ def main(argv=None) -> int:
     native_import.add_argument('--run-id',required=True)
     native_import.add_argument('--data-dir',default='runs/workbench')
     native_import.set_defaults(func=cmd_native_import)
+
+    native_compare=sub.add_parser('native-compare',help='重算两个已验签原生 VLA 记录的派生差异报告')
+    native_compare.add_argument('--left',required=True)
+    native_compare.add_argument('--right',required=True)
+    native_compare.add_argument('--data-dir',default='runs/workbench')
+    native_compare.add_argument('--out',default=None)
+    native_compare.add_argument('--verify-report',default=None)
+    native_compare.add_argument('--fail-on',default='',help='逗号分隔：action,observation,cursor,outcome,authorization')
+    native_compare.set_defaults(func=cmd_native_compare)
 
     run=sub.add_parser("run",help="执行四候选数值闭环并保存签名证据")
     run.add_argument("--out",default="runs/workbench")
