@@ -101,9 +101,9 @@ window.SentinelCompareUI = (() => {
 
   function download() {
     if (!report) return;
-    const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)+'\n'],{type:'application/json'}));
-    const link=document.createElement('a');link.href=url;link.download='sentinel-execution-diff.json';link.click();
-    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    const link=document.createElement('a');
+    link.href=`/api/native-runs/${encodeURIComponent(report.sources.left.run_id)}/compare/${encodeURIComponent(report.sources.right.run_id)}/report.json`;
+    link.download='sentinel-execution-diff.json';link.click();
   }
 
   return {updateRuns};

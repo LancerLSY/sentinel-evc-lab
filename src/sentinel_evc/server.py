@@ -67,12 +67,14 @@ class Handler(BaseHTTPRequestHandler):
     def log_message(self,*args):
         pass
 
-    def reply(self,status,value,content_type='application/json; charset=utf-8'):
+    def reply(self,status,value,content_type='application/json; charset=utf-8',download_name=None):
         data = value if isinstance(value,bytes) else json.dumps(value,ensure_ascii=False,allow_nan=False).encode('utf-8')
         self.send_response(status)
         self.send_header('Content-Type',content_type)
         self.send_header('Content-Length',str(len(data)))
         self.send_header('Cache-Control','no-store')
+        if download_name:
+            self.send_header('Content-Disposition',f'attachment; filename="{download_name}"')
         self.send_header('X-Content-Type-Options','nosniff')
         self.send_header('Referrer-Policy','no-referrer')
         self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'")
@@ -124,7 +126,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.reply(200,{'token':self.server.token,'profile':'numeric-simulator-product-v1','templates':TEMPLATES,'physics_engine':physics_engine,'capabilities':{'stop':True,'resume':True,'export':True,'real_robot':False,'model_import':True,'robot_diagnostics':True,'physics_jobs':physics_engine['available'],'native_vla_recordings':True,'native_vla_compare':True}})
             if parts == ['api','native-runs']:
                 return self.reply(200, {'runs': self.server.native_runs.list()})
-            if len(parts) in (3,4,5) and parts[:2] == ['api','native-runs']:
+            if len(parts) in (3,4,5,6) and parts[:2] == ['api','native-runs']:
                 run_id = parts[2]
                 if len(parts)==3:
                     return self.reply(200, {'run': self.server.native_runs.get(run_id)})
@@ -136,6 +138,10 @@ class Handler(BaseHTTPRequestHandler):
                     return self.archive_reply(self.server.native_runs.export(run_id))
                 if len(parts)==5 and parts[3]=='compare':
                     return self.reply(200,self.server.native_runs.compare(run_id,parts[4]))
+                if len(parts)==6 and parts[3]=='compare' and parts[5]=='report.json':
+                    report = self.server.native_runs.compare(run_id,parts[4])
+                    data = (json.dumps(report,ensure_ascii=False,sort_keys=True,indent=2,allow_nan=False)+'\n').encode('utf-8')
+                    return self.reply(200,data,download_name='sentinel-execution-diff.json')
                 if len(parts)==5 and parts[3]=='files':
                     suffix=parts[4].rsplit('.',1)[-1].lower()
                     types={'json':'application/json; charset=utf-8','mp4':'video/mp4','png':'image/png','jpg':'image/jpeg','jpeg':'image/jpeg','webp':'image/webp'}
