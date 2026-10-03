@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import struct
 from dataclasses import dataclass, field
 from collections.abc import Mapping
 from types import MappingProxyType
@@ -203,6 +204,32 @@ class Scene:
 
     @property
     def hash(self) -> str:
+        return self.exact_hash
+
+    @property
+    def exact_hash(self) -> str:
+        """Execution identity includes every float64 bit of the static scene.
+
+        A new domain tag separates these identities from legacy rounded hashes.
+        The public summary stays readable and existing signed archives stay valid.
+        """
+        cached = self.__dict__.get("_hash_cache")
+        if cached is None:
+            def exact(value):
+                if isinstance(value, float):
+                    return {"float64_le": struct.pack("<d", value).hex()}
+                if isinstance(value, dict):
+                    return {key: exact(item) for key, item in value.items()}
+                if isinstance(value, (list, tuple)):
+                    return [exact(item) for item in value]
+                return value
+            cached = sha256_hex({"schema": "sentinel-scene-exact-v1", "scene": exact(self.summary())})
+            object.__setattr__(self, "_hash_cache", cached)
+        return cached
+
+    @property
+    def legacy_hash(self) -> str:
+        """Rounded identity for reading historical records; never use for admission."""
         return sha256_hex(self.summary())
 
 
@@ -261,8 +288,34 @@ class Plan:
 
     @property
     def hash(self) -> str:
-        """最终动作摘要。证书和许可都绑定这个值。"""
-        return sha256_hex(self.summary())
+        """最终动作摘要（规范化，12 位有效数字）。证书和事件引用这个值。
+
+        Plan 构造后深度不可变，所以摘要只算一次并缓存（v2 改进：避免继承路径反复重算）。
+        """
+        cached = self.__dict__.get("_hash_cache")
+        if cached is None:
+            cached = sha256_hex(self.summary())
+            object.__setattr__(self, "_hash_cache", cached)
+        return cached
+
+    @property
+    def exact_hash(self) -> str:
+        """逐位精确摘要：节点与 dt 按 IEEE-754 float64 小端字节打包。
+
+        规范化摘要在 12 位有效数字之后会碰撞；许可绑定与 R0 同一性复用用这个值，
+        保证「被写入的就是被验证的」在字节层面成立。
+        """
+        cached = self.__dict__.get("_exact_hash_cache")
+        if cached is None:
+            h = hashlib.sha256(b"sentinel-plan-exact-v1\0")
+            h.update(struct.pack("<Id", len(self.knots), self.dt))
+            for knot in self.knots:
+                h.update(struct.pack("<3d", *knot))
+            h.update(canonical_json({"gripper_events": [list(e) for e in self.gripper_events],
+                                     "descriptor": self.descriptor.summary()}))
+            cached = "sha256:" + h.hexdigest()
+            object.__setattr__(self, "_exact_hash_cache", cached)
+        return cached
 
     def prefix(self, n: int) -> tuple:
         """前 n 段对应的节点。"""
@@ -330,11 +383,15 @@ class Context:
     task_phase: str = "transfer"
     queue_rev: int = 0
     committed_prefix_hash: str = "sha256:" + "0" * 64
+    # v2：可选的场景内容摘要。设置后，证书的 scene_hash 必须与之相等才能签发 / 提交许可。
+    scene_hash: Optional[str] = None
 
     def __post_init__(self):
         for field_name in ("robot", "scene_id", "controller", "task_phase"):
             _nonempty(getattr(self, field_name), field_name)
         _digest(self.committed_prefix_hash, "committed_prefix_hash")
+        if self.scene_hash is not None:
+            _digest(self.scene_hash, "scene_hash")
         for field_name in ("boot", "epoch", "queue_rev"):
             value = getattr(self, field_name)
             if isinstance(value, bool) or not isinstance(value, int) or value < 0:
@@ -350,6 +407,8 @@ class Context:
             "task_phase": self.task_phase,
             "queue_rev": self.queue_rev,
             "committed_prefix_hash": self.committed_prefix_hash,
+            # 只在设置时出现，保持旧上下文的摘要与 MAC 不变
+            **({"scene_hash": self.scene_hash} if self.scene_hash is not None else {}),
         }
 
     def bumped_epoch(self) -> "Context":
@@ -362,6 +421,7 @@ class Context:
             task_phase=self.task_phase,
             queue_rev=self.queue_rev,
             committed_prefix_hash=self.committed_prefix_hash,
+            scene_hash=self.scene_hash,
         )
 
 
@@ -417,12 +477,17 @@ class Certificate:
     root_id: Optional[str] = None
     depth: int = 0
     proof_scope: str = "numeric-sphere-box-L1-v1"
+    # v2: IEEE-754 byte digest of the plan the margins were computed on (Plan.exact_hash).
+    # When set, Authority.prepare only issues a lease for a plan with exactly these bytes.
+    plan_exact: Optional[str] = None
 
     def __post_init__(self):
         for field_name in ("cert_id", "method", "proof_scope"):
             _nonempty(getattr(self, field_name), field_name)
         _digest(self.plan_hash, "plan_hash")
         _digest(self.scene_hash, "scene_hash")
+        if self.plan_exact is not None:
+            _digest(self.plan_exact, "plan_exact")
         object.__setattr__(self, "dt", _finite_real(self.dt, "certificate.dt", positive=True))
         if isinstance(self.horizon, bool) or not isinstance(self.horizon, int) or self.horizon < 1:
             raise ValueError("certificate.horizon 必须为正整数")
@@ -448,6 +513,7 @@ class Certificate:
             "root_id": self.root_id,
             "depth": self.depth,
             "proof_scope": self.proof_scope,
+            **({"plan_exact": self.plan_exact} if self.plan_exact is not None else {}),
         }
 
 
@@ -467,6 +533,7 @@ class Lease:
     prediction_hash: Optional[str] = None
     authority_generation: int = 0
     mac: str = ""
+    plan_exact: Optional[str] = None
 
     def __post_init__(self):
         for field_name in ("lease_id", "cert_id"):
@@ -482,6 +549,8 @@ class Lease:
                 raise ValueError(f"{field_name} 必须是非负整数")
         if self.prediction_hash is not None:
             _digest(self.prediction_hash, "prediction_hash")
+        if self.plan_exact is not None:
+            _digest(self.plan_exact, "plan_exact")
 
     def payload(self) -> dict:
         return {
@@ -493,6 +562,7 @@ class Lease:
             "deadline_mono_ns": self.deadline_mono_ns,
             "prediction_hash": self.prediction_hash,
             "authority_generation": self.authority_generation,
+            **({"plan_exact": self.plan_exact} if self.plan_exact is not None else {}),
         }
 
 

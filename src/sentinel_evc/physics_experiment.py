@@ -29,7 +29,8 @@ def _snapshot(controller, count):
 
 def _context(controller, executor, plan=None):
     return Context(robot="mujoco-actuated-tray", boot=1, epoch=executor.generation,
-                   scene_id=controller.scene_digest(), controller="mujoco-tray-servo-50ms-v1",
+                   scene_id=controller.scene_digest(), scene_hash=controller.scene_digest(),
+                   controller="mujoco-tray-servo-50ms-v1",
                    task_phase="physics_geometry_only", queue_rev=controller.cursors()["submitted"],
                    committed_prefix_hash=sha256_hex(controller.submitted))
 
@@ -91,7 +92,7 @@ def run_branch(config, root, plan, run_id, *, revoke_at=None, mutate=None):
                 controller.tick()
                 continue
             if revoke_at is not None and not revoked and controller.cursors()["submitted"] >= revoke_at:
-                executor.revoke("physics revoke injection")
+                executor.revoke("physics revoke injection", now_ns=controller.now_ns)
                 revoked = True
                 after_revoke = {"submitted": controller.cursors()["submitted"], "observed": controller.cursors()["observed"], "position": controller.read_feedback(controller.now_ns)["payload_position"], "physics_time": controller.data.time}
             snapshot = _snapshot(controller, counter)
@@ -108,7 +109,7 @@ def run_branch(config, root, plan, run_id, *, revoke_at=None, mutate=None):
         error = "PHYSICS_PROFILE: " + str(exc)
     finally:
         if executor.state != ExecutorState.FAULT:
-            executor.revoke("physics trial ended")
+            executor.revoke("physics trial ended", now_ns=controller.now_ns)
         # Physics always continues during cancel, drain, and this 0.5s hold.
         for _ in range(round(0.5 / controller.poll_dt)):
             executor.tick(controller.now_ns)

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import math
+import hashlib
+import struct
 import threading
 from typing import Optional
 
@@ -41,7 +43,9 @@ class Executor:
         self._last_obs_id: Optional[str] = None
         self._next_dispatch_ns = 0
         self._revoked_after_capture = -1
+        self._revoked_at_ns = -1
         self._pre_revoke_context: Optional[Context] = None
+        self._last_context: Optional[Context] = None
 
     @property
     def state(self) -> str:
@@ -63,6 +67,7 @@ class Executor:
             "task_phase",
             "queue_rev",
             "committed_prefix_hash",
+            "scene_hash",
         ):
             if getattr(live, field_name) != getattr(permitted, field_name):
                 raise Rejection(ErrorCode.CONTEXT_CHANGED, f"{field_name} 变化")
@@ -139,6 +144,9 @@ class Executor:
                 raise Rejection(ErrorCode.LEASE_UNKNOWN, "许可签名不匹配")
             if lease.plan_hash != plan.hash:
                 raise Rejection(ErrorCode.CERTIFICATE_MISS, "许可未绑定这个最终动作")
+            exact = self._authority.exact_binding(lease.lease_id)
+            if exact is not None and exact != plan.exact_hash:
+                raise Rejection(ErrorCode.CERTIFICATE_MISS, "最终动作与许可绑定的字节不一致")
             self._authority.validate_available(lease)
             self._authority.validate_runtime(lease, plan.hash, now_ns)
             self._check_context(live_context, lease.context, self._generation)
@@ -152,6 +160,7 @@ class Executor:
             self._plan = plan
             self._lease = lease
             self._context = live_context
+            self._last_context = live_context
             self._pending = list(range(lease.prefix_len))
             self._dispatched = 0
             self._observed_at_commit = self._controller.cursors()["observed"]
@@ -162,6 +171,8 @@ class Executor:
             self._events.append(
                 "COMMIT",
                 plan_hash=plan.hash,
+                plan_exact=plan.exact_hash,
+                permit_payload=lease.payload(),
                 lease_id=lease.lease_id,
                 cert_id=lease.cert_id,
                 prediction_hash=lease.prediction_hash,
@@ -181,7 +192,7 @@ class Executor:
     def _enter_runtime_fault(self, rejection: Rejection) -> None:
         self._generation = self._authority.advance_generation()
         self._revoked_after_capture = self._last_snapshot_capture
-        self._pre_revoke_context = self._context
+        self._pre_revoke_context = self._context or self._last_context
         self._pending.clear()
         lease_id = self._lease.lease_id if self._lease else None
         self._lease = None
@@ -239,6 +250,10 @@ class Executor:
                 if math.dist(snapshot.position, self._plan.knots[expected_index]) > START_TUBE:
                     raise Rejection(ErrorCode.TRACKING_TUBE, "实际反馈偏离已观测计划节点")
 
+                # v2 completion budget: this step and every remaining approved step must be able to
+                # finish (one dt each, the controller's nominal step) before the lease deadline
+                if now_ns + len(self._pending) * int(self._plan.dt * 1e9) > self._lease.deadline_mono_ns:
+                    raise Rejection(ErrorCode.LEASE_EXPIRED, "剩余已批准步骤无法在许可期限内完成")
                 step = self._pending[0]
                 grip = dict(self._plan.gripper_events).get(step)
                 if grip == "open" and (
@@ -252,7 +267,10 @@ class Executor:
                     self._events.note_gap("DISPATCH event would overflow bounded buffer")
                     raise Rejection(ErrorCode.EVIDENCE_GAP, "派发事件无法完整记录")
                 action = self._plan.knots[step + 1]
-                ok = self._controller.submit(action, self._generation, grip)
+                ok = self._authority.admit_submission(
+                    self._lease, self._plan.hash, now_ns,
+                    lambda: self._controller.submit(action, self._generation, grip),
+                )
                 if ok:
                     self._pending.pop(0)
                     self._dispatched += 1
@@ -262,6 +280,9 @@ class Executor:
                     self._events.append(
                         "DISPATCH",
                         plan_hash=self._plan.hash,
+                        plan_exact=self._plan.exact_hash,
+                        action_float64_le=struct.pack("<3d", *action).hex(),
+                        action_bytes_hash="sha256:" + hashlib.sha256(struct.pack("<3d", *action)).hexdigest(),
                         lease_id=self._lease.lease_id,
                         step=step,
                         gripper_event=grip,
@@ -276,12 +297,18 @@ class Executor:
                 self._enter_runtime_fault(exc)
                 raise
 
-    def revoke(self, reason: str) -> None:
-        """Invalidate permits and request asynchronous controller cancellation."""
+    def revoke(self, reason: str, now_ns: Optional[int] = None) -> None:
+        """Invalidate permits and request asynchronous controller cancellation.
+
+        ``now_ns`` (v2) records the revocation instant on the executor's monotonic
+        clock; recovery then requires feedback captured strictly after it.
+        """
         with self._lock:
             self._generation = self._authority.advance_generation()
             self._revoked_after_capture = self._last_snapshot_capture
-            self._pre_revoke_context = self._context
+            if now_ns is not None:
+                self._revoked_at_ns = now_ns
+            self._pre_revoke_context = self._context or self._last_context
             self._pending.clear()
             self._state = ExecutorState.FAULT
             lease_id = self._lease.lease_id if self._lease else None
@@ -327,7 +354,7 @@ class Executor:
             if snapshot is None or live_context is None or now_ns is None:
                 raise Rejection(ErrorCode.STATE_STALE, "恢复缺少撤销后的新观测或上下文")
             self._check_snapshot_age(snapshot, now_ns)
-            if snapshot.capture_mono_ns <= self._revoked_after_capture:
+            if snapshot.capture_mono_ns <= max(self._revoked_after_capture, self._revoked_at_ns):
                 raise Rejection(ErrorCode.STATE_STALE, "恢复观测不是撤销后新采样")
             if not self._matches_controller_feedback(snapshot, now_ns):
                 raise Rejection(ErrorCode.STATE_STALE, "恢复快照不是控制器当前实际反馈")
@@ -341,6 +368,7 @@ class Executor:
                     "scene_id",
                     "controller",
                     "task_phase",
+                    "scene_hash",
                 ):
                     if getattr(live_context, field_name) != getattr(previous, field_name):
                         raise Rejection(

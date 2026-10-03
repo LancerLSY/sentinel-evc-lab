@@ -183,6 +183,7 @@ def validate_or_inherit(
             parent_id=parent_cert.cert_id,
             root_id=parent_cert.root_id or parent_cert.cert_id,
             depth=parent_cert.depth + 1,
+            plan_exact=child.exact_hash,
         )
         return Verdict(
             plan_hash=child.hash,
@@ -227,6 +228,7 @@ def _full_path(
         method="FULL",
         root_id=None,
         depth=0,
+        plan_exact=child.exact_hash,
     )
     return Verdict(
         plan_hash=child.hash,
@@ -270,10 +272,20 @@ class CertificateStore:
     def get(self, cert_id: str) -> Optional[Certificate]:
         return self._certs.get(cert_id)
 
-    def covers(self, cert_id: str, plan_hash: str) -> bool:
-        """该证书是否确实覆盖这个最终动作。"""
+    def covers(self, cert_id: str, plan_hash: str, plan_exact: Optional[str] = None) -> bool:
+        """该证书是否确实覆盖这个最终动作。
+
+        v2：证书记录了被验证计划的逐字节摘要时，要求与最终动作逐字节相同
+        （规范化摘要只保留 12 位有效数字，不同字节可以同摘要）。
+        """
         cert = self._certs.get(cert_id)
-        return cert is not None and cert.plan_hash == plan_hash
+        if cert is None or cert.plan_hash != plan_hash:
+            return False
+        if plan_exact is not None and cert.plan_exact != plan_exact:
+            return False
+        if cert.plan_exact is not None and cert.plan_exact != plan_exact:
+            return False
+        return True
 
     def __len__(self) -> int:
         return len(self._certs)

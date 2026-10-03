@@ -1,0 +1,33 @@
+{
+  "schema": "sentinel-evc-v2-integrated-cpu-rerun-v1",
+  "run_date_utc": "2026-10-03",
+  "base_commit": "bdf9d49e1444ba57db69afe6e42b5c5e154614f1",
+  "v1_baseline_commit": "45cc88347ea812a84c5021fc793387dce6bea295",
+  "environment": "Mac mini Mac16,10; Apple M4; 10 cores; 16 GB; macOS 27.0 build 26A428; Python 3.12.14; CPU not pinned",
+  "commands": [
+    "SENTINEL_V1_PKG_DIR=<task>/baselinepkg PYTHONPATH=src python3.12 experiments/delta_v2/bench_numeric.py --out results/cpu-fixed/numeric_v2.json --cases 1000",
+    "python3.12 experiments/delta_v2/summarize.py results/cpu-fixed/numeric_v2.json results/cpu-fixed/numeric_v2_summary.json",
+    "PYTHONPATH=src python3.12 experiments/pipeline/bench_pipeline.py results/cpu-fixed/pipeline_ticks.json"
+  ],
+  "source_sha256": {
+    "bench_numeric.py": "5992f820d081bd943baee377229e5e2c7da1fea7b25ff305727cce7f19fbe0da",
+    "summarize.py": "4fdeebaca20b30818bb218d868c17aafd3793fb6c1ae1881423ba0be49876cff",
+    "bench_pipeline.py": "5469f1d91ecea0d80dca6355d73a4047d01146ea8b97f202d3ab2194e93915d2",
+    "contracts.py": "f9dec20ac946601093b971fd8fc15197a9dff8e66a9c7cec580cdcd91a33ea33",
+    "geometry.py": "d805ec1a33b2ee0fd177acc5f30ce99803aa17324be2c9d0730fafb0e337af72",
+    "delta_cert.py": "22d8c4ab0a46b98aec82154b296d7cfcb85d47f43dd7f9a878528a1cb997bdfa",
+    "delta_cert_v2.py": "3db0ca1e109a1ea2a4c9c4765ce82bc7dd8d958dc98a38d87cea655f6dcf4c3a",
+    "scene_index.py": "256d42bdc4e93a3906f55cc5051513e5aacc97914cbb8dc15cd237482a168f70",
+    "scenarios.py": "8001aa3cac7e66492746f2cd4dda5761ab6eb7bb777793947fb925064662c3ad",
+    "authority.py": "438f3c07f959e5746aa5e03bc128eb19abd4407d473927eca4f4a6679c4fa911",
+    "executor.py": "f17a42958b31ae67e41810d2f8d9403c0115488accc5e351ef4cee3d73e52daf",
+    "executor_pipeline.py": "656e253bd3961255b7c9922341609732eb90801398aebc44c1ad5850a4430dc2",
+    "events.py": "b959f1ea5d33940f784dcfe8db3288ba261c86ae81eb3e9048ffb6786a03550f",
+    "sim_controller.py": "cb81f8d9a8edc00c4882d29555dc3bb80bccf8a554964f9d700757f6bd6866ef"
+  },
+  "output_sha256": {
+    "numeric_v2.json": "632bd033cbdcc19da2a1164d5cfe3bcb1ea745028f8e4e3acdeb7e6635fe85f8",
+    "numeric_v2_summary.json": "4ace8084c0f9e3e4d7f4e5928f69c7b8e52c5a23966c0c71ef9a40af3fec555e",
+    "pipeline_ticks.json": "2197fd15fbd55b08bc9be0e289b4e1ad4fae4623f37b3878c8ef1782997069f5"
+  }
+}

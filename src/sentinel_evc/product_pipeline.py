@@ -11,7 +11,9 @@ import time
 from dataclasses import replace
 from .authority import Authority
 from .contracts import Context, Plan, Rejection, Snapshot, canonical_json, sha256_hex
-from .delta_cert import CertificateStore, establish_root
+from .delta_cert import CertificateStore
+from .delta_cert_v2 import full_v2, to_store_certificate, validate_or_inherit_v2
+from .scene_index import IndexedChecker
 from .events import EventLog
 from .geometry import full_check
 from .evidence import build_bundle, verify_bundle
@@ -213,19 +215,23 @@ class ProductSession:
                 return
             plan=selected.plan
             self.root_prediction=selected.prediction
+            geometry_checker=IndexedChecker(self.scenario.scene)
+            root_geometry=full_v2(plan,self.scenario.scene,geometry_checker)
+            if not root_geometry.accepted:raise Rejection('GEOMETRY_VIOLATION','所选候选的几何证书建立失败')
+            self.result['geometry']={'profile':root_geometry.certificate.proof_scope,'root_full_checks':1,'suffix_full_checks':0,'segments_reused':0,'segments_inherited':0,'segments_rechecked':0,'scope':'fixed numeric sphere/box path; exact remaining suffix'}
             self.record['selected']=self.result['selected']=plan.plan_id
             controller=SimController(capacity=2,ack_delay_ticks=1,exec_delay_ticks=1,initial_position=plan.knots[0])
             certificate_store=CertificateStore()
             authority=Authority(certificate_store,events=self.log)
             executor=Executor(authority,controller,self.log)
-            context=Context(scene_id=self.scenario.scene.scene_id)
+            context=Context(scene_id=self.scenario.scene.scene_id,scene_hash=self.scenario.scene.hash)
             with self.condition:
                 self.check_preparation()
                 self.record['status']='running'
             self.persist()
             while self.observed_index < plan.horizon:
                 if self.stop_requested:
-                    executor.revoke('operator_stop' if not self.shutdown_requested else 'server_shutdown')
+                    executor.revoke('operator_stop' if not self.shutdown_requested else 'server_shutdown',now_ns=self.now())
                     for _ in range(10):
                         self.advance(controller,case,executor,context)
                         if executor.poll_cancel() is True and controller.free_slots()==controller.capacity:break
@@ -248,15 +254,19 @@ class ProductSession:
                 now=self.now()
                 prediction=slice_prediction(self.root_prediction,plan,suffix,offset,now)
                 self.predictions.append(prediction.summary())
-                validation=establish_root(suffix,self.scenario.scene)
-                if validation.verdict!='FULL':raise Rejection('GEOMETRY_VIOLATION','后缀几何复验失败')
-                certificate_store.register(validation.certificate)
+                validation=validate_or_inherit_v2(suffix,self.scenario.scene,plan,root_geometry.certificate,'shift',offset,geometry_checker)
+                if not validation.accepted:raise Rejection('GEOMETRY_VIOLATION','后缀几何复验失败')
+                geometry=self.result['geometry']
+                geometry['suffix_full_checks']+=validation.full_checks_used
+                for field in ('segments_reused','segments_inherited','segments_rechecked'):geometry[field]+=getattr(validation,field)
+                certificate=to_store_certificate(validation.certificate)
+                certificate_store.register(certificate)
                 authority.register_prediction(prediction)
-                self.log.append('CERTIFICATE',**validation.certificate.summary())
+                self.log.append('CERTIFICATE',**certificate.summary(),verification_profile=geometry['profile'],segments_reused=validation.segments_reused,segments_rechecked=validation.segments_rechecked)
                 self.log.append('PREDICTION',prediction_hash=prediction.hash,root_prediction_hash=self.root_prediction.hash,suffix_offset=offset,plan_hash=suffix.hash)
                 snapshot=self.snapshot_feedback(controller,now)
                 count=min(4,suffix.horizon)
-                lease=authority.prepare(suffix,validation.certificate,context,snapshot,now,prefix_len=count,ttl_ns=750_000_000,prediction=prediction,require_prediction=True)
+                lease=authority.prepare(suffix,certificate,context,snapshot,now,prefix_len=count,ttl_ns=750_000_000,prediction=prediction,require_prediction=True)
                 self.log.append('PREPARE',**lease.payload())
                 executor.commit(lease,suffix,snapshot,context,now)
                 target=offset+count
@@ -274,7 +284,7 @@ class ProductSession:
             self.record['status']='stopping'
             self.record['error']={'code':exc.code,'message':exc.detail}
             if executor and controller:
-                executor.revoke(exc.code)
+                executor.revoke(exc.code,now_ns=self.now())
                 # Already accepted work may still execute. Always record its observed tail.
                 for _ in range(10):
                     try:self.advance(controller,case,executor,Context(epoch=executor.generation))
@@ -286,7 +296,7 @@ class ProductSession:
             self.record['status']='stopping'
             self.record['error']={'code':'INTERNAL_FAILURE','message':'运行失败；没有自动批准后续动作。'}
             if executor and controller:
-                executor.revoke('internal_failure')
+                executor.revoke('internal_failure',now_ns=self.now())
                 for _ in range(10):
                     try:self.advance(controller,case,executor,Context(epoch=executor.generation))
                     except Rejection:pass

@@ -67,6 +67,9 @@ class EventLog:
         self._gap_count = 0
         self._has_gap = False
         self._lock = threading.RLock()
+        self._reservations = {}
+        self._reserved = 0
+        self._pinned = {}
 
     @property
     def allowed_types(self) -> tuple:
@@ -79,7 +82,51 @@ class EventLog:
         if isinstance(count, bool) or not isinstance(count, int) or count < 0:
             raise ValueError("count 必须是非负整数")
         with self._lock:
-            return not self._has_gap and len(self._events) + count <= self._maxlen
+            return not self._has_gap and len(self._events) + self._reserved + count <= self._maxlen
+
+    def reserve(self, count: int):
+        """Reserve evidence slots, retaining two unreserved emergency slots."""
+        if isinstance(count, bool) or not isinstance(count, int) or count < 1:
+            raise ValueError("count must be a positive integer")
+        with self._lock:
+            if self._has_gap or len(self._events) + self._reserved + count + 2 > self._maxlen:
+                return None
+            token = object()
+            self._reservations[token] = count
+            self._reserved += count
+            self._pinned[token] = set()
+            return token
+
+    def append_reserved(self, token, etype: str, **payload) -> dict:
+        if etype not in self.allowed_types:
+            raise ValueError(f"未定义的事件类型: {etype}")
+        payload = json.loads(canonical_json(payload).decode("utf-8"))
+        with self._lock:
+            count = self._reservations.get(token, 0)
+            if count < 1:
+                raise ValueError("evidence reservation is absent or exhausted")
+            self._reservations[token] = count - 1
+            self._reserved -= 1
+            event = self._append_one(etype, payload)
+            self._pinned[token].add(event["seq"])
+            return event
+
+    def release(self, token) -> None:
+        with self._lock:
+            self._reserved -= self._reservations.pop(token, 0)
+            self._pinned.pop(token, None)
+
+    def entry_guard(self):
+        """Serialize the writer-entry decision with creation of an evidence gap."""
+        return self._lock
+
+    def _drop_unreserved(self) -> None:
+        pinned = set().union(*self._pinned.values()) if self._pinned else set()
+        for event in self._events:
+            if event["seq"] not in pinned:
+                self._events.remove(event)
+                return
+        raise RuntimeError("no unreserved evidence slot available")
 
     def _append_one(self, etype: str, payload: dict) -> dict:
         ev = {
@@ -101,20 +148,21 @@ class EventLog:
         # an immutable JSON-compatible copy of mapping proxies/tuples.
         payload = json.loads(canonical_json(payload).decode("utf-8"))
         with self._lock:
+            limit = self._maxlen - self._reserved
             if etype == "LOG_GAP":
-                while len(self._events) >= self._maxlen:
-                    self._events.popleft()
+                while len(self._events) >= limit:
+                    self._drop_unreserved()
                     self._gap_count += 1
                 self._has_gap = True
                 return self._append_one(etype, payload)
 
-            if len(self._events) >= self._maxlen:
+            if len(self._events) >= limit:
                 dropped_now = 0
                 # Reserve one slot for the visible gap marker and one for the
                 # event that detected it. A fresh marker stays visible even
                 # after repeated overflow.
-                while len(self._events) > self._maxlen - 2:
-                    self._events.popleft()
+                while len(self._events) > limit - 2:
+                    self._drop_unreserved()
                     dropped_now += 1
                 self._gap_count += dropped_now
                 self._has_gap = True

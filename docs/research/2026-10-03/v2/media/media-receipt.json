@@ -1,0 +1,25 @@
+{
+  "schema": "sentinel-v2-case-media-v1",
+  "source_sha256": "a3bc8f1b5b2169ed19ec0732d0f37faa7164bdfec4a0f5fdd452a33b25e113ff",
+  "case_sha256": "89dc91a391269aafac4c0571c12c03ebd0db9b70735410b5a6ae0de0b162cd21",
+  "official_asset_receipt_sha256": "1a3d163d0ffc2746788ea2bd66f5aa1777a2909a0884e88292cc5fb9c90bf623",
+  "fps": 30,
+  "frames": 300,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "contact_frames": {
+    "reference": 0,
+    "proposal": 98
+  },
+  "scope": "counterfactual kinematic replay of late_suffix/root0; not controller execution",
+  "files": {
+    "encoder.log": "e2f6307387a856102f3159008588babf940be082c6cfdb804a7b0e60fdd781e0",
+    "ur5e_changed_chunk.mp4": "09d16c9ee881624459940e8884ac8ceaaa2806fc4a7bd3a8244f87ab3963d137",
+    "frame-150.png": "3748e1c99a454d441eb90e39964e2ffb31e49c10582b119241f00e15a6c36913",
+    "frame-225.png": "4e658a735ae7c03202ca56cf5637382f737441979a8c43a5a56776b69e77b337",
+    "frame-260.png": "522ae04351cae729ef3e98bf4f7c3b6b9928dcd8563f4ec772ef91d6bc1b56e5",
+    "frames.json": "d1b7c2156d01fc30469df6d2e1a6e55aeecd7d6c060d55d0761ee56f018100c4"
+  }
+}

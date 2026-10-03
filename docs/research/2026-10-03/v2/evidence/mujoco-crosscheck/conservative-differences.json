@@ -1,0 +1,315 @@
+{
+  "scope": "retrospective diagnostic of 28 proxy-contact/MuJoCo-no-contact static poses; cylinder represented by conservative capsule",
+  "count": 28,
+  "all_negative_pairs_involve_tool_cylinder": true,
+  "rows": [
+    {
+      "index": 143,
+      "negative_self_pairs": [
+        [
+          2,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.01317787082437296
+    },
+    {
+      "index": 452,
+      "negative_self_pairs": [
+        [
+          1,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.006384721758404037
+    },
+    {
+      "index": 482,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.010837258362752983
+    },
+    {
+      "index": 499,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.0073986649644884744
+    },
+    {
+      "index": 577,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.016074927802841622
+    },
+    {
+      "index": 660,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.02208427186331166
+    },
+    {
+      "index": 694,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.020865379787419987
+    },
+    {
+      "index": 724,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.005238119238282907
+    },
+    {
+      "index": 926,
+      "negative_self_pairs": [
+        [
+          0,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.010593960218822314
+    },
+    {
+      "index": 1082,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.000193760204422605
+    },
+    {
+      "index": 1153,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.002394308872462489
+    },
+    {
+      "index": 1189,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.014175223244150367
+    },
+    {
+      "index": 1223,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.007045388682609607
+    },
+    {
+      "index": 1276,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.00617232112000618
+    },
+    {
+      "index": 1323,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.010994004334780871
+    },
+    {
+      "index": 1407,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.01699742980959213
+    },
+    {
+      "index": 1422,
+      "negative_self_pairs": [
+        [
+          1,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.0002500168918304138
+    },
+    {
+      "index": 1543,
+      "negative_self_pairs": [
+        [
+          2,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.0006934458495130372
+    },
+    {
+      "index": 1552,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.004953620028174233
+    },
+    {
+      "index": 1571,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.01628583537409537
+    },
+    {
+      "index": 1635,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.001966064700723996
+    },
+    {
+      "index": 1660,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.004713882488398255
+    },
+    {
+      "index": 1709,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.013154146378694581
+    },
+    {
+      "index": 1828,
+      "negative_self_pairs": [
+        [
+          2,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.012440870017174428
+    },
+    {
+      "index": 1829,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.007356151897148666
+    },
+    {
+      "index": 1949,
+      "negative_self_pairs": [
+        [
+          1,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.006345660080848144
+    },
+    {
+      "index": 1974,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.003716418718528694
+    },
+    {
+      "index": 1979,
+      "negative_self_pairs": [
+        [
+          4,
+          8
+        ]
+      ],
+      "only_cylinder_involved": true,
+      "minimum_proxy_margin_m": -0.005777165771705742
+    }
+  ]
+}

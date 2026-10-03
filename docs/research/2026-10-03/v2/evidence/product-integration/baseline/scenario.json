@@ -1,0 +1,9 @@
+{
+  "displacement": 0.35,
+  "name": "CLI 数值运行",
+  "prediction_mode": "physical",
+  "risk_limit": 0.12,
+  "scene": null,
+  "schema_version": "product-v1",
+  "seed": 7
+}

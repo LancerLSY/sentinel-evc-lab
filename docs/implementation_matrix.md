@@ -29,6 +29,13 @@ separates normal task outcomes from six synthetic invalid-authorization attempts
 
 ## Numerical product mechanisms
 
+The numeric CLI/App lifecycle now uses one exact-scene v2 root certificate and
+certificates for its actual remaining suffixes. The fixed seed7 comparison
+preserved all 40 observed actions and reused 220 segments with no suffix full
+check. Stop/resume was independently reviewed. This integration does not connect
+the separate UR5e checker to the native VLA gateway.
+[Current audit and retained evidence](research/2026-10-03/v2/AUDIT_RESULTS.zh-CN.md).
+
 | Mechanism | Implemented behavior | Remaining experiment |
 |---|---|---|
 | M01 final action binding | immutable descriptor/Plan digest; finite 3D position profile | upstream VLA action adapters and normalization versions |

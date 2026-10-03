@@ -13,6 +13,7 @@ from __future__ import annotations
 import hmac
 import itertools
 import os
+import threading
 from hashlib import sha256
 from typing import Optional
 
@@ -64,6 +65,10 @@ class Authority:
         self._predictions: dict = {}
         self._max_predictions = max_predictions
         self._max_leases = max_leases
+        # v2: lease_id -> byte-exact plan digest (the canonical plan_hash keeps 12 significant digits)
+        self._exact: dict = {}
+        # v2: consumption is atomic even if several executors share this authority
+        self._lock = threading.RLock()
 
     @property
     def generation(self) -> int:
@@ -112,8 +117,19 @@ class Authority:
 
     def advance_generation(self) -> int:
         """Invalidate every lease issued under the previous generation."""
-        self._generation += 1
-        return self._generation
+        with self._lock:
+            self._generation += 1
+            return self._generation
+
+    def admit_submission(self, lease: Lease, plan_hash: str, now_ns: int, submit):
+        """Serialize final admission with revocation across all local writers.
+
+        The trusted adapter's submit must be a short synchronous queue admission.
+        Controller polling, cancellation and network waits stay outside this lock.
+        """
+        with self._lock:
+            self.validate_runtime(lease, plan_hash, now_ns)
+            return submit()
 
     def validate_runtime(self, lease: Lease, plan_hash: str, now_ns: int) -> None:
         """Recheck revocation, evidence and learned-evidence validity at dispatch."""
@@ -164,6 +180,7 @@ class Authority:
         ttl_ns: int = 500_000_000,
         prediction=None,
         require_prediction: bool = False,
+        chained: bool = False,
     ) -> Lease:
         """准备阶段：核对内容与范围，签发许可。**不向驱动发任何命令。**"""
         self._check_evidence()
@@ -186,8 +203,17 @@ class Authority:
             raise Rejection(ErrorCode.EVIDENCE_GAP, "签发事件无法完整记录")
 
         # 证书必须来自本地登记表，且确实覆盖这个最终动作
-        if not self._store.covers(cert.cert_id, plan.hash):
+        if not self._store.covers(cert.cert_id, plan.hash, plan.exact_hash):
             raise Rejection(ErrorCode.CERTIFICATE_MISS, "证书未覆盖该最终动作")
+        # v2：之后的判断只用登记表里的记录；调用方传入的对象必须与登记记录完全相同，
+        # 否则改写过字段（例如场景戳）的副本可以借用真实证书的 ID
+        stored = self._store.get(cert.cert_id)
+        if stored != cert:
+            raise Rejection(ErrorCode.CERTIFICATE_MISS, "证书与本地登记记录不一致")
+        cert = stored
+        # v2：上下文声明了场景内容摘要时，证书必须是在同一场景内容下得出的
+        if context.scene_hash is not None and cert.scene_hash != context.scene_hash:
+            raise Rejection(ErrorCode.CONTEXT_CHANGED, "证书场景与当前场景内容不一致")
 
         if not snapshot.valid:
             raise Rejection(ErrorCode.STATE_STALE, "快照无效")
@@ -198,7 +224,10 @@ class Authority:
         # 起点必须落在允许管内
         import math
 
-        if math.dist(snapshot.position, plan.knots[0]) > START_TUBE:
+        # A chained lease (PipelinedExecutor) is prepared while the robot is still executing the
+        # committed prefix; its start knot is checked at commit against the committed virtual plan,
+        # and an unchained commit of the same lease still re-checks this start tube in the executor.
+        if not chained and math.dist(snapshot.position, plan.knots[0]) > START_TUBE:
             raise Rejection(ErrorCode.TRACKING_TUBE, "起点偏离允许管")
 
         # 期限要覆盖整个前缀的预计执行时间
@@ -230,9 +259,13 @@ class Authority:
             deadline_mono_ns=now_ns + ttl_ns,
             prediction_hash=prediction_hash,
             authority_generation=self._generation,
+            plan_exact=plan.exact_hash,
         )
         lease = Lease(**{**lease.__dict__, "mac": self._mac(lease)})
         self._issued[lease.lease_id] = lease
+        exact = getattr(plan, "exact_hash", None)
+        if exact is not None:
+            self._exact[lease.lease_id] = exact
         if self._events is not None and self._events.supports("LEASE"):
             self._events.append(
                 "LEASE",
@@ -242,6 +275,7 @@ class Authority:
                 prediction_hash=lease.prediction_hash,
                 prefix_len=lease.prefix_len,
                 generation=lease.authority_generation,
+                plan_exact=lease.plan_exact,
             )
             self._check_evidence()
         return lease
@@ -249,9 +283,14 @@ class Authority:
     # ------------------------------------------------------------ 消费
 
     def consume(self, lease: Lease) -> None:
-        """一次性消费。同一许可第二次使用必须失败。"""
-        self.validate_available(lease)
-        self._consumed.add(lease.lease_id)
+        """一次性消费。同一许可第二次使用必须失败（检查与登记在同一把锁内）。"""
+        with self._lock:
+            self.validate_available(lease)
+            self._consumed.add(lease.lease_id)
+
+    def exact_binding(self, lease_id: str):
+        """Byte-exact plan digest recorded at prepare time (None for leases issued before v2)."""
+        return self._exact.get(lease_id)
 
     def is_consumed(self, lease_id: str) -> bool:
         return lease_id in self._consumed

@@ -1,0 +1,156 @@
+{
+  "schema": "sentinel-discrete-disagreement-posthoc-v1",
+  "analysis_timing": "post-hoc diagnostic after the frozen performance outcomes",
+  "scope": "one frozen N=128, jitter=0.01 candidate; no timing rerun",
+  "trace_sha256": "f9df5a65fa302b9ba67a09358494c4151df646c3ec8a510c5808a597f1d64083",
+  "mjcf_sha256": "ffd0a7b336d3c2d27c35a15cc0d4aaa95196769aca190ac8d6522d3318c345a0",
+  "source_sha256": {
+    "diagnose.py": "8d1639f04f095285e7b46ada64723ae84ef855f618913cf9c179a07908f6f692",
+    "arm_delta.py": "b9d22607db4fc87332d3fee938284fb40c437d1517ca4312f70477186ffb3f25",
+    "ur5e_kin.py": "ff3ffd09b6a0fd8f2025c670d7c3977fa624f1765f4d9ab577a06b8acd4f95dd"
+  },
+  "environment": {
+    "python": "3.12.3",
+    "numpy": "2.3.2",
+    "mujoco": "3.8.1",
+    "platform": "Linux-5.15.0-94-generic-x86_64-with-glibc2.35"
+  },
+  "unique_candidate_comparisons": 92160,
+  "mismatch_count": 1,
+  "location": {
+    "root": 2,
+    "cycle": 37,
+    "candidate": 32
+  },
+  "direction": {
+    "discrete_0.01_ok": true,
+    "continuous_reference_ok": false,
+    "fresh_continuous_ok": false,
+    "fresh_continuous_status": "collision",
+    "fresh_continuous_fk_evals": 811
+  },
+  "independent_dense_proxy_check": {
+    "joint_step_rad": 0.0005,
+    "samples": 1264,
+    "min_obstacle": {
+      "clearance_m": -9.881554431517836e-07,
+      "dense_index": 1079,
+      "capsule": 6,
+      "q": [
+        -1.8224823481230643,
+        -2.0913515351871967,
+        1.9420670458905356,
+        -1.3945399688205593,
+        -1.239000734274297,
+        -0.38407057266036043
+      ]
+    },
+    "min_self": {
+      "clearance_m": 0.03722619807770317,
+      "dense_index": 0,
+      "pair": 20,
+      "q": [
+        -1.94835171528938,
+        -1.9844996260150825,
+        1.8363719637514868,
+        -1.337893547830022,
+        -1.4598767425517623,
+        -0.3314666744427008
+      ]
+    },
+    "sampled_collision": true
+  },
+  "independent_mujoco_dense_check": {
+    "joint_step_rad": 0.0005,
+    "samples": 1264,
+    "robot_or_obstacle_contact_samples": 5,
+    "first_contact": {
+      "dense_index": 1077,
+      "q": [
+        -1.8223906099928158,
+        -2.0905735573351394,
+        1.9422140825305922,
+        -1.3948101289599932,
+        -1.2384095198423557,
+        -0.38308383794726714
+      ],
+      "contacts": [
+        {
+          "geom1": 12,
+          "geom2": 6,
+          "distance_m": -4.235312724421014e-07
+        }
+      ]
+    },
+    "model_binding": [
+      {
+        "geom": 0,
+        "body": "shoulder_link",
+        "kind": "capsule",
+        "radius": 0.06,
+        "half_length": 0.06
+      },
+      {
+        "geom": 1,
+        "body": "upper_arm_link",
+        "kind": "capsule",
+        "radius": 0.06,
+        "half_length": 0.06
+      },
+      {
+        "geom": 2,
+        "body": "upper_arm_link",
+        "kind": "capsule",
+        "radius": 0.05,
+        "half_length": 0.2
+      },
+      {
+        "geom": 3,
+        "body": "forearm_link",
+        "kind": "capsule",
+        "radius": 0.055,
+        "half_length": 0.06
+      },
+      {
+        "geom": 4,
+        "body": "forearm_link",
+        "kind": "capsule",
+        "radius": 0.038,
+        "half_length": 0.19
+      },
+      {
+        "geom": 5,
+        "body": "wrist_1_link",
+        "kind": "capsule",
+        "radius": 0.04,
+        "half_length": 0.07
+      },
+      {
+        "geom": 6,
+        "body": "wrist_2_link",
+        "kind": "capsule",
+        "radius": 0.04,
+        "half_length": 0.06
+      },
+      {
+        "geom": 7,
+        "body": "wrist_2_link",
+        "kind": "capsule",
+        "radius": 0.04,
+        "half_length": 0.04
+      },
+      {
+        "geom": 8,
+        "body": "wrist_3_link",
+        "kind": "cylinder",
+        "radius": 0.04,
+        "half_length": 0.02
+      }
+    ],
+    "boundary": "dense sampled mj_forward contact evaluation, not MuJoCo continuous collision detection"
+  },
+  "artifacts": {
+    "trajectory_instance.npz": "6e84ec6977091c857c681632814ae74c6ea762a282be5a95d4749160e0c46a36",
+    "diagnostic_collision_model.xml": "285571796f4b898dcabb22cfda194ac4a12ff44e6b7a579b8fd6826191487dff"
+  }
+}

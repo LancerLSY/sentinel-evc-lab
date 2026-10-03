@@ -177,7 +177,7 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
     root = establish_root(p1, scene)
     store.register(root.certificate)
 
-    ctx = Context(scene_id=scene.scene_id)
+    ctx = Context(scene_id=scene.scene_id, scene_hash=scene.hash)
     snap = Snapshot("obs-0", p1.knots[0], clock.now_ns)
 
     controller = SimController(
@@ -227,7 +227,7 @@ def _run_one_fault(fault: str, log: EventLog) -> dict:
         if fault in ("revoke_race", "cancel_unconfirmed"):
             before = len(controller.submitted)
             gen_before = ex.generation
-            ex.revoke(reason=fault)
+            ex.revoke(reason=fault, now_ns=clock.now_ns)
             # 撤销之后继续推进，观察有没有新增旧代次提交
             for _ in range(5):
                 clock.advance(50_000_000)

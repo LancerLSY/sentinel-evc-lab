@@ -1,0 +1,57 @@
+{
+  "schema": "sentinel-arm-counterbalanced-protocol-v1",
+  "status": "FROZEN_BEFORE_TIMING",
+  "created_utc": "2026-10-03T11:03:50Z",
+  "design": {
+    "roots": 12,
+    "cycles_per_root": 60,
+    "warmup_cycles_excluded": 20,
+    "measured_cycles_per_root": 40,
+    "N": [
+      4
+    ],
+    "jitter_rad": [
+      0.002,
+      0.01
+    ],
+    "process_repeats": 3,
+    "method_orders": [
+      [
+        "discrete_0.01",
+        "certified_full",
+        "delta_arm"
+      ],
+      [
+        "certified_full",
+        "delta_arm",
+        "discrete_0.01"
+      ],
+      [
+        "delta_arm",
+        "discrete_0.01",
+        "certified_full"
+      ]
+    ],
+    "deadline_ms": 50.0,
+    "max_fk_evals_per_checker": 200000,
+    "blas_threads": 1
+  },
+  "selection_rule": "Before any timing, certified_full labels every frozen candidate. The first accepted candidate index is committed for the next trace step; if none is accepted, the prior plan remains. Timed methods cannot alter this selection or the future trace.",
+  "timing_rule": "Run three independent Python processes with rotated method order. Exclude the first 20 cycles per root. Delta timing includes content/model/profile checks and selected-certificate copy/hash/seal; its one root certificate is amortized over 40 measured cycles.",
+  "analysis": {
+    "unit": "root-process pair",
+    "point": "ratio of paired unit medians",
+    "interval": "paired percentile bootstrap 95%",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20261003,
+    "report_all_cells": true
+  },
+  "scope": "static UR5e capsule model; CPU timing; not dynamics, functional safety or real-robot latency",
+  "mjcf_sha256": "ffd0a7b336d3c2d27c35a15cc0d4aaa95196769aca190ac8d6522d3318c345a0",
+  "source_sha256": {
+    "run_counterbalanced_arm.py": "8fc8e507a66c70da196b752c979b1ce39393540bf0409c8fa328983cfd48922e",
+    "arm_delta.py": "b9d22607db4fc87332d3fee938284fb40c437d1517ca4312f70477186ffb3f25",
+    "ur5e_kin.py": "ff3ffd09b6a0fd8f2025c670d7c3977fa624f1765f4d9ab577a06b8acd4f95dd"
+  },
+  "trace_files": {}
+}

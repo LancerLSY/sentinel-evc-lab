@@ -1,0 +1,44 @@
+{
+  "schema": "sentinel-numeric-product-integration-v1",
+  "scope": "one fixed CLI seed7 scenario; logical numerical clock, same CLI/App shared Python lifecycle",
+  "seed": 7,
+  "status": {
+    "baseline": "completed",
+    "v2": "completed"
+  },
+  "equal": {
+    "selected": true,
+    "cursors": true,
+    "observed_history": true,
+    "steps": true,
+    "candidates": false,
+    "model": true,
+    "calibration": true
+  },
+  "v2_geometry": {
+    "profile": "numeric-sphere-box-L1-active-v2",
+    "root_full_checks": 1,
+    "scope": "fixed numeric sphere/box path; exact remaining suffix",
+    "segments_inherited": 0,
+    "segments_rechecked": 0,
+    "segments_reused": 220,
+    "suffix_full_checks": 0
+  },
+  "signed_bundle": {
+    "baseline": {
+      "message": "OK: 179 条事件，7 层校验全部通过",
+      "ok": true,
+      "trust": "self-contained demo key; external trust required"
+    },
+    "v2": {
+      "message": "OK: 179 条事件，7 层校验全部通过",
+      "ok": true,
+      "trust": "self-contained demo key; external trust required"
+    }
+  },
+  "baseline_source_commit": "45cc88347ea812a84c5021fc793387dce6bea295",
+  "v2_source_commit": "eb7b681",
+  "claim": "same selected action, 40 submitted/accepted/observed; reuse exact remaining suffix rather than recomputing each suffix; no measured latency or VLA gain",
+  "candidate_decisions_equal_after_excluding_run_clock_derived_identity": true,
+  "candidate_full_record_difference": "per-run monotonic expiry and derived prediction IDs/hashes only; retained raw records unchanged"
+}

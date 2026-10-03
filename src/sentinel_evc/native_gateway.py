@@ -559,32 +559,47 @@ class NativeGateway:
                 self._deny("FEEDBACK_REUSED", "current feedback already authorized one native submission", permit_id=permit.permit_id)
             if self._writer_state != "idle":
                 self._deny("WRITER_REENTRY", "native environment writer is already active", permit_id=permit.permit_id)
+            # v2: no write without a complete, recordable evidence chain (mirrors Executor I8)
+            if self.log.has_gap:
+                self._deny("EVIDENCE_GAP", "event chain already has a LOG_GAP", permit_id=permit.permit_id)
+            evidence_reservation = self.log.reserve(3)
+            if evidence_reservation is None:
+                self.log.note_gap("COMMIT/DISPATCH/ACK would overflow bounded buffer")
+                raise NativeGatewayDenied("EVIDENCE_GAP", "submission events cannot be recorded completely")
             self._permits.pop(permit.permit_id, None)
             self._consumed.add(permit.permit_id)
             self._committed_snapshots.add(snapshot.digest)
             self._writer_state = "admitting"
-            self.log.append(
-                "COMMIT",
-                permit_id=permit.permit_id,
-                request_hash=request_hash,
-                request_bytes_hash=request_bytes_hash,
-                step=permit.step,
-                generation=permit.generation,
-                mono_ns=now,
-            )
-            self.log.append(
-                "DISPATCH",
-                permit_id=permit.permit_id,
-                request_hash=request_hash,
-                request_bytes_hash=request_bytes_hash,
-                step=permit.step,
-                writer="NativeGateway.submit",
-            )
+            try:
+                self.log.append_reserved(
+                    evidence_reservation, "COMMIT",
+                    permit_id=permit.permit_id,
+                    request_hash=request_hash,
+                    request_bytes_hash=request_bytes_hash,
+                    step=permit.step,
+                    generation=permit.generation,
+                    mono_ns=now,
+                )
+                self.log.append_reserved(
+                    evidence_reservation, "DISPATCH",
+                    permit_id=permit.permit_id,
+                    request_hash=request_hash,
+                    request_bytes_hash=request_bytes_hash,
+                    step=permit.step,
+                    writer="NativeGateway.submit",
+                )
+            except BaseException:
+                self.log.release(evidence_reservation)
+                self._writer_state = "idle"
+                self._writer_condition.notify_all()
+                raise
         def entered() -> None:
-            with self._writer_condition:
+            with self._writer_condition, self.log.entry_guard():
                 if self._writer_state != "admitting":
                     raise RuntimeError("native writer entered outside admission")
                 entry_now = now + time.monotonic_ns() - clock_origin
+                if self.log.has_gap:
+                    self._deny("EVIDENCE_GAP", "event gap appeared before writer entry", permit_id=permit.permit_id)
                 if permit.generation != self._generation:
                     self._deny("GENERATION_REVOKED", "permit generation changed before writer entry", permit_id=permit.permit_id)
                 if self._snapshot != snapshot or permit.snapshot_hash != snapshot.digest:
@@ -603,9 +618,9 @@ class NativeGateway:
             with self._lock:
                 if self._writer_state == "admitting":
                     raise RuntimeError("native writer did not acknowledge entry")
-        except Exception as exc:
-            self.log.append(
-                "CONTROLLER_ACK",
+        except BaseException as exc:
+            self.log.append_reserved(
+                evidence_reservation, "CONTROLLER_ACK",
                 permit_id=permit.permit_id,
                 accepted=False,
                 status="writer_raised",
@@ -613,14 +628,15 @@ class NativeGateway:
             )
             raise
         else:
-            self.log.append(
-                "CONTROLLER_ACK",
+            self.log.append_reserved(
+                evidence_reservation, "CONTROLLER_ACK",
                 permit_id=permit.permit_id,
                 accepted=True,
                 status="env_step_returned",
             )
             return result
         finally:
+            self.log.release(evidence_reservation)
             with self._writer_condition:
                 self._writer_state = "idle"
                 self._writer_condition.notify_all()

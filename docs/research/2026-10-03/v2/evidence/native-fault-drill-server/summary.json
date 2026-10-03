@@ -1,0 +1,144 @@
+{
+  "all_frozen_cases_valid": true,
+  "all_independent_probes_valid": true,
+  "by_case": {
+    "action_ulp_replaced": {
+      "actual_codes": {
+        "ACTION_REPLACED": 200
+      },
+      "cases": 200,
+      "expected_code": "ACTION_REPLACED",
+      "invalid_entries": 0,
+      "target_writer_calls": 0
+    },
+    "context_replaced": {
+      "actual_codes": {
+        "CONTEXT_CHANGED": 200
+      },
+      "cases": 200,
+      "expected_code": "CONTEXT_CHANGED",
+      "invalid_entries": 0,
+      "target_writer_calls": 0
+    },
+    "evidence_gap": {
+      "actual_codes": {
+        "EVIDENCE_GAP": 200
+      },
+      "cases": 200,
+      "expected_code": "EVIDENCE_GAP",
+      "invalid_entries": 0,
+      "target_writer_calls": 0
+    },
+    "feedback_replaced": {
+      "actual_codes": {
+        "FEEDBACK_CHANGED": 200
+      },
+      "cases": 200,
+      "expected_code": "FEEDBACK_CHANGED",
+      "invalid_entries": 0,
+      "target_writer_calls": 0
+    },
+    "generation_revoked": {
+      "actual_codes": {
+        "GENERATION_REVOKED": 200
+      },
+      "cases": 200,
+      "expected_code": "GENERATION_REVOKED",
+      "invalid_entries": 0,
+      "target_writer_calls": 0
+    },
+    "legal_control": {
+      "actual_codes": {
+        "ALLOWED": 200
+      },
+      "cases": 200,
+      "expected_code": "ALLOWED",
+      "invalid_entries": 0,
+      "target_writer_calls": 200
+    },
+    "permit_expired": {
+      "actual_codes": {
+        "LEASE_EXPIRED": 200
+      },
+      "cases": 200,
+      "expected_code": "LEASE_EXPIRED",
+      "invalid_entries": 0,
+      "target_writer_calls": 0
+    },
+    "permit_replay": {
+      "actual_codes": {
+        "LEASE_REPLAY": 200
+      },
+      "cases": 200,
+      "expected_code": "LEASE_REPLAY",
+      "invalid_entries": 0,
+      "target_writer_calls": 0
+    }
+  },
+  "claim_boundary": [
+    "deterministic bounded protocol, not a statistical robustness rate",
+    "no comparison with another product",
+    "NativeGateway schema/bounds/evidence contract only; no dynamics or functional-safety claim"
+  ],
+  "independent_probes": [
+    {
+      "entered_observed": true,
+      "generation_after_revoke": 1,
+      "name": "concurrent_revoke_after_entry",
+      "result": [
+        "ALLOWED"
+      ],
+      "retained_event_types": [
+        "OBSERVED",
+        "CERTIFICATE",
+        "PREPARE",
+        "LEASE",
+        "COMMIT",
+        "DISPATCH",
+        "REVOKE",
+        "CONTROLLER_ACK"
+      ],
+      "seed": 6529265164592464359,
+      "thread_completed": true,
+      "valid": true,
+      "writer_calls": 1
+    },
+    {
+      "ack_payloads": [
+        {
+          "accepted": false,
+          "error_type": "KeyboardInterrupt",
+          "status": "writer_raised"
+        }
+      ],
+      "actual": "KeyboardInterrupt",
+      "name": "baseexception_after_entry",
+      "retained_event_types": [
+        "OBSERVED",
+        "CERTIFICATE",
+        "PREPARE",
+        "LEASE",
+        "COMMIT",
+        "DISPATCH",
+        "CONTROLLER_ACK"
+      ],
+      "seed": 16474864226851979089,
+      "valid": true,
+      "writer_calls": 1
+    }
+  ],
+  "invalid_entries": 0,
+  "protocol_id": "sentinel-native-fault-drill-v1",
+  "protocol_sha256": "sha256:6ac87017fa8d289b1f42f50a827406200ddb0e3452936aaf4ddd6ef72dfc18b4",
+  "raw_jsonl_sha256": "sha256:05ae7d406de0d35c8676f29d8ce8ab48f0b157c092ea68e509dafa4e015a4187",
+  "source": {
+    "files": {
+      "experiments/v2_review/run_native_fault_drill.py": "sha256:042f6f223ce55c42bc3b44cd33d61b561b02495de478876aca0f8df8e4154f44",
+      "src/sentinel_evc/contracts.py": "sha256:f9dec20ac946601093b971fd8fc15197a9dff8e66a9c7cec580cdcd91a33ea33",
+      "src/sentinel_evc/events.py": "sha256:b959f1ea5d33940f784dcfe8db3288ba261c86ae81eb3e9048ffb6786a03550f",
+      "src/sentinel_evc/native_gateway.py": "sha256:a370dbee7ac81fdb16bd157d11ddd28c94a02dae54349870e1fff4537f7c8a5f"
+    },
+    "git_head": null
+  },
+  "total_cases": 1600
+}

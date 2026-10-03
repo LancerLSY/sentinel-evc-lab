@@ -1,0 +1,48 @@
+ffmpeg version 7.0.2-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2024 the FFmpeg developers
+  built with gcc 8 (Debian 8.3.0-6)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-debug --disable-ffplay --disable-indev=sndio --disable-outdev=sndio --cc=gcc --enable-fontconfig --enable-frei0r --enable-gnutls --enable-gmp --enable-libgme --enable-gray --enable-libaom --enable-libfribidi --enable-libass --enable-libvmaf --enable-libfreetype --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librubberband --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libvorbis --enable-libopus --enable-libtheora --enable-libvidstab --enable-libvo-amrwbenc --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxml2 --enable-libdav1d --enable-libxvid --enable-libzvbi --enable-libzimg
+  libavutil      59.  8.100 / 59.  8.100
+  libavcodec     61.  3.100 / 61.  3.100
+  libavformat    61.  1.100 / 61.  1.100
+  libavdevice    61.  1.100 / 61.  1.100
+  libavfilter    10.  1.100 / 10.  1.100
+  libswscale      8.  1.100 /  8.  1.100
+  libswresample   5.  1.100 /  5.  1.100
+  libpostproc    58.  1.100 / 58.  1.100
+Input #0, rawvideo, from 'fd:':
+  Duration: N/A, start: 0.000000, bitrate: 1492992 kb/s
+  Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24, 1920x1080, 1492992 kb/s, 30 tbr, 30 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (rawvideo (native) -> h264 (libx264))
+[libx264 @ 0x7dee9c0] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2 AVX512
+[libx264 @ 0x7dee9c0] profile High, level 4.0, 4:2:0, 8-bit
+[libx264 @ 0x7dee9c0] 264 - core 164 r3191 4613ac3 - H.264/MPEG-4 AVC codec - Copyleft 2003-2024 - http://www.videolan.org/x264.html - options: cabac=1 ref=2 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=6 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=1 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=30 rc=crf mbtree=1 crf=20.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to '../results/collision-media-final/ur5e_changed_chunk.mp4':
+  Metadata:
+    encoder         : Lavf61.1.100
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(progressive), 1920x1080, q=2-31, 30 fps, 15360 tbn
+      Metadata:
+        encoder         : Lavc61.3.100 libx264
+      Side data:
+        cpb: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    0 fps=0.0 q=0.0 size=       0KiB time=N/A bitrate=N/A speed=N/A    frame=    1 fps=0.7 q=26.0 size=       0KiB time=-00:00:00.03 bitrate=N/A speed=N/A    frame=   11 fps=5.5 q=26.0 size=       0KiB time=00:00:00.30 bitrate=   1.3kbits/s speed=0.15x    frame=   21 fps=8.4 q=26.0 size=       0KiB time=00:00:00.63 bitrate=   0.6kbits/s speed=0.253x    frame=   30 fps= 10 q=26.0 size=       0KiB time=00:00:00.93 bitrate=   0.4kbits/s speed=0.311x    frame=   40 fps= 11 q=26.0 size=       0KiB time=00:00:01.26 bitrate=   0.3kbits/s speed=0.362x    frame=   48 fps= 12 q=26.0 size=       0KiB time=00:00:01.53 bitrate=   0.3kbits/s speed=0.383x    frame=   57 fps= 13 q=26.0 size=       0KiB time=00:00:01.83 bitrate=   0.2kbits/s speed=0.407x    frame=   65 fps= 13 q=26.0 size=       0KiB time=00:00:02.10 bitrate=   0.2kbits/s speed=0.42x    frame=   74 fps= 13 q=26.0 size=       0KiB time=00:00:02.40 bitrate=   0.2kbits/s speed=0.436x    frame=   82 fps= 14 q=26.0 size=       0KiB time=00:00:02.66 bitrate=   0.1kbits/s speed=0.444x    frame=   90 fps= 14 q=26.0 size=       0KiB time=00:00:02.93 bitrate=   0.1kbits/s speed=0.451x    frame=   98 fps= 14 q=26.0 size=       0KiB time=00:00:03.20 bitrate=   0.1kbits/s speed=0.457x    frame=  108 fps= 14 q=26.0 size=       0KiB time=00:00:03.53 bitrate=   0.1kbits/s speed=0.471x    frame=  117 fps= 15 q=26.0 size=     256KiB time=00:00:03.83 bitrate= 547.2kbits/s speed=0.479x    frame=  125 fps= 15 q=26.0 size=     256KiB time=00:00:04.10 bitrate= 511.6kbits/s speed=0.482x    frame=  132 fps= 15 q=26.0 size=     256KiB time=00:00:04.33 bitrate= 484.0kbits/s speed=0.481x    frame=  141 fps= 15 q=26.0 size=     256KiB time=00:00:04.63 bitrate= 452.7kbits/s speed=0.487x    frame=  149 fps= 15 q=26.0 size=     256KiB time=00:00:04.90 bitrate= 428.1kbits/s speed=0.49x    frame=  157 fps= 15 q=26.0 size=     256KiB time=00:00:05.16 bitrate= 406.0kbits/s speed=0.492x    frame=  166 fps= 15 q=26.0 size=     256KiB time=00:00:05.46 bitrate= 383.7kbits/s speed=0.497x    frame=  174 fps= 15 q=26.0 size=     256KiB time=00:00:05.73 bitrate= 365.8kbits/s speed=0.498x    frame=  183 fps= 15 q=26.0 size=     256KiB time=00:00:06.03 bitrate= 347.7kbits/s speed=0.502x    frame=  191 fps= 15 q=26.0 size=     256KiB time=00:00:06.30 bitrate= 332.9kbits/s speed=0.504x    frame=  200 fps= 15 q=26.0 size=     256KiB time=00:00:06.60 bitrate= 317.8kbits/s speed=0.507x    frame=  208 fps= 15 q=26.0 size=     256KiB time=00:00:06.86 bitrate= 305.5kbits/s speed=0.508x    frame=  217 fps= 15 q=26.0 size=     256KiB time=00:00:07.16 bitrate= 292.7kbits/s speed=0.511x    frame=  226 fps= 16 q=26.0 size=     256KiB time=00:00:07.46 bitrate= 280.9kbits/s speed=0.514x    frame=  235 fps= 16 q=26.0 size=     512KiB time=00:00:07.76 bitrate= 540.1kbits/s speed=0.517x    frame=  245 fps= 16 q=26.0 size=     512KiB time=00:00:08.10 bitrate= 517.9kbits/s speed=0.522x    frame=  255 fps= 16 q=26.0 size=     512KiB time=00:00:08.43 bitrate= 497.4kbits/s speed=0.527x    frame=  284 fps= 17 q=26.0 size=     512KiB time=00:00:09.40 bitrate= 446.2kbits/s speed=0.569x    [mp4 @ 0x7ded940] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x7ded780] video:629KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.691440%
+frame=  300 fps= 18 q=26.0 Lsize=     634KiB time=00:00:09.93 bitrate= 522.6kbits/s speed=0.596x    
+[libx264 @ 0x7dee9c0] frame I:2     Avg QP: 9.35  size: 82252
+[libx264 @ 0x7dee9c0] frame P:76    Avg QP:12.79  size:  4019
+[libx264 @ 0x7dee9c0] frame B:222   Avg QP:16.20  size:   783
+[libx264 @ 0x7dee9c0] consecutive B-frames:  1.3%  0.0%  0.0% 98.7%
+[libx264 @ 0x7dee9c0] mb I  I16..4: 51.3% 33.0% 15.7%
+[libx264 @ 0x7dee9c0] mb P  I16..4:  0.6%  0.5%  0.0%  P16..4:  7.4%  1.5%  0.8%  0.0%  0.0%    skip:89.2%
+[libx264 @ 0x7dee9c0] mb B  I16..4:  0.1%  0.0%  0.0%  B16..8:  3.2%  0.6%  0.0%  direct: 0.5%  skip:95.7%  L0:54.6% L1:42.0% BI: 3.3%
+[libx264 @ 0x7dee9c0] 8x8 transform intra:35.3% inter:24.4%
+[libx264 @ 0x7dee9c0] coded y,uvDC,uvAC intra: 11.2% 31.5% 25.9% inter: 0.4% 0.7% 0.1%
+[libx264 @ 0x7dee9c0] i16 v,h,dc,p: 73% 21%  4%  2%
+[libx264 @ 0x7dee9c0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 27% 17% 38%  3%  4%  2%  4%  1%  3%
+[libx264 @ 0x7dee9c0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 34% 25% 16%  3%  4%  3%  6%  4%  5%
+[libx264 @ 0x7dee9c0] i8c dc,h,v,p: 65% 23% 10%  2%
+[libx264 @ 0x7dee9c0] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0x7dee9c0] ref P L0: 67.6% 32.4%
+[libx264 @ 0x7dee9c0] ref B L0: 80.4% 19.6%
+[libx264 @ 0x7dee9c0] ref B L1: 93.3%  6.7%
+[libx264 @ 0x7dee9c0] kb/s:515.01

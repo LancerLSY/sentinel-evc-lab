@@ -1,0 +1,6304 @@
+[
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 997,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 997,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 671,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 1,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 671,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 1,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 865,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 865,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 511,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 3,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 511,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 3,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 721,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 4,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 721,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 4,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 909,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 5,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 909,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 5,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 597,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 597,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 601,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 7,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 601,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 7,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1077,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1077,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 833,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 9,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 833,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 9,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 907,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 11,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 907,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 11,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 12,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 12,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 13,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 13,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 647,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 14,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 647,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 14,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 891,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 15,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 891,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 15,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 653,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 653,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 815,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 17,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 815,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 17,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1013,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 18,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1013,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 18,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 473,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 19,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 473,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 19,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 769,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 769,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 837,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 21,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 837,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 21,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 887,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 22,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 887,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 22,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 841,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 23,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 841,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 23,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 969,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 24,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 969,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 24,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 869,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 25,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 869,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 25,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 627,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 26,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 627,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 26,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 27,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 27,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 681,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 681,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 683,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 29,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 683,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 29,
+    "scenario": "clear"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 997,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1277,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -3.4030574263037294e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.4410799085557722,
+        -1.2803923247109306,
+        1.8299088055984698,
+        -1.4692461434861455,
+        -1.3032556634119001,
+        -0.09013404668601849
+      ]
+    },
+    "fk_evals": 45,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 0,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 671,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 1,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1283,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -2.475954890350518e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.2362879148135706,
+        -1.4615305598809423,
+        1.7986839352538861,
+        -1.268155172032542,
+        -1.4034083986251882,
+        0.31072746835698234
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 1,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 865,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1382,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00021615911878545419,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.9362668688012947,
+        -1.1827604364562052,
+        1.3542859802569311,
+        -1.841234307765629,
+        -1.665397534563154,
+        -0.21829281854400895
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 2,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 511,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 3,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1443,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -4.0336979509614235e-06,
+          "geom1": 9,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.196055840588134,
+        -1.9077725024804346,
+        1.5812448544075446,
+        -1.4941503051108227,
+        -1.4193052865047515,
+        0.15543822558975093
+      ]
+    },
+    "fk_evals": 47,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 3,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 721,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00012956895035513838,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.9075402746847019,
+        -1.442097838190715,
+        1.5697032628017331,
+        -1.3918300765746139,
+        -1.580440575278204,
+        -0.16540477905016004
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 4,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1681,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00016484669149453846,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.173339429478232,
+        -1.655809853225308,
+        1.7143417332871254,
+        -1.4042272415241976,
+        -1.579772777026714,
+        -0.15394726546302834
+      ]
+    },
+    "fk_evals": 84,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 4,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 909,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -3.548104720861589e-05,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.899073934555871,
+        -1.623565407690225,
+        1.8359398619277434,
+        -1.8236931452935157,
+        -1.3643148084228733,
+        0.2633831763148132
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 5,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1869,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.66542007757287e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.2248784780545083,
+        -1.821795340366365,
+        2.0171300462985418,
+        -1.869482800726008,
+        -1.3269279280341022,
+        0.3110721908832912
+      ]
+    },
+    "fk_evals": 87,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 5,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 597,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1025,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00023398378541300557,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5056946670080622,
+        -1.5954029820780475,
+        1.8565536612154336,
+        -1.80733779132367,
+        -1.7329681006763942,
+        -0.2596130771505306
+      ]
+    },
+    "fk_evals": 45,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 6,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 601,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 7,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1561,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00016749629647648534,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9877241170461467,
+        -1.8745553148712866,
+        1.887355182382974,
+        -1.4155336634174165,
+        -1.3374195874645722,
+        0.08590289409816415
+      ]
+    },
+    "fk_evals": 50,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 7,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1077,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2037,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.623527207906543e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.453085639561739,
+        -1.0436273861906327,
+        1.6091573536205037,
+        -1.391833798225873,
+        -1.8006244177775437,
+        -0.011960897558482043
+      ]
+    },
+    "fk_evals": 42,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 8,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 833,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 9,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1399,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.42241087725759e-05,
+          "geom1": 9,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.741170957436299,
+        -1.802856784501591,
+        1.6267055721417527,
+        -1.5361570797793866,
+        -1.5864903818918379,
+        0.023887942787922896
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 9,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1184,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.989972964809572e-05,
+          "geom1": 9,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.680380655866411,
+        -1.7269560132663626,
+        1.613079888796474,
+        -1.5071520250624342,
+        -1.6847764984917273,
+        0.042893776307639166
+      ]
+    },
+    "fk_evals": 54,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 10,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 907,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 11,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1867,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.772600151740832e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.7913173823395976,
+        -1.1903765780858586,
+        1.895994621619525,
+        -1.3374206143339655,
+        -1.7522172551226571,
+        -0.10910662393208768
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 11,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 729,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.011060385012807913,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.01281719823414848,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 54,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 12,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 981,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.011060385012807913,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.01281719823414848,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 49,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 12,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 729,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.9441018836593993e-05,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.6542092039859906,
+        -1.6238715539904918,
+        1.7059011872772247,
+        -1.6686432659860353,
+        -1.6815398919016578,
+        -0.23530893121117008
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 13,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1462,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -8.3686083521467e-05,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.6848173673792821,
+        -1.6464178867763655,
+        1.7077543681154324,
+        -1.6545519577605923,
+        -1.6655912220170972,
+        -0.2014199287899974
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 13,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 647,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 14,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1059,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00028792314844501565,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.69755912049474,
+        -1.3663796085130788,
+        1.5223275411835664,
+        -1.2754614746539321,
+        -1.6199516062470096,
+        0.13520955326676037
+      ]
+    },
+    "fk_evals": 48,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 14,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 891,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 15,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1851,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.0501293369151454e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.3143956537464923,
+        -1.567749559016153,
+        2.0290667892702223,
+        -1.4769524935636726,
+        -1.7117516500644596,
+        -0.19665434770466234
+      ]
+    },
+    "fk_evals": 47,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 15,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 653,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1587,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00028895521671858104,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9334675906780406,
+        -1.4185403546256357,
+        2.0513239552672835,
+        -1.7147943930683223,
+        -1.564726100931975,
+        0.2249008518299381
+      ]
+    },
+    "fk_evals": 54,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 16,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 815,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.020060904947431277,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.02973553622473169,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 17,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1053,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.020060904947431277,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.02973553622473169,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 17,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1013,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 18,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1245,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0004538304667945428,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.4570599683997205,
+        -1.2950552106497928,
+        1.5541688157740963,
+        -1.4736618885094612,
+        -1.837000334011734,
+        0.37789408376165057
+      ]
+    },
+    "fk_evals": 42,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 18,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 473,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 19,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1002,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00024191003485687923,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.3979558487148387,
+        -1.3706769420937668,
+        1.6992296709411527,
+        -1.7880430983719806,
+        -1.4285884751853561,
+        -0.0371483636729949
+      ]
+    },
+    "fk_evals": 49,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 19,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 769,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1337,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00021932108583598564,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.7639453981059015,
+        -1.5897500570831435,
+        1.9802249557242662,
+        -1.3655338284598995,
+        -1.7248705164727567,
+        0.3138498359086572
+      ]
+    },
+    "fk_evals": 47,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 20,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 837,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.758848369227961e-05,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.61202714260943,
+        -1.534402258440263,
+        1.9568027208186942,
+        -1.6575198001175773,
+        -1.4143490583532805,
+        -0.3573565600609809
+      ]
+    },
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 21,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1448,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001515623346586767,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.8415212046320888,
+        -1.7046919621770915,
+        2.0284863327029274,
+        -1.6472993239374594,
+        -1.4327877899957586,
+        -0.31523983233605263
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 21,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 887,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 22,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1430,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00026751282995017556,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5014513617917566,
+        -1.6112115645030958,
+        2.104340703560405,
+        -1.360141728090839,
+        -1.643927277226665,
+        -0.06624963809054325
+      ]
+    },
+    "fk_evals": 45,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 22,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 841,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 23,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1417,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0004365967723363867,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5837604629580393,
+        -1.0196991983414907,
+        1.755851215695444,
+        -1.8944132209585114,
+        -1.3482984695700788,
+        0.025664950864005224
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 23,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 969,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.03181825916179895,
+          "geom1": 9,
+          "geom2": 6
+        },
+        {
+          "dist": -0.06919233125478,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.05810704315835959,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 24,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1030,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.03181825916179895,
+          "geom1": 9,
+          "geom2": 6
+        },
+        {
+          "dist": -0.06919233125478,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.05810704315835959,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 24,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 869,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -7.0352368299331225e-06,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.6948634603907173,
+        -1.6223713800336201,
+        1.575274161212708,
+        -1.6238894719265509,
+        -1.4830253985140858,
+        -0.027298892476444073
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 25,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1829,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -7.0352368299331225e-06,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.6948634603907173,
+        -1.6223713800336201,
+        1.575274161212708,
+        -1.6238894719265509,
+        -1.4830253985140858,
+        -0.027298892476444073
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 25,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 627,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 26,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1538,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0002009077036007681,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9643676626998133,
+        -1.6036226864902097,
+        1.9939282326125345,
+        -1.545382921014281,
+        -1.3304667057201693,
+        0.22656139055799404
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 26,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 27,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1094,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00020805626067832428,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.6859292585985817,
+        -1.3217975555414767,
+        1.8244912530471213,
+        -1.2938598658827378,
+        -1.7294602026002273,
+        0.29949117121095736
+      ]
+    },
+    "fk_evals": 50,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 27,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 681,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1301,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00018814953665044487,
+          "geom1": 9,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.449087277919934,
+        -1.7671354039138067,
+        1.5607876789400612,
+        -1.7733395452710354,
+        -1.694988773703269,
+        -0.23012021739109423
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 28,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 683,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 29,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1643,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001270535163528791,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9396052181619174,
+        -1.6828828412051935,
+        1.8614581204020477,
+        -1.5168602954168584,
+        -1.6103578568939518,
+        0.14338469824734673
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 29,
+    "scenario": "late_suffix"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 997,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1943,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 671,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 1,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1876,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00012891935310382213,
+          "geom1": 10,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.531902548039337,
+        -1.6210344532384229,
+        1.5745180854170893,
+        -1.4020190560365666,
+        -1.4774479586605413,
+        0.17328852363635475
+      ]
+    },
+    "fk_evals": 54,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 1,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 865,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2003,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 511,
+    "first_contact": null,
+    "fk_evals": 51,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 3,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1904,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -5.477478294869942e-05,
+          "geom1": 10,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.2893397651918552,
+        -1.6291433599983212,
+        1.4314432241886605,
+        -1.5132647214611405,
+        -1.4570840804426408,
+        0.11667602353568035
+      ]
+    },
+    "fk_evals": 45,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 3,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 721,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 4,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2048,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 4,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 909,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 5,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2231,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00018042413997546025,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.1484232329578563,
+        -1.4620007022382184,
+        1.6880233106436169,
+        -1.8057747518118485,
+        -1.3789450306320288,
+        0.24472152621677443
+      ]
+    },
+    "fk_evals": 55,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 5,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 597,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1752,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 601,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 7,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1967,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00012457144920736268,
+          "geom1": 10,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.165074987079825,
+        -1.5006450113437901,
+        1.5785062967141723,
+        -1.462221550760028,
+        -1.407596025243993,
+        0.06007228116342674
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 7,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1077,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2317,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 833,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.042195432538982024,
+          "geom1": 9,
+          "geom2": 5
+        },
+        {
+          "dist": -0.05953015795928375,
+          "geom1": 9,
+          "geom2": 6
+        },
+        {
+          "dist": -0.01775414459138583,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.03881579521727144,
+          "geom1": 10,
+          "geom2": 6
+        },
+        {
+          "dist": -0.03881606691087127,
+          "geom1": 10,
+          "geom2": 7
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 9,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1834,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.042195432538982024,
+          "geom1": 9,
+          "geom2": 5
+        },
+        {
+          "dist": -0.05953015795928375,
+          "geom1": 9,
+          "geom2": 6
+        },
+        {
+          "dist": -0.01775414459138583,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.03881579521727144,
+          "geom1": 10,
+          "geom2": 6
+        },
+        {
+          "dist": -0.03881606691087127,
+          "geom1": 10,
+          "geom2": 7
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 71,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 9,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1766,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 907,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 11,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2198,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -5.5451000699056896e-05,
+          "geom1": 10,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9960136123156956,
+        -1.3221505923779338,
+        1.5474256557559039,
+        -1.4031394577031002,
+        -1.7011307714564203,
+        -0.07838256872787734
+      ]
+    },
+    "fk_evals": 48,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 11,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 12,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1908,
+    "first_contact": null,
+    "fk_evals": 46,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 12,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 13,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1963,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.8739980006711454e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.8363965019340887,
+        -1.5123352769209677,
+        1.6091636132521936,
+        -1.6627941432121585,
+        -1.6749198019325524,
+        -0.2212420374441497
+      ]
+    },
+    "fk_evals": 51,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 13,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 647,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.001860499687401873,
+          "geom1": 10,
+          "geom2": 4
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 47,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 14,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1808,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.001860499687401873,
+          "geom1": 10,
+          "geom2": 4
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 60,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 14,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 891,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 15,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2211,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -8.115306002803857e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.0611287949829116,
+        -1.6078906108769104,
+        1.6685125742982234,
+        -1.5068243390108802,
+        -1.6668864632721911,
+        -0.1340588829531219
+      ]
+    },
+    "fk_evals": 48,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 15,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 653,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2012,
+    "first_contact": null,
+    "fk_evals": 54,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 815,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001400462296980015,
+          "geom1": 9,
+          "geom2": 7
+        }
+      ],
+      "q": [
+        -1.5614965343371838,
+        -1.5779424288723995,
+        1.5662570336468393,
+        -1.5711488914094165,
+        -1.5638276268960918,
+        -0.009715354200285953
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 17,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1870,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001400462296980015,
+          "geom1": 9,
+          "geom2": 7
+        }
+      ],
+      "q": [
+        -1.5614965343371838,
+        -1.5779424288723995,
+        1.5662570336468393,
+        -1.5711488914094165,
+        -1.5638276268960918,
+        -0.009715354200285953
+      ]
+    },
+    "fk_evals": 53,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 17,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1013,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.02220630671625945,
+          "geom1": 10,
+          "geom2": 4
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 18,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1966,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.02220630671625945,
+          "geom1": 10,
+          "geom2": 4
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 18,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 473,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 19,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1707,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -5.115820618446787e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.546165948562193,
+        -1.5242016914007546,
+        1.4678634430115731,
+        -1.704756854543803,
+        -1.4831092577540557,
+        -0.02290649501123803
+      ]
+    },
+    "fk_evals": 55,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 19,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 769,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1924,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 837,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 21,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2002,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -4.0591491639145605e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.763430800747809,
+        -1.4512546801468607,
+        1.739204319301644,
+        -1.626324283054561,
+        -1.4706288008463215,
+        -0.22880549500030853
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 21,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 887,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 22,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1939,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 22,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 841,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 23,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1955,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -5.8407557606734994e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.6724690555194008,
+        -1.321192420397398,
+        1.499685695927343,
+        -1.767037337123775,
+        -1.435876254585006,
+        0.015563089789865567
+      ]
+    },
+    "fk_evals": 48,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 23,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 969,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 24,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2008,
+    "first_contact": null,
+    "fk_evals": 52,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 24,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 869,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 25,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2179,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -2.191622267697091e-05,
+          "geom1": 9,
+          "geom2": 7
+        }
+      ],
+      "q": [
+        -2.0977052914006586,
+        -1.5456769486256237,
+        1.464675604123904,
+        -1.6912334406608633,
+        -1.3716833601846756,
+        -0.06192752400546849
+      ]
+    },
+    "fk_evals": 51,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 25,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 627,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -2.6177764085602573e-05,
+          "geom1": 10,
+          "geom2": 4
+        }
+      ],
+      "q": [
+        -1.4843144022815649,
+        -1.6738113716661256,
+        1.6566446431353725,
+        -1.561769929087006,
+        -1.4854154170068194,
+        0.08049176004979727
+      ]
+    },
+    "fk_evals": 69,
+    "kind": "parent",
+    "mujoco_contact": true,
+    "root": 26,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1987,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -2.6177764085602573e-05,
+          "geom1": 10,
+          "geom2": 4
+        }
+      ],
+      "q": [
+        -1.4843144022815649,
+        -1.6738113716661256,
+        1.6566446431353725,
+        -1.561769929087006,
+        -1.4854154170068194,
+        0.08049176004979727
+      ]
+    },
+    "fk_evals": 78,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 26,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 27,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1802,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00011875357806818976,
+          "geom1": 10,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.641801172651853,
+        -1.4336839251677096,
+        1.5253426380966095,
+        -1.379668348228932,
+        -1.6803001513232223,
+        0.2066953655051111
+      ]
+    },
+    "fk_evals": 52,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 27,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 681,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1887,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 683,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 29,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2025,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -5.6729039128108893e-05,
+          "geom1": 10,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.0758317803663868,
+        -1.329450590204301,
+        1.5386834643659315,
+        -1.5311009454738638,
+        -1.5999141660842708,
+        0.10552962790445226
+      ]
+    },
+    "fk_evals": 52,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 29,
+    "scenario": "narrow_passage"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 997,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3899,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -5.9972348889714144e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -5.9972348889714144e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -5.9972348889714144e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.1131681813286531,
+        -1.5112869684670263,
+        2.7912635608792917,
+        -1.4688805737323403,
+        -1.3022925673698986,
+        -0.09045850783784067
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 0,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 671,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 1,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3796,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00020863371657285634,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00020863371657285634,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00020863371657285634,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00020863371657285634,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00020863371657285634,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5916167912770836,
+        -1.7092341740426604,
+        2.740832607196551,
+        -1.2776075581299018,
+        -1.4086364742419974,
+        0.3010226403521861
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 1,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 865,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 4373,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00010673146881364642,
+          "geom1": 2,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.5523987075998074,
+        -1.455585904990017,
+        2.884043350024786,
+        -1.839310524146437,
+        -1.664724597801128,
+        -0.21673995288886366
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 2,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 511,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 3,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3876,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -3.648450554125798e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -3.648450554125798e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -3.648450554125798e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.3655463562805374,
+        -1.8008302936681224,
+        2.7922712130701366,
+        -1.480097888974936,
+        -1.3915313108940182,
+        0.1839351769810006
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 3,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 721,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 4,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3881,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00011512643237187453,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00011512643237187453,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00011512643237187453,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.8966823437302607,
+        -1.4462477403309357,
+        2.76825821985561,
+        -1.397600823994993,
+        -1.5801297223491035,
+        -0.16007142926851348
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 4,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 909,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 5,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3615,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -8.725199942808542e-05,
+          "geom1": 2,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.9909006646297036,
+        -1.6383252601767202,
+        2.8814009731718677,
+        -1.8944339143460698,
+        -1.3065555471618504,
+        0.3370582790005329
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 5,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 597,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3679,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001789737016209339,
+          "geom1": 0,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.8451425840799411,
+        -1.8369172654146408,
+        2.8800739520707266,
+        -1.8109233857143971,
+        -1.735426350704376,
+        -0.26354846180082775
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 6,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 601,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 7,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3641,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -4.8248194321837135e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -4.8248194321837135e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -4.8248194321837135e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -4.8248194321837135e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -4.8248194321837135e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.3011576638301956,
+        -1.6518194142814342,
+        2.774820238292688,
+        -1.4145097910308437,
+        -1.3358806076366114,
+        0.08646936332214185
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 7,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1077,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 4199,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -7.667170142271196e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.667170142271196e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.667170142271196e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.667170142271196e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.667170142271196e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.0673056681774544,
+        -1.3142477140843063,
+        2.7698341247023106,
+        -1.396666677985765,
+        -1.7944181410281053,
+        -0.01163790037159708
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 8,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 833,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 9,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3917,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -7.852082354264239e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.852082354264239e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.852082354264239e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.9508986033243043,
+        -1.8268107763956818,
+        2.8024719876138446,
+        -1.5192144263953076,
+        -1.5941640046743382,
+        0.03557070890974842
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 9,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3851,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -2.050059722026598e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -2.050059722026598e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -2.050059722026598e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.8706387925915526,
+        -1.6949112554902157,
+        2.791667008574892,
+        -1.4791849948246483,
+        -1.734857968999499,
+        0.06174137578248972
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 10,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 907,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 11,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3814,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.681067845308586e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -6.681067845308586e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -6.681067845308586e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -6.681067845308586e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -6.681067845308586e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.1625091139050752,
+        -1.4476835155717915,
+        2.756026231122836,
+        -1.3450597570306462,
+        -1.746278974431897,
+        -0.10553526707470444
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 11,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 12,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 4065,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -3.350761118110085e-05,
+          "geom1": 2,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.2301008290432272,
+        -1.2621612317032866,
+        2.8872960516846433,
+        -1.7685287615102092,
+        -1.7908149206256943,
+        0.19348765436677332
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 12,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 13,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3665,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -5.9396839649394906e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -5.9396839649394906e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -5.9396839649394906e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.690473918705811,
+        -1.6469460430543845,
+        2.8738768608697884,
+        -1.7111836327402254,
+        -1.7296874631048538,
+        -0.33761672044306645
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 13,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 647,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 14,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 4064,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00014193625136410537,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00014193625136410537,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00014193625136410537,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00014193625136410537,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00014193625136410537,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.351623300105179,
+        -1.6130996435844012,
+        2.742050039503628,
+        -1.2797953812396097,
+        -1.6192303374258799,
+        0.13322543835096096
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 14,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 891,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 15,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3646,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00017535657017388184,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00017535657017388184,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00017535657017388184,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.973677287957075,
+        -1.8021078501701413,
+        2.7913672903236315,
+        -1.4782040999825392,
+        -1.7098718346418706,
+        -0.1940316478244883
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 15,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 653,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3527,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -8.709784082743671e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -8.709784082743671e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -8.709784082743671e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.2966558380146764,
+        -1.6723592389284077,
+        2.8737722756129043,
+        -1.7131390158936424,
+        -1.5647959272194039,
+        0.22231536409842131
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 16,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 815,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 17,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 4108,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.7771569306886115e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -1.7771569306886115e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -1.7771569306886115e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.2084152898140632,
+        -1.8490089073852396,
+        2.8281702054503657,
+        -1.5843898725131051,
+        -1.2992150339086483,
+        -0.3784284205288974
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 17,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1013,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 18,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 4227,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001714606489982909,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.0001714606489982909,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.0001714606489982909,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.1013437556699968,
+        -1.5522753379633571,
+        2.7932205964164734,
+        -1.4750943743017795,
+        -1.8330747049200122,
+        0.37232131836933147
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 18,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 473,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 19,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3797,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00011863536574666794,
+          "geom1": 2,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.7652848473869573,
+        -1.6311354426094289,
+        2.8866021316624826,
+        -1.7872961547961637,
+        -1.4290774388655074,
+        -0.03702063703032775
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 19,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 769,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3545,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -7.218456365060827e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.218456365060827e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.218456365060827e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.218456365060827e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -7.218456365060827e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5215987443043324,
+        -1.4078091629928056,
+        2.7566014952137086,
+        -1.3476325657742168,
+        -1.7383070061135197,
+        0.34122067989286303
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 20,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 837,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 21,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3519,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00011461749628961793,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00011461749628961793,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00011461749628961793,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.611552114201151,
+        -1.5348216414036149,
+        2.8518288593615013,
+        -1.65652059507913,
+        -1.4161517212855204,
+        -0.35323901741384645
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 21,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 887,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 22,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3524,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.4526617314200574e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -1.4526617314200574e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -1.4526617314200574e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.7939579505015033,
+        -1.4038840030077786,
+        2.7582480358253822,
+        -1.35686725039017,
+        -1.645063969540806,
+        -0.0672794242016646
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 22,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 841,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 23,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3941,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00015019379625753199,
+          "geom1": 2,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.962940146359619,
+        -1.2975260607757915,
+        2.8818223674525663,
+        -1.8890755581192529,
+        -1.3519684004435337,
+        0.025241634245195776
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 23,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 969,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 24,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 4105,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -9.972921134238782e-05,
+          "geom1": 2,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.1151409931068832,
+        -1.3425292656405747,
+        2.883676251589128,
+        -1.8466005430184262,
+        -1.5057846483138946,
+        -0.05632024004175748
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 24,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 869,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 25,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3935,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -8.140750624013177e-05,
+          "geom1": 0,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.9754844469254218,
+        -1.7390214516696474,
+        2.8842377435496718,
+        -1.7439733381972182,
+        -1.284486721742575,
+        -0.08904666344719263
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 25,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 627,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 26,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3574,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -2.0855401745220603e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -2.0855401745220603e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -2.0855401745220603e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.3336279920342027,
+        -1.8532911257583682,
+        2.81415256254467,
+        -1.546036569937565,
+        -1.3366473372208854,
+        0.22073492996906574
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 26,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 27,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3751,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00020665143318296386,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00020665143318296386,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00020665143318296386,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00020665143318296386,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.00020665143318296386,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.355032426245398,
+        -1.5586729216099382,
+        2.745354138653554,
+        -1.2979781151114902,
+        -1.7271008397759304,
+        0.29503757589228313
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 27,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 681,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3961,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00010510843543464626,
+          "geom1": 2,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.5787937488368589,
+        -1.7172454405968922,
+        2.8835029326833848,
+        -1.8505602390670648,
+        -1.7423372717667527,
+        -0.3178563818011298
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 28,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 683,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 29,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "joint_limit",
+    "dense_samples": 3722,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -9.68451375398735e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -9.68451375398735e-05,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -9.68451375398735e-05,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.260469734465318,
+        -1.4530351605117042,
+        2.8017205769417783,
+        -1.5164467235858978,
+        -1.61066115880172,
+        0.14448407156880222
+      ]
+    },
+    "fk_evals": 0,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 29,
+    "scenario": "joint_limit"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 997,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2497,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 671,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 1,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1913,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 1,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 865,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1964,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 511,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 3,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1983,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 3,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 721,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 4,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1785,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 4,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 909,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 5,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2132,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 5,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 597,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1757,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 601,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 7,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2101,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 7,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1077,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1956,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 833,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 9,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1844,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 9,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1679,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 907,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 11,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2407,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 11,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 12,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2229,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 12,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 13,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1902,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 13,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 647,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 14,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2069,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 14,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 891,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 15,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2076,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 15,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 653,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2127,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 815,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 17,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2301,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 17,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1013,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 18,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2513,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 18,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 473,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 19,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1544,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 19,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 769,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2066,
+    "first_contact": null,
+    "fk_evals": 42,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 837,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 21,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2152,
+    "first_contact": null,
+    "fk_evals": 47,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 21,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 887,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 22,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2198,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001456143004434987,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.0001456143004434987,
+          "geom1": 1,
+          "geom2": 8
+        },
+        {
+          "dist": -0.0001456143004434987,
+          "geom1": 1,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.0973787769132533,
+        -1.914395148519081,
+        2.626028344212742,
+        -0.761931946660762,
+        -2.130859199615615,
+        0.40492912226956396
+      ]
+    },
+    "fk_evals": 45,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 22,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 841,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 23,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1740,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 23,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 969,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 24,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2469,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 24,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 869,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 25,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1786,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 25,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 627,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 26,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2078,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 26,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 27,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2074,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 27,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 681,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1841,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 683,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 29,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 2183,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": false,
+    "root": 29,
+    "scenario": "tracking_disturbance"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 997,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 0,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1277,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -3.4030574263037294e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.4410799085557722,
+        -1.2803923247109306,
+        1.8299088055984698,
+        -1.4692461434861455,
+        -1.3032556634119001,
+        -0.09013404668601849
+      ]
+    },
+    "fk_evals": 45,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 0,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 671,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 1,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1283,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -2.475954890350518e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.2362879148135706,
+        -1.4615305598809423,
+        1.7986839352538861,
+        -1.268155172032542,
+        -1.4034083986251882,
+        0.31072746835698234
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 1,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 865,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 2,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1382,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00021615911878545419,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.9362668688012947,
+        -1.1827604364562052,
+        1.3542859802569311,
+        -1.841234307765629,
+        -1.665397534563154,
+        -0.21829281854400895
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 2,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 511,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 3,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1443,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -4.0336979509614235e-06,
+          "geom1": 9,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.196055840588134,
+        -1.9077725024804346,
+        1.5812448544075446,
+        -1.4941503051108227,
+        -1.4193052865047515,
+        0.15543822558975093
+      ]
+    },
+    "fk_evals": 47,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 3,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 721,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 4,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1681,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00016484669149453846,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.173339429478232,
+        -1.655809853225308,
+        1.7143417332871254,
+        -1.4042272415241976,
+        -1.579772777026714,
+        -0.15394726546302834
+      ]
+    },
+    "fk_evals": 84,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 4,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 909,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 5,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1869,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.66542007757287e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.2248784780545083,
+        -1.821795340366365,
+        2.0171300462985418,
+        -1.869482800726008,
+        -1.3269279280341022,
+        0.3110721908832912
+      ]
+    },
+    "fk_evals": 87,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 5,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 597,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 6,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1025,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00023398378541300557,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5056946670080622,
+        -1.5954029820780475,
+        1.8565536612154336,
+        -1.80733779132367,
+        -1.7329681006763942,
+        -0.2596130771505306
+      ]
+    },
+    "fk_evals": 45,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 6,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 601,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 7,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1561,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00016749629647648534,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9877241170461467,
+        -1.8745553148712866,
+        1.887355182382974,
+        -1.4155336634174165,
+        -1.3374195874645722,
+        0.08590289409816415
+      ]
+    },
+    "fk_evals": 50,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 7,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1077,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 8,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 2037,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.623527207906543e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.453085639561739,
+        -1.0436273861906327,
+        1.6091573536205037,
+        -1.391833798225873,
+        -1.8006244177775437,
+        -0.011960897558482043
+      ]
+    },
+    "fk_evals": 42,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 8,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 833,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 9,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1399,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.42241087725759e-05,
+          "geom1": 9,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.741170957436299,
+        -1.802856784501591,
+        1.6267055721417527,
+        -1.5361570797793866,
+        -1.5864903818918379,
+        0.023887942787922896
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 9,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 10,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1184,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.989972964809572e-05,
+          "geom1": 9,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.680380655866411,
+        -1.7269560132663626,
+        1.613079888796474,
+        -1.5071520250624342,
+        -1.6847764984917273,
+        0.042893776307639166
+      ]
+    },
+    "fk_evals": 54,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 10,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 907,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 11,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1867,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -6.772600151740832e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.7913173823395976,
+        -1.1903765780858586,
+        1.895994621619525,
+        -1.3374206143339655,
+        -1.7522172551226571,
+        -0.10910662393208768
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 11,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 12,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 981,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.011060385012807913,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.01281719823414848,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 49,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 12,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 729,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 13,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1462,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -8.3686083521467e-05,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.6848173673792821,
+        -1.6464178867763655,
+        1.7077543681154324,
+        -1.6545519577605923,
+        -1.6655912220170972,
+        -0.2014199287899974
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 13,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 647,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 14,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1059,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00028792314844501565,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.69755912049474,
+        -1.3663796085130788,
+        1.5223275411835664,
+        -1.2754614746539321,
+        -1.6199516062470096,
+        0.13520955326676037
+      ]
+    },
+    "fk_evals": 48,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 14,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 891,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 15,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1851,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -1.0501293369151454e-05,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -2.3143956537464923,
+        -1.567749559016153,
+        2.0290667892702223,
+        -1.4769524935636726,
+        -1.7117516500644596,
+        -0.19665434770466234
+      ]
+    },
+    "fk_evals": 47,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 15,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 653,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 16,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1587,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00028895521671858104,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9334675906780406,
+        -1.4185403546256357,
+        2.0513239552672835,
+        -1.7147943930683223,
+        -1.564726100931975,
+        0.2249008518299381
+      ]
+    },
+    "fk_evals": 54,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 16,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 815,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 17,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1053,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.020060904947431277,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.02973553622473169,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 17,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 1013,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 18,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1245,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0004538304667945428,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.4570599683997205,
+        -1.2950552106497928,
+        1.5541688157740963,
+        -1.4736618885094612,
+        -1.837000334011734,
+        0.37789408376165057
+      ]
+    },
+    "fk_evals": 42,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 18,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 473,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 19,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1002,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00024191003485687923,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.3979558487148387,
+        -1.3706769420937668,
+        1.6992296709411527,
+        -1.7880430983719806,
+        -1.4285884751853561,
+        -0.0371483636729949
+      ]
+    },
+    "fk_evals": 49,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 19,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 769,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 20,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1337,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00021932108583598564,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.7639453981059015,
+        -1.5897500570831435,
+        1.9802249557242662,
+        -1.3655338284598995,
+        -1.7248705164727567,
+        0.3138498359086572
+      ]
+    },
+    "fk_evals": 47,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 20,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 837,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 21,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1448,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001515623346586767,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.8415212046320888,
+        -1.7046919621770915,
+        2.0284863327029274,
+        -1.6472993239374594,
+        -1.4327877899957586,
+        -0.31523983233605263
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 21,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 887,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 22,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1430,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00026751282995017556,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5014513617917566,
+        -1.6112115645030958,
+        2.104340703560405,
+        -1.360141728090839,
+        -1.643927277226665,
+        -0.06624963809054325
+      ]
+    },
+    "fk_evals": 45,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 22,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 841,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 23,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1417,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0004365967723363867,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5837604629580393,
+        -1.0196991983414907,
+        1.755851215695444,
+        -1.8944132209585114,
+        -1.3482984695700788,
+        0.025664950864005224
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 23,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 969,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 24,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1030,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.03181825916179895,
+          "geom1": 9,
+          "geom2": 6
+        },
+        {
+          "dist": -0.06919233125478,
+          "geom1": 9,
+          "geom2": 7
+        },
+        {
+          "dist": -0.05810704315835959,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.5708,
+        -1.5708,
+        1.5708,
+        -1.5708,
+        -1.5708,
+        0.0
+      ]
+    },
+    "fk_evals": 41,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 24,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 869,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 25,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1829,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -7.0352368299331225e-06,
+          "geom1": 9,
+          "geom2": 5
+        }
+      ],
+      "q": [
+        -1.6948634603907173,
+        -1.6223713800336201,
+        1.575274161212708,
+        -1.6238894719265509,
+        -1.4830253985140858,
+        -0.027298892476444073
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 25,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 627,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 26,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1538,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0002009077036007681,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9643676626998133,
+        -1.6036226864902097,
+        1.9939282326125345,
+        -1.545382921014281,
+        -1.3304667057201693,
+        0.22656139055799404
+      ]
+    },
+    "fk_evals": 43,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 26,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 661,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 27,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1094,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00020805626067832428,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -1.6859292585985817,
+        -1.3217975555414767,
+        1.8244912530471213,
+        -1.2938598658827378,
+        -1.7294602026002273,
+        0.29949117121095736
+      ]
+    },
+    "fk_evals": 50,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 27,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 681,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 28,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1301,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.00018814953665044487,
+          "geom1": 9,
+          "geom2": 6
+        }
+      ],
+      "q": [
+        -1.449087277919934,
+        -1.7671354039138067,
+        1.5607876789400612,
+        -1.7733395452710354,
+        -1.694988773703269,
+        -0.23012021739109423
+      ]
+    },
+    "fk_evals": 46,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 28,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": true,
+    "continuous_status": "free",
+    "dense_samples": 683,
+    "first_contact": null,
+    "fk_evals": 41,
+    "kind": "parent",
+    "mujoco_contact": false,
+    "root": 29,
+    "scenario": "environment_change"
+  },
+  {
+    "continuous_ok": false,
+    "continuous_status": "collision",
+    "dense_samples": 1643,
+    "first_contact": {
+      "contacts": [
+        {
+          "dist": -0.0001270535163528791,
+          "geom1": 9,
+          "geom2": 8
+        }
+      ],
+      "q": [
+        -0.9396052181619174,
+        -1.6828828412051935,
+        1.8614581204020477,
+        -1.5168602954168584,
+        -1.6103578568939518,
+        0.14338469824734673
+      ]
+    },
+    "fk_evals": 44,
+    "kind": "final",
+    "mujoco_contact": true,
+    "root": 29,
+    "scenario": "environment_change"
+  }
+]

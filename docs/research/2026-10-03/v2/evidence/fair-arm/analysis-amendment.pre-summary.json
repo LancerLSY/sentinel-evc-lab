@@ -1,0 +1,10 @@
+{
+  "created_before_summary_or_outcome_inspection": true,
+  "reason": "The frozen protocol called each root-process pair an analysis unit, but the three processes reuse the same 12 frozen roots. Process runs are technical timing repeats, not independent experimental roots.",
+  "corrected_analysis_unit": "root cluster",
+  "independent_roots_per_cell": 12,
+  "technical_process_repeats_per_root": 3,
+  "aggregation": "For each method and root, take the median of the three process-level root medians. For delta, first add one fortieth of that process/root root-certificate time. Compute the point estimate as the ratio of method medians across the 12 aggregated roots.",
+  "interval": "Paired percentile bootstrap over 12 root clusters with 10000 resamples; all methods and technical repeats for one root remain together.",
+  "reporting_boundary": "Report n=12 independent roots per cell and three technical timing repeats. Do not report n=36 independent samples. Preserve the original frozen protocol verbatim and record this as a pre-summary analysis correction."
+}

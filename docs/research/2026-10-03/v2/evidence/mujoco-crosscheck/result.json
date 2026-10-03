@@ -1,0 +1,107 @@
+{
+  "acceptance_pass": true,
+  "artifacts": {
+    "collision_model.xml": "be2dc9404a2a754de777813e44f15720273241f728dfab0c023e74ffa572db30",
+    "contact_demo_case.json": "89dc91a391269aafac4c0571c12c03ebd0db9b70735410b5a6ae0de0b162cd21",
+    "motion_rows.json": "2cae07effd46981db7012df1a4627ea38b228e6cf9f580fad089001b10fcf88f",
+    "static_rows.json": "038d5db563150ef92510f3aff71eb3645d566bff15b593eecae0740a5bfbf6a9"
+  },
+  "environment": {
+    "affinity": [
+      4
+    ],
+    "mujoco": "3.8.1",
+    "numpy": "2.3.2",
+    "platform": "Linux-5.15.0-94-generic-x86_64-with-glibc2.35",
+    "python": "3.12.3"
+  },
+  "geom_binding": [
+    {
+      "body": "shoulder_link",
+      "geom": 0,
+      "half_length": 0.06,
+      "kind": "capsule",
+      "radius": 0.06
+    },
+    {
+      "body": "upper_arm_link",
+      "geom": 1,
+      "half_length": 0.06,
+      "kind": "capsule",
+      "radius": 0.06
+    },
+    {
+      "body": "upper_arm_link",
+      "geom": 2,
+      "half_length": 0.2,
+      "kind": "capsule",
+      "radius": 0.05
+    },
+    {
+      "body": "forearm_link",
+      "geom": 3,
+      "half_length": 0.06,
+      "kind": "capsule",
+      "radius": 0.055
+    },
+    {
+      "body": "forearm_link",
+      "geom": 4,
+      "half_length": 0.19,
+      "kind": "capsule",
+      "radius": 0.038
+    },
+    {
+      "body": "wrist_1_link",
+      "geom": 5,
+      "half_length": 0.07,
+      "kind": "capsule",
+      "radius": 0.04
+    },
+    {
+      "body": "wrist_2_link",
+      "geom": 6,
+      "half_length": 0.06,
+      "kind": "capsule",
+      "radius": 0.04
+    },
+    {
+      "body": "wrist_2_link",
+      "geom": 7,
+      "half_length": 0.04,
+      "kind": "capsule",
+      "radius": 0.04
+    },
+    {
+      "body": "wrist_3_link",
+      "geom": 8,
+      "half_length": 0.02,
+      "kind": "cylinder",
+      "radius": 0.04
+    }
+  ],
+  "model_xml_sha256": "be2dc9404a2a754de777813e44f15720273241f728dfab0c023e74ffa572db30",
+  "motion": {
+    "certified_free_mujoco_contact": 0,
+    "certified_free_paths": 237,
+    "dense_configurations": 482073,
+    "mujoco_contact_paths": 122,
+    "paths": 360,
+    "statuses": {
+      "collision": 93,
+      "free": 237,
+      "joint_limit": 30,
+      "unknown": 0
+    }
+  },
+  "protocol_sha256": "e35ab975dddec03bd1dd20f6c381f2c3a7a314a62f336f0a2297371737622c99",
+  "robot_collision_geoms": 9,
+  "schema": "sentinel-ur5e-mujoco-crosscheck-result-v1",
+  "static": {
+    "capsule_mujoco_label_disagreements": 28,
+    "configurations": 2000,
+    "max_fk_axis_endpoint_error_m": 6.661338147750939e-16,
+    "mujoco_contact_but_capsule_free": 0,
+    "mujoco_contact_configs": 333
+  }
+}

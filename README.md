@@ -25,6 +25,24 @@ declares its own authorization and validation contract.
 [Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/launch-gate-20261003) ·
 [Research showcase](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
+## Recheck revised motion with less repeated work
+
+Sentinel preserves valid checks when an action chunk changes. It checks the changed
+segments again and binds the approved bytes to the software writer.
+
+In the frozen four-candidate UR5e study, incremental checking was **1.092–1.619×**
+faster than full continuous checking, including root and issued-certificate costs.
+The full grid retained **249,120 unique candidates** with zero incremental/full
+decision differences. One-candidate checking was slower. Large batches still had
+50 ms deadline misses. These are Xeon CPU measurements from an RTX 4090 D (24 GB)
+host, with a static bare-arm geometry profile.
+
+The numeric CLI/App lifecycle now reuses certificates for exact remaining suffixes.
+The UR5e checker remains a separate experiment.
+[Design audit, all results and limits](docs/research/2026-10-03/v2/AUDIT_RESULTS.zh-CN.md) ·
+[Frozen protocols and reproduction](docs/research/2026-10-03/v2/REPRODUCE.md) ·
+[Actual 3D collision replay](docs/research/2026-10-03/v2/media/ur5e_changed_chunk.mp4)
+
 ## What is usable today
 
 | Surface | Available now | Boundary |

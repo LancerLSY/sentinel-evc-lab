@@ -1,0 +1,43 @@
+{
+  "host_cpu": "Intel(R) Xeon(R) Platinum 8474C, 2 sockets x 48 cores x 2 threads",
+  "pinned_cpus": [
+    0,
+    1,
+    2
+  ],
+  "blas_threads": 1,
+  "python": "3.12.3",
+  "numpy": "2.3.2",
+  "mjcf_sha256": "ffd0a7b336d3c2d27c35a15cc0d4aaa95196769aca190ac8d6522d3318c345a0",
+  "source_sha256": {
+    "arm_delta.py": "b9d22607db4fc87332d3fee938284fb40c437d1517ca4312f70477186ffb3f25",
+    "run_candidates.py": "eb22ec670172fd6e1f96d88fe819aee94d056cf395484cab6b919562f20fc230",
+    "ur5e_kin.py": "ff3ffd09b6a0fd8f2025c670d7c3977fa624f1765f4d9ab577a06b8acd4f95dd",
+    "run_counterbalanced_arm.py": "8fc8e507a66c70da196b752c979b1ce39393540bf0409c8fa328983cfd48922e",
+    "analyze_counterbalanced_arm.py": "bb48201c5ee79b42b547d7208678d564d5d7151ad8324b10790df9aa1341cd6b",
+    "run_counterbalanced_arm_n4.py": "4c3589868630b6c6252032e146944eeac38f0a50b62b68bb3878193045af4318"
+  },
+  "timing_command_environment": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 taskset -c 0-2",
+  "analysis": "paired root-cluster bootstrap, 12 independent roots, 3 technical process repeats, 10000 resamples",
+  "protocol_sha256": "180be8297fc1d45709f9dd43bef5d15126b4475bd7583cd3df7ee49c6abd532a",
+  "result_sha256": {
+    "analysis-amendment.pre-summary.json": "e2169f6b9b442750b878d2700769e1d626fcfbb6f11a0689de143d26f7cc36be",
+    "n4-extension.pre-timing.json": "04b220af03026b7dd62672961f7f68761984114ac2eea37937e7cffeeb041f8f",
+    "protocol.frozen.json": "180be8297fc1d45709f9dd43bef5d15126b4475bd7583cd3df7ee49c6abd532a",
+    "protocol.pre-timing.json": "34624d01703573152c310217d26dab14a5c87fd17b230d8715672d1b83a2a2fe",
+    "repeat0.json": "97591a380716e6d1182e5f2f94284a2dfe8064dcb69253614e41e650818d2e6e",
+    "repeat1.json": "6f70c1b7789ec5fd1389390dffacd9a7e063d7dea06be1ed42805c1e0d699525",
+    "repeat2.json": "250b91063b3342f3a7fd3a645d77cd02246358af7661c1a885cdca7363e25eb9",
+    "summary.root-cluster.json": "659fd4a86e6784a8df20d061ff2ebdbcf255932d6015e6eacf0d963392b2c5ff"
+  },
+  "trace_exact_array_sha256": {
+    "trace-N4-j0.002.npz": "6d43d997edbbb874c303f7c685b126c9c5648840e386a907c5f3e2af3d28c214",
+    "trace-N4-j0.01.npz": "9df9a96ed355a83ecfc7b1e374490bc515da343808fb2a4596353499a714f090"
+  },
+  "trace_file_sha256": {
+    "trace-N4-j0.002.npz": "cc5df51a75208f5fa9acacd3e69ab5dfa3b6b2d358ebce32641f77cf9f2ce744",
+    "trace-N4-j0.01.npz": "87e32811d2d3ecacdd9626af65b3a2ac436863adb6ce2bc67c748a56bf13e2d1"
+  },
+  "remote_trace_location": "/root/autodl-tmp/sentinel-v2/fair-arm-n4/traces",
+  "local_trace_files_included": true
+}

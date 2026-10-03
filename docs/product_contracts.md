@@ -16,6 +16,19 @@ This increment is a local single-user numeric workbench. Core DTOs live only in 
 
 ## Numeric interfaces
 
+The selected numeric Plan receives one v2 root certificate. Each permission uses
+the exact unexecuted suffix from the actual observed cursor, including after
+stop/resume. The certificate adapter preserves its exact-plan digest, exact scene
+digest, proof scope and parent/root lineage before Authority registration. Changed
+inputs require dependency validation or full rechecking.
+
+New `Scene.hash` values bind exact float64 content. `Scene.legacy_hash` retains the
+rounded historical identity for reading older records. Existing signed bundles
+are not rewritten. Third-party callers must supply `Context.scene_hash` to enable
+scene-content comparison in the compatible Authority interface. The pipeline's
+committed-prefix hash records positions. Individual plans and permits bind gripper
+events.
+
 `NumericHistory` contains only observable past (r, v, a) samples. Hidden plant parameters are evaluator-only. Fixed candidates use 0.6/0.9/1.2/1.6-second movement durations, 40 future intervals at dt=0.05, four final 3D position Plans from the same root. Candidate generation, physical checks and consequence predictions precede deterministic choice from the allowed subset. All four outcomes remain in saved results.
 
 Numeric APIs expose `make_numeric_case(seed)`, `generate_candidates(displacement=0.35, start=(0,0,0), dt=0.05, horizon=40)`, prediction/model/calibration APIs and a lightweight `evaluate_candidates(...)` orchestration helper. The concrete API signatures live in the numeric modules. Predictions bind final plan, history, model, calibration, candidate rule, lower/upper consequence envelopes, expiry, root prediction hash and suffix offset. `slice_prediction` compares exact suffix positions/dt/descriptor/gripper events; modified actions or stale evidence cannot inherit a learned forecast.

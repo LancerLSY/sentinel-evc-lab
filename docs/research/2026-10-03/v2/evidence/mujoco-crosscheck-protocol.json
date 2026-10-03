@@ -1,0 +1,40 @@
+{
+  "acceptance": {
+    "certified_free_mujoco_contact": 0,
+    "fk_endpoint_max_error_m": 1e-10
+  },
+  "excluded": [
+    "VLA inference",
+    "dynamic tracking",
+    "floor/table",
+    "gripper/attached tools",
+    "arbitrary mesh obstacles",
+    "hardware safety"
+  ],
+  "grid": {
+    "dense_joint_step_rad": 0.0005,
+    "historical_scenarios": [
+      "clear",
+      "late_suffix",
+      "narrow_passage",
+      "joint_limit",
+      "tracking_disturbance",
+      "environment_change"
+    ],
+    "random_joint_configurations": 2000,
+    "roots_per_scenario": 30
+  },
+  "mjcf_sha256": "ffd0a7b336d3c2d27c35a15cc0d4aaa95196769aca190ac8d6522d3318c345a0",
+  "model_transform": "remove visual mesh geoms/assets only; retain official collision geoms, bodies, joints, inertials and actuators; add two obstacle spheres",
+  "schema": "sentinel-ur5e-mujoco-crosscheck-v1",
+  "scope": "bare UR5e capsule/cylinder self collision and two static spheres; kinematic FK/contact evaluation on independent dense samples, not MuJoCo continuous collision detection",
+  "seed": 920031,
+  "sources": {
+    "experiments/arm_kinematic/arm_delta.py": "b9d22607db4fc87332d3fee938284fb40c437d1517ca4312f70477186ffb3f25",
+    "experiments/arm_kinematic/scenarios.py": "ac432d3261d11a0bac62c9690c25cc6563c16269ed9b0ead36e6212d9e76be76",
+    "experiments/arm_kinematic/ur5e_kin.py": "ff3ffd09b6a0fd8f2025c670d7c3977fa624f1765f4d9ab577a06b8acd4f95dd",
+    "experiments/v2_review/run_mujoco_crosscheck.py": "ce9582793cf8b6f04b90f14f29cdc444b45e652784740a1fdee30a920d63ffc9"
+  },
+  "state": "frozen_before_outcomes",
+  "upstream_commit": "4d038b3feae26ec82b46a4d586379114012a8ac7"
+}

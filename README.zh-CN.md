@@ -1,5 +1,9 @@
 # Sentinel EVC Lab
 
+**动作改了，保留有效检查，只重算变化部分。** 四候选 UR5e 实验中，计入根证书和新证书成本，增量检查比从头连续检查快 **1.092–1.619 倍**。全网格 249,120 个唯一候选的增量判定与完整检查一致。单候选更慢，大批量仍有 50 ms 超时。几何计时在 Xeon CPU 上进行，服务器 GPU 为 RTX 4090 D（24 GB）。
+
+CLI/App 的数值执行路径已接入精确剩余轨迹的证书复用。UR5e 检查器保留为独立静态裸臂实验。[完整设计复盘与数据](docs/research/2026-10-03/v2/AUDIT_RESULTS.zh-CN.md) · [复现方法](docs/research/2026-10-03/v2/REPRODUCE.md) · [三维碰撞视频](docs/research/2026-10-03/v2/media/ur5e_changed_chunk.mp4)
+
 [English](README.md) · **中文**
 
 <p align="center">

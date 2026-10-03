@@ -95,7 +95,7 @@ def verify_physics_plan(plan, controller, certificate_id):
     if not okay:
         raise ValueError("physics tray geometry violation")
     return Certificate(certificate_id, plan.hash, controller.scene_digest(), plan.dt,
-                       plan.horizon, margins, "FULL", proof_scope=PHYSICS_SCOPE)
+                       plan.horizon, margins, "FULL", proof_scope=PHYSICS_SCOPE, plan_exact=plan.exact_hash)
 
 
 class MujocoController:

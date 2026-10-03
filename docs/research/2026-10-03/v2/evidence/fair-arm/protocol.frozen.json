@@ -1,0 +1,157 @@
+{
+  "schema": "sentinel-arm-counterbalanced-protocol-v1",
+  "status": "TRACES_FROZEN_BEFORE_TIMING",
+  "created_utc": "2026-10-03T10:29:01Z",
+  "design": {
+    "roots": 12,
+    "cycles_per_root": 60,
+    "warmup_cycles_excluded": 20,
+    "measured_cycles_per_root": 40,
+    "N": [
+      1,
+      8,
+      32,
+      128
+    ],
+    "jitter_rad": [
+      0.002,
+      0.01
+    ],
+    "process_repeats": 3,
+    "method_orders": [
+      [
+        "discrete_0.01",
+        "certified_full",
+        "delta_arm"
+      ],
+      [
+        "certified_full",
+        "delta_arm",
+        "discrete_0.01"
+      ],
+      [
+        "delta_arm",
+        "discrete_0.01",
+        "certified_full"
+      ]
+    ],
+    "deadline_ms": 50.0,
+    "max_fk_evals_per_checker": 200000,
+    "blas_threads": 1
+  },
+  "selection_rule": "Before any timing, certified_full labels every frozen candidate. The first accepted candidate index is committed for the next trace step; if none is accepted, the prior plan remains. Timed methods cannot alter this selection or the future trace.",
+  "timing_rule": "Run three independent Python processes with rotated method order. Exclude the first 20 cycles per root. Delta timing includes content/model/profile checks and selected-certificate copy/hash/seal; its one root certificate is amortized over 40 measured cycles.",
+  "analysis": {
+    "unit": "root-process pair",
+    "point": "ratio of paired unit medians",
+    "interval": "paired percentile bootstrap 95%",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20261003,
+    "report_all_cells": true
+  },
+  "scope": "static UR5e capsule model; CPU timing; not dynamics, functional safety or real-robot latency",
+  "mjcf_sha256": "ffd0a7b336d3c2d27c35a15cc0d4aaa95196769aca190ac8d6522d3318c345a0",
+  "source_sha256": {
+    "run_counterbalanced_arm.py": "8fc8e507a66c70da196b752c979b1ce39393540bf0409c8fa328983cfd48922e",
+    "arm_delta.py": "b9d22607db4fc87332d3fee938284fb40c437d1517ca4312f70477186ffb3f25",
+    "ur5e_kin.py": "ff3ffd09b6a0fd8f2025c670d7c3977fa624f1765f4d9ab577a06b8acd4f95dd"
+  },
+  "trace_files": {
+    "trace-N1-j0.002.npz": {
+      "file_sha256": "12d13d2b9137f4fadb14a9a9c02d663177310cab25e4fbbfce33b2349a31da76",
+      "exact_array_bytes_sha256": "e7ea8aa5c19f305dc73ab12ffac16ed82dd2310afe5fce0a2cea4e238c138b4d",
+      "shape_candidates": [
+        12,
+        60,
+        1,
+        41,
+        6
+      ],
+      "selected_cycles": 711
+    },
+    "trace-N8-j0.002.npz": {
+      "file_sha256": "2b1d9bcd762aaac303262d390ceb6849ed26af9cd738fe821319aac3d88a74de",
+      "exact_array_bytes_sha256": "b4969aff01b0e8f89728affa5f443c304e3c08ab913bd93ebd20c03828ccdb92",
+      "shape_candidates": [
+        12,
+        60,
+        8,
+        41,
+        6
+      ],
+      "selected_cycles": 720
+    },
+    "trace-N32-j0.002.npz": {
+      "file_sha256": "1305972970fa168375b21c3557ea1e9bb1e48b85f8ae8c9fa43e0f108671017e",
+      "exact_array_bytes_sha256": "12526f0c986a446ed2e8ed90a96158c3a017ea08a498a52dfe55b577419540d7",
+      "shape_candidates": [
+        12,
+        60,
+        32,
+        41,
+        6
+      ],
+      "selected_cycles": 720
+    },
+    "trace-N128-j0.002.npz": {
+      "file_sha256": "23bab11cf5c07b46fceca2f8b5d956e84b8f4e1bb6bde05bec316c42dd5ebb99",
+      "exact_array_bytes_sha256": "a2dee9353190db92c8bd21733bcdfa8d27126b439bbfd8cb228bceef9aae2fe3",
+      "shape_candidates": [
+        12,
+        60,
+        128,
+        41,
+        6
+      ],
+      "selected_cycles": 720
+    },
+    "trace-N1-j0.01.npz": {
+      "file_sha256": "716beaa6c124ad5b76077bd966a30bdb4d4f4fd115c733ad64836ba9f1ca7aca",
+      "exact_array_bytes_sha256": "de34ef03bd1c879edfeaf387fd5b707bb2a8230c562af73d1e915ed4276e6ad3",
+      "shape_candidates": [
+        12,
+        60,
+        1,
+        41,
+        6
+      ],
+      "selected_cycles": 637
+    },
+    "trace-N8-j0.01.npz": {
+      "file_sha256": "ae34b276c43d814adfde10ac09e14751abf690fa9914073dac1c652572f1e481",
+      "exact_array_bytes_sha256": "35e633578ca222c9ab89331c9184d72bd7d97d876667b94d20bdd0bcadd9681f",
+      "shape_candidates": [
+        12,
+        60,
+        8,
+        41,
+        6
+      ],
+      "selected_cycles": 720
+    },
+    "trace-N32-j0.01.npz": {
+      "file_sha256": "fc24ece99cf6bb168e03c819e3db38dacd1bd3d980039a6e8f438bc4772f10e2",
+      "exact_array_bytes_sha256": "ad84eb4d44f80bc01ab5ab5fe3ec744b171b238c903fbf0b057a37f8ceef49df",
+      "shape_candidates": [
+        12,
+        60,
+        32,
+        41,
+        6
+      ],
+      "selected_cycles": 720
+    },
+    "trace-N128-j0.01.npz": {
+      "file_sha256": "f9df5a65fa302b9ba67a09358494c4151df646c3ec8a510c5808a597f1d64083",
+      "exact_array_bytes_sha256": "f43fc1e57acc3833099bb308c1747e2546e066604eb6c69b955f704b992daa7d",
+      "shape_candidates": [
+        12,
+        60,
+        128,
+        41,
+        6
+      ],
+      "selected_cycles": 720
+    }
+  }
+}

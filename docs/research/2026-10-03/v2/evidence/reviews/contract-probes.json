@@ -1,0 +1,196 @@
+{
+  "final_probe": {
+    "authority_race": {
+      "old_submit_after_revoke": 0,
+      "order": [
+        [
+          "submit",
+          0
+        ],
+        [
+          "revoke",
+          1
+        ]
+      ],
+      "revoke_blocked_at_final_admission": true,
+      "tick_error": []
+    },
+    "exact_certificate": {
+      "result": "REJECTED:CERTIFICATE_MISS",
+      "same_canonical": true,
+      "same_exact": false
+    },
+    "native_maxlen7": {
+      "calls": 0,
+      "has_gap": true,
+      "result": "REJECTED:EVIDENCE_GAP",
+      "types": [
+        "OBSERVED",
+        "CERTIFICATE",
+        "PREPARE",
+        "LEASE",
+        "LOG_GAP"
+      ]
+    },
+    "native_maxlen9_one_revoke": {
+      "ack_retained": true,
+      "calls": 1,
+      "commit_retained": true,
+      "dispatch_retained": true,
+      "has_gap": false,
+      "result": [
+        "stepped"
+      ],
+      "revoke_count": 1,
+      "types": [
+        "OBSERVED",
+        "CERTIFICATE",
+        "PREPARE",
+        "LEASE",
+        "COMMIT",
+        "DISPATCH",
+        "REVOKE",
+        "CONTROLLER_ACK"
+      ]
+    },
+    "native_maxlen9_three_revokes": {
+      "ack_retained": true,
+      "calls": 1,
+      "commit_retained": true,
+      "dispatch_retained": true,
+      "has_gap": true,
+      "result": [
+        "stepped"
+      ],
+      "revoke_count": 3,
+      "types": [
+        "PREPARE",
+        "LEASE",
+        "COMMIT",
+        "DISPATCH",
+        "REVOKE",
+        "REVOKE",
+        "LOG_GAP",
+        "REVOKE",
+        "CONTROLLER_ACK"
+      ]
+    },
+    "scene_exact": {
+      "margin_a": 2.168404344971009e-17,
+      "margin_b": -6.071532165918825e-18,
+      "same_exact_hash": false,
+      "same_legacy_hash": true,
+      "verdict_a": true,
+      "verdict_b": false
+    },
+    "signed_zero": {
+      "bytes_equal": false,
+      "numeric_equal": true
+    }
+  },
+  "native_fault_drill": {
+    "all_independent_probes_valid": true,
+    "claim_boundary": "deterministic bounded contract drill; not a statistical robustness rate or competitor comparison",
+    "classes": 8,
+    "denied_target_writer_calls": 0,
+    "invalid_entries": 0,
+    "legal_target_writer_calls": 200,
+    "master_seed": 1584471580,
+    "protocol_id": "sentinel-native-fault-drill-v1",
+    "protocol_sha256": "sha256:6a299b1b60b10402ccd9d04b04436375fe335761ac4560124550daa854915c4b",
+    "raw_jsonl_sha256": "sha256:05ae7d406de0d35c8676f29d8ce8ab48f0b157c092ea68e509dafa4e015a4187",
+    "samples_per_class": 200,
+    "script_sha256": "sha256:042f6f223ce55c42bc3b44cd33d61b561b02495de478876aca0f8df8e4154f44",
+    "second_run_raw_byte_identical": true,
+    "total_cases": 1600,
+    "ulp_cases_with_one_step_byte_change": 200,
+    "unique_seeds": 1600
+  },
+  "patch_head": "fbac932",
+  "pre_fix": {
+    "canonical_plan_collision": {
+      "legacy_certificate_plan_exact": null,
+      "prepare_result": "AUTHORIZED",
+      "same_canonical_hash": true,
+      "same_exact_hash": false
+    },
+    "native_evidence_revoke_race": {
+      "actual_writer_calls": 1,
+      "event_log_maxlen": 7,
+      "has_gap_after_write": true,
+      "retained_event_types": [
+        "PREPARE",
+        "LEASE",
+        "COMMIT",
+        "DISPATCH",
+        "REVOKE",
+        "LOG_GAP",
+        "CONTROLLER_ACK"
+      ],
+      "writer_result": "stepped"
+    },
+    "scene_digest_collision": {
+      "center_a_hex": "0x1.0000000000000p-3",
+      "center_b_hex": "0x1.fffffffffffffp-4",
+      "same_scene_hash": true,
+      "scene_a_margin": 0.0,
+      "scene_a_ok": true,
+      "scene_b_margin": -1.3877787807814457e-17,
+      "scene_b_ok": false
+    },
+    "shared_authority_revoke_race": {
+      "generation_after_revoke": 1,
+      "old_generation_submits_after_revoke": 1,
+      "submitted_generation": 0
+    },
+    "signed_zero_chain_boundary": {
+      "ieee754_bytes_equal": false,
+      "python_tuple_equal": true
+    }
+  },
+  "resolved_baseexception_probe": {
+    "controller_ack_count": 1,
+    "controller_ack_payload": {
+      "accepted": false,
+      "error_type": "KeyboardInterrupt",
+      "status": "writer_raised"
+    },
+    "event_log_has_gap": false,
+    "result": "reserved negative ACK retained before BaseException re-raised",
+    "retained_event_types": [
+      "OBSERVED",
+      "CERTIFICATE",
+      "PREPARE",
+      "LEASE",
+      "COMMIT",
+      "DISPATCH",
+      "CONTROLLER_ACK"
+    ],
+    "writer_exception_type": "KeyboardInterrupt"
+  },
+  "review_base": "45cc883",
+  "scope": "D1/D4 contract counterexamples; bounded local simulations",
+  "validation": {
+    "d4_pipeline_rerun": {
+      "byte_identical_to_retained_pilot": true,
+      "exact_certificate_enabled": true,
+      "scene_hash_enabled": true,
+      "sha256": "2197fd15fbd55b08bc9be0e289b4e1ad4fae4623f37b3878c8ef1782997069f5"
+    },
+    "git_diff_check": "PASS",
+    "lsp": "UNAVAILABLE: no Python language-server executable installed",
+    "product_tests": {
+      "failed": 0,
+      "note": "rerun with local loopback permission",
+      "passed": 40
+    },
+    "py_compile": "PASS",
+    "relevant_tests": {
+      "duration_seconds": 3.7,
+      "failed": 0,
+      "passed": 93,
+      "skip_reason": "MuJoCo unavailable",
+      "skipped": 9
+    }
+  }
+}

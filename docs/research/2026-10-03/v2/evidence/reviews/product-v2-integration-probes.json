@@ -1,0 +1,57 @@
+{
+  "review_target": "product_pipeline.py working tree on fbac932",
+  "scope": "numeric CLI/App shared lifecycle; excludes UR5e, VLA and ARM experiments",
+  "completed_run": {
+    "status": "completed",
+    "root_full_checks": 1,
+    "suffix_full_checks": 0,
+    "segments_reused": 220,
+    "certificate_count": 10,
+    "lease_count": 10,
+    "commit_count": 10,
+    "root_count": 1,
+    "root_id_on_root": null,
+    "derived_certificate_count": 9,
+    "broken_parent_references": 0,
+    "all_plan_exact_present": true,
+    "distinct_scene_hashes": 1,
+    "proof_scopes": ["numeric-sphere-box-L1-active-v2"]
+  },
+  "stop_resume_run": {
+    "observed_at_stop": 2,
+    "final_status": "completed",
+    "revoke_count": 1,
+    "root_full_checks": 1,
+    "suffix_full_checks": 0,
+    "segments_reused": 240,
+    "certificate_count": 11,
+    "certificate_horizons": [40, 38, 34, 30, 26, 22, 18, 14, 10, 6, 2],
+    "lease_generations": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "broken_parent_references": 0,
+    "all_child_roots_resolve": true,
+    "all_plan_exact_present": true,
+    "distinct_scene_hashes": 1
+  },
+  "adversarial": {
+    "exact_suffix_verdict": "INHERITED",
+    "exact_suffix_segments_reused": 36,
+    "exact_suffix_full_checks": 0,
+    "certificate_exact_matches_suffix": true,
+    "lease_exact_matches_suffix": true,
+    "one_ulp_same_canonical_hash": true,
+    "one_ulp_same_exact_hash": false,
+    "one_ulp_prepare_result": "REJECTED:CERTIFICATE_MISS",
+    "changed_root_reason": "parent_plan_mismatch",
+    "changed_root_full_checks": 1,
+    "changed_root_verdict": "FULL",
+    "changed_scene_hash_equal": false,
+    "old_checker_changed_scene_result": "ValueError: checker was built for another scene"
+  },
+  "validation": {
+    "targeted_existing_tests": "21 passed in 4.54s",
+    "py_compile": "PASS",
+    "git_diff_check": "PASS",
+    "lsp": "UNAVAILABLE: no Python language server installed"
+  },
+  "verdict": "APPROVE"
+}

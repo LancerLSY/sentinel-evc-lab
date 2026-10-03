@@ -1,0 +1,67 @@
+{
+  "case_count": 8,
+  "cases": [
+    {
+      "expected_code": "ACTION_REPLACED",
+      "name": "action_ulp_replaced"
+    },
+    {
+      "expected_code": "LEASE_REPLAY",
+      "name": "permit_replay"
+    },
+    {
+      "expected_code": "LEASE_EXPIRED",
+      "name": "permit_expired"
+    },
+    {
+      "expected_code": "FEEDBACK_CHANGED",
+      "name": "feedback_replaced"
+    },
+    {
+      "expected_code": "CONTEXT_CHANGED",
+      "name": "context_replaced"
+    },
+    {
+      "expected_code": "GENERATION_REVOKED",
+      "name": "generation_revoked"
+    },
+    {
+      "expected_code": "EVIDENCE_GAP",
+      "name": "evidence_gap"
+    },
+    {
+      "expected_code": "ALLOWED",
+      "name": "legal_control"
+    }
+  ],
+  "claim_boundary": [
+    "deterministic bounded protocol, not a statistical robustness rate",
+    "no comparison with another product",
+    "NativeGateway schema/bounds/evidence contract only; no dynamics or functional-safety claim"
+  ],
+  "entry_criterion": {
+    "aggregate": "zero invalid entries across all frozen cases",
+    "denied_case": "actual_code equals expected_code and target writer calls/entries are both zero",
+    "legal_case": "actual_code is ALLOWED and target writer calls/entries are both one"
+  },
+  "frozen_at_utc": "2026-10-03T10:48:08.516255+00:00",
+  "frozen_before_execution": true,
+  "independent_probes": [
+    "concurrent revoke after writer entry",
+    "KeyboardInterrupt after writer entry"
+  ],
+  "master_seed": 1584471580,
+  "protocol_id": "sentinel-native-fault-drill-v1",
+  "protocol_sha256": "sha256:6ac87017fa8d289b1f42f50a827406200ddb0e3452936aaf4ddd6ef72dfc18b4",
+  "samples_per_class": 200,
+  "source": {
+    "files": {
+      "experiments/v2_review/run_native_fault_drill.py": "sha256:042f6f223ce55c42bc3b44cd33d61b561b02495de478876aca0f8df8e4154f44",
+      "src/sentinel_evc/contracts.py": "sha256:f9dec20ac946601093b971fd8fc15197a9dff8e66a9c7cec580cdcd91a33ea33",
+      "src/sentinel_evc/events.py": "sha256:b959f1ea5d33940f784dcfe8db3288ba261c86ae81eb3e9048ffb6786a03550f",
+      "src/sentinel_evc/native_gateway.py": "sha256:a370dbee7ac81fdb16bd157d11ddd28c94a02dae54349870e1fff4537f7c8a5f"
+    },
+    "git_head": null
+  },
+  "total_randomized_cases": 1600
+}

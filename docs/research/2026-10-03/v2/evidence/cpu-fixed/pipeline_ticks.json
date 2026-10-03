@@ -1,0 +1,130 @@
+{
+ "cap=2,K=1": {
+  "stop_and_go": {
+   "ticks": 80,
+   "leases": 40,
+   "idle_ticks": 39,
+   "auth_age_ms_mean": 50.0,
+   "auth_age_ms_max": 50.0
+  },
+  "pipelined": {
+   "ticks": 41,
+   "leases": 40,
+   "idle_ticks": 0,
+   "auth_age_ms_mean": 50.0,
+   "auth_age_ms_max": 50.0
+  }
+ },
+ "cap=2,K=2": {
+  "stop_and_go": {
+   "ticks": 60,
+   "leases": 20,
+   "idle_ticks": 19,
+   "auth_age_ms_mean": 75.0,
+   "auth_age_ms_max": 100.0
+  },
+  "pipelined": {
+   "ticks": 41,
+   "leases": 20,
+   "idle_ticks": 0,
+   "auth_age_ms_mean": 167.5,
+   "auth_age_ms_max": 200.0
+  }
+ },
+ "cap=2,K=4": {
+  "stop_and_go": {
+   "ticks": 50,
+   "leases": 10,
+   "idle_ticks": 9,
+   "auth_age_ms_mean": 125.0,
+   "auth_age_ms_max": 200.0
+  },
+  "pipelined": {
+   "ticks": 41,
+   "leases": 10,
+   "idle_ticks": 0,
+   "auth_age_ms_mean": 300.0,
+   "auth_age_ms_max": 400.0
+  }
+ },
+ "cap=2,K=8": {
+  "stop_and_go": {
+   "ticks": 45,
+   "leases": 5,
+   "idle_ticks": 4,
+   "auth_age_ms_mean": 225.0,
+   "auth_age_ms_max": 400.0
+  },
+  "pipelined": {
+   "ticks": 41,
+   "leases": 5,
+   "idle_ticks": 0,
+   "auth_age_ms_mean": 535.0,
+   "auth_age_ms_max": 800.0
+  }
+ },
+ "cap=4,K=1": {
+  "stop_and_go": {
+   "ticks": 80,
+   "leases": 40,
+   "idle_ticks": 39,
+   "auth_age_ms_mean": 50.0,
+   "auth_age_ms_max": 50.0
+  },
+  "pipelined": {
+   "ticks": 41,
+   "leases": 40,
+   "idle_ticks": 0,
+   "auth_age_ms_mean": 50.0,
+   "auth_age_ms_max": 50.0
+  }
+ },
+ "cap=4,K=2": {
+  "stop_and_go": {
+   "ticks": 60,
+   "leases": 20,
+   "idle_ticks": 19,
+   "auth_age_ms_mean": 75.0,
+   "auth_age_ms_max": 100.0
+  },
+  "pipelined": {
+   "ticks": 41,
+   "leases": 20,
+   "idle_ticks": 0,
+   "auth_age_ms_mean": 167.5,
+   "auth_age_ms_max": 200.0
+  }
+ },
+ "cap=4,K=4": {
+  "stop_and_go": {
+   "ticks": 50,
+   "leases": 10,
+   "idle_ticks": 9,
+   "auth_age_ms_mean": 125.0,
+   "auth_age_ms_max": 200.0
+  },
+  "pipelined": {
+   "ticks": 41,
+   "leases": 10,
+   "idle_ticks": 0,
+   "auth_age_ms_mean": 300.0,
+   "auth_age_ms_max": 400.0
+  }
+ },
+ "cap=4,K=8": {
+  "stop_and_go": {
+   "ticks": 45,
+   "leases": 5,
+   "idle_ticks": 4,
+   "auth_age_ms_mean": 225.0,
+   "auth_age_ms_max": 400.0
+  },
+  "pipelined": {
+   "ticks": 41,
+   "leases": 5,
+   "idle_ticks": 0,
+   "auth_age_ms_mean": 535.0,
+   "auth_age_ms_max": 800.0
+  }
+ }
+}

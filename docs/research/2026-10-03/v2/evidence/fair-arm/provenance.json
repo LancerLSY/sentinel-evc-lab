@@ -1,0 +1,53 @@
+{
+  "host_cpu": "Intel(R) Xeon(R) Platinum 8474C, 2 sockets x 48 cores x 2 threads",
+  "pinned_cpus": [
+    0,
+    1,
+    2
+  ],
+  "blas_threads": 1,
+  "python": "3.12.3",
+  "numpy": "2.3.2",
+  "mjcf_sha256": "ffd0a7b336d3c2d27c35a15cc0d4aaa95196769aca190ac8d6522d3318c345a0",
+  "source_sha256": {
+    "arm_delta.py": "b9d22607db4fc87332d3fee938284fb40c437d1517ca4312f70477186ffb3f25",
+    "run_candidates.py": "eb22ec670172fd6e1f96d88fe819aee94d056cf395484cab6b919562f20fc230",
+    "ur5e_kin.py": "ff3ffd09b6a0fd8f2025c670d7c3977fa624f1765f4d9ab577a06b8acd4f95dd",
+    "run_counterbalanced_arm.py": "8fc8e507a66c70da196b752c979b1ce39393540bf0409c8fa328983cfd48922e",
+    "analyze_counterbalanced_arm.py": "bb48201c5ee79b42b547d7208678d564d5d7151ad8324b10790df9aa1341cd6b"
+  },
+  "timing_command_environment": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 taskset -c 0-2",
+  "analysis": "paired root-cluster bootstrap, 12 independent roots, 3 technical process repeats, 10000 resamples",
+  "protocol_sha256": "8d8c95bb3487657bac2d20136bc3ce811b8ca30994608785d1fec15c32126305",
+  "result_sha256": {
+    "analysis-amendment.pre-summary.json": "e2169f6b9b442750b878d2700769e1d626fcfbb6f11a0689de143d26f7cc36be",
+    "protocol.frozen.json": "8d8c95bb3487657bac2d20136bc3ce811b8ca30994608785d1fec15c32126305",
+    "protocol.pre-timing.json": "3a57f02035b3080ce12be06320b8e20b17e9d769eed90ead7aca7250f6195795",
+    "repeat0.json": "dc2f352579393658d4cc16e17cf4df4ae1cf9b7b08966c2c3e8074e21effbb46",
+    "repeat1.json": "494957893e96709fc2c622e4e318e7f9d6e95c62bce0d3031965b4b8dbc70862",
+    "repeat2.json": "741db5816ab9273e20fd8982c834febf6574f800082a33883882d4b7b8c8df57",
+    "summary.root-cluster.json": "7faa70d8fb78c5f513f788f4015de4f7efbfb55b818a5a732c6f711ff6476ea1"
+  },
+  "trace_exact_array_sha256": {
+    "trace-N1-j0.002.npz": "e7ea8aa5c19f305dc73ab12ffac16ed82dd2310afe5fce0a2cea4e238c138b4d",
+    "trace-N8-j0.002.npz": "b4969aff01b0e8f89728affa5f443c304e3c08ab913bd93ebd20c03828ccdb92",
+    "trace-N32-j0.002.npz": "12526f0c986a446ed2e8ed90a96158c3a017ea08a498a52dfe55b577419540d7",
+    "trace-N128-j0.002.npz": "a2dee9353190db92c8bd21733bcdfa8d27126b439bbfd8cb228bceef9aae2fe3",
+    "trace-N1-j0.01.npz": "de34ef03bd1c879edfeaf387fd5b707bb2a8230c562af73d1e915ed4276e6ad3",
+    "trace-N8-j0.01.npz": "35e633578ca222c9ab89331c9184d72bd7d97d876667b94d20bdd0bcadd9681f",
+    "trace-N32-j0.01.npz": "ad84eb4d44f80bc01ab5ab5fe3ec744b171b238c903fbf0b057a37f8ceef49df",
+    "trace-N128-j0.01.npz": "f43fc1e57acc3833099bb308c1747e2546e066604eb6c69b955f704b992daa7d"
+  },
+  "trace_file_sha256": {
+    "trace-N1-j0.002.npz": "12d13d2b9137f4fadb14a9a9c02d663177310cab25e4fbbfce33b2349a31da76",
+    "trace-N8-j0.002.npz": "2b1d9bcd762aaac303262d390ceb6849ed26af9cd738fe821319aac3d88a74de",
+    "trace-N32-j0.002.npz": "1305972970fa168375b21c3557ea1e9bb1e48b85f8ae8c9fa43e0f108671017e",
+    "trace-N128-j0.002.npz": "23bab11cf5c07b46fceca2f8b5d956e84b8f4e1bb6bde05bec316c42dd5ebb99",
+    "trace-N1-j0.01.npz": "716beaa6c124ad5b76077bd966a30bdb4d4f4fd115c733ad64836ba9f1ca7aca",
+    "trace-N8-j0.01.npz": "ae34b276c43d814adfde10ac09e14751abf690fa9914073dac1c652572f1e481",
+    "trace-N32-j0.01.npz": "fc24ece99cf6bb168e03c819e3db38dacd1bd3d980039a6e8f438bc4772f10e2",
+    "trace-N128-j0.01.npz": "f9df5a65fa302b9ba67a09358494c4151df646c3ec8a510c5808a597f1d64083"
+  },
+  "remote_trace_location": "/root/autodl-tmp/sentinel-v2/fair-arm/traces",
+  "local_trace_files_included": false
+}

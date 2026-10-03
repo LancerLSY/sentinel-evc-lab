@@ -1,0 +1,38 @@
+{
+  "schema": "sentinel-evc-v2-cpu-reproduction-manifest-v1",
+  "run_date_utc": "2026-10-03",
+  "code": {
+    "patched_commit": "bdf9d49e1444ba57db69afe6e42b5c5e154614f1",
+    "patched_source_tree": "a6f20cf966ca53d174aa1c7d046b08bcbac8b433",
+    "baseline_commit": "45cc88347ea812a84c5021fc793387dce6bea295",
+    "baseline_source_tree": "9e78747b664c0b155e33b4661498c5198c5723d1",
+    "bench_numeric_sha256": "5992f820d081bd943baee377229e5e2c7da1fea7b25ff305727cce7f19fbe0da",
+    "summarize_sha256": "4fdeebaca20b30818bb218d868c17aafd3793fb6c1ae1881423ba0be49876cff",
+    "run_patterns_sha256": "faf408c1196eb7ffd546be02aa0560601afca4b0fc8192eef76b715174daf93d",
+    "bench_pipeline_sha256": "5469f1d91ecea0d80dca6355d73a4047d01146ea8b97f202d3ab2194e93915d2",
+    "break_even_probe_sha256": "172b4342170845cd48437caff13e4a793eec4f60f2798128e22cbe1f0fb7599f"
+  },
+  "environment": {
+    "host": "Mac mini Mac16,10; Apple M4; 10 cores; 16 GB",
+    "os": "macOS 27.0 build 26A428; Darwin arm64",
+    "python": "3.12.14; Clang 22.1.3",
+    "cpu_affinity": "not pinned",
+    "concurrent_benchmark_load": "none during numeric and break-even timing runs"
+  },
+  "commands": [
+    "SENTINEL_V1_SRC=<main>/src/sentinel_evc PYTHONPATH=src python3.12 experiments/evc_patterns/run_patterns.py <results>/evc_patterns_rerun.json",
+    "PYTHONPATH=src python3.12 experiments/pipeline/bench_pipeline.py <results>/pipeline_ticks_rerun.json",
+    "SENTINEL_V1_PKG_DIR=<task>/baselinepkg PYTHONPATH=src python3.12 experiments/delta_v2/bench_numeric.py --out <results>/numeric_v2_rerun.json --cases 1000",
+    "python3.12 experiments/delta_v2/summarize.py <results>/numeric_v2_rerun.json <results>/numeric_v2_summary_rerun.json",
+    "SENTINEL_V1_PKG_DIR=<task>/baselinepkg PYTHONPATH=<repo>/src python3.12 <results>/break_even_probe.py --repo <repo> --out <results>/break_even_m2_m3.json",
+    "python3.12 experiments/delta_v2/summarize.py <results>/break_even_m2_m3.json <results>/break_even_m2_m3_summary.json"
+  ],
+  "outputs": {
+    "evc_patterns_rerun.json": "de1d13f294413a1387f1ca107f3980a1b933b0813dcb7b1989b1265add082cde",
+    "pipeline_ticks_rerun.json": "2197fd15fbd55b08bc9be0e289b4e1ad4fae4623f37b3878c8ef1782997069f5",
+    "numeric_v2_rerun.json": "082c925378ca63bc0c6d46dc4d896031aa7857e6b68d93e2ca804bd814634c92",
+    "numeric_v2_summary_rerun.json": "9bbd2f3f452870eab0f0fcf66e09f725038d1cc0c9873dda6a3f9dd2c1f3d38c",
+    "break_even_m2_m3.json": "ecef78505e5b78ecfafbbacab02c05127c76c75fedcdd9a1f1736de3f99bd7d3",
+    "break_even_m2_m3_summary.json": "a8fb5de5880805be25622bea754282627723d85813896c8bfd4080ce1928cba2"
+  }
+}

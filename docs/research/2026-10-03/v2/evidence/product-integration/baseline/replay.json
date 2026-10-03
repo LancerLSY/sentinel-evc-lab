@@ -1,0 +1,602 @@
+[
+  {
+    "cursors": {
+      "accepted": 2,
+      "observed": 1,
+      "submitted": 2
+    },
+    "payload_r": 0.00170929491095,
+    "position": [
+      0.0010040283203125,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 1
+  },
+  {
+    "cursors": {
+      "accepted": 3,
+      "observed": 2,
+      "submitted": 3
+    },
+    "payload_r": 0.00299136320391,
+    "position": [
+      0.0039306640624999995,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 2
+  },
+  {
+    "cursors": {
+      "accepted": 4,
+      "observed": 3,
+      "submitted": 4
+    },
+    "payload_r": 0.00231272052009,
+    "position": [
+      0.0086517333984375,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 3
+  },
+  {
+    "cursors": {
+      "accepted": 4,
+      "observed": 4,
+      "submitted": 4
+    },
+    "payload_r": -8.75012311661e-05,
+    "position": [
+      0.015039062499999999,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 4
+  },
+  {
+    "cursors": {
+      "accepted": 6,
+      "observed": 5,
+      "submitted": 6
+    },
+    "payload_r": -0.00391732549462,
+    "position": [
+      0.0229644775390625,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 5
+  },
+  {
+    "cursors": {
+      "accepted": 7,
+      "observed": 6,
+      "submitted": 7
+    },
+    "payload_r": -0.00884497825071,
+    "position": [
+      0.032299804687499996,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 6
+  },
+  {
+    "cursors": {
+      "accepted": 8,
+      "observed": 7,
+      "submitted": 8
+    },
+    "payload_r": -0.0145127178819,
+    "position": [
+      0.0429168701171875,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 7
+  },
+  {
+    "cursors": {
+      "accepted": 8,
+      "observed": 8,
+      "submitted": 8
+    },
+    "payload_r": -0.0205508671533,
+    "position": [
+      0.0546875,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 8
+  },
+  {
+    "cursors": {
+      "accepted": 10,
+      "observed": 9,
+      "submitted": 10
+    },
+    "payload_r": -0.0265915850524,
+    "position": [
+      0.06748352050781249,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 9
+  },
+  {
+    "cursors": {
+      "accepted": 11,
+      "observed": 10,
+      "submitted": 11
+    },
+    "payload_r": -0.0322820320773,
+    "position": [
+      0.0811767578125,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 10
+  },
+  {
+    "cursors": {
+      "accepted": 12,
+      "observed": 11,
+      "submitted": 12
+    },
+    "payload_r": -0.0372966431509,
+    "position": [
+      0.09563903808593749,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 11
+  },
+  {
+    "cursors": {
+      "accepted": 12,
+      "observed": 12,
+      "submitted": 12
+    },
+    "payload_r": -0.0413482108255,
+    "position": [
+      0.11074218749999999,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 12
+  },
+  {
+    "cursors": {
+      "accepted": 14,
+      "observed": 13,
+      "submitted": 14
+    },
+    "payload_r": -0.0441974197552,
+    "position": [
+      0.1263580322265625,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 13
+  },
+  {
+    "cursors": {
+      "accepted": 15,
+      "observed": 14,
+      "submitted": 15
+    },
+    "payload_r": -0.0456604107877,
+    "position": [
+      0.14235839843749998,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 14
+  },
+  {
+    "cursors": {
+      "accepted": 16,
+      "observed": 15,
+      "submitted": 16
+    },
+    "payload_r": -0.0456139450029,
+    "position": [
+      0.1586151123046875,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 15
+  },
+  {
+    "cursors": {
+      "accepted": 16,
+      "observed": 16,
+      "submitted": 16
+    },
+    "payload_r": -0.0439978237207,
+    "position": [
+      0.175,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 16
+  },
+  {
+    "cursors": {
+      "accepted": 18,
+      "observed": 17,
+      "submitted": 18
+    },
+    "payload_r": -0.0408144058954,
+    "position": [
+      0.19138488769531248,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 17
+  },
+  {
+    "cursors": {
+      "accepted": 19,
+      "observed": 18,
+      "submitted": 19
+    },
+    "payload_r": -0.0361253182235,
+    "position": [
+      0.2076416015625,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 18
+  },
+  {
+    "cursors": {
+      "accepted": 20,
+      "observed": 19,
+      "submitted": 20
+    },
+    "payload_r": -0.0300457174623,
+    "position": [
+      0.22364196777343748,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 19
+  },
+  {
+    "cursors": {
+      "accepted": 20,
+      "observed": 20,
+      "submitted": 20
+    },
+    "payload_r": -0.0227366740267,
+    "position": [
+      0.23925781249999997,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 20
+  },
+  {
+    "cursors": {
+      "accepted": 22,
+      "observed": 21,
+      "submitted": 22
+    },
+    "payload_r": -0.0143963517473,
+    "position": [
+      0.2543609619140625,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 21
+  },
+  {
+    "cursors": {
+      "accepted": 23,
+      "observed": 22,
+      "submitted": 23
+    },
+    "payload_r": -0.00525064273686,
+    "position": [
+      0.2688232421875,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 22
+  },
+  {
+    "cursors": {
+      "accepted": 24,
+      "observed": 23,
+      "submitted": 24
+    },
+    "payload_r": 0.00445620480272,
+    "position": [
+      0.2825164794921875,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 23
+  },
+  {
+    "cursors": {
+      "accepted": 24,
+      "observed": 24,
+      "submitted": 24
+    },
+    "payload_r": 0.0144706113956,
+    "position": [
+      0.2953125,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 24
+  },
+  {
+    "cursors": {
+      "accepted": 26,
+      "observed": 25,
+      "submitted": 26
+    },
+    "payload_r": 0.0245381808335,
+    "position": [
+      0.3070831298828125,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 25
+  },
+  {
+    "cursors": {
+      "accepted": 27,
+      "observed": 26,
+      "submitted": 27
+    },
+    "payload_r": 0.0344116916326,
+    "position": [
+      0.3177001953125,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 26
+  },
+  {
+    "cursors": {
+      "accepted": 28,
+      "observed": 27,
+      "submitted": 28
+    },
+    "payload_r": 0.0438586280259,
+    "position": [
+      0.3270355224609375,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 27
+  },
+  {
+    "cursors": {
+      "accepted": 28,
+      "observed": 28,
+      "submitted": 28
+    },
+    "payload_r": 0.0526683030482,
+    "position": [
+      0.3349609375,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 28
+  },
+  {
+    "cursors": {
+      "accepted": 30,
+      "observed": 29,
+      "submitted": 30
+    },
+    "payload_r": 0.0606585425228,
+    "position": [
+      0.3413482666015625,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 29
+  },
+  {
+    "cursors": {
+      "accepted": 31,
+      "observed": 30,
+      "submitted": 31
+    },
+    "payload_r": 0.0676817715486,
+    "position": [
+      0.3460693359375,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 30
+  },
+  {
+    "cursors": {
+      "accepted": 32,
+      "observed": 31,
+      "submitted": 32
+    },
+    "payload_r": 0.0736302153988,
+    "position": [
+      0.3489959716796875,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 31
+  },
+  {
+    "cursors": {
+      "accepted": 32,
+      "observed": 32,
+      "submitted": 32
+    },
+    "payload_r": 0.078439836549,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 32
+  },
+  {
+    "cursors": {
+      "accepted": 34,
+      "observed": 33,
+      "submitted": 34
+    },
+    "payload_r": 0.0810458584183,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 33
+  },
+  {
+    "cursors": {
+      "accepted": 35,
+      "observed": 34,
+      "submitted": 35
+    },
+    "payload_r": 0.0804335805042,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 34
+  },
+  {
+    "cursors": {
+      "accepted": 36,
+      "observed": 35,
+      "submitted": 36
+    },
+    "payload_r": 0.076769425485,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 35
+  },
+  {
+    "cursors": {
+      "accepted": 36,
+      "observed": 36,
+      "submitted": 36
+    },
+    "payload_r": 0.0703376675307,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 36
+  },
+  {
+    "cursors": {
+      "accepted": 38,
+      "observed": 37,
+      "submitted": 38
+    },
+    "payload_r": 0.0615203355449,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 37
+  },
+  {
+    "cursors": {
+      "accepted": 39,
+      "observed": 38,
+      "submitted": 39
+    },
+    "payload_r": 0.0507729245128,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 38
+  },
+  {
+    "cursors": {
+      "accepted": 40,
+      "observed": 39,
+      "submitted": 40
+    },
+    "payload_r": 0.0385989182465,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "RUNNING",
+    "step": 39
+  },
+  {
+    "cursors": {
+      "accepted": 40,
+      "observed": 40,
+      "submitted": 40
+    },
+    "payload_r": 0.0255256234256,
+    "position": [
+      0.35,
+      0.0,
+      0.0
+    ],
+    "state": "IDLE",
+    "step": 40
+  }
+]
