@@ -210,6 +210,9 @@ def _compare_episode(left_source, right_source, key, left_row, right_row):
         for field in ("success", "crashed"):
             if type(result.get(field)) is not bool:
                 missing_facts.append({"side": side, "field": field})
+        for field in ("max_reward", "sum_reward"):
+            if type(result.get(field)) not in (int, float):
+                missing_facts.append({"side": side, "field": field})
         for frame in frames:
             step = frame["step"]
             required = ["observation_hash", "decision", "cursors"] + (["action", "action_bytes_hash", "outcome"] if step > 0 else [])
@@ -223,7 +226,7 @@ def _compare_episode(left_source, right_source, key, left_row, right_row):
                 elif field == "decision":
                     absent = not isinstance(value, str) or not value
                 elif field == "outcome":
-                    absent = not isinstance(value, dict)
+                    absent = not isinstance(value, dict) or any(k not in value for k in ("reward", "terminated", "truncated", "info"))
                 if absent:
                     missing_facts.append({"side": side, "step": step, "field": field})
 
@@ -348,6 +351,19 @@ def compare_verified_runs(left_source, right_source):
         for name, version in identity["software"].items():
             if not isinstance(version, str) or not version:
                 missing_identity.append({"side": side, "field": "software." + name})
+        official = identity["official_identity"] if isinstance(identity["official_identity"], dict) else {}
+        model = official.get("model") if isinstance(official.get("model"), dict) else {}
+        if not _valid_hash(official.get("protocol_sha256")):
+            missing_identity.append({"side": side, "field": "official_identity.protocol_sha256"})
+        if not official.get("expected_mujoco") or official["expected_mujoco"] != identity["software"]["mujoco"]:
+            missing_identity.append({"side": side, "field": "official_identity.expected_mujoco"})
+        for name in ("checkpoint", "backbone"):
+            files = model.get(name)
+            if not isinstance(files, dict) or not files or any(not _valid_hash(digest) for digest in files.values()):
+                missing_identity.append({"side": side, "field": "official_identity.model." + name})
+        tree = model.get("backbone_tree") if isinstance(model.get("backbone_tree"), dict) else {}
+        if not _valid_hash(tree.get("tree_sha256")) or any(type(tree.get(k)) is not int or tree[k] < 0 for k in ("file_count", "total_bytes")):
+            missing_identity.append({"side": side, "field": "official_identity.model.backbone_tree"})
     episodes = [_compare_episode(left_source, right_source, key, left_rows[key], right_rows[key]) for key in common]
     summary = {
         "paired_episodes": len(episodes),
