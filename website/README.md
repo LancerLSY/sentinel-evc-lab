@@ -132,3 +132,9 @@ No JavaScript dependencies are required.
 `execution-boundary.js` presents the frozen common-input results and Sentinel
 concurrency improvement. Installed KineGrant and RLSOK successes remain visible.
 The downloaded JSON distinguishes callback, entry and dispatch counters.
+
+## Revised-motion evidence
+
+`motion-reuse.js` supplies bilingual copy for the retained v2 results. The numeric CLI/App suffix integration is separate from the UR5e experiment. The video replays the actual saved case with official meshes. All ten timing cells and negative outcomes are retained. Portable project page archive: https://github.com/LancerLSY/sentinel-evc-lab/releases/download/evc-v2-validation-20261003/sentinel-v2-project-page.zip
+
+The live project uses a self-hosted Satoshi font under the ITF Free Font License. This portable source and archive omit the font binary and use system fonts; the license notice is retained. The live site files are unchanged by this packaging adjustment.

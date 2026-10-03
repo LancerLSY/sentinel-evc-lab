@@ -1,17 +1,18 @@
 {
   "schema": "sentinel-project-static-assets-v1",
   "homepage": "https://lansiyao.com/research/sentinel-vla/project/",
-  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/launch-gate-20261003/sentinel-launch-gate-page.zip",
+  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/evc-v2-validation-20261003/sentinel-v2-project-page.zip",
+  "font_packaging": "System-font fallback; live self-hosted font binary omitted from portable distribution.",
   "files": [
     {
       "path": "README.md",
-      "bytes": 7309,
-      "sha256": "261f17cb15f46321612f4d5d6545b587fe9e322d3d352100dbd0371fc18f264b"
+      "bytes": 8011,
+      "sha256": "06f98a1ab2474b8a5ece67a3bb3f8c0da7f9dad8280f31e6b5fb5104f0f57c1b"
     },
     {
       "path": "app.js",
-      "bytes": 40718,
-      "sha256": "e42755fd6fa4cd2251988c4005eb198cf08a201255b16b2286b9e51c9341350f"
+      "bytes": 41492,
+      "sha256": "5e36caba59baf0f436d691503d5e10b51136ccf9571b5e61e890354f3bd87b96"
     },
     {
       "path": "assets/LICENSE-UR5E-BSD-3-Clause.txt",
@@ -67,6 +68,11 @@
       "path": "assets/export_ur5e_viewer.py",
       "bytes": 12135,
       "sha256": "39aa39f30799ed5388d954d5f6d49fbe07c47898d5301f04c0a6694eea3f605a"
+    },
+    {
+      "path": "assets/fonts/Satoshi-FFL.txt",
+      "bytes": 12734,
+      "sha256": "145e7fe2429a3336ba215c070ef722000e01348a3e1baaa127e871bb5012f554"
     },
     {
       "path": "assets/friction-failure-vs-fallback-poster.png",
@@ -229,6 +235,16 @@
       "sha256": "ef8a3825e573c4c10c3db960e3215dad5cdf0846142055dff4ef51411c5c6542"
     },
     {
+      "path": "assets/sentinel-system-overview-en.svg",
+      "bytes": 7877,
+      "sha256": "0d4de2ba86d101f0ae5c7f0cddcbd0b2a95154925a133cfd1dbadaace7ad4b76"
+    },
+    {
+      "path": "assets/sentinel-system-overview-zh.svg",
+      "bytes": 7863,
+      "sha256": "7bbbbac1cc7dd9b07d221891f0931d048bcc56ba72ea9fdd3c7047a32752542c"
+    },
+    {
       "path": "assets/sentinel-ur5e-paper-poster.png",
       "bytes": 317573,
       "sha256": "f11b44cf15be573834bed01c24069070b299b4d1d1c8ac7a881f1d58273f608c"
@@ -294,6 +310,56 @@
       "sha256": "0c0f9e78a51261d7d0b5234b34adf402b647a655a3766ce0e1f49749aeb6b5c1"
     },
     {
+      "path": "assets/v2/MENAGERIE_LICENSE.txt",
+      "bytes": 1470,
+      "sha256": "5ec71ccf66c8d03261448f2441a586765b97f2248c860a1ae19689fb1c45cee6"
+    },
+    {
+      "path": "assets/v2/arm_speedup.png",
+      "bytes": 243930,
+      "sha256": "6eb8bb08332f57c3be8004cfaa628dd52115d76799e504ff08ac3e82b14b07e0"
+    },
+    {
+      "path": "assets/v2/encoder.log",
+      "bytes": 7483,
+      "sha256": "e2f6307387a856102f3159008588babf940be082c6cfdb804a7b0e60fdd781e0"
+    },
+    {
+      "path": "assets/v2/frame-150.png",
+      "bytes": 238186,
+      "sha256": "3748e1c99a454d441eb90e39964e2ffb31e49c10582b119241f00e15a6c36913"
+    },
+    {
+      "path": "assets/v2/frame-225.png",
+      "bytes": 247897,
+      "sha256": "4e658a735ae7c03202ca56cf5637382f737441979a8c43a5a56776b69e77b337"
+    },
+    {
+      "path": "assets/v2/frame-260.png",
+      "bytes": 249268,
+      "sha256": "522ae04351cae729ef3e98bf4f7c3b6b9928dcd8563f4ec772ef91d6bc1b56e5"
+    },
+    {
+      "path": "assets/v2/frames.json",
+      "bytes": 122195,
+      "sha256": "d1b7c2156d01fc30469df6d2e1a6e55aeecd7d6c060d55d0761ee56f018100c4"
+    },
+    {
+      "path": "assets/v2/media-receipt.json",
+      "bytes": 1106,
+      "sha256": "5ca0adbacabb601376f2e27aa2001c468a7ffea6fa16ba5dd8885b3bc5a3a1c6"
+    },
+    {
+      "path": "assets/v2/official-assets-source-receipt.json",
+      "bytes": 6543,
+      "sha256": "1a3d163d0ffc2746788ea2bd66f5aa1777a2909a0884e88292cc5fb9c90bf623"
+    },
+    {
+      "path": "assets/v2/ur5e_changed_chunk.mp4",
+      "bytes": 648908,
+      "sha256": "09d16c9ee881624459940e8884ac8ceaaa2806fc4a7bd3a8244f87ab3963d137"
+    },
+    {
       "path": "assets/verification-cost.svg",
       "bytes": 14906,
       "sha256": "d1fd05127766c4bafcf7b44fa71a03f4908b818dc2f1c66e12469b9b590218c0"
@@ -310,8 +376,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 70381,
-      "sha256": "88b2e2361163bf75a2049f6c09f52943635ff181df67ba19881cb74c3dc42a57"
+      "bytes": 84725,
+      "sha256": "2edfdf48616ac26605defbad195bd46fbdd9c9735f68c8c2ff90aeba74eb39a8"
     },
     {
       "path": "launch-gate.css",
@@ -324,6 +390,16 @@
       "sha256": "8010aff612e25d65385272aeffc8cb0659b9639fb059215cf28a0236537a51cb"
     },
     {
+      "path": "motion-reuse.css",
+      "bytes": 1509,
+      "sha256": "c6d099a597041bb7bc758b6df95969cccf49aa4e39acf8a3a91bda7b5f0d971e"
+    },
+    {
+      "path": "motion-reuse.js",
+      "bytes": 2262,
+      "sha256": "e4f171d0b632d9f4a9fb9349c2596d69c40711ae7556540d15872f89272537e7"
+    },
+    {
       "path": "native-project.js",
       "bytes": 25500,
       "sha256": "79114f726b34916d1963ba436fd87fc31b895250a545b76fcd29503bc2b4d6c3"
@@ -332,6 +408,11 @@
       "path": "native-viewer.js",
       "bytes": 17375,
       "sha256": "545132279eadf2da0e38fc2a39daa4e07323b592ba583e0ecdd81658d337b7d0"
+    },
+    {
+      "path": "project-hero.css",
+      "bytes": 7814,
+      "sha256": "c6e244e5fa98392236c46a6deeb5b9d90241d2c2094089c3d0a529386c574962"
     },
     {
       "path": "replay-viewer.js",

@@ -1,6 +1,8 @@
 "use strict";
 
 const zh = {
+  navOverview:"机制总览",systemOverviewKicker:"系统机制",systemOverviewTitle:"从接入检查，到逐次核验写入。",systemOverviewCaption:"Launch Gate 用固定探针检查已捕获的接入。Native Gateway 检查每次写入请求。签名记录把判定、动作和反馈连起来，可以在回放中逐项查看。",systemOverviewScroll:"左右滑动查看，或打开高清机制图。",systemOverviewExternal:"现有模型与接入",systemOverviewAction:"最终动作",systemOverviewCheck:"Sentinel 检查与证据",systemOverviewReject:"拒绝写入",
+  projectAuthor:"兰斯尧",projectAffiliation:"中国地质大学（北京）",projectCode:"代码",projectModel:"模型",projectData:"数据",projectVideo:"视频",projectVisualization:"可视化",
   downloadNativeData:"原生产品证据包",downloadNativeDataDesc:"原始签名运行、公钥、配对结果、失败、审计视频与模型/姿态数据",downloadNativeSource:"产品源码快照",downloadNativeSourceDesc:"CLI、App、网关、运行脚本、网页代码与保存的协议",downloadNativePage:"便携项目页",downloadNativePageDesc:"双语界面、交互任务网格、原回放记录与双视角影片",nativeAssetIndex:"当前源码与网页下载索引及 SHA-256",
   nativeVideoScope:"所选任务的独立视频播放器 · 两个 720×720 展示视角、20 fps。字幕显示保存的动作、授权、整次运行游标与实际结果。回放时逐步核对了每个动作、已签名的 360×360 观测哈希及当前步结果。影片不增加基准样本，失败序列属于事后诊断。视频播放器与三维控制各自独立。",
   nativeEvidenceKicker:"实际写入边界上的测量",
