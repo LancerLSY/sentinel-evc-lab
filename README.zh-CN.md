@@ -23,6 +23,13 @@ Sentinel EVC 把授权门放在机器人策略动作块的最后提交点：校�
 [实测结果](#实测结果) · [最新实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003) ·
 [研究展示导航](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
+## 执行差异诊断与回归门
+
+**定位第一次变化，直达它的证据。** App 和 CLI 可以比较两份分别选择公钥的原生记录，检查动作、反馈、执行游标及结果，并链接两侧源记录的三维帧。下载的报告可离线重算；`--fail-on` 指定回归判定字段。
+
+完整 40 组记录中，5,420 次动作一致，产品找出第 4 步第二路相机的一次反馈差异。实际安装的 Rerun 0.38.1 CLI 对照定位到差异 Episode chunk；Sentinel 工作流进一步给出首个步骤、VLA 字段与两侧源帧引用。[实测对照、范围与复现](docs/research/2026-10-03/execution-diff/RESULTS.md)。
+
+
 ## 当前可用入口
 
 | 入口 | 已可用 | 边界 |

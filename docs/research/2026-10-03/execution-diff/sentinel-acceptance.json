@@ -1,0 +1,120 @@
+{
+  "source_commit": "197af1877a54ebf3d0c45ef7af7c5ed1024b222b",
+  "protocol_sha256": "3cd30f4320091be9b321b6c2a3aca5c25fbe5d2fc47fca01006522520f522c52",
+  "hardware": {
+    "machine": "arm64",
+    "system": "Darwin",
+    "python": "3.12.14",
+    "scope": "local CPU verification and diagnosis, not GPU inference"
+  },
+  "steps": [
+    {
+      "name": "sentinel-compare",
+      "command": [
+        "sentinel-evc",
+        "native-compare",
+        "--left",
+        "native-formal-baseline-v3",
+        "--right",
+        "native-formal-active-v3",
+        "--data-dir",
+        "WORKSPACE",
+        "--out",
+        "work/product-research-20261003/native-comparison/sentinel-execution-diff.json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 3.59554162499262
+    },
+    {
+      "name": "verify-browser-report",
+      "command": [
+        "sentinel-evc",
+        "native-compare",
+        "--left",
+        "native-formal-baseline-v3",
+        "--right",
+        "native-formal-active-v3",
+        "--data-dir",
+        "WORKSPACE",
+        "--verify-report",
+        "work/product-research-20261003/native-comparison/browser-order-report.json"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 3.551366624975344
+    },
+    {
+      "name": "reject-modified-report",
+      "command": [
+        "sentinel-evc",
+        "native-compare",
+        "--left",
+        "native-formal-baseline-v3",
+        "--right",
+        "native-formal-active-v3",
+        "--data-dir",
+        "WORKSPACE",
+        "--verify-report",
+        "work/product-research-20261003/native-comparison/modified-report.json"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "elapsed_seconds": 3.5045609590015374
+    },
+    {
+      "name": "action-regression-gate",
+      "command": [
+        "sentinel-evc",
+        "native-compare",
+        "--left",
+        "native-formal-baseline-v3",
+        "--right",
+        "native-formal-active-v3",
+        "--data-dir",
+        "WORKSPACE",
+        "--fail-on",
+        "action,cursor,outcome,authorization"
+      ],
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "elapsed_seconds": 3.529840749979485
+    },
+    {
+      "name": "feedback-regression-gate",
+      "command": [
+        "sentinel-evc",
+        "native-compare",
+        "--left",
+        "native-formal-baseline-v3",
+        "--right",
+        "native-formal-active-v3",
+        "--data-dir",
+        "WORKSPACE",
+        "--fail-on",
+        "observation"
+      ],
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "elapsed_seconds": 3.693716334004421
+    }
+  ],
+  "summary": {
+    "action_differences": 0,
+    "authorization_differences": 0,
+    "compared_actions": 5420,
+    "cursor_differences": 0,
+    "expected_authorization_differences": 40,
+    "left_successes": 33,
+    "observation_differences": 1,
+    "outcome_differences": 0,
+    "paired_episodes": 40,
+    "right_successes": 33,
+    "status": "DIFFERENCES"
+  },
+  "report_sha256": "4cf539abe206a733707f69c79df2cebf435cbaf4a6546475e1d3fb5c6bc840d4",
+  "input_files_bytes": {
+    "left": 142513720,
+    "right": 164016371
+  }
+}

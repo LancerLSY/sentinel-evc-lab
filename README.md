@@ -70,6 +70,19 @@ These are complementary roles; no installed competitor ranking is claimed.
 
 ![Actual macOS App inspecting the signed formal native run](docs/screenshots/native-formal-active-v3-overview.png)
 
+## Verified execution differences
+
+**Find the first change and open its evidence.** The App and CLI now compare two
+independently keyed native records, identify changes in actions, feedback,
+execution cursors and outcomes, and link both source frames to recorded 3D.
+Downloaded reports can be recomputed offline; `--fail-on` selects a regression gate.
+
+On all 40 paired episodes, the product found one camera-2 feedback change at
+step 4 while all 5,420 actions agree. An actual installed Rerun 0.38.1 CLI
+comparison identified the differing episode chunk; Sentinel additionally
+returned the first step, VLA field and source-frame references in its workflow.
+[Measured comparison, limits and reproduction](docs/research/2026-10-03/execution-diff/RESULTS.md).
+
 ## Five-minute setup
 
 ### Interactive installer

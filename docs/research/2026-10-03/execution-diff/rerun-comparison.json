@@ -1,0 +1,186 @@
+{
+  "created_at": "2026-10-03T03:44:32.179817+00:00",
+  "exports": {
+    "left": {
+      "action_count": 5420,
+      "episode_count": 40,
+      "frame_count": 5460,
+      "inputs": {
+        "replay": {
+          "bytes": 23266607,
+          "path": "work/native-product-results/formal-v3/independent-imports/native-formal-baseline-v3/bundle/replay.json",
+          "sha256": "sha256:f78c70d08fb933f6128e121414190e443d7b5e03c207de116a8c74fd0a76e301"
+        },
+        "result": {
+          "bytes": 28679,
+          "path": "work/native-product-results/formal-v3/independent-imports/native-formal-baseline-v3/bundle/result.json",
+          "sha256": "sha256:14a63a29bdd7942381bcc3a6a693b85b0efe342ced8b58ae6f92756235196bda"
+        }
+      },
+      "rrd": {
+        "bytes": 4600873,
+        "path": "work/product-research-20261003/native-comparison/baseline-projection.rrd",
+        "sha256": "sha256:80dc4885aa0fc1a5a620481694fe16b68f153602c4df6b247384cc52176408c4"
+      },
+      "run_id": "native-formal-baseline-v3",
+      "seconds": 0.09590024998760782
+    },
+    "right": {
+      "action_count": 5420,
+      "episode_count": 40,
+      "frame_count": 5460,
+      "inputs": {
+        "replay": {
+          "bytes": 23509217,
+          "path": "work/native-product-results/formal-v3/independent-imports/native-formal-active-v3/bundle/replay.json",
+          "sha256": "sha256:3d7f5e1c4318343bdea3a7ddb7784d13f5d658d7f7f326a6d76ce7b221f5f94d"
+        },
+        "result": {
+          "bytes": 28796,
+          "path": "work/native-product-results/formal-v3/independent-imports/native-formal-active-v3/bundle/result.json",
+          "sha256": "sha256:1100825384b358e550a6dd8ad06cb3811e664c35471a2ae4402460890896d33e"
+        }
+      },
+      "rrd": {
+        "bytes": 4600677,
+        "path": "work/product-research-20261003/native-comparison/active-projection.rrd",
+        "sha256": "sha256:4dae8a690815796ce5feba6d8c9230ed8b2ab1b80364e42e72e20717683cabba"
+      },
+      "run_id": "native-formal-active-v3",
+      "seconds": 0.06661045798682608
+    }
+  },
+  "machine": {
+    "cpu": null,
+    "machine": "arm64",
+    "memory_bytes": null,
+    "model": null,
+    "python": "3.12.14",
+    "release": "27.0.0",
+    "scope": "local RRD projection and comparison host",
+    "system": "Darwin"
+  },
+  "projection": {
+    "excluded": [
+      "run_id",
+      "episode_id",
+      "permit_id",
+      "latency",
+      "wall-clock time",
+      "authorization mode"
+    ],
+    "facts": [
+      "action_bytes_hash",
+      "observation_hash",
+      "state leaf sha256 fingerprints",
+      "episode-relative submitted/accepted/observed cursors",
+      "canonical outcome JSON"
+    ],
+    "schema": "sentinel-vla-fact-projection-v1",
+    "timeline": "execution_step"
+  },
+  "rerun": {
+    "identical_control": {
+      "command": [
+        "RERUN_ENV/bin/rerun",
+        "rrd",
+        "compare",
+        "--unordered",
+        "--ignore-timeline",
+        "log_tick",
+        "work/product-research-20261003/native-comparison/baseline-projection.rrd",
+        "work/product-research-20261003/native-comparison/baseline-projection.rrd"
+      ],
+      "exit_code": 0,
+      "observed_unmatched_chunks": [],
+      "observed_unmatched_entity_paths": [],
+      "seconds": 0.10202283298713155,
+      "started_at": "2026-10-03T03:44:31.989438+00:00",
+      "stderr": {
+        "bytes": 930,
+        "path": "work/product-research-20261003/native-comparison/rerun-identical-control.stderr.txt",
+        "sha256": "sha256:c8a653563268598f402bad30ff08251187e579376c2bc75f2933bb646f006ffc"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "work/product-research-20261003/native-comparison/rerun-identical-control.stdout.txt",
+        "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "left_vs_right": {
+      "command": [
+        "RERUN_ENV/bin/rerun",
+        "rrd",
+        "compare",
+        "--unordered",
+        "--ignore-timeline",
+        "log_tick",
+        "work/product-research-20261003/native-comparison/baseline-projection.rrd",
+        "work/product-research-20261003/native-comparison/active-projection.rrd"
+      ],
+      "exit_code": 1,
+      "observed_unmatched_chunks": [
+        {
+          "count": 1,
+          "rrd": "work/product-research-20261003/native-comparison/baseline-projection.rrd"
+        },
+        {
+          "count": 1,
+          "rrd": "work/product-research-20261003/native-comparison/active-projection.rrd"
+        }
+      ],
+      "observed_unmatched_entity_paths": [
+        "/episodes/task_00/state_48/seed_44048/instruction_0a91f8c396de41e2"
+      ],
+      "seconds": 0.05139100001542829,
+      "started_at": "2026-10-03T03:44:32.092219+00:00",
+      "stderr": {
+        "bytes": 655758,
+        "path": "work/product-research-20261003/native-comparison/rerun-left-vs-right.stderr.txt",
+        "sha256": "sha256:1675bd1940ba3869bd73a9fda0eee62160f75bb9619ee111acca05daf40ef17f"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "work/product-research-20261003/native-comparison/rerun-left-vs-right.stdout.txt",
+        "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "version_command": [
+      "RERUN_ENV/bin/rerun",
+      "--version"
+    ],
+    "version_exit_code": 0,
+    "version_text": "rerun-cli 0.38.1 (base lance map_view nasm native_viewer oss_server perf_telemetry re_server release_full release_no_web_viewer web_viewer) [rustc 1.96.0 (ac68faa20 2026-05-25), LLVM 22.1.2] aarch64-apple-darwin prepare-release-0.38.1 b08c599, built 2026-09-16T15:22:17.438344Z"
+  },
+  "schema": "sentinel-rerun-recording-comparison-v1",
+  "source_fact_comparison": {
+    "counts": {
+      "action_differences": 0,
+      "compared_actions": 5420,
+      "compared_frames": 5460,
+      "cursor_differences": 0,
+      "observation_differences": 1,
+      "outcome_differences": 0,
+      "paired_episodes": 40,
+      "state_leaf_differences": 1
+    },
+    "first_difference": {
+      "action_equal": true,
+      "categories": [
+        "observation",
+        "state__pixels__image2__sha256"
+      ],
+      "episode": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+        "seed": 44048,
+        "task_id": 0
+      },
+      "previous_observation_equal": true,
+      "step": 4
+    },
+    "state_leaf_paths": {
+      "state__pixels__image2__sha256": 1
+    }
+  }
+}

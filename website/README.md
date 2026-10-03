@@ -12,7 +12,7 @@ identity or the decoded source-model identity. This supports CDN transport
 compression without confusing it with the model file's own compression.
 
 The Git checkout contains the page code and small data. Download
-[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-web-20261003/sentinel-project-page-v2.zip)
+[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-diff-20261003/sentinel-execution-diff-page.zip)
 and extract it at the repository root to populate `website/` with the large
 meshes, replay JSON and videos. [ASSETS.json](ASSETS.json) identifies every
 published page file by size and SHA-256. It contains this project page only.
@@ -26,6 +26,13 @@ python3 -m http.server 8877 --bind 127.0.0.1 --directory website
 ```
 
 Open http://127.0.0.1:8877. Serve over HTTP so the replay and chart JSON can load.
+
+## Verified execution differences
+
+`execution-diff.js` displays all 40 paired diagnostics and original baseline/active
+poses for the camera-feedback difference. Both task models were verified byte-for-byte
+against the signed sources. The browser checks asset hashes; signature verification
+and report recomputation run in the local App/CLI.
 
 ## Native product replay
 
