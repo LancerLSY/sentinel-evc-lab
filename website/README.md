@@ -12,7 +12,7 @@ identity or the decoded source-model identity. This supports CDN transport
 compression without confusing it with the model file's own compression.
 
 The Git checkout contains the page code and small data. Download
-[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-diff-20261003/sentinel-execution-diff-page-v2.zip)
+[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-boundary-20261003/sentinel-execution-boundary-page.zip)
 and extract it at the repository root to populate `website/` with the large
 meshes, replay JSON and videos. [ASSETS.json](ASSETS.json) identifies every
 published page file by size and SHA-256. It contains this project page only.
@@ -113,3 +113,9 @@ only. Source paths can be overridden with `--model`, `--npz`, `--reviews` and
 `--media`. Copy the geometry and license into `website/assets/`; rename the
 export's `manifest.json` to `ur5e-viewer-manifest.json` and refresh `SHA256SUMS`.
 No JavaScript dependencies are required.
+
+## Execution-boundary comparison
+
+`execution-boundary.js` presents the frozen common-input results and Sentinel
+concurrency improvement. Installed KineGrant and RLSOK successes remain visible.
+The downloaded JSON distinguishes callback, entry and dispatch counters.

@@ -1,12 +1,17 @@
 {
   "schema": "sentinel-project-static-assets-v1",
   "homepage": "https://lansiyao.com/research/sentinel-vla/project/",
-  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-diff-20261003/sentinel-execution-diff-page-v2.zip",
+  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-boundary-20261003/sentinel-execution-boundary-page.zip",
   "files": [
     {
+      "path": "README.md",
+      "bytes": 6584,
+      "sha256": "d4585df8c5252f542c95dd7abf76bcde62e4cf1e1d1b808cc9cc58ffd766930c"
+    },
+    {
       "path": "app.js",
-      "bytes": 40663,
-      "sha256": "f07d321d1e6583062f2dc852bae880fc8f83813df4fc583084f76cbb3d09e1ad"
+      "bytes": 40662,
+      "sha256": "827f454a97b7a6650871b82e1ff6107a3c66bff1de5828cecc2e361b381b3098"
     },
     {
       "path": "assets/LICENSE-UR5E-BSD-3-Clause.txt",
@@ -42,6 +47,11 @@
       "path": "assets/evidence.json",
       "bytes": 553006,
       "sha256": "5921d21ee0c41bfe65c4a0071a9939404e79edd72c2bee9b24fc2a5fd41b1118"
+    },
+    {
+      "path": "assets/execution-boundary-comparison.json",
+      "bytes": 4403,
+      "sha256": "1df7e668c24da2d32a7a746085171cff24c48a8df0be6abc71ee6f8e12804641"
     },
     {
       "path": "assets/execution-diff-frames.json",
@@ -284,14 +294,19 @@
       "sha256": "d1fd05127766c4bafcf7b44fa71a03f4908b818dc2f1c66e12469b9b590218c0"
     },
     {
+      "path": "execution-boundary.js",
+      "bytes": 4188,
+      "sha256": "b44435494cc094599cc0bf39bcd3c03d671af96c977c98d0c2e29b87f53ac241"
+    },
+    {
       "path": "execution-diff.js",
       "bytes": 7824,
       "sha256": "d622a8e57f786b274c6fe199a8f770588d2c88c8ed7ee9e035c83826483bea6a"
     },
     {
       "path": "index.html",
-      "bytes": 61558,
-      "sha256": "6f817450988aed64d9f79c236855e52679ede5a555f99f197ac2118a35bfd4f6"
+      "bytes": 65888,
+      "sha256": "7e276ecc992daf7108bda23e9b94c488c90f534cdd4b983868f5fcd7c094120f"
     },
     {
       "path": "native-project.js",

@@ -1,0 +1,4 @@
+config/
+raw/
+results/
+__pycache__/

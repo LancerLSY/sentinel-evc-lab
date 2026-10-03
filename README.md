@@ -52,7 +52,7 @@ the request, decision and observed transition become a portable signed record.
 | Direct baseline vs Sentinel active | **33/40 vs 33/40** task successes; all seven failures retained |
 | Complete paired action sequences | **40/40 byte-identical**, covering **5,420** requests |
 | Six invalid-authorization classes | **60/60 blocked**, **0** forbidden writer calls |
-| Authorization + admission cost | **0.802 ms mean · 1.040 ms P95**, excluding inference and `env.step` |
+| Original native v3 authorization + admission cost | **0.802 ms mean · 1.040 ms P95**, before the copy/entry hardening; excluding inference and `env.step` |
 | Actual App import/export | complete 40-episode bundle verified with an independently selected key; exported ZIP reverified |
 
 This fixed engineering grid used **RTX 4090 D (24 GB)** and actual official
@@ -65,8 +65,17 @@ in-process request integrity; physical checks have separate profiles.
 LeRobot supplies policy deployment and RTC, MoveIt Pro supplies motion and
 physical controls, and Foxglove/Rerun supply visualization workflows. Sentinel
 focuses on final-request authorization and verifiable write-boundary evidence.
-These are complementary roles; no installed competitor ranking is claimed.
-[Documented ecosystem roles](docs/native_method_position.md).
+These are complementary roles. Installed KineGrant 2.65.5 and RLSOK 1.5.12 each
+pass the same **60/60** ordinary authorization-fault grid as Sentinel.
+[Measured comparison and ecosystem roles](docs/native_method_position.md).
+
+**Protect the approved request through writer preparation.** The gateway now
+owns the action array and checks live state and timing again at its entry
+acknowledgement. Across 40 concurrency probes, invalid downstream dispatches
+fell from **40 to 0**; all ten caller-buffer cases executed the approved copy.
+Real authenticated, encrypted CycloneDDS delivered **70/70** frozen inputs.
+The comparison retains competitor successes and separates wrapper invocation
+from downstream dispatch. [Protocol and full results](docs/research/2026-10-03/execution-boundary/RESULTS.md).
 
 ![Actual macOS App inspecting the signed formal native run](docs/screenshots/native-formal-active-v3-overview.png)
 

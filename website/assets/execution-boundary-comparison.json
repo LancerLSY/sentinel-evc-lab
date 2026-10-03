@@ -1,0 +1,130 @@
+{
+  "schema": "sentinel-execution-boundary-comparison-v1",
+  "protocol_sha256": "49019e04923fbd70cab86af9d508f585be723bc6734b81efc7883340dcb05586",
+  "payload_sha256": "34fe19434a6e3d0de3eeef1059518f8e54507741324ff8c688428f351cef9acd",
+  "source_action_identity": "SHA256(dtype UTF8 + NUL + canonical_json(shape) + NUL + raw C-order bytes)",
+  "systems": [
+    {
+      "system": "dds_hmac_nonce_ttl",
+      "valid_executed": 10,
+      "valid_cases": 10,
+      "invalid_blocked": 30,
+      "invalid_cases": 60,
+      "invalid_downstream_dispatches": 30
+    },
+    {
+      "system": "dds_schema",
+      "valid_executed": 10,
+      "valid_cases": 10,
+      "invalid_blocked": 0,
+      "invalid_cases": 60,
+      "invalid_downstream_dispatches": 60
+    },
+    {
+      "system": "secure_dds",
+      "valid_executed": 10,
+      "valid_cases": 10,
+      "invalid_blocked": 0,
+      "invalid_cases": 60,
+      "invalid_downstream_dispatches": 60
+    },
+    {
+      "system": "sentinel",
+      "valid_executed": 10,
+      "valid_cases": 10,
+      "invalid_blocked": 60,
+      "invalid_cases": 60,
+      "invalid_downstream_dispatches": 0
+    },
+    {
+      "system": "kinegrant_2.65.5",
+      "valid_executed": 10,
+      "valid_cases": 10,
+      "invalid_blocked": 60,
+      "invalid_cases": 60,
+      "invalid_downstream_dispatches": 0
+    },
+    {
+      "system": "rlsok_1.5.12",
+      "valid_executed": 10,
+      "valid_cases": 10,
+      "invalid_blocked": 60,
+      "invalid_cases": 60,
+      "invalid_downstream_dispatches": 0
+    }
+  ],
+  "sentinel_entry_preparation": {
+    "original": {
+      "caller_array_changed": {
+        "cases": 10,
+        "callback_invocations": 10,
+        "entry_acknowledgements": 10,
+        "downstream_dispatches": 10,
+        "invalid_downstream_dispatches": 10
+      },
+      "entry_context_changed": {
+        "cases": 10,
+        "callback_invocations": 10,
+        "entry_acknowledgements": 10,
+        "downstream_dispatches": 10,
+        "invalid_downstream_dispatches": 10
+      },
+      "entry_deadline_passed": {
+        "cases": 10,
+        "callback_invocations": 10,
+        "entry_acknowledgements": 10,
+        "downstream_dispatches": 10,
+        "invalid_downstream_dispatches": 10
+      },
+      "entry_feedback_changed": {
+        "cases": 10,
+        "callback_invocations": 10,
+        "entry_acknowledgements": 10,
+        "downstream_dispatches": 10,
+        "invalid_downstream_dispatches": 10
+      }
+    },
+    "hardened": {
+      "caller_array_changed": {
+        "cases": 10,
+        "callback_invocations": 10,
+        "entry_acknowledgements": 10,
+        "downstream_dispatches": 10,
+        "invalid_downstream_dispatches": 0
+      },
+      "entry_context_changed": {
+        "cases": 10,
+        "callback_invocations": 10,
+        "entry_acknowledgements": 0,
+        "downstream_dispatches": 0,
+        "invalid_downstream_dispatches": 0
+      },
+      "entry_deadline_passed": {
+        "cases": 10,
+        "callback_invocations": 10,
+        "entry_acknowledgements": 0,
+        "downstream_dispatches": 0,
+        "invalid_downstream_dispatches": 0
+      },
+      "entry_feedback_changed": {
+        "cases": 10,
+        "callback_invocations": 10,
+        "entry_acknowledgements": 0,
+        "downstream_dispatches": 0,
+        "invalid_downstream_dispatches": 0
+      }
+    }
+  },
+  "counter_contract": {
+    "callback_invocations": "trusted writer wrapper invocation, before its preparation barrier",
+    "downstream_dispatches": "recorded software dispatch after successful entry acknowledgement",
+    "entry_acknowledgements": "successful entered() return in the instrumented wrapper",
+    "unauthorized_writer_calls": "downstream dispatch with substituted bytes or after the injected stale-entry condition",
+    "writer_calls": "legacy alias of downstream_dispatches, not wrapper invocations"
+  },
+  "scope": "Actual encrypted DDS delivery followed by recorded-action software application probes. Entry-preparation scores compare Sentinel revisions only. No physical-motion or latency ranking.",
+  "formal_result_sha256": "ddcaad283864dbe5d4a6cc7f3462d6676945b8a590501affb0352598d979a6a8",
+  "kinegrant_results_sha256": "4035e250365045722f8dbf0431aa90ab8a0cf0f8df53b8e9fa2920a32f1df0be",
+  "rlsok_results_sha256": "99f77b2d613321d937b17053021ff15dfe0a453275bb8df1e196b0e587630699",
+  "global_exclusivity_established": false
+}

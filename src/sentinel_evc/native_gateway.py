@@ -89,6 +89,27 @@ def _native_request_identity(action: Any) -> tuple[tuple[float, ...], tuple[int,
     return values, shape, dtype, "sha256:" + digest.hexdigest()
 
 
+def _owned_native_request(action: Any) -> Any:
+    """Copy caller-owned array storage before admission and writer dispatch.
+
+    Array implementations remain in the policy environment. Their C-order
+    copy must own its storage; a caller can then change the original array
+    without changing the request whose identity the gateway checks.
+    """
+    array = action
+    if hasattr(array, "detach"):
+        array = array.detach().to("cpu").numpy()
+    if not hasattr(array, "copy"):
+        raise NativeGatewayDenied("UNSUPPORTED_ACTION_SCHEMA", "native request must support an independent copy")
+    try:
+        owned = array.copy(order="C")
+    except TypeError:
+        owned = array.copy()
+    if owned is array:
+        raise NativeGatewayDenied("UNSUPPORTED_ACTION_SCHEMA", "native request copy reused caller storage")
+    return owned
+
+
 @dataclass(frozen=True)
 class NativeActionProfile:
     """Declared support boundary for a native environment request."""
@@ -489,8 +510,10 @@ class NativeGateway:
         now_ns: int | None = None,
     ) -> Any:
         """Consume a permit and invoke the sole environment writer once."""
-        now = time.monotonic_ns() if now_ns is None else now_ns
-        raw_values, request_shape, request_dtype, request_bytes_hash = _native_request_identity(action)
+        clock_origin = time.monotonic_ns()
+        now = clock_origin if now_ns is None else now_ns
+        owned_action = _owned_native_request(action)
+        raw_values, request_shape, request_dtype, request_bytes_hash = _native_request_identity(owned_action)
         if request_shape != self.profile.request_shape or request_dtype not in self.profile.request_dtypes:
             self._deny(
                 "UNSUPPORTED_ACTION_SCHEMA",
@@ -561,11 +584,22 @@ class NativeGateway:
             with self._writer_condition:
                 if self._writer_state != "admitting":
                     raise RuntimeError("native writer entered outside admission")
+                entry_now = now + time.monotonic_ns() - clock_origin
+                if permit.generation != self._generation:
+                    self._deny("GENERATION_REVOKED", "permit generation changed before writer entry", permit_id=permit.permit_id)
+                if self._snapshot != snapshot or permit.snapshot_hash != snapshot.digest:
+                    self._deny("FEEDBACK_CHANGED", "feedback changed before writer entry", permit_id=permit.permit_id)
+                if self._context != context or permit.context_hash != context.digest:
+                    self._deny("CONTEXT_CHANGED", "execution context changed before writer entry", permit_id=permit.permit_id)
+                if entry_now > permit.deadline_mono_ns:
+                    self._deny("LEASE_EXPIRED", "permit deadline passed before writer entry", permit_id=permit.permit_id)
+                if entry_now < snapshot.capture_mono_ns or entry_now - snapshot.capture_mono_ns > self.max_feedback_age_ns:
+                    self._deny("STALE_FEEDBACK", "feedback became too old before writer entry", permit_id=permit.permit_id)
                 self._writer_state = "entered"
                 self._writer_condition.notify_all()
 
         try:
-            result = writer(action, entered)
+            result = writer(owned_action, entered)
             with self._lock:
                 if self._writer_state == "admitting":
                     raise RuntimeError("native writer did not acknowledge entry")

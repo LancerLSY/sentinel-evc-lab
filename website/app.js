@@ -9,7 +9,7 @@ const zh = {
   nativeMetricOutcome:"直接执行与主动授权的任务成功次数一致",
   nativeMetricBytes:"动作字节保持一致，40/40 条完整配对序列相同",
   nativeMetricFaults:"无效授权全部拒绝，越权写入器调用为零",
-  nativeMetricCost:"授权加写入前准入的均值；P95 为 1.040 ms",
+  nativeMetricCost:"改进前原 native v3 的计时；P95 为 1.040 ms",
   nativeEvidenceDetails:"查看六类拒绝记录与所有计划任务格",
   faultCondition:"注入条件",
   faultReason:"保存的拒绝原因",

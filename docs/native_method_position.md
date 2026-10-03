@@ -25,9 +25,17 @@ separate submitted, accepted and observed cursors.
 | [MoveIt Pro MCP](https://docs.picknik.ai/how_to/programmatic_sdks/mcp_server/) | deployment/session context and scoped execution/cancellation interfaces | per-request binding to feedback, exact action bytes and local queue/generation state |
 | [Foxglove](https://docs.foxglove.dev/docs) and [Rerun](https://rerun.io/docs/howto/logging-and-ingestion/shared-recordings) | recorded-data visualization and shared recordings | signed import/export plus task-specific mesh replay of the same request/decision/transition timeline |
 
-These are complementary integration roles, not a measured ranking. Official
-documentation does not establish that another product lacks equivalent request
-controls. No installed competitor performance comparison is reported.
+These are complementary integration roles. The
+[installed authorization comparison](research/2026-10-03/execution-boundary/RESULTS.md)
+also covers KineGrant 2.65.5 and RLSOK 1.5.12. Both admit 10/10 valid requests
+and block 60/60 ordinary faults, matching Sentinel on that grid. RLSOK also
+preserves its private command copy when the caller mutates its object.
+
+Sentinel's delivered integration accepts the native postprocessor array, owns
+its storage, and rechecks live execution facts at an explicit writer-entry
+acknowledgement. Its signed native records connect that request to task-specific
+mesh replay and first-difference diagnosis. Separate preparation probes explain
+these interfaces; they do not establish a universal exclusivity or speed ranking.
 
 ## What the method makes measurable
 

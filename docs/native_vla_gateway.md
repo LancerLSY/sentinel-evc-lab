@@ -41,6 +41,28 @@ Revocation prevents new admissions from the old generation. A writer already
 entered may finish its synchronous `env.step`; this gateway does not interrupt
 in-flight simulation, cancel a physical controller, or prove a physical stop.
 
+### Admission and writer entry
+
+`submit` takes an independent C-order copy of the caller's array, checks that
+copy against the permit, and passes the same copy to the trusted writer. A
+caller changing its original buffer during writer preparation cannot change
+the approved request. Supported array implementations must provide an
+independent `copy`; the gateway does not import NumPy.
+
+The writer must call its supplied `entered()` function immediately before the
+environment call. At that acknowledgement, the gateway checks feedback,
+context, generation, permit expiry and feedback age again under its lock. A
+failed acknowledgement consumes the permit but prevents the environment call.
+The writer must propagate the exception. Work after a successful acknowledgement
+is in flight; a trusted writer must not mutate the approved copy before dispatch.
+
+These checks establish a software admission boundary. They do not protect
+against a malicious writer, array implementation, or code with access to the
+gateway's process. The [execution-boundary comparison](research/2026-10-03/execution-boundary/RESULTS.md)
+retains actual secure DDS delivery, installed authorization baselines and the
+before/after concurrency probes. Earlier native timing measurements describe
+their original source revision, rather than the copy and entry checks added here.
+
 The active profile does **not** perform collision clearance, self-collision,
 dynamics, controller-mapped joint-limit, contact-force, physical-stop or
 WorldGuard validation. Result bundles therefore mark `physical_validation`

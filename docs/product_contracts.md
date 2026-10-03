@@ -34,6 +34,12 @@ The first trainable model is explicitly a standard-library low-dimensional resid
 
 ## Experimental status
 
+The native VLA request gateway has a separate [contract](native_vla_gateway.md).
+It owns a copy of the submitted array and revalidates current feedback/context,
+generation and timing at the writer's `entered()` acknowledgement. Writers are
+trusted adapters and must acknowledge immediately before dispatch and propagate
+denials. This contract does not grant physical-motion authority through HTTP.
+
 Pending/blocked experiments have prerequisites, runnable entrypoints or explicit integration requirements, acceptance criteria and output expectations, but no metrics. Completed experiments require command, source/environment, data/model/calibration identifiers, acceptance output and artifact digests. Real VLA/vision/robot/GRU experiments are distinct from this numerical product.
 
 
