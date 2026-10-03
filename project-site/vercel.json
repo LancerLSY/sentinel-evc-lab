@@ -1,0 +1,24 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "public",
+  "redirects": [
+    {
+      "source": "/research/sentinel-vla/project",
+      "destination": "/research/sentinel-vla/project/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/research/sentinel-vla/project/",
+      "destination": "/research/sentinel-vla/project/index.html"
+    },
+    {
+      "source": "/:path((?!research/sentinel-vla/project(?:/|$)).*)",
+      "destination": "https://lancer-research-studio.lanceryou.chatgpt.site/:path*"
+    }
+  ]
+}

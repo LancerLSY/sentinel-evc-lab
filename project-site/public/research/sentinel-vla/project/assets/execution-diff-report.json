@@ -1,0 +1,1975 @@
+{
+  "eligibility": {
+    "compatible": true,
+    "identity_differences": [],
+    "incomplete_evidence": false,
+    "missing_identity": [],
+    "unmatched_left": [],
+    "unmatched_right": []
+  },
+  "episodes": [
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 77,
+        "cursor": 0,
+        "expected_authorization": 77,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+        "seed": 44046,
+        "task_id": 0
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 77,
+        "episode_id": "task00-state46-88b9dab9",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 0,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 77,
+        "episode_id": "task00-state46-3dec6f5c",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 0
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 280,
+        "cursor": 0,
+        "expected_authorization": 280,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+        "seed": 44047,
+        "task_id": 0
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task00-state47-2dda7ec8",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "left_episode_index": 1,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task00-state47-f0ed3be3",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "right_episode_index": 1
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 74,
+        "cursor": 0,
+        "expected_authorization": 74,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 1,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": {
+          "action_equal": true,
+          "category": "observation",
+          "details": {
+            "left_hash": "sha256:0861d3d10232da4ff58d70ef520a85b4a54842a19d66db3e2a556c16f92a36b6",
+            "right_hash": "sha256:ea4b651ff06d9652cb58c8e8c188e64b6f1f10d7b5ef584b61c0bc1bee0c46fc",
+            "state_leaf_differences": [
+              {
+                "left": "sha256:cf67aa964212aedefb7e36135ba7173badf0925315ce00eea13b9d06ec842928",
+                "path": "pixels.image2",
+                "right": "sha256:21f21e1ff25e7197a8d56cb04aaf819b835997220691d081a45fce5cb63bdf8c"
+              }
+            ]
+          },
+          "left_ref": {
+            "episode_index": 2,
+            "exact_pose": false,
+            "frame_index": 4,
+            "pose_frame_index": 0,
+            "pose_step": 0,
+            "run_id": "native-formal-baseline-v3",
+            "step": 4
+          },
+          "previous_observation_equal": true,
+          "right_ref": {
+            "episode_index": 2,
+            "exact_pose": false,
+            "frame_index": 4,
+            "pose_frame_index": 0,
+            "pose_step": 0,
+            "run_id": "native-formal-active-v3",
+            "step": 4
+          },
+          "step": 4
+        },
+        "outcome": null
+      },
+      "first_difference": {
+        "action_equal": true,
+        "category": "observation",
+        "details": {
+          "left_hash": "sha256:0861d3d10232da4ff58d70ef520a85b4a54842a19d66db3e2a556c16f92a36b6",
+          "right_hash": "sha256:ea4b651ff06d9652cb58c8e8c188e64b6f1f10d7b5ef584b61c0bc1bee0c46fc",
+          "state_leaf_differences": [
+            {
+              "left": "sha256:cf67aa964212aedefb7e36135ba7173badf0925315ce00eea13b9d06ec842928",
+              "path": "pixels.image2",
+              "right": "sha256:21f21e1ff25e7197a8d56cb04aaf819b835997220691d081a45fce5cb63bdf8c"
+            }
+          ]
+        },
+        "left_ref": {
+          "episode_index": 2,
+          "exact_pose": false,
+          "frame_index": 4,
+          "pose_frame_index": 0,
+          "pose_step": 0,
+          "run_id": "native-formal-baseline-v3",
+          "step": 4
+        },
+        "previous_observation_equal": true,
+        "right_ref": {
+          "episode_index": 2,
+          "exact_pose": false,
+          "frame_index": 4,
+          "pose_frame_index": 0,
+          "pose_step": 0,
+          "run_id": "native-formal-active-v3",
+          "step": 4
+        },
+        "step": 4
+      },
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+        "seed": 44048,
+        "task_id": 0
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 74,
+        "episode_id": "task00-state48-4e715fc3",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 2,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 74,
+        "episode_id": "task00-state48-8e6cc54d",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 2
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 75,
+        "cursor": 0,
+        "expected_authorization": 75,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+        "seed": 44049,
+        "task_id": 0
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 75,
+        "episode_id": "task00-state49-97de93b6",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 3,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 75,
+        "episode_id": "task00-state49-eeab6d1b",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 3
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 110,
+        "cursor": 0,
+        "expected_authorization": 110,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+        "seed": 44046,
+        "task_id": 1
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 110,
+        "episode_id": "task01-state46-32f01aac",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 4,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 110,
+        "episode_id": "task01-state46-0518ea8d",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 4
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 260,
+        "cursor": 0,
+        "expected_authorization": 260,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+        "seed": 44047,
+        "task_id": 1
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 260,
+        "episode_id": "task01-state47-1d3e0ff0",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 5,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 260,
+        "episode_id": "task01-state47-90be1cc3",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 5
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 110,
+        "cursor": 0,
+        "expected_authorization": 110,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+        "seed": 44048,
+        "task_id": 1
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 110,
+        "episode_id": "task01-state48-07b024ab",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 6,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 110,
+        "episode_id": "task01-state48-47fdbe2d",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 6
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 103,
+        "cursor": 0,
+        "expected_authorization": 103,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl next to the ramekin and place it on the plate",
+        "seed": 44049,
+        "task_id": 1
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 103,
+        "episode_id": "task01-state49-6aa344fa",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 7,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 103,
+        "episode_id": "task01-state49-b4a16c05",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 7
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 93,
+        "cursor": 0,
+        "expected_authorization": 93,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl from table center and place it on the plate",
+        "seed": 44046,
+        "task_id": 2
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 93,
+        "episode_id": "task02-state46-76a5a76a",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 8,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 93,
+        "episode_id": "task02-state46-c690ae10",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 8
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 92,
+        "cursor": 0,
+        "expected_authorization": 92,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl from table center and place it on the plate",
+        "seed": 44047,
+        "task_id": 2
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 92,
+        "episode_id": "task02-state47-46193ec1",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 9,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 92,
+        "episode_id": "task02-state47-c2923de2",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 9
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 86,
+        "cursor": 0,
+        "expected_authorization": 86,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl from table center and place it on the plate",
+        "seed": 44048,
+        "task_id": 2
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 86,
+        "episode_id": "task02-state48-42ce0950",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 10,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 86,
+        "episode_id": "task02-state48-024a4688",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 10
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 99,
+        "cursor": 0,
+        "expected_authorization": 99,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl from table center and place it on the plate",
+        "seed": 44049,
+        "task_id": 2
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 99,
+        "episode_id": "task02-state49-ddbed98c",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 11,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 99,
+        "episode_id": "task02-state49-ebccb3e4",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 11
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 83,
+        "cursor": 0,
+        "expected_authorization": 83,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+        "seed": 44046,
+        "task_id": 3
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 83,
+        "episode_id": "task03-state46-a2acb496",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 12,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 83,
+        "episode_id": "task03-state46-a6155305",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 12
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 85,
+        "cursor": 0,
+        "expected_authorization": 85,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+        "seed": 44047,
+        "task_id": 3
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 85,
+        "episode_id": "task03-state47-cbde1d5c",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 13,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 85,
+        "episode_id": "task03-state47-d8e7dd7e",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 13
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 82,
+        "cursor": 0,
+        "expected_authorization": 82,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+        "seed": 44048,
+        "task_id": 3
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 82,
+        "episode_id": "task03-state48-8dfe4dc8",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 14,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 82,
+        "episode_id": "task03-state48-918be746",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 14
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 85,
+        "cursor": 0,
+        "expected_authorization": 85,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl on the cookie box and place it on the plate",
+        "seed": 44049,
+        "task_id": 3
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 85,
+        "episode_id": "task03-state49-36e98268",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 15,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 85,
+        "episode_id": "task03-state49-f57a80b3",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 15
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 131,
+        "cursor": 0,
+        "expected_authorization": 131,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+        "seed": 44046,
+        "task_id": 4
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 131,
+        "episode_id": "task04-state46-ff2e01db",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 16,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 131,
+        "episode_id": "task04-state46-e0c2d735",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 16
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 280,
+        "cursor": 0,
+        "expected_authorization": 280,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+        "seed": 44047,
+        "task_id": 4
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task04-state47-84d77104",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "left_episode_index": 17,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task04-state47-6dcea877",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "right_episode_index": 17
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 136,
+        "cursor": 0,
+        "expected_authorization": 136,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+        "seed": 44048,
+        "task_id": 4
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 136,
+        "episode_id": "task04-state48-d7ab2ea0",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 18,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 136,
+        "episode_id": "task04-state48-f09dbea8",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 18
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 135,
+        "cursor": 0,
+        "expected_authorization": 135,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+        "seed": 44049,
+        "task_id": 4
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 135,
+        "episode_id": "task04-state49-5209e2ea",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 19,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 135,
+        "episode_id": "task04-state49-e7ddf5b7",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 19
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 83,
+        "cursor": 0,
+        "expected_authorization": 83,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+        "seed": 44046,
+        "task_id": 5
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 83,
+        "episode_id": "task05-state46-2d13c118",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 20,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 83,
+        "episode_id": "task05-state46-9d2857c3",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 20
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 85,
+        "cursor": 0,
+        "expected_authorization": 85,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+        "seed": 44047,
+        "task_id": 5
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 85,
+        "episode_id": "task05-state47-9be66529",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 21,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 85,
+        "episode_id": "task05-state47-8cd3ae5d",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 21
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 91,
+        "cursor": 0,
+        "expected_authorization": 91,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+        "seed": 44048,
+        "task_id": 5
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 91,
+        "episode_id": "task05-state48-4dfaf96e",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 22,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 91,
+        "episode_id": "task05-state48-97dbf110",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 22
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 94,
+        "cursor": 0,
+        "expected_authorization": 94,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+        "seed": 44049,
+        "task_id": 5
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 94,
+        "episode_id": "task05-state49-592a56d6",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 23,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 94,
+        "episode_id": "task05-state49-5f2377be",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 23
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 280,
+        "cursor": 0,
+        "expected_authorization": 280,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+        "seed": 44046,
+        "task_id": 6
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task06-state46-ca688494",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "left_episode_index": 24,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task06-state46-3961c860",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "right_episode_index": 24
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 115,
+        "cursor": 0,
+        "expected_authorization": 115,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+        "seed": 44047,
+        "task_id": 6
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 115,
+        "episode_id": "task06-state47-95642537",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 25,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 115,
+        "episode_id": "task06-state47-fea9e3bf",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 25
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 106,
+        "cursor": 0,
+        "expected_authorization": 106,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+        "seed": 44048,
+        "task_id": 6
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 106,
+        "episode_id": "task06-state48-c7d49d76",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 26,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 106,
+        "episode_id": "task06-state48-8e3d27b6",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 26
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 102,
+        "cursor": 0,
+        "expected_authorization": 102,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl next to the cookie box and place it on the plate",
+        "seed": 44049,
+        "task_id": 6
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 102,
+        "episode_id": "task06-state49-df4fdbcb",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 27,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 102,
+        "episode_id": "task06-state49-a6966061",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 27
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 126,
+        "cursor": 0,
+        "expected_authorization": 126,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl on the stove and place it on the plate",
+        "seed": 44046,
+        "task_id": 7
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 126,
+        "episode_id": "task07-state46-540b1378",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 28,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 126,
+        "episode_id": "task07-state46-c6e89a60",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 28
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 117,
+        "cursor": 0,
+        "expected_authorization": 117,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl on the stove and place it on the plate",
+        "seed": 44047,
+        "task_id": 7
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 117,
+        "episode_id": "task07-state47-406d265b",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 29,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 117,
+        "episode_id": "task07-state47-63353559",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 29
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 115,
+        "cursor": 0,
+        "expected_authorization": 115,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl on the stove and place it on the plate",
+        "seed": 44048,
+        "task_id": 7
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 115,
+        "episode_id": "task07-state48-d8a98e47",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 30,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 115,
+        "episode_id": "task07-state48-a0c1f8d6",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 30
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 280,
+        "cursor": 0,
+        "expected_authorization": 280,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl on the stove and place it on the plate",
+        "seed": 44049,
+        "task_id": 7
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task07-state49-b2a29a89",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "left_episode_index": 31,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task07-state49-720d571e",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "right_episode_index": 31
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 280,
+        "cursor": 0,
+        "expected_authorization": 280,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl next to the plate and place it on the plate",
+        "seed": 44046,
+        "task_id": 8
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task08-state46-4e575732",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "left_episode_index": 32,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task08-state46-d22a21d4",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "right_episode_index": 32
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 93,
+        "cursor": 0,
+        "expected_authorization": 93,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl next to the plate and place it on the plate",
+        "seed": 44047,
+        "task_id": 8
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 93,
+        "episode_id": "task08-state47-0b773a61",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 33,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 93,
+        "episode_id": "task08-state47-621cedd7",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 33
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 92,
+        "cursor": 0,
+        "expected_authorization": 92,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl next to the plate and place it on the plate",
+        "seed": 44048,
+        "task_id": 8
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 92,
+        "episode_id": "task08-state48-6ee81cb3",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 34,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 92,
+        "episode_id": "task08-state48-23170019",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 34
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 94,
+        "cursor": 0,
+        "expected_authorization": 94,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl next to the plate and place it on the plate",
+        "seed": 44049,
+        "task_id": 8
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 94,
+        "episode_id": "task08-state49-12e3f121",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 35,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 94,
+        "episode_id": "task08-state49-f44385de",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 35
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 117,
+        "cursor": 0,
+        "expected_authorization": 117,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 46,
+        "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+        "seed": 44046,
+        "task_id": 9
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 117,
+        "episode_id": "task09-state46-4602cb7f",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 36,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 117,
+        "episode_id": "task09-state46-6ef9b80b",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 36
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 114,
+        "cursor": 0,
+        "expected_authorization": 114,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 47,
+        "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+        "seed": 44047,
+        "task_id": 9
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 114,
+        "episode_id": "task09-state47-0eacf9bb",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "left_episode_index": 37,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 114,
+        "episode_id": "task09-state47-de706615",
+        "max_reward": 1.0,
+        "success": true,
+        "sum_reward": 1.0
+      },
+      "right_episode_index": 37
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 280,
+        "cursor": 0,
+        "expected_authorization": 280,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 48,
+        "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+        "seed": 44048,
+        "task_id": 9
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task09-state48-441af2cd",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "left_episode_index": 38,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task09-state48-afad2c2a",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "right_episode_index": 38
+    },
+    {
+      "counts": {
+        "action": 0,
+        "authorization": 0,
+        "compared_actions": 280,
+        "cursor": 0,
+        "expected_authorization": 280,
+        "missing_left_steps": 0,
+        "missing_right_steps": 0,
+        "observation": 0,
+        "outcome": 0
+      },
+      "first_by_category": {
+        "action": null,
+        "authorization": null,
+        "cursor": null,
+        "observation": null,
+        "outcome": null
+      },
+      "first_difference": null,
+      "key": {
+        "initial_state_index": 49,
+        "instruction": "pick up the black bowl on the wooden cabinet and place it on the plate",
+        "seed": 44049,
+        "task_id": 9
+      },
+      "left": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task09-state49-64f47753",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "left_episode_index": 39,
+      "missing_facts": [],
+      "right": {
+        "crashed": false,
+        "env_steps": 280,
+        "episode_id": "task09-state49-ef30672c",
+        "max_reward": 0.0,
+        "success": false,
+        "sum_reward": 0.0
+      },
+      "right_episode_index": 39
+    }
+  ],
+  "schema": "sentinel-native-vla-compare-v1",
+  "scope": "derived-from-two-independently-verified-records",
+  "sources": {
+    "left": {
+      "files": {
+        "config.json": "sha256:bfb633bdddda6840c19273cf48f475ef2782c0668c66941c2c157c8e18d09ae5",
+        "episode-task00-state46.mp4": "sha256:d30234f299b500f3193224e8196f43285ca296a9da3a9d229776be9ceca2f178",
+        "episode-task04-state46.mp4": "sha256:4d1220f06bbb1e092fe9275faebf9e2ca425da445fed8579ca5ae0a8282ac7f8",
+        "episode-task05-state46.mp4": "sha256:670afe12cb419ec87b64b8ae6c3a5de92f28eb7254c16504c99992431c734359",
+        "events.jsonl": "sha256:31750a5dd5797247cea3e616ccf0097625d19b924b04973f4b1659d4fff0f756",
+        "native_trace.jsonl": "sha256:5d4aa606c65cb4ea472811f9c6ac97adc2036ec0cdd8be7de274e82ec85db063",
+        "replay.json": "sha256:f78c70d08fb933f6128e121414190e443d7b5e03c207de116a8c74fd0a76e301",
+        "result.json": "sha256:14a63a29bdd7942381bcc3a6a693b85b0efe342ced8b58ae6f92756235196bda",
+        "viewer-model-task0.json": "sha256:a33f5182717064499a6b1014c19dd844d42e0edf9bf57b640912d9e5fde4e03b",
+        "viewer-model-task4.json": "sha256:18f686c3b677c8503d1a2440be6bbf48c989aae231a354988821adc394b7740c",
+        "viewer-model-task5.json": "sha256:456847e96f309b1cfb632a847a5b903f949d501c9e554502bab922dd8cf4a181",
+        "viewer-model.json": "sha256:c78d16bd0cb3825bb67723bf8f66b1c7ef7e7187986761243d2d6c9c7d4baeb2"
+      },
+      "manifest_sha256": "sha256:269b9c4272bc787b2a58733552b0d4e9a744d5722d9506676835c7de1587516b",
+      "public_key_sha256": "sha256:f2c14b1f8c2216e044239e9dd5adc6c3202b7b4a652c6c6ddaf0a4d8a1ac8d30",
+      "run_id": "native-formal-baseline-v3"
+    },
+    "right": {
+      "files": {
+        "config.json": "sha256:9cd81e1009ace1ef073bc87e6c7dd48d9bd89404a34a6083591af304bf4faf71",
+        "episode-task00-state46.mp4": "sha256:d30234f299b500f3193224e8196f43285ca296a9da3a9d229776be9ceca2f178",
+        "episode-task04-state46.mp4": "sha256:4d1220f06bbb1e092fe9275faebf9e2ca425da445fed8579ca5ae0a8282ac7f8",
+        "episode-task05-state46.mp4": "sha256:670afe12cb419ec87b64b8ae6c3a5de92f28eb7254c16504c99992431c734359",
+        "events.jsonl": "sha256:51731381b6286f03a44ac149198f8f565791f5c92ea097c2f45d4c1e91c403bf",
+        "native_trace.jsonl": "sha256:923e59ecab0f195b77ae1e66c2417bd19e477fe2c7ac24359fea543238bde391",
+        "replay.json": "sha256:3d7f5e1c4318343bdea3a7ddb7784d13f5d658d7f7f326a6d76ce7b221f5f94d",
+        "result.json": "sha256:1100825384b358e550a6dd8ad06cb3811e664c35471a2ae4402460890896d33e",
+        "viewer-model-task0.json": "sha256:a33f5182717064499a6b1014c19dd844d42e0edf9bf57b640912d9e5fde4e03b",
+        "viewer-model-task4.json": "sha256:18f686c3b677c8503d1a2440be6bbf48c989aae231a354988821adc394b7740c",
+        "viewer-model-task5.json": "sha256:456847e96f309b1cfb632a847a5b903f949d501c9e554502bab922dd8cf4a181",
+        "viewer-model.json": "sha256:c78d16bd0cb3825bb67723bf8f66b1c7ef7e7187986761243d2d6c9c7d4baeb2"
+      },
+      "manifest_sha256": "sha256:34187ef49b9512a663e9f973565de1c1599191c01025bc497d71832d92d5288a",
+      "public_key_sha256": "sha256:49b37b42791801fdc73d5a677423dcc5c1f45e49df73d5eff7baa21448784558",
+      "run_id": "native-formal-active-v3"
+    }
+  },
+  "summary": {
+    "action_differences": 0,
+    "authorization_differences": 0,
+    "compared_actions": 5420,
+    "cursor_differences": 0,
+    "expected_authorization_differences": 40,
+    "left_successes": 33,
+    "observation_differences": 1,
+    "outcome_differences": 0,
+    "paired_episodes": 40,
+    "right_successes": 33,
+    "status": "DIFFERENCES"
+  }
+}

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 710" role="img" aria-labelledby="title desc">
+<title id="title">Sentinel EVC · integration &amp; execution</title>
+<desc id="desc">(a) Before motion: Compare the integration on fixed inputs. (b) At the software writer: Check each request, then retain its evidence</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#8492a5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker><style>text{font-family:Satoshi,Inter,Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#27364c} .title{font-size:23px;font-weight:700}.label{font-size:18px;font-weight:600}.body{font-size:16px;fill:#637087}.note{font-size:15px;fill:#738096}.green{fill:#24796f}.blue{fill:#3563a3}.orange{fill:#a66b20}.red{fill:#b55858}</style></defs>
+<rect x="12" y="12" width="1096" height="274" rx="20" fill="#faf9f6" stroke="#e4e0d7" stroke-width="1.5"/>
+<text x="36" y="49" class="title" text-anchor="start">(a) Before motion</text>
+<text x="1080" y="48" class="body" text-anchor="end">Compare the integration on fixed inputs</text>
+<rect x="36" y="107" width="154" height="102" rx="13" fill="#f2f5fb" stroke="#c6d3e6" stroke-width="1.5"/>
+<text x="113" y="137" class="label blue" text-anchor="middle">Fixed probes</text>
+<text x="113" y="166" class="body" text-anchor="middle">Cameras + state</text>
+<text x="113" y="191" class="note" text-anchor="middle">Same input pack</text>
+<rect x="226" y="83" width="208" height="62" rx="13" fill="#edf3fd" stroke="#bfd1ec" stroke-width="1.5"/>
+<text x="330" y="120" class="label blue" text-anchor="middle">Reference adapter</text>
+<rect x="226" y="171" width="208" height="62" rx="13" fill="#edf3fd" stroke="#bfd1ec" stroke-width="1.5"/>
+<text x="330" y="208" class="label blue" text-anchor="middle">Candidate adapter</text>
+<path d="M190 158H207V114H226" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M207 158V202H226" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="478" y="83" width="306" height="150" rx="13" fill="#edf7f4" stroke="#a4cfc5" stroke-width="1.5"/>
+<text x="631" y="114" class="label green" text-anchor="middle">Compare what was consumed</text>
+<text x="631" y="146" class="body" text-anchor="middle">Camera tensors · ordered state</text>
+<text x="631" y="176" class="body" text-anchor="middle">Action cursor · final action bytes</text>
+<text x="631" y="209" class="body green" text-anchor="middle">First changed field</text>
+<path d="M434 114H456V151H478" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M434 202H456V168H478" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="828" y="83" width="252" height="150" rx="13" fill="#fff" stroke="#c8dcd4" stroke-width="1.5"/>
+<text x="954" y="115" class="label green" text-anchor="middle">Signed decision capsule</text>
+<text x="954" y="156" class="body green" text-anchor="middle">PASS → fixed probes match</text>
+<text x="954" y="192" class="body red" text-anchor="middle">BLOCK / REVIEW → inspect</text>
+<path d="M784 158H828" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="36" y="264" class="note" text-anchor="start">Qualification is bound to the captured adapter and fixed probes.</text>
+<rect x="12" y="310" width="1096" height="386" rx="20" fill="#faf9f6" stroke="#e4e0d7" stroke-width="1.5"/>
+<text x="36" y="347" class="title" text-anchor="start">(b) At the software writer</text>
+<text x="1080" y="347" class="body" text-anchor="end">Check each request, then retain its evidence</text>
+<rect x="36" y="391" width="208" height="87" rx="13" fill="#edf3fd" stroke="#bfd1ec" stroke-width="1.5"/>
+<text x="140" y="427" class="label blue" text-anchor="middle">Existing VLA</text>
+<text x="140" y="458" class="body" text-anchor="middle">Official postprocessor</text>
+<rect x="288" y="391" width="204" height="87" rx="13" fill="#fff3df" stroke="#e7c484" stroke-width="1.5"/>
+<text x="390" y="427" class="label orange" text-anchor="middle">Final native action</text>
+<text x="390" y="458" class="body orange" text-anchor="middle">Shape · dtype · exact bytes</text>
+<rect x="534" y="386" width="286" height="125" rx="13" fill="#edf7f4" stroke="#a4cfc5" stroke-width="1.5"/>
+<text x="677" y="417" class="label green" text-anchor="middle">Sentinel Native Gateway</text>
+<text x="677" y="446" class="body" text-anchor="middle">One-use, short-lived permit</text>
+<text x="677" y="473" class="body" text-anchor="middle">Copy + exact-byte check</text>
+<text x="677" y="498" class="body" text-anchor="middle">Recheck at writer entry</text>
+<rect x="864" y="391" width="216" height="87" rx="13" fill="#edf3fd" stroke="#bfd1ec" stroke-width="1.5"/>
+<text x="972" y="427" class="label blue" text-anchor="middle">Native writer</text>
+<text x="972" y="458" class="body" text-anchor="middle">env.step</text>
+<path d="M244 433H288" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M492 433H534" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M820 433H864" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="325" y="510" width="167" height="35" rx="9" fill="#fbefed" stroke="#e3baba" stroke-width="1.5"/>
+<text x="408" y="533" class="body red" text-anchor="middle">Reject → no write</text>
+<path d="M534 486H510V527H492" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="5 5"/>
+<rect x="534" y="552" width="286" height="66" rx="13" fill="#fff" stroke="#bcd7d0" stroke-width="1.5"/>
+<text x="677" y="578" class="label green" text-anchor="middle">Execution context</text>
+<text x="677" y="604" class="note" text-anchor="middle">Feedback · queue · generation</text>
+<rect x="864" y="552" width="216" height="66" rx="13" fill="#fff" stroke="#c6d3e6" stroke-width="1.5"/>
+<text x="972" y="578" class="label blue" text-anchor="middle">Actual feedback</text>
+<text x="972" y="604" class="note" text-anchor="middle">env.reset / env.step</text>
+<path d="M972 478V552" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M864 585H820" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="842" y="535" class="note" text-anchor="middle">next request</text>
+<path d="M677 552V511" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="36" y="556" width="208" height="62" rx="13" fill="#edf7f4" stroke="#a4cfc5" stroke-width="1.5"/>
+<text x="140" y="581" class="label green" text-anchor="middle">Signed execution trace</text>
+<text x="140" y="607" class="note" text-anchor="middle">Action + feedback + cursors</text>
+<rect x="288" y="556" width="204" height="62" rx="13" fill="#fff" stroke="#c6d3e6" stroke-width="1.5"/>
+<text x="390" y="581" class="label blue" text-anchor="middle">Verify &amp; replay</text>
+<text x="390" y="607" class="note" text-anchor="middle">Public key · 3D · first difference</text>
+<path d="M244 586H288" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1080 435H1094V647H140V618" fill="none" stroke="#8492a5" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="5 5"/>
+<text x="760" y="674" class="note" text-anchor="middle">Retain executed actions and observed feedback</text>
+</svg>

@@ -1,0 +1,106 @@
+{
+  "schema": "sentinel-native-demo-index-v1",
+  "readme": "https://github.com/LancerLSY/sentinel-evc-lab/blob/main/docs/research/2026-10-03/native-product/MEDIA.md",
+  "source": "https://github.com/LancerLSY/sentinel-evc-lab/tree/2ede56bd655554ad03b9dc93731ca1660aae9010",
+  "release": "https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003",
+  "bundle": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v3-active.zip",
+  "publicKey": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/native-vla-product-20261003/native-v3-active.public",
+  "provenance": "assets/native-v3-web-provenance.json",
+  "demos": [
+    {
+      "taskId": 0,
+      "stateIndex": 46,
+      "instruction": {
+        "en": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+        "zh": "\u62ff\u8d77\u76d8\u5b50\u4e0e\u5c0f\u76c5\u4e4b\u95f4\u7684\u9ed1\u7897\uff0c\u653e\u5230\u76d8\u5b50\u4e0a"
+      },
+      "model": "assets/native-v3-panda-task0.json.gz",
+      "modelSha256": "7c5b1e507c3f7b75032fe0440ec88da84f18b3b76ac2a81654eac7131964ebf4",
+      "replay": "assets/native-v3-active-task00-state46.json",
+      "replaySha256": "bffb63c16ea27024ba9a6509c5f4336d7ab8bfb6f3fe61dd179ed4150bffc88d",
+      "sourceManifestSha256": "34187ef49b9512a663e9f973565de1c1599191c01025bc497d71832d92d5288a",
+      "sourceResultSha256": "1100825384b358e550a6dd8ad06cb3811e664c35471a2ae4402460890896d33e",
+      "video": "assets/native-v3-active-task00-state46.mp4",
+      "videoSha256": "32aad611a04489f55186670ec642c84182aaca4d59f22426c1130cc4418c60bb",
+      "poster": "assets/native-v3-active-task00-state46-poster.png",
+      "posterSha256": "10ae448353349916bf877206de4a612391d5e7dd23e94f3e0001274ad7d7328b",
+      "mediaManifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
+      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+      "modelDecodedSha256": "a33f5182717064499a6b1014c19dd844d42e0edf9bf57b640912d9e5fde4e03b"
+    },
+    {
+      "taskId": 4,
+      "stateIndex": 46,
+      "instruction": {
+        "en": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+        "zh": "\u62ff\u8d77\u6728\u67dc\u9876\u5c42\u62bd\u5c49\u91cc\u7684\u9ed1\u7897\uff0c\u653e\u5230\u76d8\u5b50\u4e0a"
+      },
+      "model": "assets/native-v3-panda-task4.json.gz",
+      "modelSha256": "5e0b6f5f0bece2ccfb8b32791b97e4e88881d71abfbc1ef902cc994cf168b036",
+      "replay": "assets/native-v3-active-task04-state46.json",
+      "replaySha256": "6b310da5c68ae8f14ab222ffc239b8a5cdaa7c739fb332d1ec3fe79eda903c49",
+      "sourceManifestSha256": "34187ef49b9512a663e9f973565de1c1599191c01025bc497d71832d92d5288a",
+      "sourceResultSha256": "1100825384b358e550a6dd8ad06cb3811e664c35471a2ae4402460890896d33e",
+      "video": "assets/native-v3-active-task04-state46.mp4",
+      "videoSha256": "d8525c8678014e861529ed72275c3ac149c91128d6353d1653771cf7fe89e663",
+      "poster": "assets/native-v3-active-task04-state46-poster.png",
+      "posterSha256": "6a7f37f0408c28d4e3749ba67f9729df26df359dd9d50e6c7332c2a26cbf5970",
+      "mediaManifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
+      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+      "modelDecodedSha256": "18f686c3b677c8503d1a2440be6bbf48c989aae231a354988821adc394b7740c"
+    },
+    {
+      "taskId": 5,
+      "stateIndex": 46,
+      "instruction": {
+        "en": "pick up the black bowl on the ramekin and place it on the plate",
+        "zh": "\u62ff\u8d77\u5c0f\u76c5\u4e0a\u7684\u9ed1\u7897\uff0c\u653e\u5230\u76d8\u5b50\u4e0a"
+      },
+      "model": "assets/native-v3-panda-task5.json.gz",
+      "modelSha256": "084cf724267141668978c87759e1f3c4cbcb685d0784a9b14e8c2d23db8adc42",
+      "replay": "assets/native-v3-active-task05-state46.json",
+      "replaySha256": "71ac631671627087a676fc1c74ee43703b77d2404159faeebbc0d2ada40624e7",
+      "sourceManifestSha256": "34187ef49b9512a663e9f973565de1c1599191c01025bc497d71832d92d5288a",
+      "sourceResultSha256": "1100825384b358e550a6dd8ad06cb3811e664c35471a2ae4402460890896d33e",
+      "video": "assets/native-v3-active-task05-state46.mp4",
+      "videoSha256": "e40687abed72f5f010aac1652ff2101b35eb65e896e7a6bf8e01c63bec1414ee",
+      "poster": "assets/native-v3-active-task05-state46-poster.png",
+      "posterSha256": "c8d5f9303597911a74e188951cf363d4e0d401185348b09bbf2406647ae979d4",
+      "mediaManifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
+      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+      "modelDecodedSha256": "456847e96f309b1cfb632a847a5b903f949d501c9e554502bab922dd8cf4a181"
+    },
+    {
+      "taskId": 0,
+      "stateIndex": 47,
+      "instruction": {
+        "en": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+        "zh": "\u62ff\u8d77\u76d8\u5b50\u4e0e\u5c0f\u76c5\u4e4b\u95f4\u7684\u9ed1\u7897\uff0c\u653e\u5230\u76d8\u5b50\u4e0a"
+      },
+      "model": "assets/native-v3-panda-task0.json.gz",
+      "modelSha256": "7c5b1e507c3f7b75032fe0440ec88da84f18b3b76ac2a81654eac7131964ebf4",
+      "replay": "assets/native-v3-active-task00-state47.json",
+      "replaySha256": "e998ddef19d742d5ba97ce6ac8699fc3e7b15f28bb21cc1bf20d792779b6c049",
+      "sourceManifestSha256": "34187ef49b9512a663e9f973565de1c1599191c01025bc497d71832d92d5288a",
+      "sourceResultSha256": "1100825384b358e550a6dd8ad06cb3811e664c35471a2ae4402460890896d33e",
+      "purpose": "posthoc_failure_diagnostic",
+      "video": "assets/native-v3-active-task00-state47.mp4",
+      "videoSha256": "b6c2e3b3a1bdc5316322d9ccf29a16a2928401f17fa88df710cc88c6f2854154",
+      "poster": "assets/native-v3-active-task00-state47-poster.png",
+      "posterSha256": "35370f34086cc297999256af2720d6d9092853ee16a0fcc6781407c5e13ee23f",
+      "mediaManifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
+      "mediaValidationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+      "additionalBenchmarkSamples": 0,
+      "sourceEpisodeCountedInFormalStatistics": true,
+      "modelDecodedSha256": "a33f5182717064499a6b1014c19dd844d42e0edf9bf57b640912d9e5fde4e03b"
+    }
+  ],
+  "mediaProvenance": {
+    "manifestSha256": "a2723243d087fa2e969ac3698d69c17783063e8b9bafe57d9d1e4c37a00c3f8e",
+    "validationSha256": "5b43c66569f3f0688b552e4967c4b5293f101eb134d24e5133d80b7d91358c32",
+    "generatorCommit": "a3071f9d7c0b88e60c878c7b350054e34510a9c7",
+    "generatorSha256": "28bcedb156e9a9fe53a6a7acabcc65a1ccee74bf5402f5681eb12da6fee8ab9a",
+    "formalSourceCommit": "2ede56bd655554ad03b9dc93731ca1660aae9010",
+    "formalBundleSha256": "b95b1886ac8aad4d744b540c2b085ca18c06dabf445945ab3eec0ff92562208a"
+  }
+}
