@@ -1,7 +1,7 @@
 {
   "schema": "sentinel-project-static-assets-v1",
   "homepage": "https://lansiyao.com/research/sentinel-vla/project/",
-  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-diff-20261003/sentinel-execution-diff-page.zip",
+  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-diff-20261003/sentinel-execution-diff-page-v2.zip",
   "files": [
     {
       "path": "app.js",
@@ -290,8 +290,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 61549,
-      "sha256": "975820f9281ebae91a8df5a0036a69e28821fc45459644257892f354e498b221"
+      "bytes": 61558,
+      "sha256": "6f817450988aed64d9f79c236855e52679ede5a555f99f197ac2118a35bfd4f6"
     },
     {
       "path": "native-project.js",
