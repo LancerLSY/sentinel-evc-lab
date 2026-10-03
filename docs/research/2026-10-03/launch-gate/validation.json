@@ -1,0 +1,21 @@
+{
+  "schema": "sentinel-launch-release-validation-v1",
+  "existing_regression": {
+    "passed": 211,
+    "failed": 0,
+    "skipped": 9,
+    "seconds": 23.63
+  },
+  "native_shell_compile": "arm64 macOS12 AppKit WebKit PASS",
+  "native_upload_check_save": "PASS",
+  "packaged_experiment_capsules": {
+    "count": 20,
+    "reproduction": "PASS",
+    "diagnosis": "MATCH"
+  },
+  "independent_review": {
+    "open_findings": 0,
+    "recommendation": "APPROVE"
+  },
+  "page_scope": "research/sentinel-vla/project only; owner updates preserved"
+}

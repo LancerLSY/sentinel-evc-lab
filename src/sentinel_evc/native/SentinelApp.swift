@@ -17,7 +17,7 @@ private struct BackendReady: Decodable {
 }
 
 @main
-final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKDownloadDelegate {
+final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKUIDelegate, WKDownloadDelegate {
     private var window: NSWindow!
     private var webView: WKWebView!
     private var backend: Process?
@@ -45,6 +45,7 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         configuration.websiteDataStore = .nonPersistent()
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView.navigationDelegate = self
+        webView.uiDelegate = self
         window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 1320, height: 900),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
@@ -102,6 +103,23 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         stopBackend()
     }
 
+    func webView(_ webView: WKWebView, runOpenPanelWith parameters: WKOpenPanelParameters,
+                 initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping ([URL]?) -> Void) {
+        guard let url = frame.request.url, url.scheme == "http", url.host == "127.0.0.1",
+              backendPort != nil, url.port == backendPort else {
+            completionHandler(nil)
+            return
+        }
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = parameters.allowsDirectories
+        panel.allowsMultipleSelection = parameters.allowsMultipleSelection
+        panel.beginSheetModal(for: window) { result in
+            completionHandler(result == .OK ? panel.urls : nil)
+        }
+    }
+
     func webView(_ webView: WKWebView, decidePolicyFor action: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = action.request.url else {
@@ -111,7 +129,7 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         let localPage = url.scheme == "about"
         let backendPage = url.scheme == "http" && url.host == "127.0.0.1"
             && backendPort != nil && url.port == backendPort
-        if backendPage && action.shouldPerformDownload {
+        if (backendPage || isBackendBlob(url)) && action.shouldPerformDownload {
             decisionHandler(.download)
         } else {
             decisionHandler(localPage || backendPage ? .allow : .cancel)
@@ -126,11 +144,18 @@ final class SentinelApp: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         }
         let backendResponse = url.scheme == "http" && url.host == "127.0.0.1"
             && backendPort != nil && url.port == backendPort
-        guard backendResponse else {
+        guard backendResponse || isBackendBlob(url) else {
             decisionHandler(.cancel)
             return
         }
         decisionHandler(response.canShowMIMEType ? .allow : .download)
+    }
+
+    private func isBackendBlob(_ url: URL) -> Bool {
+        guard url.scheme == "blob", backendPort != nil,
+              let origin = URL(string: String(url.absoluteString.dropFirst(5))) else { return false }
+        return origin.scheme == "http" && origin.host == "127.0.0.1"
+            && origin.port == backendPort && origin.user == nil && origin.password == nil
     }
 
     func webView(_ webView: WKWebView, navigationAction: WKNavigationAction,

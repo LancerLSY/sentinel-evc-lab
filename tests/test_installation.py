@@ -290,7 +290,7 @@ def test_native_app_routes_only_backend_downloads_to_save_panel():
     assert "action.shouldPerformDownload" in source
     assert "response.canShowMIMEType ? .allow : .download" in source
     assert source.count("url.host == \"127.0.0.1\"") >= 3
-    assert "guard backendResponse else" in source
+    assert "guard backendResponse || isBackendBlob(url) else" in source
     assert "decisionHandler(.cancel)" in source
     assert "download.delegate = self" in source
     assert "NSSavePanel()" in source

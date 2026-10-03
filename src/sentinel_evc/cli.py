@@ -275,6 +275,36 @@ def cmd_native_run(args) -> int:
                            '--output-dir', str(Path(args.out).resolve())], check=False).returncode
 
 
+def _launch_pack(path_value: str) -> bytes:
+    from .launch_gate import MAX_PACK_BYTES, _read_regular_snapshot
+    return _read_regular_snapshot(Path(path_value), MAX_PACK_BYTES)
+
+
+def cmd_launch_check(args) -> int:
+    from .launch_gate import build_qualification_capsule
+    out = Path(args.out)
+    if out.exists() and (out.is_symlink() or not out.is_dir() or any(out.iterdir())):
+        raise ValueError("--out 必须是尚不存在或为空的目录；不会覆盖已有结果。")
+    out.mkdir(parents=True, exist_ok=True)
+    reference = _launch_pack(args.reference)
+    candidate = _launch_pack(args.candidate)
+    run_id = args.run_id or out.name
+    report, bundle = build_qualification_capsule(reference, candidate, out, run_id)
+    print(json.dumps({"verdict": report["verdict"], "summary": report["summary"],
+                      "report": str(Path(bundle["bundle_dir"]) / "qualification.json"),
+                      "bundle": bundle["bundle_dir"],
+                      "public_key": bundle["public_key"], "run_id": run_id,
+                      "scope": report["scope"]}, ensure_ascii=False, indent=2))
+    return 0 if report["verdict"] == "PASS" else 3
+
+
+def cmd_launch_reproduce(args) -> int:
+    from .launch_gate import reproduce_qualification_capsule
+    result = reproduce_qualification_capsule(args.bundle, args.public_key, args.run_id)
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["reproduction"] == "PASS" else 1
+
+
 def cmd_run(args):
     from .scenario import Scenario, strict_json
     from .runstore import RunStore
@@ -470,6 +500,19 @@ def main(argv=None) -> int:
     native_compare.add_argument('--verify-report',default=None)
     native_compare.add_argument('--fail-on',default='',help='逗号分隔：action,observation,cursor,outcome,authorization')
     native_compare.set_defaults(func=cmd_native_compare)
+
+    launch_check=sub.add_parser('launch-check',help='用同一组有限探针核验 VLA 适配器升级并生成签名决策包')
+    launch_check.add_argument('--reference',required=True,help='参考适配器 probe pack JSON')
+    launch_check.add_argument('--candidate',required=True,help='候选适配器 probe pack JSON')
+    launch_check.add_argument('--out',required=True,help='尚不存在或为空的输出目录')
+    launch_check.add_argument('--run-id',default=None,help='证据 run id；默认使用输出目录名')
+    launch_check.set_defaults(func=cmd_launch_check)
+
+    launch_reproduce=sub.add_parser('launch-reproduce',help='验签并重算 launch-check 派生决策')
+    launch_reproduce.add_argument('--bundle',required=True)
+    launch_reproduce.add_argument('--public-key',required=True)
+    launch_reproduce.add_argument('--run-id',required=True)
+    launch_reproduce.set_defaults(func=cmd_launch_reproduce)
 
     run=sub.add_parser("run",help="执行四候选数值闭环并保存签名证据")
     run.add_argument("--out",default="runs/workbench")

@@ -20,8 +20,23 @@ Sentinel EVC 把授权门放在机器人策略动作块的最后提交点：校�
 > 产品运行时：Python 3.10+ · macOS App：由 Python 环境管理并在本机构建 · 服务仅监听 `127.0.0.1`
 
 [安装](#五分钟安装) · [机制](#执行许可如何产生) ·
-[实测结果](#实测结果) · [最新实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003) ·
+[实测结果](#实测结果) · [最新实验包下载](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/launch-gate-20261003) ·
 [研究展示导航](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
+
+## 换配置后，机械臂动之前先查接入错误
+
+同一组输入经过两套实际适配器，Launch Gate 检查相机对应关系、状态顺序和单位、动作块位置以及最终动作字节。它给出具体线索：相机是否互换、哪个动作分量反号、索引偏了多少。修正接入后，重新采集同一组探针确认。
+
+CLI 和 App 都能导出小型签名判定包。另一台机器无需模型和 GPU，就能重新计算这次判定。
+
+```bash
+sentinel-evc launch-check --reference reference.json --candidate candidate.json --out runs/launch-check
+sentinel-evc launch-reproduce --bundle runs/launch-check/bundle --public-key runs/launch-check/anchors/demo.public --run-id launch-check
+```
+
+**RTX 4090 D（24 GB）实测：**10 个 LIBERO 输入上的 6/6 类接入故障均在写入入口前被拦住，被拦请求的下游调用为零。另一次 20 条记录的接入回放拦住 10/10 类故障。两组共 20 份签名判定包均可在 CPU 上复核。
+
+通过结果覆盖这组探针。主动改变策略行为时，使用重新审核的参考记录。[接入与写入器示例](docs/launch_gate.md) · [实测结果](docs/research/2026-10-03/launch-gate/RESULTS.md) · [固定实验协议](docs/research/2026-10-03/launch-gate/PROTOCOL.md)
 
 ## 执行差异诊断与回归门
 

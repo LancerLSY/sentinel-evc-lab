@@ -12,7 +12,7 @@ identity or the decoded source-model identity. This supports CDN transport
 compression without confusing it with the model file's own compression.
 
 The Git checkout contains the page code and small data. Download
-[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-boundary-20261003/sentinel-execution-boundary-page.zip)
+[the complete portable page](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/launch-gate-20261003/sentinel-launch-gate-page.zip)
 and extract it at the repository root to populate `website/` with the large
 meshes, replay JSON and videos. [ASSETS.json](ASSETS.json) identifies every
 published page file by size and SHA-256. It contains this project page only.
@@ -26,6 +26,19 @@ python3 -m http.server 8877 --bind 127.0.0.1 --directory website
 ```
 
 Open http://127.0.0.1:8877. Serve over HTTP so the replay and chart JSON can load.
+
+## Launch checks before motion
+
+`launch-gate.js` displays the exact retained GPU and recorded probe comparisons.
+Select an experiment, injected wiring fault and fixed input. The page shows the
+first changed field, both values, named camera routing, signed action values and
+observed repair hints. A BLOCK case has zero downstream software calls. The
+browser reads captured evidence; actual qualification and signed reproduction run
+in the local CLI/App. GPU probes make no environment-step calls.
+
+[Launch Gate usage](../docs/launch_gate.md) and
+[results and protocols](../docs/research/2026-10-03/launch-gate/RESULTS.md)
+retain the writer hook, scopes, exact identities and CPU reproduction commands.
 
 ## Verified execution differences
 
@@ -84,7 +97,7 @@ The GitHub Release retains a mirror; the Hub publication receipt verifies the
 ## Editing and publication
 
 Edit `index.html`, `styles.css`, `app.js`, `native-project.js`, `native-viewer.js`
-and `replay-viewer.js`. Chinese strings are in `app.js`; English
+`replay-viewer.js`, `launch-gate.js` and `launch-gate.css`. Chinese strings are in `app.js`; English
 strings are in the HTML. Replace the disabled arXiv resource and software citation
 only after the paper URL and bibliographic metadata are available. Keep chart data
 bound to retained source files and refresh asset hashes after changes.

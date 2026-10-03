@@ -4,6 +4,7 @@ import json
 import os
 import re
 import secrets
+from pathlib import Path
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib.resources import files
 from urllib.parse import urlsplit
@@ -12,6 +13,7 @@ from .runstore import RunStore
 
 MAX_BODY = 12 * 1024 * 1024
 MAX_NATIVE_BODY = 88 * 1024 * 1024
+MAX_LAUNCH_BODY = 36 * 1024 * 1024
 
 class LocalServer(ThreadingHTTPServer):
     daemon_threads = False
@@ -185,7 +187,7 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3]=='download':
                     path=self.server.store.export(run_id)
                     return self.reply(200,path.read_bytes(),'application/zip')
-            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js','native-ui.js':'native-ui.js','native-viewer.js':'native-viewer.js','native-compare-ui.js':'native-compare-ui.js'}
+            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js','native-ui.js':'native-ui.js','native-viewer.js':'native-viewer.js','native-compare-ui.js':'native-compare-ui.js','launch-ui.js':'launch-ui.js'}
             name='/'.join(parts)
             if name in assets:
                 resource=files('sentinel_evc').joinpath('web',assets[name])
@@ -202,13 +204,39 @@ class Handler(BaseHTTPRequestHandler):
         try:
             parts=self.parts()
             length=self.headers.get('Content-Length','')
-            body_limit = MAX_NATIVE_BODY if parts == ['api','native-runs','import'] else MAX_BODY
+            body_limit = (MAX_NATIVE_BODY if parts == ['api','native-runs','import'] else
+                          MAX_LAUNCH_BODY if parts in (['api','launch-check'],['api','launch-capsule']) else MAX_BODY)
             if self.headers.get('Transfer-Encoding') or not length.isdigit() or not 0 < int(length) <= body_limit:
                 return self.error(413,'BODY_LIMIT','请求大小超出范围。')
             if self.headers.get('Content-Type','').split(';')[0].strip() != 'application/json':
                 return self.error(415,'CONTENT_TYPE','需要 application/json。')
             self.connection.settimeout(5)
             body=strict_json(self.rfile.read(int(length)))
+            if parts in (['api','launch-check'], ['api','launch-capsule']):
+                from .launch_gate import MAX_PACK_BYTES, build_qualification_capsule, qualify
+                if not isinstance(body,dict) or set(body) != {'reference_json','candidate_json'}:
+                    raise InputError('请选择参考和待检查两份探针 JSON。')
+                packs=[]
+                for name in ('reference_json','candidate_json'):
+                    value=body[name]
+                    if not isinstance(value,str) or not 0 < len(value.encode('utf-8')) <= MAX_PACK_BYTES:
+                        raise InputError('探针文件需要为不超过 8 MiB 的 JSON。')
+                    packs.append(value.encode('utf-8'))
+                if parts[-1] == 'launch-check':
+                    return self.reply(200,qualify(*packs))
+                import base64, io, tempfile, uuid, zipfile
+                run_id='launch-'+uuid.uuid4().hex
+                with tempfile.TemporaryDirectory(prefix='.launch-',dir=self.server.store.root) as temporary:
+                    report,evidence=build_qualification_capsule(*packs,Path(temporary)/'decision',run_id)
+                    archive=io.BytesIO()
+                    with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as output:
+                        for source in sorted(Path(evidence['bundle_dir']).iterdir()):
+                            output.writestr('bundle/'+source.name,source.read_bytes())
+                    public_key=Path(evidence['public_key']).read_bytes()
+                return self.reply(200,{'report':report,'run_id':run_id,
+                    'capsule_base64':base64.b64encode(archive.getvalue()).decode('ascii'),
+                    'public_key_base64':base64.b64encode(public_key).decode('ascii'),
+                    'trust':'new derived decision with demo key; select its public key separately'})
             if parts == ['api','native-runs','import']:
                 return self.reply(201, {'run': self.server.native_runs.import_request(body)})
             if parts == ['api','assets']:

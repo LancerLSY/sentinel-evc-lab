@@ -66,7 +66,7 @@ const zh = {
   paperCost:"60 个预设 UR5e 样本中，障碍物在生成计划前独立采样；全检与增量判定一致。边际平均节省 0.996 ms，但增量 P95 更差，不主张尾延迟改善。",
   paperReport:"冻结设计、失败原因、配对结果与区间",
   navProduct:"产品",navNative:"原生回放",navOverview:"概览",navDemo:"演示",navMethod:"机制",navResults:"实验",navReproduce:"复现",
-  eyebrow:"本地执行控制 · 可核验回放",headline:"在最终动作上，作出执行决定。",hero:"面向机器人策略请求的本地执行边界：绑定最终精确字节、单次授权、观察实际写入，并保留签名回放。",personalHome:"个人主页",researchOverview:"研究概览",artifacts:"数据与源码",hfModel:"SO100 模型 · Hugging Face",videoLink:"原生回放",forthcoming:"待发布",
+  eyebrow:"VLA 接入检查 · 机械臂运动之前",headline:"机械臂动之前，先查接入错误。",hero:"换模型、改相机配置后，先跑一组可以检查的固定输入。找出相机和状态接错、动作改变的位置，再把检查结论放到实际软件写入器前。",personalHome:"个人主页",researchOverview:"研究概览",artifacts:"数据与源码",hfModel:"SO100 模型 · Hugging Face",videoLink:"原生回放",forthcoming:"待发布",
   productKicker:"产品 / 从策略到证据",productHeadline:"从最终请求到实际反馈，一条可以检查的事务链。",productLead:"Sentinel EVC 在本地运行，位于策略集成与实际写入器之间。原生 Panda profile 把官方后处理器输出与当前反馈、上下文绑定到有期限且只能使用一次的许可；数值与 MuJoCo profile 分别提供各自有边界的检查。",
   accessCli:"安装并运行本地工作台",accessApp:"导入、检查与回放已核验记录",accessSsh:"源码绑定的远程实验",accessVla:"接入现有 LeRobot / LIBERO Python 环境",
   boundaryRequest:"最终请求",boundaryRequestBody:"后处理后的 shape · dtype · 精确字节",boundaryPermit:"单次许可",boundaryPermitBody:"反馈 · profile · 上下文 · 有效期",boundaryWriter:"实际写入器",boundaryWriterBody:"在环境调用前一刻完成准入",boundaryReplay:"签名回放",boundaryReplayBody:"submitted · accepted · observed · outcome",
@@ -106,7 +106,7 @@ function languageUpdate() {
   const button = document.getElementById("language");
   button.textContent = locale === "zh" ? "English" : "中文";
   button.setAttribute("aria-label", locale === "zh" ? "Switch to English" : "切换到中文");
-  document.title = locale === "zh" ? "Sentinel EVC — 最终机器人动作校验" : "Sentinel EVC — Verify the Final Robot Action";
+  document.title = locale === "zh" ? "Sentinel EVC — 机械臂动之前先查接入错误" : "Sentinel EVC — Check VLA Wiring Before Motion";
   if (evidence) { renderArm(); renderSmol(); renderWorldguard(); }
   if (replay) { updateReplay(); }
   window.dispatchEvent(new CustomEvent("sentinel-language",{detail:{locale}}));

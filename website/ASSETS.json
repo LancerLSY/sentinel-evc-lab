@@ -1,17 +1,17 @@
 {
   "schema": "sentinel-project-static-assets-v1",
   "homepage": "https://lansiyao.com/research/sentinel-vla/project/",
-  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/execution-boundary-20261003/sentinel-execution-boundary-page.zip",
+  "archive_url": "https://github.com/LancerLSY/sentinel-evc-lab/releases/download/launch-gate-20261003/sentinel-launch-gate-page.zip",
   "files": [
     {
       "path": "README.md",
-      "bytes": 6584,
-      "sha256": "d4585df8c5252f542c95dd7abf76bcde62e4cf1e1d1b808cc9cc58ffd766930c"
+      "bytes": 7309,
+      "sha256": "261f17cb15f46321612f4d5d6545b587fe9e322d3d352100dbd0371fc18f264b"
     },
     {
       "path": "app.js",
-      "bytes": 40662,
-      "sha256": "827f454a97b7a6650871b82e1ff6107a3c66bff1de5828cecc2e361b381b3098"
+      "bytes": 40718,
+      "sha256": "e42755fd6fa4cd2251988c4005eb198cf08a201255b16b2286b9e51c9341350f"
     },
     {
       "path": "assets/LICENSE-UR5E-BSD-3-Clause.txt",
@@ -82,6 +82,11 @@
       "path": "assets/full-suite-confirmation.svg",
       "bytes": 18503,
       "sha256": "ea5b299b9b826e5e17162dba782d2bbb719114393d11873e8732876cd3d0174b"
+    },
+    {
+      "path": "assets/launch-gate.json",
+      "bytes": 433985,
+      "sha256": "4b694aae502ec30e11f47a4a0fa14dd76e3627c7d1f2b78bdeedfe5e03274cba"
     },
     {
       "path": "assets/libero-task00-state00-explained.mp4",
@@ -305,8 +310,18 @@
     },
     {
       "path": "index.html",
-      "bytes": 65888,
-      "sha256": "7e276ecc992daf7108bda23e9b94c488c90f534cdd4b983868f5fcd7c094120f"
+      "bytes": 70381,
+      "sha256": "88b2e2361163bf75a2049f6c09f52943635ff181df67ba19881cb74c3dc42a57"
+    },
+    {
+      "path": "launch-gate.css",
+      "bytes": 5011,
+      "sha256": "ee5a2a402b900f1fd14761552536bf13355805255267d3936c527fc2c23f2c26"
+    },
+    {
+      "path": "launch-gate.js",
+      "bytes": 13380,
+      "sha256": "8010aff612e25d65385272aeffc8cb0659b9639fb059215cf28a0236537a51cb"
     },
     {
       "path": "native-project.js",

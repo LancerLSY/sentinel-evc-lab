@@ -1,0 +1,11 @@
+{
+  "schema": "sentinel-vla-launch-reproduction-v1",
+  "run_id": "launch-1f20e7628fa2455594874d63bc87236d",
+  "reproduction": "PASS",
+  "launch_verdict": "BLOCK",
+  "diagnosis_reproduction": "MATCH",
+  "reason": "signed probe bytes reproduce the stored authoritative qualification exactly; original repair hints remain signature-verified",
+  "native_upload_check_save": "PASS",
+  "zip_sha256": "6c8ac8193567fb543c08e28f2a01c361b48a41e70668c952f478fc5131a3de3a",
+  "public_key_sha256": "ca60da89479603480434729d772bb16fbb7c3df8f5d68e76f96234581e96494c"
+}

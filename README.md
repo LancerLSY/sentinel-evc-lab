@@ -22,7 +22,7 @@ declares its own authorization and validation contract.
 > Product runtime: Python 3.10+ · macOS App: Python-managed, locally built · server: `127.0.0.1` only
 
 [Install](#five-minute-setup) · [See the mechanism](#how-the-gate-works) ·
-[Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/native-vla-product-20261003) ·
+[Review measured results](#measured-results) · [Download experiment pack](https://github.com/LancerLSY/sentinel-evc-lab/releases/tag/launch-gate-20261003) ·
 [Research showcase](docs/research_showcase.md) · [CI](https://github.com/LancerLSY/sentinel-evc-lab/actions/workflows/ci.yml)
 
 ## What is usable today
@@ -30,6 +30,7 @@ declares its own authorization and validation contract.
 | Surface | Available now | Boundary |
 |---|---|---|
 | **CLI + local service** | install, run, verify, export; numeric and fixed MuJoCo profiles | local single-workspace service |
+| **Launch Gate** | exact probe comparison, first-field diagnosis, routing/transform hints, guarded writer and signed offline decision capsule | finite recorded inputs; no task or physical safety certification |
 | **Native macOS App** | same loopback workbench; independently keyed native-run import, task-specific 3D replay and signed ZIP export | requires a managed Python environment; locally built, without distribution signing/notarization |
 | **SSH experiments** | strict OpenSSH launch, source binding, returned-evidence verification | existing host alias, key agent and `known_hosts` required |
 | **Robot entry** | mock diagnostics and Universal Robots read-only dashboard probe | no physical motion/write adapter yet |
@@ -39,6 +40,19 @@ declares its own authorization and validation contract.
 
 The workbench always shows execution completion, evidence integrity, and scientific
 acceptance separately. A run may complete correctly while a scientific gate fails.
+
+## Check integration changes before motion
+
+**Catch camera, state and action wiring errors before the first command.** Launch Gate runs fixed inputs through your adapter and compares what it consumed with what it would send. It identifies the changed camera binding, state position, axis sign or action-chunk index. The CLI and App export a small signed capsule that reproduces the decision without the model or GPU.
+
+```bash
+sentinel-evc launch-check --reference reference.json --candidate candidate.json --out runs/launch-check
+sentinel-evc launch-reproduce --bundle runs/launch-check/bundle --public-key runs/launch-check/anchors/demo.public --run-id launch-check
+```
+
+**Measured on RTX 4090 D (24 GB):** all six injected integration configurations blocked before writer entry on ten LIBERO inputs, with zero blocked downstream calls. The separate recorded adapter replay blocks 10/10 configurations over 20 requests. All 20 signed decision capsules reproduce on CPU.
+
+PASS covers the fixed probes. Intentional policy changes need a reviewed reference. [Integration and writer example](docs/launch_gate.md) · [Measured outcomes](docs/research/2026-10-03/launch-gate/RESULTS.md) · [Frozen protocol](docs/research/2026-10-03/launch-gate/PROTOCOL.md)
 
 ## Why add Sentinel to an existing VLA stack
 

@@ -20,6 +20,7 @@ the physical checks in the numerical table below.
 | Policy to environment | official checkpoint/processors, raw chunk, selected action, postprocessed ndarray and actual `env.step` identity retained | pinned SmolVLA/LIBERO runtime |
 | Request authorization | exact dtype/shape/bytes bound to feedback, task context, queue revision, step and revocation generation; expiring one-use permit | in-process request integrity, not collision/dynamics validation |
 | Dispatch and observation | gateway-owned action copy; state and timing rechecked at writer entry; submitted/accepted/observed cursors use actual transitions | trusted writer acknowledges immediately before dispatch; an entered synchronous step may finish after revoke |
+| Launch qualification | fixed-input camera/state/cursor/final-action comparison, observed wiring hints, signed CPU reproducer and guarded native writer | finite probes; trusted loaded identity; concurrent hot-swap needs caller lock |
 | Portable evidence | independent public-key selection, bounded staged ZIP import, fresh verification and signed export | demo trust source, no customer PKI or sensor authenticity |
 | App replay | exact task-model binding, real visual meshes and stored body poses, request/decision/cursor timeline | no new browser dynamics or interpolated motion |
 
