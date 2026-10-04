@@ -1,0 +1,7 @@
+episode_id,task_id,state_index,seed,branch,steps,success,crashed,denied_candidates,unwanted_collisions,message
+formal-task05-state040-parent_only,5,40,2026100400,parent_only,35,False,True,,,actual Panda qpos drifted from restored rollout by 1.07081994811e-05 rad
+formal-task05-state040-full_final,5,40,2026100400,full_final,35,False,True,,,actual Panda qpos drifted from restored rollout by 1.07081994811e-05 rad
+formal-task05-state040-delta_evc,5,40,2026100400,delta_evc,35,False,True,,,actual Panda qpos drifted from restored rollout by 1.07081994811e-05 rad
+formal-task05-state041-parent_only,5,41,2026100401,parent_only,34,False,True,,,actual Panda qpos drifted from restored rollout by 0.000514480113928 rad
+formal-task05-state041-full_final,5,41,2026100401,full_final,34,False,True,,,actual Panda qpos drifted from restored rollout by 0.000514480113928 rad
+formal-task05-state041-delta_evc,5,41,2026100401,delta_evc,34,False,True,,,actual Panda qpos drifted from restored rollout by 0.000514480113928 rad

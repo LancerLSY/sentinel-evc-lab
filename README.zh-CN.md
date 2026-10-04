@@ -58,7 +58,8 @@ sentinel-evc launch-reproduce --bundle runs/launch-check/bundle --public-key run
 | **SSH 实验** | 严格 OpenSSH 启动、源码绑定、返回证据校验 | 需要已有主机别名、密钥代理和 `known_hosts` |
 | **机械臂入口** | mock 诊断与 Universal Robots 只读 dashboard 探测 | 尚无物理运动写入适配器 |
 | **三维模型入口** | OBJ、STL、MJCF、URDF 检查与离线 Canvas 预览 | 预览不会获得执行授权 |
-| **原生 VLA 接入** | 官方 SmolVLA/Panda 推理、精确 7-D 请求授权、一次性许可与真实环境反馈 | LIBERO 仿真；尚无 Panda 碰撞、动力学、WorldGuard 或物理停止验证 |
+| **原生 VLA 接入** | 官方 SmolVLA/Panda 推理、精确 7-D 请求授权、一次性许可与真实环境反馈 | LIBERO 请求完整性入口；Panda 几何实验单独列出；尚无物理停止验证 |
+| **统一 VLA 实验** | 原生 SmolVLA 输出、自然聚合、Panda 几何检查、许可与实际 MuJoCo 写入 | [18 次配对执行 + 12 次接触诊断](docs/research/2026-10-04/unified/RESULTS.md)；保留偏差失败与全检成本 |
 | **GPU / 模型研究** | WorldGuard 模型对照与固定 SO100 数据上的 SmolVLA 微调 | 各实验 profile 分别报告；SO100 overlay 与原生 Panda 检查点不同 |
 
 工作台把“运行是否完成”“证据是否完整”“科学验收是否通过”分开显示。
@@ -198,6 +199,7 @@ submitted / accepted / observed 游标。导入记录不会启动推理或授予
 | 原始官方 SmolVLA/LIBERO 闭环，100 次固定任务 | 成功 58/100；task5 失败 10/10 | 官方 Panda 模型、仅观察记录；与 SO100 overlay 分开 |
 | 配对版本闭环，40 次新状态执行 | task5：0/10 → 7/10；对照：10/10 → 10/10 | 完整 MuJoCo 3.8.1 / 3.3.7 处理；基准兼容性，不是物理精度结论 |
 | 全任务新初态确认，100 次执行 | **成功93/100**；零崩溃；task4仍为6/10 | 官方 Panda 模型、隔离MuJoCo3.3.7、执行间隔10；与原58/100为不同网格 |
+| 统一 SmolVLA/Panda/EVC，18 次配对执行 | 每个分支成功 2/6；零次观测到禁止接触；任务 5 偏差中止 | 本组没有碰撞收益或加速优势；[报告与原始证据](docs/research/2026-10-04/unified/RESULTS.md) |
 
 [![完整 UR5e 网格：任务、计划变化、判定与结果](docs/research/2026-10-02/paper-v2/video/sentinel-ur5e-paper-poster.png)](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/sentinel-ur5e-paper.mp4)
 

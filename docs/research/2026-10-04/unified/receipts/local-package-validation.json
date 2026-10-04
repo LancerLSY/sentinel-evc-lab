@@ -1,0 +1,42 @@
+{
+  "schema": "sentinel-unified-local-package-validation-v1",
+  "archives": [
+    {
+      "file": "A1-run.tar.gz",
+      "bytes": 16197933,
+      "sha256": "b8cb85987846c913979206b03a2a4133e57bb908e91c3cbffde01ca3ad41c44a",
+      "file_count": 160
+    },
+    {
+      "file": "A2-run.tar.gz",
+      "bytes": 4401414,
+      "sha256": "70b6889d8d9bca30a2f2d4ad98102fd39ce07a77544519baef8d87fa13727d3e",
+      "file_count": 133
+    },
+    {
+      "file": "A3-run.tar.gz",
+      "bytes": 4407314,
+      "sha256": "341588949f048f79fec1a46e055eeedc0e2159294f30af4e9221e09af1f8e5f6",
+      "file_count": 133
+    },
+    {
+      "file": "initial-run.tar.gz",
+      "bytes": 3985209,
+      "sha256": "23ae66fd259751393ff4bd9870551899d0d7491b027fcc7a8f9671ebef09753f",
+      "file_count": 156
+    },
+    {
+      "file": "live-demo-20261004.tar.gz",
+      "bytes": 2697000,
+      "sha256": "488ec539847556598778c440fb3b2a1481ced80d10ec3a8f4d3fc39bc94eecfc",
+      "file_count": 16
+    }
+  ],
+  "archive_paths_safe": true,
+  "source_compilation": "pass",
+  "new_test_files_added": false,
+  "core_source_files_modified": false,
+  "homepage_files_modified": false,
+  "poster_visual_review": "1280x720 live scene plus task, pipeline, write count, simulation time and wall time; labels readable",
+  "claim_boundary": "experiment integration evidence; no collision or throughput superiority established"
+}

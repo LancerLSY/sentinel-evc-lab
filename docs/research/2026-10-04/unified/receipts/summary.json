@@ -1,0 +1,394 @@
+{
+  "claim_boundary": "direct MuJoCo physics replay of retained final native actions; no policy inference and no frozen-scene animation",
+  "elapsed_seconds": 11.779310464859009,
+  "episode": {
+    "branch": "delta_evc",
+    "episode_id": "formal-task00-state040-delta_evc",
+    "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+    "seed": 2026100400,
+    "state_index": 40,
+    "task_id": 0
+  },
+  "error": {
+    "error_type": "RuntimeError",
+    "message": "physics replay diverged at step 30: actual=1.90352503487e-06, forecast=1.90352503487e-06, retained=0 rad"
+  },
+  "included_in_experiment_statistics": false,
+  "replay_outcome": {
+    "steps": 31,
+    "success": false
+  },
+  "retained_outcome": {
+    "denied_final_reason": null,
+    "steps": 76,
+    "success": true
+  },
+  "schema": "sentinel-unified-libero-excluded-replay-v1",
+  "selection": "first declared formal task/state; fixed delta_evc branch; no outcome selection",
+  "source": {
+    "candidate_npz_sha256": "sha256:8c9e52362ea72c3358444a3b3b1aa4f837448e796423eafa3e083c40fe489cf0",
+    "episodes_sha256": "sha256:d15999355a9167c57596700251386492931f46064b735c72310e5a89473dc9cd",
+    "manifest_sha256": "sha256:5911eb63db769eabc411972907ea5f5e1f937c9df2eaf0e46d5f68a1f534e305",
+    "run_dir": "/root/autodl-tmp/sentinel-unified-20261004/formal-A1-20261004",
+    "steps_sha256": "sha256:fd349e5dfa729626a04c57fb5033fe61e3ed9d608b2ad2650ff1eed572d8b371"
+  },
+  "status": "diverged",
+  "trace_equality": {
+    "all_substeps_within_tolerance": false,
+    "comparisons": [
+      {
+        "cycle": 0,
+        "kind": "initial",
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 0,
+        "step": -1,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:03c1ba5f95cb9444741b1914a1e79c4f16db9c65c2f87aa6e798ded7d9bf5e32",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 0,
+        "within_cycle": 0,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:15e30899199cb42911507cf400ca5877756ecf3d9c851595e8b7af47f91bd03f",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 1,
+        "within_cycle": 1,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:b54507b600843aec4d498353cc7d60b69053ab8c74e17b049f560ccc2a1a444a",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 2,
+        "within_cycle": 2,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:b072d66a94ddc9e0ff571958d29e3db02ebf70211f1b2b855420443428fff993",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 3,
+        "within_cycle": 3,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:93b4979403394b03776b027eb2a2d94757da3bc6af6b2ffe63f53db4c28d5bff",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 4,
+        "within_cycle": 4,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:78349122fd2dde636d45c03d3254b74e4b59fcb13ca9f528b1d4675bce4d0f9f",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 5,
+        "within_cycle": 5,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:2f509c119bb30f9de5f44b97b3381ef477e20a65fbb0c6212a9f7742520a04d8",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 6,
+        "within_cycle": 6,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:35b5c4f72165bef7739edcc578b898741baa0ea18e21e011219e7eacf0411244",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 7,
+        "within_cycle": 7,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:b4203840350e2306ef00ea94c46a18c4eb135b0e6e9bcd716c3fc67a6bc38730",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 8,
+        "within_cycle": 8,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:7dc152e13189c34e3d769677ccea6a71ed1b2791552e136b97b19c7ec6e61f58",
+        "cycle": 0,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 9,
+        "within_cycle": 9,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:b35234df74df0b62e53174df579012da43bfb0f843b4a857135cab07fc2ae692",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 10,
+        "within_cycle": 0,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:d84fd63f6b6ed8ef7cf3fca930156eaf14f4ca80212d602a0a9bf7c54da113ea",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 11,
+        "within_cycle": 1,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:19bfe4b05b6bee5a09a75b90cface86259d91f8affbb044acac1e05526dc23ee",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 12,
+        "within_cycle": 2,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:029ba39aab747621ee4704fbf4a6d98eded80790385ea509a50f130d28255c0c",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 13,
+        "within_cycle": 3,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:5e64430f605624ba1e73796e95f50910896b3bbf0ae72cadb208a4258ec07119",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 14,
+        "within_cycle": 4,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:a3a6bae097d11c5c968dabab4186ae24dfdd2da771cebe44799812aa7ac3e39c",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 15,
+        "within_cycle": 5,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:555ed0f952768c97846e1cbd3d6e6b57faed0a27d1e0910e3f3263ccce9aa051",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 16,
+        "within_cycle": 6,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:c08d2bd73aad441e80219dadb64e510b6bcdba1607e385fb900e96aa25f26f60",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 17,
+        "within_cycle": 7,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:c8da9568894af48c9fbbf48ac00ab0a3d2df8da440c7119e1f023c2bae82cda0",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 18,
+        "within_cycle": 8,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:f6fd40a52c1f71f9c23fde3d677c56ed585cdeb24d0b1d8bd99e6f4b9aa7361e",
+        "cycle": 1,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 19,
+        "within_cycle": 9,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:088bad09105c428d34c8588adaf3a493407b932aa6d121d0b801da3a12db5c11",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 20,
+        "within_cycle": 0,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:091e4522f4b5fe8eb6c9e2cc1401226c658daf91c61734a6d2df6b66815d9225",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 21,
+        "within_cycle": 1,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:90fe28b136ce86ae53274754bfd94d5506c035a7f59541cf258b04f3f2f6b136",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 22,
+        "within_cycle": 2,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:f3b0a045e5f953dd111a92ffe1426dfa02516c84531e54d1e9169a133fa9d540",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 23,
+        "within_cycle": 3,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:0074de8ade1bfb39a94f22f11e96dee5952674a8d5138f82e842a7bfbb7dd5de",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 24,
+        "within_cycle": 4,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:0d0b0a684c54049274365da5a21e5c02ab028e6db71411118bb3c819f14cb601",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 25,
+        "within_cycle": 5,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:7dac2c65e501e7038606ec22057ce3a3127299bfa2956093c5bb658fb5588d9e",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 26,
+        "within_cycle": 6,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:d31e96443f8e03d1cb7be1d7e4bac84580f5987d6584754c97c188ccb15a766e",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 27,
+        "within_cycle": 7,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:e72e2065ef5f72ee96186ebeda8314f78840a59345e3d85ab40c80db5dbf7a4f",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 28,
+        "within_cycle": 8,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:4944c453b33a030e84b2d11995aee03455872c5604292a06c9e106f02b13d4cc",
+        "cycle": 2,
+        "max_abs_forecast_qpos_error_rad": 0.0,
+        "max_abs_qpos_error_rad": 0.0,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 29,
+        "within_cycle": 9,
+        "within_tolerance": true
+      },
+      {
+        "action_sha256": "sha256:6fd1c0b8e4d9b260acc551c60ad08fe4c4853202e614072935670a43c4bded73",
+        "cycle": 3,
+        "max_abs_forecast_qpos_error_rad": 1.9035250348742316e-06,
+        "max_abs_qpos_error_rad": 1.9035250348742316e-06,
+        "physics_substeps": 25,
+        "retained_actual_vs_forecast_max_abs_rad": 0.0,
+        "step": 30,
+        "within_cycle": 0,
+        "within_tolerance": false
+      }
+    ],
+    "max_abs_forecast_qpos_error_rad": 1.9035250348742316e-06,
+    "max_abs_qpos_error_rad": 1.9035250348742316e-06,
+    "tolerance_rad": 1e-08
+  }
+}

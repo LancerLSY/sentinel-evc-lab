@@ -1,0 +1,152 @@
+{
+  "run": "formal-A3-20261004",
+  "status": "failed",
+  "formal_episodes": 6,
+  "unfinished_cases": [],
+  "manifest_metrics": {
+    "delta_evc": {
+      "crashes": 2,
+      "episodes": 2,
+      "final_candidate_preclip_components_changed": 0,
+      "finite_resolution_disagreements": 0,
+      "full_incremental_disagreements": 0,
+      "raw_candidate_preclip_components_changed": 0,
+      "steps": 69,
+      "successes": 0,
+      "unwanted_collisions": 0,
+      "valid_parent_final_collision": 0,
+      "valid_parent_final_unproven": 0
+    },
+    "full_final": {
+      "crashes": 2,
+      "episodes": 2,
+      "final_candidate_preclip_components_changed": 0,
+      "finite_resolution_disagreements": 0,
+      "full_incremental_disagreements": 0,
+      "raw_candidate_preclip_components_changed": 0,
+      "steps": 69,
+      "successes": 0,
+      "unwanted_collisions": 0,
+      "valid_parent_final_collision": 0,
+      "valid_parent_final_unproven": 0
+    },
+    "parent_only": {
+      "crashes": 2,
+      "episodes": 2,
+      "final_candidate_preclip_components_changed": 0,
+      "finite_resolution_disagreements": 0,
+      "full_incremental_disagreements": 0,
+      "raw_candidate_preclip_components_changed": 0,
+      "steps": 69,
+      "successes": 0,
+      "unwanted_collisions": 0,
+      "valid_parent_final_collision": 0,
+      "valid_parent_final_unproven": 0
+    }
+  },
+  "branches": {
+    "parent_only": {
+      "candidates": 8,
+      "actual_writes": 69,
+      "naturally_revised_candidates": 6,
+      "incremental_methods": {
+        "incremental_exact": 2,
+        "fallback_full": 6
+      },
+      "full_geometry": {
+        "n": 8,
+        "median_ms": 358.455548,
+        "p95_ms": 800.785257,
+        "p95_rule": "nearest rank"
+      },
+      "incremental_geometry": {
+        "n": 8,
+        "median_ms": 327.301628,
+        "p95_ms": 801.323934,
+        "p95_rule": "nearest rank"
+      },
+      "parent_plus_incremental_geometry": {
+        "n": 8,
+        "median_ms": 663.6665865,
+        "p95_ms": 2110.244771,
+        "p95_rule": "nearest rank"
+      },
+      "cycle_elapsed_at_write": {
+        "n": 69,
+        "median_ms": 5495.746009,
+        "p95_ms": 7593.109985,
+        "p95_rule": "nearest rank"
+      },
+      "maximum_tracking_error_rad": 0.000514480113928073
+    },
+    "full_final": {
+      "candidates": 8,
+      "actual_writes": 69,
+      "naturally_revised_candidates": 6,
+      "incremental_methods": {
+        "incremental_exact": 2,
+        "fallback_full": 6
+      },
+      "full_geometry": {
+        "n": 8,
+        "median_ms": 354.8301275,
+        "p95_ms": 781.9891,
+        "p95_rule": "nearest rank"
+      },
+      "incremental_geometry": {
+        "n": 8,
+        "median_ms": 332.282676,
+        "p95_ms": 795.482081,
+        "p95_rule": "nearest rank"
+      },
+      "parent_plus_incremental_geometry": {
+        "n": 8,
+        "median_ms": 677.0750095,
+        "p95_ms": 2099.382587,
+        "p95_rule": "nearest rank"
+      },
+      "cycle_elapsed_at_write": {
+        "n": 69,
+        "median_ms": 5502.316215,
+        "p95_ms": 7566.224238,
+        "p95_rule": "nearest rank"
+      },
+      "maximum_tracking_error_rad": 0.000514480113928073
+    },
+    "delta_evc": {
+      "candidates": 8,
+      "actual_writes": 69,
+      "naturally_revised_candidates": 6,
+      "incremental_methods": {
+        "incremental_exact": 2,
+        "fallback_full": 6
+      },
+      "full_geometry": {
+        "n": 8,
+        "median_ms": 355.9783355,
+        "p95_ms": 851.931495,
+        "p95_rule": "nearest rank"
+      },
+      "incremental_geometry": {
+        "n": 8,
+        "median_ms": 333.1716085,
+        "p95_ms": 794.720054,
+        "p95_rule": "nearest rank"
+      },
+      "parent_plus_incremental_geometry": {
+        "n": 8,
+        "median_ms": 673.4811295,
+        "p95_ms": 2092.227797,
+        "p95_rule": "nearest rank"
+      },
+      "cycle_elapsed_at_write": {
+        "n": 69,
+        "median_ms": 5648.168978,
+        "p95_ms": 13366.693401,
+        "p95_rule": "nearest rank"
+      },
+      "maximum_tracking_error_rad": 0.000514480113928073
+    }
+  },
+  "timing_note": "Instrumented diagnostic timings include counterfactual checks. cycle_elapsed_at_write measures time from the cycle start through each write, rather than an independent completed cycle. No deployment throughput estimate."
+}

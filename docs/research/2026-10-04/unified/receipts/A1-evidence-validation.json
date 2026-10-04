@@ -1,0 +1,180 @@
+{
+  "a1_freeze": {
+    "base_commit": "009a24c",
+    "base_commit_verified_shared_repo": true,
+    "checks": {
+      "experiments/vla/config_unified_libero_A1_20261004.json": {
+        "actual_sha256": "88f46779d06497e70194635b6ac842424839802eef361b326065ee5530164da4",
+        "expected_sha256": "88f46779d06497e70194635b6ac842424839802eef361b326065ee5530164da4",
+        "match": true
+      },
+      "experiments/vla/panda_geometry.py": {
+        "actual_sha256": "2ef50ee682743b6e56375b8bf10c86f21eeacaf0b3fd4acc9c29061ac0a6a640",
+        "expected_sha256": "2ef50ee682743b6e56375b8bf10c86f21eeacaf0b3fd4acc9c29061ac0a6a640",
+        "match": true
+      },
+      "experiments/vla/run_unified_libero.py": {
+        "actual_sha256": "383281bba5cb818308f24f7d94a5bbbb5b0f9510d49c50fdc7f43d5ca01a2e1d",
+        "expected_sha256": "383281bba5cb818308f24f7d94a5bbbb5b0f9510d49c50fdc7f43d5ca01a2e1d",
+        "match": true
+      },
+      "experiments/vla/unified_libero_amendment_A1.md": {
+        "actual_sha256": "f57d15a667d8f7a8a29b2b871ff18be8e357fcd7af71176343e07131cbbd2194",
+        "expected_sha256": "f57d15a667d8f7a8a29b2b871ff18be8e357fcd7af71176343e07131cbbd2194",
+        "match": true,
+        "verification_location": "shared_local_repository"
+      },
+      "src/sentinel_evc/native_gateway.py": {
+        "actual_sha256": "a370dbee7ac81fdb16bd157d11ddd28c94a02dae54349870e1fff4537f7c8a5f",
+        "expected_sha256": "a370dbee7ac81fdb16bd157d11ddd28c94a02dae54349870e1fff4537f7c8a5f",
+        "match": true
+      }
+    },
+    "path": "/root/autodl-tmp/sentinel-unified-20261004/A1-freeze.json",
+    "sha256": "sha256:44d8aaaf768580383e08fea3d41d39a54333313f9abeb9fb2aab0225a6dae781"
+  },
+  "contracts_sha256": "sha256:f9dec20ac946601093b971fd8fc15197a9dff8e66a9c7cec580cdcd91a33ea33",
+  "contracts_sha256_hex_source": "/root/autodl-tmp/sentinel-unified-20261004/repo/src/sentinel_evc/contracts.py",
+  "counts": {
+    "a1_freeze_files_checked": 5,
+    "actual_selected_certificate_bindings_checked": 908,
+    "actual_step_rows": 908,
+    "actual_substep_hash_mismatches": 0,
+    "actual_substep_hashes_checked": 899,
+    "actual_substep_rows_without_npz_trace": 9,
+    "actual_writer_npz_binding_mismatches": 0,
+    "actual_writer_npz_bindings_checked": 908,
+    "candidate_certificates_checked": 303,
+    "candidate_rows": 107,
+    "commit_events_checked": 908,
+    "controller_ack_events_checked": 908,
+    "crashed_results": 6,
+    "dispatch_events_checked": 908,
+    "event_chains_checked": 21,
+    "event_file_hashes_checked": 21,
+    "event_rows": 6362,
+    "forecast_substep_comparisons": 899,
+    "formal_results": 18,
+    "logged_tracking_errors_checked": 908,
+    "manifest_additional_source_hashes_checked": 1,
+    "manifest_artifact_hashes_checked": 2,
+    "manifest_results": 21,
+    "manifest_source_freeze_bindings_checked": 4,
+    "npz_hashes_checked": 21,
+    "per_episode_rows": 21,
+    "preflight_results": 3,
+    "step_rows": 1122,
+    "unique_actual_permit_ids": 908
+  },
+  "error_counts": {
+    "MISSING_EXECUTED_QPOS_TRACE": 6,
+    "TRACKING_TOLERANCE_EXCEEDED_LOGGED": 6
+  },
+  "errors": [
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED_LOGGED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-parent_only",
+      "error_rad": 4.873024248008839e-08,
+      "step": 30,
+      "tolerance_rad": 1e-08,
+      "within_cycle": 0
+    },
+    {
+      "actual_steps": 1,
+      "code": "MISSING_EXECUTED_QPOS_TRACE",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-parent_only"
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED_LOGGED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-full_final",
+      "error_rad": 4.873024248008839e-08,
+      "step": 30,
+      "tolerance_rad": 1e-08,
+      "within_cycle": 0
+    },
+    {
+      "actual_steps": 1,
+      "code": "MISSING_EXECUTED_QPOS_TRACE",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-full_final"
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED_LOGGED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-delta_evc",
+      "error_rad": 4.873024248008839e-08,
+      "step": 30,
+      "tolerance_rad": 1e-08,
+      "within_cycle": 0
+    },
+    {
+      "actual_steps": 1,
+      "code": "MISSING_EXECUTED_QPOS_TRACE",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-delta_evc"
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED_LOGGED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-parent_only",
+      "error_rad": 1.592726877386319e-06,
+      "step": 31,
+      "tolerance_rad": 1e-08,
+      "within_cycle": 1
+    },
+    {
+      "actual_steps": 2,
+      "code": "MISSING_EXECUTED_QPOS_TRACE",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-parent_only"
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED_LOGGED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-full_final",
+      "error_rad": 1.592726877386319e-06,
+      "step": 31,
+      "tolerance_rad": 1e-08,
+      "within_cycle": 1
+    },
+    {
+      "actual_steps": 2,
+      "code": "MISSING_EXECUTED_QPOS_TRACE",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-full_final"
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED_LOGGED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-delta_evc",
+      "error_rad": 1.592726877386319e-06,
+      "step": 31,
+      "tolerance_rad": 1e-08,
+      "within_cycle": 1
+    },
+    {
+      "actual_steps": 2,
+      "code": "MISSING_EXECUTED_QPOS_TRACE",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-delta_evc"
+    }
+  ],
+  "manifest_sha256": "sha256:5911eb63db769eabc411972907ea5f5e1f937c9df2eaf0e46d5f68a1f534e305",
+  "manifest_status": "failed",
+  "max_logged_forecast_tracking_error_rad": 1.592726877386319e-06,
+  "max_recomputed_forecast_tracking_error_rad": 0.0,
+  "notes": [
+    "No model, simulator, policy inference, or environment execution was rerun.",
+    "Event prev_hash links were recomputed with the current sentinel_evc.contracts.sha256_hex implementation.",
+    "Missing executed_qpos arrays belong to cycles aborted immediately after the runner recorded an over-tolerance actual_step."
+  ],
+  "run_directory": "/root/autodl-tmp/sentinel-unified-20261004/formal-A1-20261004",
+  "schema": "sentinel-unified-A1-evidence-validation-v1",
+  "tolerance_rad": 1e-08,
+  "validated_utc": "2026-10-04T05:12:46.776908+00:00",
+  "validation_status": "fail",
+  "warnings": []
+}

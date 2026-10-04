@@ -1,0 +1,39 @@
+{
+  "included_in_experiment_statistics": false,
+  "outcome": {
+    "crashed": false,
+    "denied_final_reason": null,
+    "steps": 76,
+    "success": true
+  },
+  "output": {
+    "video": "task00-state040-delta_evc-excluded-live-explained.mp4",
+    "video_sha256": "sha256:9d78682b527440d325dd62d08162ada58982b1db9833323090a83ae4b172500d"
+  },
+  "pipeline": [
+    "SmolVLA predicts a 50-action chunk",
+    "Fixed overlap aggregation selects 10 actions",
+    "Panda geometry checks predicted joint motion",
+    "EVC issues a one-use permit for exact action bytes",
+    "LIBERO Panda controller executes the authorized write"
+  ],
+  "playback": {
+    "fps": 20,
+    "frames": 76,
+    "simulator_seconds": 3.8,
+    "source_wall_clock_seconds": 148.89903616905212
+  },
+  "postprocessor_sha256": "sha256:08cde43d0ab6216cc1c62c92e73a930547cc36d51a877cb494d0e9ab16b8d5d8",
+  "schema": "sentinel-unified-libero-excluded-live-presentation-v1",
+  "source": {
+    "capture_helper_sha256": "sha256:818f33e4e60ea896bed6e3ab4f5350788899727c12b0696c777c3c1e69bdced1",
+    "capture_summary": "/root/autodl-tmp/sentinel-unified-20261004/excluded-live-A2-task0-state40-delta/capture_summary.json",
+    "capture_summary_sha256": "sha256:85c3eca538fae526f6da08a4f04abd0523a4417417143e6efc7102e32387ce2b",
+    "frozen_runner_sha256": "sha256:330e6470cfdfb74fbfbb9bcd8ed1a3bdca83dfe4c2b02c945322fc9c5e0543ab",
+    "input_video": "/root/autodl-tmp/sentinel-unified-20261004/excluded-live-A2-task0-state40-delta/task00-state040-delta_evc-excluded-live.mp4",
+    "input_video_sha256": "sha256:fe3c4a68ba75515e26bdcbf385053764b9e89f1aa27c234f1e0851a97b42e974"
+  },
+  "task_goal": "Pick up the black bowl between the plate and the ramekin and place it on the plate.",
+  "tracking_reserve_rad": 1e-05,
+  "visual_transform": "recorded live frames scaled to 720x720 at left; explanatory text panel added at right; no frames or motion synthesized"
+}

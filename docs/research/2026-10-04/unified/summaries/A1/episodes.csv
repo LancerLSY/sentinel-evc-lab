@@ -1,0 +1,19 @@
+episode_id,task_id,state_index,seed,branch,steps,success,crashed,denied_candidates,unwanted_collisions,message
+formal-task00-state040-parent_only,0,40,2026100400,parent_only,76,True,False,0,0,
+formal-task00-state040-full_final,0,40,2026100400,full_final,76,True,False,0,0,
+formal-task00-state040-delta_evc,0,40,2026100400,delta_evc,76,True,False,0,0,
+formal-task00-state041-parent_only,0,41,2026100401,parent_only,76,True,False,0,0,
+formal-task00-state041-full_final,0,41,2026100401,full_final,76,True,False,0,0,
+formal-task00-state041-delta_evc,0,41,2026100401,delta_evc,76,True,False,0,0,
+formal-task04-state040-parent_only,4,40,2026100400,parent_only,40,False,False,1,0,
+formal-task04-state040-full_final,4,40,2026100400,full_final,40,False,False,1,0,
+formal-task04-state040-delta_evc,4,40,2026100400,delta_evc,40,False,False,1,0,
+formal-task04-state041-parent_only,4,41,2026100401,parent_only,50,False,False,1,0,
+formal-task04-state041-full_final,4,41,2026100401,full_final,50,False,False,1,0,
+formal-task04-state041-delta_evc,4,41,2026100401,delta_evc,40,False,False,1,0,
+formal-task05-state040-parent_only,5,40,2026100400,parent_only,31,False,True,,,actual Panda qpos drifted from restored rollout by 4.87302424801e-08 rad
+formal-task05-state040-full_final,5,40,2026100400,full_final,31,False,True,,,actual Panda qpos drifted from restored rollout by 4.87302424801e-08 rad
+formal-task05-state040-delta_evc,5,40,2026100400,delta_evc,31,False,True,,,actual Panda qpos drifted from restored rollout by 4.87302424801e-08 rad
+formal-task05-state041-parent_only,5,41,2026100401,parent_only,32,False,True,,,actual Panda qpos drifted from restored rollout by 1.59272687739e-06 rad
+formal-task05-state041-full_final,5,41,2026100401,full_final,32,False,True,,,actual Panda qpos drifted from restored rollout by 1.59272687739e-06 rad
+formal-task05-state041-delta_evc,5,41,2026100401,delta_evc,32,False,True,,,actual Panda qpos drifted from restored rollout by 1.59272687739e-06 rad

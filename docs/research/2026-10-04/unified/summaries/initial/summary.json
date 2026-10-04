@@ -1,0 +1,146 @@
+{
+  "run": "formal-20261004",
+  "status": "failed",
+  "formal_episodes": 18,
+  "unfinished_cases": [],
+  "manifest_metrics": {
+    "delta_evc": {
+      "crashes": 6,
+      "episodes": 6,
+      "finite_resolution_disagreements": 0,
+      "full_incremental_disagreements": 0,
+      "steps": 30,
+      "successes": 0,
+      "unwanted_collisions": 0,
+      "valid_parent_final_collision": 0,
+      "valid_parent_final_unproven": 0
+    },
+    "full_final": {
+      "crashes": 6,
+      "episodes": 6,
+      "finite_resolution_disagreements": 0,
+      "full_incremental_disagreements": 0,
+      "steps": 30,
+      "successes": 0,
+      "unwanted_collisions": 0,
+      "valid_parent_final_collision": 0,
+      "valid_parent_final_unproven": 0
+    },
+    "parent_only": {
+      "crashes": 6,
+      "episodes": 6,
+      "finite_resolution_disagreements": 0,
+      "full_incremental_disagreements": 0,
+      "steps": 29,
+      "successes": 0,
+      "unwanted_collisions": 0,
+      "valid_parent_final_collision": 0,
+      "valid_parent_final_unproven": 0
+    }
+  },
+  "branches": {
+    "parent_only": {
+      "candidates": 8,
+      "actual_writes": 29,
+      "naturally_revised_candidates": 2,
+      "incremental_methods": {
+        "incremental_exact": 6,
+        "fallback_full": 2
+      },
+      "full_geometry": {
+        "n": 8,
+        "median_ms": 225.79032,
+        "p95_ms": 359.869325,
+        "p95_rule": "nearest rank"
+      },
+      "incremental_geometry": {
+        "n": 8,
+        "median_ms": 12.2535695,
+        "p95_ms": 352.935286,
+        "p95_rule": "nearest rank"
+      },
+      "parent_plus_incremental_geometry": {
+        "n": 8,
+        "median_ms": 235.7588395,
+        "p95_ms": 701.327014,
+        "p95_rule": "nearest rank"
+      },
+      "cycle_elapsed_at_write": {
+        "n": 29,
+        "median_ms": 3177.329623,
+        "p95_ms": 3844.0242,
+        "p95_rule": "nearest rank"
+      },
+      "maximum_tracking_error_rad": 0.0
+    },
+    "full_final": {
+      "candidates": 8,
+      "actual_writes": 30,
+      "naturally_revised_candidates": 2,
+      "incremental_methods": {
+        "incremental_exact": 6,
+        "fallback_full": 2
+      },
+      "full_geometry": {
+        "n": 8,
+        "median_ms": 225.429741,
+        "p95_ms": 422.044034,
+        "p95_rule": "nearest rank"
+      },
+      "incremental_geometry": {
+        "n": 8,
+        "median_ms": 12.987847,
+        "p95_ms": 366.963692,
+        "p95_rule": "nearest rank"
+      },
+      "parent_plus_incremental_geometry": {
+        "n": 8,
+        "median_ms": 239.4245815,
+        "p95_ms": 710.355685,
+        "p95_rule": "nearest rank"
+      },
+      "cycle_elapsed_at_write": {
+        "n": 30,
+        "median_ms": 3264.1529905,
+        "p95_ms": 5075.698753,
+        "p95_rule": "nearest rank"
+      },
+      "maximum_tracking_error_rad": 0.0
+    },
+    "delta_evc": {
+      "candidates": 8,
+      "actual_writes": 30,
+      "naturally_revised_candidates": 2,
+      "incremental_methods": {
+        "incremental_exact": 6,
+        "fallback_full": 2
+      },
+      "full_geometry": {
+        "n": 8,
+        "median_ms": 226.985631,
+        "p95_ms": 346.916573,
+        "p95_rule": "nearest rank"
+      },
+      "incremental_geometry": {
+        "n": 8,
+        "median_ms": 13.316803,
+        "p95_ms": 363.139936,
+        "p95_rule": "nearest rank"
+      },
+      "parent_plus_incremental_geometry": {
+        "n": 8,
+        "median_ms": 241.618927,
+        "p95_ms": 713.5438,
+        "p95_rule": "nearest rank"
+      },
+      "cycle_elapsed_at_write": {
+        "n": 30,
+        "median_ms": 3175.9457195,
+        "p95_ms": 3867.648334,
+        "p95_rule": "nearest rank"
+      },
+      "maximum_tracking_error_rad": 0.0
+    }
+  },
+  "timing_note": "Instrumented diagnostic timings include counterfactual checks. cycle_elapsed_at_write measures time from the cycle start through each write, rather than an independent completed cycle. No deployment throughput estimate."
+}

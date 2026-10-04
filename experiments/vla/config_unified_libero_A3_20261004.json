@@ -1,0 +1,1240 @@
+{
+  "checkpoint": "/root/autodl-tmp/sentinel-unified-20261004/models/checkpoint",
+  "backbone": "/root/autodl-tmp/sentinel-unified-20261004/models/backbone",
+  "output_dir": "/root/autodl-tmp/sentinel-unified-20261004/formal-A3-20261004",
+  "device": "cuda",
+  "mujoco_gl": "egl",
+  "torch_threads": 4,
+  "deadline_timestamp": "2026-10-04T05:45:00Z",
+  "preflight": {
+    "task_id": 0,
+    "initial_state_index": 49,
+    "seed": 2026100399,
+    "max_episode_steps": 1
+  },
+  "formal": {
+    "task_ids": [
+      5
+    ],
+    "initial_state_indices": [
+      40,
+      41
+    ],
+    "seed_base": 2026100400
+  },
+  "geometry": {
+    "allowed_contacts": [
+      {
+        "geom_a": 71,
+        "geom_b": 84,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g1 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 85,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g2 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 86,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g3 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 87,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g4 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 88,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g5 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 89,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g6 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 90,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g7 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 91,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g8 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 92,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g9 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 93,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g10 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 94,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g11 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 95,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g12 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 96,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g13 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 97,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g14 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 98,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g15 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 99,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g16 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 100,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g17 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 101,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g18 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 102,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g19 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 103,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g20 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 104,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g21 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 105,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g22 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 106,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g23 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 107,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g24 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 108,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g25 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 109,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g26 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 110,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g27 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 111,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g28 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 112,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g29 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 113,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g30 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 114,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g31 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 115,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g32 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 116,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g33 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 117,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g34 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 118,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g35 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 119,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g36 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 120,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g37 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 121,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g38 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 122,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g39 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 71,
+        "geom_b": 123,
+        "label": "gripper0_hand_collision <-> akita_black_bowl_1_g40 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 84,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g1 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 85,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g2 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 86,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g3 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 87,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g4 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 88,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g5 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 89,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g6 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 90,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g7 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 91,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g8 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 92,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g9 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 93,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g10 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 94,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g11 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 95,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g12 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 96,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g13 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 97,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g14 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 98,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g15 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 99,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g16 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 100,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g17 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 101,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g18 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 102,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g19 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 103,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g20 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 104,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g21 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 105,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g22 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 106,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g23 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 107,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g24 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 108,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g25 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 109,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g26 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 110,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g27 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 111,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g28 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 112,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g29 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 113,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g30 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 114,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g31 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 115,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g32 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 116,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g33 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 117,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g34 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 118,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g35 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 119,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g36 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 120,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g37 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 121,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g38 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 122,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g39 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 73,
+        "geom_b": 123,
+        "label": "gripper0_finger1_collision <-> akita_black_bowl_1_g40 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 84,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g1 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 85,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g2 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 86,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g3 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 87,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g4 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 88,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g5 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 89,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g6 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 90,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g7 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 91,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g8 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 92,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g9 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 93,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g10 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 94,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g11 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 95,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g12 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 96,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g13 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 97,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g14 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 98,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g15 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 99,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g16 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 100,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g17 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 101,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g18 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 102,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g19 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 103,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g20 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 104,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g21 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 105,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g22 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 106,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g23 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 107,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g24 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 108,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g25 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 109,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g26 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 110,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g27 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 111,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g28 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 112,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g29 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 113,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g30 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 114,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g31 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 115,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g32 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 116,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g33 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 117,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g34 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 118,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g35 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 119,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g36 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 120,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g37 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 121,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g38 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 122,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g39 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 74,
+        "geom_b": 123,
+        "label": "gripper0_finger1_pad_collision <-> akita_black_bowl_1_g40 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 84,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g1 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 85,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g2 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 86,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g3 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 87,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g4 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 88,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g5 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 89,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g6 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 90,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g7 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 91,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g8 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 92,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g9 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 93,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g10 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 94,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g11 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 95,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g12 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 96,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g13 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 97,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g14 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 98,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g15 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 99,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g16 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 100,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g17 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 101,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g18 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 102,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g19 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 103,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g20 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 104,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g21 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 105,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g22 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 106,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g23 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 107,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g24 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 108,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g25 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 109,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g26 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 110,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g27 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 111,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g28 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 112,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g29 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 113,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g30 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 114,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g31 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 115,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g32 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 116,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g33 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 117,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g34 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 118,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g35 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 119,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g36 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 120,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g37 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 121,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g38 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 122,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g39 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 76,
+        "geom_b": 123,
+        "label": "gripper0_finger2_collision <-> akita_black_bowl_1_g40 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 84,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g1 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 85,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g2 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 86,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g3 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 87,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g4 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 88,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g5 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 89,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g6 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 90,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g7 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 91,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g8 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 92,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g9 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 93,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g10 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 94,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g11 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 95,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g12 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 96,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g13 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 97,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g14 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 98,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g15 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 99,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g16 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 100,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g17 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 101,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g18 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 102,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g19 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 103,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g20 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 104,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g21 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 105,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g22 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 106,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g23 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 107,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g24 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 108,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g25 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 109,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g26 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 110,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g27 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 111,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g28 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 112,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g29 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 113,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g30 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 114,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g31 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 115,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g32 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 116,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g33 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 117,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g34 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 118,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g35 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 119,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g36 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 120,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g37 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 121,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g38 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 122,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g39 intended target grasp",
+        "max_penetration": null
+      },
+      {
+        "geom_a": 77,
+        "geom_b": 123,
+        "label": "gripper0_finger2_pad_collision <-> akita_black_bowl_1_g40 intended target grasp",
+        "max_penetration": null
+      }
+    ],
+    "max_joint_step_rad": 0.01,
+    "max_subdivision_depth": 12,
+    "collision_tolerance": 0.0,
+    "separator_min_pad_m": 1e-09,
+    "tracking_reserve_rad": 1e-05
+  },
+  "lease_ttl_ms": 1000,
+  "max_feedback_age_ms": 2000,
+  "freeze_note": "six paired roots declared before formal results; engineering preflights excluded",
+  "native_clip_to_profile": true,
+  "protocol_amendment": "A3 paired contact diagnostic: full in-place MjData restore; same six A2 episodes and error budget",
+  "forecast_tracking_tolerance_rad": 1e-05
+}

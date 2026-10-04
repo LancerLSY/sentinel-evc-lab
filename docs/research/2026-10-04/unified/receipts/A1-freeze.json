@@ -1,0 +1,14 @@
+{
+  "frozen_utc": "2026-10-04T04:53:58.016498+00:00",
+  "base_commit": "009a24c",
+  "amendment": "A1",
+  "sha256": {
+    "experiments/vla/panda_geometry.py": "2ef50ee682743b6e56375b8bf10c86f21eeacaf0b3fd4acc9c29061ac0a6a640",
+    "experiments/vla/run_unified_libero.py": "383281bba5cb818308f24f7d94a5bbbb5b0f9510d49c50fdc7f43d5ca01a2e1d",
+    "experiments/vla/config_unified_libero_A1_20261004.json": "88f46779d06497e70194635b6ac842424839802eef361b326065ee5530164da4",
+    "experiments/vla/unified_libero_amendment_A1.md": "f57d15a667d8f7a8a29b2b871ff18be8e357fcd7af71176343e07131cbbd2194",
+    "src/sentinel_evc/native_gateway.py": "a370dbee7ac81fdb16bd157d11ddd28c94a02dae54349870e1fff4537f7c8a5f"
+  },
+  "planned_formal_roots": 6,
+  "planned_formal_episodes": 18
+}

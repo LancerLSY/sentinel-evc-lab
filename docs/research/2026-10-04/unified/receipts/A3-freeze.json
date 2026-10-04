@@ -1,0 +1,12 @@
+{
+  "frozen_at": "2026-10-04T05:32:13.475557+00:00",
+  "base_commit": "009a24c",
+  "amendment": "A3",
+  "files": {
+    "experiments/vla/run_unified_libero.py": "4e5404c9af1557448aa321947e0a18ed3ef22d2f0425f1d8ccfe5443f55cbd48",
+    "experiments/vla/panda_geometry.py": "4f358fc7d0df189015f11149087c6727a67ef128b21ae0109eea634e17c1a61c",
+    "experiments/vla/config_unified_libero_A3_20261004.json": "51afc9d312ba4ccf409e7097de2e11b1e7d8a6af8c9c08a96a53c9cd732ca75b",
+    "experiments/vla/unified_libero_amendment_A3.md": "c873897ee8c088d78661ce925778ba73eae99988fdbab3835c021dcbbd54af6e"
+  },
+  "prespecified_formal_episodes": 6
+}

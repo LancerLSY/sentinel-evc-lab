@@ -1,0 +1,140 @@
+{
+  "a2_freeze": {
+    "base_commit": "009a24c",
+    "base_commit_verified_shared_repo": true,
+    "checks": {
+      "experiments/vla/config_unified_libero_A2_20261004.json": {
+        "actual_sha256": "951da1e99e3ce645c7b9756900c7ae0e7c4c2b417ad5df45bb525fc56ee2c8a5",
+        "expected_sha256": "951da1e99e3ce645c7b9756900c7ae0e7c4c2b417ad5df45bb525fc56ee2c8a5",
+        "match": true
+      },
+      "experiments/vla/panda_geometry.py": {
+        "actual_sha256": "4f358fc7d0df189015f11149087c6727a67ef128b21ae0109eea634e17c1a61c",
+        "expected_sha256": "4f358fc7d0df189015f11149087c6727a67ef128b21ae0109eea634e17c1a61c",
+        "match": true
+      },
+      "experiments/vla/run_unified_libero.py": {
+        "actual_sha256": "330e6470cfdfb74fbfbb9bcd8ed1a3bdca83dfe4c2b02c945322fc9c5e0543ab",
+        "expected_sha256": "330e6470cfdfb74fbfbb9bcd8ed1a3bdca83dfe4c2b02c945322fc9c5e0543ab",
+        "match": true
+      },
+      "experiments/vla/unified_libero_amendment_A2.md": {
+        "actual_sha256": "7334faba2deda7ed5a17977b4cc1ed5f9c9c78477aebae4878f0a289efd76033",
+        "expected_sha256": "7334faba2deda7ed5a17977b4cc1ed5f9c9c78477aebae4878f0a289efd76033",
+        "match": true,
+        "verification_location": "shared_local_repository"
+      }
+    },
+    "path": "/root/autodl-tmp/sentinel-unified-20261004/A2-freeze.json",
+    "sha256": "sha256:5c11202c334495d96f8021c5a4ddbd7d957b13829760afd2975e56bc5993f4b9"
+  },
+  "classification": {
+    "integrity_or_hash_faults": 0,
+    "interpretation": "All retained evidence integrity checks pass. Validation failure is due only to runner-enforced forecast tracking drift beyond the prespecified tolerance.",
+    "malicious_tamper_indicators": 0,
+    "missing_executed_qpos_arrays": 0,
+    "tracking_drift_aborts": 6
+  },
+  "configured_tolerance_rad": 1e-05,
+  "contracts_sha256": "sha256:f9dec20ac946601093b971fd8fc15197a9dff8e66a9c7cec580cdcd91a33ea33",
+  "contracts_sha256_hex_source": "/root/autodl-tmp/sentinel-unified-20261004/repo/src/sentinel_evc/contracts.py",
+  "counts": {
+    "a2_freeze_files_checked": 4,
+    "actual_selected_certificate_bindings_checked": 210,
+    "actual_step_rows": 210,
+    "actual_substep_hashes_checked": 210,
+    "actual_writer_npz_bindings_checked": 210,
+    "candidate_certificates_checked": 81,
+    "candidate_rows": 27,
+    "commit_events_checked": 210,
+    "controller_ack_events_checked": 210,
+    "crashed_results": 6,
+    "dispatch_events_checked": 210,
+    "event_chains_checked": 9,
+    "event_file_hashes_checked": 9,
+    "event_rows": 1476,
+    "forecast_substep_comparisons": 210,
+    "formal_results": 6,
+    "logged_tracking_errors_checked": 210,
+    "manifest_additional_source_hashes_checked": 2,
+    "manifest_artifact_hashes_checked": 2,
+    "manifest_results": 9,
+    "manifest_source_freeze_bindings_checked": 3,
+    "npz_hashes_checked": 9,
+    "per_episode_rows": 9,
+    "preflight_results": 3,
+    "step_rows": 258,
+    "unique_actual_permit_ids": 210
+  },
+  "error_counts": {
+    "TRACKING_TOLERANCE_EXCEEDED": 6
+  },
+  "errors": [
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-parent_only",
+      "error_rad": 1.0708199481124225e-05,
+      "step": 34,
+      "tolerance_rad": 1e-05,
+      "within_cycle": 4
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-full_final",
+      "error_rad": 1.0708199481124225e-05,
+      "step": 34,
+      "tolerance_rad": 1e-05,
+      "within_cycle": 4
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state040-delta_evc",
+      "error_rad": 1.0708199481124225e-05,
+      "step": 34,
+      "tolerance_rad": 1e-05,
+      "within_cycle": 4
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-parent_only",
+      "error_rad": 0.000514480113928073,
+      "step": 33,
+      "tolerance_rad": 1e-05,
+      "within_cycle": 3
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-full_final",
+      "error_rad": 0.000514480113928073,
+      "step": 33,
+      "tolerance_rad": 1e-05,
+      "within_cycle": 3
+    },
+    {
+      "code": "TRACKING_TOLERANCE_EXCEEDED",
+      "cycle": 3,
+      "episode_id": "formal-task05-state041-delta_evc",
+      "error_rad": 0.000514480113928073,
+      "step": 33,
+      "tolerance_rad": 1e-05,
+      "within_cycle": 3
+    }
+  ],
+  "manifest_sha256": "sha256:1c94d8ca258ea544ff06002cad359f1d7617383c7f6d4f38e1dd702b959b2b5e",
+  "manifest_status": "failed",
+  "max_logged_forecast_tracking_error_rad": 0.000514480113928073,
+  "max_recomputed_forecast_tracking_error_rad": 0.000514480113928073,
+  "notes": [
+    "No model, simulator, policy inference, or environment execution was rerun.",
+    "Event prev_hash links were recomputed with current sentinel_evc.contracts.sha256_hex."
+  ],
+  "run_directory": "/root/autodl-tmp/sentinel-unified-20261004/formal-A2-20261004",
+  "schema": "sentinel-unified-A2-evidence-validation-v1",
+  "validated_utc": "2026-10-04T05:23:45.449005+00:00",
+  "validation_status": "fail"
+}
