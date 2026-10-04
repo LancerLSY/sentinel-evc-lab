@@ -1,0 +1,36 @@
+{
+  "artifact_integrity_ok": true,
+  "bundle_manifest": "/root/autodl-tmp/sentinel-unified-20261004/excluded-native-direct-F-20261004/bundle/manifest.json",
+  "bundle_manifest_sha256": "sha256:45c682a5bd9e4a0e86d4fd49a2611f2b199a45376a6a8d13775378a564268eb2",
+  "comparison_scope": "excluded posthoc unaggregated native direct control; same six roots and 280-action cap; not a same-transform ablation",
+  "counts": {
+    "env_step_outcomes": 600,
+    "episodes": 6,
+    "events": 1812,
+    "log_gap": 0,
+    "native_trace_records": 2469,
+    "normalized_chunk_bindings": 600,
+    "policy_inputs": 600,
+    "postprocess_env_byte_bindings": 600,
+    "postprocessed_actions": 600,
+    "raw_policy_chunks": 63,
+    "selected_actions": 600,
+    "strict_checkpoint_keys": 500,
+    "strict_loaded_keys": 500
+  },
+  "errors": [],
+  "ok": true,
+  "result_metrics": {
+    "env_steps": 600,
+    "postprocessor_to_env_max_abs_diff": 0.0,
+    "task_success_rate": 1.0,
+    "task_successes": 6
+  },
+  "source_hashes": {
+    "config_excluded_native_direct_20261004.json": "sha256:4edcdca59124a17f02d78e28910cde8d1f2299d0832543e3d5e8c55cfd088f5f",
+    "excluded_native_direct_identity.json": "sha256:e6b95dad44ccce7e2bfbec4b73053fc8085c7a63b270d4a45e1ebde8b5f42a4f",
+    "run_sentinel_libero.py": "sha256:aa522a28fae8dd7e14e381c186a6a52e9f3b1b564b7eb5b0dbbfe78ce09f5d41"
+  },
+  "stage": "excluded-native-direct-F",
+  "status": "complete"
+}

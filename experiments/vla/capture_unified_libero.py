@@ -21,12 +21,6 @@ import numpy as np
 import run_unified_libero as runner
 
 
-TASK_ID = 0
-STATE_INDEX = 40
-SEED = 2026100400
-BRANCH = "delta_evc"
-
-
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -66,9 +60,17 @@ def _write_video(path: Path, frames: list[np.ndarray], fps: int = 20) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", type=Path, required=True, help="frozen A2 config to clone")
+    parser.add_argument("--config", type=Path, required=True, help="frozen experiment config to clone")
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--task-id", type=int, default=0)
+    parser.add_argument("--state-index", type=int, default=40)
+    parser.add_argument("--branch", choices=runner.BRANCHES, default="delta_evc")
+    parser.add_argument("--seed", type=int, help="default: 2026100400 + state-index - 40")
+    parser.add_argument("--deadline-timestamp", help="explicitly override the frozen config deadline")
     args = parser.parse_args()
+    if args.task_id < 0 or args.state_index < 0:
+        raise ValueError("task-id and state-index must be non-negative")
+    seed = args.seed if args.seed is not None else 2026100400 + args.state_index - 40
     source_config = args.config.resolve()
     output_dir = args.output_dir.resolve()
     if output_dir.exists():
@@ -76,7 +78,8 @@ def main() -> int:
 
     config = json.loads(source_config.read_text(encoding="utf-8"))
     config["output_dir"] = str(output_dir)
-    config.pop("deadline_timestamp", None)
+    if args.deadline_timestamp is not None:
+        config["deadline_timestamp"] = args.deadline_timestamp
     output_dir.parent.mkdir(parents=True, exist_ok=True)
     capture_config = output_dir.parent / f".{output_dir.name}-config.json"
     capture_config.write_text(json.dumps(config, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -116,9 +119,9 @@ def main() -> int:
 
     started = time.time()
     try:
-        runner.BRANCHES = (BRANCH,)
+        runner.BRANCHES = (args.branch,)
         runner._episode_specs = lambda unused: [{
-            "phase": "formal", "task_id": TASK_ID, "state_index": STATE_INDEX, "seed": SEED,
+            "phase": "formal", "task_id": args.task_id, "state_index": args.state_index, "seed": seed,
         }]
         runner._step_with_substeps = capture_step
         runner.NativeGateway.submit = capture_submit
@@ -138,8 +141,25 @@ def main() -> int:
     trace = _jsonl(output_dir / "steps.jsonl")
     actual = [row for row in trace if row.get("event") == "actual_step"]
     denied = [row for row in trace if row.get("event") == "denied"]
+    recovery_cycles: dict[int, dict[str, Any]] = {}
+    for row in trace:
+        recovery = row.get("safe_prefix_recovery") if row.get("event") == "candidate" else None
+        if isinstance(recovery, dict) and bool(recovery.get("prefix_success")):
+            cycle = int(row["cycle"])
+            recovery_cycles[cycle] = {
+                "cycle": cycle,
+                "prefix_length": int(recovery["prefix_length"]),
+                "selected_execution_horizon": int(recovery["selected_execution_horizon"]),
+                "policy": str(recovery["policy"]),
+            }
     if len(raw_frames) != len(actual):
         raise RuntimeError(f"captured {len(raw_frames)} frames for {len(actual)} committed writes")
+    raw_task = actual[0].get("info", {}).get("task") if actual else None
+    if isinstance(raw_task, list) and raw_task:
+        raw_task = raw_task[0]
+    task_goal = str(raw_task).replace("_", " ").strip() if raw_task else f"LIBERO spatial task {args.task_id}"
+    if task_goal:
+        task_goal = task_goal[0].upper() + task_goal[1:]
 
     denied_reason = denied[-1].get("reason") if denied else None
     outcome = "success" if episode.get("success") else "stopped"
@@ -150,12 +170,13 @@ def main() -> int:
     frames = [
         _annotate(frame, [
             "EXCLUDED LIVE DEMO | geometry + EVC + SmolVLA",
-            f"task {TASK_ID} state {STATE_INDEX} | {BRANCH} | committed write {index + 1}/{len(raw_frames)}",
+            f"task {args.task_id} state {args.state_index} | {args.branch} | committed write {index + 1}/{len(raw_frames)}",
             f"outcome: {outcome}",
         ])
         for index, frame in enumerate(raw_frames)
     ]
-    video_path = output_dir / "task00-state040-delta_evc-excluded-live.mp4"
+    stem = f"task{args.task_id:02d}-state{args.state_index:03d}-{args.branch}"
+    video_path = output_dir / f"{stem}-excluded-live.mp4"
     if frames:
         _write_video(video_path, frames)
 
@@ -163,7 +184,8 @@ def main() -> int:
         "schema": "sentinel-unified-libero-excluded-live-capture-v1",
         "included_in_experiment_statistics": False,
         "capture_boundary": "one frame rendered after each authorized NativeGateway writer environment step; forecast rollouts excluded",
-        "episode": {"task_id": TASK_ID, "state_index": STATE_INDEX, "seed": SEED, "branch": BRANCH},
+        "episode": {"task_id": args.task_id, "state_index": args.state_index, "seed": seed,
+                    "branch": args.branch, "task_goal": task_goal},
         "outcome": {
             "success": bool(episode.get("success")), "crashed": bool(episode.get("crashed")),
             "steps": int(episode.get("steps", 0)), "denied_final_reason": denied_reason,
@@ -171,7 +193,21 @@ def main() -> int:
         "capture": {
             "frames": len(frames), "actual_writes": len(actual), "fps": 20,
             "actual_env_step_hashes": [row.get("actual_env_step_hash") for row in actual],
+            "frame_telemetry": [{
+                "frame": index, "step": int(row["step"]), "cycle": int(row["cycle"]),
+                "within_cycle": int(row["within_cycle"]),
+                "certified_prefix_length": (
+                    recovery_cycles[int(row["cycle"])]["prefix_length"]
+                    if int(row["cycle"]) in recovery_cycles else None
+                ),
+            } for index, row in enumerate(actual)],
             "video": ({"path": video_path.name, "sha256": _sha256(video_path)} if frames else None),
+        },
+        "safe_prefix_recovery": {
+            "successful_recovery_count": len(recovery_cycles),
+            "selected_horizons": [item["selected_execution_horizon"] for item in recovery_cycles.values()],
+            "first_recovery_cycle": min(recovery_cycles) if recovery_cycles else None,
+            "cycles": list(recovery_cycles.values()),
         },
         "sources": {
             "source_config": str(source_config), "source_config_sha256": _sha256(source_config),
@@ -182,6 +218,12 @@ def main() -> int:
             "steps_sha256": _sha256(output_dir / "steps.jsonl"),
             "per_episode_sha256": _sha256(output_dir / "per_episode.jsonl"),
         },
+        "geometry": {
+            "joint_graph_dimension": 9 if bool(config.get("certify_moving_fingers", False)) else 7,
+            "tracking_reserve_rad": config.get("geometry", {}).get("tracking_reserve_rad"),
+            "tracking_reserve_slide_m": config.get("geometry", {}).get("tracking_reserve_slide_m"),
+        },
+        "deadline_timestamp": config.get("deadline_timestamp"),
         "runner_return_code": return_code,
         "elapsed_seconds": time.time() - started,
     }

@@ -178,7 +178,7 @@ def _deadline_reached(deadline: float | None) -> bool:
 def _safe_leaf(value: Any) -> bool:
     import numpy as np
 
-    if isinstance(value, (str, int, float, bool, type(None), np.ndarray)):
+    if isinstance(value, (str, int, float, bool, type(None), np.ndarray, np.generic)):
         return True
     if isinstance(value, (list, tuple, collections.deque)):
         return all(_safe_leaf(item) for item in value)
@@ -208,10 +208,16 @@ def _stateful_objects(underlying: Any) -> list[Any]:
 
     while values:
         value = values.pop()
-        if value is None or id(value) in seen or not hasattr(value, "__dict__"):
+        if value is None or id(value) in seen:
+            continue
+        if isinstance(value, (dict, list, tuple, collections.deque)):
+            seen.add(id(value))
+            values.extend(children(value))
+            continue
+        if not hasattr(value, "__dict__"):
             continue
         module = type(value).__module__
-        if not module.startswith(("libero", "robosuite", "gymnasium")):
+        if value is not underlying and not module.startswith(("lerobot", "libero", "robosuite", "gymnasium")):
             continue
         seen.add(id(value))
         result.append(value)
@@ -220,6 +226,34 @@ def _stateful_objects(underlying: Any) -> list[Any]:
                 continue
             values.extend(children(child))
     return result
+
+
+def _rollout_state_inventory(underlying: Any, objects: list[Any]) -> dict[str, Any]:
+    """Require real wrapper and controller coverage before forecasting."""
+    covered = {id(obj) for obj in objects}
+    native = underlying._env
+    robots = getattr(native, "robots", ())
+    controllers = [robot.controller for robot in robots]
+    if not controllers or id(underlying) not in covered or id(native) not in covered:
+        raise RuntimeError("rollout snapshot did not reach the native environment and robot controllers")
+    if any(id(controller) not in covered for controller in controllers):
+        raise RuntimeError("rollout snapshot omitted a live robot controller")
+    for controller in controllers:
+        for name in ("interpolator_pos", "interpolator_ori"):
+            interpolator = getattr(controller, name, None)
+            if interpolator is not None and id(interpolator) not in covered:
+                raise RuntimeError(f"rollout snapshot omitted controller {name}")
+    observable_count = sum(type(obj).__module__.startswith("robosuite.utils.observables") for obj in objects)
+    if not observable_count:
+        raise RuntimeError("rollout snapshot omitted native observable buffers")
+    entries = [{
+        "type": f"{type(obj).__module__}.{type(obj).__qualname__}",
+        "leaf_keys": sorted(key for key, value in obj.__dict__.items() if _safe_leaf(value)),
+    } for obj in objects]
+    return {
+        "object_count": len(entries), "controller_count": len(controllers),
+        "observable_count": observable_count, "objects": entries,
+    }
 
 
 def _mujoco_copy_data_api() -> tuple[Any, Any]:
@@ -292,10 +326,14 @@ def _capture_rollout_state(underlying: Any) -> dict[str, Any]:
     integration = np.empty(mujoco.mj_stateSize(model, state_spec), dtype=np.float64)
     mujoco.mj_getState(model, data, integration, state_spec)
     python_state: list[tuple[Any, dict[str, Any]]] = []
+    original_leaves: list[dict[str, Any]] = []
     object_rngs: list[tuple[Any, Any]] = []
-    for obj in _stateful_objects(underlying):
+    objects = _stateful_objects(underlying)
+    inventory = _rollout_state_inventory(underlying, objects)
+    for obj in objects:
         leaves = {key: copy.deepcopy(value) for key, value in obj.__dict__.items() if _safe_leaf(value)}
         python_state.append((obj, leaves))
+        original_leaves.append({key: obj.__dict__[key] for key in leaves})
         for value in obj.__dict__.values():
             if hasattr(value, "bit_generator") and hasattr(value.bit_generator, "state"):
                 object_rngs.append((value, copy.deepcopy(value.bit_generator.state)))
@@ -304,6 +342,8 @@ def _capture_rollout_state(underlying: Any) -> dict[str, Any]:
         "native_data": copy.copy(data),
         "native_data_digest": _native_data_digest(data),
         "objects": python_state,
+        "original_leaves": original_leaves,
+        "state_inventory": inventory,
         "object_rngs": object_rngs,
         "random": random.getstate(),
         "numpy_random": np.random.get_state(),
@@ -335,9 +375,9 @@ def _restore_rollout_state(underlying: Any, state: dict[str, Any]) -> None:
             return current
         return copy.deepcopy(saved)
 
-    for obj, leaves in state["objects"]:
+    for (obj, leaves), references in zip(state["objects"], state["original_leaves"]):
         for key, value in leaves.items():
-            setattr(obj, key, restore_leaf(getattr(obj, key, None), value))
+            setattr(obj, key, restore_leaf(references[key], value))
     for generator, generator_state in state["object_rngs"]:
         generator.bit_generator.state = copy.deepcopy(generator_state)
     random.setstate(state["random"])
@@ -352,18 +392,13 @@ def _rollout_fingerprint(underlying: Any, state: dict[str, Any] | None = None) -
 
     if state is None:
         state = _capture_rollout_state(underlying)
-    def encode(value: Any) -> Any:
-        if isinstance(value, np.ndarray):
-            return _array_identity(value)
-        if isinstance(value, dict):
-            return {str(key): encode(item) for key, item in sorted(value.items(), key=lambda item: str(item[0]))}
-        if isinstance(value, (list, tuple, collections.deque)):
-            return [encode(item) for item in value]
-        return value
 
     leaves: list[Any] = []
-    for _, attrs in state["objects"]:
-        leaves.append({key: encode(value) for key, value in sorted(attrs.items())})
+    for obj, attrs in state["objects"]:
+        leaves.append({
+            "type": f"{type(obj).__module__}.{type(obj).__qualname__}",
+            "leaves": {key: _snapshot_value_identity(value) for key, value in sorted(attrs.items())},
+        })
     rng = {
         "python": state["random"],
         "numpy": state["numpy_random"],
@@ -375,8 +410,23 @@ def _rollout_fingerprint(underlying: Any, state: dict[str, Any] | None = None) -
         state["integration"].tobytes()
         + str(state["native_data_digest"]).encode()
         + _canonical(leaves)
+        + _canonical(state["state_inventory"])
         + _canonical(rng)
     )
+
+
+def _snapshot_value_identity(value: Any) -> Any:
+    import numpy as np
+
+    if isinstance(value, (np.ndarray, np.generic)):
+        return _array_identity(value)
+    if isinstance(value, dict):
+        return {str(key): _snapshot_value_identity(item) for key, item in sorted(value.items(), key=lambda item: str(item[0]))}
+    if isinstance(value, (list, tuple, collections.deque)):
+        return [_snapshot_value_identity(item) for item in value]
+    if isinstance(value, float) and not math.isfinite(value):
+        return {"float_hex": value.hex()}
+    return value
 
 
 def _sim_handles(underlying: Any) -> tuple[Any, Any, Any]:
@@ -503,7 +553,12 @@ def _forecast(underlying: Any, actions: Any, qpos_indices: list[int], geometry_p
     after = _rollout_fingerprint(underlying, after_state)
     after_native_data = str(after_state["native_data_digest"])
     if after != before:
-        raise RuntimeError(f"forecast state restoration mismatch: {before} != {after}")
+        differences = []
+        for (obj, old), (_, new) in zip(snapshot["objects"], after_state["objects"]):
+            for key in sorted(set(old) | set(new)):
+                if key not in old or key not in new or _canonical(_snapshot_value_identity(old.get(key))) != _canonical(_snapshot_value_identity(new.get(key))):
+                    differences.append(f"{type(obj).__module__}.{type(obj).__qualname__}.{key}")
+        raise RuntimeError(f"forecast state restoration mismatch: {before} != {after}; changed leaves={differences[:20]}")
     if after_native_data != before_native_data:
         raise RuntimeError(f"forecast native MjData restoration mismatch: {before_native_data} != {after_native_data}")
     if error is not None:
@@ -512,6 +567,7 @@ def _forecast(underlying: Any, actions: Any, qpos_indices: list[int], geometry_p
         "before": before, "after": after, "match": after == before,
         "native_data_before": before_native_data, "native_data_after": after_native_data,
         "native_data_match": after_native_data == before_native_data,
+        "state_inventory": snapshot["state_inventory"],
         "action_end_indices": action_end_indices, "physics_substeps": len(qpos) - 1,
         "substep_unwanted_contacts": substep_contacts,
     }
@@ -607,6 +663,12 @@ def _model_and_source_identity(config_path: Path, checkpoint: Path, backbone: Pa
         "native_profile": _file_digest(Path(__file__).with_name("libero_native_profile.py")),
         "config": _file_digest(config_path),
     }
+    recovery_source = Path(__file__).with_name("safe_prefix_recovery.py")
+    if recovery_source.exists():
+        sources["safe_prefix_recovery"] = _file_digest(recovery_source)
+    motion_source = Path(__file__).with_name("cartesian_recovery.py")
+    if motion_source.exists():
+        sources["cartesian_recovery"] = _file_digest(motion_source)
     return {"sources": sources, "checkpoint": _tree_digest(checkpoint), "backbone": _tree_digest(backbone)}
 
 
@@ -628,6 +690,7 @@ def _run_episode(
     cycle_times: dict[str, list[int]] = collections.defaultdict(list)
     valid_parent_final_collision = valid_parent_final_unproven = 0
     full_incremental_disagreement = finite_resolution_disagreement = 0
+    recovered_full_incremental_disagreement = 0
     unwanted: list[dict[str, Any]] = []
     denied = 0
     raw_preclip_components = final_preclip_components = 0
@@ -641,16 +704,33 @@ def _run_episode(
         raise RuntimeError(f"reset state mismatch: requested {state_index}, observed {actual_state}")
     _, model, data = _sim_handles(underlying)
     qpos_indices, joint_ids, body_ids = _joint_indices(underlying)
+    finger_qpos: list[int] = []
+    if config.get("certify_moving_fingers", False):
+        import mujoco
+
+        finger_joints = underlying._env.robots[0].gripper.joints
+        finger_ids = [mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, name) for name in finger_joints]
+        if len(finger_ids) != 2 or any(joint_id < 0 for joint_id in finger_ids):
+            raise RuntimeError("native Panda gripper must expose both named slide joints")
+        finger_qpos = [int(model.jnt_qposadr[joint_id]) for joint_id in finger_ids]
     geometry_profile = PandaGeometryProfile.from_model(
         model, joint_qpos_indices=qpos_indices, joint_ids=joint_ids,
+        controlled_extra_qpos_indices=finger_qpos,
         arm_body_ids=body_ids, allowed_contacts=_allowed_contacts(config, model, task_id), config=_geometry_config(config),
     )
+    qpos_indices = list(geometry_profile.moving_qpos_indices)
     record["geometry_profile"] = {
         "digest": str(geometry_profile.digest),
         "allowed_contacts_resolved": _jsonable(geometry_profile.allowed_contacts),
         "arm_geom_ids": list(geometry_profile.arm_geom_ids),
         "scene_geom_ids": list(geometry_profile.scene_geom_ids),
-        "scope_limit": "arm-link compiled collision proxies against the scene frozen at each 10-action chunk root; moving fingers and grasped objects are not jointly certified",
+        "moving_qpos_indices": qpos_indices,
+        "coordinate_units": list(geometry_profile.coordinate_units),
+        "scope_limit": (
+            "arm and both moving fingers against the scene frozen at each chunk root; carried-object future motion is not certified"
+            if finger_qpos else
+            "arm-link compiled collision proxies against the frozen scene; moving fingers and carried objects are not jointly certified"
+        ),
     }
     external_scene_base = {"task_id": task_id, "state_index": state_index, "seed": seed,
                            "instruction": str(env.call("task_description")[0])}
@@ -663,6 +743,9 @@ def _run_episode(
         max_feedback_age_ns=int(float(config.get("max_feedback_age_ms", 2000.0)) * 1e6),
     )
     previous_raw = None
+    previous_horizon = 10
+    recovery_enabled = bool(config.get("recover_safe_prefix", False)) and branch in {"full_final", "delta_evc"}
+    motion_repair_count = 0
     total_reward = 0.0
     max_reward = -math.inf
     done = False
@@ -670,7 +753,7 @@ def _run_episode(
         int(config.get("_preflight_step_limit", 1)) if spec["phase"] == "preflight" else 280
     )
     try:
-        for cycle in range(28):
+        for cycle in range(280 if recovery_enabled else 28):
             if done or record["steps"] >= episode_step_limit or _deadline_reached(deadline):
                 break
             cycle_start = time.monotonic_ns()
@@ -694,7 +777,7 @@ def _run_episode(
             if previous_raw is None:
                 aggregate = raw_candidate.copy()
             else:
-                aggregate = 0.5 * raw_candidate + 0.5 * previous_raw[:, 10:20, :]
+                aggregate = 0.5 * raw_candidate + 0.5 * previous_raw[:, previous_horizon:previous_horizon + 10, :]
             changed = float(np.linalg.norm(aggregate - raw_candidate))
             raw_native_preclip = _native_actions(
                 raw_candidate, postprocessor, env_postprocessor, str(config.get("device", "cuda"))
@@ -765,7 +848,102 @@ def _run_episode(
                     valid_parent_final_unproven += 1
             if bool(getattr(full, "allowed", False)) != bool(getattr(incremental, "allowed", False)):
                 full_incremental_disagreement += 1
+            review_disagrees = bool(getattr(full, "allowed", False)) != bool(getattr(review, "allowed", False))
+            recovery_record = None
+            recovery_ns = 0
+            forecast_contact_veto = bool(config.get("forecast_contact_veto", False))
+            original_forecast_contact_veto = forecast_contact_veto and any(
+                final_restore["substep_unwanted_contacts"]
+            )
+            final_branch_decision = full if branch == "full_final" else incremental
+            if recovery_enabled and (final_branch_decision.status in {"collision", "unknown"} or original_forecast_contact_veto):
+                from safe_prefix_recovery import recover_safe_prefix
+
+                recovery = recover_safe_prefix(
+                    model, data, geometry_profile, final_native, final_qpos,
+                    final_restore["action_end_indices"], scene,
+                    forecast_substep_unwanted_contacts=final_restore["substep_unwanted_contacts"],
+                    veto_unwanted_contacts=forecast_contact_veto,
+                )
+                recovery_ns = recovery.total_latency_ns
+                recovery_record = {
+                    "success": recovery.success, "prefix_length": recovery.prefix_length,
+                    "attempts": _jsonable(recovery.attempts), "total_work": dict(recovery.total_work),
+                    "total_latency_ns": recovery_ns, "original_full": _decision_record(full),
+                    "original_parent": _decision_record(parent),
+                    "original_incremental": _decision_record(incremental),
+                    "original_dense_review": _decision_record(review),
+                    "policy": "unchanged_prefix_5_2_1_then_reobserve_replan",
+                    "original_forecast_contact_veto": original_forecast_contact_veto,
+                }
+                chosen_success = recovery.success
+                chosen_n = recovery.prefix_length
+                chosen_native, chosen_qpos, chosen_decision = recovery.native_actions, recovery.qpos_samples, recovery.decision
+                if not recovery.success and config.get("recover_cartesian_motion", False):
+                    repair_budget = int(config.get("max_motion_repairs", 32))
+                    if motion_repair_count < repair_budget:
+                        from cartesian_recovery import recover_cartesian_motion
+
+                        motion = recover_cartesian_motion(
+                            final_native[:, :1, :],
+                            forecast=lambda actions: _forecast(underlying, actions, qpos_indices, geometry_profile),
+                            model=model, data=data, profile=geometry_profile, scene_snapshot=scene,
+                            native_lower=gateway_profile.lower, native_upper=gateway_profile.upper,
+                            veto_unwanted_contacts=forecast_contact_veto,
+                        )
+                        recovery_ns += motion.total_latency_ns
+                        recovery_record["cartesian_motion"] = {
+                            "selected_name": motion.selected_name, "attempts": _jsonable(motion.attempts),
+                            "exclusions": _jsonable(motion.exclusions), "total_latency_ns": motion.total_latency_ns,
+                        }
+                        if motion.native is not None:
+                            chosen_success, chosen_n = True, 1
+                            chosen_native, chosen_qpos, chosen_decision = motion.native, motion.qpos, motion.decision
+                            final_restore = dict(motion.restore)
+                            if final_restore["before"] != execution_state_fingerprint or final_restore["after"] != execution_state_fingerprint:
+                                raise RuntimeError("Cartesian repair forecast did not preserve its bound controller state")
+                            motion_repair_count += 1
+                    else:
+                        recovery_record["cartesian_motion"] = {"reason": "motion_repair_budget_exhausted", "budget": repair_budget}
+                recovery_record["prefix_success"] = recovery.success
+                recovery_record["success"] = chosen_success
+                recovery_record["prefix_length"] = chosen_n
+                recovery_record["selected_execution_horizon"] = chosen_n
+                recovery_record["total_latency_ns"] = recovery_ns
+                cycle_times["safe_prefix_recovery"].append(recovery_ns)
+                if chosen_success:
+                    n = chosen_n
+                    arrays[f"cycle_{cycle:02d}_proposal_raw_native"] = raw_native.copy()
+                    arrays[f"cycle_{cycle:02d}_proposal_final_native"] = final_native.copy()
+                    arrays[f"cycle_{cycle:02d}_proposal_raw_qpos"] = raw_qpos.copy()
+                    arrays[f"cycle_{cycle:02d}_proposal_final_qpos"] = final_qpos.copy()
+                    raw_end = raw_restore["action_end_indices"][n - 1]
+                    raw_native = np.ascontiguousarray(raw_native[:, :n, :])
+                    raw_qpos = raw_qpos[:raw_end + 1].copy()
+                    final_native = chosen_native
+                    final_qpos = chosen_qpos
+                    for restored, retained in ((raw_restore, raw_qpos), (final_restore, final_qpos)):
+                        restored["action_end_indices"] = restored["action_end_indices"][:n]
+                        restored["physics_substeps"] = len(retained) - 1
+                        restored["substep_unwanted_contacts"] = restored["substep_unwanted_contacts"][:len(retained) - 1]
+                    action_bytes_raw = raw_native.tobytes(order="C")
+                    action_bytes_final = final_native.tobytes(order="C")
+                    prefix_parent_start = time.monotonic_ns()
+                    parent = certify_trajectory(model, data, geometry_profile, raw_qpos, action_bytes=action_bytes_raw, scene_snapshot=scene)
+                    parent_ns += time.monotonic_ns() - prefix_parent_start
+                    full = chosen_decision
+                    prefix_incremental_start = time.monotonic_ns()
+                    incremental = certify_trajectory(
+                        model, data, geometry_profile, final_qpos, action_bytes=action_bytes_final,
+                        scene_snapshot=scene, parent=getattr(parent, "certificate", None),
+                    )
+                    incremental_ns += time.monotonic_ns() - prefix_incremental_start
+                    if bool(full.allowed) != bool(incremental.allowed):
+                        recovered_full_incremental_disagreement += 1
             selected = parent if branch == "parent_only" else full if branch == "full_final" else incremental
+            selected_forecast_contact_veto = forecast_contact_veto and any(
+                final_restore["substep_unwanted_contacts"]
+            )
             selected_certificate = getattr(selected, "certificate", None)
             expected_certificate_action_sha = hashlib.sha256(
                 action_bytes_raw if branch == "parent_only" else action_bytes_final
@@ -780,7 +958,7 @@ def _run_episode(
                 selected_certificate is not None
                 and selected_certificate.action_sha256 == hashlib.sha256(action_bytes_final).hexdigest()
             )
-            active_geometry_ns = parent_ns if branch == "parent_only" else full_ns if branch == "full_final" else parent_ns + incremental_ns
+            active_geometry_ns = parent_ns if branch == "parent_only" else full_ns + recovery_ns if branch == "full_final" else parent_ns + incremental_ns + recovery_ns
             effective_final_forecast_ns = raw_forecast_ns if changed == 0.0 else final_forecast_ns
             active_forecast_ns = (
                 raw_forecast_ns + final_forecast_ns if branch in {"parent_only", "delta_evc"}
@@ -788,7 +966,7 @@ def _run_episode(
             )
             active_decision_ns = preprocess_ns + inference_ns + transform_ns + active_forecast_ns + active_geometry_ns
             cycle_times["active_decision_path"].append(active_decision_ns)
-            if bool(getattr(full, "allowed", False)) != bool(getattr(review, "allowed", False)):
+            if review_disagrees:
                 finite_resolution_disagreement += 1
             arrays[f"cycle_{cycle:02d}_raw_chunk"] = raw_chunk
             arrays[f"cycle_{cycle:02d}_aggregate"] = aggregate
@@ -803,10 +981,19 @@ def _run_episode(
                 "raw_chunk": _array_identity(raw_chunk), "raw_candidate": _array_identity(raw_candidate),
                 "aggregate": _array_identity(aggregate), "raw_to_aggregate_l2": changed,
                 "transform": TRANSFORM, "raw_forecast": _array_identity(raw_qpos),
+                "previous_consumed_horizon": previous_horizon,
+                "selected_execution_horizon": int(final_native.shape[1]),
+                "forecast_contact_veto_enabled": forecast_contact_veto,
+                "original_forecast_contact_veto": original_forecast_contact_veto,
+                "selected_forecast_contact_veto": selected_forecast_contact_veto,
+                "safe_prefix_recovery": recovery_record,
+                "dense_review_scope": "original_ten_action_proposal",
+                "original_proposal_comparisons": "valid_parent_final and full_incremental_disagreements use original ten-action proposals",
                 "native_transform_pipeline": [
                     "official_lerobot_postprocessor",
                     "optional_componentwise_native_profile_clip" if clip_enabled else "no_optional_native_clip",
                     "reversible_native_simulator_forecast",
+                    "optional_certified_cartesian_motion_repair" if config.get("recover_cartesian_motion", False) else "no_cartesian_motion_repair",
                     "geometry_certificate",
                     "native_gateway_permit_and_exact_writer",
                 ],
@@ -836,13 +1023,14 @@ def _run_episode(
                     "raw_forecast": raw_forecast_ns, "final_forecast": final_forecast_ns,
                     "parent_geometry": parent_ns, "full_geometry": full_ns,
                     "incremental_geometry": incremental_ns, "dense_review_counterfactual": dense_review_ns,
+                    "safe_prefix_recovery": recovery_ns,
                     "active_decision_path": active_decision_ns,
                     "note": "component-sum estimate only; active path excludes counterfactual methods and dense review; full_cycle is measured and includes all diagnostics plus actual writes",
                 },
             })
-            permitted = bool(getattr(selected, "allowed", False))
+            permitted = bool(getattr(selected, "allowed", False)) and not selected_forecast_contact_veto
             executed_qpos = [np.asarray(data.qpos[qpos_indices], dtype=np.float64).copy()]
-            for within in range(10):
+            for within in range(int(final_native.shape[1])):
                 if done or record["steps"] >= episode_step_limit or _deadline_reached(deadline):
                     break
                 requested = final_native[:, within, :].copy()
@@ -856,7 +1044,7 @@ def _run_episode(
                     disposition = "terminal_denial_no_env_step"
                     done = True
                     step_trace.write({"event": "denied", "episode_id": episode_id, "step": record["steps"],
-                                      "reason": getattr(selected, "status", "not_certified"),
+                                      "reason": "forecast_unwanted_contact" if selected_forecast_contact_veto else getattr(selected, "status", "not_certified"),
                                       "fallback": "none", "env_step_called": False})
                     break
                 elif branch in {"full_final", "delta_evc"} and not certificate_matches_dispatched_candidate:
@@ -934,8 +1122,11 @@ def _run_episode(
                     raise RuntimeError(
                         f"physics substep count changed after restored forecast: {len(actual_substeps)} != {len(expected_substeps)}"
                     )
-                tracking_error = float(np.max(np.abs(actual_substeps - expected_substeps)))
+                tracking_difference = np.abs(actual_substeps - expected_substeps)
+                tracking_error = float(np.max(tracking_difference[:, :7]))
+                slide_tracking_error = float(np.max(tracking_difference[:, 7:])) if finger_qpos else 0.0
                 tracking_tolerance = float(config.get("forecast_tracking_tolerance_rad", 1e-8))
+                slide_tracking_tolerance = float(config.get("forecast_tracking_tolerance_slide_m", 0.0))
                 collision_rows = [_jsonable(item) for item in collisions]
                 for substep_index, substep_rows in enumerate(writer_substep_contacts):
                     unwanted.extend({"step": record["steps"], "physics_substep": substep_index, **item}
@@ -955,6 +1146,8 @@ def _run_episode(
                     "admission_observation_input_hash": admission_input_hash,
                     "forecast_tracking_max_abs_rad": tracking_error,
                     "forecast_tracking_tolerance_rad": tracking_tolerance,
+                    "forecast_tracking_max_abs_slide_m": slide_tracking_error,
+                    "forecast_tracking_tolerance_slide_m": slide_tracking_tolerance,
                     "fallback_forecast_restore": fallback_restore,
                     "actual_physics_substeps": len(writer_substep_qpos),
                     "actual_substep_qpos": _array_identity(np.asarray(writer_substep_qpos)),
@@ -963,16 +1156,17 @@ def _run_episode(
                     "info": _jsonable(info), "unwanted_collisions": collision_rows,
                     "full_cycle_ns": time.monotonic_ns() - cycle_start,
                 })
-                if tracking_error > tracking_tolerance:
+                if tracking_error > tracking_tolerance or slide_tracking_error > slide_tracking_tolerance:
                     gateway.revoke("forecast tracking drift invalidated geometry certificate")
                     raise RuntimeError(
-                        f"actual Panda qpos drifted from restored rollout by {tracking_error:.12g} rad"
+                        f"actual Panda qpos drifted from restored rollout by {tracking_error:.12g} rad / {slide_tracking_error:.12g} m"
                     )
                 done = bool(_array(terminated).reshape(-1)[0]) or bool(_array(truncated).reshape(-1)[0])
                 if bool(_array(info.get("is_success", [False])).reshape(-1)[0]) if isinstance(info, dict) else False:
                     record["success"] = True
                     done = True
             previous_raw = raw_chunk.copy()
+            previous_horizon = int(final_native.shape[1])
             arrays[f"cycle_{cycle:02d}_executed_qpos"] = np.asarray(executed_qpos, dtype=np.float64)
             tracking_report = None
             if selected_certificate is not None and len(executed_qpos) == len(final_qpos):
@@ -990,6 +1184,8 @@ def _run_episode(
         record.update({
             "sum_reward": total_reward, "max_reward": None if max_reward == -math.inf else max_reward,
             "unwanted_collisions": len(unwanted), "unwanted_collision_records": unwanted,
+            "recovered_full_incremental_disagreements": recovered_full_incremental_disagreement,
+            "motion_repair_candidates_selected": motion_repair_count,
             "valid_parent_final_collision": valid_parent_final_collision,
             "valid_parent_final_unproven": valid_parent_final_unproven,
             "full_incremental_disagreements": full_incremental_disagreement,

@@ -1,0 +1,25 @@
+{
+  "mode": "baseline",
+  "checkpoint": "/root/autodl-tmp/sentinel-unified-20261004/models/checkpoint",
+  "backbone": "/root/autodl-tmp/sentinel-unified-20261004/models/backbone",
+  "identity_protocol": "/root/autodl-tmp/sentinel-unified-20261004/repo/experiments/vla/excluded_native_direct_identity.json",
+  "expected_mujoco": "3.3.7",
+  "profile": "/root/autodl-tmp/sentinel-unified-20261004/repo/experiments/vla/profiles/libero_native_raw_float32.json",
+  "task_ids": [
+    0,
+    4,
+    5
+  ],
+  "initial_state_indices": [
+    40,
+    41
+  ],
+  "seed_base": 2026100400,
+  "execution_horizon": 10,
+  "torch_threads": 4,
+  "record_pose_stride": 280,
+  "render_episode_keys": [],
+  "render_episodes": 0,
+  "excluded_native_direct_identity": true,
+  "comparison_scope": "excluded posthoc unaggregated native direct control; same six roots and 280-action cap; not a same-transform ablation"
+}

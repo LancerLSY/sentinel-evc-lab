@@ -54,7 +54,7 @@ The UR5e checker remains a separate experiment.
 | **Robot entry** | mock diagnostics and Universal Robots read-only dashboard probe | no physical motion/write adapter yet |
 | **3D model entry** | OBJ, STL, MJCF and URDF inspection; offline Canvas preview | inspection does not grant execution authority |
 | **Native VLA integration** | official SmolVLA/Panda inference, exact 7-D request authorization, one-use permits and recorded environment feedback | LIBERO request-integrity lane; separate Panda geometry experiment below; no physical-stop validation |
-| **Unified VLA experiment** | native SmolVLA output, temporal aggregation, Panda geometry, permits and actual MuJoCo writes | [18 paired runs + 12 contact diagnostics](docs/research/2026-10-04/unified/RESULTS.md); tracking failures and full-check costs retained |
+| **Unified VLA experiment** | native SmolVLA output, temporal aggregation, Panda geometry, permits and actual MuJoCo writes | [paired repair experiments](docs/research/2026-10-04/unified/REPAIR_RESULTS.md); complete state restoration, arm and finger checks, certified short-prefix continuation; remaining denials and full-check costs retained |
 | **GPU/model research** | trained WorldGuard families and a SmolVLA fine-tune on fixed SO100 recordings | separate experimental profiles; the SO100 overlay is not the native Panda checkpoint |
 
 The workbench always shows execution completion, evidence integrity, and scientific
@@ -226,7 +226,8 @@ does not claim that a signature proves sensor honesty or physical execution.
 | Original official SmolVLA/LIBERO, 100 fixed rollouts | 58/100 success; task 5 fails 10/10 | official Panda checkpoint, observe-only logging; not the SO100 overlay |
 | Paired backend comparison, 40 fresh rollouts | task 5: 0/10 → 7/10; control: 10/10 → 10/10 | complete MuJoCo 3.8.1 / 3.3.7 treatment; benchmark compatibility, not physical accuracy |
 | Full-suite fresh-state confirmation, 100 rollouts | **93/100 success**; zero crashes; task 4 remains 6/10 | official Panda checkpoint, isolated MuJoCo 3.3.7, horizon 10; separate grid from original 58/100 |
-| Unified SmolVLA/Panda/EVC, 18 paired rollouts | each branch succeeds 2/6; 0 observed forbidden contacts; task 5 tracking aborts | no observed collision benefit or speed advantage; [report and raw evidence](docs/research/2026-10-04/unified/RESULTS.md) |
+| Unified SmolVLA/Panda/EVC repair, six paired roots per branch | corrected baseline: 2/6 each; certified short prefixes: **3/6** full and incremental, **2/6** parent-only; 0 drift aborts or observed forbidden contacts | three roots remain unsuccessful; no clean speed or general safety claim; [report and raw evidence](docs/research/2026-10-04/unified/REPAIR_RESULTS.md) |
+| A8 follow-up and native control | full-final completes both task-5 roots; unaggregated native control **6/6** | A8 grid and control-completion shard are deadline-limited; combined deployment still loses task completion; [details](docs/research/2026-10-04/unified/REPAIR_RESULTS.md) |
 
 [![Full-mesh UR5e: task, changed plan, decision and outcome](docs/research/2026-10-02/paper-v2/video/sentinel-ur5e-paper-poster.png)](https://github.com/LancerLSY/sentinel-evc-lab/releases/download/paper-validation-20261002/sentinel-ur5e-paper.mp4)
 

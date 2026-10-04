@@ -1,0 +1,198 @@
+{
+  "schema": "sentinel-rollout-forensic-compact-summary-v1",
+  "diagnostic_only": true,
+  "policy_loaded": false,
+  "source_gzip_sha256": "e4f6a6955000aa376bc3e1c8579808b3dc080547c1d9fb5b4d3025b1fbf06498",
+  "source_json_sha256": "25639bbd6d8cef3f1228cbd370bad7716371ad6f926074456288f8028d09dc4e",
+  "sources": {
+    "config": "/root/autodl-tmp/sentinel-unified-20261004/config_unified_libero_A3_20261004.json",
+    "config_sha256": "sha256:51afc9d312ba4ccf409e7097de2e11b1e7d8a6af8c9c08a96a53c9cd732ca75b",
+    "diagnostic_sha256": "sha256:8cd1aa521cb62351ddbd7679c3e321adffc70a01a1b7b3168cd4c7ecea674650",
+    "run_dir": "/root/autodl-tmp/sentinel-unified-20261004/formal-A3-20261004",
+    "runner_sha256": "sha256:53019f345227a97ed4e1e21e251d3b15212aa96c6b6f525776ce006c77619d1e"
+  },
+  "cases": [
+    {
+      "episode_id": "formal-task05-state040-delta_evc",
+      "task_id": 5,
+      "state_index": 40,
+      "branch": "delta_evc",
+      "seed": 2026100400,
+      "source_npz": "/root/autodl-tmp/sentinel-unified-20261004/formal-A3-20261004/candidates/formal-task05-state040-delta_evc.npz",
+      "source_npz_sha256": "sha256:77f4f507cc6c10f7214dcd8bb642235f396d5c11a2535dd094cf669a5ea2ea87",
+      "physics_substeps": 2000,
+      "all_cycle_fingerprints_restored": true,
+      "all_cycle_forecasts_exact_actual": true,
+      "all_cycle_leaf_values_restored": true,
+      "cycles": [
+        {
+          "cycle": 0,
+          "forecast_actual_max_abs_rad": 0.0,
+          "forecast_actual_shape_match": true,
+          "contact_sequence": {
+            "actual_sha256": "sha256:5805e2d859b5a32a56d14db9142b0846c63ce0a55aa0546c88a51552b819c687",
+            "actual_substeps": 250,
+            "exact_match": true,
+            "first_differing_physics_substep": null,
+            "forecast_sha256": "sha256:5805e2d859b5a32a56d14db9142b0846c63ce0a55aa0546c88a51552b819c687",
+            "forecast_substeps": 250
+          },
+          "restoration_checks": {
+            "fingerprint_restored": true,
+            "integration_restored": true,
+            "native_data_restored": true,
+            "rng_restored": true
+          }
+        },
+        {
+          "cycle": 1,
+          "forecast_actual_max_abs_rad": 0.0,
+          "forecast_actual_shape_match": true,
+          "contact_sequence": {
+            "actual_sha256": "sha256:83ad8a0a8b1bc7dba75496459693dc3f05208b92fb91dad94271d80b18d1f86b",
+            "actual_substeps": 250,
+            "exact_match": true,
+            "first_differing_physics_substep": null,
+            "forecast_sha256": "sha256:83ad8a0a8b1bc7dba75496459693dc3f05208b92fb91dad94271d80b18d1f86b",
+            "forecast_substeps": 250
+          },
+          "restoration_checks": {
+            "fingerprint_restored": true,
+            "integration_restored": true,
+            "native_data_restored": true,
+            "rng_restored": true
+          }
+        },
+        {
+          "cycle": 2,
+          "forecast_actual_max_abs_rad": 0.0,
+          "forecast_actual_shape_match": true,
+          "contact_sequence": {
+            "actual_sha256": "sha256:4b92d723d427ff1aa6e2979c0dcacd57f60c73ba6a5b2974ab0f6fb15092e624",
+            "actual_substeps": 250,
+            "exact_match": true,
+            "first_differing_physics_substep": null,
+            "forecast_sha256": "sha256:4b92d723d427ff1aa6e2979c0dcacd57f60c73ba6a5b2974ab0f6fb15092e624",
+            "forecast_substeps": 250
+          },
+          "restoration_checks": {
+            "fingerprint_restored": true,
+            "integration_restored": true,
+            "native_data_restored": true,
+            "rng_restored": true
+          }
+        },
+        {
+          "cycle": 3,
+          "forecast_actual_max_abs_rad": 0.0,
+          "forecast_actual_shape_match": true,
+          "contact_sequence": {
+            "actual_sha256": "sha256:752f44082f41a8321c3e7f8de1c7ad0e646886f929cadd0fa880a30d70af28ad",
+            "actual_substeps": 250,
+            "exact_match": true,
+            "first_differing_physics_substep": null,
+            "forecast_sha256": "sha256:752f44082f41a8321c3e7f8de1c7ad0e646886f929cadd0fa880a30d70af28ad",
+            "forecast_substeps": 250
+          },
+          "restoration_checks": {
+            "fingerprint_restored": true,
+            "integration_restored": true,
+            "native_data_restored": true,
+            "rng_restored": true
+          }
+        }
+      ]
+    },
+    {
+      "episode_id": "formal-task05-state041-delta_evc",
+      "task_id": 5,
+      "state_index": 41,
+      "branch": "delta_evc",
+      "seed": 2026100401,
+      "source_npz": "/root/autodl-tmp/sentinel-unified-20261004/formal-A3-20261004/candidates/formal-task05-state041-delta_evc.npz",
+      "source_npz_sha256": "sha256:81b47f552f1daeacaebf45758e1645e2511abff8b6f4b620f059deb718cfcadf",
+      "physics_substeps": 2000,
+      "all_cycle_fingerprints_restored": true,
+      "all_cycle_forecasts_exact_actual": true,
+      "all_cycle_leaf_values_restored": true,
+      "cycles": [
+        {
+          "cycle": 0,
+          "forecast_actual_max_abs_rad": 0.0,
+          "forecast_actual_shape_match": true,
+          "contact_sequence": {
+            "actual_sha256": "sha256:69a888abfaa191e924ec5417ddd2682c4df3b381f754c5c22e4b636d02fa6bc9",
+            "actual_substeps": 250,
+            "exact_match": true,
+            "first_differing_physics_substep": null,
+            "forecast_sha256": "sha256:69a888abfaa191e924ec5417ddd2682c4df3b381f754c5c22e4b636d02fa6bc9",
+            "forecast_substeps": 250
+          },
+          "restoration_checks": {
+            "fingerprint_restored": true,
+            "integration_restored": true,
+            "native_data_restored": true,
+            "rng_restored": true
+          }
+        },
+        {
+          "cycle": 1,
+          "forecast_actual_max_abs_rad": 0.0,
+          "forecast_actual_shape_match": true,
+          "contact_sequence": {
+            "actual_sha256": "sha256:7d3f0f987d0efc89559c0a9dedf982d1245ef622fe8079e42738417ce4a191ce",
+            "actual_substeps": 250,
+            "exact_match": true,
+            "first_differing_physics_substep": null,
+            "forecast_sha256": "sha256:7d3f0f987d0efc89559c0a9dedf982d1245ef622fe8079e42738417ce4a191ce",
+            "forecast_substeps": 250
+          },
+          "restoration_checks": {
+            "fingerprint_restored": true,
+            "integration_restored": true,
+            "native_data_restored": true,
+            "rng_restored": true
+          }
+        },
+        {
+          "cycle": 2,
+          "forecast_actual_max_abs_rad": 0.0,
+          "forecast_actual_shape_match": true,
+          "contact_sequence": {
+            "actual_sha256": "sha256:e0118f3ea480cde84d96fb2aee7f37973cc4ffff1633245688349db53d811551",
+            "actual_substeps": 250,
+            "exact_match": true,
+            "first_differing_physics_substep": null,
+            "forecast_sha256": "sha256:e0118f3ea480cde84d96fb2aee7f37973cc4ffff1633245688349db53d811551",
+            "forecast_substeps": 250
+          },
+          "restoration_checks": {
+            "fingerprint_restored": true,
+            "integration_restored": true,
+            "native_data_restored": true,
+            "rng_restored": true
+          }
+        },
+        {
+          "cycle": 3,
+          "forecast_actual_max_abs_rad": 0.0,
+          "forecast_actual_shape_match": true,
+          "contact_sequence": {
+            "actual_sha256": "sha256:854b0f73d2d9a0336f17e3ecb9992a5378b8da8b91bf14d1b0b61271b191f21b",
+            "actual_substeps": 250,
+            "exact_match": true,
+            "first_differing_physics_substep": null,
+            "forecast_sha256": "sha256:854b0f73d2d9a0336f17e3ecb9992a5378b8da8b91bf14d1b0b61271b191f21b",
+            "forecast_substeps": 250
+          },
+          "restoration_checks": {
+            "fingerprint_restored": true,
+            "integration_restored": true,
+            "native_data_restored": true,
+            "rng_restored": true
+          }
+        }
+      ]
+    }
+  ]
+}

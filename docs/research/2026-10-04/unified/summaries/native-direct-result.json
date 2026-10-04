@@ -1,0 +1,353 @@
+{
+  "backbone": {
+    "config_sha256": "sha256:ea6bc1237e96247f6258de3e202e2e62b93d6f386dc47e7b36b5588bf3a15e17",
+    "path": "/root/autodl-tmp/sentinel-unified-20261004/models/backbone"
+  },
+  "checkpoint": {
+    "config_sha256": "sha256:5c9f3ba9f5f37ea7024c9501b0b20b1941f232989c2167853cb46d9071a70dd7",
+    "path": "/root/autodl-tmp/sentinel-unified-20261004/models/checkpoint"
+  },
+  "claim_limits": [
+    "official SmolVLA checkpoint inference and native LIBERO/Panda env.step were used when status is complete",
+    "active/fault modes make the gateway the only env.step writer",
+    "shadow mode observes exact postprocessor-to-env bytes and does not establish intervention efficacy",
+    "request authorization is not collision, dynamics, physical-stop or functional-safety validation",
+    "task success is the official LIBERO result; fault attempts are excluded from task success"
+  ],
+  "configuration": {
+    "execution_horizon": 10,
+    "initial_state_indices": [
+      40,
+      41
+    ],
+    "lease_ttl_ms": 250.0,
+    "max_feedback_age_ms": 500.0,
+    "record_pose_stride": 280,
+    "render_episode_keys": [],
+    "seed_base": 2026100400,
+    "task_ids": [
+      0,
+      4,
+      5
+    ],
+    "torch_threads": 4
+  },
+  "dependencies": {
+    "files": {
+      "backbone/config.json": "sha256:ea6bc1237e96247f6258de3e202e2e62b93d6f386dc47e7b36b5588bf3a15e17",
+      "backbone/preprocessor_config.json": "sha256:149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374",
+      "backbone/processor_config.json": "sha256:f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c",
+      "backbone/special_tokens_map.json": "sha256:2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60",
+      "backbone/tokenizer.json": "sha256:5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+      "backbone/tokenizer_config.json": "sha256:dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913",
+      "checkpoint/config.json": "sha256:5c9f3ba9f5f37ea7024c9501b0b20b1941f232989c2167853cb46d9071a70dd7",
+      "checkpoint/model.safetensors": "sha256:9a9f6413e42c0f332fccbce9a0dc796af2790f82cf002f791cdbf7e01e1afca8",
+      "checkpoint/policy_postprocessor.json": "sha256:3b51f092c70c710ce0213ee1b63bf51b4878ec67828dd2d67daf9ef51081a41a",
+      "checkpoint/policy_postprocessor_step_0_unnormalizer_processor.safetensors": "sha256:b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9",
+      "checkpoint/policy_preprocessor.json": "sha256:122ec5106602b1bf129f49690d05ab2f49748a0ac6119de55ea0677d4e90d248",
+      "checkpoint/policy_preprocessor_step_5_normalizer_processor.safetensors": "sha256:b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9",
+      "libero/assets-tree": "8d7e6a9b9c64a439666d1ff257e9a10ab44c85c9f7a89f382dce47fa18c348a8",
+      "libero/task-0/bddl": "sha256:9b59eb1287802868ad9bc78d58e6d36d4ba31134e679cfdbdf4b0feb660c959b",
+      "libero/task-0/init-states": "sha256:cbbc73792ce546c9bec181fd328a411d3183074840b282671dee481511381d0a",
+      "libero/task-4/bddl": "sha256:4371189e11d9fd29bb548ab9a8adcd741bb0ce41bb66c612672d0e8cb29a52a9",
+      "libero/task-4/init-states": "sha256:deef3df529e0bb57658b973bbb3baf02b02922db065c025a73ebfcd11eb54d46",
+      "libero/task-5/bddl": "sha256:10239815a9d18ad53e09365d453a362ee54d29ca276e04eef411cf1db8d72940",
+      "libero/task-5/init-states": "sha256:2d2c50b7dcbf861fffa94d576f217ed34153e57487010d7a109a220d4d97189b",
+      "run/config": "sha256:4edcdca59124a17f02d78e28910cde8d1f2299d0832543e3d5e8c55cfd088f5f",
+      "run/identity-protocol": "sha256:e6b95dad44ccce7e2bfbec4b73053fc8085c7a63b270d4a45e1ebde8b5f42a4f",
+      "run/profile": "sha256:d19b142d67b736bd26286f13bcf6c2ae2238e9e7a0b1bab6fd3adaa6722fa3ae",
+      "runtime/env-config": "sha256:76edac3c354e1574627c20932f98c25259d2b0d92128a66ee04aa6eceb52a407",
+      "runtime/hf-libero": "sha256:4533065aed7c960261a231b4035cc9bcec8bff61ce6b338d43e9c50d153a4546",
+      "runtime/lerobot": "sha256:14848c5f87427ae54b00bf9eb86bfd3fb6288e611d3af1d7739ee09050cd46df",
+      "runtime/mujoco": "sha256:f03c0eb45f7816348590370210020794d3febc1554836072e51313076b7d54f4",
+      "runtime/rename-map": "sha256:16f0546e930e7fe93df7fd8781a9c834306c7496a7ceec716cfcb5cf6e5a1b72",
+      "runtime/robosuite": "sha256:74b860b3270666137a4d543c3e3d1e4e473d54636f7593d1c17bf693e6540bbe",
+      "runtime/torch": "sha256:0e0e8d27362471131d3cfa6149c29a0d2c2ad2fb77f9ff0945072344ee3d4473",
+      "source/export_native_scene.py": "sha256:50792d85a2a9d3d1f3c53cbe52045d2d38de38d21f0b1163f2dbb8856d77b954",
+      "source/libero_native_profile.py": "sha256:a787f60b95f605d5acee7dfa2468b967695a4e7d5cb6a5bb7c2e6c286a414557",
+      "source/native_gateway.py": "sha256:a370dbee7ac81fdb16bd157d11ddd28c94a02dae54349870e1fff4537f7c8a5f",
+      "source/run_sentinel_libero.py": "sha256:aa522a28fae8dd7e14e381c186a6a52e9f3b1b564b7eb5b0dbbfe78ce09f5d41"
+    },
+    "hash": "sha256:b864fa9c302f8f05b81ca8a9641048c7591e1da23daafceb4856771cba993cde",
+    "libero_assets": {
+      "file_count": 587,
+      "total_bytes": 422472344,
+      "tree_sha256": "8d7e6a9b9c64a439666d1ff257e9a10ab44c85c9f7a89f382dce47fa18c348a8"
+    }
+  },
+  "episodes": [
+    {
+      "crashed": false,
+      "env_steps": 77,
+      "episode_id": "task00-state40-f01b372b",
+      "fault_attempts": [],
+      "initial_state_index": 40,
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "max_reward": 1.0,
+      "seed": 2026100400,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "crashed": false,
+      "env_steps": 74,
+      "episode_id": "task00-state41-82a2948a",
+      "fault_attempts": [],
+      "initial_state_index": 41,
+      "instruction": "pick up the black bowl between the plate and the ramekin and place it on the plate",
+      "max_reward": 1.0,
+      "seed": 2026100401,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 0
+    },
+    {
+      "crashed": false,
+      "env_steps": 127,
+      "episode_id": "task04-state40-6eeba636",
+      "fault_attempts": [],
+      "initial_state_index": 40,
+      "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "max_reward": 1.0,
+      "seed": 2026100400,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 4
+    },
+    {
+      "crashed": false,
+      "env_steps": 137,
+      "episode_id": "task04-state41-aa4bd62d",
+      "fault_attempts": [],
+      "initial_state_index": 41,
+      "instruction": "pick up the black bowl in the top drawer of the wooden cabinet and place it on the plate",
+      "max_reward": 1.0,
+      "seed": 2026100401,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 4
+    },
+    {
+      "crashed": false,
+      "env_steps": 92,
+      "episode_id": "task05-state40-9a8fee70",
+      "fault_attempts": [],
+      "initial_state_index": 40,
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "max_reward": 1.0,
+      "seed": 2026100400,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    },
+    {
+      "crashed": false,
+      "env_steps": 93,
+      "episode_id": "task05-state41-14155010",
+      "fault_attempts": [],
+      "initial_state_index": 41,
+      "instruction": "pick up the black bowl on the ramekin and place it on the plate",
+      "max_reward": 1.0,
+      "seed": 2026100401,
+      "success": true,
+      "sum_reward": 1.0,
+      "task_id": 5
+    }
+  ],
+  "fatal_failure": null,
+  "fault_attempts": [],
+  "metrics": {
+    "accepted": 600,
+    "crashes": 0,
+    "elapsed_seconds": 67.8374559879303,
+    "env_steps": 600,
+    "episodes": 6,
+    "fault_attempts": 0,
+    "fault_attempts_blocked": 0,
+    "latency_ms": {
+      "active_submit_including_env_step": {
+        "count": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "feedback_age_at_authorize": {
+        "count": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "gateway_authorize": {
+        "count": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "gateway_submit_admission_before_writer": {
+        "count": 0,
+        "mean": null,
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "native_env_step": {
+        "count": 600,
+        "mean": 19.093129355000002,
+        "p50": 18.833921,
+        "p95": 23.108913,
+        "p99": 25.966112
+      },
+      "policy_inference_to_raw_chunk": {
+        "count": 63,
+        "mean": 226.6914257936508,
+        "p50": 218.022488,
+        "p95": 230.514385,
+        "p99": 698.492147
+      }
+    },
+    "observed": 600,
+    "postprocessed_action_profile": {
+      "component_max": [
+        1.0298329591751099,
+        0.8546370267868042,
+        0.9705992937088013,
+        0.09952026605606079,
+        0.17234385013580322,
+        0.20090904831886292,
+        1.0359201431274414
+      ],
+      "component_min": [
+        -0.8682126402854919,
+        -0.35628005862236023,
+        -1.0781757831573486,
+        -0.06733066588640213,
+        -0.22558899223804474,
+        -0.16222357749938965,
+        -1.0382622480392456
+      ],
+      "count": 600
+    },
+    "postprocessor_to_env_exact_comparisons": 600,
+    "postprocessor_to_env_max_abs_diff": 0.0,
+    "raw_policy_chunks": 63,
+    "shadow_would_reject": 0,
+    "submitted": 600,
+    "task_success_rate": 1.0,
+    "task_successes": 6
+  },
+  "mode": "baseline",
+  "official_identity": {
+    "expected_mujoco": "3.3.7",
+    "model": {
+      "backbone": {
+        "config.json": "ea6bc1237e96247f6258de3e202e2e62b93d6f386dc47e7b36b5588bf3a15e17",
+        "preprocessor_config.json": "149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374",
+        "processor_config.json": "f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c",
+        "special_tokens_map.json": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60",
+        "tokenizer.json": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+        "tokenizer_config.json": "dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913"
+      },
+      "backbone_tree": {
+        "file_count": 12,
+        "total_bytes": 4857252,
+        "tree_sha256": "9a43f1587a07286c364059348d4f79531ab588db90c0d277f1e7a615f2c19f64"
+      },
+      "checkpoint": {
+        "config.json": "5c9f3ba9f5f37ea7024c9501b0b20b1941f232989c2167853cb46d9071a70dd7",
+        "model.safetensors": "9a9f6413e42c0f332fccbce9a0dc796af2790f82cf002f791cdbf7e01e1afca8",
+        "policy_postprocessor.json": "3b51f092c70c710ce0213ee1b63bf51b4878ec67828dd2d67daf9ef51081a41a",
+        "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9",
+        "policy_preprocessor.json": "122ec5106602b1bf129f49690d05ab2f49748a0ac6119de55ea0677d4e90d248",
+        "policy_preprocessor_step_5_normalizer_processor.safetensors": "b0cdde6e8a6f49a8e19eefb376728e47c09d3b3cc20ce3a97c45619fe7a732d9"
+      },
+      "diagnostic_checkpoint_key_validation": {
+        "checkpoint_keys": 500,
+        "loaded_model_keys": 500,
+        "missing_keys": 0,
+        "strict": true,
+        "unexpected_keys": 0
+      }
+    },
+    "protocol": "/root/autodl-tmp/sentinel-unified-20261004/repo/experiments/vla/excluded_native_direct_identity.json",
+    "protocol_sha256": "sha256:e6b95dad44ccce7e2bfbec4b73053fc8085c7a63b270d4a45e1ebde8b5f42a4f"
+  },
+  "physical_validation": {
+    "reason": "native gateway validates request schema, finite values and declared component bounds only",
+    "status": "unsupported"
+  },
+  "profile": {
+    "component_names": [
+      "delta_x",
+      "delta_y",
+      "delta_z",
+      "delta_axis_angle_x",
+      "delta_axis_angle_y",
+      "delta_axis_angle_z",
+      "gripper"
+    ],
+    "lower": [
+      -3.4028234663852886e+38,
+      -3.4028234663852886e+38,
+      -3.4028234663852886e+38,
+      -3.4028234663852886e+38,
+      -3.4028234663852886e+38,
+      -3.4028234663852886e+38,
+      -3.4028234663852886e+38
+    ],
+    "request_dtypes": [
+      "float32"
+    ],
+    "request_shape": [
+      1,
+      7
+    ],
+    "schema_id": "libero-panda-relative-7d-raw-float32-v1",
+    "semantics": "Exact finite float32 request at the pinned official LIBERO env.step API: 3 relative translation values, 3 axis-angle values, and one gripper value. The limits describe the complete finite IEEE float32 representation domain, not robot motion or physical safety limits. The pinned native OSC controller performs its own clipping and scaling after this API boundary; Sentinel does not clip or rescale the submitted bytes. Controller mapping provenance and physical validation are separate from this request-integrity profile.",
+    "supported_checks": [
+      "shape",
+      "finite",
+      "declared_component_bounds"
+    ],
+    "unsupported_checks": [
+      "collision_clearance",
+      "self_collision",
+      "joint_limits_after_controller_mapping",
+      "dynamics",
+      "contact_force",
+      "physical_stop",
+      "worldguard_prediction"
+    ],
+    "upper": [
+      3.4028234663852886e+38,
+      3.4028234663852886e+38,
+      3.4028234663852886e+38,
+      3.4028234663852886e+38,
+      3.4028234663852886e+38,
+      3.4028234663852886e+38,
+      3.4028234663852886e+38
+    ]
+  },
+  "profile_hash": "sha256:ae7518410da8a6cc4e84186f16a324a7bc3b9ece11fd26f6ca0e42b606cba3ab",
+  "run_id": "native-vla-1791100919-097d8355",
+  "schema": "sentinel-native-vla-run-v1",
+  "software": {
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4090 D",
+    "hf-libero": "0.1.4",
+    "lerobot": "0.6.1",
+    "mujoco": "3.3.7",
+    "num2words": "0.5.14",
+    "python": "3.12.3",
+    "robosuite": "1.4.0",
+    "torch": "2.8.0+cu128"
+  },
+  "status": "complete",
+  "worldguard": {
+    "reason": "no WorldGuard model is bound to this LIBERO native action profile",
+    "status": "unsupported"
+  }
+}

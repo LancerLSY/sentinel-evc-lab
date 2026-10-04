@@ -1,0 +1,252 @@
+{
+  "stage": "A7",
+  "formal_count": 18,
+  "preflight_excluded_count": 3,
+  "branches": {
+    "parent_only": {
+      "episodes": 6,
+      "successes": 2,
+      "steps": 371,
+      "crashes": 0,
+      "unwanted_collision_records": 0,
+      "full_incremental_disagreements": 0,
+      "recovered_full_incremental_disagreements": 0
+    },
+    "full_final": {
+      "episodes": 6,
+      "successes": 3,
+      "steps": 382,
+      "crashes": 0,
+      "unwanted_collision_records": 0,
+      "full_incremental_disagreements": 0,
+      "recovered_full_incremental_disagreements": 0
+    },
+    "delta_evc": {
+      "episodes": 6,
+      "successes": 3,
+      "steps": 378,
+      "crashes": 0,
+      "unwanted_collision_records": 0,
+      "full_incremental_disagreements": 0,
+      "recovered_full_incremental_disagreements": 0
+    }
+  },
+  "paired_outcomes": [
+    {
+      "episode_id": "formal-task04-state040-parent_only",
+      "task_id": 4,
+      "state_index": 40,
+      "branch": "parent_only",
+      "success": false,
+      "steps": 40,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task04-state040-full_final",
+      "task_id": 4,
+      "state_index": 40,
+      "branch": "full_final",
+      "success": false,
+      "steps": 42,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task04-state040-delta_evc",
+      "task_id": 4,
+      "state_index": 40,
+      "branch": "delta_evc",
+      "success": false,
+      "steps": 45,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 3
+    },
+    {
+      "episode_id": "formal-task04-state041-parent_only",
+      "task_id": 4,
+      "state_index": 41,
+      "branch": "parent_only",
+      "success": false,
+      "steps": 50,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task04-state041-full_final",
+      "task_id": 4,
+      "state_index": 41,
+      "branch": "full_final",
+      "success": false,
+      "steps": 57,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 1
+    },
+    {
+      "episode_id": "formal-task04-state041-delta_evc",
+      "task_id": 4,
+      "state_index": 41,
+      "branch": "delta_evc",
+      "success": false,
+      "steps": 50,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task05-state040-parent_only",
+      "task_id": 5,
+      "state_index": 40,
+      "branch": "parent_only",
+      "success": false,
+      "steps": 90,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task05-state040-full_final",
+      "task_id": 5,
+      "state_index": 40,
+      "branch": "full_final",
+      "success": true,
+      "steps": 92,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task05-state040-delta_evc",
+      "task_id": 5,
+      "state_index": 40,
+      "branch": "delta_evc",
+      "success": true,
+      "steps": 92,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task05-state041-parent_only",
+      "task_id": 5,
+      "state_index": 41,
+      "branch": "parent_only",
+      "success": false,
+      "steps": 40,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task05-state041-full_final",
+      "task_id": 5,
+      "state_index": 41,
+      "branch": "full_final",
+      "success": false,
+      "steps": 40,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task05-state041-delta_evc",
+      "task_id": 5,
+      "state_index": 41,
+      "branch": "delta_evc",
+      "success": false,
+      "steps": 40,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task00-state040-parent_only",
+      "task_id": 0,
+      "state_index": 40,
+      "branch": "parent_only",
+      "success": true,
+      "steps": 77,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task00-state040-full_final",
+      "task_id": 0,
+      "state_index": 40,
+      "branch": "full_final",
+      "success": true,
+      "steps": 77,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task00-state040-delta_evc",
+      "task_id": 0,
+      "state_index": 40,
+      "branch": "delta_evc",
+      "success": true,
+      "steps": 77,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task00-state041-parent_only",
+      "task_id": 0,
+      "state_index": 41,
+      "branch": "parent_only",
+      "success": true,
+      "steps": 74,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task00-state041-full_final",
+      "task_id": 0,
+      "state_index": 41,
+      "branch": "full_final",
+      "success": true,
+      "steps": 74,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    },
+    {
+      "episode_id": "formal-task00-state041-delta_evc",
+      "task_id": 0,
+      "state_index": 41,
+      "branch": "delta_evc",
+      "success": true,
+      "steps": 74,
+      "crashed": false,
+      "deadline_reached": false,
+      "unwanted_collisions": 0,
+      "motion_repair_candidates_selected": 0
+    }
+  ]
+}

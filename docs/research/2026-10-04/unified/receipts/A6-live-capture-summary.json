@@ -1,0 +1,800 @@
+{
+  "capture": {
+    "actual_env_step_hashes": [
+      "sha256:5ef0eba447e3ea779746b1455330eefebfa9ea2a0aabd94dc131359e222fdd68",
+      "sha256:3c0a988bbacd5ef36df2937342453a84b96478f497e9c59247884394c7223b6a",
+      "sha256:7e2b7fc0b5d99173ee0facf7eace89dc457c38aaf6e15d3a599515f8884c2cbd",
+      "sha256:4281454ab4fbf29a00073c3df40cce1b413fdfbfb04050766d406cff9e05f8ed",
+      "sha256:dd5648e4c4082be7355916842e74705ad49652655b155834ca365c34a82498c6",
+      "sha256:ff6d9a1016e4dae0bffc15a195e06d11fe07f167c49e6b6d16b19bedc2641bac",
+      "sha256:1cdecb87e6d022d33de51915bf7fce6b328e9d1c98fca25e8c25a0bad70d9464",
+      "sha256:67e3b3cdc015226ddf062bb932f3bfd7bb652f4037db3241afb07637b9edbe99",
+      "sha256:e87c2415611311fdaddd01818f1cd7ae7df32ec89af2251c4b32f6f912805a83",
+      "sha256:d79744bb0965cbfdb9e53709cb737ac5bbb79c432a817fa2bcfec2f407459b7b",
+      "sha256:9cff1eb40bfae0d6615aece0d430c11d2f1de535a464fb0b1fda7a9ee2f0c56e",
+      "sha256:9f0a29d01a31e2392ca89d3d3a50de5069e2a6a0c88e7f238edbb332120b3b37",
+      "sha256:ce6d8de5eb405138115e2eb46aa93c246c501bf0dd07fc04aca41208d54e929c",
+      "sha256:9f79636fdb639bb05bc26dd7a53a4e0c8b2fc5d614d25290b89f0bd0516cb7a6",
+      "sha256:8fc70f91fcc4b926da71a94a496223c1dfd8828d304a1cb54c6dcd86e735b291",
+      "sha256:fad8317a1b95c3632c53284cc30edc10e5c1075ff2ef7ac4c12d6ee9325ac523",
+      "sha256:dc823cd46482a9c5668d4c0c9dc0cf63580df522f847dc864659a59bcc8294e7",
+      "sha256:52b61774159a8d4f75e573821464508d2d36c6ba4eee078a6917543638fd8d98",
+      "sha256:9f940bce3596ae644888dd4a64cef6d54ed114b301db84ef7e566543a8afa129",
+      "sha256:5d1c6d51dea6e18bb92a29bc0d8f0c892b1e62297a4cd8d2ebd42439f9b2d4f5",
+      "sha256:0a288b5d6e1a3974bbab8009a74d12d5d1ae802c11c7be6448e5e6258be59d25",
+      "sha256:0a914aa1fa79489331cd5dc35f5ba6c927a4600edf8cc50d1b6f25da23dd3b21",
+      "sha256:0a9b9ec12ec0b8d8aaeb2a36646f19a85943b283f994f0f125896860f39a8fa0",
+      "sha256:5e978251ba1de941ccc7ac78b2f737f6cc39d88aef5d50a6885d98f406c93882",
+      "sha256:95aa26ef8d400a1473690ac3d97a3ff92c2b66994bd4acb9771e12bf60871610",
+      "sha256:b491f0aece3a9077e9dbed327e9c95de746f161ec583f90a44a8f79eeb1ff407",
+      "sha256:8d9211ea2e4f9c6c4b4abaf6f45dd726a9dd393a7b9fd321fec1b2d05648a0de",
+      "sha256:179fdc040803a95dc74f4b6073789ef4279b33e8f95b2ccab7b5f591321fc44b",
+      "sha256:b2e557c93030722fe25f0e4c56d9a8bc57a5c23ce73b9c9a9f135ad99c991525",
+      "sha256:c041cf1bf424612b00886670400b8865001389d754dc35d871e52859645c141b",
+      "sha256:2ee8ac3b373dece18b4dba1e919ec0fa4e34d146d852786b40a2b2e4534797a7",
+      "sha256:6f99de7e2cf61e7d9aecb007aaa5f7980629bd957134ee877a1c45a997cf199f",
+      "sha256:e1177806ded0743b8fbea77ff22a18fe42a635a120f4de450c7d17b7abd6e0a0",
+      "sha256:ce93ff041b0b74542b7cd18fa19ef6faee36ab59137943cf7e3034c68204a459",
+      "sha256:5a63c6c3b32f90beab6c15c321bf854463f8598c3d676d937e36a3f4a738ced9",
+      "sha256:ced87ec77c5b055b2702200d36a3c26d7e02e15f32514e8f327cbfe08dd5d702",
+      "sha256:66af4369d40c502d9a901d69ba6cf6bb5406bd06f5458cc368b35776fe86029c",
+      "sha256:a4cdabce4dc95d289ec18b8c0ff0b053a44e30d41b0d9b7cc61addabb3840fc6",
+      "sha256:69873207ed36b4bd6a165ac1819a8f9764ca7433c6da50325d5b80afa6e9d7df",
+      "sha256:cb7c00007fca55c7e526fcb861450e2bc0ee29e7613e6cc15e3430f9451a2cf6",
+      "sha256:c0edcb76d4c92dbe6e2259ac71b8f9d1fae55341b3145baaaa26fa19e9123476",
+      "sha256:536dd9a03ef27d3981cc033dbba73d08771ad4a9f1da0d4c42a03bf7f2641c96",
+      "sha256:02059b0ec4e214f039b76665623b19fb160ce569b93dfb7e9570e73667871aab",
+      "sha256:3dc27c15ca47bad0b22c9cebbcc63584c674eb8543745eff76e73743e9bf9a6b",
+      "sha256:2629eddef0d22e1afdce8c2b057d65e1ab2a9204969ec07bd5aa773d33ebf06e",
+      "sha256:93c9dd82e9b650755101462c01d085a5bc365deea13b03929bd93b9faf304e8a",
+      "sha256:df87efc3f7415af075a4852ca90b08728a555c736a30e0651e96c4712872aa1e",
+      "sha256:ee610e719572ffd9bd0048a39317ba8921d485e756a5b2f6c40a9907b1c74594",
+      "sha256:961603dcc0b721e60f897e890c85ead25e2849a6570f62cef0fa759c88e1990e",
+      "sha256:c7613f5129058239ed3f137fd3479fc3ba8fbd7a1baca0af95d24ab9fc2985dd",
+      "sha256:be80ae0478199f5480ed1f4c671abc3e32ba64f23ab76ab2989f1ce81727d97d",
+      "sha256:63329caa0e3aaaf3e16c8f60675f0bdc0cc807cda0fb6a8ea77f530c0e08aed8",
+      "sha256:82824936e8527104241b644f7bc2bd713e8d98b0f0fac12ef176ae30fbe89fc1",
+      "sha256:0e92f26b7fb1f2f0c41261ff8f47074a5d37854f1f3eb43069ac9aa76bc0683f",
+      "sha256:0b0ba7860a62d087558abd384c4f57ac6e18c9ad8059f1c87a73070257cded46",
+      "sha256:fbca06326205661d07e695ae4275ef803e26a02d9063d37d3f3eb9c74c866727",
+      "sha256:541fa88c41909886b3ced69853212f35757cfa63449f700fbcd967fe94478e91",
+      "sha256:a5955887123298a6fcded0d6e6d19d2a440fef9f43c84ae18a5af0b2cd27bc3f",
+      "sha256:c9c745a1cb999834310a06c3642522d9c59f0c4627759eaf6302ba637b6bf0b6",
+      "sha256:68bb6aa36ef5bd901bddf62f1f23feca37a172ac8ddca31a4d59dd6584c4cb9f",
+      "sha256:c7686c3848ce7b4c140a9ea636f6296f2eff53e36eb89168042e4fe454ad7ae3",
+      "sha256:790c051d88e5463f3cfcd0265ace6e39347c88eaa17dcda699868fc3dc51c473",
+      "sha256:aff52bb9a8cf343ce68beb90ef13fcccae2cb6d95a681af21fd81ce71ec47ccc",
+      "sha256:db6cba1c4ca261561f8ade1c9ca2bc0542ce0feec31782449a9856e5ecb8adfd",
+      "sha256:f1e7e98b68449286648e2e9cb7fadd54a96f66ead1815a96f63ede43a1dd5146",
+      "sha256:7fd7e97c15bb6c06c028bd5ed5c02011efba9bca233046eadb2159538273a771",
+      "sha256:8633bf332ea987355b4204f641e0d8550944d498e3fcc32a1a03171b58b19a4b",
+      "sha256:046db7db3a59165994584dbd473011e59d3c449092edd44e28f393d4efa1b934",
+      "sha256:9a2402275933735fb31194facfc258829debca835629e646d898a7294d967331",
+      "sha256:213277fa18e087900f2b35308e1490f0b5f1e8d168cd64d7336c6c1241dfc5f6",
+      "sha256:588bf050563bcdfe4b5835880baea5d82664237d9914cc0fa8cf841b5fe6c231",
+      "sha256:5ee38892f0cfca9f906d41d7fd71af9a1da3c8202b2124e24a73074eb06e48cb",
+      "sha256:1fc0a65707d80c2b125ecf6af5602b2d08343d1ac66e19d9170dc094c4599999",
+      "sha256:6902176b5c4cecb5935dfc3bc7fdc09c2be1ceefd9aa12906c46a0f0e586dbbb",
+      "sha256:0f388ca7a7a9864eb1808f940c6f9128f68aeeaef6d63545f31c95f66168fdf4",
+      "sha256:2aaf699285e853ee111aa3a91f6e5a367d4aa2e6b98daed8d52406746412097a",
+      "sha256:d7d31133fed2560753b2bea827257b10e5bac3944c1076be7d55d1bd0a07f794",
+      "sha256:78784c6ea4fb56fda397843a36c92a99dc12fe16233db9e29fdbe43ef2d2bbe6",
+      "sha256:0b3dcc46a1bcd525c39a4b18664dfb76580a9c9930b7e3dccaac720b4dec373a",
+      "sha256:6b942064460b73654b389632dec67c594e449680b353360ffbb05d8fa42c2589",
+      "sha256:405dba4bb7166964a3bfcb9e70bb7506a0fd0f6db20b7eb19a24f7541575a437",
+      "sha256:3a28e4a716766f58493a90f50139f2b49d0a209d7193e08884206d1f6ab445a3",
+      "sha256:7ac9b5e7e60eb1d714a3c0174e6f0f5c1a31f39be5b9ae54baf3c733742db01b",
+      "sha256:b05fef84b4c36cbdc5527be5c2eac741bcc8e7bfdc99dd8003ad9962cd203fca",
+      "sha256:ee962f01b14b98582d4b561bf2284eba1e151c67b6b9076afcf8bed532808a6e",
+      "sha256:320a844fa54d17bc8e4c4dc76b24c30bc1a19f9ce132e43a53a51745900b8c98",
+      "sha256:584aaaa748f213c390c5cc98c8f5a361490d757d8f5c426089b98e24bc1ea16f",
+      "sha256:dfa2dc85fd1bd9f489e888e71020cb5642435439d22832ff6523f58a6097c739",
+      "sha256:cd8ea6298d530a8e935724e4cfcfa68dccec67089eed05ad8f89e956cd604df7",
+      "sha256:0df4eadafcfe16b376a8877ce1ab10854c7fd3cec1010e5a03f7f25f4f017b3e",
+      "sha256:10535f0d3e1a58d7372cdded1419ecc4d6a8588ef2b35e87795c7fdaac2a7f96",
+      "sha256:984da5be2a1751309839b8fab1976c99d158a808e92bb8c7eba1f88442b3b662"
+    ],
+    "actual_writes": 92,
+    "fps": 20,
+    "frame_telemetry": [
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 0,
+        "step": 0,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 1,
+        "step": 1,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 2,
+        "step": 2,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 3,
+        "step": 3,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 4,
+        "step": 4,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 5,
+        "step": 5,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 6,
+        "step": 6,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 7,
+        "step": 7,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 8,
+        "step": 8,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 0,
+        "frame": 9,
+        "step": 9,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 10,
+        "step": 10,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 11,
+        "step": 11,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 12,
+        "step": 12,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 13,
+        "step": 13,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 14,
+        "step": 14,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 15,
+        "step": 15,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 16,
+        "step": 16,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 17,
+        "step": 17,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 18,
+        "step": 18,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 1,
+        "frame": 19,
+        "step": 19,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 20,
+        "step": 20,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 21,
+        "step": 21,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 22,
+        "step": 22,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 23,
+        "step": 23,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 24,
+        "step": 24,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 25,
+        "step": 25,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 26,
+        "step": 26,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 27,
+        "step": 27,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 28,
+        "step": 28,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 2,
+        "frame": 29,
+        "step": 29,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 30,
+        "step": 30,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 31,
+        "step": 31,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 32,
+        "step": 32,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 33,
+        "step": 33,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 34,
+        "step": 34,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 35,
+        "step": 35,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 36,
+        "step": 36,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 37,
+        "step": 37,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 38,
+        "step": 38,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 3,
+        "frame": 39,
+        "step": 39,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 40,
+        "step": 40,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 41,
+        "step": 41,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 42,
+        "step": 42,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 43,
+        "step": 43,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 44,
+        "step": 44,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 45,
+        "step": 45,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 46,
+        "step": 46,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 47,
+        "step": 47,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 48,
+        "step": 48,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 4,
+        "frame": 49,
+        "step": 49,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 50,
+        "step": 50,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 51,
+        "step": 51,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 52,
+        "step": 52,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 53,
+        "step": 53,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 54,
+        "step": 54,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 55,
+        "step": 55,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 56,
+        "step": 56,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 57,
+        "step": 57,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 58,
+        "step": 58,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 5,
+        "frame": 59,
+        "step": 59,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 60,
+        "step": 60,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 61,
+        "step": 61,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 62,
+        "step": 62,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 63,
+        "step": 63,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 64,
+        "step": 64,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 65,
+        "step": 65,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 66,
+        "step": 66,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 67,
+        "step": 67,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 68,
+        "step": 68,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 6,
+        "frame": 69,
+        "step": 69,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 70,
+        "step": 70,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 71,
+        "step": 71,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 72,
+        "step": 72,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 73,
+        "step": 73,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 74,
+        "step": 74,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 75,
+        "step": 75,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 76,
+        "step": 76,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 77,
+        "step": 77,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 78,
+        "step": 78,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 7,
+        "frame": 79,
+        "step": 79,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 80,
+        "step": 80,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 81,
+        "step": 81,
+        "within_cycle": 1
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 82,
+        "step": 82,
+        "within_cycle": 2
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 83,
+        "step": 83,
+        "within_cycle": 3
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 84,
+        "step": 84,
+        "within_cycle": 4
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 85,
+        "step": 85,
+        "within_cycle": 5
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 86,
+        "step": 86,
+        "within_cycle": 6
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 87,
+        "step": 87,
+        "within_cycle": 7
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 88,
+        "step": 88,
+        "within_cycle": 8
+      },
+      {
+        "certified_prefix_length": null,
+        "cycle": 8,
+        "frame": 89,
+        "step": 89,
+        "within_cycle": 9
+      },
+      {
+        "certified_prefix_length": 2,
+        "cycle": 9,
+        "frame": 90,
+        "step": 90,
+        "within_cycle": 0
+      },
+      {
+        "certified_prefix_length": 2,
+        "cycle": 9,
+        "frame": 91,
+        "step": 91,
+        "within_cycle": 1
+      }
+    ],
+    "frames": 92,
+    "video": {
+      "path": "task05-state040-delta_evc-excluded-live.mp4",
+      "sha256": "sha256:ca3d12ad963278963c4d6cf7a0d3e65eb5bd44d93e95f9fe847246a6d988950d"
+    }
+  },
+  "capture_boundary": "one frame rendered after each authorized NativeGateway writer environment step; forecast rollouts excluded",
+  "deadline_timestamp": "2026-10-04T08:05:00Z",
+  "elapsed_seconds": 187.565260887146,
+  "episode": {
+    "branch": "delta_evc",
+    "seed": 2026100400,
+    "state_index": 40,
+    "task_goal": "Pick up the black bowl on the ramekin and place it on the plate",
+    "task_id": 5
+  },
+  "geometry": {
+    "joint_graph_dimension": 9,
+    "tracking_reserve_rad": 1e-05,
+    "tracking_reserve_slide_m": 1e-08
+  },
+  "included_in_experiment_statistics": false,
+  "outcome": {
+    "crashed": false,
+    "denied_final_reason": null,
+    "steps": 92,
+    "success": true
+  },
+  "runner_return_code": 0,
+  "safe_prefix_recovery": {
+    "cycles": [
+      {
+        "cycle": 9,
+        "policy": "unchanged_prefix_5_2_1_then_reobserve_replan",
+        "prefix_length": 2,
+        "selected_execution_horizon": 2
+      }
+    ],
+    "first_recovery_cycle": 9,
+    "selected_horizons": [
+      2
+    ],
+    "successful_recovery_count": 1
+  },
+  "schema": "sentinel-unified-libero-excluded-live-capture-v1",
+  "sources": {
+    "capture_config_sha256": "sha256:8631302dd856907ceeec0b1338addbf92b872c191e5d433280a1e9ac5dd1a797",
+    "capture_helper_sha256": "sha256:e7d6575876cdd9236035b981d04a050040a38cb6ff95e6f4e34d9f001f0f3caf",
+    "frozen_runner_sha256": "sha256:74dd938a8d06308a0fc1e189f0a22208d5d2c137550ead2915e1eaeeed1f5117",
+    "per_episode_sha256": "sha256:29a12311a81b0feb7f03397b35e3c00837c6e25b0a228ef2ac79e65ddb493833",
+    "run_manifest_sha256": "sha256:5952a0a36d14d516a15e3bbebb1165cbfd0fe505cfb1a8f81c864eb25d260a47",
+    "source_config": "/root/autodl-tmp/sentinel-unified-20261004/repo/experiments/vla/config_unified_libero_A6_20261004.json",
+    "source_config_sha256": "sha256:53d09ea749705e0297b9f512eff6e5776da405e6e5cc94365e7648d6e35a938f",
+    "steps_sha256": "sha256:fd93ffb3f0ffa1e71541b6626c78dca2588628138cbcc3abca7d382f5a719b45"
+  }
+}

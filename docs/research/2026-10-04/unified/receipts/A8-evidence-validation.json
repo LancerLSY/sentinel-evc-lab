@@ -1,0 +1,44 @@
+{
+  "artifact_integrity_ok": true,
+  "counts": {
+    "actual_qpos_verified": 540,
+    "actual_steps": 761,
+    "actual_unwanted_contact_records": 0,
+    "actual_unwanted_contact_substeps": 0,
+    "cartesian_recovery_success": 35,
+    "certificates": 310,
+    "denied_records": 8,
+    "episode_records": 15,
+    "event_files_verified": 15,
+    "full_incremental_disagreements": 0,
+    "gateway_events": 5327,
+    "log_gap": 0,
+    "manifest_results": 15,
+    "npz_verified": 15,
+    "prefix_recovery_success": 6,
+    "recovered_full_incremental_disagreements": 0,
+    "recovery_attempted": 45,
+    "recovery_failed": 4,
+    "recovery_success": 41,
+    "selected_forecast_contact_vetoes": 7,
+    "step_records": 1015,
+    "unique_actual_permits": 761
+  },
+  "errors": [
+    {
+      "code": "manifest_not_complete",
+      "status": "deadline_stopped"
+    },
+    {
+      "code": "manifest_unfinished_cases",
+      "count": 6
+    }
+  ],
+  "manifest": "/root/autodl-tmp/sentinel-unified-20261004/formal-A8-20261004/manifest.json",
+  "manifest_sha256": "sha256:44fbd523330109f2e1b0055c5825b88d3447245b6ef120190f7043865763e676",
+  "max_tracking_error_rad": 0.0,
+  "max_tracking_error_slide_m": 0.0,
+  "ok": false,
+  "stage": "A8",
+  "status": "partial"
+}

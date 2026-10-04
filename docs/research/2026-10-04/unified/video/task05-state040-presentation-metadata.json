@@ -1,0 +1,63 @@
+{
+  "episode": {
+    "branch": "delta_evc",
+    "state_index": 40,
+    "task_id": 5
+  },
+  "included_in_experiment_statistics": false,
+  "joint_graph_dimension": 9,
+  "outcome": {
+    "crashed": false,
+    "denied_final_reason": null,
+    "steps": 92,
+    "success": true
+  },
+  "output": {
+    "video": "task05-state040-delta_evc-excluded-live-explained.mp4",
+    "video_sha256": "sha256:4b66b8bc2eb322d593bedc1624551ceb74aef3bd7aeaec55e783182d4cf5a5bd"
+  },
+  "pipeline": [
+    "SmolVLA predicts a 50-action chunk",
+    "Fixed overlap aggregation selects 10 actions",
+    "9D Panda joint graph checks arm + gripper motion",
+    "EVC issues a one-use permit for exact action bytes",
+    "LIBERO Panda controller executes the authorized write"
+  ],
+  "playback": {
+    "fps": 5.0,
+    "frames": 92,
+    "playback_seconds": 18.4,
+    "simulator_hz": 20,
+    "simulator_seconds": 4.6,
+    "slowdown_factor": 4.0,
+    "source_wall_clock_seconds": 187.565260887146
+  },
+  "postprocessor_sha256": "sha256:6a689909c1114a977d7dbbad5924a60ca96d338c6eed83795a2a2b22ec207856",
+  "safe_prefix_recovery": {
+    "cycles": [
+      {
+        "cycle": 9,
+        "policy": "unchanged_prefix_5_2_1_then_reobserve_replan",
+        "prefix_length": 2,
+        "selected_execution_horizon": 2
+      }
+    ],
+    "first_recovery_cycle": 9,
+    "selected_horizons": [
+      2
+    ],
+    "successful_recovery_count": 1
+  },
+  "schema": "sentinel-unified-libero-excluded-live-presentation-v1",
+  "source": {
+    "capture_helper_sha256": "sha256:e7d6575876cdd9236035b981d04a050040a38cb6ff95e6f4e34d9f001f0f3caf",
+    "capture_summary": "/root/autodl-tmp/sentinel-unified-20261004/excluded-live-A6-task05-state040-delta/capture_summary.json",
+    "capture_summary_sha256": "sha256:7b6bd222df63739ade7db624b12451defabde68c180bc13051b5bea54bb5af9d",
+    "frozen_runner_sha256": "sha256:74dd938a8d06308a0fc1e189f0a22208d5d2c137550ead2915e1eaeeed1f5117",
+    "input_video": "/root/autodl-tmp/sentinel-unified-20261004/excluded-live-A6-task05-state040-delta/task05-state040-delta_evc-excluded-live.mp4",
+    "input_video_sha256": "sha256:ca3d12ad963278963c4d6cf7a0d3e65eb5bd44d93e95f9fe847246a6d988950d"
+  },
+  "task_goal": "Pick up the black bowl on the ramekin and place it on the plate.",
+  "tracking_reserve_rad": 1e-05,
+  "visual_transform": "recorded live frames scaled to 720x720 at left; explanatory text panel added at right; no frames or motion synthesized"
+}

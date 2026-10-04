@@ -26,6 +26,7 @@ from typing import Any, Callable
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SRC_ROOT = REPO_ROOT / "src"
 OFFICIAL_IDENTITY_PROTOCOL_SHA256 = "431ea1bea335c071f723b1ef1898002b0965b3dde8de4903322874bc1d7ae66b"
+EXCLUDED_NATIVE_DIRECT_IDENTITY_SHA256 = "e6b95dad44ccce7e2bfbec4b73053fc8085c7a63b270d4a45e1ebde8b5f42a4f"
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
@@ -1034,7 +1035,13 @@ def main() -> int:
     if not checkpoint.is_dir() or not backbone.is_dir():
         raise FileNotFoundError("checkpoint and backbone directories must exist")
     identity_protocol_path = Path(config["identity_protocol"]).resolve()
-    if _file_sha256(identity_protocol_path).removeprefix("sha256:") != OFFICIAL_IDENTITY_PROTOCOL_SHA256:
+    diagnostic_identity = config.get("excluded_native_direct_identity", False)
+    if not isinstance(diagnostic_identity, bool):
+        raise ValueError("excluded_native_direct_identity must be a JSON bool")
+    if diagnostic_identity and config["mode"] != "baseline":
+        raise ValueError("selective-backbone identity is restricted to the excluded native direct baseline")
+    expected_identity = EXCLUDED_NATIVE_DIRECT_IDENTITY_SHA256 if diagnostic_identity else OFFICIAL_IDENTITY_PROTOCOL_SHA256
+    if _file_sha256(identity_protocol_path).removeprefix("sha256:") != expected_identity:
         raise RuntimeError("identity protocol does not match the pinned official source")
     identity_protocol = json.loads(identity_protocol_path.read_text(encoding="utf-8"))
     official_identity = _verify_model_identity(checkpoint, backbone, identity_protocol)
@@ -1156,6 +1163,9 @@ def main() -> int:
     policy_cfg.device = "cuda"
     policy_cfg.vlm_model_name = str(backbone)
     policy_cfg.pretrained_path = checkpoint
+    if diagnostic_identity:
+        # The complete pinned checkpoint supplies these weights after construction.
+        policy_cfg.load_vlm_weights = False
     rename_map = config.get(
         "rename_map",
         {
@@ -1169,6 +1179,17 @@ def main() -> int:
     torch.backends.cudnn.deterministic = True
     torch.use_deterministic_algorithms(True, warn_only=True)
     policy = make_policy(cfg=policy_cfg, env_cfg=env_cfg, rename_map=rename_map)
+    if diagnostic_identity:
+        from safetensors.torch import load_file
+
+        verified_weights = load_file(str(checkpoint / "model.safetensors"), device="cpu")
+        key_result = policy.load_state_dict(verified_weights, strict=True)
+        official_identity["diagnostic_checkpoint_key_validation"] = {
+            "checkpoint_keys": len(verified_weights), "loaded_model_keys": len(policy.state_dict()),
+            "missing_keys": len(key_result.missing_keys), "unexpected_keys": len(key_result.unexpected_keys),
+            "strict": True,
+        }
+        del verified_weights
     policy.eval()
     policy.config.n_action_steps = execution_horizon
     preprocessor, postprocessor = make_pre_post_processors(

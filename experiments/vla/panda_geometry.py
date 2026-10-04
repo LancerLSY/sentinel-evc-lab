@@ -4,7 +4,8 @@
 The native seven-dimensional policy action is relative Cartesian control.  It
 is bound to a result as opaque bytes and is never interpreted as joint angles.
 The trajectory accepted here is a separate forecast in the seven actual Panda
-joint coordinates, beginning at the live simulator configuration.
+hinge coordinates and, when configured, controlled finger slide coordinates,
+beginning at the live simulator configuration.
 
 Continuous certificates use MuJoCo's compiled collision geometries together
 with a conservative joint-motion Lipschitz bound.  ``dense_review`` is a point
@@ -26,6 +27,7 @@ import numpy as np
 
 
 CONTINUOUS_SCOPE = "continuous_joint_linear_frozen_scene_lipschitz"
+_MAX_EXTRA_SEPARATOR_AXES = 2048
 
 
 def _mujoco():
@@ -103,10 +105,15 @@ class GeometryConfig:
     continuous: bool = True
     separator_min_pad_m: float = 1e-9
     tracking_reserve_rad: float = 0.0
+    max_slide_step_m: float = 0.001
+    tracking_reserve_slide_m: float = 0.0
+    mesh_separator_axes: bool = False
 
     def __post_init__(self) -> None:
         if not math.isfinite(self.max_joint_step_rad) or self.max_joint_step_rad <= 0:
             raise ValueError("max_joint_step_rad must be positive and finite")
+        if not math.isfinite(self.max_slide_step_m) or self.max_slide_step_m <= 0:
+            raise ValueError("max_slide_step_m must be positive and finite")
         if not isinstance(self.max_subdivision_depth, int) or self.max_subdivision_depth < 0:
             raise ValueError("max_subdivision_depth must be a non-negative integer")
         if not math.isfinite(self.distance_query_max) or self.distance_query_max <= 0:
@@ -117,6 +124,10 @@ class GeometryConfig:
             raise ValueError("separator_min_pad_m must be finite and at least 1e-9 metres")
         if not math.isfinite(self.tracking_reserve_rad) or self.tracking_reserve_rad < 0:
             raise ValueError("tracking_reserve_rad must be finite and non-negative")
+        if not math.isfinite(self.tracking_reserve_slide_m) or self.tracking_reserve_slide_m < 0:
+            raise ValueError("tracking_reserve_slide_m must be finite and non-negative")
+        if not isinstance(self.mesh_separator_axes, bool):
+            raise ValueError("mesh_separator_axes must be a bool")
 
     @property
     def digest(self) -> str:
@@ -174,6 +185,7 @@ class GeometryCertificate:
     trajectory_dtype: str
     trajectory_shape: tuple[int, int]
     trajectory: tuple[tuple[float, ...], ...]
+    coordinate_units: tuple[str, ...]
     scene_digest: str
     state_digest: str
     model_digest: str
@@ -183,6 +195,7 @@ class GeometryCertificate:
     pair_margins: tuple[tuple[str, float], ...]
     min_margin: float
     min_joint_limit_margin_rad: float
+    min_slide_limit_margin_m: float
     parent_digest: str | None
 
 
@@ -200,6 +213,7 @@ class GeometryDecision:
     latency_ns: int
     certificate: GeometryCertificate | None
     reason: str
+    min_slide_limit_margin_m: float | None = None
 
 
 @dataclass(frozen=True)
@@ -214,6 +228,10 @@ class ExecutionTrackingReport:
     final_max_abs_error_rad: float | None
     per_joint_max_abs_error_rad: tuple[float, ...]
     note: str
+    rmse_slide_m: float | None = None
+    max_abs_error_slide_m: float | None = None
+    final_max_abs_error_slide_m: float | None = None
+    per_slide_max_abs_error_m: tuple[float, ...] = ()
 
 
 def _model_digest(model: Any) -> str:
@@ -311,7 +329,7 @@ def _motion_sensitivity(model: Any, geom_id: int, joint_ids: Sequence[int]) -> t
             values.append(1.0)
             continue
         if joint_type != int(mj.mjtJoint.mjJNT_HINGE):
-            raise ValueError("the seven Panda arm coordinates must be scalar hinge/slide joints")
+            raise ValueError("controlled geometry coordinates must be scalar hinge/slide joints")
         joint_pos = np.asarray(model.jnt_pos[joint_id], dtype=np.float64)
         geom_pos = np.asarray(model.geom_pos[geom_id], dtype=np.float64)
         if geom_body == joint_body:
@@ -367,6 +385,11 @@ def _infer_joint_ids(model: Any, qpos_indices: Sequence[int]) -> tuple[int, ...]
 class PandaGeometryProfile:
     joint_qpos_indices: tuple[int, ...]
     joint_ids: tuple[int, ...]
+    controlled_extra_qpos_indices: tuple[int, ...]
+    controlled_extra_joint_ids: tuple[int, ...]
+    moving_qpos_indices: tuple[int, ...]
+    moving_joint_ids: tuple[int, ...]
+    coordinate_units: tuple[str, ...]
     arm_body_ids: tuple[int, ...]
     arm_geom_ids: tuple[int, ...]
     scene_geom_ids: tuple[int, ...]
@@ -387,6 +410,8 @@ class PandaGeometryProfile:
         *,
         joint_qpos_indices: Sequence[int],
         joint_ids: Sequence[int] | None = None,
+        controlled_extra_qpos_indices: Sequence[int] = (),
+        controlled_extra_joint_ids: Sequence[int] | None = None,
         arm_body_ids: Sequence[int] | None = None,
         allowed_contacts: Sequence[AllowedContact] = (),
         ignored_geom_ids: Sequence[int] = (),
@@ -401,12 +426,38 @@ class PandaGeometryProfile:
         expected_qpos = tuple(int(model.jnt_qposadr[j]) for j in joints)
         if expected_qpos != qpos:
             raise ValueError("joint_ids and joint_qpos_indices do not describe the same ordered joints")
+        extra_qpos = tuple(int(v) for v in controlled_extra_qpos_indices)
+        if len(set(extra_qpos)) != len(extra_qpos) or any(v < 0 or v >= model.nq for v in extra_qpos):
+            raise ValueError("controlled_extra_qpos_indices must be distinct valid scalar coordinates")
+        if set(qpos) & set(extra_qpos):
+            raise ValueError("controlled extra coordinates must not duplicate the seven Panda arm coordinates")
+        if len(extra_qpos) not in (0, 2):
+            raise ValueError("configure either both Panda finger slide coordinates or neither")
+        extra_joints = tuple(int(v) for v in (
+            controlled_extra_joint_ids
+            if controlled_extra_joint_ids is not None
+            else _infer_joint_ids(model, extra_qpos)
+        ))
+        if len(extra_joints) != len(extra_qpos) or len(set(extra_joints)) != len(extra_joints):
+            raise ValueError("controlled_extra_joint_ids must match the distinct extra coordinates")
+        if tuple(int(model.jnt_qposadr[j]) for j in extra_joints) != extra_qpos:
+            raise ValueError("controlled extra joint ids and qpos indices do not match")
+        mj = _mujoco()
+        if any(int(model.jnt_type[j]) != int(mj.mjtJoint.mjJNT_HINGE) for j in joints):
+            raise ValueError("the seven Panda arm coordinates must be hinge joints in radians")
+        if any(int(model.jnt_type[j]) != int(mj.mjtJoint.mjJNT_SLIDE) for j in extra_joints):
+            raise ValueError("controlled extra coordinates must be slide joints in metres")
+        moving_qpos = qpos + extra_qpos
+        moving_joints = joints + extra_joints
+        coordinate_units = ("rad",) * len(joints) + ("m",) * len(extra_joints)
         seeds = tuple(int(v) for v in (arm_body_ids or tuple(int(model.jnt_bodyid[j]) for j in joints)))
         if not seeds or any(v <= 0 or v >= model.nbody for v in seeds):
             raise ValueError("arm_body_ids must reference non-world bodies")
         arm_bodies = tuple(
             b for b in range(1, model.nbody) if any(_is_descendant(model, b, seed) for seed in seeds)
         )
+        if any(int(model.jnt_bodyid[j]) not in arm_bodies for j in extra_joints):
+            raise ValueError("controlled extra joints must belong to the Panda arm body subtree")
         ignored = tuple(sorted(set(int(v) for v in ignored_geom_ids)))
         if any(v < 0 or v >= model.ngeom for v in ignored):
             raise ValueError("ignored geom id out of range")
@@ -423,7 +474,7 @@ class PandaGeometryProfile:
 
         specs: list[PairSpec] = []
         added_pairs: set[tuple[int, int]] = set()
-        sensitivity = {g: _motion_sensitivity(model, g, joints) for g in arm}
+        sensitivity = {g: _motion_sensitivity(model, g, moving_joints) for g in arm}
 
         def add(a: int, b: int, kind: str) -> None:
             pair = _pair(a, b)
@@ -435,8 +486,9 @@ class PandaGeometryProfile:
                 return
             threshold = -float(rule.max_penetration) if rule is not None else config.collision_tolerance
             sens = tuple(
-                sensitivity.get(a, (0.0,) * 7)[i] + sensitivity.get(b, (0.0,) * 7)[i]
-                for i in range(7)
+                sensitivity.get(a, (0.0,) * len(moving_joints))[i]
+                + sensitivity.get(b, (0.0,) * len(moving_joints))[i]
+                for i in range(len(moving_joints))
             )
             specs.append(PairSpec(a, b, kind, threshold, sens, rule.label if rule else None))
             added_pairs.add(pair)
@@ -484,11 +536,17 @@ class PandaGeometryProfile:
         specs.sort(key=lambda spec: spec.pair)
         if not specs:
             raise ValueError("profile discovered no collision-enabled arm/scene or self geom pairs")
-        low = tuple(float(model.jnt_range[j, 0]) for j in joints)
-        high = tuple(float(model.jnt_range[j, 1]) for j in joints)
+        if any(not bool(model.jnt_limited[j]) for j in moving_joints):
+            raise ValueError("every controlled moving joint must have finite limits")
+        low = tuple(float(model.jnt_range[j, 0]) for j in moving_joints)
+        high = tuple(float(model.jnt_range[j, 1]) for j in moving_joints)
         model_sha = _model_digest(model)
         payload = {
-            "joint_qpos_indices": qpos, "joint_ids": joints, "arm_body_ids": arm_bodies,
+            "joint_qpos_indices": qpos, "joint_ids": joints,
+            "controlled_extra_qpos_indices": extra_qpos,
+            "controlled_extra_joint_ids": extra_joints,
+            "moving_qpos_indices": moving_qpos, "moving_joint_ids": moving_joints,
+            "coordinate_units": coordinate_units, "arm_body_ids": arm_bodies,
             "arm_geom_ids": arm, "scene_geom_ids": scene, "ignored_geom_ids": ignored,
             "pair_specs": [asdict(spec) for spec in specs],
             "allowed_contacts": [asdict(rule) for rule in allowed],
@@ -496,14 +554,15 @@ class PandaGeometryProfile:
             "model_digest": model_sha, "config_digest": config.digest,
         }
         return cls(
-            qpos, joints, arm_bodies, arm, scene, tuple(spec.pair for spec in specs),
+            qpos, joints, extra_qpos, extra_joints, moving_qpos, moving_joints,
+            coordinate_units, arm_bodies, arm, scene, tuple(spec.pair for spec in specs),
             tuple(specs), allowed, ignored, low, high, model_sha, config, _json_sha(payload),
         )
 
 
 def _live_digests(model: Any, data: Any, profile: PandaGeometryProfile, external_sha: str) -> tuple[str, str]:
-    arm_qpos = set(profile.joint_qpos_indices)
-    other_qpos = np.asarray([data.qpos[i] for i in range(model.nq) if i not in arm_qpos], dtype=np.float64)
+    moving_qpos = set(profile.moving_qpos_indices)
+    other_qpos = np.asarray([data.qpos[i] for i in range(model.nq) if i not in moving_qpos], dtype=np.float64)
     scene_arrays: list[tuple[str, Any]] = [
         ("other_qpos", other_qpos), ("mocap_pos", data.mocap_pos), ("mocap_quat", data.mocap_quat),
     ]
@@ -621,7 +680,8 @@ def _support_interval(model: Any, data: Any, geom_id: int, direction: np.ndarray
 
 
 def _separating_lower_bound(
-    model: Any, data: Any, geom_a: int, geom_b: int, witness: np.ndarray, minimum_pad: float
+    model: Any, data: Any, geom_a: int, geom_b: int, witness: np.ndarray, minimum_pad: float,
+    mesh_separator_axes: bool = False,
 ) -> float:
     rotations = [
         np.asarray(data.geom_xmat[geom_id], dtype=np.float64).reshape(3, 3)
@@ -635,30 +695,95 @@ def _separating_lower_bound(
     best = 0.0
     projection_scale = 1.0
     seen: set[tuple[float, float, float]] = set()
-    for raw in directions:
-        norm = float(np.linalg.norm(raw))
-        if not math.isfinite(norm) or norm <= 1e-15:
-            continue
-        direction = np.asarray(raw, dtype=np.float64) / norm
-        key = tuple(float(round(value, 12)) for value in direction)
-        if key in seen:
-            continue
-        seen.add(key)
-        first = _support_interval(model, data, geom_a, direction)
-        second = _support_interval(model, data, geom_b, direction)
-        if not all(math.isfinite(value) for value in (*first, *second)):
-            raise _UnknownDistance("nonfinite_support_projection")
-        projection_scale = max(projection_scale, *(abs(value) for value in (*first, *second)))
-        best = max(best, first[0] - second[1], second[0] - first[1])
+    extra_axes = 0
+
+    def consume(raw_directions: Iterable[np.ndarray], *, extra: bool = False) -> None:
+        nonlocal best, projection_scale, extra_axes
+        for raw in raw_directions:
+            if extra and extra_axes >= _MAX_EXTRA_SEPARATOR_AXES:
+                break
+            norm = float(np.linalg.norm(raw))
+            if not math.isfinite(norm) or norm <= 1e-15:
+                continue
+            direction = np.asarray(raw, dtype=np.float64) / norm
+            key = tuple(float(round(value, 12)) for value in direction)
+            if key in seen:
+                continue
+            seen.add(key)
+            if extra:
+                extra_axes += 1
+            first = _support_interval(model, data, geom_a, direction)
+            second = _support_interval(model, data, geom_b, direction)
+            if not all(math.isfinite(value) for value in (*first, *second)):
+                raise _UnknownDistance("nonfinite_support_projection")
+            projection_scale = max(projection_scale, *(abs(value) for value in (*first, *second)))
+            best = max(best, first[0] - second[1], second[0] - first[1])
+
+    def lower_bound() -> float:
+        pad = minimum_pad + 64 * np.finfo(np.float64).eps * projection_scale
+        return max(0.0, best - pad)
+
+    consume(directions)
+    if mesh_separator_axes and lower_bound() == 0.0:
+        mj = _mujoco()
+
+        def mesh_batches(geom_id: int, other_rotation: np.ndarray, edges: bool):
+            if int(model.geom_type[geom_id]) != int(mj.mjtGeom.mjGEOM_MESH):
+                return
+            mesh_id = int(model.geom_dataid[geom_id])
+            vert_start = int(model.mesh_vertadr[mesh_id])
+            vert_count = int(model.mesh_vertnum[mesh_id])
+            face_start = int(model.mesh_faceadr[mesh_id])
+            face_count = int(model.mesh_facenum[mesh_id])
+            vertices = np.asarray(
+                model.mesh_vert[vert_start:vert_start + vert_count], dtype=np.float64,
+            )
+            faces = np.asarray(
+                model.mesh_face[face_start:face_start + face_count], dtype=np.int64,
+            ).reshape(-1, 3)
+            if faces.size and not np.all((faces >= 0) & (faces < vert_count)):
+                if np.all((faces >= vert_start) & (faces < vert_start + vert_count)):
+                    faces = faces - vert_start
+                else:
+                    raise _UnknownDistance(f"{geom_id}:mesh_face_index_out_of_range")
+            rotation = np.asarray(data.geom_xmat[geom_id], dtype=np.float64).reshape(3, 3)
+            other_axes = other_rotation.T
+            for start in range(0, len(faces), 256):
+                triangles = vertices[faces[start:start + 256]]
+                local_edges = np.stack(
+                    (triangles[:, 1] - triangles[:, 0],
+                     triangles[:, 2] - triangles[:, 1],
+                     triangles[:, 0] - triangles[:, 2]),
+                    axis=1,
+                )
+                world_edges = local_edges @ rotation.T
+                if not edges:
+                    yield np.cross(world_edges[:, 0], world_edges[:, 1])
+                else:
+                    crosses = np.cross(
+                        world_edges[:, :, None, :], other_axes[None, None, :, :],
+                    )
+                    yield crosses.reshape(-1, 3)
+
+        def consume_mesh_phase(edges: bool) -> None:
+            for geom_id, other_rotation in ((geom_a, rotations[1]), (geom_b, rotations[0])):
+                for batch in mesh_batches(geom_id, other_rotation, edges) or ():
+                    consume(batch, extra=True)
+                    if lower_bound() > 0.0 or extra_axes >= _MAX_EXTRA_SEPARATOR_AXES:
+                        return
+
+        consume_mesh_phase(False)
+        if lower_bound() == 0.0 and extra_axes < _MAX_EXTRA_SEPARATOR_AXES:
+            consume_mesh_phase(True)
     # Include a scene-scale roundoff budget and a declared metre floor.
-    pad = minimum_pad + 64 * np.finfo(np.float64).eps * projection_scale
-    return max(0.0, best - pad)
+    return lower_bound()
 
 
 def _distance(
     model: Any, data: Any, spec: PairSpec, maximum: float,
     contacts_by_pair: dict[tuple[int, int], list[float]] | None = None,
     separator_min_pad_m: float = 1e-9,
+    mesh_separator_axes: bool = False,
 ) -> float:
     mj = _mujoco()
     nearest = np.full(6, np.nan, dtype=np.float64)
@@ -682,7 +807,10 @@ def _distance(
         if pair_contacts:
             return value
         try:
-            lower = _separating_lower_bound(model, data, spec.geom_a, spec.geom_b, nearest, separator_min_pad_m)
+            lower = _separating_lower_bound(
+                model, data, spec.geom_a, spec.geom_b, nearest, separator_min_pad_m,
+                mesh_separator_axes,
+            )
         except _UnknownDistance:
             lower = 0.0
         if lower > 0.0:
@@ -702,8 +830,20 @@ def _collision_record(model: Any, spec: PairSpec, distance: float) -> CollisionR
 
 
 def _set_q(model: Any, data: Any, profile: PandaGeometryProfile, q: np.ndarray) -> None:
-    data.qpos[list(profile.joint_qpos_indices)] = q
+    data.qpos[list(profile.moving_qpos_indices)] = q
     _mujoco().mj_forward(model, data)
+
+
+def _tracking_reserves(profile: PandaGeometryProfile) -> np.ndarray:
+    reserves = []
+    for unit in profile.coordinate_units:
+        if unit == "rad":
+            reserves.append(profile.config.tracking_reserve_rad)
+        elif unit == "m":
+            reserves.append(profile.config.tracking_reserve_slide_m)
+        else:
+            raise ValueError(f"unsupported controlled-coordinate unit: {unit!r}")
+    return np.asarray(reserves, dtype=np.float64)
 
 
 def _point_margins(
@@ -721,13 +861,14 @@ def _point_margins(
             distance = _distance(
                 model, data, spec, profile.config.distance_query_max,
                 contacts_by_pair, profile.config.separator_min_pad_m,
+                profile.config.mesh_separator_axes,
             )
             work["distance_queries"] += 1
         except _UnknownDistance as exc:
             unknown.append(str(exc))
             continue
         physical_margin = distance - spec.threshold
-        reserve = profile.config.tracking_reserve_rad * float(np.sum(spec.sensitivity))
+        reserve = float(np.dot(np.asarray(spec.sensitivity), _tracking_reserves(profile)))
         margin = physical_margin - reserve
         margins[spec.key] = margin
         if physical_margin <= 0:
@@ -740,12 +881,15 @@ def _point_margins(
 def _validate_trajectory(
     model: Any, data: Any, profile: PandaGeometryProfile, qpos_samples: Any,
     snapshot: SceneSnapshot, action_bytes: bytes,
-) -> tuple[np.ndarray, str, str, float]:
+) -> tuple[np.ndarray, str, str, float, float]:
     if not isinstance(action_bytes, bytes):
         raise TypeError("action_bytes must be exact native action bytes")
     q_original = np.asarray(qpos_samples)
-    if q_original.ndim != 2 or q_original.shape[1] != 7 or q_original.shape[0] < 1:
-        raise ValueError("qpos_samples must have shape (N, 7) and include the current configuration")
+    width = len(profile.moving_qpos_indices)
+    if q_original.ndim != 2 or q_original.shape[1] != width or q_original.shape[0] < 1:
+        raise ValueError(
+            f"qpos_samples must have shape (N, {width}) in profile moving-coordinate order"
+        )
     if q_original.dtype.kind != "f" or not np.all(np.isfinite(q_original)):
         raise ValueError("qpos_samples must be a finite floating-point array")
     q = np.asarray(q_original, dtype=np.float64)
@@ -754,18 +898,21 @@ def _validate_trajectory(
         raise ValueError("model/profile/snapshot identity mismatch")
     if live_scene != snapshot.digest or live_state != snapshot.state_digest:
         raise ValueError("live simulator scene/state no longer matches the supplied snapshot")
-    live_q = np.asarray(data.qpos[list(profile.joint_qpos_indices)], dtype=np.float64)
+    live_q = np.asarray(data.qpos[list(profile.moving_qpos_indices)], dtype=np.float64)
     if not np.array_equal(q[0], live_q):
-        raise ValueError("qpos_samples[0] must exactly equal the seven live Panda joint coordinates")
+        raise ValueError("qpos_samples[0] must exactly equal the live controlled moving coordinates")
     low, high = np.asarray(profile.joint_lower), np.asarray(profile.joint_upper)
-    limit_margin = float(min(np.min(q - low), np.min(high - q)))
-    return q, _sha(_array_bytes(q_original)), live_state, limit_margin
+    per_coordinate = np.minimum(np.min(q - low, axis=0), np.min(high - q, axis=0))
+    hinge_margin = float(np.min(per_coordinate[:7]))
+    slide_margin = float(np.min(per_coordinate[7:])) if len(per_coordinate) > 7 else math.inf
+    return q, _sha(_array_bytes(q_original)), live_state, hinge_margin, slide_margin
 
 
 def _certificate(
     *, profile: PandaGeometryProfile, q: np.ndarray, trajectory_sha: str,
     trajectory_dtype: str, action_bytes: bytes, snapshot: SceneSnapshot,
-    state_digest: str, pair_margins: Mapping[str, float], limit_margin: float,
+    state_digest: str, pair_margins: Mapping[str, float], hinge_limit_margin: float,
+    slide_limit_margin: float,
     parent_digest: str | None,
 ) -> GeometryCertificate:
     trajectory = tuple(tuple(float(value) for value in row) for row in q)
@@ -774,12 +921,14 @@ def _certificate(
         "action_sha256": _sha(action_bytes), "action_nbytes": len(action_bytes),
         "trajectory_sha256": trajectory_sha, "trajectory_dtype": trajectory_dtype,
         "trajectory_shape": tuple(q.shape), "trajectory": trajectory,
+        "coordinate_units": profile.coordinate_units,
         "scene_digest": snapshot.digest, "state_digest": state_digest,
         "model_digest": profile.model_digest, "config_digest": profile.config.digest,
         "profile_digest": profile.digest, "scope": CONTINUOUS_SCOPE,
         "pair_margins": margins,
         "min_margin": min(pair_margins.values(), default=math.inf),
-        "min_joint_limit_margin_rad": limit_margin, "parent_digest": parent_digest,
+        "min_joint_limit_margin_rad": hinge_limit_margin,
+        "min_slide_limit_margin_m": slide_limit_margin, "parent_digest": parent_digest,
     }
     return GeometryCertificate(digest=_json_sha(payload), **payload)
 
@@ -909,26 +1058,35 @@ def certify_trajectory(
             "incremental_comparisons": 0, "full_fallbacks": 0}
     try:
         q_original = np.asarray(qpos_samples)
-        q, trajectory_sha, state_digest, limit_margin = _validate_trajectory(
+        q, trajectory_sha, state_digest, hinge_nominal, slide_nominal = _validate_trajectory(
             model, data, profile, q_original, scene_snapshot, action_bytes,
         )
     except (TypeError, ValueError) as exc:
         return GeometryDecision(False, "invalid", "full", "none", None, None, (), (), work,
                                 time.perf_counter_ns() - started, None, str(exc))
-    if limit_margin < 0:
+    if hinge_nominal < 0 or slide_nominal < 0:
         return GeometryDecision(False, "collision", "full", CONTINUOUS_SCOPE, None,
-                                limit_margin, (), (), work, time.perf_counter_ns() - started,
-                                None, "joint_limit")
-    limit_margin -= profile.config.tracking_reserve_rad
-    if limit_margin < 0:
+                                hinge_nominal, (), (), work, time.perf_counter_ns() - started,
+                                None, "joint_limit", slide_nominal)
+    hinge_limit = hinge_nominal - profile.config.tracking_reserve_rad
+    slide_limit = slide_nominal - profile.config.tracking_reserve_slide_m
+    if hinge_limit < 0 or slide_limit < 0:
+        exhausted = tuple(
+            label for value, label in (
+                (hinge_limit, "hinge_joint_limit:tracking_reserve_exhausted"),
+                (slide_limit, "slide_joint_limit:tracking_reserve_exhausted"),
+            ) if value < 0
+        )
         return GeometryDecision(False, "unknown", "full", CONTINUOUS_SCOPE, None,
-                                limit_margin, ("joint_limit:tracking_reserve_exhausted",), (), work,
+                                hinge_limit, exhausted, (), work,
                                 time.perf_counter_ns() - started, None,
-                                "tracking reserve reaches joint limit")
+                                "tracking reserve reaches joint limit", slide_limit)
 
     if not profile.config.continuous:
         return dense_review(model, data, profile, q_original, action_bytes=action_bytes,
-                            scene_snapshot=scene_snapshot, max_joint_step_rad=profile.config.max_joint_step_rad)
+                            scene_snapshot=scene_snapshot,
+                            max_joint_step_rad=profile.config.max_joint_step_rad,
+                            max_slide_step_m=profile.config.max_slide_step_m)
 
     method, margins = (None, None)
     if parent is not None:
@@ -940,18 +1098,21 @@ def certify_trajectory(
         status, margins, violations, unknown = _full_continuous(model, data, profile, q, work)
         if status != "certified":
             return GeometryDecision(False, status, method, CONTINUOUS_SCOPE,
-                                    min(margins.values(), default=None), limit_margin, unknown,
+                                    min(margins.values(), default=None), hinge_limit, unknown,
                                     violations, work, time.perf_counter_ns() - started, None,
-                                    "collision" if status == "collision" else "continuous clearance not proven")
+                                    "collision" if status == "collision" else "continuous clearance not proven",
+                                    slide_limit)
     assert margins is not None
     cert = _certificate(
         profile=profile, q=q, trajectory_sha=trajectory_sha,
         trajectory_dtype=str(q_original.dtype), action_bytes=action_bytes,
         snapshot=scene_snapshot, state_digest=state_digest, pair_margins=margins,
-        limit_margin=limit_margin, parent_digest=parent.digest if parent is not None else None,
+        hinge_limit_margin=hinge_limit, slide_limit_margin=slide_limit,
+        parent_digest=parent.digest if parent is not None else None,
     )
     return GeometryDecision(True, "certified", method, CONTINUOUS_SCOPE, cert.min_margin,
-                            limit_margin, (), (), work, time.perf_counter_ns() - started, cert, "ok")
+                            hinge_limit, (), (), work, time.perf_counter_ns() - started, cert, "ok",
+                            slide_limit)
 
 
 def dense_review(
@@ -963,37 +1124,55 @@ def dense_review(
     action_bytes: bytes,
     scene_snapshot: SceneSnapshot,
     max_joint_step_rad: float = 0.0025,
+    max_slide_step_m: float | None = None,
 ) -> GeometryDecision:
     """Finite-resolution diagnostic; never returns a continuous certificate."""
     started = time.perf_counter_ns()
     work = {"configurations": 0, "distance_queries": 0, "segments": 0,
             "subdivisions": 0, "windows": 0, "window_splits": 0,
             "incremental_comparisons": 0, "full_fallbacks": 0}
-    scope = f"finite_resolution_joint_linear_frozen_scene_max_joint_step_rad={max_joint_step_rad:.17g}"
-    if not math.isfinite(max_joint_step_rad) or max_joint_step_rad <= 0:
+    slide_step = profile.config.max_slide_step_m if max_slide_step_m is None else max_slide_step_m
+    scope = (
+        "finite_resolution_joint_linear_frozen_scene_"
+        f"max_joint_step_rad={max_joint_step_rad:.17g}_max_slide_step_m={slide_step:.17g}"
+    )
+    if (not math.isfinite(max_joint_step_rad) or max_joint_step_rad <= 0
+            or not math.isfinite(slide_step) or slide_step <= 0):
         return GeometryDecision(False, "invalid", "dense_review", scope, None, None, (), (), work,
                                 time.perf_counter_ns() - started, None, "invalid review step")
     try:
         original = np.asarray(qpos_samples)
-        q, _, _, limit_margin = _validate_trajectory(
+        q, _, _, hinge_nominal, slide_nominal = _validate_trajectory(
             model, data, profile, original, scene_snapshot, action_bytes,
         )
     except (TypeError, ValueError) as exc:
         return GeometryDecision(False, "invalid", "dense_review", scope, None, None, (), (), work,
                                 time.perf_counter_ns() - started, None, str(exc))
-    if limit_margin < 0:
-        return GeometryDecision(False, "collision", "dense_review", scope, None, limit_margin,
-                                (), (), work, time.perf_counter_ns() - started, None, "joint_limit")
-    limit_margin -= profile.config.tracking_reserve_rad
-    if limit_margin < 0:
-        return GeometryDecision(False, "unknown", "dense_review", scope, None, limit_margin,
-                                ("joint_limit:tracking_reserve_exhausted",), (), work,
+    if hinge_nominal < 0 or slide_nominal < 0:
+        return GeometryDecision(False, "collision", "dense_review", scope, None, hinge_nominal,
+                                (), (), work, time.perf_counter_ns() - started, None, "joint_limit",
+                                slide_nominal)
+    hinge_limit = hinge_nominal - profile.config.tracking_reserve_rad
+    slide_limit = slide_nominal - profile.config.tracking_reserve_slide_m
+    if hinge_limit < 0 or slide_limit < 0:
+        exhausted = tuple(
+            label for value, label in (
+                (hinge_limit, "hinge_joint_limit:tracking_reserve_exhausted"),
+                (slide_limit, "slide_joint_limit:tracking_reserve_exhausted"),
+            ) if value < 0
+        )
+        return GeometryDecision(False, "unknown", "dense_review", scope, None, hinge_limit,
+                                exhausted, (), work,
                                 time.perf_counter_ns() - started, None,
-                                "tracking reserve reaches joint limit")
+                                "tracking reserve reaches joint limit", slide_limit)
     points = [q[0]]
+    step_limits = np.asarray(
+        [max_joint_step_rad] * 7 + [slide_step] * len(profile.controlled_extra_joint_ids),
+        dtype=np.float64,
+    )
     for index in range(1, len(q)):
         delta = q[index] - q[index - 1]
-        count = max(1, int(math.ceil(float(np.max(np.abs(delta))) / max_joint_step_rad)))
+        count = max(1, int(math.ceil(float(np.max(np.abs(delta) / step_limits)))))
         points.extend(q[index - 1] + delta * (step / count) for step in range(1, count + 1))
     review_data = _copy_data(model, data)
     best = {spec.key: math.inf for spec in profile.pair_specs}
@@ -1009,16 +1188,16 @@ def dense_review(
             break
     status = "collision" if violations else "unknown" if unknown else "finite_clear"
     return GeometryDecision(status == "finite_clear", status, "dense_review", scope,
-                            min(best.values(), default=None), limit_margin,
+                            min(best.values(), default=None), hinge_limit,
                             tuple(sorted(set(unknown))), tuple(violations), work,
                             time.perf_counter_ns() - started, None,
-                            "point samples only; not a continuous certificate")
+                            "point samples only; not a continuous certificate", slide_limit)
 
 
 def compare_execution(
     certificate: GeometryCertificate, executed_qpos_samples: Any
 ) -> ExecutionTrackingReport:
-    """Bind and compare an executed seven-joint trace to its certified forecast.
+    """Bind and compare an executed controlled-coordinate trace to its forecast.
 
     This reports tracking error only. It does not retroactively certify an
     execution or replace checking live unwanted contacts at every env step.
@@ -1026,15 +1205,25 @@ def compare_execution(
     executed_original = np.asarray(executed_qpos_samples)
     executed_sha = _sha(_array_bytes(executed_original))
     shape = tuple(int(value) for value in executed_original.shape)
+    units = certificate.coordinate_units
+    expected_width = certificate.trajectory_shape[1]
+    if len(units) != expected_width or units[:7] != ("rad",) * 7 or any(
+        unit != "m" for unit in units[7:]
+    ):
+        return ExecutionTrackingReport(
+            certificate.digest, executed_sha, str(executed_original.dtype), shape, False,
+            None, None, None, (), "certificate has an invalid controlled-coordinate unit layout",
+        )
     if (
         executed_original.dtype.kind != "f"
         or executed_original.ndim != 2
-        or executed_original.shape[1] != 7
+        or executed_original.shape[1] != expected_width
         or not np.all(np.isfinite(executed_original))
     ):
         return ExecutionTrackingReport(
             certificate.digest, executed_sha, str(executed_original.dtype), shape, False,
-            None, None, None, (), "executed trace must be a finite floating (N, 7) array",
+            None, None, None, (),
+            f"executed trace must be a finite floating (N, {expected_width}) array",
         )
     forecast = np.asarray(certificate.trajectory, dtype=np.float64)
     executed = np.asarray(executed_original, dtype=np.float64)
@@ -1044,12 +1233,19 @@ def compare_execution(
             None, None, None, (), "executed trace and certified forecast shapes differ",
         )
     error = executed - forecast
-    per_joint = tuple(float(value) for value in np.max(np.abs(error), axis=0))
+    hinge = error[:, [i for i, unit in enumerate(units) if unit == "rad"]]
+    slide = error[:, [i for i, unit in enumerate(units) if unit == "m"]]
+    per_joint = tuple(float(value) for value in np.max(np.abs(hinge), axis=0))
+    per_slide = tuple(float(value) for value in np.max(np.abs(slide), axis=0))
     return ExecutionTrackingReport(
         certificate.digest, executed_sha, str(executed_original.dtype), shape, True,
-        float(np.sqrt(np.mean(np.square(error)))), float(np.max(np.abs(error))),
-        float(np.max(np.abs(error[-1]))), per_joint,
+        float(np.sqrt(np.mean(np.square(hinge)))), float(np.max(np.abs(hinge))),
+        float(np.max(np.abs(hinge[-1]))), per_joint,
         "tracking comparison only; inspect live contacts and dynamics separately",
+        float(np.sqrt(np.mean(np.square(slide)))) if slide.size else None,
+        float(np.max(np.abs(slide))) if slide.size else None,
+        float(np.max(np.abs(slide[-1]))) if slide.size else None,
+        per_slide,
     )
 
 
