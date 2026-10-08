@@ -22,6 +22,7 @@ const response=await fetch('/api/runs',{method:'POST',headers:{'Content-Type':'a
 }else{scenario={schema_version:'product-v1',name:$('name').value,seed:Number($('seed').value),displacement:Number($('displacement').value),risk_limit:Number($('risk_limit').value),prediction_mode:$('prediction_mode').value};const value=await api('/api/runs',scenario);await loadRun(value.run.id);}notice('运行已创建，正在检查四个最终候选。');}catch(e){notice(e.message);}finally{$('start').disabled=false;}};
 $('template').onchange=()=>fill(templates.find(t=>t.id===$('template').value).scenario);$('refresh').onclick=()=>listRuns().catch(e=>notice(e.message));
 const pageCopy = {
+  loop: ['闭环运行', '启动模型、检查最终动作、执行仿真，并从实际反馈继续。', 'SmolVLA · Panda · MuJoCo'],
   runs: ['实验工作台', '比较候选、检查许可，并追踪实际控制器反馈。', 'L0 · 数值参考'],
   native: ['AI执行', '核验并回放 VLA 的真实保存记录、动作和授权游标。', '签名记录 · 非物理证明'],
   physics: ['三维实验', '检查真实接触动力学、轨迹与科学验收门。', 'MuJoCo · 真实物理'],
@@ -52,6 +53,7 @@ function showPage(name) {
   }
   if (name !== 'physics') stopPhysicsPlayback();
   if (name !== 'native') window.SentinelNativeUI?.deactivate();
+  if (name !== 'loop') window.SentinelLoopUI?.deactivate();
   activePage = name;
   document.querySelectorAll('.page').forEach(element => {
     element.hidden = element.id !== `${name}-page`;
@@ -97,6 +99,7 @@ async function loadPage(name) {
   try {
     if (name === 'runs') await listRuns();
     if (name === 'native') await window.SentinelNativeUI.load();
+    if (name === 'loop') await window.SentinelLoopUI.load();
     if (name === 'physics') {
       const jobs = await listPhysics();
       if (selectedJob) await loadPhysics(selectedJob);

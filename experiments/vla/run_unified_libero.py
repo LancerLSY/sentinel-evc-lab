@@ -60,6 +60,16 @@ TRANSFORM = {
 }
 
 
+def _selected_transform(config: dict[str, Any]) -> dict[str, Any]:
+    if config.get("_product_profile") and config.get("_product_aggregation") == "native":
+        return {
+            "name": "native_first_ten_v1", "status": "product_default",
+            "operation": "execute the official postprocessed first ten actions without overlap averaging",
+            "claim_boundary": "preserves the selected native action chunk; geometry checks, permits and recovery remain active",
+        }
+    return TRANSFORM
+
+
 def _jsonable(value: Any) -> Any:
     if is_dataclass(value):
         return _jsonable(asdict(value))
@@ -160,6 +170,10 @@ class JsonlWriter:
 
     def close(self) -> None:
         self.handle.close()
+
+
+class ProductSessionStopped(RuntimeError):
+    """A managed simulator stop observed immediately before writer entry."""
 
 
 def _deadline(config: dict[str, Any]) -> float | None:
@@ -677,7 +691,7 @@ def _run_episode(
     postprocessor: Any, gateway_profile: Any, config: dict[str, Any], dependency_hash: str,
     spec: dict[str, Any], branch: str, output_dir: Path, step_trace: JsonlWriter,
     result_trace: JsonlWriter, deadline: float | None, set_seed: Callable[[int], None],
-    preprocess_observation: Callable[[Any], Any], rollout_option: Any,
+    preprocess_observation: Callable[[Any], Any], rollout_option: Any, product_io: Any | None = None,
 ) -> dict[str, Any]:
     import numpy as np
     import torch
@@ -742,6 +756,11 @@ def _run_episode(
         lease_ttl_ns=int(float(config.get("lease_ttl_ms", 1000.0)) * 1e6),
         max_feedback_age_ns=int(float(config.get("max_feedback_age_ms", 2000.0)) * 1e6),
     )
+    if product_io is not None:
+        product_io.bind_scene(
+            env, task_id=task_id, task_name=str(external_scene_base["instruction"]),
+            state_index=state_index, seed=seed,
+        )
     previous_raw = None
     previous_horizon = 10
     recovery_enabled = bool(config.get("recover_safe_prefix", False)) and branch in {"full_final", "delta_evc"}
@@ -749,12 +768,22 @@ def _run_episode(
     total_reward = 0.0
     max_reward = -math.inf
     done = False
-    episode_step_limit = (
-        int(config.get("_preflight_step_limit", 1)) if spec["phase"] == "preflight" else 280
+    episode_step_limit = int(config.get("_preflight_step_limit", 1)) if spec["phase"] == "preflight" else int(
+        config.get("_formal_step_limit", 280)
     )
+
+    def cooperative_stop(stage: str) -> bool:
+        if product_io is None or not product_io.stop_requested(stage):
+            return False
+        gateway.revoke("operator requested cooperative product session stop")
+        record.update({"stopped": True, "stop_reason": "operator_requested", "stop_stage": stage})
+        return True
+
     try:
         for cycle in range(280 if recovery_enabled else 28):
             if done or record["steps"] >= episode_step_limit or _deadline_reached(deadline):
+                break
+            if cooperative_stop("before_policy_cycle"):
                 break
             cycle_start = time.monotonic_ns()
             policy_start = time.monotonic_ns()
@@ -774,7 +803,8 @@ def _run_episode(
                 raise RuntimeError(f"SmolVLA prediction must be (1,50,7), found {raw_chunk.shape}")
             transform_start = time.monotonic_ns()
             raw_candidate = raw_chunk[:, :10, :].copy()
-            if previous_raw is None:
+            selected_transform = _selected_transform(config)
+            if selected_transform["name"] == "native_first_ten_v1" or previous_raw is None:
                 aggregate = raw_candidate.copy()
             else:
                 aggregate = 0.5 * raw_candidate + 0.5 * previous_raw[:, previous_horizon:previous_horizon + 10, :]
@@ -980,7 +1010,7 @@ def _run_episode(
                 "event": "candidate", "episode_id": episode_id, "cycle": cycle,
                 "raw_chunk": _array_identity(raw_chunk), "raw_candidate": _array_identity(raw_candidate),
                 "aggregate": _array_identity(aggregate), "raw_to_aggregate_l2": changed,
-                "transform": TRANSFORM, "raw_forecast": _array_identity(raw_qpos),
+                "transform": selected_transform, "raw_forecast": _array_identity(raw_qpos),
                 "previous_consumed_horizon": previous_horizon,
                 "selected_execution_horizon": int(final_native.shape[1]),
                 "forecast_contact_veto_enabled": forecast_contact_veto,
@@ -1029,9 +1059,19 @@ def _run_episode(
                 },
             })
             permitted = bool(getattr(selected, "allowed", False)) and not selected_forecast_contact_veto
+            if product_io is not None:
+                product_io.publish_candidate(
+                    episode_id=episode_id, cycle=cycle, step=record["steps"],
+                    action=_jsonable(final_native), qpos=_jsonable(final_qpos),
+                    decision={**_decision_record(selected), "allowed": permitted},
+                    reason=("forecast_unwanted_contact" if selected_forecast_contact_veto else getattr(selected, "status", None)),
+                )
             executed_qpos = [np.asarray(data.qpos[qpos_indices], dtype=np.float64).copy()]
             for within in range(int(final_native.shape[1])):
                 if done or record["steps"] >= episode_step_limit or _deadline_reached(deadline):
+                    break
+                if cooperative_stop("before_dispatch"):
+                    done = True
                     break
                 requested = final_native[:, within, :].copy()
                 dispatch = requested
@@ -1073,6 +1113,13 @@ def _run_episode(
                 authorization_start = time.monotonic_ns()
                 permit = gateway.authorize(dispatch, snapshot=snapshot, context=context)
                 cycle_times["authorize"].append(time.monotonic_ns() - authorization_start)
+                if cooperative_stop("before_gateway_submit"):
+                    done = True
+                    step_trace.write({
+                        "event": "stopped", "episode_id": episode_id, "step": record["steps"],
+                        "reason": "operator_requested", "env_step_called": False,
+                    })
+                    break
                 entered_ns: int | None = None
                 writer_request_identity: dict[str, Any] | None = None
                 writer_substep_qpos: list[Any] = []
@@ -1083,7 +1130,15 @@ def _run_episode(
                     writer_request_identity = _array_identity(exact_request)
                     if writer_request_identity["sha256"] != permit.request_bytes_hash:
                         raise NativeGatewayDenied("ACTION_REPLACED", "writer received bytes different from permit")
+                    if product_io is not None and product_io.stop_requested("writer_entry"):
+                        record.update({"stopped": True, "stop_reason": "operator_requested", "stop_stage": "writer_entry"})
+                        raise ProductSessionStopped("operator requested stop before native writer entry")
                     entered()
+                    # The acknowledgement is the writer-entry boundary. A stop
+                    # already requested there must still prevent the env call.
+                    if product_io is not None and product_io.stop_requested("writer_entry"):
+                        record.update({"stopped": True, "stop_reason": "operator_requested", "stop_stage": "writer_entry"})
+                        raise ProductSessionStopped("operator requested stop at native writer entry")
                     entered_ns = time.monotonic_ns()
                     native_output, writer_substep_qpos, writer_substep_contacts = _step_with_substeps(
                         underlying, _array(exact_request)[0], qpos_indices, geometry_profile
@@ -1162,9 +1217,20 @@ def _run_episode(
                         f"actual Panda qpos drifted from restored rollout by {tracking_error:.12g} rad / {slide_tracking_error:.12g} m"
                     )
                 done = bool(_array(terminated).reshape(-1)[0]) or bool(_array(truncated).reshape(-1)[0])
-                if bool(_array(info.get("is_success", [False])).reshape(-1)[0]) if isinstance(info, dict) else False:
+                step_success = bool(_array(info.get("is_success", [False])).reshape(-1)[0]) if isinstance(info, dict) else False
+                if step_success:
                     record["success"] = True
                     done = True
+                if product_io is not None:
+                    product_io.publish_actual(
+                        step=record["steps"] - 1, cycle=cycle, action=_jsonable(dispatch), reward=reward_value,
+                        decision={
+                            "allowed": True, "status": getattr(selected_for_step, "status", None),
+                            "certificate_hash": cert_digest, "permit_id": permit.permit_id,
+                            "writer_hash_matches_permit": writer_request_identity["sha256"] == permit.request_bytes_hash,
+                        },
+                        permit_id=permit.permit_id, success=record["success"],
+                    )
             previous_raw = raw_chunk.copy()
             previous_horizon = int(final_native.shape[1])
             arrays[f"cycle_{cycle:02d}_executed_qpos"] = np.asarray(executed_qpos, dtype=np.float64)
@@ -1200,6 +1266,14 @@ def _run_episode(
             raise RuntimeError(
                 f"preflight executed {record['steps']} actual steps, expected {episode_step_limit}"
             )
+    except ProductSessionStopped:
+        gateway.revoke("operator requested cooperative product session stop before writer entry")
+        record.update({
+            "sum_reward": total_reward, "max_reward": None if max_reward == -math.inf else max_reward,
+            "unwanted_collisions": len(unwanted), "unwanted_collision_records": unwanted,
+            "denied_candidates": denied, "fallback_steps": 0,
+            "deadline_reached": _deadline_reached(deadline),
+        })
     except Exception as error:
         record.update({"crashed": True, "error_type": type(error).__name__, "message": str(error), "traceback": traceback.format_exc()})
     finally:
@@ -1221,8 +1295,26 @@ def main() -> int:
     args.add_argument("--config", type=Path, required=True)
     args.add_argument("--preflight-only", action="store_true", help="run only the excluded one-step API/state proof")
     args.add_argument("--preflight-steps", type=int, default=1)
+    args.add_argument("--product-session", action="store_true", help="run one managed delta_evc product session")
+    args.add_argument("--output-dir", type=Path, help="fresh product output directory")
+    args.add_argument("--stop-file", type=Path, help="cooperative product stop request file")
     parsed = args.parse_args()
-    config = _load_config(parsed.config.resolve())
+    product_io = None
+    product_config_identity = None
+    if parsed.product_session:
+        if parsed.preflight_only:
+            raise ValueError("--product-session cannot be combined with --preflight-only")
+        if parsed.output_dir is None or parsed.stop_file is None:
+            raise ValueError("--product-session requires --output-dir and --stop-file")
+        from product_session import ProductSessionIO, load_product_config
+
+        config, product_config_identity = load_product_config(parsed.config.resolve())
+        config["output_dir"] = str(parsed.output_dir.expanduser().resolve())
+        branches = tuple(config.get("branches", BRANCHES))
+        if branches != BRANCHES:
+            raise ValueError(f"product protocol branches must be exactly {BRANCHES}")
+    else:
+        config = _load_config(parsed.config.resolve())
     if parsed.preflight_steps <= 0 or parsed.preflight_steps > 280:
         raise ValueError("preflight-steps must be in [1, 280]")
     config["_preflight_step_limit"] = parsed.preflight_steps if parsed.preflight_only else int(
@@ -1234,6 +1326,10 @@ def main() -> int:
     if output_dir.exists():
         raise FileExistsError("configured output_dir must not exist")
     output_dir.mkdir(parents=True)
+    if parsed.product_session:
+        product_io = ProductSessionIO(
+            output_dir, parsed.stop_file.expanduser().resolve(), product_config_identity
+        )
     step_trace = JsonlWriter(output_dir / "steps.jsonl")
     result_trace = JsonlWriter(output_dir / "per_episode.jsonl")
     started = time.time()
@@ -1242,10 +1338,18 @@ def main() -> int:
     backbone = Path(config["backbone"]).expanduser().resolve()
     if not checkpoint.is_dir() or not backbone.is_dir():
         raise FileNotFoundError("checkpoint and backbone directories must exist")
+    if product_io is not None and product_io.stop_requested("before_source_and_model_identity"):
+        step_trace.close()
+        result_trace.close()
+        product_io.finalize(status="stopped", result={"success": False, "stopped": True, "steps": 0})
+        return 0
     identity = _model_and_source_identity(parsed.config.resolve(), checkpoint, backbone)
     dependency_hash = _digest_bytes(_canonical(identity))
     os.environ.setdefault("MUJOCO_GL", str(config.get("mujoco_gl", "egl")))
     os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+
+    if product_io is not None:
+        product_io.progress("preparing", "loading_dependencies")
 
     import torch
     from libero.libero import benchmark, get_libero_path
@@ -1262,15 +1366,30 @@ def main() -> int:
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
     torch.use_deterministic_algorithms(True, warn_only=True)
+    if product_io is not None and product_io.stop_requested("before_environment_load"):
+        step_trace.close()
+        result_trace.close()
+        product_io.finalize(status="stopped", result={"success": False, "stopped": True, "steps": 0})
+        return 0
     specs = _episode_specs(config)
     if parsed.preflight_only:
         specs = specs[:1]
+    elif parsed.product_session:
+        specs = specs[1:2]
     task_ids = sorted({item["task_id"] for item in specs})
     env_cfg = LiberoEnv(
         task="libero_spatial", task_ids=task_ids, fps=20, init_states=True, hard_reset=True,
         control_mode="relative", max_parallel_tasks=1, observation_height=360, observation_width=360,
     )
     envs = make_env(env_cfg, n_envs=1, use_async_envs=False, trust_remote_code=False)
+    if product_io is not None:
+        product_io.progress("preparing", "loading_policy")
+        if product_io.stop_requested("before_policy_load"):
+            close_envs(envs)
+            step_trace.close()
+            result_trace.close()
+            product_io.finalize(status="stopped", result={"success": False, "stopped": True, "steps": 0})
+            return 0
     policy_cfg = PreTrainedConfig.from_pretrained(checkpoint, local_files_only=True)
     if policy_cfg.chunk_size != 50 or policy_cfg.n_action_steps != 50:
         raise RuntimeError("official checkpoint must declare chunk_size=n_action_steps=50")
@@ -1305,6 +1424,9 @@ def main() -> int:
         "checkpoint_keys": len(checkpoint_keys), "loaded_model_keys": len(loaded_keys),
         "missing_keys": 0, "unexpected_keys": 0,
     }
+    if parsed.product_session and _model_and_source_identity(parsed.config.resolve(), checkpoint, backbone) != identity:
+        close_envs(envs)
+        raise RuntimeError("model or source files changed while the product policy was loading")
     policy.config.n_action_steps = 10
     preprocessor, postprocessor = make_pre_post_processors(
         policy_cfg=policy_cfg, pretrained_path=str(checkpoint),
@@ -1320,9 +1442,13 @@ def main() -> int:
     results: list[dict[str, Any]] = []
     unfinished: list[dict[str, Any]] = []
     preflight_passed = True
+    branch_names = ("delta_evc",) if parsed.product_session else BRANCHES
     try:
         for spec in specs:
-            for branch in BRANCHES:
+            for branch in branch_names:
+                if product_io is not None and product_io.stop_requested("before_episode_load"):
+                    unfinished.append({**spec, "branch": branch, "reason": "operator_requested"})
+                    continue
                 if _deadline_reached(deadline):
                     unfinished.append({**spec, "branch": branch, "reason": "deadline_reached"})
                     continue
@@ -1347,6 +1473,7 @@ def main() -> int:
                         dependency_hash=dependency_hash, spec=spec, branch=branch, output_dir=output_dir,
                         step_trace=step_trace, result_trace=result_trace, deadline=deadline, set_seed=set_seed,
                         preprocess_observation=preprocess_observation, rollout_option=NEW_ROLLOUT_OPTION,
+                        product_io=product_io,
                     )
                 except Exception as error:
                     row = {**spec, "branch": branch, "success": False, "crashed": True, "steps": 0,
@@ -1361,9 +1488,9 @@ def main() -> int:
         result_trace.close()
 
     formal = [row for row in results if row["phase"] == "formal"]
-    expected_formal = sum(item["phase"] == "formal" for item in specs) * len(BRANCHES)
+    expected_formal = sum(item["phase"] == "formal" for item in specs) * len(branch_names)
     metrics: dict[str, Any] = {}
-    for branch in BRANCHES:
+    for branch in branch_names:
         rows = [row for row in formal if row["branch"] == branch]
         metrics[branch] = {
             "episodes": len(rows), "successes": sum(bool(row.get("success")) for row in rows),
@@ -1381,10 +1508,19 @@ def main() -> int:
                 int(row.get("final_candidate_preclip_components_changed", 0)) for row in rows
             ),
         }
+    identity_valid = not parsed.product_session or (
+        _model_and_source_identity(parsed.config.resolve(), checkpoint, backbone) == identity
+    )
     manifest = {
-        "schema": "sentinel-unified-smolvla-libero-geometry-evc-v1",
-        "status": "complete" if (
-            len(results) == len(specs) * len(BRANCHES)
+        "schema": "sentinel-unified-smolvla-libero-geometry-evc-product-v1" if parsed.product_session else "sentinel-unified-smolvla-libero-geometry-evc-v1",
+        "status": "failed" if not identity_valid else "stopped" if parsed.product_session and (
+            any(bool(row.get("stopped")) for row in results)
+            or any(item.get("reason") == "operator_requested" for item in unfinished)
+        ) else "rejected" if parsed.product_session and results and (
+            not any(bool(row.get("crashed")) for row in results)
+            and any(int(row.get("denied_candidates", 0)) > 0 for row in results)
+        ) else "complete" if (
+            len(results) == len(specs) * len(branch_names)
             and len(formal) == expected_formal
             and not unfinished
             and not any(bool(row.get("crashed")) for row in results)
@@ -1392,16 +1528,18 @@ def main() -> int:
         "claim_boundary": "MuJoCo/LIBERO experimental certificates; no continuous physical-safety or functional-safety claim",
         "actual_policy": "lerobot/smolvla_libero native Panda checkpoint",
         "prediction_chunk_size": 50, "execution_horizon": 10, "max_episode_steps": 280,
-        "execution_mode": "preflight_only" if parsed.preflight_only else "preflight_then_formal",
+        "execution_mode": "product_session" if parsed.product_session else "preflight_only" if parsed.preflight_only else "preflight_then_formal",
         "preflight_step_limit": config["_preflight_step_limit"],
-        "formal_step_limit": 280,
-        "temporal_aggregation": TRANSFORM, "preflight_excluded_from_formal": True,
+        "formal_step_limit": int(config.get("_formal_step_limit", 280)),
+        "temporal_aggregation": _selected_transform(config), "preflight_excluded_from_formal": True,
         "native_profile_clip": {
             "enabled": bool(config.get("native_clip_to_profile", False)),
             "position": "after official LeRobot postprocessor; before forecast, geometry, authorization, and writer",
             "profile_bounds_unchanged": True,
         },
         "config": config, "identity": identity, "dependencies_hash": dependency_hash,
+        "product_config_identity": product_config_identity,
+        "product_model_source_identity_unchanged": identity_valid if parsed.product_session else None,
         "checkpoint_key_validation": checkpoint_key_validation,
         "software": {"python": platform.python_version(), "torch": torch.__version__, "cuda": torch.version.cuda,
                      **{name: importlib.metadata.version(name) for name in ("lerobot", "hf-libero", "robosuite", "mujoco")}},
@@ -1417,8 +1555,11 @@ def main() -> int:
     }
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(_jsonable(manifest), indent=2, sort_keys=True, allow_nan=False) + "\n", encoding="utf-8")
+    if product_io is not None:
+        result = results[0] if results else {"success": False, "stopped": manifest["status"] == "stopped", "steps": 0}
+        product_io.finalize(status=manifest["status"], result=result)
     print(json.dumps({"status": manifest["status"], "formal_episodes": len(formal), "unfinished": len(unfinished), "output": str(output_dir)}, indent=2))
-    return 0 if manifest["status"] == "complete" else 2
+    return 0 if manifest["status"] in {"complete", "stopped", "rejected"} else 2
 
 
 if __name__ == "__main__":

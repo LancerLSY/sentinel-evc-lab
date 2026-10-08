@@ -26,18 +26,24 @@ class LocalServer(ThreadingHTTPServer):
         from .robot_connectors import RobotRegistry
         from .physics_jobs import PhysicsJobs
         from .native_runs import NativeRunStore
+        from .loop_jobs import LoopJobs
         self.store, self.manager, self.token = store, manager, secrets.token_urlsafe(32)
         self.physics_jobs = None
+        self.loop_jobs = None
         super().__init__(address, Handler)
         try:
             self.assets = AssetStore(store.root / "models")
             self.robots = RobotRegistry(store.root / "robots")
             self.physics_jobs = PhysicsJobs(store.root / "physics-jobs")
             self.native_runs = NativeRunStore(store.root / "native-runs")
+            self.loop_jobs = LoopJobs(store.root / "loop-jobs")
             port = self.server_address[1]
             self.hosts = {'127.0.0.1:'+str(port),'localhost:'+str(port)}
             self.origins = {'http://'+host for host in self.hosts}
         except Exception:
+            if self.loop_jobs is not None:
+                self.loop_jobs.close()
+                self.loop_jobs = None
             if self.physics_jobs is not None:
                 self.physics_jobs.close()
                 self.physics_jobs = None
@@ -55,6 +61,9 @@ class LocalServer(ThreadingHTTPServer):
 
     def server_close(self):
         try:
+            if self.loop_jobs is not None:
+                self.loop_jobs.close()
+                self.loop_jobs = None
             if self.physics_jobs is not None:
                 self.physics_jobs.close()
                 self.physics_jobs = None
@@ -126,6 +135,20 @@ class Handler(BaseHTTPRequestHandler):
             if parts == ['api','session']:
                 physics_engine=self.server.physics_jobs.engine_status()
                 return self.reply(200,{'token':self.server.token,'profile':'numeric-simulator-product-v1','templates':TEMPLATES,'physics_engine':physics_engine,'capabilities':{'stop':True,'resume':True,'export':True,'real_robot':False,'model_import':True,'robot_diagnostics':True,'physics_jobs':physics_engine['available'],'native_vla_recordings':True,'native_vla_compare':True}})
+            if parts == ['api','loop-runtime']:
+                return self.reply(200, {'runtime': self.server.loop_jobs.runtime()})
+            if parts == ['api','loop-jobs']:
+                return self.reply(200, {'jobs': self.server.loop_jobs.list()})
+            if len(parts) in (3,4) and parts[:2] == ['api','loop-jobs']:
+                job_id = parts[2]
+                if len(parts) == 3:
+                    return self.reply(200, {'job': self.server.loop_jobs.get(job_id)})
+                if parts[3] == 'live':
+                    return self.reply(200, self.server.loop_jobs.live(job_id))
+                if parts[3] == 'model':
+                    return self.reply(200, self.server.loop_jobs.model(job_id))
+                if parts[3] == 'download':
+                    return self.reply(200, self.server.loop_jobs.export(job_id).read_bytes(), 'application/zip')
             if parts == ['api','native-runs']:
                 return self.reply(200, {'runs': self.server.native_runs.list()})
             if len(parts) in (3,4,5,6) and parts[:2] == ['api','native-runs']:
@@ -187,7 +210,7 @@ class Handler(BaseHTTPRequestHandler):
                 if parts[3]=='download':
                     path=self.server.store.export(run_id)
                     return self.reply(200,path.read_bytes(),'application/zip')
-            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js','native-ui.js':'native-ui.js','native-viewer.js':'native-viewer.js','native-compare-ui.js':'native-compare-ui.js','launch-ui.js':'launch-ui.js'}
+            assets={'':'index.html','index.html':'index.html','app.js':'app.js','styles.css':'styles.css','viewer.js':'viewer.js','native-ui.js':'native-ui.js','native-viewer.js':'native-viewer.js','native-compare-ui.js':'native-compare-ui.js','launch-ui.js':'launch-ui.js','loop-ui.js':'loop-ui.js'}
             name='/'.join(parts)
             if name in assets:
                 resource=files('sentinel_evc').joinpath('web',assets[name])
@@ -212,6 +235,10 @@ class Handler(BaseHTTPRequestHandler):
                 return self.error(415,'CONTENT_TYPE','需要 application/json。')
             self.connection.settimeout(5)
             body=strict_json(self.rfile.read(int(length)))
+            if parts == ['api','loop-jobs']:
+                return self.reply(201, {'job': self.server.loop_jobs.start(body)})
+            if len(parts) == 4 and parts[:2] == ['api','loop-jobs'] and parts[3] == 'stop' and body == {}:
+                return self.reply(200, {'job': self.server.loop_jobs.stop(parts[2])})
             if parts in (['api','launch-check'], ['api','launch-capsule']):
                 from .launch_gate import MAX_PACK_BYTES, build_qualification_capsule, qualify
                 if not isinstance(body,dict) or set(body) != {'reference_json','candidate_json'}:

@@ -1,0 +1,14 @@
+{
+  "profile": "smolvla-libero-panda",
+  "protocol_config": "experiments/vla/config_unified_libero_A6_20261004.json",
+  "checkpoint": "/absolute/path/to/smolvla-libero-checkpoint",
+  "backbone": "/absolute/path/to/frozen-vlm-backbone",
+  "task_id": 0,
+  "initial_state_index": 40,
+  "seed": 2026100400,
+  "max_steps": 280,
+  "aggregation": "native",
+  "device": "cuda",
+  "mujoco_gl": "egl",
+  "torch_threads": 4
+}

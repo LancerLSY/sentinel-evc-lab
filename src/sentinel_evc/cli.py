@@ -275,6 +275,43 @@ def cmd_native_run(args) -> int:
                            '--output-dir', str(Path(args.out).resolve())], check=False).returncode
 
 
+def cmd_loop(args) -> int:
+    """The same managed lifecycle as the App, using an operator-bound runtime."""
+    import time
+    from .loop_jobs import LoopJobs, ACTIVE
+    from .runstore import RunStore
+    store = RunStore(args.data_dir)
+    jobs = None
+    try:
+        jobs = LoopJobs(store.root / 'loop-jobs')
+        if args.cmd == 'loop-configure':
+            source = args.source or str(Path(__file__).resolve().parents[2])
+            result = jobs.configure(args.python, source, args.config)
+            print(json.dumps({'runtime': result}, ensure_ascii=False, indent=2))
+            return 0 if result['ready'] else 3
+        if args.cmd == 'loop-status':
+            print(json.dumps({'runtime': jobs.runtime(refresh=True), 'jobs': jobs.list()}, ensure_ascii=False, indent=2))
+            return 0
+        record = jobs.start({})
+        print(json.dumps({'id': record['id'], 'status': record['status']}, ensure_ascii=False), flush=True)
+        try:
+            while jobs.get(record['id'])['status'] in ACTIVE:
+                time.sleep(.5)
+        except KeyboardInterrupt:
+            jobs.stop(record['id'])
+            jobs.close()
+        result = jobs.get(record['id'])
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        if (result.get('verification') or {}).get('ok'):
+            print(json.dumps({'archive': str(jobs.export(record['id'])),
+                              'public_key': str(jobs.directory(record['id']) / 'anchors/demo.public')}, ensure_ascii=False))
+        return 0 if result['status'] == 'completed' else 3
+    finally:
+        if jobs is not None:
+            jobs.close()
+        store.close()
+
+
 def _launch_pack(path_value: str) -> bytes:
     from .launch_gate import MAX_PACK_BYTES, _read_regular_snapshot
     return _read_regular_snapshot(Path(path_value), MAX_PACK_BYTES)
@@ -477,6 +514,18 @@ def main(argv=None) -> int:
     ui.add_argument("--port",type=int,default=8765)
     ui.add_argument("--data-dir",default="runs/workbench")
     ui.set_defaults(func=cmd_serve)
+
+    loop_configure = sub.add_parser('loop-configure', help='绑定已有 VLA 环境和任务，检查统一闭环依赖')
+    loop_configure.add_argument('--python', required=True, help='VLA 环境 Python 的绝对路径')
+    loop_configure.add_argument('--source', default=None, help='含统一 runner 的源码检出目录')
+    loop_configure.add_argument('--config', required=True)
+    loop_configure.add_argument('--data-dir', default='runs/workbench')
+    loop_configure.set_defaults(func=cmd_loop)
+    for command, help_text in [('loop-run', '运行已绑定的实际 VLA/Panda 仿真闭环；Ctrl+C 请求停止'),
+                                ('loop-status', '查看闭环环境检查和已保存作业')]:
+        loop_command = sub.add_parser(command, help=help_text)
+        loop_command.add_argument('--data-dir', default='runs/workbench')
+        loop_command.set_defaults(func=cmd_loop)
 
     native_run=sub.add_parser('native-run',help='使用已有 VLA 环境运行原生策略和执行授权门禁')
     native_run.add_argument('--config',required=True)

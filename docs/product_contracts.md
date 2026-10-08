@@ -47,6 +47,16 @@ The first trainable model is explicitly a standard-library low-dimensional resid
 
 ## Experimental status
 
+The [managed unified loop](managed_closed_loop.md) adds `loop-configure`,
+`loop-status`, `loop-run` and the App's live execution page. Operator-side CLI
+configuration binds a source digest and a separate Python/configuration;
+HTTP only starts that binding or requests stop. `GET /api/loop-runtime` reports
+readiness. `GET/POST /api/loop-jobs`, `GET /api/loop-jobs/{id}` and its `live`,
+`model`, `download` resources expose the lifecycle. `POST .../{id}/stop` accepts
+only `{}`. Live data is provisional; terminal data and downloads reverify signed
+post-exit assets. A receipt covers the raw gateway events without changing their
+schema. Simulator process cleanup does not establish physical cancellation.
+
 The native VLA request gateway has a separate [contract](native_vla_gateway.md).
 It owns a copy of the submitted array and revalidates current feedback/context,
 generation and timing at the writer's `entered()` acknowledgement. Writers are

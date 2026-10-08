@@ -167,6 +167,16 @@ candidates, run a recorded simulation, inspect events, and export signed ZIP evi
 
 ### Use an existing VLA environment
 
+**Managed unified loop:** the CLI and App can now launch the supported
+SmolVLA native chunks (optional fixed-overlap aggregation) → Panda geometry →
+EVC → MuJoCo → feedback runner in a
+separate, operator-configured Linux VLA environment. The live page separates
+candidate motion from actual feedback, supports cooperative stop, and exports
+signed post-exit artifacts. Missing dependencies disable launch with a readiness
+report. [Setup, operation and acceptance boundary](docs/managed_closed_loop.md).
+This product entry does not add a new task-success measurement to the existing
+paired experiment results.
+
 Keep the heavy ML stack in its existing environment. The installed CLI can
 launch the native runner using that environment's Python:
 
