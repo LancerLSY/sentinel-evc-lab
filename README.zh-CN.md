@@ -103,7 +103,7 @@ LeRobot 提供策略部署与 RTC，MoveIt Pro 提供运动与物理控制，Fox
 
 ## 运行产品闭环
 
-CLI 和 App 的「闭环运行」现在管理统一 SmolVLA/Panda 仿真：原生动作块（可选固定重叠聚合）→ 几何检查 → 一次性许可 → MuJoCo 写入 → 实际反馈。支持已绑定的 Linux VLA 环境、协作停止、逐步三维回放和签名证据导出。环境检查失败时显示缺失项并禁用启动。[配置与验收范围](docs/managed_closed_loop.md)。新入口尚未增加新的 GPU 任务成功率结果。
+CLI 和 App 的「闭环运行」现在管理统一 SmolVLA/Panda 仿真：原生动作块（可选固定重叠聚合）→ 几何检查 → 一次性许可 → MuJoCo 写入 → 实际反馈。支持已绑定的 Linux VLA 环境、协作停止、逐步三维回放和签名证据导出。环境检查失败时显示缺失项并禁用启动。[配置与验收范围](docs/managed_closed_loop.md)。 [项目页使用入口](https://lansiyao.com/research/sentinel-vla/project/#managed-loop) · [SO100 模型卡](https://huggingface.co/LancerLSY/sentinel-smolvla-so100)。新入口尚未增加新的 GPU 任务成功率结果。
 
 ## 五分钟安装
 

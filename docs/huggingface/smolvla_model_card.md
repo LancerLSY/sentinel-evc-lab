@@ -106,12 +106,34 @@ For another input preserve camera order `observation.images.top`, then
 language. The example's zero action placeholder is a preprocessing field, not
 a motor command or future observation.
 
+## Product integration
+
+The [Sentinel EVC repository](https://github.com/LancerLSY/sentinel-evc-lab)
+now includes a managed closed-loop entry for model inference, Panda motion
+checking, one-time execution permits, MuJoCo writes, environment feedback and
+signed run export. See the [project page](https://lansiyao.com/research/sentinel-vla/project/#managed-loop),
+[integration guide](https://github.com/LancerLSY/sentinel-evc-lab/blob/59d3f1a469c7d53482f8bc651e0bfbef33defa6c/docs/managed_closed_loop.md)
+and [validation record](https://github.com/LancerLSY/sentinel-evc-lab/blob/59d3f1a469c7d53482f8bc651e0bfbef33defa6c/docs/managed_closed_loop_validation.md).
+
+That managed runtime is a separate supported profile: the official SmolVLA
+LIBERO checkpoint with Panda tasks on Linux and MuJoCo 3.3.7. This SO100 overlay
+cannot replace its Panda checkpoint. The integration validation covers local
+software lifecycle, evidence and interface behavior; it adds no new GPU task-
+success result and does not establish live SO100 execution.
+
 ## Scope and attribution
 
 This is an offline research model. No robot task-success rate, multi-object
-tracking result or live Sentinel permit/runtime integration is established by
-this evaluation. The separate UR5e simulation study uses its own controller;
-its task results must not be attributed to this SO100 policy.
+tracking result or live Sentinel permit/runtime integration is established for
+this SO100 policy by its recorded-data evaluation. The separate UR5e simulation
+study and the managed SmolVLA/Panda product profile use their own controllers
+and checkpoints; their task results must not be attributed to this SO100 policy.
+
+The ten reserved calibration episodes were not used in training, development
+selection or the reported five-episode test evaluation. The reported evaluation
+used the original dataset instructions. Instruction paraphrases, extra clauses
+and different-object instructions have not yet been evaluated on those episodes,
+so no language-robustness claim is made here.
 
 Upstream SmolVLA, SmolVLM2 and dataset: Apache-2.0, retained in `LICENSE` and
 `NOTICE`. Sentinel loading/training source: MIT, retained in `LICENSE-CODE-MIT`.

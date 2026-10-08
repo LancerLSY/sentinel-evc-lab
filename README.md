@@ -55,6 +55,7 @@ The UR5e checker remains a separate experiment.
 | **3D model entry** | OBJ, STL, MJCF and URDF inspection; offline Canvas preview | inspection does not grant execution authority |
 | **Native VLA integration** | official SmolVLA/Panda inference, exact 7-D request authorization, one-use permits and recorded environment feedback | LIBERO request-integrity lane; separate Panda geometry experiment below; no physical-stop validation |
 | **Unified VLA experiment** | native SmolVLA output, temporal aggregation, Panda geometry, permits and actual MuJoCo writes | [paired repair experiments](docs/research/2026-10-04/unified/REPAIR_RESULTS.md); complete state restoration, arm and finger checks, certified short-prefix continuation; remaining denials and full-check costs retained |
+| **Managed VLA loop** | CLI/App start, observed 3D feedback, cooperative stop and signed export for the configured SmolVLA/Panda runner | [setup and validation](docs/managed_closed_loop.md); local integration preview, new-entry GPU acceptance pending |
 | **GPU/model research** | trained WorldGuard families and a SmolVLA fine-tune on fixed SO100 recordings | separate experimental profiles; the SO100 overlay is not the native Panda checkpoint |
 
 The workbench always shows execution completion, evidence integrity, and scientific
